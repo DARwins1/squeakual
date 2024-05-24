@@ -80,7 +80,20 @@ dataset		CAM_3
 game		"wrf/cam3/L7.gam"
 data		"wrf/cam3/L7.wrf"
 
-/* end of campaign */
+/* end of reclamation 1 campaign */
+
+/* act 1 */
+
+camstart	A1L1
+dataset		CAM_3
+game		"wrf/cam3/L1.gam"
+data		"wrf/cam3/L1.wrf"
+
+camchange	A1L1
+dataset		CAM_2
+data		"wrf/cam3/cam3change.wrf"
+game		"wrf/cam3/L1.gam"
+data		"wrf/cam3/L1.wrf"
 
 miss_keep	CAM_3_4
 dataset		CAM_3

@@ -11,7 +11,12 @@
   },
   "updatesUrl": "https://github.com/DARwins1/reclamation/releases/latest",
   "campaigns": [
-    "aarec1.json"
+    "rec1.json",
+    "rec2act0.json",
+    "rec2act1.json",
+    "rec2act2.json",
+    "rec2act3.json",
+    "rec2act4.json"
   ],
   "universe": "wz2100extended",
   "difficultyLevels": "default",
@@ -35,6 +40,19 @@
       "id": "autosavesOnly",
       "default": false,
       "userEditable": false
+    }
+  ],
+  "customTweakOptions": [
+    {
+      "id": "rec_timerlessMode",
+      "type": "bool",
+      "default": false,
+      "displayName": {
+        "en": "Timerless Mode"
+      },
+      "description": {
+        "en": "For players who like to go at their own flow! Disables the mission timer on most missions, but also lowers the player's maximum stored power and causes enemies to rebuild more frequently."
+      }
     }
   ]
 }
