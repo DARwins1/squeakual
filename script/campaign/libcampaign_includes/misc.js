@@ -582,7 +582,7 @@ function camSetDroidRank(droid, rank)
 {
 	if (!camDef(droid) || droid.type !== DROID)
 	{
-		camTrace("Tried setting an unkown object's rank.");
+		camTrace("Tried setting an unknown object's rank.");
 		return;
 	}
 
@@ -622,7 +622,7 @@ function camSetDroidRank(droid, rank)
 				xpAmount = 512;
 				break;
 			default:
-				camDebug("Unkown rank given to camSetDroidRank!");
+				camDebug("unknown rank given to camSetDroidRank!");
 				return;
 		}
 	}
@@ -652,7 +652,7 @@ function camGetDroidRank(droid)
 {
 	if (!camDef(droid) || droid.type !== DROID)
 	{
-		camTrace("Tried getting an unkown object's rank.");
+		camTrace("Tried getting an unknown object's rank.");
 		return;
 	}
 
@@ -872,6 +872,11 @@ function camNameTemplate(weapon, body, propulsion)
 				{
 					// Commander????
 					weapName = camGetCompNameFromId(weapon, "Brain");
+					if (!camDef(weapName))
+					{
+						// ?????
+						weapName = "?"
+					}
 				}
 			}
 		}

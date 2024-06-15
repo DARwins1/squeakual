@@ -106,7 +106,7 @@ function camManageGroup(group, order, data)
 		}
 
 		const leaderObj = getObject(data.leader);
-		if (leaderObj.type === DROID) // command or sensor droid
+		if (leaderObj !== null && leaderObj.type === DROID) // command or sensor droid
 		{
 			camTrace("Group", group, "assigned to follow droid", leaderObj.id);
 			// Give the suborder to the leader
@@ -115,14 +115,14 @@ function camManageGroup(group, order, data)
 				camManageGroup(camMakeGroup(leaderObj), data.leaderOrder, data.data);
 			}
 		}
-		else if (leaderObj.type === STRUCTURE) // sensor towers, vtol strike towers, etc.
+		else if (leaderObj !== null && leaderObj.type === STRUCTURE) // sensor towers, vtol strike towers, etc.
 		{
 			camTrace("Group", group, "assigned to follow structure", leaderObj.id);
 			// Structures can't take orders, nothing to do here
 		}
 		else
 		{
-			camDebug("Group", group, "was ordered to follow an invalid leader!");
+			camTrace("Group", group, "was ordered to a non-existant leader!");
 		}
 	}
 	// apply orders instantly
@@ -723,11 +723,11 @@ function __camTacticsTickForGroup(group)
 			const __ARTILLERY_LIKE = (droid.isCB || droid.hasIndirect || droid.isSensor);
 			const __HAS_WEAPON = camDef(droid.weapons[0]);
 			let weapon;
-			let preferRange;
+			// let preferRange;
 			if (__HAS_WEAPON)
 			{
 				weapon = camGetCompStats(droid.weapons[0].fullname, "Weapon");
-				preferRange = (weapon.HitChance > weapon.ShortHitChance);
+				// preferRange = (weapon.HitChance > weapon.ShortHitChance);
 			}
 			let closeBy = enumRange(droid.x, droid.y, __camScanRange(gi.order, droid), ALL_PLAYERS, __TRACK).filter((obj) => (
 				obj.type !== FEATURE && !allianceExistsBetween(droid.player, obj.player)
@@ -768,27 +768,30 @@ function __camTacticsTickForGroup(group)
 				}
 			}
 
-			if (closeBy.length > 0)
+			while (closeBy.length > 0 && !closeByObj)
 			{
 				__camFindGroupAvgCoordinate(group);
 				closeBy.sort(__camDistToGroupAverage);
 				closeByObj = closeBy[0];
-			}
 
-			//We only care about explicit observe/attack if the object is close
-			//on the z coordinate. We should not chase things up or down hills
-			//that may be far away, at least path-wise.
-			if (closeByObj && !__VTOL_UNIT && !__ARTILLERY_LIKE)
-			{
-				if (Math.abs(droid.z - closeByObj.z) > __CLOSE_Z)
+				//We only care about explicit observe/attack if the object is close
+				//on the z coordinate. We should not chase things up or down hills
+				//that may be far away, at least path-wise.
+				if (closeByObj && !__VTOL_UNIT && !__ARTILLERY_LIKE)
 				{
-					closeByObj = undefined;
+					if (Math.abs(droid.z - closeByObj.z) > __CLOSE_Z)
+					{
+						closeByObj = undefined;
+						closeBy = closeBy.slice(1);
+					}
 				}
-			}
 
-			if (closeByObj && ((closeByObj.type === DROID) && isVTOL(closeByObj) && (isVTOL(droid) || !droid.canHitAir)))
-			{
-				closeByObj = undefined;
+				if (closeByObj && ((closeByObj.type === DROID) && isVTOL(closeByObj) && (isVTOL(droid) || !droid.canHitAir)))
+				{
+					// Don't try to attack VTOLs if we can't shoot them!
+					closeByObj = undefined;
+					closeBy = closeBy.slice(1);
+				}
 			}
 
 			if (!__DEFENDING && closeByObj)

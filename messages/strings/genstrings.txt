@@ -20,7 +20,7 @@ END_MSG1			_("Mission Failed")
 WIN_MSG1			_("Mission Successful")
 
 /* more proximity text */
-LZ_MSG3				_("Enemy Landing Zone")
+ENEMYLZ_MSG			_("Enemy Landing Zone")
 ENEMYBASE_MSG		_("Enemy Base")
 ENEMYPOST_MSG		_("Enemy Outpost")
 NPBASE_MSG			_("New Paradigm Base")

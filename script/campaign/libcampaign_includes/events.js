@@ -5,9 +5,15 @@
 
 function cam_eventPickup(feature, droid)
 {
-	if (feature.stattype === ARTIFACT)
+	if (feature.stattype === ARTIFACT && droid.player === CAM_HUMAN_PLAYER)
 	{
 		__camPickupArtifact(feature);
+	}
+	else if (feature.stattype === ARTIFACT && droid.droidType === DROID_CONSTRUCT)
+	{
+		// AI Truck picking up the artifact
+		// console("enemy picking up artifact")
+		__camStoreArtifact(feature);
 	}
 }
 
@@ -192,6 +198,31 @@ function cam_eventStructureBuilt(struct, droid)
 			|| struct.stattype === RESEARCH_LAB || struct.stattype === POWER_GEN)
 		{
 			__camTruckCheckForModules(struct.player);
+
+			// Check if a factory has been rebuilt.
+			// If it has, then automatically start managing it again.
+			if (struct.stattype === FACTORY || struct.stattype === CYBORG_FACTORY || struct.stattype === VTOL_FACTORY)
+			{
+				const PLAYER = struct.player;
+				const X_COORD = struct.x;
+				const Y_COORD = struct.y;
+				const stattype = struct.stattype;
+
+				for (let i = 0; i < __camFactoryInfo.length; i++)
+				{
+					const labelInfo = __camFactoryInfo[i];
+
+					// Determine if this newly built factory is the same as the old one
+					if (PLAYER === labelInfo.player && X_COORD === labelInfo.x && Y_COORD === labelInfo.y 
+						&& stattype === labelInfo.stattype)
+					{
+						// Everything matches, set the label to refer to the
+						// newly built factory now
+						addLabel(struct, labelInfo.label);
+						break;
+					}
+				}
+			}
 		}
 		__camUpdateBaseGroups(struct);
 	}

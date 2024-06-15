@@ -106,3 +106,7 @@ dataset		REC_2
 game		"wrf/act1/A1L2.gam"
 data		"wrf/act1/A1L2.wrf"
 
+expand		A1L3
+dataset		REC_2
+game		"wrf/act1/A1L3.gam"
+data		"wrf/act1/A1L3.wrf"

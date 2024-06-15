@@ -3220,7 +3220,8 @@
         "researchPoints": 3600,
         "researchPower": 112,
         "resultComponents": [
-            "Rocket-LtA-TMk1"
+            "Rocket-LtA-TMk1",
+            "Rocket-VTOL-LtA-TMk1"
         ],
         "statID": "Rocket-LtA-TMk1"
     },

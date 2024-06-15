@@ -1,7 +1,7 @@
 include("script/campaign/transitionTech.js");
 include("script/campaign/libcampaign.js");
 include("script/campaign/templates.js");
-include("script/campaign/structsets.js");
+include("script/campaign/structSets.js");
 
 const MIS_NASDA = 1;
 const MIS_CLAYDE = 5;
@@ -354,14 +354,14 @@ function eventTransporterLanded(transport)
 		for (const group of otherGroups)
 		{
 			if (droidAssigned) break;
-			// Triple loop babey
+			// Triple loop (awesome)
 			for (const template of camGetRefillableGroupTemplates(group))
 			{
-				if (droidAssigned) break;
 				if (camDroidMatchesTemplate(droid, template))
 				{
 					camGroupAdd(group, droid);
 					droidAssigned = true;
+					break;
 				}
 			}
 		}
@@ -458,7 +458,7 @@ function eventStartLevel()
 	const startPos = camMakePos("landingZone");
 	const lz = getObject("landingZone"); //player lz
 
-	camSetStandardWinLossConditions(CAM_VICTORY_OFFWORLD, "THE_END", {
+	camSetStandardWinLossConditions(CAM_VICTORY_OFFWORLD, "A1L3", {
 		area: "compromiseZone",
 		reinforcements: camMinutesToSeconds(2.5),
 		callback: "nasdaCaptured",
@@ -671,6 +671,7 @@ function eventStartLevel()
 		cTempl.pllpodt, cTempl.pllpodt, cTempl.pllpodt, cTempl.pllpodt, cTempl.pllpodt, cTempl.pllpodt,
 		cTempl.plltmgt, cTempl.plltmgt, cTempl.plltmgt, cTempl.plltmgt,
 		]}, CAM_ORDER_ATTACK, {
+		pos: camMakePos("vtolFactoryCaptureZone"),
 		count: 10,
 		morale: 80,
 		fallback: camMakePos("scavOuterAssembly1"),
@@ -695,7 +696,7 @@ function eventStartLevel()
 	// Charlie gets 2 trucks
 	camManageTrucks(MIS_TEAM_CHARLIE, {
 		label: "charlieLZ", // Label of Charlie's LZ base (which starts unbuilt)
-		structset: camCharlieA1L2Structs // See structsets.js
+		structset: camCharlieA1L2Structs // See structSets.js
 		// NOTE: We don't need any more data here, since we'll manually assign/rebuild the truck with transport reinforcements
 	});
 	camManageTrucks(MIS_TEAM_CHARLIE, {
@@ -703,11 +704,11 @@ function eventStartLevel()
 		structset: camCharlieA1L2Structs
 	});
 
-	// Foxtrot attack group (8 Flamer Cyborgs, 6 Sarissas, 6 Mini-Rockets)
+	// Foxtrot attack group (8 Flamer Cyborgs, 6 Mini-Rockets, 6 Sarissas)
 	foxtrotAttackGroup = camMakeRefillableGroup(undefined, {templates: [
 		cTempl.cybfl, cTempl.cybfl, cTempl.cybfl, cTempl.cybfl, cTempl.cybfl, cTempl.cybfl, cTempl.cybfl, cTempl.cybfl,
-		cTempl.pllsarw, cTempl.pllsarw, cTempl.pllsarw, cTempl.pllsarw, cTempl.pllsarw, cTempl.pllsarw,
 		cTempl.pllpodw, cTempl.pllpodw, cTempl.pllpodw, cTempl.pllpodw, cTempl.pllpodw, cTempl.pllpodw,
+		cTempl.pllsart, cTempl.pllsart, cTempl.pllsart, cTempl.pllsart, cTempl.pllsart, cTempl.pllsart,
 		]}, CAM_ORDER_ATTACK, {
 		count: 20,
 		morale: 90,

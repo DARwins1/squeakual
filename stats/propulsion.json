@@ -39,7 +39,7 @@
         "deceleration": 450,
         "hitpointPctOfBody": 50,
         "id": "BoomTickLegs",
-        "name": "Cyborg Propulsion",
+        "name": "Boom Tick Propulsion",
         "speed": 550,
         "spinAngle": 45,
         "spinSpeed": 450,

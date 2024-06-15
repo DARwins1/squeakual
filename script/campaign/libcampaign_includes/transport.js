@@ -88,6 +88,7 @@ function __camDispatchTransporterUnsafe()
 	const pos = args.position;
 	const list = args.list;
 	const data = args.data;
+	const __SILENT = args.silent;
 	if (camDef(__camIncomingTransports[__PLAYER]))
 	{
 		camTrace("Transporter already on map for player", __PLAYER + ", delaying.");
@@ -131,7 +132,7 @@ function __camDispatchTransporterUnsafe()
 		camRemoveEnemyTransporterBlip();
 	}
 
-	if (__PLAYER !== CAM_HUMAN_PLAYER && !allianceExistsBetween(__PLAYER, CAM_HUMAN_PLAYER))
+	if (__PLAYER !== CAM_HUMAN_PLAYER && !allianceExistsBetween(__PLAYER, CAM_HUMAN_PLAYER) && !__SILENT)
 	{
 		playSound("pcv381.ogg"); //Enemy transport detected.
 	}
@@ -170,7 +171,7 @@ function __camLandTransporter(player, pos)
 	camTrace("Landing transport for player", player);
 	if (!allianceExistsBetween(player, CAM_HUMAN_PLAYER))
 	{
-		playSound("pcv395.ogg", pos.x, pos.y, 0); //Incoming enemy transport.
+		// playSound("pcv395.ogg", pos.x, pos.y, 0); //Incoming enemy transport.
 	}
 	if (camDef(ti.order))
 	{
@@ -191,5 +192,11 @@ function __camRemoveIncomingTransporter(player)
 	if (camDef(__camIncomingTransports[player]))
 	{
 		delete __camIncomingTransports[player];
+	}
+
+	// Also place the no-build area in the corner of the map where it won't annoy anybody
+	if (player !== CAM_HUMAN_PLAYER)
+	{
+		setNoGoArea(0, 0, 3, 3, player);
 	}
 }

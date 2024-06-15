@@ -81,6 +81,11 @@ function camSetFactoryData(factoryLabel, factoryData)
 	}
 	fi.enabled = false;
 	fi.state = 0;
+	// Record the coordinates, player, and type of this factory, in case it is destroyed and rebuilt
+	fi.x = structure.x;
+	fi.y = structure.y;
+	fi.player = structure.player;
+	fi.stattype = structure.stattype;
 	if (!camDef(fi.group))
 	{
 		fi.group = camNewGroup();

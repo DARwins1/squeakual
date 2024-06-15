@@ -107,6 +107,32 @@ function camEnableTruck(what)
 	}
 }
 
+// Set a truck's structure set
+function camSetStructureSet(what, newStructSet)
+{
+	if (camIsString(what))
+	{
+		what = camGetTruckIndicesFromLabel(what);
+	}
+	else if (Number.isInteger(what))
+	{
+		what = [what];
+	}
+	else if (!(what instanceof Array))
+	{
+		camDebug("Invalid input; must be truck index or base label.");
+		return;
+	}
+	
+	for (const __INDEX of what)
+	{
+		__camTruckInfo[__INDEX].structset = newStructSet;
+		__camTruckInfo[__INDEX].checkForModuleUpdate = true;
+		__camTruckInfo[__INDEX].checkForStructureReplacement = true;
+		__camTruckInfo[__INDEX].checkForObsolete = true;
+	}
+}
+
 //;; ## camTruckObsoleteStructure(player, obsoleteStruct, newStruct[, noObsolete])
 //;;
 //;; Replace a structure with another structure in a truck's structure set
@@ -462,13 +488,18 @@ function __camTruckTick()
 			let minDist = Number.MAX_VALUE;
 			let minDistIndex = -1;
 			const structSet = ti.structset;
+			let artiBlock = false;
 			
 			// Find the closest spot that we want to build on
 			for (let j = 0; j < structSet.length; j++)
 			{
-				// Check the structure spot and see if it's unobstructed (except for oil derricks, we want those ON the oil resource)
+				// Check the structure spot and see if it's unobstructed, except:
+				// When we're trying to build Oil Derricks, we want those ON the oil resource!
+				// If the blocking object is an artifact, pick it up instead!
 				const structSpot = getObject(structSet[j].x, structSet[j].y);
-				if (structSpot === null || (structSet[j].stat === "A0ResourceExtractor" && structSpot.type === FEATURE))
+				if (structSpot === null ||
+					(structSet[j].stat === "A0ResourceExtractor" && structSpot.type === FEATURE) ||
+					(structSpot.type === FEATURE && structSpot.stattype === ARTIFACT))
 				{
 					// Compare the distance between the truck and the structure location
 					const __DISTANCE = distBetweenTwoPoints(truck.x, truck.y, structSet[j].x, structSet[j].y);
@@ -476,6 +507,14 @@ function __camTruckTick()
 					{
 						minDist = __DISTANCE;
 						minDistIndex = j;
+						if (structSpot !== null &&structSpot.type === FEATURE && structSpot.stattype === ARTIFACT)
+						{
+							artiBlock = true;
+						}
+						else
+						{
+							artiBlock = false;
+						}
 					}
 				}
 			}
@@ -483,10 +522,22 @@ function __camTruckTick()
 			// If we found a clear spot, build the structure
 			if (minDistIndex !== -1)
 			{
-				enableStructure(structSet[minDistIndex].stat, __PLAYER);
-				orderDroidBuild(truck, DORDER_BUILD, structSet[minDistIndex].stat, 
-					structSet[minDistIndex].x, structSet[minDistIndex].y, 
-					structSet[minDistIndex].rot * 90);
+				if (!artiBlock)
+				{
+					// Build the structure
+					enableStructure(structSet[minDistIndex].stat, __PLAYER);
+					orderDroidBuild(truck, DORDER_BUILD, structSet[minDistIndex].stat, 
+						structSet[minDistIndex].x, structSet[minDistIndex].y, 
+						structSet[minDistIndex].rot * 90);
+				}
+				else
+				{
+					// Pick up the artifact and build the structure over it
+					// The artifact will be reassigned to the new structure later
+					orderDroidObj(truck, DORDER_RECOVER, getObject(structSet[minDistIndex].x, structSet[minDistIndex].y));
+					// We'll handle building the structure on the next truck tick...
+				}
+				
 				orderGiven = true;
 			}
 			else

@@ -1190,7 +1190,7 @@
         "height": 2,
         "hitpoints": 700,
         "id": "CoolingTower",
-        "name": "*CoolingTower*",
+        "name": "Cooling Tower",
         "sensorID": "ZNULLSENSOR",
         "strength": "SOFT",
         "structureModel": [
@@ -1821,6 +1821,29 @@
         ],
         "width": 1
     },
+    "GuardTower6H": {
+        "armour": 15,
+        "breadth": 1,
+        "buildPoints": 350,
+        "buildPower": 125,
+        "ecmID": "ZNULLECM",
+        "height": 2,
+        "hitpoints": 60,
+        "id": "GuardTower6H",
+        "name": "Mini-Rocket Tower",
+        "resistance": 150,
+        "sensorID": "DefaultSensor1Mk1",
+        "strength": "MEDIUM",
+        "structureModel": [
+            "BLGUARDN.pie"
+        ],
+        "thermal": 15,
+        "type": "DEFENSE",
+        "weapons": [
+            "Rocket-Pod"
+        ],
+        "width": 1
+    },
     "RustGuardTower6": {
         "armour": 15,
         "breadth": 1,
@@ -2155,7 +2178,7 @@
         "height": 2,
         "hitpoints": 700,
         "id": "NuclearReactor",
-        "name": "*NuclearReactor*",
+        "name": "Nuclear Reactor",
         "sensorID": "DefaultSensor1Mk1",
         "strength": "MEDIUM",
         "structureModel": [
@@ -2754,7 +2777,7 @@
         "height": 3,
         "hitpoints": 1000,
         "id": "UplinkCentre",
-        "name": "*UplinkCentre*",
+        "name": "Uplink Centre",
         "sensorID": "UplinkSensor",
         "strength": "MEDIUM",
         "structureModel": [

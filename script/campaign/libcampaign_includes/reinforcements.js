@@ -29,7 +29,7 @@
 //;;
 function camSendReinforcement(playerId, position, templates, kind, data)
 {
-	const pos = camMakePos(position);
+	let pos = camMakePos(position);
 	let order = CAM_ORDER_ATTACK;
 	let order_data = { regroup: false, count: -1 };
 	if (camDef(data) && camDef(data.order))
@@ -47,6 +47,15 @@ function camSendReinforcement(playerId, position, templates, kind, data)
 			const droids = [];
 			for (let i = 0, l = templates.length; i < l; ++i)
 			{
+				if (camDef(position.x2))
+				{
+					// If position is an area, choose random coordinates inside of it
+					pos = {
+						x: position.x + camRand(position.x2 - position.x),
+						y: position.y + camRand(position.y2 - position.y)
+					};
+				}
+
 				const template = templates[i];
 				const __PROP = __camChangePropulsion(template.prop, playerId);
 				const droid = addDroid(playerId, pos.x, pos.y, camNameTemplate(template.weap, template.body, __PROP), template.body, __PROP, "", "", template.weap);
@@ -65,7 +74,8 @@ function camSendReinforcement(playerId, position, templates, kind, data)
 				list: templates,
 				data: data,
 				order: order,
-				order_data: order_data
+				order_data: order_data,
+				silent: data.silent
 			});
 			__camDispatchTransporterSafe();
 			break;
