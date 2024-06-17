@@ -129,7 +129,15 @@ function __camSpawnVtols()
 		}
 		else
 		{
-			__camVtolDataSystem[idx].nextSpawnTime = gameTime + __camVtolDataSystem[idx].timer;
+			if (camDef(__camVtolDataSystem[idx].timer))
+			{
+				__camVtolDataSystem[idx].nextSpawnTime = gameTime + __camVtolDataSystem[idx].timer;
+			}
+			else
+			{
+				// One-time VTOL spawn
+				__camVtolDataSystem[idx].active = false;
+			}
 		}
 
 		// Default VTOL amounts

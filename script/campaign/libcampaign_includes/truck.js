@@ -42,9 +42,9 @@ function camManageTrucks(player, data)
 		checkForStructureReplacement: true, // Whether we look for structures to build
 		checkForObsolete: true, // Whether we look for structures to demolish
 		player: player,
-		template: data.template,
-		respawnDelay: camDef(data.respawnDelay) ? data.respawnDelay : 0,
 		truckDroid: data.truckDroid, // Holds info about the assigned truck droid
+		template: camDef(data.template) ? data.template : (camDef(data.truckDroid) ? __toTruckTemplate(data.truckDroid) : undefined),
+		respawnDelay: camDef(data.respawnDelay) ? data.respawnDelay : 0,
 		rebuildTruck: camDef(data.rebuildTruck) ? data.rebuildTruck : true,
 		rebuildBase: camDef(data.rebuildBase) ? data.rebuildBase : false,
 		area: camDef(data.area) ? data.area : (camDef(__camEnemyBases[data.label]) ? getObject(__camEnemyBases[data.label].cleanup) : undefined), // NOTE: This checks if a base already exists!
@@ -57,6 +57,9 @@ function camManageTrucks(player, data)
 		// Build the new truck
 		camRebuildTruck(__LENGTH - 1, false);
 	}
+
+	// Return the index so levels scripts can hold onto it
+	return __LENGTH - 1;
 }
 
 // Stop managing a given truck.
@@ -227,7 +230,7 @@ function camRebuildTruck(index, force)
 		force = false;
 	}
 
-	if (!force && (!camDef(__camEnemyBases[ti.label]) || camBaseIsEliminated(ti.label)))
+	if (!force && (!camDef(__camEnemyBases[ti.label]) || (camBaseIsEliminated(ti.label) && !ti.rebuildBase)))
 	{
 		return false; // Truck's base was destroyed after queuing (or doesn't exist)
 	}
@@ -306,11 +309,7 @@ function camAssignTruck(droid, index)
 	}
 
 	__camTruckInfo[index].truckDroid = droid;
-	__camTruckInfo[index].template = {
-		body: droid.body,
-		prop: droid.propulsion,
-		weap: (droid.propulsion == "CyborgLegs") ? "CyborgSpade" : "Spade1Mk1"
-	};
+	__camTruckInfo[index].template = __toTruckTemplate(droid);
 }
 
 //;; ## camAreaToStructSet(area[, player])
@@ -319,17 +318,23 @@ function camAssignTruck(droid, index)
 //;; NOTE: Currently, rotation is NOT provided.
 function camAreaToStructSet(area, player)
 {
-	const structures = enumArea(area.x, area.y, area.x2, area.y2, ALL_PLAYERS, false)
+	let a = area;
+	if (!camDef(area.x))
+	{
+		// Area label
+		a = getObject(area);
+	}
+	
+	const structures = enumArea(a.x, a.y, a.x2, a.y2, player, false).filter((obj) => (obj.type === STRUCTURE));
 	const structSet = [];
 
 	for (const structure of structures)
 	{
-		if (!camDef(player) || structure.player == player)
-		{
-			// Note: The spelling of ".Id" instead of ".id" here is correct!
-			structSet.push({stat: camGetCompStats(structure.name, "Building").Id, x: structure.x, y: structure.y/*, rot: structure.direction*/})
-		}
+		// Note: The spelling of ".Id" instead of ".id" here is correct!
+		structSet.push({stat: camGetCompStats(structure.name, "Building").Id, x: structure.x, y: structure.y/*, rot: structure.direction*/})
 	}
+
+	// TODO: Check structures for modules
 
 	return structSet;
 }
@@ -702,6 +707,20 @@ function __camCheckDeadTruck(obj)
 	}
 }
 
+// Destroy check if any trucks should automatically self-destruct
+// Called when a base is eradicated.
+function __camCheckBaseTrucks(baseLabel)
+{
+	for (const __INDEX in __camTruckInfo)
+	{
+		const ti = __camTruckInfo[__INDEX];
+		if (ti.label === baseLabel && !ti.rebuildBase)
+		{
+			__camTruckSelfDestruct(__INDEX);
+		}
+	}
+}
+
 // Destroy this index's truck droid
 // Called when a truck is disabled or when a base is destroyed (and we no longer want the truck).
 function __camTruckSelfDestruct(index)
@@ -710,5 +729,14 @@ function __camTruckSelfDestruct(index)
 	{
 		camSafeRemoveObject(__camTruckInfo[index].truckDroid, true);
 		__camTruckInfo[index].truckDroid = undefined;
+	}
+}
+
+function __toTruckTemplate(droid)
+{
+	return {
+		body: droid.body,
+		prop: droid.propulsion,
+		weap: (droid.propulsion == "CyborgLegs") ? "CyborgSpade" : "Spade1Mk1"
 	}
 }

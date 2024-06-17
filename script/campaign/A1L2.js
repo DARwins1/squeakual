@@ -696,11 +696,13 @@ function eventStartLevel()
 	// Charlie gets 2 trucks
 	camManageTrucks(MIS_TEAM_CHARLIE, {
 		label: "charlieLZ", // Label of Charlie's LZ base (which starts unbuilt)
+		rebuildBase: true,
 		structset: camCharlieA1L2Structs // See structSets.js
 		// NOTE: We don't need any more data here, since we'll manually assign/rebuild the truck with transport reinforcements
 	});
 	camManageTrucks(MIS_TEAM_CHARLIE, {
 		label: "charlieLZ",
+		rebuildBase: true,
 		structset: camCharlieA1L2Structs
 	});
 
@@ -722,10 +724,12 @@ function eventStartLevel()
 	// Trucks
 	camManageTrucks(MIS_TEAM_FOXTROT, {
 		label: "foxtrotLZ",
+		rebuildBase: true,
 		structset: camFoxtrotA1L2Structs
 	});
 	camManageTrucks(MIS_TEAM_FOXTROT, {
 		label: "foxtrotLZ",
+		rebuildBase: true,
 		structset: camFoxtrotA1L2Structs
 	});
 
@@ -747,6 +751,7 @@ function eventStartLevel()
 	// Truck
 	camManageTrucks(MIS_TEAM_GOLF, {
 		label: "golfLZ",
+		rebuildBase: true,
 		structset: camGolfA1L2Structs
 	});
 

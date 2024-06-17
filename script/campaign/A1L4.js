@@ -1,0 +1,822 @@
+include("script/campaign/transitionTech.js");
+include("script/campaign/libcampaign.js");
+include("script/campaign/templates.js");
+include("script/campaign/structSets.js");
+
+const MIS_NASDA = 1;
+const MIS_NASDA_POWER = 1;
+const MIS_CLAYDE = 5;
+const MIS_TEAM_DELTA = 7;
+const SPOTTER_RANGE = 16;
+
+const mis_collectiveResearch = [
+	"R-Wpn-MG-Damage02", "R-Wpn-Rocket-Damage02", "R-Wpn-Mortar-Damage01", 
+	"R-Wpn-Flamer-Damage02", "R-Wpn-Cannon-Damage02", "R-Wpn-MG-ROF01",
+	"R-Wpn-Rocket-ROF02", "R-Wpn-Mortar-ROF01", "R-Wpn-Flamer-ROF02",
+	"R-Wpn-Cannon-ROF02", "R-Vehicle-Metals02", "R-Struc-Materials02", 
+	"R-Defense-WallUpgrade02", "R-Sys-Engineering01",
+];
+
+var phaseTwo;
+var deltaTruckJob;
+var colTruckJob1;
+var colTruckJob2;
+var colTruckJob3;
+var nasdaCentralStructSet;
+var waveIndex;
+var powerDestroyed;
+var structsDonated;
+var deltaSensorPos;
+var deltaVtolPos;
+var zuluVtolPos1;
+var zuluVtolPos2;
+var zuluVtolPos3;
+// Refillable Groups...
+var deltaPatrolGroup;
+var deltaRepairGroup;
+var deltaMortarGroup;
+var deltaVtolGroup;
+var zuluPatrolGroup;
+var zuluVtolGroupNW;
+var zuluVtolGroupNE;
+var zuluVtolGroupSouth;
+
+camAreaEvent("vtolRemoveZone", function(droid)
+{
+	camSafeRemoveObject(droid, false);
+	resetLabel("vtolRemoveZone", CAM_THE_COLLECTIVE);
+});
+
+function heliAttack()
+{
+	// Attack anything
+	const templates = [cTempl.helcan, cTempl.helhmg, cTempl.helpod];
+	const ext = {
+		limit: [1, 1, 1],
+		alternate: true
+	};
+	camSetVtolData(CAM_THE_COLLECTIVE, undefined, "vtolRemoveZone", templates, camChangeOnDiff(camSecondsToMilliseconds(50)), undefined, ext);
+}
+
+// Real VTOLs !!! (scary)
+function vtolAttack()
+{
+	// Send a one-time bomber squadron from the northeast
+	camSetVtolData(CAM_THE_COLLECTIVE, "vtolAttackPos1", "vtolRemoveZone", [cTempl.colbombv], undefined, // These VTOLs don't come back
+		undefined, {limit: 2}
+	);
+
+	// Focus towards NASDA Central
+	const templates = [cTempl.colatv, cTempl.colhmgv]; // Lancers and HMGs
+	const ext = {
+		limit: [2, 3],
+		alternate: true,
+		targetPlayer: MIS_CLAYDE,
+		pos: camMakePos("landingZoneZulu")
+	};
+	camSetVtolData(CAM_THE_COLLECTIVE, ["vtolAttackPos2", "vtolAttackPos3"], "vtolRemoveZone", templates, camChangeOnDiff(camMinutesToMilliseconds(1.5)), undefined, ext);
+}
+
+// Send Collective-scavengers at team Delta while the transport flies over
+function introAttack()
+{
+	camManageGroup(camMakeGroup("introAttackGroup"), CAM_ORDER_ATTACK, {
+		targetPlayer: MIS_TEAM_DELTA
+	});
+}
+
+// Remove and damage defenses around NASDA Central
+// Clayde's trucks will rebuild and repair them over time.
+function weakenZuluDefenses()
+{
+	const structs = enumArea("claydeStructSetArea", MIS_CLAYDE, false).filter((obj) => (obj.type === STRUCTURE));
+	for (structure of structs)
+	{
+		if (structure.name === _("Heavy Machinegun Guard Tower") || structure.name === _("Tank Traps") 
+			|| structure.name === _("Sarissa Guard Tower") || structure.name === _("Mini-Rocket Battery"))
+		{
+			camSafeRemoveObject(structure);
+		}
+		else
+		{
+			setHealth(structure, 80 + camRand(10));
+		}
+	}
+}
+
+function sendDeltaTransporter()
+{
+	// Make a list of droids to bring in in order of importance
+	// Truck -> Repair -> Mortar -> VTOL -> Patrol
+	let droidQueue = [];
+
+	const trucks = camGetTrucksFromLabel("deltaLZ");
+	if (!camDef(trucks[0])) droidQueue.push(cTempl.plltruckt);
+
+	droidQueue = droidQueue.concat(camGetRefillableGroupTemplates(deltaRepairGroup)
+		).concat(camGetRefillableGroupTemplates(deltaMortarGroup)
+		).concat(camGetRefillableGroupTemplates(deltaVtolGroup)
+		).concat(camGetRefillableGroupTemplates(deltaPatrolGroup));
+
+	const droids = [];
+	// Get (up to) the first 10 units in the queue
+	for (let i = 0; i < Math.min(droidQueue.length, 10); i++)
+	{
+		droids.push(droidQueue[i]);
+	}
+
+	// Don't send an empty transport!
+	if (droids.length > 0)
+	{
+		camSendReinforcement(MIS_TEAM_DELTA, camMakePos("landingZoneDelta"), droids,
+			CAM_REINFORCE_TRANSPORT, {
+				entry: camMakePos("transportEntryPos"),
+				exit: camMakePos("transportEntryPos")
+			}
+		);
+	}
+}
+
+// Land extra Collective tanks at a random built LZ
+function sendCollectiveTransporter()
+{
+	// Set reinforcement droids
+	const droids = [
+		cTempl.colpodt, cTempl.colpodt,
+		cTempl.colcanht, cTempl.colcanht,
+		cTempl.colhmght, cTempl.colhmght,
+	];
+	// Add Medium Cannon(s) on Hard+
+	if (difficulty >= HARD) droids.push(cTempl.commcant);
+	if (difficulty === INSANE) droids.push(cTempl.commcant);
+
+	// Get all available LZs
+	const lzPool = [];
+	if (!camBaseIsEliminated("colLZ1")) lzPool.push(camMakePos("collectiveLZ1"));
+	if (!camBaseIsEliminated("colLZ2")) lzPool.push(camMakePos("collectiveLZ2"));
+	if (!camBaseIsEliminated("colLZ3")) lzPool.push(camMakePos("collectiveLZ3"));
+
+	// If we have a valid LZ, send the transport
+	if (lzPool.length > 0)
+	{
+		camSendReinforcement(CAM_THE_COLLECTIVE, lzPool[camRand(lzPool.length)], droids,
+			CAM_REINFORCE_TRANSPORT, {
+				entry: camGenerateRandomMapEdgeCoordinate(),
+				exit: camGenerateRandomMapEdgeCoordinate(),
+				data: {targetPlayer: CAM_HUMAN_PLAYER}
+			}
+		);
+	}
+}
+
+// Assign Delta reinforcements
+// Also donate structures on the player's first landing
+function eventTransporterLanded(transport)
+{
+	if (!structsDonated && transport.player === CAM_HUMAN_PLAYER)
+	{
+		// Donate some defenses to the player, and also assign some engineers
+		const structs = enumArea("donateArea", MIS_CLAYDE, false).filter((obj) => (obj.type === STRUCTURE));
+		for (structure of structs)
+		{
+			donateObject(structure, CAM_HUMAN_PLAYER);
+		}
+
+		camManageTrucks(MIS_CLAYDE, {
+			label: "nasdaCentral",
+			rebuildBase: true,
+			respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(40), true),
+			truckDroid: getObject("zuluEngineer1"),
+			structset: nasdaCentralStructSet
+		});
+		camManageTrucks(MIS_CLAYDE, {
+			label: "nasdaCentral",
+			rebuildBase: true,
+			respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(40), true),
+			truckDroid: getObject("zuluEngineer2"),
+			structset: nasdaCentralStructSet
+		});
+
+		// Also create a spotter that grants vision, centered on NASDA Central
+		addSpotter(18, 56, CAM_HUMAN_PLAYER, SPOTTER_RANGE * 128, false, 0);
+
+		structsDonated = true;
+		return;
+	}
+
+
+	if (phaseTwo || transport.player !== MIS_TEAM_DELTA)
+	{
+		return; // don't care
+	}
+
+	const transDroids = camGetTransporterDroids(transport.player);
+	const transTrucks = transDroids.filter((droid) => (droid.droidType == DROID_CONSTRUCT));
+	const transOther = transDroids.filter((droid) => (droid.droidType != DROID_CONSTRUCT));
+
+	// First, assign the truck
+	const lzTruck = camGetTrucksFromLabel("deltaLZ")[0];
+	// Check if the LZ truck is missing
+	if (!camDef(lzTruck) && camDef(transTrucks[0]))
+	{
+		// Assign this truck!
+		camAssignTruck(transTrucks[0], camGetTruckIndicesFromLabel("deltaLZ"));
+	}
+
+	// Next, assign other units to their refillable groups
+	// Loop through the droids we have and match them to any missing templates
+	for (const droid of transOther)
+	{
+		let droidAssigned = false;
+
+		for (const group of [deltaRepairGroup, deltaMortarGroup, deltaVtolGroup, deltaPatrolGroup])
+		{
+			if (droidAssigned) break;
+
+			for (const template of camGetRefillableGroupTemplates(group))
+			{
+				if (camDroidMatchesTemplate(droid, template))
+				{
+					camGroupAdd(group, droid);
+					droidAssigned = true;
+					break;
+				}
+			}
+		}
+	}
+}
+
+// Replace the spotter when the player re-loads the game
+function eventGameLoaded()
+{
+	addSpotter(18, 56, CAM_HUMAN_PLAYER, SPOTTER_RANGE * 128, false, 0);
+}
+
+// Check if a Sensor/VTOL tower is rebuilt
+function eventStructureBuilt(struct, droid)
+{
+	if (struct.player === MIS_TEAM_DELTA && struct.x === deltaSensorPos.x && struct.y === deltaSensorPos.y)
+	{
+		// Delta Sensor Tower rebuilt!
+		addLabel(struct, "deltaSensorTower");
+		camManageGroup(deltaMortarGroup, CAM_ORDER_FOLLOW, {
+			leader: "deltaSensorTower",
+			suborder: CAM_ORDER_DEFEND,
+			pos: camMakePos("deltaRepairPos") // Defend this position if the tower is destroyed (again).
+		});
+	}
+	else if (struct.player === MIS_TEAM_DELTA && struct.x === deltaVtolPos.x && struct.y === deltaVtolPos.y)
+	{
+		// Delta VTOL Tower rebuilt!
+		addLabel(struct, "deltaVtolTower");
+		camManageGroup(deltaVtolGroup, CAM_ORDER_FOLLOW, {
+			leader: "deltaVtolTower",
+			suborder: CAM_ORDER_DEFEND,
+			pos: camMakePos("zuluVtolAssembly")
+		});
+	}
+	else if (struct.player === MIS_CLAYDE && struct.x === zuluVtolPos1.x && struct.y === zuluVtolPos1.y)
+	{
+		// Zulu NW VTOL Tower rebuilt!
+		addLabel(struct, "zuluVtolTower1");
+		camManageGroup(zuluVtolGroupNW, CAM_ORDER_FOLLOW, {
+			leader: "zuluVtolTower1",
+			suborder: CAM_ORDER_DEFEND,
+			pos: camMakePos("zuluVtolAssembly")
+		});
+	}
+	else if (struct.player === MIS_CLAYDE && struct.x === zuluVtolPos2.x && struct.y === zuluVtolPos2.y)
+	{
+		// Zulu NE VTOL Tower rebuilt!
+		addLabel(struct, "zuluVtolTower2");
+		camManageGroup(zuluVtolGroupNE, CAM_ORDER_FOLLOW, {
+			leader: "zuluVtolTower2",
+			suborder: CAM_ORDER_DEFEND,
+			pos: camMakePos("zuluVtolAssembly")
+		});
+	}
+	else if (struct.player === MIS_CLAYDE && struct.x === zuluVtolPos3.x && struct.y === zuluVtolPos3.y)
+	{
+		// Zulu south VTOL Tower rebuilt!
+		addLabel(struct, "zuluVtolTower3");
+		camManageGroup(zuluVtolGroupSouth, CAM_ORDER_FOLLOW, {
+			leader: "zuluVtolTower3",
+			suborder: CAM_ORDER_DEFEND,
+			pos: camMakePos("zuluVtolAssembly")
+		});
+	}
+}
+
+// Bring in Collective and Collective-affiliated scavengers
+// NOTE: The Collective and their scavengers are represented by the same player (CAM_THE_COLLECTIVE)
+// The Collective-scavengers will usually be referred to as "C-Scavs".
+function collectiveAttackWaves()
+{
+	waveIndex++;
+
+	/*
+		The waves of Collective and C-Scav units will spawn 8 different "entrances" around the edges of the map
+		As the level progresses, more entrances will "activate", allowing enemies to spawn from those.
+		Each wave, a set number of random entrances will spawn units, with the number of entrances being chosen depending on the difficulty
+		> Waves 1+ will activate the northwest ridge and south entrances 
+		> Waves 3+ will activate the north city entrance
+		> Waves 6+ will activate the northeast valley entrance
+		> Waves 10+ will activate the northeast plateau entrance
+		> Waves 14+ will activate the east plateau entrance
+		> Waves 18+ will activate the northwest crater entrance
+		> Waves 22+ will activate the east valley entrance
+	*/
+
+	// Each entrance has a unit set composition, mostly of C-Scavs. 
+	const nwRidgeDroids = [cTempl.bloke, cTempl.buggy, cTempl.buscan, cTempl.lance, cTempl.rbuggy];
+
+	const northCityDroids = [cTempl.moncan, cTempl.rbjeep, cTempl.bloke, cTempl.bjeep, cTempl.lance];
+
+	const neValleyDroids = [cTempl.firetruck, cTempl.gbjeep, cTempl.lance, cTempl.trike, cTempl.monsar];
+
+	const nePlateauDroids = [cTempl.bjeep, cTempl.minitruck, cTempl.buscan, cTempl.monhmg, cTempl.sartruck];
+
+	const eastPlateauDroids = [cTempl.flatmrl, cTempl.gbjeep, cTempl.bloke, cTempl.lance, cTempl.buggy, cTempl.rbuggy];
+
+	const nwCraterDroids = [cTempl.monmrl, cTempl.gbjeep, cTempl.minitruck, cTempl.lance, cTempl.bjeep];
+
+	const eastValleyDroids = [cTempl.flatat, cTempl.minitruck, cTempl.gbjeep, cTempl.trike, cTempl.moncan];
+
+	const southDroids = [cTempl.moncan, cTempl.bjeep, cTempl.bloke, cTempl.minitruck, cTempl.flatmrl, cTempl.buggy];
+
+	// Occasionally, entrance templates will be overwritten with these purely Collective units.
+	// cTempl.colpodt // MRP
+	// cTempl.colaaht // Hurricane
+	// cTempl.colmrat // MRA
+	// cTempl.colhmght // HMG
+	// cTempl.colcanht // Light Cannon
+	// cTempl.colflamt // Flamer
+	// cTempl.colmortht // Mortar
+	// cTempl.commcant // Medium Cannon
+	// cTempl.comatt // Lancer
+	const colOverrideDroids = [
+		cTempl.colpodt, cTempl.colpodt, // MRP
+		cTempl.colmrat, cTempl.colmrat, // MRA
+		cTempl.colhmght, cTempl.colhmght, // HMG
+		cTempl.colcanht, cTempl.colcanht, cTempl.colcanht, // Light Cannon
+		cTempl.colflamt, cTempl.colflamt, // Flamer
+		cTempl.colaaht, // Hurricane
+	];
+	if (phaseTwo) colOverrideDroids.push(cTempl.commcant); // Add chance for Medium Cannon
+	if (difficulty >= HARD) colOverrideDroids.push(cTempl.commcant); // Add chance for Medium Cannon
+	if (difficulty === INSANE) colOverrideDroids.push(cTempl.comatt); // Add chance for Lancer
+
+	// This block handles activating new entrances
+	const waveEntrances = [];
+	const waveTemplates = [];
+	if (waveIndex >= 1)
+	{
+		waveEntrances.push("colEntrance1");
+		waveTemplates.push(nwRidgeDroids);
+		waveEntrances.push("colEntrance8");
+		waveTemplates.push(southDroids);
+	}
+	if (waveIndex >= 3)
+	{
+		waveEntrances.push("colEntrance2");
+		waveTemplates.push(northCityDroids);
+	}
+	if (waveIndex >= 6)
+	{
+		waveEntrances.push("colEntrance3");
+		waveTemplates.push(neValleyDroids);
+	}
+	if (waveIndex >= 10)
+	{
+		waveEntrances.push("colEntrance4");
+			waveTemplates.push(nePlateauDroids);
+	}
+	if (waveIndex >= 14)
+	{
+		waveEntrances.push("colEntrance5");
+		waveTemplates.push(eastPlateauDroids);
+	}
+	if (waveIndex >= 18)
+	{
+		waveEntrances.push("colEntrance6");
+		waveTemplates.push(nwCraterDroids);
+	}
+	if (waveIndex >= 22)
+	{
+		waveEntrances.push("colEntrance7");
+		waveTemplates.push(eastValleyDroids);
+	}
+
+	// Determine the number of separate groups to spawn at once
+	let numGroups = 2;
+	if (difficulty >= MEDIUM) numGroups++; // 3 on Normal
+	if (difficulty >= HARD) numGroups++; // 4 on Hard
+	if (difficulty >= INSANE) numGroups++; // 5 on Insane
+
+	// Determine how many groups should be replaced with stronger Collective templates
+	let numColOverrides = 0;
+	if (waveIndex >= 6 && waveIndex % 3 == 0)
+	{
+		numColOverrides++;
+		if (difficulty === INSANE) numColOverrides++;
+	}
+	if (waveIndex >= 16 && waveIndex % 2 == 0)
+	{
+		numColOverrides++;
+	}
+	if (phaseTwo)
+	{
+		numColOverrides++;
+	}
+
+	// Choose from among the active entrances and spawn units
+	const chosenEntrances = [];
+	const chosenTemplates = [];
+	for (let i = 0; i < Math.min(waveEntrances.length, numGroups); i++)
+	{
+		const INDEX = camRand(waveEntrances.length);
+
+		chosenEntrances.push(waveEntrances[INDEX]);
+		waveEntrances.splice(INDEX, 1);
+		if (numColOverrides > 0)
+		{
+			chosenTemplates.push(colOverrideDroids);
+			numColOverrides--;
+		}
+		else
+		{
+			chosenTemplates.push(waveTemplates[INDEX]);
+			waveTemplates.splice(INDEX, 1);
+		}
+	}
+
+	// Spawn units at the chosen entrance(s) with the corresponding templates
+	const NUM_DROIDS = difficulty + 3;
+	for (let i = 0; i < chosenEntrances.length; i++)
+	{
+		const droids = [];
+		for (let j = 0; j < NUM_DROIDS; j++)
+		{
+			const templateList = chosenTemplates[i];
+			droids.push(templateList[camRand(templateList.length)]);
+		}
+
+		camSendReinforcement(CAM_THE_COLLECTIVE, getObject(chosenEntrances[i]), droids, CAM_REINFORCE_GROUND, {
+			data: {targetPlayer: MIS_CLAYDE}
+		});
+	}
+
+	// Lastly, send a truck to attempt building a Collective LZ
+	// NOTE: During phase two, trucks are sent every other wave
+	if (!camDef(camGetTrucksFromLabel("colLZ1")[0]) && waveIndex >= 8 && (waveIndex % 4 == 0 || (phaseTwo && waveIndex % 2 == 0)))
+	{
+		const tPos = camMakePos("colEntrance5");
+		const tTemp = (phaseTwo || difficulty === INSANE) ? cTempl.comtruckt : cTempl.coltruckht;
+		const newTruck = addDroid(CAM_THE_COLLECTIVE, tPos.x, tPos.y, 
+			camNameTemplate(tTemp.weap, tTemp.body, tTemp.prop), 
+			tTemp.body, tTemp.prop, "", "", tTemp.weap);
+		camAssignTruck(newTruck, colTruckJob1);
+	}
+	if (!camDef(camGetTrucksFromLabel("colLZ2")[0]) && waveIndex >= 16 && (waveIndex % 8 == 0 || (phaseTwo && waveIndex % 2 == 0)))
+	{
+		const tPos = camMakePos("colEntrance4");
+		const tTemp = (phaseTwo || difficulty >= HARD) ? cTempl.comtruckt : cTempl.coltruckht;
+		const newTruck = addDroid(CAM_THE_COLLECTIVE, tPos.x, tPos.y, 
+			camNameTemplate(tTemp.weap, tTemp.body, tTemp.prop), 
+			tTemp.body, tTemp.prop, "", "", tTemp.weap);
+		camAssignTruck(newTruck, colTruckJob2);
+	}
+	if (!camDef(camGetTrucksFromLabel("colLZ3")[0]) && waveIndex >= 24 && (waveIndex % 6 == 0 || (phaseTwo && waveIndex % 2 == 0)))
+	{
+		const tPos = camMakePos("colEntrance7");
+		const tTemp = (phaseTwo || difficulty >= MEDIUM) ? cTempl.comtruckt : cTempl.coltruckht;
+		const newTruck = addDroid(CAM_THE_COLLECTIVE, tPos.x, tPos.y, 
+			camNameTemplate(tTemp.weap, tTemp.body, tTemp.prop), 
+			tTemp.body, tTemp.prop, "", "", tTemp.weap);
+		camAssignTruck(newTruck, colTruckJob3);
+	}
+}
+
+
+function setPhaseTwo()
+{
+	phaseTwo = true;
+
+	// Attack waves come faster
+	removeTimer("collectiveAttackWaves");
+	setTimer("collectiveAttackWaves", camChangeOnDiff(camSecondsToMilliseconds(25)));
+
+	// TODO: Dialogue about evacuating
+
+	// Switch the teams of the NASDA power structures (so the player can destroy them)
+	const structs = enumArea("nasdaPowerArea", MIS_NASDA, false).filter((obj) => (obj.type === STRUCTURE));
+	for (structure of structs)
+	{
+		donateObject(structure, MIS_NASDA_POWER);
+	}
+
+	hackAddMessage("NASDA_POWER", PROX_MSG, CAM_HUMAN_PLAYER);
+
+	evacuateAllies();
+}
+
+function eventDestroyed(obj)
+{
+	if (obj.player === MIS_NASDA_POWER 
+		&& enumArea("nasdaPowerArea", MIS_NASDA_POWER, false).filter((obj) => (obj.type === STRUCTURE)).length === 0)
+	{
+		powerDestroyed = true;
+		hackRemoveMessage("NASDA_POWER", PROX_MSG, CAM_HUMAN_PLAYER);
+	}
+}
+
+// Have team Delta and Zulu practice the time-honored strategy known as:
+// "Drop Everything and Run for Your Lives"
+function evacuateAllies()
+{
+	// TODO: Implement
+}
+
+// Returns true if the player should be allowed to escape (and end the level)
+function canEscape()
+{
+	if (phaseTwo && powerDestroyed) return true;
+	return undefined;
+}
+
+function eventStartLevel()
+{
+	const startPos = camMakePos("transportEntryPos");
+	const lz = getObject("landingZone");
+
+	camSetStandardWinLossConditions(CAM_VICTORY_OFFWORLD, "THE_END", {
+		area: "compromiseZone",
+		retlz: true,
+		reinforcements: camMinutesToSeconds(2),
+		callback: "canEscape"
+	});
+	camSetExtraObjectiveMessage("Defend NASDA Central");
+	setMissionTime(camMinutesToSeconds(30)); // This will be overwritten later
+
+	centreView(startPos.x, startPos.y);
+	setNoGoArea(lz.x, lz.y, lz.x2, lz.y2, CAM_HUMAN_PLAYER);
+	startTransporterEntry(startPos.x, startPos.y, CAM_HUMAN_PLAYER);
+	setTransporterExit(startPos.x, startPos.y, CAM_HUMAN_PLAYER);
+
+	// Get the camera to follow the transporter
+	// Transporter is the only droid of the player's on the map at this point
+	const transporter = enumDroid();
+	cameraTrack(transporter[0]);
+
+	// Make sure the scavengers/allies aren't choosing conflicting colors with the player
+	const PLAYER_COLOR = playerData[0].colour;
+	changePlayerColour(MIS_NASDA, 10); // NASDA is white in all cases
+	changePlayerColour(MIS_NASDA_POWER, 10);
+	changePlayerColour(MIS_CLAYDE, (PLAYER_COLOR !== 15) ? 15 : 0); // Clayde to brown or green
+	changePlayerColour(MIS_TEAM_DELTA, (PLAYER_COLOR !== 1) ? 1 : 8); // Golf to orange or yellow
+	// NOTE: The Collective keep their color from the previous mission
+
+	camCompleteRequiredResearch(mis_collectiveResearch, CAM_THE_COLLECTIVE);
+	camCompleteRequiredResearch(camA1L4AllyResearch, MIS_CLAYDE);
+	camCompleteRequiredResearch(camA1L4AllyResearch, MIS_TEAM_DELTA);
+
+	// Set alliances...
+	setAlliance(MIS_NASDA, CAM_HUMAN_PLAYER, true);
+	setAlliance(MIS_NASDA, CAM_THE_COLLECTIVE, true);
+	setAlliance(MIS_NASDA, MIS_CLAYDE, true);
+	setAlliance(MIS_NASDA, MIS_TEAM_DELTA, true);
+	setAlliance(MIS_NASDA_POWER, CAM_THE_COLLECTIVE, true);
+	setAlliance(MIS_NASDA_POWER, MIS_CLAYDE, true);
+	setAlliance(MIS_NASDA_POWER, MIS_TEAM_DELTA, true);
+	setAlliance(MIS_CLAYDE, CAM_HUMAN_PLAYER, true);
+	setAlliance(MIS_CLAYDE, MIS_TEAM_DELTA, true);
+	setAlliance(CAM_HUMAN_PLAYER, MIS_TEAM_DELTA, true);
+
+	camSetEnemyBases({
+		// These are mostly here to simplify truck logic
+		"nasdaCentral": {
+			cleanup: "claydeTruckZone",
+			friendly: true,
+			player: MIS_CLAYDE
+		},
+		"deltaLZ": {
+			cleanup: "deltaStructSetArea",
+			friendly: true,
+			player: MIS_TEAM_DELTA
+		},
+		// These LZs can be built later by enemy trucks:
+		"colLZ1": {
+			cleanup: "colLZBase1",
+			detectMsg: "COL_LZBASE1",
+			detectSnd: "pcv382.ogg",
+			eliminateSnd: "pcv394.ogg",
+		},
+		"colLZ2": {
+			cleanup: "colLZBase2",
+			detectMsg: "COL_LZBASE2",
+			detectSnd: "pcv382.ogg",
+			eliminateSnd: "pcv394.ogg",
+		},
+		"colLZ3": {
+			cleanup: "colLZBase3",
+			detectMsg: "COL_LZBASE3",
+			detectSnd: "pcv382.ogg",
+			eliminateSnd: "pcv394.ogg",
+		},
+	});
+
+	// NOTE: These factories serve only to resupply refillable groups and trucks
+	// The template lists of these factories are empty!
+	camSetFactories({
+		"zuluFactory1": {
+			assembly: "zuluAssembly",
+			order: CAM_ORDER_ATTACK, // The order and group size should go unused
+			groupSize: 4,
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(30), true), // NOTE: These get SLOWER on higher difficulties!
+			templates: [ ]
+		},
+		"zuluFactory2": {
+			assembly: "zuluAssembly",
+			order: CAM_ORDER_ATTACK,
+			groupSize: 4,
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(30), true),
+			templates: [ ]
+		},
+		"zuluCyborgFactory1": {
+			assembly: "zuluAssembly",
+			order: CAM_ORDER_ATTACK,
+			groupSize: 4,
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(30), true),
+			templates: [ ]
+		},
+		"zuluCyborgFactory2": {
+			assembly: "zuluAssembly",
+			order: CAM_ORDER_ATTACK,
+			groupSize: 4,
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(30), true),
+			templates: [ ]
+		},
+		"zuluVtolFactory": {
+			assembly: "zuluVtolAssembly",
+			order: CAM_ORDER_ATTACK,
+			groupSize: 4,
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(40), true),
+			templates: [ ]
+		},
+	});
+
+	// Set up refillable groups for the player's allies
+	// Also set up allied and Collective trucks
+
+	// Delta patrol group (4 Mini-Rocket Pods, 6 Mini-Rocket Arrays)
+	deltaPatrolGroup = camMakeRefillableGroup(camMakeGroup("deltaPatrolGroup"), {templates: [
+		cTempl.pllpodt, cTempl.pllpodt, cTempl.pllmrat, cTempl.pllmrat, cTempl.pllmrat,
+		cTempl.pllpodt, cTempl.pllpodt, cTempl.pllmrat, cTempl.pllmrat, cTempl.pllmrat,
+		]}, CAM_ORDER_PATROL, {
+		pos: [
+			camMakePos("patrolPos1"), camMakePos("patrolPos2"), camMakePos("patrolPos5")
+		],
+		interval: camSecondsToMilliseconds(28),
+		count: 10,
+		morale: 80,
+		fallback: camMakePos("deltaRepairPos"),
+		repair: 50,
+		repairPos: camMakePos("deltaRepairPos") // Wait here for repairs
+	});
+	// Delta Mortar group
+	deltaMortarGroup = camMakeRefillableGroup(camMakeGroup("deltaMortarGroup"), {templates: [
+		cTempl.pllmortt, cTempl.pllmortt, cTempl.pllmortt, cTempl.pllmortt,
+		]}, CAM_ORDER_FOLLOW, {
+		leader: "deltaSensorTower",
+		suborder: CAM_ORDER_DEFEND,
+		pos: camMakePos("deltaRepairPos") // Defend this position if the tower is destroyed.
+	});
+	// Delta repair group
+	deltaRepairGroup = camMakeRefillableGroup(camMakeGroup("deltaRepairGroup"), {templates: [
+		cTempl.pllrept, cTempl.pllrept,
+		]}, CAM_ORDER_DEFEND, {pos: camMakePos("deltaRepairPos")});
+	// Delta VTOL group (4 Light Cannons)
+	deltaVtolGroup = camMakeRefillableGroup(camMakeGroup("deltaVtolGroup"), {templates: [
+		cTempl.pllcanv, cTempl.pllcanv, cTempl.pllcanv, cTempl.pllcanv,
+		]}, CAM_ORDER_FOLLOW, {
+		leader: "deltaVtolTower",
+		suborder: CAM_ORDER_DEFEND,
+		pos: camMakePos("zuluVtolAssembly")
+	});
+	// Delta truck
+	deltaTruckJob = camManageTrucks(MIS_TEAM_DELTA, {
+		label: "deltaLZ",
+		structset: camAreaToStructSet("deltaStructSetArea", MIS_TEAM_DELTA),
+		truckDroid: getObject("deltaTruck")
+	});
+
+	// Zulu patrol group (6 Heavy Machineguns, 4 Light Cannons, 4 Mechanic Cyborgs, 4 Flamer Cyborgs)
+	zuluPatrolGroup = camMakeRefillableGroup(camMakeGroup("zuluPatrolGroup"), {templates: [
+		cTempl.pllhmght, cTempl.pllhmght, cTempl.pllhmght,
+		cTempl.pllcanht, cTempl.pllcanht,
+		cTempl.cybfl, cTempl.cybfl,
+		cTempl.cybrp, cTempl.cybrp, cTempl.cybrp, cTempl.cybrp,
+		cTempl.pllhmght, cTempl.pllhmght, cTempl.pllhmght,
+		cTempl.pllcanht, cTempl.pllcanht,
+		cTempl.cybfl, cTempl.cybfl,
+		],
+		globalFill: true, // Use all available factories to replenish this group
+		}, CAM_ORDER_PATROL, {
+		pos: [
+			camMakePos("patrolPos3"), camMakePos("patrolPos4"), camMakePos("patrolPos5")
+		],
+		interval: camSecondsToMilliseconds(20),
+	});
+	// Zulu northwest VTOL group (2 Mini-Rockets, 2 Heavy Machineguns)
+	zuluVtolGroupNW = camMakeRefillableGroup(camMakeGroup("zuluVtolGroup1"), {templates: [
+		cTempl.pllpodv, cTempl.pllpodv, cTempl.pllhmgv, cTempl.pllhmgv,
+		],
+		globalFill: true,
+		}, CAM_ORDER_FOLLOW, {
+		leader: "zuluVtolTower1",
+		suborder: CAM_ORDER_DEFEND,
+		pos: camMakePos("zuluVtolAssembly")
+	});
+	// Zulu northeast VTOL group (2 Mini-Rockets, 2 Heavy Machineguns)
+	zuluVtolGroupNE = camMakeRefillableGroup(camMakeGroup("zuluVtolGroup2"), {templates: [
+		cTempl.pllpodv, cTempl.pllpodv, cTempl.pllhmgv, cTempl.pllhmgv,
+		],
+		globalFill: true,
+		}, CAM_ORDER_FOLLOW, {
+		leader: "zuluVtolTower2",
+		suborder: CAM_ORDER_DEFEND,
+		pos: camMakePos("zuluVtolAssembly")
+	});
+	// Zulu south VTOL group (2 Mini-Rockets)
+	zuluVtolGroupSouth = camMakeRefillableGroup(camMakeGroup("zuluVtolGroup3"), {templates: [
+		cTempl.pllpodv, cTempl.pllpodv,
+		],
+		globalFill: true,
+		}, CAM_ORDER_FOLLOW, {
+		leader: "zuluVtolTower3",
+		suborder: CAM_ORDER_DEFEND,
+		pos: camMakePos("zuluVtolAssembly")
+	});
+	// Trucks
+	nasdaCentralStructSet = camAreaToStructSet("claydeStructSetArea", MIS_CLAYDE);
+	camManageTrucks(MIS_CLAYDE, {
+		label: "nasdaCentral",
+		rebuildBase: true,
+		respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70), true),
+		truckDroid: getObject("zuluTruck1"),
+		structset: nasdaCentralStructSet
+	});
+	camManageTrucks(MIS_CLAYDE, {
+		label: "nasdaCentral",
+		rebuildBase: true,
+		respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70), true),
+		truckDroid: getObject("zuluTruck2"),
+		structset: nasdaCentralStructSet
+	});
+
+	// Collective trucks
+	colTruckJob1 = camManageTrucks(CAM_THE_COLLECTIVE, {
+		label: "colLZ1",
+		rebuildBase: true,
+		structset: camA1L4ColLZ1Structs
+	});
+	colTruckJob2 = camManageTrucks(CAM_THE_COLLECTIVE, {
+		label: "colLZ2",
+		rebuildBase: true,
+		structset: camA1L4ColLZ2Structs
+	});
+	colTruckJob3 = camManageTrucks(CAM_THE_COLLECTIVE, {
+		label: "colLZ3",
+		rebuildBase: true,
+		structset: camA1L4ColLZ3Structs
+	});
+
+	phaseTwo = false;
+	waveIndex = 0;
+	powerDestroyed = false;
+	structsDonated = false;
+
+	// Store the locations of these towers (in case they're destroyed and rebuilt)
+	deltaSensorPos = camMakePos("deltaSensorTower");
+	deltaVtolPos = camMakePos("deltaVtolTower");
+	zuluVtolPos1 = camMakePos("zuluVtolTower1");
+	zuluVtolPos2 = camMakePos("zuluVtolTower2");
+	zuluVtolPos3 = camMakePos("zuluVtolTower3");
+
+	// Do these immediately
+	camEnableFactory("zuluFactory1");
+	camEnableFactory("zuluFactory2");
+	camEnableFactory("zuluCyborgFactory1");
+	camEnableFactory("zuluCyborgFactory2");
+	camEnableFactory("zuluVtolFactory");
+	heliAttack();
+	introAttack();
+	weakenZuluDefenses();
+
+	queue("vtolAttack", camMinutesToMilliseconds(20));
+	queue("setPhaseTwo", camMinutesToMilliseconds(22));
+
+	setTimer("collectiveAttackWaves", camChangeOnDiff(camSecondsToMilliseconds(55)));
+	setTimer("sendDeltaTransporter", camChangeOnDiff(camMinutesToMilliseconds(2.5), true));
+	setTimer("sendCollectiveTransporter", camChangeOnDiff(camMinutesToMilliseconds(2)));
+}

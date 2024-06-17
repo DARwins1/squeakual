@@ -460,5 +460,18 @@
             "Automatically targets enemies within sensor range",
             "Defensive Strength: Medium"
         ]
+    },
+    "RES_CYW_HMG": {
+        "id": "RES_CYW_HMG",
+        "imdName": "MICAPSUL.pie",
+        "sequenceName": "res_droid.ogg",
+        "text": [
+            "Armed with Cyborg Heavy Machinegun",
+            "Effective against: Infantry and wheeled vehicles",
+            "Ineffective against: Structures and tracked vehicles",
+            "Can attack aerial targets",
+            "Obsoletes and replaces Machinegunner Cyborg",
+            "Requires Cyborg factory to produce"
+        ]
     }
 }

@@ -1,0 +1,432 @@
+{
+	"position_0": {
+		"label": "transportEntryPos",
+		"pos": [6092, 8893]
+	},
+
+
+	"position_1": {
+		"label": "patrolPos1",
+		"pos": [5979, 7597]
+	},
+
+
+	"position_2": {
+		"label": "patrolPos2",
+		"pos": [6181, 5887]
+	},
+
+
+	"position_3": {
+		"label": "patrolPos3",
+		"pos": [2938, 5295]
+	},
+
+
+	"position_4": {
+		"label": "patrolPos4",
+		"pos": [1693, 7356]
+	},
+
+
+	"position_5": {
+		"label": "patrolPos5",
+		"pos": [4139, 7786]
+	},
+
+
+	"position_6": {
+		"label": "zuluAssembly",
+		"pos": [3201, 6407]
+	},
+
+
+	"position_7": {
+		"label": "deltaRepairPos",
+		"pos": [6736, 8661]
+	},
+
+
+	"position_8": {
+		"label": "vtolAttackPos1",
+		"pos": [7902, 326]
+	},
+
+
+	"position_9": {
+		"label": "zuluVtolAssembly",
+		"pos": [1461, 6087]
+	},
+
+
+	"position_10": {
+		"label": "vtolAttackPos3",
+		"pos": [7871, 6782]
+	},
+
+
+	"position_11": {
+		"label": "vtolAttackPos2",
+		"pos": [7801, 3984]
+	},
+
+
+	"area_0": {
+		"label": "landingZone",
+		"pos1": [2816, 2304],
+		"pos2": [3199, 2687]
+	},
+
+
+	"area_1": {
+		"label": "landingZoneZulu",
+		"pos1": [1920, 7808],
+		"pos2": [2303, 8191]
+	},
+
+
+	"area_2": {
+		"label": "compromiseZone",
+		"pos1": [2432, 1920],
+		"pos2": [3968, 3328]
+	},
+
+
+	"area_3": {
+		"label": "landingZoneDelta",
+		"pos1": [5504, 8320],
+		"pos2": [5887, 8703]
+	},
+
+
+	"area_4": {
+		"label": "claydeTruckZone",
+		"pos1": [640, 4736],
+		"pos2": [4480, 8320]
+	},
+
+
+	"area_5": {
+		"label": "donateArea",
+		"pos1": [512, 1920],
+		"pos2": [4608, 3584]
+	},
+
+
+	"area_6": {
+		"label": "claydeStructSetArea",
+		"pos1": [512, 4096],
+		"pos2": [4992, 8832]
+	},
+
+
+	"area_7": {
+		"label": "deltaStructSetArea",
+		"pos1": [4480, 7552],
+		"pos2": [6400, 8704]
+	},
+
+
+	"area_8": {
+		"label": "colEntrance1",
+		"pos1": [1024, 256],
+		"pos2": [1536, 512]
+	},
+
+
+	"area_9": {
+		"label": "colEntrance2",
+		"pos1": [2560, 256],
+		"pos2": [3072, 512]
+	},
+
+
+	"area_10": {
+		"label": "colEntrance3",
+		"pos1": [4736, 256],
+		"pos2": [5376, 512]
+	},
+
+
+	"area_11": {
+		"label": "colEntrance4",
+		"pos1": [7680, 768],
+		"pos2": [7936, 1280]
+	},
+
+
+	"area_12": {
+		"label": "colEntrance5",
+		"pos1": [7680, 3712],
+		"pos2": [7936, 4224]
+	},
+
+
+	"area_13": {
+		"label": "colEntrance6",
+		"pos1": [256, 256],
+		"pos2": [640, 512]
+	},
+
+
+	"area_14": {
+		"label": "colEntrance7",
+		"pos1": [7680, 6016],
+		"pos2": [7936, 6656]
+	},
+
+
+	"area_15": {
+		"label": "colEntrance8",
+		"pos1": [3840, 8704],
+		"pos2": [4352, 8960]
+	},
+
+
+	"area_16": {
+		"label": "collectiveLZ1",
+		"pos1": [7040, 2176],
+		"pos2": [7424, 2560]
+	},
+
+
+	"area_17": {
+		"label": "colLZBase1",
+		"pos1": [6784, 2048],
+		"pos2": [7680, 2816]
+	},
+
+
+	"area_18": {
+		"label": "collectiveLZ2",
+		"pos1": [6400, 384],
+		"pos2": [6784, 768]
+	},
+
+
+	"area_19": {
+		"label": "collectiveLZ3",
+		"pos1": [7040, 6144],
+		"pos2": [7424, 6528]
+	},
+
+
+	"area_20": {
+		"label": "colLZBase3",
+		"pos1": [6784, 6016],
+		"pos2": [7680, 6784]
+	},
+
+
+	"area_21": {
+		"label": "colLZBase2",
+		"pos1": [6016, 384],
+		"pos2": [7296, 1024]
+	},
+
+
+	"area_22": {
+		"label": "zuluVtolGroup1",
+		"pos1": [896, 6528],
+		"pos2": [1152, 6656]
+	},
+
+
+	"area_23": {
+		"label": "zuluVtolGroup2",
+		"pos1": [896, 6784],
+		"pos2": [1152, 6912]
+	},
+
+
+	"area_24": {
+		"label": "zuluVtolGroup3",
+		"pos1": [1280, 6528],
+		"pos2": [1536, 6656]
+	},
+
+
+	"area_25": {
+		"label": "deltaVtolGroup",
+		"pos1": [1664, 6528],
+		"pos2": [1920, 6784]
+	},
+
+
+	"area_26": {
+		"label": "deltaPatrolGroup",
+		"pos1": [4608, 6272],
+		"pos2": [4864, 6784]
+	},
+
+
+	"area_27": {
+		"label": "deltaMortarGroup",
+		"pos1": [6016, 8576],
+		"pos2": [6528, 8832]
+	},
+
+
+	"area_28": {
+		"label": "zuluPatrolGroup",
+		"pos1": [1536, 2432],
+		"pos2": [1920, 2688]
+	},
+
+
+	"area_29": {
+		"label": "deltaRepairGroup",
+		"pos1": [6656, 8576],
+		"pos2": [6912, 8704]
+	},
+
+
+	"area_30": {
+		"label": "introAttackGroup",
+		"pos1": [7040, 6656],
+		"pos2": [7552, 7040]
+	},
+
+
+	"area_31": {
+		"label": "nasdaPowerArea",
+		"pos1": [896, 7424],
+		"pos2": [1536, 8448]
+	},
+
+
+	"object_0": {
+		"label": "uplink",
+		"id": 14,
+		"player": 1,
+		"type": 1
+	},
+
+
+	"object_1": {
+		"label": "zuluTruck2",
+		"id": 287,
+		"player": 5,
+		"type": 0
+	},
+
+
+	"object_2": {
+		"label": "zuluFactory2",
+		"id": 3,
+		"player": 5,
+		"type": 1
+	},
+
+
+	"object_3": {
+		"label": "zuluVtolTower1",
+		"id": 154,
+		"player": 5,
+		"type": 1
+	},
+
+
+	"object_4": {
+		"label": "zuluVtolTower3",
+		"id": 131,
+		"player": 5,
+		"type": 1
+	},
+
+
+	"object_5": {
+		"label": "deltaVtolTower",
+		"id": 114,
+		"player": 7,
+		"type": 1
+	},
+
+
+	"object_6": {
+		"label": "zuluVtolTower2",
+		"id": 52,
+		"player": 5,
+		"type": 1
+	},
+
+
+	"object_7": {
+		"label": "zuluFactory1",
+		"id": 141,
+		"player": 5,
+		"type": 1
+	},
+
+
+	"object_8": {
+		"label": "zuluCyborgFactory1",
+		"id": 17,
+		"player": 5,
+		"type": 1
+	},
+
+
+	"object_9": {
+		"label": "zuluEngineer2",
+		"id": 273,
+		"player": 5,
+		"type": 0
+	},
+
+
+	"object_10": {
+		"label": "zuluCyborgFactory2",
+		"id": 16,
+		"player": 5,
+		"type": 1
+	},
+
+
+	"object_11": {
+		"label": "zuluEngineer1",
+		"id": 274,
+		"player": 5,
+		"type": 0
+	},
+
+
+	"object_12": {
+		"label": "deltaSensorTower",
+		"id": 105,
+		"player": 7,
+		"type": 1
+	},
+
+
+	"object_13": {
+		"label": "deltaTruck",
+		"id": 285,
+		"player": 7,
+		"type": 0
+	},
+
+
+	"object_14": {
+		"label": "zuluTruck1",
+		"id": 286,
+		"player": 5,
+		"type": 0
+	},
+
+
+	"object_15": {
+		"label": "zuluVtolFactory",
+		"id": 19,
+		"player": 5,
+		"type": 1
+	},
+
+
+	"radius_0": {
+		"label": "vtolRemoveZone",
+		"pos": [192, 3520],
+		"radius": 128,
+		"subscriber": 2
+	}
+}

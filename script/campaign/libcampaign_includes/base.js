@@ -196,11 +196,11 @@ function camSetBaseAffiliation(baseLabel, friendly)
 		hackRemoveMessage(bi.detectMsg, PROX_MSG, CAM_HUMAN_PLAYER);
 	}
 
-	if (!bi.friendly && friendly)
+	if (!bi.eliminated && !bi.friendly && friendly)
 	{
 		++__camNumEnemyBases; // Consider this base "destroyed" for victory purposes
 	}
-	else if (bi.friendly && !friendly)
+	else if (!bi.eliminated && bi.friendly && !friendly)
 	{
 		--__camNumEnemyBases; // Don't consider this base destroyed anymore
 	}
@@ -301,7 +301,7 @@ function __camUpdateBaseGroups(struct)
 
 function __camIsValidLeftover(obj)
 {
-	if (camPlayerMatchesFilter(obj.player, ENEMIES))
+	if (obj.player !== CAM_HUMAN_PLAYER)
 	{
 		if (obj.type === STRUCTURE && obj.stattype === WALL)
 		{
@@ -399,6 +399,9 @@ function __camCheckBaseEliminated(group)
 		{
 			callback();
 		}
+
+		// Check if any trucks should self-destruct
+		__camCheckBaseTrucks("baseLabel")
 
 		__camSetupConsoleForVictoryConditions();
 	}

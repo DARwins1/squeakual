@@ -58,7 +58,20 @@ function camSendReinforcement(playerId, position, templates, kind, data)
 
 				const template = templates[i];
 				const __PROP = __camChangePropulsion(template.prop, playerId);
-				const droid = addDroid(playerId, pos.x, pos.y, camNameTemplate(template.weap, template.body, __PROP), template.body, __PROP, "", "", template.weap);
+				let droid;
+				if (typeof template.weap === "object" && camDef(template.weap[2]))
+				{
+					droid = addDroid(playerId, pos.x, pos.y, camNameTemplate(template), template.body, __PROP, "", "", template.weap[0], template.weap[1], template.weap[2]);
+				}
+				else if (typeof template.weap === "object" && camDef(template.weap[1]))
+				{
+					droid = addDroid(playerId, pos.x, pos.y, camNameTemplate(template), template.body, __PROP, "", "", template.weap[0], template.weap[1]);
+				}
+				else
+				{
+					droid = addDroid(playerId, pos.x, pos.y, camNameTemplate(template), template.body, __PROP, "", "", template.weap);
+				}
+				
 				camSetDroidExperience(droid);
 				droids.push(droid);
 			}

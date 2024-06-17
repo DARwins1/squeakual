@@ -377,6 +377,36 @@
             "RustRocket-LtA-T"
         ]
     },
+    "Baba-LCan-Chopper": {
+        "body": "ScavengerChopper",
+        "id": "Baba-LCan-Chopper",
+        "name": "Cannon Chopper",
+        "propulsion": "Helicopter",
+        "type": "DROID",
+        "weapons": [
+            "RustCannon1-VTOL"
+        ]
+    },
+    "Baba-HMG-Chopper": {
+        "body": "ScavengerChopper",
+        "id": "Baba-HMG-Chopper",
+        "name": "Heavy Machinegun Chopper",
+        "propulsion": "Helicopter",
+        "type": "DROID",
+        "weapons": [
+            "RustMG3-VTOL"
+        ]
+    },
+    "Baba-Pod-HChopper": {
+        "body": "ScavengerHvyChopper",
+        "id": "Baba-Pod-HChopper",
+        "name": "Mini-Rocket Heavy Chopper",
+        "propulsion": "Helicopter",
+        "type": "DROID",
+        "weapons": [
+            "RustRocket-Pod-VTOL"
+        ]
+    },
     "CO-H-COM-H": {
         "body": "Body9REC",
         "brain": "CommandBrain01",
@@ -851,6 +881,90 @@
         "propulsion": "wheeled01",
         "type": "CONSTRUCT"
     },
+    "TruckViperHalf": {
+        "body": "Body1REC",
+        "construct": "Spade1Mk1",
+        "id": "TruckViperHalf",
+        "name": "Truck Viper Half-tracks",
+        "propulsion": "HalfTrack",
+        "type": "CONSTRUCT"
+    },
+    "TruckViperTrack": {
+        "body": "Body1REC",
+        "construct": "Spade1Mk1",
+        "id": "TruckViperTrack",
+        "name": "Truck Viper Tracks",
+        "propulsion": "tracked01",
+        "type": "CONSTRUCT"
+    },
+    "SensorViperTrack": {
+        "body": "Body1REC",
+        "id": "SensorViperTrack",
+        "name": "Sensor Viper Tracks",
+        "propulsion": "tracked01",
+        "sensor": "SensorTurret1Mk1",
+        "type": "DROID"
+    },
+    "MRLViperTrack": {
+        "body": "Body1REC",
+        "id": "MRLViperTrack",
+        "name": "Mini-Rocket Array Viper Tracks",
+        "propulsion": "tracked01",
+        "type": "DROID",
+        "weapons": [
+            "Rocket-MRL"
+        ]
+    },
+    "MRPViperTrack": {
+        "body": "Body1REC",
+        "id": "MRPViperTrack",
+        "name": "Mini-Rocket Pod Viper Tracks",
+        "propulsion": "tracked01",
+        "type": "DROID",
+        "weapons": [
+            "Rocket-Pod"
+        ]
+    },
+    "MortarViperTrack": {
+        "body": "Body1REC",
+        "id": "MortarViperTrack",
+        "name": "Mortar Viper Tracks",
+        "propulsion": "tracked01",
+        "type": "DROID",
+        "weapons": [
+            "Mortar1Mk1"
+        ]
+    },
+    "MRPViperVTOL": {
+        "body": "Body1REC",
+        "id": "MRPViperVTOL",
+        "name": "Mini-Rocket Pod Viper VTOL",
+        "propulsion": "V-Tol",
+        "type": "DROID",
+        "weapons": [
+            "Rocket-VTOL-Pod"
+        ]
+    },
+    "HMGViperVTOL": {
+        "body": "Body1REC",
+        "id": "HMGViperVTOL",
+        "name": "Heavy Machinegun Viper VTOL",
+        "propulsion": "V-Tol",
+        "type": "DROID",
+        "weapons": [
+            "MG3-VTOL"
+        ]
+    },
+    "CannonViperVTOL": {
+        "body": "Body1REC",
+        "id": "CannonViperVTOL",
+        "name": "Cannon Viper VTOL",
+        "propulsion": "V-Tol",
+        "type": "DROID",
+        "weapons": [
+            "Cannon1-VTOL"
+        ]
+    },
     "Cyb-Atmiss-GROUND": {
         "available": true,
         "body": "CyborgLightBody",
@@ -920,6 +1034,17 @@
         "body": "CyborgLightBody",
         "id": "Cyb-Chain-GROUND",
         "name": "Machinegunner Cyborg",
+        "propulsion": "CyborgLegs",
+        "type": "CYBORG",
+        "weapons": [
+            "CyborgChaingun"
+        ]
+    },
+    "CyborgHvyChain": {
+        "available": true,
+        "body": "CyborgLightBody",
+        "id": "CyborgHvyChain",
+        "name": "Heavy Machinegunner Cyborg",
         "propulsion": "CyborgLegs",
         "type": "CYBORG",
         "weapons": [
@@ -1907,6 +2032,14 @@
         "id": "ViperRepairHalftrack",
         "name": "Repair Turret Viper Half-tracks",
         "propulsion": "HalfTrack",
+        "repair": "LightRepair1",
+        "type": "DROID"
+    },
+    "ViperRepairTracks": {
+        "body": "Body1REC",
+        "id": "ViperRepairTracks",
+        "name": "Repair Turret Viper Tracks",
+        "propulsion": "tracked01",
         "repair": "LightRepair1",
         "type": "DROID"
     },

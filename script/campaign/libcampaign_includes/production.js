@@ -460,8 +460,8 @@ function __camAddDroidToFactoryGroup(droid, structure)
 	if (camDef(fi.assignGroup))
 	{
 		// Assign the droid to an alternate group
-		groupAdd(fi.assignGroup, droid);
-		fi.assignGroup = undefined;
+		camGroupAdd(fi.assignGroup, droid);
+		delete __camFactoryInfo[__FLABEL].assignGroup;
 	}
 	else
 	{
@@ -600,6 +600,7 @@ function __camContinueProduction(structure)
 		// Only build if destination is reachable or undefined
 		const destPos = __camFactoryQueue[__PLAYER][0].position;
 		if ((!camDef(destPos) || propulsionCanReach(__camFactoryQueue[__PLAYER][0].template.prop, structPos.x, structPos.y, destPos.x, destPos.y)) 
+			&& camFactoryCanProducePropulsion(__camFactoryQueue[__PLAYER][0].template.prop, struct.stattype)
 			&& __camBuildDroid(__camFactoryQueue[__PLAYER][0].template, struct))
 		{
 			__camFactoryQueue[__PLAYER].shift();
@@ -637,31 +638,20 @@ function __camContinueProduction(structure)
 		fi.state = 0;
 	}
 
-	// check factory queue after every loop
-	if (fi.state === -1)
-	{
-		fi.state = 0;
-		const __PL = struct.player;
-		if (camDef(__camFactoryQueue[__PL]) && __camFactoryQueue[__PL].length > 0)
-		{
-			if (__camBuildDroid(__camFactoryQueue[__PL][0], struct))
-			{
-				__camFactoryQueue[__PL].shift();
-				return;
-			}
-		}
-	}
 	// Check if a refillable group needs a replacement unit
-	const refillableTemplate = __camGetRefillableTemplateForFactory(flabel);
+	const refillableTemplate = __camGetRefillableTemplateForFactory(flabel, struct.stattype);
 	if (camDef(refillableTemplate))
 	{
 		// Build this template instead, and assign it to the refillable group
-		fi.assignGroup = refillableTemplate.group;
+		__camFactoryInfo[flabel].assignGroup = refillableTemplate.group;
 		__camBuildDroid(refillableTemplate.template, struct);
 	}
 	else // Build the standard unit
 	{
-		__camBuildDroid(fi.templates[fi.state], struct);
+		if (camDef(fi.templates[fi.state]))
+		{
+			__camBuildDroid(fi.templates[fi.state], struct);
+		}
 		// loop through templates
 		++fi.state;
 		if (fi.state >= fi.templates.length)

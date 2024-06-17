@@ -50,4 +50,14 @@ const camA1L2AllyResearch = camAct1StartResearch.concat([
 	"R-Wpn-Cannon-Damage02",
 ]);
 
+// Used to grant research to allies on A1L4
+const camA1L4AllyResearch = camA1L2AllyResearch.concat([
+	// A1L2
+	"R-Struc-PowerModuleMk1", "R-Vehicle-Prop-VTOL", "R-Struc-VTOLFactory",
+	"R-Struc-VTOLPad", "R-Sys-VTOLStrike-Turret01", "R-Sys-VTOLStrike-Tower01",
+	// A1L3
+	"R-Vehicle-Prop-Halftracks", "R-Wpn-MG3Mk1", "R-Wpn-MG-Damage03",
+	"R-Defense-Tower01", "R-Cyborg-Wpn-HvyMG",
+]);
+
 //...

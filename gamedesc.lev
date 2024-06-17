@@ -110,3 +110,12 @@ expand		A1L3
 dataset		REC_2
 game		"wrf/act1/A1L3.gam"
 data		"wrf/act1/A1L3.wrf"
+
+between		A1L4S
+dataset		REC_2
+data		"wrf/act1/A1L4s.wrf"
+
+miss_keep	A1L4
+dataset		REC_2
+game		"wrf/act1/A1L4.gam"
+data		"wrf/act1/A1L4.wrf"

@@ -50,3 +50,19 @@ const camA1L3UplinkStructs = [
 	{stat: "A0TankTrap", x: 106, y: 46}, {stat: "A0TankTrap", x: 106, y: 49}, {stat: "A0TankTrap", x: 106, y: 50},
 	{stat: "A0TankTrap", x: 105, y: 53}, {stat: "A0TankTrap", x: 106, y: 54},
 ];
+
+// A1L3
+// Collective LZ defenses
+const camA1L4ColLZ1Structs = [
+	{stat: "PillBox4", x: 58, y: 17}, {stat: "AASite-QuadMg1", x: 59, y: 20, rot: 3}, {stat: "GuardTower6H", x: 54, y: 16},
+	{stat: "PillBox1", x: 53, y: 18}, {stat: "GuardTower6H", x: 54, y: 21}, 
+];
+const camA1L4ColLZ2Structs = [
+	{stat: "AASite-QuadMg1", x: 48, y: 3}, {stat: "Sys-SensoTower02", x: 47, y: 6}, {stat: "PillBox5", x: 50, y: 7},
+	{stat: "GuardTower3", x: 53, y: 5}, {stat: "PillBox4", x: 53, y: 6}, {stat: "Emplacement-MortarPit01", x: 54, y: 3},
+	{stat: "Emplacement-MortarPit01", x: 56, y: 4},
+];
+const camA1L4ColLZ3Structs = [
+	{stat: "GuardTower6H", x: 59, y: 50}, {stat: "AASite-QuadMg1", x: 59, y: 47, rot: 2}, {stat: "AASite-QuadMg1", x: 57, y: 52},
+	{stat: "PillBox1", x: 54, y: 51}, {stat: "PillBox1", x: 53, y: 47}, {stat: "GuardTower5", x: 55, y: 51},
+];

@@ -979,6 +979,25 @@
         ],
         "statID": "CyborgCannon"
     },
+    "R-Cyborg-Wpn-HvyMG": {
+        "iconID": "IMAGE_RES_CYBORGTECH",
+        "id": "R-Cyborg-Wpn-HvyMG",
+        "msgName": "RES_CYW_HMG",
+        "name": "Heavy Machinegunner Cyborg",
+        "replacedComponents": [
+            "CyborgChaingun:CyborgHeavyChaingun"
+        ],
+        "requiredResearch": [
+            "R-Wpn-MG3Mk1",
+            "R-Cyborg-Wpn-MG"
+        ],
+        "researchPoints": 1500,
+        "researchPower": 46,
+        "resultComponents": [
+            "CyborgHeavyChaingun"
+        ],
+        "statID": "CyborgHeavyChaingun"
+    },
     "R-Cyb-Wpn-Grenade": {
         "iconID": "IMAGE_RES_CYBORGTECH",
         "id": "R-Cyborg-Wpn-Grenade",
@@ -1015,6 +1034,9 @@
         "id": "R-Cyborg-Wpn-Flamer",
         "msgName": "RES_CYW_THERM",
         "name": "Thermite Flamer Cyborg",
+        "replacedComponents": [
+            "CyborgFlamer01:Cyb-Wpn-Thermite"
+        ],
         "redComponents": [
             "CyborgFlamer01"
         ],
@@ -1117,7 +1139,8 @@
         "msgName": "RES_CYW_MG4",
         "name": "Assault Gunner Cyborg",
         "replacedComponents": [
-            "CyborgChaingun:CyborgRotMG"
+            "CyborgChaingun:CyborgRotMG",
+            "CyborgHeavyChaingun:CyborgRotMG"
         ],
         "requiredResearch": [
             "R-Wpn-MG4"
@@ -4109,7 +4132,7 @@
         "requiredResearch": [
             "R-Vehicle-Prop-VTOL"
         ],
-        "researchPoints": 1200,
+        "researchPoints": 900,
         "researchPower": 187,
         "resultStructures": [
             "A0VTolFactory1"

@@ -228,7 +228,9 @@ function camGroupAdd(group, droid)
 
 // Return a list of all the templates in a refillable group's template list that can't be matched to a 
 // unique droid in the group.
-function __camGetMissingGroupTemplates(group, returnFirst)
+// If returnFirst is true, just return the first missing template we find.
+// If factoryType is defined, only return a template(s) that can be produced by the given factory type.
+function __camGetMissingGroupTemplates(group, returnFirst, factoryType)
 {
 	const droids = enumGroup(group);
 	const templateList = __camRefillableGroupInfo[group].templates;
@@ -238,30 +240,31 @@ function __camGetMissingGroupTemplates(group, returnFirst)
 	for (let i = 0; i < templateList.length; i++)
 	{
 		const templ = templateList[i];
+
+		// Make sure the missing template can be refilled by the given factory
+		if (camDef(factoryType) && !camFactoryCanProducePropulsion(templateList[i].prop, factoryType))
+		{
+			continue; // The given factory can't produce this template type; skip it.
+		}
+		
 		let foundMatch = false;
 		for (let j = 0; j < droids.length; j++)
 		{
-			if (foundMatch)
-			{
-				break;
-			}
-
 			const droid = droids[j];
 
 			if (!camDef(droid))
 			{
-				// This droid has already been matched
+				// This droid has already been matched to different template
 				continue;
 			}
 			
-			// A droid matches a template if the propulsion, body, and weapon are the same
 			// NOTE: Comparison only works for single-turret templates!
 			if (camDroidMatchesTemplate(droid, templ))
 			{
 				// Remove this droid from the droids list; we don't want multiple templates matching to the same droid!
 				delete droids[j]; // Set this element as undefined
 				foundMatch = true;
-				continue;
+				break;
 			}
 		}
 
@@ -281,7 +284,7 @@ function __camGetMissingGroupTemplates(group, returnFirst)
 }
 
 // Gets a template to be built by the given factory
-function __camGetRefillableTemplateForFactory(factoryLabel)
+function __camGetRefillableTemplateForFactory(factoryLabel, factoryType)
 {
 	for (const group in __camRefillableGroupInfo)
 	{
@@ -292,11 +295,11 @@ function __camGetRefillableTemplateForFactory(factoryLabel)
 		if (__VALID_FACTORY || (!__VALID_FACTORY && gi.globalFill))
 		{
 			// If so, see if this group is missing any templates
-			const missingTempl = __camGetMissingGroupTemplates(group, true);
+			const missingTempl = __camGetMissingGroupTemplates(group, true, factoryType);
 			if (camDef(missingTempl))
 			{
 				// Return the template and the group to send it to
-				return {group: group, tempate: missingTempl};
+				return {group: group, template: missingTempl};
 			}
 		}
 	}

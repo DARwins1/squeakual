@@ -185,13 +185,6 @@ function sendCollectiveTransporter()
 		else
 		{
 			// Add misc. attack units
-			// cTempl.colpodt
-			// cTempl.colaaht
-			// cTempl.colmrat
-			// cTempl.colhmght
-			// cTempl.colcanht
-			// cTempl.colflamt
-			// cTempl.colaaht
 			templates = [
 			cTempl.colhmght, cTempl.colhmght, // HMG
 			cTempl.colcanht, cTempl.colcanht, // Light Cannon
@@ -337,21 +330,22 @@ function introduceCollective()
 	const tTemp = cTempl.coltruckht;
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colLZBase",
+		rebuildBase: true,
 		structset: camA1L3LZStructs,
 		// Spawn a truck along with the other units
 		truckDroid: addDroid(CAM_THE_COLLECTIVE, tPos.x, tPos.y, 
-			camNameTemplate(tTemp.weap, tTemp.body, tTemp.prop), 
-			tTemp.body, tTemp.prop, "", "", tTemp.weap),
+			camNameTemplate(tTemp), tTemp.body, tTemp.prop, "", "", tTemp.weap),
 	});
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colUplinkBase",
+		rebuildBase: true,
 		structset: camA1L3UplinkStructs,
 		// This truck is brought in later!
 	});
 
 	if (difficulty >= HARD) addCollectiveAntiAir(); // Do this immediately on Hard+
 
-	setTimer("sendCollectiveTransporter", camChangeOnDiff(camMinutesToMilliseconds(3)));
+	setTimer("sendCollectiveTransporter", camChangeOnDiff(camMinutesToMilliseconds(3.5)));
 }
 
 // If the player attacks the Collective with VTOLs, have the Collective get extra AA.
@@ -403,7 +397,7 @@ function spawnBackupTruck()
 	const tTemp = cTempl.coltruckht;
 	const newTruck = addDroid(CAM_THE_COLLECTIVE, tPos.x, tPos.y, 
 		camNameTemplate(tTemp.weap, tTemp.body, tTemp.prop), 
-		tTemp.body, tTemp.prop, "", "", cTempl.weap);
+		tTemp.body, tTemp.prop, "", "", tTemp.weap);
 	camAssignTruck(newTruck, camGetTruckIndicesFromLabel("colUplinkBase"));
 	if (!backupTruckSpawned)
 	{
@@ -428,11 +422,11 @@ function addCollectiveAntiAir()
 	// Order the LZ truck to build extra AA
 	camSetStructureSet("colLZBase", camA1L3LZStructs.concat(camA1L3AntiAir));
 
-	if (difficulty >= HARD)
+	if (difficulty == INSANE)
 	{
 		// Add 2 Hurricane units to the patrol group
 		camSetRefillableGroupData(colUplinkPatrolGroup, {templates: [
-			cTempl.colhmght, cTempl.colhmght, cTempl.colhmght, cTempl.colhmght, cTempl.colhmght, cTempl.colhmght,
+			cTempl.colcanht, cTempl.colcanht, cTempl.colcanht, cTempl.colcanht, cTempl.colcanht, cTempl.colcanht,
 			cTempl.colpodt, cTempl.colpodt, cTempl.colpodt, cTempl.colpodt, 
 			cTempl.colaaht, cTempl.colaaht,
 		]});
@@ -466,7 +460,7 @@ function eventStartLevel()
 	const startPos = camMakePos("landingZone");
 	const lz = getObject("landingZone");
 
-	camSetStandardWinLossConditions(CAM_VICTORY_STANDARD, "THE_END");
+	camSetStandardWinLossConditions(CAM_VICTORY_STANDARD, "A1L4S");
 
 	centreView(startPos.x, startPos.y);
 	setNoGoArea(lz.x, lz.y, lz.x2, lz.y2, CAM_HUMAN_PLAYER);
@@ -554,7 +548,7 @@ function eventStartLevel()
 			cleanup: "collectiveLZBaseArea",
 			detectMsg: "COL_LZ",
 			detectSnd: "pcv382.ogg",
-			eliminateSnd: "pcv665.ogg",
+			eliminateSnd: "pcv394.ogg",
 		},
 		"colUplinkBase": {
 			cleanup: "collectiveUplinkBaseArea",

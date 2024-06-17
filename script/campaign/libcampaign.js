@@ -195,6 +195,9 @@ var __camNumArtifacts;
 var __camEnemyBases;
 var __camNumEnemyBases;
 
+//dialogue
+var __camQueuedDialogue;
+
 //reinforcements
 const CAM_REINFORCE_NONE = 0;
 const CAM_REINFORCE_GROUND = 1;

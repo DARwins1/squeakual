@@ -335,7 +335,7 @@ function camMakeGroup(what, playerFilter)
 {
 	if (!camDef(playerFilter))
 	{
-		playerFilter = ENEMIES;
+		playerFilter = ALL_PLAYERS;
 	}
 	let array;
 	let obj;
@@ -900,7 +900,6 @@ function camNameTemplate(weapon, body, propulsion)
 
 //;; ## camDroidMatchesTemplate(droid, template)
 //;; Returns true if a given droid matches a given template
-//;; Takes in either a template object or a turret + body + propulsion
 //;; NOTE: Multi-turret droids/templates are not properly supported!
 //;;
 //;; @param {Object} droid
@@ -920,7 +919,7 @@ function camDroidMatchesTemplate(droid, template)
 	{
 		case DROID_CONSTRUCT:
 		{
-			return (template.weap == "Spade1Mk1" || template == "CyborgSpade");
+			return (template.weap == "Spade1Mk1" || template.weap == "CyborgSpade");
 		}
 		case DROID_REPAIR:
 		{
@@ -943,7 +942,41 @@ function camDroidMatchesTemplate(droid, template)
 			return (template.weap == droid.weapons[0].name);
 		}
 	}
+}
 
+//;; ## camFactoryCanProducePropulsion(propulsion, factoryType)
+//;; Returns true if a given propulsion can be built by the given factory type.
+//;;
+//;; @param {string} propulsion
+//;; @param {number} factoryType
+//;; @returns {boolean}
+//;;
+function camFactoryCanProducePropulsion(prop, factoryType)
+{
+	switch (factoryType)
+	{
+		case VTOL_FACTORY:
+		{
+			// Any VTOL or Helicopter propulsion
+			return (prop === "V-Tol" || prop === "V-Tol02" || prop === "V-Tol03" || prop === "Helicopter");
+		}
+		case CYBORG_FACTORY:
+		{
+			// Cyborg Legs
+			return (prop === "CyborgLegs" || prop === "CyborgLegs02" || prop === "CyborgLegs03" || prop === "BoomTickLegs");
+		}
+		case FACTORY:
+		{
+			// Anything else
+			return (prop !== "V-Tol" && prop !== "V-Tol02" && prop !== "V-Tol03" && prop !== "Helicopter"
+				&& prop !== "CyborgLegs" && prop !== "CyborgLegs02" && prop !== "CyborgLegs03" && prop !== "BoomTickLegs");
+		}
+		default:
+		{
+			camDebug("Unknown factory type!");
+			return false;
+		}
+	}
 }
 
 //////////// privates

@@ -153,7 +153,7 @@ function prepareEnding()
 	camAbsorbPlayer(CAM_HUMAN_PLAYER, MIS_TRANSPORT);
 
 	// Give the player full vision of the map by placing a spotter on the LZ that has an absurdley long radius
-	addSpotter(32, 20, 0, 16384, false, 0);
+	addSpotter(32, 20, CAM_HUMAN_PLAYER, 16384, false, 0);
 
 	// Start causing a bunch of tiny explosions around the player's base
 	setTimer("smallExplosionFX", camSecondsToMilliseconds(0.3));
