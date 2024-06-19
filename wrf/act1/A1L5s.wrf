@@ -1,0 +1,16 @@
+/*
+ * A1L5s.wrf
+ *
+ */
+
+/* Directory for Proximity messages and mission briefs */
+directory	"messages"
+
+file		SMSG		"briefA1L5.txt"
+file		SMSG		"proxA1L5.txt"
+
+directory "script"
+file JAVASCRIPT "rules.js"
+
+directory "script/campaign"
+file JAVASCRIPT "A1L5s.js"

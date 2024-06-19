@@ -93,7 +93,7 @@ function camSetFactoryData(factoryLabel, factoryData)
 	for (let i = 0, l = droids.length; i < l; ++i)
 	{
 		const droid = droids[i];
-		groupAdd(fi.group, droid);
+		camGroupAdd(fi.group, droid);
 	}
 	if (!camDef(fi.data.count))
 	{
@@ -465,7 +465,7 @@ function __camAddDroidToFactoryGroup(droid, structure)
 	}
 	else
 	{
-		groupAdd(fi.group, droid);
+		camGroupAdd(fi.group, droid);
 	}
 	if (camDef(fi.assembly))
 	{

@@ -119,3 +119,16 @@ miss_keep	A1L4
 dataset		REC_2
 game		"wrf/act1/A1L4.gam"
 data		"wrf/act1/A1L4.wrf"
+
+between		A1L5S
+dataset		REC_2
+data		"wrf/act1/A1L5s.wrf"
+
+miss_keep	A1L5
+dataset		REC_2
+game		"wrf/act1/A1L5.gam"
+data		"wrf/act1/A1L5.wrf"
+
+between	A1L6
+dataset		REC_2
+data		"wrf/act1/A1L6.wrf"

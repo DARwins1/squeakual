@@ -1470,13 +1470,12 @@
         "resultStructures": [
             "WallTower06"
         ],
-        "statID": "WallTower06",
-        "subgroupIconID": "IMAGE_RES_GRPACC"
+        "statID": "WallTower06"
     },
     "R-Defense-WallUpgrade01": {
         "iconID": "IMAGE_RES_DEFENCE",
         "id": "R-Defense-WallUpgrade01",
-        "imdName": "BLWALLH.PIE",
+        "imdName": "BLWALL2.PIE",
         "msgName": "RES_DF_WU1",
         "name": "Improved Hardcrete",
         "requiredResearch": [
@@ -1506,7 +1505,7 @@
     "R-Defense-WallUpgrade02": {
         "iconID": "IMAGE_RES_DEFENCE",
         "id": "R-Defense-WallUpgrade02",
-        "imdName": "BLWALLH.PIE",
+        "imdName": "BLWALL2.PIE",
         "name": "Improved Hardcrete Mk2",
         "requiredResearch": [
             "R-Defense-WallUpgrade01"
@@ -1535,7 +1534,7 @@
     "R-Defense-WallUpgrade03": {
         "iconID": "IMAGE_RES_DEFENCE",
         "id": "R-Defense-WallUpgrade03",
-        "imdName": "BLWALLH.PIE",
+        "imdName": "BLWALL2.PIE",
         "name": "Improved Hardcrete Mk3",
         "requiredResearch": [
             "R-Defense-WallUpgrade02"
@@ -3495,7 +3494,6 @@
     "R-Defense-AASite-QuadMg1": {
         "iconID": "IMAGE_RES_DEFENCE",
         "id": "R-Defense-AASite-QuadMg1",
-        "keyTopic": 1,
         "msgName": "RES_EMP_AA2",
         "name": "Hurricane AA Site",
         "requiredResearch": [
@@ -3745,7 +3743,7 @@
     "R-Defense-WallUpgrade04": {
         "iconID": "IMAGE_RES_DEFENCE",
         "id": "R-Defense-WallUpgrade04",
-        "imdName": "BLWALLH.PIE",
+        "imdName": "BLWALL2.PIE",
         "msgName": "RES_DF_WU4",
         "name": "Supercrete",
         "requiredResearch": [
@@ -3775,7 +3773,7 @@
     "R-Defense-WallUpgrade05": {
         "iconID": "IMAGE_RES_DEFENCE",
         "id": "R-Defense-WallUpgrade05",
-        "imdName": "BLWALLH.PIE",
+        "imdName": "BLWALL2.PIE",
         "name": "Supercrete Mk2",
         "requiredResearch": [
             "R-Defense-WallUpgrade04"
@@ -3804,7 +3802,7 @@
     "R-Defense-WallUpgrade06": {
         "iconID": "IMAGE_RES_DEFENCE",
         "id": "R-Defense-WallUpgrade06",
-        "imdName": "BLWALLH.PIE",
+        "imdName": "BLWALL2.PIE",
         "name": "Supercrete Mk3",
         "requiredResearch": [
             "R-Defense-WallUpgrade05"
@@ -4358,7 +4356,7 @@
         "msgName": "RES_V_B02",
         "name": "Light Body - Leopard",
         "requiredResearch": [
-			"R-Vehicle-Body06"
+			"R-Vehicle-Body01"
         ],
         "researchPoints": 6000,
         "researchPower": 187,
@@ -6609,7 +6607,7 @@
     "R-Defense-WallUpgrade07": {
         "iconID": "IMAGE_RES_DEFENCE",
         "id": "R-Defense-WallUpgrade07",
-        "imdName": "BLWALLH.PIE",
+        "imdName": "BLWALL2.PIE",
         "msgName": "RES_DF_WU7",
         "name": "Plascrete",
         "requiredResearch": [
@@ -6639,7 +6637,7 @@
     "R-Defense-WallUpgrade08": {
         "iconID": "IMAGE_RES_DEFENCE",
         "id": "R-Defense-WallUpgrade08",
-        "imdName": "BLWALLH.PIE",
+        "imdName": "BLWALL2.PIE",
         "name": "Plascrete Mk2",
         "requiredResearch": [
             "R-Defense-WallUpgrade07"
@@ -6668,7 +6666,7 @@
     "R-Defense-WallUpgrade09": {
         "iconID": "IMAGE_RES_DEFENCE",
         "id": "R-Defense-WallUpgrade09",
-        "imdName": "BLWALLH.PIE",
+        "imdName": "BLWALL2.PIE",
         "name": "Plascrete Mk3",
         "requiredResearch": [
             "R-Defense-WallUpgrade08"

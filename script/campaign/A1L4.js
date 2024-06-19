@@ -4,7 +4,7 @@ include("script/campaign/templates.js");
 include("script/campaign/structSets.js");
 
 const MIS_NASDA = 1;
-const MIS_NASDA_POWER = 1;
+const MIS_NASDA_POWER = 3;
 const MIS_CLAYDE = 5;
 const MIS_TEAM_DELTA = 7;
 const SPOTTER_RANGE = 16;
@@ -163,6 +163,7 @@ function sendCollectiveTransporter()
 			CAM_REINFORCE_TRANSPORT, {
 				entry: camGenerateRandomMapEdgeCoordinate(),
 				exit: camGenerateRandomMapEdgeCoordinate(),
+				order: CAM_ORDER_ATTACK,
 				data: {targetPlayer: CAM_HUMAN_PLAYER}
 			}
 		);
@@ -345,15 +346,6 @@ function collectiveAttackWaves()
 	const southDroids = [cTempl.moncan, cTempl.bjeep, cTempl.bloke, cTempl.minitruck, cTempl.flatmrl, cTempl.buggy];
 
 	// Occasionally, entrance templates will be overwritten with these purely Collective units.
-	// cTempl.colpodt // MRP
-	// cTempl.colaaht // Hurricane
-	// cTempl.colmrat // MRA
-	// cTempl.colhmght // HMG
-	// cTempl.colcanht // Light Cannon
-	// cTempl.colflamt // Flamer
-	// cTempl.colmortht // Mortar
-	// cTempl.commcant // Medium Cannon
-	// cTempl.comatt // Lancer
 	const colOverrideDroids = [
 		cTempl.colpodt, cTempl.colpodt, // MRP
 		cTempl.colmrat, cTempl.colmrat, // MRA
@@ -497,7 +489,6 @@ function collectiveAttackWaves()
 	}
 }
 
-
 function setPhaseTwo()
 {
 	phaseTwo = true;
@@ -549,7 +540,7 @@ function eventStartLevel()
 	const startPos = camMakePos("transportEntryPos");
 	const lz = getObject("landingZone");
 
-	camSetStandardWinLossConditions(CAM_VICTORY_OFFWORLD, "THE_END", {
+	camSetStandardWinLossConditions(CAM_VICTORY_OFFWORLD, "A1L5S", {
 		area: "compromiseZone",
 		retlz: true,
 		reinforcements: camMinutesToSeconds(2),

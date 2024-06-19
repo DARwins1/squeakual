@@ -549,6 +549,56 @@
             "MG4ROTARY-VTOL"
         ]
     },
+    "CO-L-HMG-Halftrack": {
+        "body": "Body2SUP",
+        "id": "CO-L-HMG-Halftrack",
+        "name": "Heavy Machinegun Leopard Half-tracks",
+        "propulsion": "HalfTrack",
+        "type": "DROID",
+        "weapons": [
+            "MG3Mk1"
+        ]
+    },
+    "CO-L-Cannon-Halftrack": {
+        "body": "Body2SUP",
+        "id": "CO-L-Cannon-Halftrack",
+        "name": "Light Cannon Leopard Half-tracks",
+        "propulsion": "HalfTrack",
+        "type": "DROID",
+        "weapons": [
+            "Cannon1Mk1"
+        ]
+    },
+    "CO-L-Flamer-Track": {
+        "body": "Body2SUP",
+        "id": "CO-L-Flamer-Track",
+        "name": "Flamer Leopard Tracks",
+        "propulsion": "tracked01",
+        "type": "DROID",
+        "weapons": [
+            "Flame1Mk1"
+        ]
+    },
+    "CO-L-MRA-Track": {
+        "body": "Body2SUP",
+        "id": "CO-L-MRA-Track",
+        "name": "Mini-Rocket Array Leopard Tracks",
+        "propulsion": "tracked01",
+        "type": "DROID",
+        "weapons": [
+            "Rocket-MRL"
+        ]
+    },
+    "CO-L-Pod-Track": {
+        "body": "Body2SUP",
+        "id": "CO-L-Pod-Track",
+        "name": "Mini-Rocket Pod Leopard Tracks",
+        "propulsion": "tracked01",
+        "type": "DROID",
+        "weapons": [
+            "Rocket-Pod"
+        ]
+    },
     "CO-M-Bomb1-VTOL": {
         "body": "Body6SUPP",
         "id": "CO-M-Bomb1-VTOL",

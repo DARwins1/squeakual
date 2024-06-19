@@ -314,6 +314,7 @@ function __checkRefillableGroupObject()
 			camSetRefillableGroupData(group, {
 				templates: __camRefillableGroupInfo[group].templates,
 				// `factories`, `globalFill`, and `obj` are left blank
+				// since `globalFill` is disabled and `factories` is blank, this group will no longer automatically refill itself
 			});
 		}
 	}
