@@ -110,13 +110,9 @@ function sendDeltaTransporter()
 	// Truck -> Repair -> Mortar -> VTOL -> Patrol
 	let droidQueue = [];
 
-	const trucks = camGetTrucksFromLabel("deltaLZ");
-	if (!camDef(trucks[0])) droidQueue.push(cTempl.plltruckt);
+	if (!camDef(camGetTruck(deltaTruckJob)) droidQueue.push(cTempl.plltruckt);
 
-	droidQueue = droidQueue.concat(camGetRefillableGroupTemplates(deltaRepairGroup)
-		).concat(camGetRefillableGroupTemplates(deltaMortarGroup)
-		).concat(camGetRefillableGroupTemplates(deltaVtolGroup)
-		).concat(camGetRefillableGroupTemplates(deltaPatrolGroup));
+	droidQueue = droidQueue.concat(camGetRefillableGroupTemplates([deltaRepairGroup, deltaMortarGroup, deltaVtolGroup, deltaPatrolGroup]));
 
 	const droids = [];
 	// Get (up to) the first 10 units in the queue
@@ -215,36 +211,16 @@ function eventTransporterLanded(transport)
 	const transTrucks = transDroids.filter((droid) => (droid.droidType == DROID_CONSTRUCT));
 	const transOther = transDroids.filter((droid) => (droid.droidType != DROID_CONSTRUCT));
 
-	// First, assign the truck
-	const lzTruck = camGetTrucksFromLabel("deltaLZ")[0];
+	// Assign the truck
 	// Check if the LZ truck is missing
-	if (!camDef(lzTruck) && camDef(transTrucks[0]))
+	if (!camDef(camGetTruck(deltaTruckJob)) && camDef(transTrucks[0]))
 	{
 		// Assign this truck!
-		camAssignTruck(transTrucks[0], camGetTruckIndicesFromLabel("deltaLZ"));
+		camAssignTruck(transTrucks[0], deltaTruckJob);
 	}
 
-	// Next, assign other units to their refillable groups
-	// Loop through the droids we have and match them to any missing templates
-	for (const droid of transOther)
-	{
-		let droidAssigned = false;
-
-		for (const group of [deltaRepairGroup, deltaMortarGroup, deltaVtolGroup, deltaPatrolGroup])
-		{
-			if (droidAssigned) break;
-
-			for (const template of camGetRefillableGroupTemplates(group))
-			{
-				if (camDroidMatchesTemplate(droid, template))
-				{
-					camGroupAdd(group, droid);
-					droidAssigned = true;
-					break;
-				}
-			}
-		}
-	}
+	// Assign other units to their refillable groups
+	camAssignToRefillableGroups(transOther, [deltaRepairGroup, deltaMortarGroup, deltaVtolGroup, deltaPatrolGroup]);
 }
 
 // Replace the spotter when the player re-loads the game
@@ -460,7 +436,7 @@ function collectiveAttackWaves()
 
 	// Lastly, send a truck to attempt building a Collective LZ
 	// NOTE: During phase two, trucks are sent every other wave
-	if (!camDef(camGetTrucksFromLabel("colLZ1")[0]) && waveIndex >= 8 && (waveIndex % 4 == 0 || (phaseTwo && waveIndex % 2 == 0)))
+	if (!camDef(camGetTruck(colTruckJob1)) && waveIndex >= 8 && (waveIndex % 4 == 0 || (phaseTwo && waveIndex % 2 == 0)))
 	{
 		const tPos = camMakePos("colEntrance5");
 		const tTemp = (phaseTwo || difficulty === INSANE) ? cTempl.comtruckt : cTempl.coltruckht;
@@ -469,7 +445,7 @@ function collectiveAttackWaves()
 			tTemp.body, tTemp.prop, "", "", tTemp.weap);
 		camAssignTruck(newTruck, colTruckJob1);
 	}
-	if (!camDef(camGetTrucksFromLabel("colLZ2")[0]) && waveIndex >= 16 && (waveIndex % 8 == 0 || (phaseTwo && waveIndex % 2 == 0)))
+	if (!camDef(camGetTruck(colTruckJob2)) && waveIndex >= 16 && (waveIndex % 8 == 0 || (phaseTwo && waveIndex % 2 == 0)))
 	{
 		const tPos = camMakePos("colEntrance4");
 		const tTemp = (phaseTwo || difficulty >= HARD) ? cTempl.comtruckt : cTempl.coltruckht;
@@ -478,7 +454,7 @@ function collectiveAttackWaves()
 			tTemp.body, tTemp.prop, "", "", tTemp.weap);
 		camAssignTruck(newTruck, colTruckJob2);
 	}
-	if (!camDef(camGetTrucksFromLabel("colLZ3")[0]) && waveIndex >= 24 && (waveIndex % 6 == 0 || (phaseTwo && waveIndex % 2 == 0)))
+	if (!camDef(camGetTruck(colTruckJob3)) && waveIndex >= 24 && (waveIndex % 6 == 0 || (phaseTwo && waveIndex % 2 == 0)))
 	{
 		const tPos = camMakePos("colEntrance7");
 		const tTemp = (phaseTwo || difficulty >= MEDIUM) ? cTempl.comtruckt : cTempl.coltruckht;
@@ -599,20 +575,20 @@ function eventStartLevel()
 		"colLZ1": {
 			cleanup: "colLZBase1",
 			detectMsg: "COL_LZBASE1",
-			detectSnd: "pcv382.ogg",
-			eliminateSnd: "pcv394.ogg",
+			detectSnd: cam_sounds.baseDetection.enemyLZDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
 		},
 		"colLZ2": {
 			cleanup: "colLZBase2",
 			detectMsg: "COL_LZBASE2",
-			detectSnd: "pcv382.ogg",
-			eliminateSnd: "pcv394.ogg",
+			detectSnd: cam_sounds.baseDetection.enemyLZDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
 		},
 		"colLZ3": {
 			cleanup: "colLZBase3",
 			detectMsg: "COL_LZBASE3",
-			detectSnd: "pcv382.ogg",
-			eliminateSnd: "pcv394.ogg",
+			detectSnd: cam_sounds.baseDetection.enemyLZDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
 		},
 	});
 

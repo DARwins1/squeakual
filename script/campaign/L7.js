@@ -96,7 +96,7 @@ function detonationMessage()
 	// Stop sending transports
 	removeTimer("transportEvac");
 
-	camPlayVideos(["pcv455.ogg", {video: "L7_DETMSG", type: MISS_MSG}]);
+	camPlayVideos([cam_sounds.incoming.incomingTransmission, {video: "L7_DETMSG", type: MISS_MSG}]);
 	queue("messageAlert", camSecondsToMilliseconds(3.4));
 	camSetExtraObjectiveMessage("Defend the missile silos until nuclear detonation");
 }
@@ -508,14 +508,14 @@ function eventStartLevel()
 	// Sounds to play before detonation (ripped straight from cam3-1 lol)
 	// Lists sound files to play and the time remaining (in seconds) for them to be played
 	detonateInfo = [
-		{sound: "det10min.ogg", time: camMinutesToSeconds(10)},
-		{sound: "det5min.ogg", time: camMinutesToSeconds(5)},
-		{sound: "det4min.ogg", time: camMinutesToSeconds(4)},
-		{sound: "det3min.ogg", time: camMinutesToSeconds(3)},
-		{sound: "det2min.ogg", time: camMinutesToSeconds(2)},
-		{sound: "det1min.ogg", time: camMinutesToSeconds(1)},
-		{sound: "fdetseq.ogg", time: 20},
-		{sound: "10to1.ogg", time: 10},
+		{sound: cam_sounds.missile.detonate.detonationIn10Minutes, time: camMinutesToSeconds(10)},
+		{sound: cam_sounds.missile.detonate.detonationIn5Minutes, time: camMinutesToSeconds(5)},
+		{sound: cam_sounds.missile.detonate.detonationIn4Minutes, time: camMinutesToSeconds(4)},
+		{sound: cam_sounds.missile.detonate.detonationIn3Minutes, time: camMinutesToSeconds(3)},
+		{sound: cam_sounds.missile.detonate.detonationIn2Minutes, time: camMinutesToSeconds(2)},
+		{sound: cam_sounds.missile.detonate.detonationIn1Minute, time: camMinutesToSeconds(1)},
+		{sound: cam_sounds.missile.detonate.finalDetonationSequenceInitiated, time: 20},
+		{sound: cam_sounds.missile.countdown, time: 10},
 	];
 
    	camSetStandardWinLossConditions(CAM_VICTORY_TIMEOUT, "THE_END", {

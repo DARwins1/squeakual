@@ -258,20 +258,20 @@ function eventStartLevel()
 		"scavSWBase": {
 			cleanup: "scavBase1",
 			detectMsg: "CSCAV_BASE1",
-			detectSnd: "pcv374.ogg",
-			eliminateSnd: "pcv392.ogg",
+			detectSnd: cam_sounds.baseDetection.scavengerBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerBaseEradicated,
 		},
 		"scavNEBase": {
 			cleanup: "scavBase2",
 			detectMsg: "CSCAV_BASE2",
-			detectSnd: "pcv374.ogg",
-			eliminateSnd: "pcv392.ogg",
+			detectSnd: cam_sounds.baseDetection.scavengerBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerBaseEradicated,
 		},
 		"colMainBase": {
 			cleanup: "colBase",
 			detectMsg: "COL_BASE",
-			detectSnd: "pcv379.ogg",
-			eliminateSnd: "pcv394.ogg",
+			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
 		},
 	});
 

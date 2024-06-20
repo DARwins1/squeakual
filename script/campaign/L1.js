@@ -62,7 +62,7 @@ camAreaEvent("captureZone", function(droid)
 	queue("researchFlash", camSecondsToMilliseconds(1));
 
 	// Tell the player to use the inbound trucks
-	camPlayVideos(["pcv621.ogg", {video: "L1_BASEMSG", type: MISS_MSG}]);
+	camPlayVideos([cam_sounds.objectiveCaptured, {video: "L1_BASEMSG", type: MISS_MSG}]);
 	queue("messageAlert", camSecondsToMilliseconds(3.4));
 
 	// Activate scavenger factories after a 35 second delay
@@ -475,32 +475,32 @@ function eventStartLevel()
 		"SensorOutpost": {
 			cleanup: "cScavBase1",
 			detectMsg: "CSCAV_BASE1",
-			detectSnd: "pcv375.ogg",
-			eliminateSnd: "pcv391.ogg"
+			detectSnd: cam_sounds.baseDetection.scavengerOutpostDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerOutpostEradicated
 		},
 		"BridgeDefences": {
 			cleanup: "cScavBase2",
 			detectMsg: "CSCAV_BASE2",
-			detectSnd: "pcv375.ogg",
-			eliminateSnd: "pcv391.ogg"
+			detectSnd: cam_sounds.baseDetection.scavengerOutpostDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerOutpostEradicated
 		},
 		"CyanBase": {
 			cleanup: "cScavBase3",
 			detectMsg: "CSCAV_BASE3",
-			detectSnd: "pcv374.ogg",
-			eliminateSnd: "pcv392.ogg"
+			detectSnd: cam_sounds.baseDetection.scavengerBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerBaseEradicated
 		},
 		"GasStation": {
 			cleanup: "yScavBase1",
 			detectMsg: "YSCAV_BASE1",
-			detectSnd: "pcv374.ogg",
-			eliminateSnd: "pcv392.ogg"
+			detectSnd: cam_sounds.baseDetection.scavengerBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerBaseEradicated
 		},
 		"YellowBase": {
 			cleanup: "yScavBase2",
 			detectMsg: "YSCAV_BASE2",
-			detectSnd: "pcv374.ogg",
-			eliminateSnd: "pcv392.ogg"
+			detectSnd: cam_sounds.baseDetection.scavengerBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerBaseEradicated
 		},
 	});
 

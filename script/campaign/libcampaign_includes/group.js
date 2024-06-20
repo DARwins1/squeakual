@@ -194,10 +194,28 @@ function camDisableRefillableGroup(group)
 	});
 }
 
-// Returns the templates of the units currently missing from the group
-// If `allTemplates` is true, then returns the entire group template list instead
+//;; ## camGetRefillableGroupTemplates(group, allTemplates)
+//;;
+//;; Returns the templates of the units currently missing from the group
+//;; If `allTemplates` is true, then returns the entire group template list instead
+//;;
+//;; @param {number|number[]} group
+//;; @param {boolean} allTemplates
+//;; @returns {Object}
+//;;
 function camGetRefillableGroupTemplates(group, allTemplates)
 {
+	if (group instanceof Array)
+	{
+		// If we were given an array of groups, the templates of all of them combined.
+		const templates = [];
+		for (g in group)
+		{
+			templates = templates.concat(camGetRefillableGroupTemplates(g, allTemplates));
+		}
+		return templates;
+	}
+
 	if (camDef(allTemplates) && allTemplates)
 	{
 		// Return the whole list
@@ -207,6 +225,54 @@ function camGetRefillableGroupTemplates(group, allTemplates)
 	return __camGetMissingGroupTemplates(group);
 }
 
+//;; ## camAssignToRefillableGroups(droids, groups)
+//;;
+//;; Assign droids from a given array to the provided refillable group(s).
+//;; Returns an array containing any leftover droids that were not assigned.
+//;;
+//;; @param {Object[]} droids
+//;; @param {number|number[]} groups
+//;; @returns {Object[]}
+//;;
+function camAssignToRefillableGroups(droids, groups)
+{
+	let groupList;
+	if (groups instanceof Array)
+	{
+		groupList = groups;
+	}
+	else
+	{
+		groupList = [groups];
+	}
+
+	// Next, assign other units to their refillable groups
+	// Loop through the droids we have and match them to any missing templates
+	const leftovers = [];
+	for (const droid of droids)
+	{
+		let droidAssigned = false;
+
+		for (const group of groupList)
+		{
+			if (droidAssigned) break;
+
+			for (const template of camGetRefillableGroupTemplates(group))
+			{
+				if (camDroidMatchesTemplate(droid, template))
+				{
+					camGroupAdd(group, droid);
+					droidAssigned = true;
+					break;
+				}
+			}
+		}
+
+		// If this droid wasn't assigned to any group, add it to the return list.
+		if (!droidAssigned) leftovers.push(droid);
+	}
+	return leftovers;
+}
 
 //;; ## camGroupAdd(group, droid)
 //;;

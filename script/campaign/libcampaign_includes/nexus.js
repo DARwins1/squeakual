@@ -14,7 +14,7 @@ function camNexusLaugh()
 	const __LAUGH_CHANCE = 45;
 	if (camRand(100) < __LAUGH_CHANCE)
 	{
-		const laughs = [CAM_LAUGH1_SND, CAM_LAUGH2_SND, CAM_LAUGH3_SND];
+		const laughs = [cam_sounds.nexus.laugh1, cam_sounds.nexus.laugh2, cam_sounds.nexus.laugh3];
 		playSound(laughs[camRand(laughs.length)]);
 	}
 }
@@ -126,16 +126,16 @@ function camHackIntoPlayer(player, to)
 			{
 				if (target.stattype === DEFENSE)
 				{
-					sound = CAM_DEFENSE_NEUTRALIZE_SND;
+					sound = cam_sounds.nexus.defensesNeutralized;
 				}
 				else
 				{
-					sound = CAM_STRUCTURE_NEUTRALIZE_SND;
+					sound = cam_sounds.nexus.structureNeutralized;
 				}
 			}
 			else if (target.type === DROID)
 			{
-				sound = CAM_UNIT_NEUTRALIZE_SND;
+				sound = cam_sounds.nexus.unitNeutralized;
 			}
 
 			if (camDef(sound))

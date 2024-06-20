@@ -47,7 +47,7 @@ camAreaEvent("yScavAttack", function(droid)
 		camEnableFactory("yScavFactory");
 
 		// Message about scavengers being dug in
-		camPlayVideos(["pcv455.ogg", {video: "L2_SCAVMSG", type: MISS_MSG}]);
+		camPlayVideos([cam_sounds.incoming.incomingTransmission, {video: "L2_SCAVMSG", type: MISS_MSG}]);
 		queue("messageAlert", camSecondsToMilliseconds(3.4));
 	}
 	else
@@ -73,7 +73,7 @@ camAreaEvent("cScavAttack", function(droid)
 		});
 
 		// Message about scavengers being cool
-		camPlayVideos(["pcv455.ogg", {video: "L2_SCAV2MSG", type: MISS_MSG}]);
+		camPlayVideos([cam_sounds.incoming.incomingTransmission, {video: "L2_SCAV2MSG", type: MISS_MSG}]);
 		queue("messageAlert", camSecondsToMilliseconds(3.4));
 	}
 	else
@@ -87,7 +87,7 @@ camAreaEvent("cScavAttack", function(droid)
 function checkCivilianGuards()
 {
 	const civExit = getObject("civilianExit");
-	const SND_CIV_RESCUE = "pcv612.ogg"; // "Civilian Rescued"
+	const SND_CIV_RESCUE = cam_sounds.rescue.civilianRescued; // "Civilian Rescued"
 
 	// Ruins group
 	if (getObject("civGuard1") === null && !civGroup1Free)
@@ -209,38 +209,38 @@ function eventStartLevel()
 		"yellowBase": {
 			cleanup: "yScavBase1",
 			detectMsg: "YSCAV_BASE1",
-			detectSnd: "pcv374.ogg",
-			eliminateSnd: "pcv392.ogg"
+			detectSnd: cam_sounds.baseDetection.scavengerBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerBaseEradicated
 		},
 		"mortarRidge": {
 			cleanup: "yScavBase2",
 			detectMsg: "YSCAV_BASE2",
-			detectSnd: "pcv375.ogg",
-			eliminateSnd: "pcv391.ogg"
+			detectSnd: cam_sounds.baseDetection.scavengerOutpostDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerOutpostEradicated
 		},
 		"roadblock": {
 			cleanup: "yScavBase3",
 			detectMsg: "YSCAV_BASE3",
-			detectSnd: "pcv375.ogg",
-			eliminateSnd: "pcv391.ogg"
+			detectSnd: cam_sounds.baseDetection.scavengerOutpostDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerOutpostEradicated
 		},
 		"cyanDepot": {
 			cleanup: "cScavBase1",
 			detectMsg: "CSCAV_BASE1",
-			detectSnd: "pcv374.ogg",
-			eliminateSnd: "pcv392.ogg"
+			detectSnd: cam_sounds.baseDetection.scavengerBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerBaseEradicated
 		},
 		"bridgeDefences": {
 			cleanup: "cScavBase2",
 			detectMsg: "CSCAV_BASE2",
-			detectSnd: "pcv375.ogg",
-			eliminateSnd: "pcv391.ogg"
+			detectSnd: cam_sounds.baseDetection.scavengerOutpostDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerOutpostEradicated
 		},
 		"cyanBase": {
 			cleanup: "cScavBase3",
 			detectMsg: "CSCAV_BASE3",
-			detectSnd: "pcv374.ogg",
-			eliminateSnd: "pcv392.ogg"
+			detectSnd: cam_sounds.baseDetection.scavengerBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerBaseEradicated
 		},
 	});
 

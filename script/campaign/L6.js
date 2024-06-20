@@ -143,7 +143,7 @@ function activateNorthInfested()
 	setTimer("northInfestedReinforcements", camChangeOnDiff(camSecondsToMilliseconds(45)));
 
 	// Message the player about infested outside of the area
-	camPlayVideos(["pcv456.ogg", {video: "L6_INFESMSG", type: MISS_MSG}]);
+	camPlayVideos([cam_sounds.incoming.incomingIntelligenceReport, {video: "L6_INFESMSG", type: MISS_MSG}]);
 	queue("messageAlert", camSecondsToMilliseconds(3.4));
 }
 
@@ -213,7 +213,7 @@ camAreaEvent("scavAttackTrigger", function(droid)
 		westHeliAttack();
 
 		// Remind the player that the AA sites are the primary target
-		camPlayVideos(["pcv455.ogg", {video: "L6_AAMSG", type: MISS_MSG}]);
+		camPlayVideos([cam_sounds.incoming.incomingTransmission, {video: "L6_AAMSG", type: MISS_MSG}]);
 		queue("messageAlert", camSecondsToMilliseconds(3.4));
 	}
 	else
@@ -363,7 +363,7 @@ function checkForLZReturn()
 		wavePhase = true;
 
 		// Give a message about the imminent infested waves
-		camPlayVideos(["pcv456.ogg", {video: "L6_WAVEMSG", type: MISS_MSG}]);
+		camPlayVideos([cam_sounds.incoming.incomingIntelligenceReport, {video: "L6_WAVEMSG", type: MISS_MSG}]);
 		queue("messageAlert", camSecondsToMilliseconds(3.4));
 		camSetExtraObjectiveMessage("Escape the incoming infested waves");
 
@@ -512,50 +512,50 @@ function eventStartLevel()
 		"northWestScavOutpost": {
 			cleanup: "wScavOutpost",
 			detectMsg: "SCAV_OUTPOST1",
-			detectSnd: "pcv375.ogg",
-			eliminateSnd: "pcv391.ogg"
+			detectSnd: cam_sounds.baseDetection.scavengerOutpostDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerOutpostEradicated
 		},
 		"northEastScavOutpost": {
 			cleanup: "neScavOutpost",
 			detectMsg: "SCAV_OUTPOST2",
-			detectSnd: "pcv375.ogg",
-			eliminateSnd: "pcv391.ogg"
+			detectSnd: cam_sounds.baseDetection.scavengerOutpostDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerOutpostEradicated
 		},
 		"northWestScavBase": {
 			cleanup: "nwScavFactoryBase",
 			detectMsg: "SCAV_BASE1",
-			detectSnd: "pcv374.ogg",
-			eliminateSnd: "pcv392.ogg"
+			detectSnd: cam_sounds.baseDetection.scavengerBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerBaseEradicated
 		},
 		"westScavBase": {
 			cleanup: "wScavMountainBase",
 			detectMsg: "SCAV_BASE2",
-			detectSnd: "pcv374.ogg",
-			eliminateSnd: "pcv392.ogg"
+			detectSnd: cam_sounds.baseDetection.scavengerBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerBaseEradicated
 		},
 		"eastScavBase": {
 			cleanup: "eScavBase",
 			detectMsg: "SCAV_BASE3",
-			detectSnd: "pcv374.ogg",
-			eliminateSnd: "pcv392.ogg"
+			detectSnd: cam_sounds.baseDetection.scavengerBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerBaseEradicated
 		},
 		"southWestScavBase": {
 			cleanup: "swScavBase",
 			detectMsg: "SCAV_BASE4",
-			detectSnd: "pcv374.ogg",
-			eliminateSnd: "pcv392.ogg"
+			detectSnd: cam_sounds.baseDetection.scavengerBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerBaseEradicated
 		},
 		"infestedHighwayCamp": {
 			cleanup: "infestedHighwayBase",
 			detectMsg: "INFESTED_BASE1",
-			detectSnd: "pcv379.ogg",
-			eliminateSnd: "pcv394.ogg"
+			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated
 		},
 		"infestedRoadCamp": {
 			cleanup: "infestedRoadBase",
 			detectMsg: "INFESTED_BASE2",
-			detectSnd: "pcv379.ogg",
-			eliminateSnd: "pcv394.ogg"
+			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated
 		},
 	});
 

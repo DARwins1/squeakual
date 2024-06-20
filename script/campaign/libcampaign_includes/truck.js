@@ -256,6 +256,22 @@ function camRebuildTruck(index, force)
 	return true;
 }
 
+//;; ## camGetTruck(index)
+//;;
+//;; Returns a truck droid that correspond is managed this index.
+//;; Returns undefined if no truck exists currently
+function camGetTruck(index)
+{
+	if (!camDef(__camTruckInfo[index]))
+	{
+		return undefined;
+	}
+	else
+	{
+		return __camTruckInfo[index].truckDroid;
+	}
+}
+
 //;; ## camGetTruckIndicesFromLabel(label)
 //;;
 //;; Returns an array of indexes that correspond to a given label.

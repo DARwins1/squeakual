@@ -497,7 +497,7 @@ function __camVictoryOffworld()
 				if (__camRTLZTicker % __REMIND_RETURN === 0)
 				{
 					const pos = camMakePos(lz);
-					playSound("pcv427.ogg", pos.x, pos.y, 0);
+					playSound(cam_sounds.lz.returnToLZ, pos.x, pos.y, 0);
 					console(_("Return to LZ"));
 				}
 				++__camRTLZTicker;
@@ -519,7 +519,7 @@ function __camVictoryOffworld()
 		if (__camLZCompromisedTicker % __REMIND_COMPROMISED === 1)
 		{
 			const pos = camMakePos(lz);
-			playSound("pcv445.ogg", pos.x, pos.y, 0);
+			playSound(cam_sounds.lz.LZCompromised, pos.x, pos.y, 0);
 		}
 		++__camLZCompromisedTicker;
 		if (__camRTLZTicker === 0)
@@ -531,7 +531,7 @@ function __camVictoryOffworld()
 	{
 		camTrace("LZ clear");
 		const pos = camMakePos(lz);
-		playSound("lz-clear.ogg", pos.x, pos.y, 0);
+		playSound(cam_sounds.lz.LZClear, pos.x, pos.y, 0);
 		setReinforcementTime(__camVictoryData.reinforcements);
 		__camLZCompromisedTicker = 0;
 		if (__camRTLZTicker === 0)

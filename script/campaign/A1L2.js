@@ -37,6 +37,11 @@ var foxtrotAttackGroup;
 var foxtrotRepairGroup;
 var golfAttackGroup;
 var golfRepairGroup;
+var charlieTruckJob1;
+var charlieTruckJob2;
+var foxtrotTruckJob1;
+var foxtrotTruckJob2;
+var golfTruckJob;
 
 // The chances of a helicopter actually using this is incredibly low
 // but we should still have this
@@ -199,13 +204,10 @@ function sendCharlieTransporter()
 	// Trucks -> Repair -> Slow Attack -> Fast Attack
 	let droidQueue = [];
 
-	const trucks = camGetTrucksFromLabel("charlieLZ");
-	if (!camDef(trucks[0])) droidQueue.push(cTempl.truck);
-	if (!camDef(trucks[1])) droidQueue.push(cTempl.truck);
+	if (!camDef(camGetTruck(charlieTruckJob1))) droidQueue.push(cTempl.truck);
+	if (!camDef(camGetTruck(charlieTruckJob2))) droidQueue.push(cTempl.truck);
 
-	droidQueue = droidQueue.concat(camGetRefillableGroupTemplates(charlieRepairGroup)
-		).concat(camGetRefillableGroupTemplates(charlieSlowAttackGroup)
-		).concat(camGetRefillableGroupTemplates(charlieFastAttackGroup));
+	droidQueue = droidQueue.concat(camGetRefillableGroupTemplates([charlieRepairGroup, charlieSlowAttackGroup, charlieFastAttackGroup]));
 
 	const droids = [];
 	// Get (up to) the first 10 units in the queue
@@ -233,12 +235,10 @@ function sendFoxtrotTransporter()
 	// Trucks -> Repair -> Attack
 	let droidQueue = [];
 
-	const trucks = camGetTrucksFromLabel("foxtrotLZ");
-	if (!camDef(trucks[0])) droidQueue.push(cTempl.cyben);
-	if (!camDef(trucks[1])) droidQueue.push(cTempl.cyben);
+	if (!camDef(camGetTruck(foxtrotTruckJob1))) droidQueue.push(cTempl.cyben);
+	if (!camDef(camGetTruck(foxtrotTruckJob2))) droidQueue.push(cTempl.cyben);
 
-	droidQueue = droidQueue.concat(camGetRefillableGroupTemplates(foxtrotRepairGroup)
-		).concat(camGetRefillableGroupTemplates(foxtrotAttackGroup));
+	droidQueue = droidQueue.concat(camGetRefillableGroupTemplates([foxtrotRepairGroup, foxtrotAttackGroup]));
 
 	const droids = [];
 	// Get (up to) the first 10 units in the queue
@@ -266,11 +266,9 @@ function sendGolfTransporter()
 	// Trucks -> Repair -> Attack
 	let droidQueue = [];
 
-	const trucks = camGetTrucksFromLabel("golfLZ");
-	if (!camDef(trucks[0])) droidQueue.push(cTempl.plltruckt);
+	if (!camDef(camGetTruck(foxtrotTruckJob1))) droidQueue.push(cTempl.plltruckt);
 
-	droidQueue = droidQueue.concat(camGetRefillableGroupTemplates(golfRepairGroup)
-		).concat(camGetRefillableGroupTemplates(golfAttackGroup));
+	droidQueue = droidQueue.concat(camGetRefillableGroupTemplates([golfRepairGroup, golfAttackGroup]));
 
 	const droids = [];
 	// Get (up to) the first 10 units in the queue
@@ -300,25 +298,25 @@ function eventTransporterLanded(transport)
 	}
 
 	const transDroids = camGetTransporterDroids(transport.player);
-	var truckLabel;
+	var truckJobs;
 	var other = [];
 	switch (transport.player)
 	{
 		case MIS_TEAM_CHARLIE:
 		{
-			truckLabel = "charlieLZ";
+			truckJobs = [charlieTruckJob1, charlieTruckJob2];
 			otherGroups = [charlieRepairGroup, charlieSlowAttackGroup, charlieFastAttackGroup];
 			break;
 		}
 		case MIS_TEAM_FOXTROT:
 		{
-			truckLabel = "foxtrotLZ";
+			truckJobs = [foxtrotTruckJob1, foxtrotTruckJob2];
 			otherGroups = [foxtrotRepairGroup, foxtrotAttackGroup];
 			break;
 		}
 		case MIS_TEAM_GOLF:
 		{
-			truckLabel = "golfLZ";
+			truckJobs = [golfTruckJob];
 			otherGroups = [golfRepairGroup, golfAttackGroup];
 			break;
 		}
@@ -332,40 +330,21 @@ function eventTransporterLanded(transport)
 	const transTrucks = transDroids.filter((droid) => (droid.droidType == DROID_CONSTRUCT));
 	const transOther = transDroids.filter((droid) => (droid.droidType != DROID_CONSTRUCT));
 
-	// First, assign any trucks/engineers
-	const truckSpots = camGetTrucksFromLabel(truckLabel);
+	// Assign any trucks/engineers
 	let truckIndex = 0;
-	for (const spotIndex in truckSpots)
+	for (const job in truckJobs)
 	{
-		// If a "truck spot" is undefined, that means there is no truck currently working this spot!
-		if (!camDef(truckSpots[spotIndex]) && camDef(transTrucks[truckIndex]))
+		// Check if we have an open job and an available truck
+		if (!camDef(camGetTruck(job)) && camDef(transTrucks[truckIndex]))
 		{
 			// Assign this truck!
-			camAssignTruck(transTrucks[truckIndex], camGetTruckIndicesFromLabel(truckLabel)[spotIndex]);
+			camAssignTruck(transTrucks[truckIndex], job);
 			truckIndex++;
 		}
 	}
 
-	// Next, assign other units to their refillable groups
-	// Loop through the droids we have and match them to the missing templates
-	for (const droid of transOther)
-	{
-		let droidAssigned = false;
-		for (const group of otherGroups)
-		{
-			if (droidAssigned) break;
-			// Triple loop (awesome)
-			for (const template of camGetRefillableGroupTemplates(group))
-			{
-				if (camDroidMatchesTemplate(droid, template))
-				{
-					camGroupAdd(group, droid);
-					droidAssigned = true;
-					break;
-				}
-			}
-		}
-	}
+	// Assign other units to their refillable groups
+	camAssignToRefillableGroups(transOther, otherGroups);
 }
 
 // Trigger the ambush early if the player attacks
@@ -508,48 +487,48 @@ function eventStartLevel()
 		"charlieLZBase": {
 			cleanup: "scavLZBase1",
 			detectMsg: "SCAV_LZBASE1",
-			detectSnd: "pcv374.ogg",
-			eliminateSnd: "pcv392.ogg",
+			detectSnd: cam_sounds.baseDetection.scavengerBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerBaseEradicated,
 			// We need to designate a player here because allies will eventually build over this base
 			player: MIS_YELLOW_SCAVS
 		},
 		"foxtrotLZBase": {
 			cleanup: "scavLZBase2",
 			detectMsg: "SCAV_LZBASE2",
-			detectSnd: "pcv375.ogg",
-			eliminateSnd: "pcv391.ogg",
+			detectSnd: cam_sounds.baseDetection.scavengerOutpostDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerOutpostEradicated,
 			player: MIS_YELLOW_SCAVS
 		},
 		"golfLZBase": {
 			cleanup: "scavLZBase3",
 			detectMsg: "SCAV_LZBASE3",
-			detectSnd: "pcv374.ogg",
-			eliminateSnd: "pcv392.ogg",
+			detectSnd: cam_sounds.baseDetection.scavengerBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerBaseEradicated,
 			player: MIS_YELLOW_SCAVS
 		},
 		"scavHillBase": {
 			cleanup: "scavOuterBase1",
 			detectMsg: "SCAV_BASE1",
-			detectSnd: "pcv374.ogg",
-			eliminateSnd: "pcv392.ogg",
+			detectSnd: cam_sounds.baseDetection.scavengerBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerBaseEradicated,
 		},
 		"scavMiniOutpost": {
 			cleanup: "scavOuterBase2",
 			detectMsg: "SCAV_BASE2",
-			detectSnd: "pcv375.ogg",
-			eliminateSnd: "pcv391.ogg",
+			detectSnd: cam_sounds.baseDetection.scavengerOutpostDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerOutpostEradicated,
 		},
 		"scavCanalBase": {
 			cleanup: "scavOuterBase3",
 			detectMsg: "SCAV_BASE3",
-			detectSnd: "pcv374.ogg",
-			eliminateSnd: "pcv392.ogg",
+			detectSnd: cam_sounds.baseDetection.scavengerBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerBaseEradicated,
 		},
 		"scavNEBase": {
 			cleanup: "scavOuterBase4",
 			detectMsg: "SCAV_BASE4",
-			detectSnd: "pcv374.ogg",
-			eliminateSnd: "pcv392.ogg",
+			detectSnd: cam_sounds.baseDetection.scavengerBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerBaseEradicated,
 		},
 		// These are allied LZs:
 		"charlieLZ": {
@@ -694,13 +673,13 @@ function eventStartLevel()
 	// Charlie repair group (6 Mechanic Cyborgs)
 	charlieRepairGroup = camMakeRefillableGroup(undefined, {templates: [cTempl.cybrp, cTempl.cybrp, cTempl.cybrp, cTempl.cybrp]}, CAM_ORDER_DEFEND, {pos: camMakePos("scavOuterAssembly1")});
 	// Charlie gets 2 trucks
-	camManageTrucks(MIS_TEAM_CHARLIE, {
+	charlieTruckJob1 = camManageTrucks(MIS_TEAM_CHARLIE, {
 		label: "charlieLZ", // Label of Charlie's LZ base (which starts unbuilt)
 		rebuildBase: true,
 		structset: camCharlieA1L2Structs // See structSets.js
 		// NOTE: We don't need any more data here, since we'll manually assign/rebuild the truck with transport reinforcements
 	});
-	camManageTrucks(MIS_TEAM_CHARLIE, {
+	charlieTruckJob2 = camManageTrucks(MIS_TEAM_CHARLIE, {
 		label: "charlieLZ",
 		rebuildBase: true,
 		structset: camCharlieA1L2Structs
@@ -722,12 +701,12 @@ function eventStartLevel()
 	// Foxtrot repair group (4 Repair Turrets)
 	foxtrotRepairGroup = camMakeRefillableGroup(undefined, {templates: [cTempl.pllrepw, cTempl.pllrepw, cTempl.pllrepw, cTempl.pllrepw]}, CAM_ORDER_DEFEND, {pos: camMakePos("scavLZBase2")});
 	// Trucks
-	camManageTrucks(MIS_TEAM_FOXTROT, {
+	foxtrotTruckJob1 = camManageTrucks(MIS_TEAM_FOXTROT, {
 		label: "foxtrotLZ",
 		rebuildBase: true,
 		structset: camFoxtrotA1L2Structs
 	});
-	camManageTrucks(MIS_TEAM_FOXTROT, {
+	foxtrotTruckJob2 = camManageTrucks(MIS_TEAM_FOXTROT, {
 		label: "foxtrotLZ",
 		rebuildBase: true,
 		structset: camFoxtrotA1L2Structs
@@ -749,7 +728,7 @@ function eventStartLevel()
 	// Golf repair group (2 Repair Turrets)
 	golfRepairGroup = camMakeRefillableGroup(undefined, {templates: [cTempl.pllrepw, cTempl.pllrepw]}, CAM_ORDER_DEFEND, {pos: camMakePos("scavOuterAssembly4")});
 	// Truck
-	camManageTrucks(MIS_TEAM_GOLF, {
+	golfTruckJob = camManageTrucks(MIS_TEAM_GOLF, {
 		label: "golfLZ",
 		rebuildBase: true,
 		structset: camGolfA1L2Structs

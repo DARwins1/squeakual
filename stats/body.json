@@ -57,7 +57,7 @@
         "powerOutput": 8000,
         "size": "LIGHT",
         "weaponSlots": 3,
-        "weight": 1500
+        "weight": 2000
     },
     "ScavengerChopper": {
         "armourHeat": 1,

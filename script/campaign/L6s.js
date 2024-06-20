@@ -392,7 +392,7 @@ function colourSwitch()
 
 function spawnThem()
 {
-	var droids = [cTempl.bubut, cTempl.bubut, cTempl.sart, cTempl.sart, cTempl.cybtf, cTempl.cybtf, cTempl.cybtf, cTempl.cybtf, cTempl.cybtf, cTempl.cybtf];
+	var droids = [cTempl.bubut, cTempl.bubut, cTempl.sart, cTempl.sart, cTempl.cybth, cTempl.cybth, cTempl.cybth, cTempl.cybth, cTempl.cybth, cTempl.cybth];
 
 	camSendReinforcement(THEM, camMakePos(61, 115), droids, CAM_REINFORCE_GROUND);
 	

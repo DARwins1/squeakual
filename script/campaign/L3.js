@@ -77,7 +77,7 @@ function expandMap()
 	setScrollLimits(0, 0, 64, 128);
 
 	// Tell the player to go kill everything again
-	camPlayVideos(["pcv455.ogg", {video: "L3_KILLMSG", type: MISS_MSG}]);
+	camPlayVideos([cam_sounds.incoming.incomingTransmission, {video: "L3_KILLMSG", type: MISS_MSG}]);
 	queue("messageAlert", camSecondsToMilliseconds(3.4));
 
 	// Setup patrol groups and repeating helicopter attacks
@@ -221,7 +221,7 @@ function startScavAttack()
 	queue("removeTransport", camSecondsToMilliseconds(5));
 
 	// Tell the player about incoming scavs
-	camPlayVideos(["pcv456.ogg", {video: "L3_ATTACKMSG", type: MISS_MSG}]);
+	camPlayVideos([cam_sounds.incoming.incomingIntelligenceReport, {video: "L3_ATTACKMSG", type: MISS_MSG}]);
 	queue("messageAlert", camSecondsToMilliseconds(3.4));
 
 	// Send the first attack wave after a delay, and cue up additional waves
@@ -276,38 +276,38 @@ function eventStartLevel()
 		"scavHideout": {
 			cleanup: "yScavBase",
 			detectMsg: "YSCAV_BASE",
-			detectSnd: "pcv374.ogg",
-			eliminateSnd: "pcv392.ogg"
+			detectSnd: cam_sounds.baseDetection.scavengerBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerBaseEradicated
 		},
 		"factoryZone": {
 			cleanup: "cScavBase1",
 			detectMsg: "CSCAV_BASE1",
-			detectSnd: "pcv374.ogg",
-			eliminateSnd: "pcv392.ogg"
+			detectSnd: cam_sounds.baseDetection.scavengerBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerBaseEradicated
 		},
 		"rampDefenses": {
 			cleanup: "cScavBase2",
 			detectMsg: "CSCAV_BASE2",
-			detectSnd: "pcv375.ogg",
-			eliminateSnd: "pcv391.ogg"
+			detectSnd: cam_sounds.baseDetection.scavengerOutpostDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerOutpostEradicated
 		},
 		"mortarRidge": {
 			cleanup: "cScavBase3",
 			detectMsg: "CSCAV_BASE3",
-			detectSnd: "pcv375.ogg",
-			eliminateSnd: "pcv391.ogg"
+			detectSnd: cam_sounds.baseDetection.scavengerOutpostDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerOutpostEradicated
 		},
 		"mountainBase": {
 			cleanup: "cScavBase4",
 			detectMsg: "CSCAV_BASE4",
-			detectSnd: "pcv374.ogg",
-			eliminateSnd: "pcv392.ogg"
+			detectSnd: cam_sounds.baseDetection.scavengerBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerBaseEradicated
 		},
 		"cityBase": {
 			cleanup: "cScavBase5",
 			detectMsg: "CSCAV_BASE5",
-			detectSnd: "pcv374.ogg",
-			eliminateSnd: "pcv392.ogg"
+			detectSnd: cam_sounds.baseDetection.scavengerBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerBaseEradicated
 		}
 	});
 

@@ -134,7 +134,7 @@ function __camDispatchTransporterUnsafe()
 
 	if (__PLAYER !== CAM_HUMAN_PLAYER && !allianceExistsBetween(__PLAYER, CAM_HUMAN_PLAYER) && !__SILENT)
 	{
-		playSound("pcv381.ogg"); //Enemy transport detected.
+		playSound(cam_sounds.transport.enemyTransportDetected); //Enemy transport detected.
 	}
 
 	setTransporterExit(data.exit.x, data.exit.y, __PLAYER);
@@ -171,7 +171,7 @@ function __camLandTransporter(player, pos)
 	camTrace("Landing transport for player", player);
 	if (!allianceExistsBetween(player, CAM_HUMAN_PLAYER))
 	{
-		// playSound("pcv395.ogg", pos.x, pos.y, 0); //Incoming enemy transport.
+		// playSound(cam_sounds.transport.incomingEnemyTransport, pos.x, pos.y, 0); //Incoming enemy transport.
 	}
 	if (camDef(ti.order))
 	{

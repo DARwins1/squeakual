@@ -176,7 +176,7 @@ function camEnemyBaseDetected_scavOutpost()
 	});
 
 	// Tell the player to go destroy the scavengers (again)
-	camPlayVideos(["pcv455.ogg", {video: "L5_SCAVMSG", type: MISS_MSG}]);
+	camPlayVideos([cam_sounds.incoming.incomingTransmission, {video: "L5_SCAVMSG", type: MISS_MSG}]);
 	queue("messageAlert", camSecondsToMilliseconds(3.4));
 }
 
@@ -473,50 +473,50 @@ function eventStartLevel()
 		"scavOutpost": {
 			cleanup: "yScavBase1",
 			detectMsg: "SCAV_BASE1",
-			detectSnd: "pcv375.ogg",
-			eliminateSnd: "pcv391.ogg"
+			detectSnd: cam_sounds.baseDetection.scavengerOutpostDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerOutpostEradicated
 		},
 		"scavCamp": {
 			cleanup: "yScavBase2",
 			detectMsg: "SCAV_BASE2",
-			detectSnd: "pcv375.ogg",
-			eliminateSnd: "pcv391.ogg"
+			detectSnd: cam_sounds.baseDetection.scavengerOutpostDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerOutpostEradicated
 		},
 		"scavRoadblock": {
 			cleanup: "yScavBase3",
 			detectMsg: "SCAV_BASE3",
-			detectSnd: "pcv375.ogg",
-			eliminateSnd: "pcv391.ogg"
+			detectSnd: cam_sounds.baseDetection.scavengerOutpostDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerOutpostEradicated
 		},
 		"scavAllianceBase": {
 			cleanup: "scavBase",
 			detectMsg: "SCAV_BASE4",
-			detectSnd: "pcv374.ogg",
-			eliminateSnd: "pcv392.ogg"
+			detectSnd: cam_sounds.baseDetection.scavengerBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerBaseEradicated
 		},
 		"infestedStation": {
 			cleanup: "infestedBase1",
 			detectMsg: "INFESTED_BASE1",
-			detectSnd: "pcv379.ogg",
-			eliminateSnd: "pcv394.ogg"
+			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated
 		},
 		"infestedCampNE": {
 			cleanup: "infestedBase2",
 			detectMsg: "INFESTED_BASE2",
-			detectSnd: "pcv379.ogg",
-			eliminateSnd: "pcv394.ogg"
+			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated
 		},
 		"infestedCampNW": {
 			cleanup: "infestedBase3",
 			detectMsg: "INFESTED_BASE3",
-			detectSnd: "pcv379.ogg",
-			eliminateSnd: "pcv394.ogg"
+			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated
 		},
 		"infestedCampW": {
 			cleanup: "infestedBase4",
 			detectMsg: "INFESTED_BASE4",
-			detectSnd: "pcv379.ogg",
-			eliminateSnd: "pcv394.ogg"
+			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated
 		},
 	});
 

@@ -348,26 +348,26 @@ function eventStartLevel()
 		"colNorthLZ": {
 			cleanup: "colLZBaseArea1",
 			detectMsg: "COL_LZBASE1",
-			detectSnd: "pcv382.ogg",
-			eliminateSnd: "pcv394.ogg",
+			detectSnd: cam_sounds.baseDetection.enemyLZDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
 		},
 		"colEastLZ": {
 			cleanup: "colLZBaseArea2",
 			detectMsg: "COL_LZBASE2",
-			detectSnd: "pcv382.ogg",
-			eliminateSnd: "pcv394.ogg",
+			detectSnd: cam_sounds.baseDetection.enemyLZDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
 		},
 		"colSouthLZ": {
 			cleanup: "colLZBaseArea3",
 			detectMsg: "COL_LZBASE3",
-			detectSnd: "pcv382.ogg",
-			eliminateSnd: "pcv394.ogg",
+			detectSnd: cam_sounds.baseDetection.enemyLZDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
 		},
 		"colSWLZ": {
 			cleanup: "colLZBaseArea4",
 			detectMsg: "COL_LZBASE4",
-			detectSnd: "pcv382.ogg",
-			eliminateSnd: "pcv394.ogg",
+			detectSnd: cam_sounds.baseDetection.enemyLZDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
 		},
 	});
 

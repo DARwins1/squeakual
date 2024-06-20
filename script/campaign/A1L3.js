@@ -17,6 +17,8 @@ var colRepairGroup;
 var colUplinkPatrolGroup;
 var colSensorGroup;
 var colMortarGroup;
+var colLZTruckJob;
+var colUplinkTruckJob;
 
 const mis_scavResearch = [
 	"R-Wpn-MG-Damage02", "R-Wpn-Rocket-Damage02", "R-Wpn-Mortar-Damage01", 
@@ -158,22 +160,19 @@ function sendCollectiveTransporter()
 	// If space allows, add additional Misc. attack units
 	let droidQueue = [];
 
-	if (!camDef(camGetTrucksFromLabel("colLZBase")[0]))
+	if (!camDef(camGetTruck(colLZTruckJob))
 	{
 		droidQueue.push(cTempl.coltruckht);
 	}
 
-	if (!camDef(camGetTrucksFromLabel("colUplinkBase")[0]) && camBaseIsEliminated("redUplinkBase") 
+	if (!camDef(camGetTruck(colUplinkTruckJob)) && camBaseIsEliminated("redUplinkBase")
 		&& (enumArea("redBase5", CAM_HUMAN_PLAYER, false).length == 0 || !camBaseIsEliminated("colUplinkBase")))
 	{
 		// Only order this truck if the scav uplink base is destroyed, and no player units are nearby or the outpost is already set up
 		droidQueue.push(cTempl.coltruckht);
 	}
 
-	droidQueue = droidQueue.concat(camGetRefillableGroupTemplates(colRepairGroup)
-		).concat(camGetRefillableGroupTemplates(colUplinkPatrolGroup)
-		).concat(camGetRefillableGroupTemplates(colSensorGroup)
-		).concat(camGetRefillableGroupTemplates(colMortarGroup));
+	droidQueue = droidQueue.concat(camGetRefillableGroupTemplates([colRepairGroup, colUplinkPatrolGroup, colSensorGroup, colMortarGroup]));
 
 	const droids = [];
 	for (let i = 0; i < (difficulty < HARD) ? 8 : 10; i++)
@@ -222,60 +221,42 @@ function eventTransporterLanded(transport)
 	const transTrucks = transDroids.filter((droid) => (droid.droidType == DROID_CONSTRUCT));
 	const transOther = transDroids.filter((droid) => (droid.droidType != DROID_CONSTRUCT));
 
-	// First, assign the truck(s)
-	const lzTruck = camGetTrucksFromLabel("colLZBase")[0];
-	const uplinkTruck = camGetTrucksFromLabel("colUplinkBase")[0];
+	// Assign the truck(s)
 	let truckIndex = 0;
 	// Check if the LZ truck is missing
-	if (!camDef(lzTruck) && camDef(transTrucks[truckIndex]))
+	if (!camDef(camGetTruck(colLZTruckJob)) && camDef(transTrucks[truckIndex]))
 	{
 		// Assign this truck!
-		camAssignTruck(transTrucks[truckIndex], camGetTruckIndicesFromLabel("colLZBase"));
+		camAssignTruck(transTrucks[truckIndex], colLZTruckJob);
 		truckIndex++;
 	}
 	// Check if the Uplink truck is missing
-	if (!camDef(uplinkTruck) && camDef(transTrucks[truckIndex]))
+	if (!camDef(camGetTruck(colUplinkTruckJob)) && camDef(transTrucks[truckIndex]))
 	{
-		camAssignTruck(transTrucks[truckIndex], camGetTruckIndicesFromLabel("colUplinkBase"));
+		camAssignTruck(transTrucks[truckIndex], colUplinkTruckJob);
 	}
 
-	// Next, assign other units to their refillable groups
-	// Loop through the droids we have and match them to any missing templates
+	// Loop through the list and look for a sensor droid
 	for (const droid of transOther)
 	{
-		let droidAssigned = false;
-
-		for (const group of [colRepairGroup, colUplinkPatrolGroup, colSensorGroup, colMortarGroup])
+		if (droid.isSensor)
 		{
-			if (droidAssigned) break;
+			// Allows the mortar group to follow the sensor
+			addLabel(droid, "colSensorDroid");
 
-			for (const template of camGetRefillableGroupTemplates(group))
-			{
-				if (camDroidMatchesTemplate(droid, template))
-				{
-					camGroupAdd(group, droid);
-					droidAssigned = true;
-
-					// Special case for the sensor "group"
-					if (group === colSensorGroup)
-					{
-						// Allows the mortar group to follow the sensor
-						addLabel(droid, "colSensorDroid");
-
-						// Restate the follow order
-						camManageGroup(colMortarGroup, CAM_ORDER_FOLLOW, {
-							leader: "colSensorDroid",
-							suborder: CAM_ORDER_DEFEND,
-							pos: camMakePos("collectiveRepairPos"), // Defend this position if the sensor is dead.
-							repair: 75,
-							repairPos: camMakePos("collectiveRepairPos")
-						});
-					}
-					break;
-				}
-			}
+			// Restate the follow order
+			camManageGroup(colMortarGroup, CAM_ORDER_FOLLOW, {
+				leader: "colSensorDroid",
+				suborder: CAM_ORDER_DEFEND,
+				pos: camMakePos("collectiveRepairPos"), // Defend this position if the sensor is dead.
+				repair: 75,
+				repairPos: camMakePos("collectiveRepairPos")
+			});
 		}
 	}
+
+	// Assign other units to their refillable groups
+	camAssignToRefillableGroups(transOther, [colRepairGroup, colUplinkPatrolGroup, colSensorGroup, colMortarGroup]);
 	// NOTE: Remaining reinforcements that aren't assigned here will be handled like normal reinforcement units
 }
 
@@ -328,7 +309,7 @@ function introduceCollective()
 	// One truck for the LZ, one for the Uplink outpost
 	const tPos = camMakePos("collectiveEntrance");
 	const tTemp = cTempl.coltruckht;
-	camManageTrucks(CAM_THE_COLLECTIVE, {
+	colLZTruckJob = camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colLZBase",
 		rebuildBase: true,
 		structset: camA1L3LZStructs,
@@ -336,7 +317,7 @@ function introduceCollective()
 		truckDroid: addDroid(CAM_THE_COLLECTIVE, tPos.x, tPos.y, 
 			camNameTemplate(tTemp), tTemp.body, tTemp.prop, "", "", tTemp.weap),
 	});
-	camManageTrucks(CAM_THE_COLLECTIVE, {
+	colUplinkTruckJob = camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colUplinkBase",
 		rebuildBase: true,
 		structset: camA1L3UplinkStructs,
@@ -398,7 +379,7 @@ function spawnBackupTruck()
 	const newTruck = addDroid(CAM_THE_COLLECTIVE, tPos.x, tPos.y, 
 		camNameTemplate(tTemp.weap, tTemp.body, tTemp.prop), 
 		tTemp.body, tTemp.prop, "", "", tTemp.weap);
-	camAssignTruck(newTruck, camGetTruckIndicesFromLabel("colUplinkBase"));
+	camAssignTruck(newTruck, colLZTruckJob);
 	if (!backupTruckSpawned)
 	{
 		backupTruckSpawned;
@@ -420,7 +401,7 @@ function addCollectiveAntiAir()
 	}
 
 	// Order the LZ truck to build extra AA
-	camSetStructureSet("colLZBase", camA1L3LZStructs.concat(camA1L3AntiAir));
+	camSetStructureSet(colLZTruckJob, camA1L3LZStructs.concat(camA1L3AntiAir));
 
 	if (difficulty == INSANE)
 	{
@@ -491,70 +472,70 @@ function eventStartLevel()
 		"redRoadblockBase": {
 			cleanup: "redBase1",
 			detectMsg: "RED_BASE1",
-			detectSnd: "pcv375.ogg",
-			eliminateSnd: "pcv391.ogg",
+			detectSnd: cam_sounds.baseDetection.scavengerOutpostDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerOutpostEradicated,
 		},
 		"redNorthRoadBase": {
 			cleanup: "redBase2",
 			detectMsg: "RED_BASE2",
-			detectSnd: "pcv374.ogg",
-			eliminateSnd: "pcv392.ogg",
+			detectSnd: cam_sounds.baseDetection.scavengerBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerBaseEradicated,
 		},
 		"redPlateauBase": {
 			cleanup: "redBase3",
 			detectMsg: "RED_BASE3",
-			detectSnd: "pcv374.ogg",
-			eliminateSnd: "pcv392.ogg",
+			detectSnd: cam_sounds.baseDetection.scavengerBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerBaseEradicated,
 		},
 		"redSouthRoadBase": {
 			cleanup: "redBase4",
 			detectMsg: "RED_BASE4",
-			detectSnd: "pcv374.ogg",
-			eliminateSnd: "pcv392.ogg",
+			detectSnd: cam_sounds.baseDetection.scavengerBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerBaseEradicated,
 		},
 		"redUplinkBase": {
 			cleanup: "redBase5",
 			detectMsg: "RED_BASE5",
-			detectSnd: "pcv374.ogg",
-			eliminateSnd: "pcv392.ogg",
+			detectSnd: cam_sounds.baseDetection.scavengerBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerBaseEradicated,
 			player: MIS_RED_SCAVS
 		},
 		"orangeNorthRoadBase": {
 			cleanup: "orangeBase1",
 			detectMsg: "ORANGE_BASE1",
-			detectSnd: "pcv375.ogg",
-			eliminateSnd: "pcv391.ogg",
+			detectSnd: cam_sounds.baseDetection.scavengerOutpostDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerOutpostEradicated,
 		},
 		"orangePlateauBase": {
 			cleanup: "orangeBase2",
 			detectMsg: "ORANGE_BASE2",
-			detectSnd: "pcv374.ogg",
-			eliminateSnd: "pcv392.ogg",
+			detectSnd: cam_sounds.baseDetection.scavengerBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerBaseEradicated,
 		},
 		"orangeSouthCraterBase": {
 			cleanup: "orangeBase3",
 			detectMsg: "ORANGE_BASE3",
-			detectSnd: "pcv374.ogg",
-			eliminateSnd: "pcv392.ogg",
+			detectSnd: cam_sounds.baseDetection.scavengerBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerBaseEradicated,
 		},
 		"orangeNorthCraterBase": {
 			cleanup: "orangeBase4",
 			detectMsg: "ORANGE_BASE4",
-			detectSnd: "pcv374.ogg",
-			eliminateSnd: "pcv392.ogg",
+			detectSnd: cam_sounds.baseDetection.scavengerBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerBaseEradicated,
 		},
 		// These start unbuilt
 		"colLZBase": {
 			cleanup: "collectiveLZBaseArea",
 			detectMsg: "COL_LZ",
-			detectSnd: "pcv382.ogg",
-			eliminateSnd: "pcv394.ogg",
+			detectSnd: cam_sounds.baseDetection.enemyLZDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
 		},
 		"colUplinkBase": {
 			cleanup: "collectiveUplinkBaseArea",
 			detectMsg: "COL_UPLINK",
-			detectSnd: "pcv379.ogg",
-			eliminateSnd: "pcv394.ogg",
+			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
 			player: CAM_THE_COLLECTIVE,
 		},
 	});

@@ -238,7 +238,7 @@ function infestedAmbush2()
 	camEnableFactory("infestedFactory6");
 
 	// Message about destroying the research facility and containing the outbreak
-	camPlayVideos(["pcv455.ogg", {video: "L4_KILLMSG", type: MISS_MSG}]);
+	camPlayVideos([cam_sounds.incoming.incomingTransmission, {video: "L4_KILLMSG", type: MISS_MSG}]);
 	queue("messageAlert", camSecondsToMilliseconds(3.4));
 	camSetExtraObjectiveMessage("Destroy the Research Facility");
 
@@ -365,14 +365,14 @@ function randomTemplates(coreUnits)
 // Warn the player about scavs at the research facility
 function warnPlayer()
 {
-	camPlayVideos(["pcv455.ogg", {video: "L4_WARNMSG", type: MISS_MSG}]);
+	camPlayVideos([cam_sounds.incoming.incomingTransmission, {video: "L4_WARNMSG", type: MISS_MSG}]);
 	queue("messageAlert", camSecondsToMilliseconds(3.4));
 	queue("enableReinforcements", camSecondsToMilliseconds(6));
 }
 
 function enableReinforcements()
 {
-	playSound("pcv440.ogg"); // Reinforcements are available.
+	playSound(cam_sounds.reinforcementsAreAvailable); // Reinforcements are available.
 	camSetStandardWinLossConditions(CAM_VICTORY_OFFWORLD, "L5S", {
 		area: "compromiseZone",
 		reinforcements: camMinutesToSeconds(1.5),
@@ -491,44 +491,44 @@ function eventStartLevel()
 		"scavCamp": {
 			cleanup: "scavBase1",
 			detectMsg: "SCAV_BASE1",
-			detectSnd: "pcv374.ogg",
-			eliminateSnd: "pcv392.ogg"
+			detectSnd: cam_sounds.baseDetection.scavengerBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerBaseEradicated
 		},
 		"scavHoldout": {
 			cleanup: "scavBase2",
 			detectMsg: "SCAV_BASE2",
-			detectSnd: "pcv375.ogg",
-			eliminateSnd: "pcv391.ogg"
+			detectSnd: cam_sounds.baseDetection.scavengerOutpostDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerOutpostEradicated
 		},
 		"infestedCampNW": {
 			cleanup: "infestedBase1",
 			detectMsg: "INFESTED_BASE1",
-			detectSnd: "pcv379.ogg",
-			eliminateSnd: "pcv394.ogg"
+			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated
 		},
 		"infestedCampSW": {
 			cleanup: "infestedBase2",
 			detectMsg: "INFESTED_BASE2",
-			detectSnd: "pcv379.ogg",
-			eliminateSnd: "pcv394.ogg"
+			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated
 		},
 		"infestedCampNE": {
 			cleanup: "infestedBase3",
 			detectMsg: "INFESTED_BASE3",
-			detectSnd: "pcv379.ogg",
-			eliminateSnd: "pcv394.ogg"
+			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated
 		},
 		"infestedCampSE": {
 			cleanup: "infestedBase4",
 			detectMsg: "INFESTED_BASE4",
-			detectSnd: "pcv379.ogg",
-			eliminateSnd: "pcv394.ogg"
+			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated
 		},
 		"infestedResearchBase": {
 			cleanup: "infestedBase5",
 			detectMsg: "INFESTED_BASE5",
-			detectSnd: "pcv379.ogg",
-			eliminateSnd: "pcv394.ogg"
+			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated
 		},
 	});
 
