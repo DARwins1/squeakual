@@ -23,16 +23,17 @@ var colUplinkTruckJob;
 const mis_scavResearch = [
 	"R-Wpn-MG-Damage02", "R-Wpn-Rocket-Damage02", "R-Wpn-Mortar-Damage01", 
 	"R-Wpn-Flamer-Damage02", "R-Wpn-Cannon-Damage02", "R-Wpn-MG-ROF01",
-	"R-Wpn-Rocket-ROF02", "R-Wpn-Mortar-ROF01", "R-Wpn-Flamer-ROF02",
-	"R-Wpn-Cannon-ROF02", "R-Vehicle-Metals02", "R-Struc-Materials02", 
-	"R-Defense-WallUpgrade02",
+	"R-Wpn-Rocket-ROF01", "R-Wpn-Mortar-ROF01", "R-Wpn-Flamer-ROF02",
+	"R-Wpn-Cannon-ROF01", "R-Vehicle-Metals01", "R-Struc-Materials02", 
+	"R-Defense-WallUpgrade02", "R-Wpn-Flamer-Damage03",
 ];
 const mis_collectiveResearch = [
 	"R-Wpn-MG-Damage02", "R-Wpn-Rocket-Damage02", "R-Wpn-Mortar-Damage01", 
 	"R-Wpn-Flamer-Damage02", "R-Wpn-Cannon-Damage02", "R-Wpn-MG-ROF01",
-	"R-Wpn-Rocket-ROF02", "R-Wpn-Mortar-ROF01", "R-Wpn-Flamer-ROF02",
-	"R-Wpn-Cannon-ROF02", "R-Vehicle-Metals02", "R-Struc-Materials02", 
-	"R-Defense-WallUpgrade02", "R-Sys-Engineering01",
+	"R-Wpn-Rocket-ROF01", "R-Wpn-Mortar-ROF01", "R-Wpn-Flamer-ROF02",
+	"R-Wpn-Cannon-ROF01", "R-Vehicle-Metals01", "R-Struc-Materials02", 
+	"R-Defense-WallUpgrade02", "R-Wpn-Flamer-Damage03", "R-Sys-Engineering01",
+	"R-Wpn-Cannon-Accuracy01", "R-Wpn-Rocket-Accuracy01",
 ];
 
 // The chances of a helicopter actually using this is incredibly low
@@ -452,6 +453,8 @@ function eventStartLevel()
 	// An artifact for the Heavy Machinegun is added later, once the Collective start building their LZ
 	camSetArtifacts({
 		"redFactory2": { tech: "R-Vehicle-Prop-Halftracks" }, // Half-Tracks
+		"orangeFactory3": { tech: "R-Wpn-Mortar-Damage02" }, // HE Mortar Shells Mk2
+		"redFactory5": { tech: "R-Wpn-Flamer-Damage03" }, // High Temperature Flamer Gel Mk3
 	});
 
 	setMissionTime(camChangeOnDiff(camHoursToSeconds(1)));

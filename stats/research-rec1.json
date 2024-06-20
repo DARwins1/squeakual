@@ -3218,7 +3218,7 @@
     },
     "R-Wpn-Rocket-LtA-TMk1": {
         "iconID": "IMAGE_RES_WEAPONTECH",
-        "id": "R-Wpn-Rocket01-LtAT",
+        "id": "R-Wpn-Rocket-LtA-TMk1",
         "keyTopic": 1,
         "msgName": "RES_W_RK_LTAT1MK1",
         "name": "Sarissa AT Rocket",

@@ -126,7 +126,7 @@
         "requiredStructures": [
             "A0ComDroidControl"
         ],
-        "researchPoints": 1200,
+        "researchPoints": 600,
         "researchPower": 37,
         "resultComponents": [
             "CommandBrain01",
@@ -165,7 +165,7 @@
         "requiredResearch": [
             "R-Vehicle-Metals01"
         ],
-        "researchPoints": 1200,
+        "researchPoints": 700,
         "researchPower": 37,
         "results": [
             {
@@ -189,12 +189,12 @@
         "iconID": "IMAGE_RES_CYBORGTECH",
         "id": "R-Cyborg-Metals02",
         "imdName": "icmolql.pie",
-        "keyTopic": 1,
         "name": "Cyborg Composite Alloys Mk2",
         "requiredResearch": [
-            "R-Cyborg-Metals01"
+            "R-Cyborg-Metals01",
+            "R-Vehicle-Metals02"
         ],
-        "researchPoints": 2400,
+        "researchPoints": 900,
         "researchPower": 75,
         "results": [
             {
@@ -567,7 +567,7 @@
         "imdName": "icmolql.pie",
         "msgName": "RES_V_MET1",
         "name": "Composite Alloys",
-        "researchPoints": 1800,
+        "researchPoints": 800,
         "researchPower": 56,
         "results": [
             {
@@ -591,12 +591,12 @@
         "iconID": "IMAGE_RES_DROIDTECH",
         "id": "R-Vehicle-Metals02",
         "imdName": "icmolql.pie",
-        "keyTopic": 1,
         "name": "Composite Alloys Mk2",
         "requiredResearch": [
-            "R-Vehicle-Metals01"
+            "R-Vehicle-Metals01",
+            "R-Vehicle-Body02"
         ],
-        "researchPoints": 3600,
+        "researchPoints": 1000,
         "researchPower": 112,
         "results": [
             {
@@ -1208,7 +1208,7 @@
         "requiredResearch": [
             "R-Defense-HardcreteWall"
         ],
-        "researchPoints": 1800,
+        "researchPoints": 800,
         "researchPower": 56,
         "resultStructures": [
             "A0HardcreteMk1Gate"
@@ -1221,6 +1221,11 @@
         "keyTopic": 1,
         "msgName": "RES_DF_HCW1",
         "name": "Hardcrete",
+        "redStructures": [
+            "Sys-SensoTower01",
+            "GuardTower1",
+            "GuardTower6"
+        ],
         "requiredResearch": [
             "R-Sys-Engineering01"
         ],
@@ -1228,7 +1233,10 @@
         "researchPower": 18,
         "resultStructures": [
             "A0HardcreteMk1CWall",
-            "A0HardcreteMk1Wall"
+            "A0HardcreteMk1Wall",
+            "Sys-SensoTower02",
+            "GuardTower3",
+            "GuardTower6H"
         ],
         "statID": "A0HardcreteMk1Wall"
     },
@@ -1256,7 +1264,7 @@
             "R-Defense-HardcreteWall",
             "R-Wpn-Mortar01Lt"
         ],
-        "researchPoints": 1200,
+        "researchPoints": 600,
         "researchPower": 37,
         "resultStructures": [
             "Emplacement-MortarPit01"
@@ -1272,7 +1280,7 @@
             "R-Defense-HardcreteWall",
             "R-Wpn-MG-Damage01"
         ],
-        "researchPoints": 1200,
+        "researchPoints": 600,
         "researchPower": 37,
         "resultStructures": [
             "PillBox1"
@@ -1284,11 +1292,14 @@
         "id": "R-Defense-Pillbox04",
         "msgName": "RES_PB_LC",
         "name": "Light Cannon Bunker",
+        "redStructures": [
+            "Cannon-Emplacement"
+        ],
         "requiredResearch": [
             "R-Defense-HardcreteWall",
             "R-Wpn-Cannon1Mk1"
         ],
-        "researchPoints": 1500,
+        "researchPoints": 600,
         "researchPower": 46,
         "resultStructures": [
             "PillBox4"
@@ -1300,11 +1311,14 @@
         "id": "R-Defense-Pillbox05",
         "msgName": "RES_PB_FL",
         "name": "Flamer Bunker",
+        "redStructures": [
+            "Flamer-Emplacement"
+        ],
         "requiredResearch": [
             "R-Defense-HardcreteWall",
             "R-Wpn-Flamer01Mk1"
         ],
-        "researchPoints": 1500,
+        "researchPoints": 600,
         "researchPower": 46,
         "resultStructures": [
             "PillBox5"
@@ -1320,7 +1334,7 @@
             "R-Wpn-Rocket01-LtAT",
             "R-Defense-HardcreteWall"
         ],
-        "researchPoints": 1500,
+        "researchPoints": 800,
         "researchPower": 46,
         "resultStructures": [
             "PillBox6"
@@ -1332,11 +1346,14 @@
         "id": "R-Defense-Tower06",
         "msgName": "RES_EMP_LANTOW",
         "name": "Lancer Tower",
+        "redStructures": [
+            "Sarissa-Tower"
+        ],
         "requiredResearch": [
             "R-Defense-HardcreteWall",
             "R-Wpn-Rocket01-LtAT"
         ],
-        "researchPoints": 2400,
+        "researchPoints": 600,
         "researchPower": 75,
         "resultStructures": [
             "GuardTower5"
@@ -1398,7 +1415,7 @@
             "R-Wpn-MG3Mk1",
             "R-Defense-Pillbox01"
         ],
-        "researchPoints": 1200,
+        "researchPoints": 900,
         "researchPower": 37,
         "resultStructures": [
             "WallTower01"
@@ -1414,7 +1431,7 @@
             "R-Wpn-Cannon1Mk1",
             "R-Defense-HardcreteWall"
         ],
-        "researchPoints": 1500,
+        "researchPoints": 900,
         "researchPower": 46,
         "resultStructures": [
             "WallTower02"
@@ -1465,7 +1482,7 @@
             "R-Wpn-Rocket01-LtAT",
             "R-Defense-HardcreteWall"
         ],
-        "researchPoints": 1500,
+        "researchPoints": 900,
         "researchPower": 46,
         "resultStructures": [
             "WallTower06"
@@ -1505,6 +1522,7 @@
     "R-Defense-WallUpgrade02": {
         "iconID": "IMAGE_RES_DEFENCE",
         "id": "R-Defense-WallUpgrade02",
+        "keyTopic": 1,
         "imdName": "BLWALL2.PIE",
         "name": "Improved Hardcrete Mk2",
         "requiredResearch": [
@@ -1569,7 +1587,7 @@
         "requiredResearch": [
             "R-Sys-Sensor-Tower01"
         ],
-        "researchPoints": 1200,
+        "researchPoints": 900,
         "researchPower": 37,
         "resultStructures": [
             "A0ComDroidControl"
@@ -1720,6 +1738,7 @@
     "R-Struc-Materials02": {
         "iconID": "IMAGE_RES_STRUCTURETECH",
         "id": "R-Struc-Materials02",
+        "keyTopic": 1,
         "imdName": "icmolql.pie",
         "name": "Reinforced Base Structure Materials Mk2",
         "requiredResearch": [
@@ -2116,6 +2135,7 @@
     "R-Vehicle-Body11": {
         "iconID": "IMAGE_RES_DROIDTECH",
         "id": "R-Vehicle-Body11",
+        "keyTopic": 1,
         "msgName": "RES_V_B11",
         "name": "Heavy Body - Python",
         "requiredResearch": [
@@ -2285,7 +2305,7 @@
         "msgName": "RES_W_CNAC1",
         "name": "Cannon Laser Rangefinder",
         "requiredResearch": [
-            "R-Wpn-Cannon-Damage02"
+            "R-Wpn-Cannon-Damage01"
         ],
         "researchPoints": 3600,
         "researchPower": 112,
@@ -2316,7 +2336,7 @@
         "requiredResearch": [
             "R-Wpn-Cannon1Mk1"
         ],
-        "researchPoints": 1200,
+        "researchPoints": 600,
         "researchPower": 37,
         "results": [
             {
@@ -2343,9 +2363,9 @@
         "name": "HEAT Cannon Shells Mk2",
         "requiredResearch": [
             "R-Wpn-Cannon-Damage01",
-            "R-Wpn-Rocket-Damage02"
+            "R-Wpn-Cannon-Accuracy01"
         ],
-        "researchPoints": 2400,
+        "researchPoints": 900,
         "researchPower": 75,
         "results": [
             {
@@ -2481,12 +2501,12 @@
     "R-Wpn-Flamer-Damage02": {
         "iconID": "IMAGE_RES_WEAPONTECH",
         "id": "R-Wpn-Flamer-Damage02",
-        "keyTopic": 1,
         "name": "High Temperature Flamer Gel Mk2",
         "requiredResearch": [
-            "R-Wpn-Flamer-Damage01"
+            "R-Wpn-Flamer-Damage01",
+            "R-Wpn-Flamer-ROF01"
         ],
-        "researchPoints": 2200,
+        "researchPoints": 900,
         "researchPower": 87,
         "results": [
             {
@@ -2516,7 +2536,7 @@
             "R-Wpn-Flamer-Damage02",
             "R-Wpn-Flame2"
         ],
-        "researchPoints": 1800,
+        "researchPoints": 1100,
         "researchPower": 75,
         "results": [
             {
@@ -2541,11 +2561,11 @@
     "R-Wpn-Flamer-ROF01": {
         "iconID": "IMAGE_RES_WEAPONTECH",
         "id": "R-Wpn-Flamer-ROF01",
+        "keyTopic": 1,
         "msgName": "RES_W_FL_ROF1",
         "name": "Flamer Autoloader",
         "requiredResearch": [
-            "R-Wpn-Flamer-Damage01",
-            "R-Wpn-Cannon-ROF01"
+            "R-Wpn-Flamer-Damage01"
         ],
         "researchPoints": 900,
         "researchPower": 28,
@@ -2795,7 +2815,7 @@
         "requiredResearch": [
             "R-Wpn-Mortar01Lt"
         ],
-        "researchPoints": 1800,
+        "researchPoints": 800,
         "researchPower": 56,
         "results": [
             {
@@ -2829,10 +2849,9 @@
         "keyTopic": 1,
         "name": "HE Mortar Shells Mk2",
         "requiredResearch": [
-            "R-Wpn-Mortar-Damage01",
-            "R-Wpn-Cannon-Damage02"
+            "R-Wpn-Mortar-Damage01"
         ],
-        "researchPoints": 3600,
+        "researchPoints": 1000,
         "researchPower": 112,
         "results": [
             {
@@ -2864,6 +2883,7 @@
     "R-Wpn-Mortar-Damage03": {
         "iconID": "IMAGE_RES_WEAPONTECH",
         "id": "R-Wpn-Mortar-Damage03",
+        "keyTopic": 1,
         "name": "HE Mortar Shells Mk3",
         "requiredResearch": [
             "R-Wpn-Mortar-Damage02",
@@ -2901,6 +2921,7 @@
     "R-Wpn-Mortar-Incendiary": {
         "iconID": "IMAGE_RES_WEAPONTECH",
         "id": "R-Wpn-Mortar-Incendiary",
+        "keyTopic": 1,
         "msgName": "RES_IMORT",
         "name": "Incendiary Mortar",
         "requiredResearch": [
@@ -2917,13 +2938,13 @@
     "R-Wpn-Mortar-ROF01": {
         "iconID": "IMAGE_RES_WEAPONTECH",
         "id": "R-Wpn-Mortar-ROF01",
+        "keyTopic": 1,
         "msgName": "RES_W_M_ROF1",
         "name": "Mortar Autoloader",
         "requiredResearch": [
-			"R-Wpn-Mortar01Lt",
-            "R-Wpn-Cannon-ROF01"
+			"R-Wpn-Mortar01Lt"
         ],
-        "researchPoints": 1800,
+        "researchPoints": 1200,
         "researchPower": 56,
         "results": [
             {
@@ -2982,9 +3003,9 @@
         "msgName": "RES_W_RK_AC1",
         "name": "Stabilized Rockets",
         "requiredResearch": [
-            "R-Wpn-Rocket-Damage02"
+            "R-Wpn-Rocket-Damage01"
         ],
-        "researchPoints": 3600,
+        "researchPoints": 1100,
         "researchPower": 112,
         "results": [
             {
@@ -3043,7 +3064,7 @@
         "requiredResearch": [
             "R-Wpn-Rocket05-MiniPod"
         ],
-        "researchPoints": 1200,
+        "researchPoints": 600,
         "researchPower": 37,
         "results": [
             {
@@ -3070,9 +3091,9 @@
         "name": "HE Rockets Mk2",
         "requiredResearch": [
             "R-Wpn-Rocket-Damage01",
-            "R-Wpn-Rocket02-MRL"
+            "R-Wpn-Rocket-Accuracy01"
         ],
-        "researchPoints": 2400,
+        "researchPoints": 900,
         "researchPower": 75,
         "results": [
             {
@@ -3130,7 +3151,7 @@
         "msgName": "RES_W_RK_ROF1",
         "name": "Rocket Autoloader",
         "requiredResearch": [
-            "R-Wpn-Cannon-ROF01",
+            "R-Wpn-Rocket-Accuracy01",
             "R-Wpn-Rocket-Damage01"
         ],
         "researchPoints": 1400,
@@ -3222,10 +3243,13 @@
         "msgName": "RES_W_RK_LTAT1",
         "name": "Lancer AT Rocket",
         "requiredResearch": [
-            "R-Wpn-Rocket-Damage02",
-            "R-Struc-Research-Module"
+            "R-Wpn-Rocket-Damage02"
         ],
-        "researchPoints": 3600,
+        "redComponents": [
+            "Rocket-LtA-TMk1",
+            "Rocket-VTOL-LtA-TMk1"
+        ],
+        "researchPoints": 1400,
         "researchPower": 112,
         "resultComponents": [
             "Rocket-LtA-T",
@@ -3235,7 +3259,7 @@
     },
     "R-Wpn-Rocket-LtA-TMk1": {
         "iconID": "IMAGE_RES_WEAPONTECH",
-        "id": "R-Wpn-Rocket01-LtAT",
+        "id": "R-Wpn-Rocket-LtA-TMk1",
         "keyTopic": 1,
         "msgName": "RES_W_RK_LTAT1MK1",
         "name": "Sarissa AT Rocket",
@@ -3390,6 +3414,7 @@
     "R-Wpn-RocketSlow-Damage01": {
         "iconID": "IMAGE_RES_WEAPONTECH",
         "id": "R-Wpn-RocketSlow-Damage01",
+        "keyTopic": 1,
         "msgName": "RES_W_SRK_D1",
         "name": "HEAT Rocket Warhead",
         "requiredResearch": [
@@ -3499,8 +3524,8 @@
         "requiredResearch": [
             "R-Wpn-AAGun03"
         ],
-        "researchPoints": 3600,
-        "researchPower": 112,
+        "researchPoints": 600,
+        "researchPower": 56,
         "resultStructures": [
             "AASite-QuadMg1"
         ],
@@ -4265,26 +4290,6 @@
         ],
         "subgroupIconID": "IMAGE_RES_GRPUPG"
     },
-    "R-Sys-Sensor-Tower02": {
-        "iconID": "IMAGE_RES_SYSTEMTECH",
-        "id": "R-Sys-Sensor-Tower02",
-        "keyTopic": 1,
-        "msgName": "RES_SY_STW2",
-        "name": "Hardened Sensor Tower",
-        "redStructures": [
-            "Sys-SensoTower01"
-        ],
-        "requiredResearch": [
-            "R-Sys-Sensor-Tower01",
-            "R-Defense-WallUpgrade02"
-        ],
-        "researchPoints": 1200,
-        "researchPower": 37,
-        "resultStructures": [
-            "Sys-SensoTower02"
-        ],
-        "statID": "Sys-SensoTower02"
-    },
     "R-Sys-VTOLCBS-Tower01": {
         "iconID": "IMAGE_RES_SYSTEMTECH",
         "id": "R-Sys-VTOLCBS-Tower01",
@@ -4358,7 +4363,7 @@
         "requiredResearch": [
 			"R-Vehicle-Body01"
         ],
-        "researchPoints": 6000,
+        "researchPoints": 1200,
         "researchPower": 187,
         "resultComponents": [
             "Body2SUP"
@@ -4469,7 +4474,7 @@
         "keyTopic": 1,
         "msgName": "RES_V_P_V1",
         "name": "VTOL Propulsion",
-        "researchPoints": 2100,
+        "researchPoints": 1400,
         "researchPower": 187,
         "resultComponents": [
             "V-Tol"
@@ -4631,7 +4636,7 @@
             "R-Wpn-MG-ROF01",
             "R-Wpn-AAGun-Damage01"
         ],
-        "researchPoints": 3600,
+        "researchPoints": 900,
         "researchPower": 112,
         "results": [
             {
@@ -4734,7 +4739,7 @@
         "keyTopic": 1,
         "msgName": "RES_W_AA3",
         "name": "Hurricane AA Turret",
-        "researchPoints": 3600,
+        "researchPoints": 1200,
         "researchPower": 112,
         "resultComponents": [
             "QuadMg1AAGun"
@@ -4893,7 +4898,7 @@
              "R-Wpn-Cannon-Accuracy01",
              "R-Wpn-Cannon-Damage04"
         ],
-        "researchPoints": 4800,
+        "researchPoints": 1400,
         "researchPower": 150,
         "results": [
             {
@@ -5011,7 +5016,7 @@
         "name": "Cannon Autoloader",
         "requiredResearch": [
             "R-Wpn-Cannon1Mk1",
-            "R-Wpn-MG-ROF01"
+            "R-Wpn-Cannon-Accuracy01"
         ],
         "researchPoints": 1200,
         "researchPower": 125,
@@ -5037,6 +5042,7 @@
     "R-Wpn-Cannon-ROF02": {
         "iconID": "IMAGE_RES_WEAPONTECH",
         "id": "R-Wpn-Cannon-ROF02",
+        "keyTopic": 1,
         "name": "Cannon Autoloader Mk2",
         "requiredResearch": [
             "R-Wpn-Cannon-ROF01",

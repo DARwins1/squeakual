@@ -471,7 +471,7 @@
             "New Defensive Structure Available",
             "Armored hardpoint with Inferno flamer",
             "Automatically targets enemies within sensor range",
-            "Defensive Strength: High"
+            "Defensive Strength: Hard"
         ]
     },
     "RES_WT12_HAT": {
@@ -482,7 +482,7 @@
             "New Defensive Structure Available",
             "Armored hardpoint with Tank Killer AT missile",
             "Automatically targets enemies within sensor range",
-            "Defensive Strength: High"
+            "Defensive Strength: Hard"
         ]
     },
     "RES_WT7_RMG": {
@@ -493,7 +493,7 @@
             "New Defensive Structure Available",
             "Armored hardpoint with Assault Gun",
             "Automatically targets enemies within sensor range",
-            "Defensive Strength: High"
+            "Defensive Strength: Hard"
         ]
     },
     "RES_WT8_RC": {
@@ -504,7 +504,7 @@
             "New Defensive Structure Available",
             "Armored hardpoint with Assault Cannon",
             "Automatically targets enemies within sensor range",
-            "Defensive Strength: High"
+            "Defensive Strength: Hard"
         ]
     },
     "RES_W_AA1": {

@@ -8,13 +8,24 @@
 //;; Queues up a dialogue, consisting of the text to be displayed, 
 //;; the delay, and the sound file to be played (if any).
 //;;
-//;; @param {string} text
+//;; @param {string|Object|Object[]} text
 //;; @param {number} delay
 //;; @param {string} sound
 //;; @returns {void}
 //;;
 function camQueueDialogue(text, delay, sound)
 {
+	if (text instanceof Array)
+	{
+		for (const diaInfo of text)
+		{
+			const text = diaInfo.text;
+			const delay = diaInfo.delay;
+			const sound = diaInfo.sound;
+			camQueueDialogue(text, delay, sound)
+		}
+	}	
+
 	if (!camIsString(text))
 	{
 		// Got an object instead of 3 different inputs
@@ -23,23 +34,6 @@ function camQueueDialogue(text, delay, sound)
 		text = text.text;
 	}
 	__camQueuedDialogue.push({text: text, time: gameTime + delay, sound: sound})
-}
-
-//;; ## camQueueDialogues(dialogues)
-//;; Takes an array of dialogues and queues them up.
-//;;
-//;; @param {object[]} dialogue
-//;; @returns {void}
-//;;
-function camQueueDialogues(dialogues)
-{
-	for (const diaInfo of dialogues)
-	{
-		const text = diaInfo.text;
-		const delay = diaInfo.delay;
-		const sound = diaInfo.sound;
-		camQueueDialogue(text, delay, sound)
-	}
 }
 
 //////////// privates
@@ -58,7 +52,17 @@ function __camPlayScheduledDialogues()
 			console(diaInfo.text);
 			if (camDef(diaInfo.sound))
 			{
-				playSound(diaInfo.sound);
+				if (diaInfo.sound instanceof Array)
+				{
+					for (sound of diaInfo.sound)
+					{
+						__camPlayDialogueSound(sound);
+					}
+				}
+				else
+				{
+					__camPlayDialogueSound(diaInfo.sound);
+				}
 			}
 		}
 		else
@@ -68,4 +72,22 @@ function __camPlayScheduledDialogues()
 		}
 	}
 	__camQueuedDialogue = newQueue;
+}
+
+// Simple wrapper for playSound() that replaces CAM_RADIO_CLICK with a random radio click sound
+function __camPlayDialogueSound(sound)
+{
+	if (sound === CAM_RADIO_CLICK)
+	{
+		const radioClicks = [
+			cam_sounds.radio.click1, cam_sounds.radio.click2,
+			cam_sounds.radio.click3, cam_sounds.radio.click4,
+			cam_sounds.radio.click5, cam_sounds.radio.click6,
+		];
+		playSound(radioClicks[camRand(radioClicks.length)]);
+	}
+	else
+	{
+		playSound(sound);
+	}
 }

@@ -44,20 +44,34 @@ const camAct1StartResearch = camRec2StartResearch.concat(camRec2PrologueResearch
 // Used to grant research to allies on A1L2
 const camA1L2AllyResearch = camAct1StartResearch.concat([
 	// A1L1
-	"R-Wpn-MG-ROF01", "R-Wpn-Cannon-ROF01", "R-Wpn-Rocket-ROF01",
 	"R-Wpn-Mortar-ROF01", "R-Wpn-Flamer-ROF01", "R-Wpn-Flamer-Damage02",
-	"R-Wpn-Rocket02-MRL", "R-Defense-MRL", "R-Wpn-Rocket-Damage02",
-	"R-Wpn-Cannon-Damage02",
+	"R-Wpn-Rocket02-MRL", "R-Defense-MRL", 
 ]);
 
 // Used to grant research to allies on A1L4
 const camA1L4AllyResearch = camA1L2AllyResearch.concat([
 	// A1L2
+	"R-Wpn-Cannon-Accuracy01", "R-Wpn-Cannon-ROF01", "R-Wpn-Cannon-Damage02",
+	"R-Wpn-Rocket-Accuracy01", "R-Wpn-Rocket-ROF01", "R-Wpn-Rocket-Damage02",
 	"R-Struc-PowerModuleMk1", "R-Vehicle-Prop-VTOL", "R-Struc-VTOLFactory",
 	"R-Struc-VTOLPad", "R-Sys-VTOLStrike-Turret01", "R-Sys-VTOLStrike-Tower01",
+	"R-Wpn-MG-ROF01",
 	// A1L3
 	"R-Vehicle-Prop-Halftracks", "R-Wpn-MG3Mk1", "R-Wpn-MG-Damage03",
-	"R-Defense-Tower01", "R-Cyborg-Wpn-HvyMG",
+	"R-Defense-Tower01", "R-Cyborg-Wpn-HvyMG", "R-Wpn-Flamer-Damage03",
+	"R-Wpn-Mortar-Damage02",
 ]);
+
+const camAct2StartResearch = [
+	// A1L5
+	"R-Vehicle-Body02", "R-Vehicle-Metals02", "R-Cyborg-Metals02",
+	"R-Wpn-AAGun03", "R-Defense-AASite-QuadMg1", "R-Struc-CommandRelay",
+	"R-Comp-CommandTurret01", "R-Wpn-Rocket01-LtAT", "R-Cyborg-Wpn-Rocket",
+	"R-Defense-Pillbox06", "R-Defense-LancerTower", "R-Defense-WallTower06",
+	"R-Defense-HardcreteWall", "R-Defense-HardcreteGate", "R-Defense-MortarPit",
+	"R-Defense-Pillbox01", "R-Defense-Pillbox04", "R-Defense-Pillbox05", 
+	"R-Defense-WallTower01", "R-Defense-WallTower02", "R-Defense-WallUpgrade01",
+	"R-Struc-Materials01",
+].concat(camA1L4AllyResearch);
 
 //...

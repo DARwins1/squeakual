@@ -17,9 +17,9 @@ const transportEntryPosGolf = { x: 62, y: 20 };
 const mis_scavResearch = [
 	"R-Wpn-MG-Damage02", "R-Wpn-Rocket-Damage02", "R-Wpn-Mortar-Damage01", 
 	"R-Wpn-Flamer-Damage02", "R-Wpn-Cannon-Damage02", "R-Wpn-MG-ROF01",
-	"R-Wpn-Rocket-ROF02", "R-Wpn-Mortar-ROF01", "R-Wpn-Flamer-ROF02",
-	"R-Wpn-Cannon-ROF02", "R-Vehicle-Metals02", "R-Struc-Materials02", 
-	"R-Defense-WallUpgrade02",
+	"R-Wpn-Rocket-ROF01", "R-Wpn-Mortar-ROF01", "R-Wpn-Flamer-ROF02",
+	"R-Wpn-Cannon-ROF01", "R-Vehicle-Metals01", "R-Struc-Materials02", 
+	"R-Defense-WallUpgrade02", "R-Wpn-Flamer-Damage02",
 ];
 
 var powerCaptured;
@@ -482,6 +482,11 @@ function eventStartLevel()
 	setAlliance(MIS_TEAM_FOXTROT, MIS_TEAM_GOLF, true);
 
 	// TODO: Do we need artifacts?
+	camSetArtifacts({
+		"scavInnerFactory1": { tech: "R-Wpn-MG-ROF01" }, // Chaingun Upgrade
+		"scavInnerFactory2": { tech: "R-Wpn-Cannon-Accuracy01" }, // Cannon Laser Rangefinder
+		"scavInnerFactory3": { tech: "R-Wpn-Rocket-Accuracy01" }, // Stabilized Rockets
+	});
 
 	camSetEnemyBases({
 		"charlieLZBase": {

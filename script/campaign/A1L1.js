@@ -17,19 +17,18 @@ var playerColour;
 
 const mis_orangeScavResearch = [
 	"R-Wpn-MG-Damage02", "R-Wpn-Mortar-Damage01", "R-Wpn-Cannon-Damage02",
-	"R-Wpn-MG-ROF01", "R-Wpn-Mortar-ROF01", "R-Wpn-Cannon-ROF01",
-	"R-Vehicle-Metals01", "R-Struc-Materials01", "R-Defense-WallUpgrade01",
+	"R-Wpn-MG-ROF01", "R-Wpn-Mortar-ROF01", "R-Vehicle-Metals01",
+	"R-Struc-Materials01", "R-Defense-WallUpgrade01",
 ];
 const mis_pinkScavResearch = [
-	"R-Wpn-MG-Damage02", "R-Wpn-Rocket-Damage02", "R-Wpn-Cannon-ROF01",
-	"R-Wpn-Cannon-Damage02", "R-Wpn-MG-ROF01", "R-Wpn-Rocket-ROF01",
+	"R-Wpn-MG-Damage02", "R-Wpn-Rocket-Damage02", "R-Wpn-Cannon-Damage02",
 	"R-Vehicle-Metals01", "R-Struc-Materials01", "R-Defense-WallUpgrade01",
 ];
 const mis_redScavResearch = [
 	"R-Wpn-MG-Damage02", "R-Wpn-Rocket-Damage02", "R-Wpn-Flamer-ROF02",
-	"R-Wpn-Cannon-Damage02", "R-Wpn-MG-ROF01", "R-Wpn-Rocket-ROF02",
-	"R-Wpn-Cannon-ROF02", "R-Vehicle-Metals01", "R-Struc-Materials01",
-	"R-Defense-WallUpgrade01",
+	"R-Wpn-Cannon-Damage02", "R-Wpn-MG-ROF01", "R-Wpn-Rocket-ROF01",
+	"R-Wpn-Cannon-ROF01", "R-Vehicle-Metals01", "R-Wpn-Flamer-Damage02",
+	"R-Defense-WallUpgrade01", "R-Struc-Materials01",
 ];
 
 // The chances of a helicopter actually using this is incredibly low
@@ -166,6 +165,11 @@ function eventTransporterLanded(transport)
 		if (transporterIndex == 0)
 		{
 			camCallOnce("ambushLZ");
+			camQueueDialogue([
+				{text: "CLAYDE: TEST TEXT!", delay: 0, sound: CAM_RADIO_CLICK},
+				{text: "CLAYDE: TEST TEXT DELAYED", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
+				{text: "CLAYDE: TEST TEXT DELAYED MULTISOUND", delay: camSecondsToMilliseconds(3), sound: [CAM_RADIO_CLICK, CAM_RADIO_CLICK, CAM_RADIO_CLICK]},
+			]);
 		}
 
 		transporterIndex += 1;
@@ -418,8 +422,8 @@ function eventStartLevel()
 
 	camSetArtifacts({
 		"redMiniPit": { tech: "R-Wpn-Rocket02-MRL" }, // Mini-Rocket Array
-		"orangeFactory1": { tech: "R-Wpn-MG-ROF01" }, // Chaingun Upgrade
-		"redFactory2": { tech: "R-Wpn-Flamer-Damage02" }, // High Temperature Flamer Gel Mk2
+		"orangeFactory1": { tech: "R-Wpn-Mortar-ROF01" }, // Mortar Autoloader
+		"redFactory2": { tech: "R-Wpn-Flamer-ROF01" }, // Flamer Autoloader
 	});
 
 	setMissionTime(camChangeOnDiff(camHoursToSeconds(1)));
@@ -590,6 +594,6 @@ function eventStartLevel()
 	queue("groupPatrol", camChangeOnDiff(camMinutesToMilliseconds(0.5)));
 	queue("orangeAggro", camChangeOnDiff(camMinutesToMilliseconds(8)));
 	queue("pinkAggro", camChangeOnDiff(camMinutesToMilliseconds(12)));
-	queue("redAggro", camChangeOnDiff(camMinutesToMilliseconds(18)));
-	queue("heliAttack", camChangeOnDiff(camMinutesToMilliseconds(18)));
+	queue("redAggro", camChangeOnDiff(camMinutesToMilliseconds(16)));
+	queue("heliAttack", camChangeOnDiff(camMinutesToMilliseconds(16)));
 }

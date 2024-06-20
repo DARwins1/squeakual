@@ -86,7 +86,10 @@
         "text": [
             "New Cyborg Available",
             "Armed with Lance Anti-Tank rocket",
-            "Body Points: Medium",
+            "Effective against: Vehicles",
+            "Ineffective against: Cyborgs and structures",
+            "Greater accuracy at longer ranges",
+            "Can attack aerial targets",
             "Requires Cyborg factory to produce"
         ]
     },
@@ -120,7 +123,7 @@
             "New Defensive Structure Available",
             "Armored bunker with Machinegun",
             "Automatically targets enemies within sensor range",
-            "Defensive Strength: High"
+            "Defensive Strength: Bunker"
         ]
     },
     "RES_DF_WU1": {
@@ -215,7 +218,7 @@
             "New Defensive Structure Available",
             "Armored bunker with Lancer AT rocket",
             "Automatically targets enemies within sensor range",
-            "Defensive Strength: High"
+            "Defensive Strength: Bunker"
         ]
     },
     "RES_PB_FL": {
@@ -226,7 +229,7 @@
             "New Defensive Structure Available",
             "Armored bunker with Flamer",
             "Automatically targets enemies within sensor range",
-            "Defensive Strength: High"
+            "Defensive Strength: Bunker"
         ]
     },
     "RES_PB_LC": {
@@ -237,7 +240,7 @@
             "New Defensive Structure Available",
             "Armored bunker with Light Cannon",
             "Automatically targets enemies within sensor range",
-            "Defensive Strength: High"
+            "Defensive Strength: Bunker"
         ]
     },
     "RES_POWMD1": {
@@ -514,7 +517,7 @@
             "New Defensive Structure Available",
             "Armored hardpoint with Light Cannon",
             "Automatically targets enemies within sensor range",
-            "Defensive Strength: High"
+            "Defensive Strength: Hard"
         ]
     },
     "RES_WT3_MC": {
@@ -525,7 +528,7 @@
             "New Defensive Structure Available",
             "Armored hardpoint with Medium Cannon",
             "Automatically targets enemies within sensor range",
-            "Defensive Strength: High"
+            "Defensive Strength: Hard"
         ]
     },
     "RES_WT4_HC": {
@@ -536,7 +539,7 @@
             "New Defensive Structure Available",
             "Armored hardpoint with Heavy Cannon",
             "Automatically targets enemies within sensor range",
-            "Defensive Strength: High"
+            "Defensive Strength: Hard"
         ]
     },
     "RES_W_CN_D1": {

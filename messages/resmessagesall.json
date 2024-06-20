@@ -136,10 +136,12 @@
         "imdName": "MICAPSUL.PIE",
         "sequenceName": "res_weapons.ogg",
         "text": [
-            "New Rocket Available",
-            "Anti-tank rocket",
-            "Best Targets: Vehicles",
-            "Body Points: Very Low"
+            "New Weapon Turret Available",
+            "Dual-mounted anti-tank rocket launchers",
+            "Effective against: Vehicles",
+            "Ineffective against: Cyborgs and structures",
+            "Greater accuracy at longer ranges",
+            "Obsoletes Sarissa"
         ]
     },
     "RES_W_SRK_AC3": {
@@ -330,7 +332,7 @@
             "New Defensive Structure Available",
             "Armored bunker with Assault Gun",
             "Automatically targets enemies within sensor range",
-            "Defensive Strength: High"
+            "Defensive Strength: Bunker"
         ]
     },
     "RES_EMP_LANTOW": {
@@ -341,7 +343,7 @@
             "New Defensive Structure Available",
             "Armored guard tower with Lancer AT Rocket",
             "Automatically targets enemies within sensor range",
-            "Defensive Strength: Medium"
+            "Defensive Strength: Hard"
         ]
     },
     "RES_EMP_PULSETOW": {
@@ -352,7 +354,7 @@
             "New Defensive Structure Available",
             "Armored guard tower with Pulse Laser",
             "Automatically targets enemies within sensor range",
-            "Defensive Strength: Medium"
+            "Defensive Strength: Hard"
         ]
     },
     "RES_DEF_ASSTOW": {
@@ -363,7 +365,7 @@
             "New Defensive Structure Available",
             "Armored guard tower with Assault Gun",
             "Automatically targets enemies within sensor range",
-            "Defensive Strength: Medium"
+            "Defensive Strength: Hard"
         ]
     },
     "RES_REPTUHVY": {

@@ -268,6 +268,14 @@ const cam_sounds = {
 		},
 		countdown: "10to1.ogg",
 	},
+	radio: {
+		click1: "radclik1.ogg",
+		click2: "radclik2.ogg",
+		click3: "radclik3.ogg",
+		click4: "radclik4.ogg",
+		click5: "radclik5.ogg",
+		click6: "radclik6.ogg",
+	},
 	reinforcementsAreAvailable: "pcv440.ogg",
 	objectiveCaptured: "pcv621.ogg",
 	enemyEscaping: "pcv632.ogg",
@@ -286,6 +294,7 @@ var __camEnemyBases;
 var __camNumEnemyBases;
 
 //dialogue
+const CAM_RADIO_CLICK = "RADIO_CLICK";
 var __camQueuedDialogue;
 
 //reinforcements
@@ -414,3 +423,4 @@ include(__CAM_INCLUDE_PATH + "vtol.js");
 include(__CAM_INCLUDE_PATH + "nexus.js");
 include(__CAM_INCLUDE_PATH + "group.js");
 include(__CAM_INCLUDE_PATH + "video.js");
+include(__CAM_INCLUDE_PATH + "dialogue.js");
