@@ -195,7 +195,7 @@ function ambushLZ()
 
 	// Dialogue about scavenger encampments...
 	camQueueDialogue([
-		{text: "LIEUTENANT: Sir, we have confirmed reports of scavenger in our AO.", delay: camSecondsToMilliseconds(8), sound: CAM_RADIO_CLICK},
+		{text: "LIEUTENANT: Sir, we have confirmed reports of scavengers in our AO.", delay: camSecondsToMilliseconds(8), sound: CAM_RADIO_CLICK},
 		{text: "LIEUTENANT: Multiple encampments within close proximity of several LZs.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
 		{text: "CLAYDE: That's to be expected, this city used to hold millions, after all.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
 		{text: "CLAYDE: All Commanders be advised; the Council has authorized the use of lethal force.", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},

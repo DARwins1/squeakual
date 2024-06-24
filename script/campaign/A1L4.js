@@ -923,7 +923,7 @@ function eventStartLevel()
 	queue("vtolAttack", camMinutesToMilliseconds(20));
 	queue("setPhaseTwo", camMinutesToMilliseconds(22));
 
-	setTimer("collectiveAttackWaves", camChangeOnDiff(camSecondsToMilliseconds(45)));
+	setTimer("collectiveAttackWaves", camChangeOnDiff(camSecondsToMilliseconds(50)));
 	setTimer("sendDeltaTransporter", camChangeOnDiff(camMinutesToMilliseconds(2.5), true));
 	setTimer("sendCollectiveTransporter", camChangeOnDiff(camMinutesToMilliseconds(2)));
 

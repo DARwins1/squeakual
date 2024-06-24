@@ -23,7 +23,7 @@ function eventStartLevel()
 		{text: "CLAYDE: Lieutenant, have you scouted NASDA Central? What are we up against?", delay: camSecondsToMilliseconds(2), sound: CAM_RADIO_CLICK},
 		{text: "LIEUTENANT: Yes sir. We've done some limited aerial reconnaissance using our transporters.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
 		{text: "LIEUTENANT: But to avoid alerting any inhabitants, I have avoided sending our transports too close.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "LIEUTENANT: Our observation are limited, but we've detected a large scavenger presence around NASDA Central.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
+		{text: "LIEUTENANT: Our observations are limited, but we've detected a large scavenger presence around NASDA Central.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
 		{text: "LIEUTENANT: It seems one of the local factions has been using it as their base of operations.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
 		{text: "CLAYDE: I see.", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
 		{text: "CLAYDE: Still, I'm sure it's nothing that we can't handle.", delay: camSecondsToMilliseconds(2), sound: CAM_RADIO_CLICK},

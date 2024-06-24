@@ -217,7 +217,7 @@ function camSetBaseAffiliation(baseLabel, friendly)
 function camAllEnemyBasesEliminated()
 {
 	// FIXME: O(n) lookup here
-	return __camNumEnemyBases === Object.keys(__camEnemyBases).length;
+	return __camNumEnemyBases >= Object.keys(__camEnemyBases).length;
 }
 
 //;; ## camBaseIsEliminated(baseLabel)

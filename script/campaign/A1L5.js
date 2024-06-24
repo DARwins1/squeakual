@@ -251,8 +251,8 @@ function camEnemyBaseDetected_colMainBase()
 	// Dialogue about the Collective
 	camQueueDialogue([
 		{text: "LIEUTENANT: How did we not see this coming?", delay: camSecondsToMilliseconds(2), sound: CAM_RADIO_CLICK},
-		{text: "LIEUTENANT: How were we so blindsided by the Collective?", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "LIEUTENANT: Hopefully there's still time to fix things...", delay: camSecondsToMilliseconds(5), sound: CAM_RADIO_CLICK},
+		{text: "LIEUTENANT: Were we so focused on our goal that we..?", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
+		{text: "LIEUTENANT: Hopefully there's still time to fix things.", delay: camSecondsToMilliseconds(5), sound: CAM_RADIO_CLICK},
 	]);
 }
 

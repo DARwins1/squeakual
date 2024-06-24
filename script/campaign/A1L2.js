@@ -121,7 +121,7 @@ camAreaEvent("vtolFactoryCaptureZone", function(droid)
 			{text: "CLAYDE: Lieutenant, what am I looking at here?", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
 			{text: "LIEUTENANT: That..!", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
 			{text: "LIEUTENANT: THAT is a Pre-Collapse VTOL Factory!", delay: camSecondsToMilliseconds(2), sound: CAM_RADIO_CLICK},
-			{text: "LIEUTENANT: I never thought I'd see one of these again!.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
+			{text: "LIEUTENANT: I never thought I'd see one of these again!", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
 			{text: "CLAYDE: Slow down, Lieutenant.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
 			{text: "LIEUTENANT: Sorry, sir.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
 			{text: "LIEUTENANT: These scavengers were likely using this to assemble and store their helicopters.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
