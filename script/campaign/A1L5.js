@@ -353,7 +353,7 @@ function eventStartLevel()
 		factories: ["colFactory"], // Only refill from this factory
 	}, CAM_ORDER_DEFEND, {pos: camMakePos("colRepairPos")});
 	// Collective trucks
-	const colBaseStructs = camAreaToStructSet("colBase")
+	const colBaseStructs = camAreaToStructSet("colBase", CAM_THE_COLLECTIVE);
 	colTruckJob1 = camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colMainBase",
 		respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
