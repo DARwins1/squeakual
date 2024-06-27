@@ -365,7 +365,7 @@ function eventTransporterLanded(transport)
 
 	// Assign any trucks/engineers
 	let truckIndex = 0;
-	for (const job in truckJobs)
+	for (const job of truckJobs)
 	{
 		// Check if we have an open job and an available truck
 		if (!camDef(camGetTruck(job)) && camDef(transTrucks[truckIndex]))

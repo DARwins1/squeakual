@@ -30,7 +30,7 @@
 		}
 	],
 	"contents": [
-		"Units gain experience when they successfully dispatch enemies.",
+		"Units gain experience by dealing damage to enemies.",
 		"",
 		"A higher experience level means that a unit is more accurate, moves faster, and takes less damage.",
 		"",

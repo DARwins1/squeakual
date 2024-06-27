@@ -178,6 +178,7 @@
         "buildPower": 20,
         "designable": 1,
         "droidType": "DROID_SENSOR",
+        "hitpoints": 200,
         "id": "Sys-VstrikeTurret01",
         "location": "TURRET",
         "mountModel": "TRMECM2.PIE",
