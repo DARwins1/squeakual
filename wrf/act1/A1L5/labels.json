@@ -191,62 +191,6 @@
 
 
 	"object_0": {
-		"label": "heliTower2",
-		"id": 98,
-		"player": 2,
-		"type": 1
-	},
-
-
-	"object_1": {
-		"label": "scavFactory2",
-		"id": 52,
-		"player": 2,
-		"type": 1
-	},
-
-
-	"object_2": {
-		"label": "colCommandRelay",
-		"id": 4,
-		"player": 2,
-		"type": 1
-	},
-
-
-	"object_3": {
-		"label": "heliTower1",
-		"id": 97,
-		"player": 2,
-		"type": 1
-	},
-
-
-	"object_4": {
-		"label": "colResearchFacility",
-		"id": 7,
-		"player": 2,
-		"type": 1
-	},
-
-
-	"object_5": {
-		"label": "colCommandCenter",
-		"id": 10,
-		"player": 2,
-		"type": 1
-	},
-
-
-	"object_6": {
-		"label": "scavFactory1",
-		"id": 109,
-		"player": 2,
-		"type": 1
-	},
-
-
-	"object_7": {
 		"label": "colFactory",
 		"id": 2,
 		"player": 2,
@@ -254,7 +198,39 @@
 	},
 
 
-	"object_8": {
+	"object_1": {
+		"label": "heliTower1",
+		"id": 97,
+		"player": 2,
+		"type": 1
+	},
+
+
+	"object_2": {
+		"label": "colAASite",
+		"id": 47,
+		"player": 2,
+		"type": 1
+	},
+
+
+	"object_3": {
+		"label": "colCommandCenter",
+		"id": 10,
+		"player": 2,
+		"type": 1
+	},
+
+
+	"object_4": {
+		"label": "scavFactory1",
+		"id": 109,
+		"player": 2,
+		"type": 1
+	},
+
+
+	"object_5": {
 		"label": "scavFactory3",
 		"id": 1,
 		"player": 2,
@@ -262,7 +238,15 @@
 	},
 
 
-	"object_9": {
+	"object_6": {
+		"label": "colCommandRelay",
+		"id": 4,
+		"player": 2,
+		"type": 1
+	},
+
+
+	"object_7": {
 		"label": "scavFactory4",
 		"id": 53,
 		"player": 2,
@@ -270,9 +254,25 @@
 	},
 
 
+	"object_8": {
+		"label": "scavFactory2",
+		"id": 52,
+		"player": 2,
+		"type": 1
+	},
+
+
+	"object_9": {
+		"label": "colResearchFacility",
+		"id": 7,
+		"player": 2,
+		"type": 1
+	},
+
+
 	"object_10": {
-		"label": "colAASite",
-		"id": 47,
+		"label": "heliTower2",
+		"id": 98,
 		"player": 2,
 		"type": 1
 	},

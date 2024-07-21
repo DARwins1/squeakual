@@ -340,17 +340,18 @@ function camAreaToStructSet(area, player)
 		// Area label
 		a = getObject(area);
 	}
+
+	const __PLAYER_FILTER = camDef(player) ? player : ALL_PLAYERS;
 	
-	const structures = enumArea(a.x, a.y, a.x2, a.y2, player, false).filter((obj) => (obj.type === STRUCTURE));
+	const structures = enumArea(a.x, a.y, a.x2, a.y2, __PLAYER_FILTER, false).filter((obj) => (obj.type === STRUCTURE));
 	const structSet = [];
 
 	for (const structure of structures)
 	{
 		// Note: The spelling of ".Id" instead of ".id" here is correct!
-		structSet.push({stat: camGetCompStats(structure.name, "Building").Id, x: structure.x, y: structure.y/*, rot: structure.direction*/})
+		structSet.push({stat: camGetCompStats(structure.name, "Building").Id, 
+			x: structure.x, y: structure.y, rot: structure.direction, mods: structure.modules});
 	}
-
-	// TODO: Check structures for modules
 
 	return structSet;
 }

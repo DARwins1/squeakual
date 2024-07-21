@@ -106,6 +106,7 @@ flatat: { body: "ScavTruckBody", prop: "BaBaProp", weap: ["RustRocket-Pod", "Rus
 gbjeep: { body: "B2RKJeepBody", prop: "BaBaProp", weap: "BabaMiniMortar" }, // Grenade Jeep
 helpod: { body: "ScavengerHvyChopper", prop: "Helicopter", weap: "RustRocket-Pod-VTOL" }, // MRP Helicopter
 monfire: { body: "MonsterFireBody", prop: "tracked01", weap: "RustFlame1Mk1" }, // Monster Fire Truck
+crane: { body: "ScaveCraneBody", prop: "HalfTrack", weap: "ScavCrane" }, // Scavenger Crane (Truck)
 
 // Infested Units:
 

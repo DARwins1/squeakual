@@ -32,7 +32,8 @@ function camScriptedVictory()
 
 //;; ## camNextLevel(nextLevel)
 //;;
-//;; A wrapper around `loadLevel()`. Remembers to give bonus power for completing the mission faster.
+//;; A wrapper around `loadLevel()`. 
+//;; Remembers to give bonus power for completing the mission faster (if not in Timerless mode).
 //;;
 //;; @param {string} nextLevel
 //;; @returns {void}
@@ -41,27 +42,22 @@ function camNextLevel(nextLevel)
 {
 	if (__camNeedBonusTime)
 	{
-		let bonusTime = getMissionTime();
-		if (difficulty <= MEDIUM)
+		if (!tweakOptions.rec_timerlessMode)
 		{
-			bonusTime = Math.floor(bonusTime * 0.75);
+			// Calculate bonus power based on remaining mission time
+			let bonusTime = getMissionTime();
+			if (bonusTime > 0)
+			{
+				camTrace("Bonus time", bonusTime);
+				extraPowerTime(bonusTime);
+			}
 		}
-		if (bonusTime > 0)
+		else
 		{
-			let bonus = 110;
-			if (difficulty === HARD)
-			{
-				bonus = 105;
-			}
-			else if (difficulty === INSANE)
-			{
-				bonus = 100;
-			}
-			camTrace("Bonus time", bonusTime);
-			setPowerModifier(bonus); // Bonus percentage for completing fast
-			extraPowerTime(bonusTime);
-			setPowerModifier(100);
+			// In Timerless mode, just set the player to max power at the end of the level
+			setPower(__camTimerlessPowerLimits[difficulty], CAM_HUMAN_PLAYER);
 		}
+		
 	}
 	camBreakAlliances();
 	//Set these limits again for the home map before exiting this mission
@@ -135,7 +131,7 @@ function camSetStandardWinLossConditions(kind, nextLevel, data)
 			break;
 		case CAM_VICTORY_TIMEOUT:
 			__camWinLossCallback = CAM_VICTORY_TIMEOUT;
-			__camNeedBonusTime = false;
+			__camNeedBonusTime = true;
 			__camDefeatOnTimeout = false;
 			__camVictoryData = data;
 			setReinforcementTime((__camVictoryData.reinforcements > -1) ? __camVictoryData.reinforcements : -1);
@@ -143,7 +139,7 @@ function camSetStandardWinLossConditions(kind, nextLevel, data)
 			break;
 		case CAM_VICTORY_SCRIPTED:
 			__camWinLossCallback = CAM_VICTORY_SCRIPTED;
-			__camNeedBonusTime = false;
+			__camNeedBonusTime = true;
 			__camDefeatOnTimeout = false;
 			__camVictoryData = data;
 			useSafetyTransport(false);

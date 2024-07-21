@@ -122,41 +122,37 @@ function collectiveAttackWaves()
 	{
 		waveEntrances.push("colEntrance1");
 	}
-	if (waveIndex >= 3)
+	if (waveIndex >= 4)
 	{
 		waveEntrances.push("colEntrance2");
 	}
-	if (waveIndex >= 5)
+	if (waveIndex >= 7)
 	{
 		waveEntrances.push("colEntrance3");
 	}
-	if (waveIndex >= 7)
+	if (waveIndex >= 11)
 	{
 		waveEntrances.push("colEntrance4");
 	}
-	if (waveIndex >= 9)
+	if (waveIndex >= 15)
 	{
 		waveEntrances.push("colEntrance5");
 	}
-	if (waveIndex >= 11)
+	if (waveIndex >= 19)
 	{
 		waveEntrances.push("colEntrance6");
 	}
-	if (waveIndex >= 13)
+	if (waveIndex >= 24)
 	{
 		waveEntrances.push("colEntrance7");
 	}
-	if (waveIndex >= 15)
+	if (waveIndex >= 29)
 	{
 		waveEntrances.push("colEntrance8");
 	}
-	if (waveIndex >= 17)
+	if (waveIndex >= 34)
 	{
 		waveEntrances.push("colEntrance9");
-	}
-	if (waveIndex >= 19)
-	{
-		waveEntrances.push("colEntrance10");
 	}
 
 	// Determine the number of separate groups to spawn at once
@@ -406,6 +402,7 @@ function eventStartLevel()
 	// Place the satellite uplink from A1L3
 	const NASDA = 1;
 	setAlliance(CAM_HUMAN_PLAYER, NASDA, true);
+	setAlliance(CAM_THE_COLLECTIVE, NASDA, true);
 	addStructure("UplinkCentre", NASDA, 108 * 128, 50 * 128);
 
 	// Placeholder for the actual briefing sequence

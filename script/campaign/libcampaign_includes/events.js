@@ -159,6 +159,7 @@ function cam_eventStartLevel()
 	setTimer("__camPlayScheduledDialogues", camSecondsToMilliseconds(.1));
 	queue("__camGrantSpecialResearch", camSecondsToMilliseconds(6));
 	queue("__camEnableGuideTopics", camSecondsToMilliseconds(0.1)); // delayed to handle when mission scripts add research
+	queue("__camResetPower", camSecondsToMilliseconds(1));
 }
 
 function cam_eventDroidBuilt(droid, structure)
@@ -423,31 +424,6 @@ function cam_eventGameLoaded()
 {
 	receiveAllEvents(true);
 	__camSaveLoading = true;
-	const scavKevlarMissions = [
-		"CAM_1CA", "SUB_1_4AS", "SUB_1_4A", "SUB_1_5S", "SUB_1_5",
-		"CAM_1A-C", "SUB_1_7S", "SUB_1_7", "SUB_1_DS", "CAM_1END", "SUB_2_5S"
-	];
-
-	//Need to set the scavenger kevlar vests when loading a save from later Alpha
-	//missions or else it reverts to the original texture.
-	for (let i = 0, l = scavKevlarMissions.length; i < l; ++i)
-	{
-		const __MISSION = scavKevlarMissions[i];
-		if (__camNextLevel === __MISSION)
-		{
-			if (tilesetType === "ARIZONA")
-			{
-				replaceTexture("page-7-barbarians-arizona.png",
-							"page-7-barbarians-kevlar.png");
-			}
-			else if (tilesetType === "URBAN")
-			{
-				replaceTexture("page-7-barbarians-arizona.png",
-							"page-7-barbarians-kevlar.png");
-			}
-			break;
-		}
-	}
 
 	// Reset the fog colour to the correct value
 	setFogColour(__camFogR, __camFogG, __camFogB);
@@ -469,6 +445,7 @@ function cam_eventGameLoaded()
 	__camCheatMode = false;
 
 	__camSaveLoading = false;
+	queue("__camResetPower", camSecondsToMilliseconds(1));
 }
 
 //Plays Nexus sounds if nexusActivated is true.

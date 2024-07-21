@@ -1169,3 +1169,30 @@ function camSetDroidExperience(droid)
 
 	setDroidExperience(droid, exp);
 }
+
+// This used to be in `rules.js``
+function __camResetPower()
+{	
+	// Rate changes by 15% per difficulty level, with Normal at 100%
+	let powerProductionRate = 100 + (15 * (difficulty - 2));
+	
+	let powerLimit;
+	if (!tweakOptions.rec_timerlessMode)
+	{
+		powerLimit = __camPowerLimits[difficulty];
+	}
+	else
+	{
+		// Enforce stricter power limits on timerless mode
+		powerLimit = __camTimerlessPowerLimits[difficulty];
+	}
+
+	// TODO: Increase the power limits as the player progresses through the acts?
+
+	setPowerModifier(powerProductionRate, CAM_HUMAN_PLAYER);
+	setPowerStorageMaximum(powerLimit, CAM_HUMAN_PLAYER);
+	if (playerPower(CAM_HUMAN_PLAYER) >= powerLimit)
+	{
+		setPower(powerLimit - 1, CAM_HUMAN_PLAYER);
+	}
+}

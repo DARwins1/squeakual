@@ -37,7 +37,7 @@
 
 	"position_6": {
 		"label": "orangeAssembly1",
-		"pos": [9418, 1212]
+		"pos": [9418, 1012]
 	},
 
 
@@ -274,14 +274,6 @@
 
 
 	"object_1": {
-		"label": "redFactory4",
-		"id": 3,
-		"player": 6,
-		"type": 1
-	},
-
-
-	"object_2": {
 		"label": "heliTower1",
 		"id": 71,
 		"player": 6,
@@ -289,7 +281,7 @@
 	},
 
 
-	"object_3": {
+	"object_2": {
 		"label": "redFactory3",
 		"id": 9,
 		"player": 6,
@@ -297,7 +289,7 @@
 	},
 
 
-	"object_4": {
+	"object_3": {
 		"label": "redFactory2",
 		"id": 4,
 		"player": 6,
@@ -305,7 +297,7 @@
 	},
 
 
-	"object_5": {
+	"object_4": {
 		"label": "orangeFactory2",
 		"id": 6,
 		"player": 4,
@@ -313,7 +305,7 @@
 	},
 
 
-	"object_6": {
+	"object_5": {
 		"label": "orangeFactory3",
 		"id": 7,
 		"player": 4,
@@ -322,6 +314,13 @@
 
 
 	"object_7": {
+		"label": "redFactory4",
+		"id": 3,
+		"player": 6,
+		"type": 1
+	},
+
+	"object_6": {
 		"label": "orangeFactory1",
 		"id": 8,
 		"player": 4,

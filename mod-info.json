@@ -51,7 +51,7 @@
         "en": "Timerless Mode"
       },
       "description": {
-        "en": "For players who like to go at their own flow! Disables the mission timer on most missions, but also lowers the player's maximum stored power and causes enemies to rebuild more frequently."
+        "en": "For players who like to go at their own flow! Disables the mission timer on most missions, but also lowers the amount of power you can store and causes enemies to rebuild more frequently."
       }
     }
   ]

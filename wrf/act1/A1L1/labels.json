@@ -125,65 +125,65 @@
 
 
 	"area_5": {
-		"label": "pinkScavBase2",
-		"pos1": [3712, 4224],
-		"pos2": [4864, 5760]
-	},
-
-
-	"area_6": {
-		"label": "pinkScavBase3",
-		"pos1": [5248, 4224],
-		"pos2": [6656, 4864]
-	},
-
-
-	"area_7": {
 		"label": "redScavBase1",
 		"pos1": [640, 6272],
 		"pos2": [2176, 7296]
 	},
 
 
-	"area_8": {
+	"area_6": {
 		"label": "redScavBase2",
 		"pos1": [6528, 6272],
 		"pos2": [7680, 7424]
 	},
 
 
-	"area_9": {
+	"area_7": {
 		"label": "redPatrolGroup",
 		"pos1": [5888, 7040],
 		"pos2": [6272, 7296]
 	},
 
 
-	"area_10": {
+	"area_8": {
 		"label": "orangePatrolGroup",
 		"pos1": [896, 1408],
 		"pos2": [1280, 1664]
 	},
 
 
-	"area_11": {
+	"area_9": {
 		"label": "pinkPatrolGroup",
 		"pos1": [4864, 3712],
 		"pos2": [5248, 4096]
 	},
 
 
-	"area_12": {
+	"area_10": {
 		"label": "orangeAmbushGroup",
 		"pos1": [3712, 1920],
 		"pos2": [3968, 2048]
 	},
 
 
-	"area_13": {
+	"area_11": {
 		"label": "pinkAmbushGroup",
 		"pos1": [5504, 3712],
 		"pos2": [5888, 3968]
+	},
+
+
+	"area_12": {
+		"label": "pinkScavBase2",
+		"pos1": [3712, 4608],
+		"pos2": [4864, 5760]
+	},
+
+
+	"area_13": {
+		"label": "pinkScavBase3",
+		"pos1": [4608, 3968],
+		"pos2": [6656, 4864]
 	},
 
 
@@ -204,14 +204,6 @@
 
 
 	"object_2": {
-		"label": "pinkFactory2",
-		"id": 2,
-		"player": 5,
-		"type": 1
-	},
-
-
-	"object_3": {
 		"label": "orangeFactory2",
 		"id": 81,
 		"player": 4,
@@ -219,15 +211,15 @@
 	},
 
 
-	"object_4": {
-		"label": "orangeFactory1",
-		"id": 82,
-		"player": 4,
+	"object_3": {
+		"label": "pinkFactory2",
+		"id": 2,
+		"player": 5,
 		"type": 1
 	},
 
 
-	"object_5": {
+	"object_4": {
 		"label": "redFactory2",
 		"id": 7,
 		"player": 6,
@@ -235,7 +227,7 @@
 	},
 
 
-	"object_6": {
+	"object_5": {
 		"label": "redMiniPit",
 		"id": 206,
 		"player": 6,
@@ -243,7 +235,7 @@
 	},
 
 
-	"object_7": {
+	"object_6": {
 		"label": "heliTower",
 		"id": 131,
 		"player": 6,
@@ -251,10 +243,18 @@
 	},
 
 
-	"object_8": {
+	"object_7": {
 		"label": "pinkFactory3",
 		"id": 1,
 		"player": 5,
+		"type": 1
+	},
+
+
+	"object_8": {
+		"label": "orangeFactory1",
+		"id": 82,
+		"player": 4,
 		"type": 1
 	},
 

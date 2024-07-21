@@ -269,7 +269,7 @@ function setupGame()
 	showInterface(); // init buttons. This MUST come before setting the reticule button data
 	setMainReticule();
 	mainReticule = true;
-	queue("resetPower", 1000);
+	// queue("resetPower", 1000);
 }
 
 function eventGameLoaded()
@@ -303,53 +303,6 @@ function setLimits()
 		setStructureLimits("A0CommandCentreNP", 5, i);
 		setStructureLimits("A0CommandCentreCO", 5, i);
 		setStructureLimits("A0CommandCentreNE", 5, i);
-	}
-}
-
-function resetPower()
-{
-	let powerLimit = 999999;
-	let powerProductionRate = 100;
-
-	// set income modifier/power storage for player 0 (human)
-	if (difficulty <= EASY)
-	{
-		powerProductionRate = 115;
-	}
-	else if (difficulty === HARD)
-	{
-		powerProductionRate = 85;
-		powerLimit = 20000; //base value for Alpha
-
-		if (tilesetType === "URBAN")
-		{
-			powerLimit += 5000;
-		}
-		else if (tilesetType === "ROCKIES")
-		{
-			powerLimit += 10000;
-		}
-	}
-	else if (difficulty === INSANE)
-	{
-		powerProductionRate = 70;
-		powerLimit = 12000; //base value for Alpha
-
-		if (tilesetType === "URBAN")
-		{
-			powerLimit += 2000;
-		}
-		else if (tilesetType === "ROCKIES")
-		{
-			powerLimit += 4000;
-		}
-	}
-
-	setPowerModifier(powerProductionRate);
-	setPowerStorageMaximum(powerLimit);
-	if (playerPower(selectedPlayer) >= powerLimit)
-	{
-		setPower(powerLimit - 1, selectedPlayer);
 	}
 }
 

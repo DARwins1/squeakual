@@ -76,9 +76,11 @@ function __camProcessResearchGatedGuideTopics(research = null)
 	}
 
 	// First Flamer weapon researched
+	// Also first thermal weapon
 	if (__camGuideTopicCheckResearchComplete("R-Wpn-Flamer01Mk1", research))
 	{
 		addGuideTopic("wz2100::units::weapons::flamer", showFlags);
+		addGuideTopic("wz2100::units::thermaldamage");
 	}
 
 	// First (and only) Bunker Buster weapon researched

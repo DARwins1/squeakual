@@ -328,6 +328,20 @@ var __camRefillableGroupInfo;
 var __camOriginalEvents = {};
 
 //misc
+const __camPowerLimits = [ // Power limits
+	999999, // SUPEREASY
+	100000, // EASY
+	50000, // MEDIUM
+	20000, // HARD
+	10000, // INSANE
+];
+const __camTimerlessPowerLimits = [ // Timerless mode power limits 
+	50000, // SUPEREASY
+	20000, // EASY
+	10000, // MEDIUM
+	5000, // HARD
+	2000, // INSANE
+];
 var __camCalledOnce = {};
 var __camExpLevel;
 

@@ -23,6 +23,18 @@
         "sensorModel": "cy_con.pie",
         "weight": 150
     },
+    "ScavCrane": {
+        "buildPoints": 25,
+        "buildPower": 10,
+        "constructPoints": 4,
+        "designable": 1,
+        "droidType": "DROID_CONSTRUCT",
+        "hitpoints": 35,
+        "id": "ScavCrane",
+        "name": "Crane",
+        "sensorModel": "excranearm.pie",
+        "weight": 800
+    },
     "ZNULLCONSTRUCT": {
         "id": "ZNULLCONSTRUCT",
         "mountModel": "TRLCON.PIE",

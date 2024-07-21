@@ -43,135 +43,121 @@
 
 
 	"area_1": {
-		"label": "colEntrance1",
-		"pos1": [15872, 1024],
-		"pos2": [16128, 1920]
-	},
-
-
-	"area_2": {
-		"label": "colEntrance2",
-		"pos1": [13440, 256],
-		"pos2": [14208, 512]
-	},
-
-
-	"area_3": {
 		"label": "colEntrance3",
 		"pos1": [12416, 7680],
 		"pos2": [13056, 7936]
 	},
 
 
-	"area_4": {
+	"area_2": {
 		"label": "colEntrance4",
-		"pos1": [11520, 256],
-		"pos2": [12160, 512]
-	},
-
-
-	"area_5": {
-		"label": "colEntrance5",
 		"pos1": [15872, 3200],
 		"pos2": [16128, 3840]
 	},
 
 
-	"area_6": {
-		"label": "colEntrance6",
+	"area_3": {
+		"label": "colEntrance5",
 		"pos1": [10752, 7680],
 		"pos2": [11392, 7936]
 	},
 
 
-	"area_7": {
-		"label": "colEntrance7",
+	"area_4": {
+		"label": "colEntrance6",
 		"pos1": [7680, 256],
 		"pos2": [8320, 512]
 	},
 
 
-	"area_8": {
-		"label": "colEntrance8",
+	"area_5": {
+		"label": "colEntrance7",
 		"pos1": [4096, 7680],
 		"pos2": [4736, 7936]
 	},
 
 
-	"area_9": {
-		"label": "colEntrance9",
+	"area_6": {
+		"label": "colEntrance8",
 		"pos1": [256, 4736],
 		"pos2": [512, 5376]
 	},
 
 
-	"area_10": {
-		"label": "colEntrance10",
+	"area_7": {
+		"label": "colEntrance9",
 		"pos1": [640, 256],
 		"pos2": [1152, 512]
 	},
 
 
-	"area_11": {
+	"area_8": {
 		"label": "colLZ2",
 		"pos1": [10624, 4608],
 		"pos2": [11008, 4992]
 	},
 
 
-	"area_12": {
+	"area_9": {
 		"label": "colLZ1",
 		"pos1": [9088, 1408],
 		"pos2": [9472, 1792]
 	},
 
 
-	"area_13": {
+	"area_10": {
 		"label": "colLZ4",
 		"pos1": [768, 6272],
 		"pos2": [1152, 6656]
 	},
 
 
-	"area_14": {
+	"area_11": {
 		"label": "colLZBaseArea1",
 		"pos1": [8832, 1024],
 		"pos2": [9856, 2048]
 	},
 
 
-	"area_15": {
+	"area_12": {
 		"label": "colLZBaseArea2",
 		"pos1": [10368, 4352],
 		"pos2": [11520, 5248]
 	},
 
 
-	"area_16": {
+	"area_13": {
 		"label": "colLZ3",
 		"pos1": [7424, 6912],
 		"pos2": [7808, 7296]
 	},
 
 
-	"area_17": {
+	"area_14": {
 		"label": "colLZBaseArea3",
 		"pos1": [7168, 6784],
 		"pos2": [8064, 7552]
 	},
 
 
-	"area_18": {
+	"area_15": {
 		"label": "colLZBaseArea4",
 		"pos1": [512, 5888],
 		"pos2": [1536, 6912]
 	},
 
 
-	"radius_0": {
-		"label": "Radius1",
-		"pos": [2112, 320],
-		"radius": 0
+	"area_16": {
+		"label": "colEntrance1",
+		"pos1": [15872, 1280],
+		"pos2": [16128, 1664]
+	},
+
+
+	"area_17": {
+		"label": "colEntrance2",
+		"pos1": [13184, 256],
+		"pos2": [13952, 512]
 	},
 
 

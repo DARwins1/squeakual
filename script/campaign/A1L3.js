@@ -24,8 +24,8 @@ const mis_scavResearch = [
 	"R-Wpn-MG-Damage02", "R-Wpn-Rocket-Damage02", "R-Wpn-Mortar-Damage01", 
 	"R-Wpn-Flamer-Damage02", "R-Wpn-Cannon-Damage02", "R-Wpn-MG-ROF01",
 	"R-Wpn-Rocket-ROF01", "R-Wpn-Mortar-ROF01", "R-Wpn-Flamer-ROF01",
-	"R-Wpn-Cannon-ROF01", "R-Vehicle-Metals01", "R-Struc-Materials02", 
-	"R-Defense-WallUpgrade02", "R-Wpn-Flamer-Damage03",
+	"R-Wpn-Cannon-ROF01", "R-Vehicle-Metals01", "R-Struc-Materials01", 
+	"R-Defense-WallUpgrade01", "R-Wpn-Flamer-Damage03",
 ];
 const mis_collectiveResearch = [
 	"R-Wpn-MG-Damage02", "R-Wpn-Rocket-Damage02", "R-Wpn-Mortar-Damage01", 
@@ -592,7 +592,7 @@ function eventStartLevel()
 			},
 			groupSize: 3,
 			maxSize: 3,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(32)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(40)),
 			templates: [ cTempl.flatmrl, cTempl.firetruck, cTempl.rbjeep, cTempl.monmrl, cTempl.minitruck, cTempl.lance ]
 		},
 		"redFactory3": {
@@ -603,7 +603,7 @@ function eventStartLevel()
 			},
 			groupSize: 3,
 			maxSize: 3,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(24)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(32)),
 			templates: [ cTempl.minitruck, cTempl.lance, cTempl.rbjeep, cTempl.firetruck, cTempl.bloke, cTempl.monhmg ]
 		},
 		"redFactory4": {
@@ -614,7 +614,7 @@ function eventStartLevel()
 			},
 			groupSize: 3,
 			maxSize: 3,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(34)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(44)),
 			templates: [ cTempl.flatat, cTempl.lance, cTempl.monfire, cTempl.rbjeep, cTempl.minitruck, cTempl.bjeep, cTempl.bloke ]
 		},
 		"redFactory5": {
@@ -625,7 +625,7 @@ function eventStartLevel()
 			},
 			groupSize: 3,
 			maxSize: 3,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(36)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(38)),
 			templates: [ cTempl.flatmrl, cTempl.sartruck, cTempl.bjeep, cTempl.rbjeep, cTempl.firetruck ]
 		},
 		"orangeFactory1": {
