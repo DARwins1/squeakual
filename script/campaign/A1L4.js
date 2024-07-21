@@ -285,60 +285,60 @@ function eventGameLoaded()
 	addSpotter(18, 56, CAM_HUMAN_PLAYER, SPOTTER_RANGE * 128, false, 0);
 }
 
-// Check if a Sensor/VTOL tower is rebuilt
-function eventStructureBuilt(struct, droid)
-{
-	if (struct.player === MIS_TEAM_DELTA && struct.x === deltaSensorPos.x && struct.y === deltaSensorPos.y)
-	{
-		// Delta Sensor Tower rebuilt!
-		addLabel(struct, "deltaSensorTower");
-		camManageGroup(deltaMortarGroup, CAM_ORDER_FOLLOW, {
-			leader: "deltaSensorTower",
-			suborder: CAM_ORDER_DEFEND,
-			pos: camMakePos("deltaRepairPos") // Defend this position if the tower is destroyed (again).
-		});
-	}
-	else if (struct.player === MIS_TEAM_DELTA && struct.x === deltaVtolPos.x && struct.y === deltaVtolPos.y)
-	{
-		// Delta VTOL Tower rebuilt!
-		addLabel(struct, "deltaVtolTower");
-		camManageGroup(deltaVtolGroup, CAM_ORDER_FOLLOW, {
-			leader: "deltaVtolTower",
-			suborder: CAM_ORDER_DEFEND,
-			pos: camMakePos("zuluVtolAssembly")
-		});
-	}
-	else if (struct.player === MIS_CLAYDE && struct.x === zuluVtolPos1.x && struct.y === zuluVtolPos1.y)
-	{
-		// Zulu NW VTOL Tower rebuilt!
-		addLabel(struct, "zuluVtolTower1");
-		camManageGroup(zuluVtolGroupNW, CAM_ORDER_FOLLOW, {
-			leader: "zuluVtolTower1",
-			suborder: CAM_ORDER_DEFEND,
-			pos: camMakePos("zuluVtolAssembly")
-		});
-	}
-	else if (struct.player === MIS_CLAYDE && struct.x === zuluVtolPos2.x && struct.y === zuluVtolPos2.y)
-	{
-		// Zulu NE VTOL Tower rebuilt!
-		addLabel(struct, "zuluVtolTower2");
-		camManageGroup(zuluVtolGroupNE, CAM_ORDER_FOLLOW, {
-			leader: "zuluVtolTower2",
-			suborder: CAM_ORDER_DEFEND,
-			pos: camMakePos("zuluVtolAssembly")
-		});
-	}
-	else if (struct.player === MIS_CLAYDE && struct.x === zuluVtolPos3.x && struct.y === zuluVtolPos3.y)
-	{
-		// Zulu south VTOL Tower rebuilt!
-		addLabel(struct, "zuluVtolTower3");
-		camManageGroup(zuluVtolGroupSouth, CAM_ORDER_FOLLOW, {
-			leader: "zuluVtolTower3",
-			suborder: CAM_ORDER_DEFEND,
-			pos: camMakePos("zuluVtolAssembly")
-		});
-	}
-}
+// // Check if a Sensor/VTOL tower is rebuilt
+// function eventStructureBuilt(struct, droid)
+// {
+// 	if (struct.player === MIS_TEAM_DELTA && struct.x === deltaSensorPos.x && struct.y === deltaSensorPos.y)
+// 	{
+// 		// Delta Sensor Tower rebuilt!
+// 		addLabel(struct, "deltaSensorTower");
+// 		camManageGroup(deltaMortarGroup, CAM_ORDER_FOLLOW, {
+// 			leader: "deltaSensorTower",
+// 			suborder: CAM_ORDER_DEFEND,
+// 			pos: camMakePos("deltaRepairPos") // Defend this position if the tower is destroyed (again).
+// 		});
+// 	}
+// 	else if (struct.player === MIS_TEAM_DELTA && struct.x === deltaVtolPos.x && struct.y === deltaVtolPos.y)
+// 	{
+// 		// Delta VTOL Tower rebuilt!
+// 		addLabel(struct, "deltaVtolTower");
+// 		camManageGroup(deltaVtolGroup, CAM_ORDER_FOLLOW, {
+// 			leader: "deltaVtolTower",
+// 			suborder: CAM_ORDER_DEFEND,
+// 			pos: camMakePos("zuluVtolAssembly")
+// 		});
+// 	}
+// 	else if (struct.player === MIS_CLAYDE && struct.x === zuluVtolPos1.x && struct.y === zuluVtolPos1.y)
+// 	{
+// 		// Zulu NW VTOL Tower rebuilt!
+// 		addLabel(struct, "zuluVtolTower1");
+// 		camManageGroup(zuluVtolGroupNW, CAM_ORDER_FOLLOW, {
+// 			leader: "zuluVtolTower1",
+// 			suborder: CAM_ORDER_DEFEND,
+// 			pos: camMakePos("zuluVtolAssembly")
+// 		});
+// 	}
+// 	else if (struct.player === MIS_CLAYDE && struct.x === zuluVtolPos2.x && struct.y === zuluVtolPos2.y)
+// 	{
+// 		// Zulu NE VTOL Tower rebuilt!
+// 		addLabel(struct, "zuluVtolTower2");
+// 		camManageGroup(zuluVtolGroupNE, CAM_ORDER_FOLLOW, {
+// 			leader: "zuluVtolTower2",
+// 			suborder: CAM_ORDER_DEFEND,
+// 			pos: camMakePos("zuluVtolAssembly")
+// 		});
+// 	}
+// 	else if (struct.player === MIS_CLAYDE && struct.x === zuluVtolPos3.x && struct.y === zuluVtolPos3.y)
+// 	{
+// 		// Zulu south VTOL Tower rebuilt!
+// 		addLabel(struct, "zuluVtolTower3");
+// 		camManageGroup(zuluVtolGroupSouth, CAM_ORDER_FOLLOW, {
+// 			leader: "zuluVtolTower3",
+// 			suborder: CAM_ORDER_DEFEND,
+// 			pos: camMakePos("zuluVtolAssembly")
+// 		});
+// 	}
+// }
 
 // Bring in Collective and Collective-affiliated scavengers
 // NOTE: The Collective and their scavengers are represented by the same player (CAM_THE_COLLECTIVE)
@@ -903,12 +903,14 @@ function eventStartLevel()
 	powerDestroyed = false;
 	structsDonated = false;
 
-	// Store the locations of these towers (in case they're destroyed and rebuilt)
-	deltaSensorPos = camMakePos("deltaSensorTower");
-	deltaVtolPos = camMakePos("deltaVtolTower");
-	zuluVtolPos1 = camMakePos("zuluVtolTower1");
-	zuluVtolPos2 = camMakePos("zuluVtolTower2");
-	zuluVtolPos3 = camMakePos("zuluVtolTower3");
+	// // Store the locations of these towers (in case they're destroyed and rebuilt)
+	// deltaSensorPos = camMakePos("deltaSensorTower");
+	// deltaVtolPos = camMakePos("deltaVtolTower");
+	// zuluVtolPos1 = camMakePos("zuluVtolTower1");
+	// zuluVtolPos2 = camMakePos("zuluVtolTower2");
+	// zuluVtolPos3 = camMakePos("zuluVtolTower3");
+	// Automatically re-label these structures if they're destroyed and rebuilt
+	camAutoReplaceObjectLabel(["deltaSensorTower", "deltaVtolTower", "zuluVtolTower1", "zuluVtolTower2", "zuluVtolTower3"])
 
 	// Do these immediately
 	camEnableFactory("zuluFactory1");

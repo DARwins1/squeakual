@@ -81,11 +81,13 @@ function camSetFactoryData(factoryLabel, factoryData)
 	}
 	fi.enabled = false;
 	fi.state = 0;
-	// Record the coordinates, player, and type of this factory, in case it is destroyed and rebuilt
-	fi.x = structure.x;
-	fi.y = structure.y;
-	fi.player = structure.player;
-	fi.stattype = structure.stattype;
+	// // Record the coordinates, player, and type of this factory, in case it is destroyed and rebuilt
+	// fi.x = structure.x;
+	// fi.y = structure.y;
+	// fi.player = structure.player;
+	// fi.stattype = structure.stattype;
+	// Automatically re-manage this factory if it's destroyed and rebuilt
+	camAutoReplaceObjectLabel(factoryLabel);
 	if (!camDef(fi.group))
 	{
 		fi.group = camNewGroup();
@@ -347,74 +349,74 @@ function camUpgradeOnMapStructures(struct1, struct2, playerId, excluded)
 	}
 }
 
-//;; ## camUpgradeOnMapFeatures(feat1, feat2[, excluded])
-//;;
-//;; Search for feat1, save its coordinates, remove it, and then replace with it
-//;; with feat2. A third parameter can be specified to ignore specific object
-//;; IDs. Useful if a feature is assigned to an object label. It can be either an array
-//;; or a single ID number. Unortunatly, feature rotation is not preserved.
-//;; If a feature has a label or group, it will be transferred to the replacement, but if the
-//;; feature has multiple labels, then only one label will be transferred.
-//;;
-//;; @param {Object} struct1
-//;; @param {Object} struct2
-//;; @param {number|number[]} [excluded]
-//;; @returns {void}
-//;;
-function camUpgradeOnMapFeatures(feat1, feat2, excluded)
-{
-	if (!camDef(feat1) || !camDef(feat2))
-	{
-		camDebug("Not enough parameters specified for upgrading on map features");
-		return;
-	}
+// //;; ## camUpgradeOnMapFeatures(feat1, feat2[, excluded])
+// //;;
+// //;; Search for feat1, save its coordinates, remove it, and then replace with it
+// //;; with feat2. A third parameter can be specified to ignore specific object
+// //;; IDs. Useful if a feature is assigned to an object label. It can be either an array
+// //;; or a single ID number. Unortunatly, feature rotation is not preserved.
+// //;; If a feature has a label or group, it will be transferred to the replacement, but if the
+// //;; feature has multiple labels, then only one label will be transferred.
+// //;;
+// //;; @param {Object} struct1
+// //;; @param {Object} struct2
+// //;; @param {number|number[]} [excluded]
+// //;; @returns {void}
+// //;;
+// function camUpgradeOnMapFeatures(feat1, feat2, excluded)
+// {
+// 	if (!camDef(feat1) || !camDef(feat2))
+// 	{
+// 		camDebug("Not enough parameters specified for upgrading on map features");
+// 		return;
+// 	}
 
-	const featsOnMap = enumFeature(ALL_PLAYERS, feat1);
+// 	const featsOnMap = enumFeature(ALL_PLAYERS, feat1);
 
-	for (let i = 0, l = featsOnMap.length; i < l; ++i)
-	{
-		const feature = featsOnMap[i];
-		let skip = false;
+// 	for (let i = 0, l = featsOnMap.length; i < l; ++i)
+// 	{
+// 		const feature = featsOnMap[i];
+// 		let skip = false;
 		
-		//Check if this object should be excluded from the upgrades
-		if (camDef(excluded))
-		{
-			if (excluded instanceof Array)
-			{
-				for (let j = 0, c = excluded.length; j < c; ++j)
-				{
-					if (feature.id === excluded[j])
-					{
-						skip = true;
-						break;
-					}
-				}
-				if (skip === true)
-				{
-					continue;
-				}
-			}
-			else if (feature.id === excluded)
-			{
-				continue;
-			}
-		}
+// 		//Check if this object should be excluded from the upgrades
+// 		if (camDef(excluded))
+// 		{
+// 			if (excluded instanceof Array)
+// 			{
+// 				for (let j = 0, c = excluded.length; j < c; ++j)
+// 				{
+// 					if (feature.id === excluded[j])
+// 					{
+// 						skip = true;
+// 						break;
+// 					}
+// 				}
+// 				if (skip === true)
+// 				{
+// 					continue;
+// 				}
+// 			}
+// 			else if (feature.id === excluded)
+// 			{
+// 				continue;
+// 			}
+// 		}
 
-		//Check if this object has a label assigned to it
-		// FIXME: O(n) lookup here
-		const __FEATURE_LABEL = getLabel(feature);
+// 		//Check if this object has a label assigned to it
+// 		// FIXME: O(n) lookup here
+// 		const __FEATURE_LABEL = getLabel(feature);
 
-		//Replace it
-		const featInfo = {x: feature.x, y: feature.y};
-		camSafeRemoveObject(feature, false);
-		const newFeat = addFeature(feat2, featInfo.x, featInfo.y);
+// 		//Replace it
+// 		const featInfo = {x: feature.x, y: feature.y};
+// 		camSafeRemoveObject(feature, false);
+// 		const newFeat = addFeature(feat2, featInfo.x, featInfo.y);
 		
-		if (camDef(__FEATURE_LABEL)) 
-		{
-			addLabel(newFeat, __FEATURE_LABEL);
-		}
-	}
-}
+// 		if (camDef(__FEATURE_LABEL)) 
+// 		{
+// 			addLabel(newFeat, __FEATURE_LABEL);
+// 		}
+// 	}
+// }
 
 //////////// privates
 

@@ -336,6 +336,7 @@ const __camPowerLimits = [ // Power limits
 	10000, // INSANE
 ];
 const __camTimerlessPowerLimits = [ // Timerless mode power limits 
+	// Note that these are MUCH lower
 	50000, // SUPEREASY
 	20000, // EASY
 	10000, // MEDIUM
@@ -344,6 +345,7 @@ const __camTimerlessPowerLimits = [ // Timerless mode power limits
 ];
 var __camCalledOnce = {};
 var __camExpLevel;
+var __camLabelInfo;
 
 //nexus
 var __camLastNexusAttack;

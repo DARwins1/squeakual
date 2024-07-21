@@ -250,13 +250,13 @@ function eventTransporterLanded(transport)
 			addLabel(droid, "colSensorDroid");
 
 			// Restate the follow order
-			camManageGroup(colMortarGroup, CAM_ORDER_FOLLOW, {
-				leader: "colSensorDroid",
-				suborder: CAM_ORDER_DEFEND,
-				pos: camMakePos("collectiveRepairPos"), // Defend this position if the sensor is dead.
-				repair: 75,
-				repairPos: camMakePos("collectiveRepairPos")
-			});
+			// camManageGroup(colMortarGroup, CAM_ORDER_FOLLOW, {
+			// 	leader: "colSensorDroid",
+			// 	suborder: CAM_ORDER_DEFEND,
+			// 	pos: camMakePos("collectiveRepairPos"), // Defend this position if the sensor is dead.
+			// 	repair: 75,
+			// 	repairPos: camMakePos("collectiveRepairPos")
+			// });
 		}
 	}
 

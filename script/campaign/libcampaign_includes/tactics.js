@@ -615,7 +615,9 @@ function __camTacticsTickForGroup(group)
 			if (leaderObj === null)
 			{
 				// Is the leader dead? Let the group execute the suborder.
-				camManageGroup(group, gi.data.suborder, gi.data.data);
+				const newData = gi.data.data; // do you pronounce it "data" or "data"?
+				newData.data = gi.data; // Hold onto the current group data in case we find a new leader.
+				camManageGroup(group, gi.data.suborder, newData);
 				return;
 			}
 
@@ -630,6 +632,12 @@ function __camTacticsTickForGroup(group)
 				orderDroidObj(droid, followOrder, leaderObj);
 				continue;
 			}
+		}
+		else if (camDef(gi.data.leader))
+		{
+			// If we find a new leader, follow it instead
+			// The old follow order data was stored in the data's "data" field (yes i know this is confusing)
+			camManageGroup(group, CAM_ORDER_FOLLOW, gi.data.data);
 		}
 
 		if (gi.order === CAM_ORDER_DEFEND)

@@ -115,6 +115,7 @@ function cam_eventStartLevel()
 	// on the global scope (or wherever necessary).
 	__camGroupInfo = {};
 	__camRefillableGroupInfo = {};
+	__camLabelInfo = [];
 	__camFactoryInfo = {};
 	__camFactoryQueue = {};
 	__camTruckInfo = [];
@@ -210,30 +211,26 @@ function cam_eventStructureBuilt(struct, droid)
 			|| struct.stattype === RESEARCH_LAB || struct.stattype === POWER_GEN)
 		{
 			__camTruckCheckForModules(struct.player);
+		}
 
-			// Check if a factory has been rebuilt.
-			// If it has, then automatically start managing it again.
-			if (struct.stattype === FACTORY || struct.stattype === CYBORG_FACTORY || struct.stattype === VTOL_FACTORY)
+		// Check if we should re-apply a label to this structure.
+		// If it has, then automatically start managing it again.
+		const PLAYER = struct.player;
+		const X_COORD = struct.x;
+		const Y_COORD = struct.y;
+		const stattype = struct.stattype;
+
+		for (let i = 0; i < __camLabelInfo.length; i++)
+		{
+			const labelInfo = __camLabelInfo[i];
+
+			// Determine if this newly built structure is the same as the old one
+			if (PLAYER === labelInfo.player && X_COORD === labelInfo.x && Y_COORD === labelInfo.y 
+				&& stattype === labelInfo.stattype)
 			{
-				const PLAYER = struct.player;
-				const X_COORD = struct.x;
-				const Y_COORD = struct.y;
-				const stattype = struct.stattype;
-
-				for (let i = 0; i < __camFactoryInfo.length; i++)
-				{
-					const labelInfo = __camFactoryInfo[i];
-
-					// Determine if this newly built factory is the same as the old one
-					if (PLAYER === labelInfo.player && X_COORD === labelInfo.x && Y_COORD === labelInfo.y 
-						&& stattype === labelInfo.stattype)
-					{
-						// Everything matches, set the label to refer to the
-						// newly built factory now
-						addLabel(struct, labelInfo.label);
-						break;
-					}
-				}
+				// Everything matches, set the label to refer to the newly built structure now
+				addLabel(struct, labelInfo.label);
+				break;
 			}
 		}
 		__camUpdateBaseGroups(struct);

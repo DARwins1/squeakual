@@ -1012,6 +1012,39 @@ function camFactoryCanProduceTemplate(template, factory)
 	}
 }
 
+//;; ## camAutoReplaceObjectLabel(label)
+//;; Mark an object for automatic label replacement.
+//;; If the object with this label is destroyed and then rebuilt, this label will automatically
+//;; be reapplied.
+//;; NOTE: Since position is used to determine if the object is the "same", this function only works with
+//;; structures!
+//;; See `cam_eventStructureBuilt` in `events.js` for how this is used.
+//;; NOTE: Factories automatically call this function when set! There's no need to call this again within the level scripts.
+//;;
+//;; @param {string|string[]} label
+//;; @returns {void}
+//;;
+function camAutoReplaceObjectLabel(label)
+{
+	if (!camIsString(label)) // Array of labels?
+	{
+		for (const subLabel of label)
+		{
+			camAutoReplaceObjectLabel(subLabel);
+		}
+		return;
+	}
+
+	const obj = getObject(label);
+
+	if (!camDef(obj) || obj.type !== STRUCTURE)
+	{
+		return;
+	}
+
+	__camLabelInfo.push({player: obj.player, x: obj.x, y: obj.y, stattype: obj.stattype});
+}
+
 //////////// privates
 
 function __camGlobalContext()
