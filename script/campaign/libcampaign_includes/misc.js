@@ -1042,7 +1042,7 @@ function camAutoReplaceObjectLabel(label)
 		return;
 	}
 
-	__camLabelInfo.push({player: obj.player, x: obj.x, y: obj.y, stattype: obj.stattype});
+	__camLabelInfo.push({label: label, player: obj.player, x: obj.x, y: obj.y, stattype: obj.stattype});
 }
 
 //////////// privates

@@ -218,7 +218,7 @@ function cam_eventStructureBuilt(struct, droid)
 		const PLAYER = struct.player;
 		const X_COORD = struct.x;
 		const Y_COORD = struct.y;
-		const stattype = struct.stattype;
+		const STATTYPE = struct.stattype;
 
 		for (let i = 0; i < __camLabelInfo.length; i++)
 		{
@@ -226,10 +226,15 @@ function cam_eventStructureBuilt(struct, droid)
 
 			// Determine if this newly built structure is the same as the old one
 			if (PLAYER === labelInfo.player && X_COORD === labelInfo.x && Y_COORD === labelInfo.y 
-				&& stattype === labelInfo.stattype)
+				&& STATTYPE === labelInfo.stattype)
 			{
 				// Everything matches, set the label to refer to the newly built structure now
+				// console("re-applied label: " + labelInfo.label)
 				addLabel(struct, labelInfo.label);
+
+				// Check if any groups should "follow" this object
+				__camCheckReplacementLeader();
+
 				break;
 			}
 		}
@@ -486,10 +491,10 @@ function cam_eventVideoDone()
 
 function cam_eventDroidRankGained(droid, rankNum)
 {
-	if (droid.player === CAM_HUMAN_PLAYER)
-	{
-		addGuideTopic("wz2100::units::experience", SHOWTOPIC_FIRSTADD);
-	}
+	// if (droid.player === CAM_HUMAN_PLAYER)
+	// {
+	// 	addGuideTopic("wz2100::units::experience", SHOWTOPIC_FIRSTADD);
+	// }
 }
 
 function cam_eventResearched(research, structure, player)

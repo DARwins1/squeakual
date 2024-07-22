@@ -175,6 +175,7 @@ function __camEnableGuideTopics()
 	// Basic units topics
 	addGuideTopic("wz2100::units::building");
 	addGuideTopic("wz2100::units::designing");
+	addGuideTopic("wz2100::units::experience");
 
 	// Weapon/propulsion topics (the player always has these components)
 	addGuideTopic("wz2100::units::weapons::antipersonnel");

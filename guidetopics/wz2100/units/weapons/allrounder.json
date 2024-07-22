@@ -46,7 +46,7 @@
 		"",
 		"However, All Rounder weapons are less effective against bunkers and infantry.",
 		"",
-		"All Rounder weapons also give significant bonus hitpoints to the unit that it's equipped to, at the cost of having high weight values."
+		"All Rounder weapons also give significant bonus hitpoints to the unit that it's equipped to, at the cost of having higher weight values."
 	],
 	"links": [
 		"wz2100::units::weapons",

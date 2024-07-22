@@ -8,7 +8,7 @@ const mis_collectiveResearch = [
 	"R-Wpn-Flamer-Damage02", "R-Wpn-Cannon-Damage02", "R-Wpn-MG-ROF01",
 	"R-Wpn-Rocket-ROF01", "R-Wpn-Mortar-ROF01", "R-Wpn-Flamer-ROF01",
 	"R-Wpn-Cannon-ROF01", "R-Vehicle-Metals02", "R-Struc-Materials02", 
-	"R-Defense-WallUpgrade02", "R-Wpn-Flamer-Damage03", "R-Sys-Engineering01",
+	"R-Defense-WallUpgrade01", "R-Wpn-Flamer-Damage03", "R-Sys-Engineering01",
 	"R-Wpn-Cannon-Accuracy01", "R-Wpn-Rocket-Accuracy01",
 ];
 
