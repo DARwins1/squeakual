@@ -172,7 +172,7 @@ function eventTransporterLanded(transport)
 			{
 				addLabel(droid, "colCommander");
 				// Set the commander's rank (ranges from Green to Professional)
-				const COMMANDER_RANK = (difficulty >= EASY) ? 1 : (difficulty);
+				const COMMANDER_RANK = (difficulty <= EASY) ? 1 : (difficulty);
 				camSetDroidRank(droid, COMMANDER_RANK);
 			}
 			// Assign Medium Cannons

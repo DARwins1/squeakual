@@ -351,13 +351,14 @@ function collectiveAttackWaves()
 		The waves of Collective and C-Scav units will spawn 8 different "entrances" around the edges of the map
 		As the level progresses, more entrances will "activate", allowing enemies to spawn from those.
 		Each wave, a set number of random entrances will spawn units, with the number of entrances being chosen depending on the difficulty
-		> Waves 1+ will activate the northwest ridge and south entrances 
+		> Waves 1+ will activate the northwest ridge
 		> Waves 3+ will activate the north city entrance
 		> Waves 6+ will activate the northeast valley entrance
 		> Waves 10+ will activate the northeast plateau entrance
 		> Waves 14+ will activate the east plateau entrance
 		> Waves 18+ will activate the northwest crater entrance
 		> Waves 22+ will activate the east valley entrance
+		NOTE: The south entrance is always active
 	*/
 
 	// Each entrance has a unit set composition, mostly of C-Scavs. 
@@ -397,8 +398,6 @@ function collectiveAttackWaves()
 	{
 		waveEntrances.push("colEntrance1");
 		waveTemplates.push(nwRidgeDroids);
-		waveEntrances.push("colEntrance8");
-		waveTemplates.push(southDroids);
 	}
 	if (waveIndex >= 3)
 	{
@@ -455,8 +454,10 @@ function collectiveAttackWaves()
 	}
 
 	// Choose from among the active entrances and spawn units
-	const chosenEntrances = [];
-	const chosenTemplates = [];
+	// NOTE: The south entrance is always active
+	const chosenEntrances = ["colEntrance8"];
+	const southTemplates = (numColOverrides > 0) ? ((camRand(2) === 0) ? colOverrideDroids : southDroids) : southDroids;
+	const chosenTemplates = [southTemplates];
 	for (let i = 0; i < Math.min(waveEntrances.length, numGroups); i++)
 	{
 		const INDEX = camRand(waveEntrances.length);
@@ -631,7 +632,29 @@ function evacuateAllies()
 // Spawn a Collective command tank from the southern entrance
 function spawnCollectiveCommander()
 {
-	// TODO: Implement
+	// Spawn a Collective commander
+	const commanderPos = camMakePos("colEntrance8");
+	const commanderTemp = cTempl.comcomt;
+	const commDroid = addDroid(CAM_THE_COLLECTIVE, commanderPos.x, commanderPos.y, 
+		camNameTemplate(commanderTemp), commanderTemp.body, commanderTemp.prop, "", "", commanderTemp.weap);
+	addLabel(commDroid, "colCommander");
+	// Set the commander's rank (ranges from Trained to Professional)
+	const COMMANDER_RANK = (difficulty <= EASY) ? 2 : (difficulty);
+	camSetDroidRank(commDroid, COMMANDER_RANK);
+	// Order the commander to attack
+	camManageGroup(camMakeGroup(commDroid), CAM_ORDER_ATTACK, {repair: 25, repairPos: commanderPos});
+
+	// Spawn the commander's escorts
+	const commanderTemplates = [ // 2 Repair Turrets, 2 Medium Cannons, 4 Mini-Rocket Arrays, 1 Hurricane, 1 Lancer
+		cTempl.colrepht, cTempl.colrepht,
+		cTempl.commcant, cTempl.commcant,
+		cTempl.colmrat, cTempl.colmrat, cTempl.colmrat, cTempl.colmrat,
+		cTempl.colaaht,
+		cTempl.comatt,
+		]
+	const colCommanderGroup = camSendReinforcement(CAM_THE_COLLECTIVE, getObject("colEntrance8"), commanderTemplates, CAM_REINFORCE_GROUND);
+	camManageGroup(colCommanderGroup, CAM_ORDER_FOLLOW, {leader: "colCommander", suborder: CAM_ORDER_ATTACK});
+
 }
 
 function eventDestroyed(obj)
