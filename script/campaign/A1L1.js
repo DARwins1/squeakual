@@ -453,84 +453,6 @@ function eventStartLevel()
 		"redFactory2": { tech: "R-Wpn-Flamer-ROF01" }, // Flamer Autoloader
 	});
 
-	if (tweakOptions.rec_timerlessMode)
-	{
-		// Timerless mode disables the mission time limit on *almost* every mission.
-		// To balance this, the player's max power is severely limited and enemies rebuild stuff more frequently.
-		// This is to discourage the player from just mindlessly waiting around accumulating resources or "grinding" enemies down through sheer attrition.
-		// This is pretty similar to how Fractured Kingdom is balanced without a timer.
-		// Also note that the player's power reserves are completely refilled between missions, so there's no point in loitering around purely for resources.
-
-		// If we're in Timerless mode, set up scavenger Cranes instead of adding a timer
-		switch (difficulty)
-		{
-			case INSANE:
-				// Cranes for the easternmost orange and pink bases
-				camManageTrucks(MIS_ORANGE_SCAVS, {
-					label: "orangeNorthBase", // Label of base to rebuilt/maintain
-					rebuildBase: true,
-					respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
-					template: cTempl.crane, // Scavenger Crane unit exclusive to Timerless mode
-					structset: camAreaToStructSet("orangeScavBase2")
-				});
-
-				camManageTrucks(MIS_PINK_SCAVS, {
-					label: "pinkEastBase",
-					rebuildBase: true,
-					respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
-					template: cTempl.crane,
-					structset: camAreaToStructSet("pinkScavBase3")
-				});
-			case HARD: // NOTE: Fall-through here! We still add Cranes from lower difficulties!
-				// Cranes for the westernmost scav bases
-				camManageTrucks(MIS_ORANGE_SCAVS, {
-					label: "orangeNWBase",
-					rebuildBase: true,
-					respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
-					template: cTempl.crane,
-					structset: camAreaToStructSet("orangeScavBase1")
-				});
-
-				camManageTrucks(MIS_PINK_SCAVS, {
-					label: "pinkWestBase",
-					rebuildBase: true,
-					respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
-					template: cTempl.crane,
-					structset: camAreaToStructSet("pinkScavBase1")
-				});
-
-				camManageTrucks(MIS_RED_SCAVS, {
-					label: "redSWBase",
-					rebuildBase: true,
-					respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
-					template: cTempl.crane,
-					structset: camAreaToStructSet("redScavBase1")
-				});
-			case MEDIUM:
-				// Crane for the central pink base
-				camManageTrucks(MIS_PINK_SCAVS, {
-					label: "pinkCentralBase",
-					rebuildBase: true,
-					respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
-					template: cTempl.crane,
-					structset: camAreaToStructSet("pinkScavBase2")
-				});
-			default:
-				// Crane for the final red base
-				camManageTrucks(MIS_RED_SCAVS, {
-					label: "redSEBase",
-					rebuildBase: true,
-					respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
-					template: cTempl.crane,
-					structset: camAreaToStructSet("redScavBase2")
-				});
-		}
-	}
-	else
-	{
-		setMissionTime(camChangeOnDiff(camHoursToSeconds(1)));
-	}
-
 	setPower(PLAYER_POWER, CAM_HUMAN_PLAYER);
 	grantPlayerTech();
 	camCompleteRequiredResearch(mis_orangeScavResearch, MIS_ORANGE_SCAVS);
@@ -674,6 +596,81 @@ function eventStartLevel()
 			templates: [ cTempl.flatmrl, cTempl.sartruck, cTempl.bjeep, cTempl.rbjeep, cTempl.firetruck ]
 		},
 	});
+
+	if (tweakOptions.rec_timerlessMode)
+	{
+		// Timerless mode disables the mission time limit on *almost* every mission.
+		// To balance this, the player's max power is severely limited and enemies rebuild stuff more frequently.
+		// This is to discourage the player from just mindlessly waiting around accumulating resources or "grinding" enemies down through sheer attrition.
+		// This is pretty similar to how Fractured Kingdom is balanced without a timer.
+		// Also note that the player's power reserves are completely refilled between missions, so there's no point in loitering around purely for resources.
+
+		// If we're in Timerless mode, set up scavenger Cranes instead of adding a timer
+		switch (difficulty)
+		{
+			case INSANE:
+				// Cranes for the easternmost orange and pink bases
+				camManageTrucks(MIS_ORANGE_SCAVS, {
+					label: "orangeNorthBase", // Label of base to rebuild/maintain
+					rebuildBase: true,
+					respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
+					template: cTempl.crane, // Scavenger Crane unit exclusive to Timerless mode
+					structset: camAreaToStructSet("orangeScavBase2")
+				});
+				camManageTrucks(MIS_PINK_SCAVS, {
+					label: "pinkEastBase",
+					rebuildBase: true,
+					respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
+					template: cTempl.crane,
+					structset: camAreaToStructSet("pinkScavBase3")
+				});
+			case HARD: // NOTE: Fall-through here! We still add Cranes from lower difficulties!
+				// Cranes for the westernmost scav bases
+				camManageTrucks(MIS_ORANGE_SCAVS, {
+					label: "orangeNWBase",
+					rebuildBase: true,
+					respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
+					template: cTempl.crane,
+					structset: camAreaToStructSet("orangeScavBase1")
+				});
+				camManageTrucks(MIS_PINK_SCAVS, {
+					label: "pinkWestBase",
+					rebuildBase: true,
+					respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
+					template: cTempl.crane,
+					structset: camAreaToStructSet("pinkScavBase1")
+				});
+				camManageTrucks(MIS_RED_SCAVS, {
+					label: "redSWBase",
+					rebuildBase: true,
+					respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
+					template: cTempl.crane,
+					structset: camAreaToStructSet("redScavBase1")
+				});
+			case MEDIUM:
+				// Crane for the central pink base
+				camManageTrucks(MIS_PINK_SCAVS, {
+					label: "pinkCentralBase",
+					rebuildBase: true,
+					respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
+					template: cTempl.crane,
+					structset: camAreaToStructSet("pinkScavBase2")
+				});
+			default:
+				// Crane for the final red base
+				camManageTrucks(MIS_RED_SCAVS, {
+					label: "redSEBase",
+					rebuildBase: true,
+					respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
+					template: cTempl.crane,
+					structset: camAreaToStructSet("redScavBase2")
+				});
+		}
+	}
+	else
+	{
+		setMissionTime(camChangeOnDiff(camHoursToSeconds(1)));
+	}
 
 	startedFromMenu = false;
 

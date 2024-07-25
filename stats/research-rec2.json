@@ -1368,7 +1368,7 @@
         "requiredResearch": [
             "R-Sys-Engineering01"
         ],
-        "researchPoints": 600,
+        "researchPoints": 200,
         "researchPower": 18,
         "resultStructures": [
             "A0TankTrap"

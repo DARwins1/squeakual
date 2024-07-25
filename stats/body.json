@@ -59,7 +59,7 @@
         "weaponSlots": 3,
         "weight": 2000
     },
-    "ScaveCraneBody": {
+    "ScavCraneBody": {
         "armourHeat": 4,
         "armourKinetic": 10,
         "buildPoints": 50,
@@ -67,7 +67,7 @@
         "class": "Babas",
         "designable": 1,
         "hitpoints": 140,
-        "id": "ScaveCraneBody",
+        "id": "ScavCraneBody",
         "model": "cranebody1.pie",
         "name": "Crane Body",
         "powerOutput": 2800,

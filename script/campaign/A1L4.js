@@ -547,6 +547,9 @@ function setPhaseTwo()
 	removeTimer("collectiveAttackWaves");
 	setTimer("collectiveAttackWaves", camChangeOnDiff(camSecondsToMilliseconds(25)));
 
+	// Disable the mission timer
+	setMissionTime(-1);
+
 	// Switch the teams of the NASDA power structures (so the player can destroy them)
 	const structs = enumArea("nasdaPowerArea", MIS_NASDA, false).filter((obj) => (obj.type === STRUCTURE));
 	for (structure of structs)

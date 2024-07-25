@@ -567,11 +567,12 @@ function finalDialogue()
 	camQueueDialogue([
 		{text: "CLAYDE: Excellent work, Commanders.", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
 		{text: "CLAYDE: NASDA Central is ours.", delay: camSecondsToMilliseconds(2), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: Commander Foxtrot, clear the area of any remaining stragglers.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
+		{text: "CLAYDE: Commander Bravo, return to base.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
+		{text: "CLAYDE: Charlie, Foxtrot, Golf. You three secure the area.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
 		{text: "CLAYDE: I'll send some forces over shortly to fortify NASDA Central.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: Bravo, Charlie, Golf. You three return to base and await further orders.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
 		{text: "CLAYDE: Good work, everyone.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
 		{text: "CLAYDE: Let today's victory mark the start of a bright new age.", delay: camSecondsToMilliseconds(2), sound: CAM_RADIO_CLICK},
+		{text: "CLAYDE: General Clayde, signing off.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
 	]);
 }
 
@@ -905,6 +906,41 @@ function eventStartLevel()
 		rebuildBase: true,
 		structset: camGolfA1L2Structs
 	});
+
+	// If we're in Timerless mode, set up scavenger Cranes
+	if (tweakOptions.rec_timerlessMode)
+	{
+		// Northeast scav base
+		camManageTrucks(MIS_YELLOW_SCAVS, {
+			label: "scavNEBase",
+			rebuildBase: true,
+			respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
+			template: cTempl.crane,
+			structset: camAreaToStructSet("scavOuterBase4")
+		});
+		if (difficulty >= MEDIUM)
+		{
+			// Southwest scav base
+			camManageTrucks(MIS_YELLOW_SCAVS, {
+				label: "scavHillBase",
+				rebuildBase: true,
+				respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
+				template: cTempl.crane,
+				structset: camAreaToStructSet("scavOuterBase1")
+			});
+		}
+		if (difficulty >= HARD)
+		{
+			// Southeast scav base
+			camManageTrucks(MIS_YELLOW_SCAVS, {
+				label: "scavCanalBase",
+				rebuildBase: true,
+				respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
+				template: cTempl.crane,
+				structset: camAreaToStructSet("scavOuterBase3")
+			});
+		}
+	}
 
 	queue("groupPatrol", camChangeOnDiff(camMinutesToMilliseconds(0.25)));
 	queue("ambushLZ", camChangeOnDiff(camMinutesToMilliseconds(2.5)));

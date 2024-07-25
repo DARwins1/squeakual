@@ -341,7 +341,7 @@ function eventStartLevel()
 			order: CAM_ORDER_ATTACK,
 			groupSize: 4,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(35)),
-			templates: [ cTempl.colcanht, cTempl.colcanht, cTempl.colflamt, cTempl.colmrat, cTempl.colhmght ]
+			templates: [ cTempl.colcanht, cTempl.colcanht, cTempl.colflamt, cTempl.colmrat, cTempl.colhmght]
 		},
 	});
 
@@ -353,19 +353,59 @@ function eventStartLevel()
 		factories: ["colFactory"], // Only refill from this factory
 	}, CAM_ORDER_DEFEND, {pos: camMakePos("colRepairPos")});
 	// Collective trucks
+	const TRUCK_TIME = camChangeOnDiff(camSecondsToMilliseconds(70))
 	const colBaseStructs = camAreaToStructSet("colBase");
 	colTruckJob1 = camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colMainBase",
-		respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
+		respawnDelay: (tweakOptions.rec_timerlessMode) ? (TRUCK_TIME / 2) : TRUCK_TIME,
 		template: cTempl.coltruckht,
 		structset: colBaseStructs
 	});
 	colTruckJob2 = camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colMainBase",
-		respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
+		respawnDelay: (tweakOptions.rec_timerlessMode) ? (TRUCK_TIME / 2) : TRUCK_TIME,
 		template: cTempl.coltruckht,
 		structset: colBaseStructs
 	});
+
+	// If we're in Timerless mode, set up scavenger Cranes
+	if (tweakOptions.rec_timerlessMode)
+	{
+		// Filter out non-scavenger structures in the SW base
+		const scavStructsSW = camAreaToStructSet("scavOuterBase4").filter((struct) => (
+			struct.stat !== "AASite-QuadMg1" && struct.stat !== "A0TankTrap" && struct.stat !== "GuardTower6")
+		);
+		// Southwest scav base
+		camManageTrucks(CAM_THE_COLLECTIVE, {
+			label: "scavSWBase",
+			rebuildBase: true,
+			respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
+			template: cTempl.crane,
+			structset: scavStructsSW
+		});
+		if (difficulty >= MEDIUM)
+		{
+			// Northeast scav base
+			camManageTrucks(CAM_THE_COLLECTIVE, {
+				label: "scavNEBase",
+				rebuildBase: true,
+				respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
+				template: cTempl.crane,
+				structset: camAreaToStructSet("scavBase2")
+			});
+		}
+		if (difficulty >= HARD)
+		{
+			// Southwest scav base (again)
+			camManageTrucks(CAM_THE_COLLECTIVE, {
+				label: "scavSWBase",
+				rebuildBase: true,
+				respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
+				template: cTempl.crane,
+				structset: scavStructsSW
+			});
+		}
+	}
 
 	baitActive = false;
 	ambushSprung = false;

@@ -264,6 +264,12 @@
 		"pos2": [7936, 7296]
 	},
 
+	"area_20": {
+		"label": "scavCraneZone",
+		"pos1": [768, 384],
+		"pos2": [4480, 5248]
+	},
+
 
 	"object_0": {
 		"label": "uplink",

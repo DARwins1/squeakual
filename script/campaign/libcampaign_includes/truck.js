@@ -232,7 +232,14 @@ function camRebuildTruck(index, force)
 
 	if (!force && (!camDef(__camEnemyBases[ti.label]) || (camBaseIsEliminated(ti.label) && !ti.rebuildBase)))
 	{
-		return false; // Truck's base was destroyed after queuing (or doesn't exist)
+		return false; // Truck's base was destroyed (and we can't rebuild) after queuing (or doesn't exist)
+	}
+
+	if (!force && camDef(__camEnemyBases[ti.label]) && camBaseIsEliminated(ti.label) && ti.rebuildBase && !camAreaSecure(ti.area, ti.player))
+	{
+		// Truck's base area is compromised, requeue the rebuild request and check if it's clear later
+		queue("camRebuildTruck", ti.respawnDelay, index);
+		return false;
 	}
 
 	if (ti.truckDroid !== undefined)
@@ -331,7 +338,6 @@ function camAssignTruck(droid, index)
 //;; ## camAreaToStructSet(area[, player])
 //;; Generate a structure set using the structures in the given area.
 //;; If a player is provided, only consider structures belonging to that player.
-//;; NOTE: Currently, rotation is NOT provided.
 function camAreaToStructSet(area, player)
 {
 	let a = area;
@@ -350,7 +356,9 @@ function camAreaToStructSet(area, player)
 	{
 		// Note: The spelling of ".Id" instead of ".id" here is correct!
 		structSet.push({stat: camGetCompStats(structure.name, "Building").Id, 
-			x: structure.x, y: structure.y, rot: structure.direction, mods: structure.modules});
+			x: structure.x, y: structure.y, 
+			rot: (structure.direction > 2) ? (structure.direction - 1) : structure.direction, // HACK: Structure directions seem to increase by one after 180 degrees?
+			mods: structure.modules});
 	}
 
 	return structSet;

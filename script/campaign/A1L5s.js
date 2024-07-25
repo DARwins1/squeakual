@@ -5,7 +5,14 @@ function eventStartLevel()
 	camSetupTransporter(46, 11, 68, 2);
 	centreView(46, 11);
 	setNoGoArea(45, 10, 47, 12, CAM_HUMAN_PLAYER);
-	setMissionTime(camChangeOnDiff(camHoursToSeconds(1.25)));
+	if (!tweakOptions.rec_timerlessMode)
+	{
+		setMissionTime(camChangeOnDiff(camHoursToSeconds(1.25)));
+	}
+	else
+	{
+		setMissionTime(-1);
+	}
 	camSetStandardWinLossConditions(CAM_VICTORY_PRE_OFFWORLD, "A1L5");
 
 	// Give player briefing.

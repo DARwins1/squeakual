@@ -21,7 +21,7 @@
     "InfBunker": {
         "armour": 12,
         "breadth": 1,
-        "buildPoints": 10,
+        "buildPoints": 300,
         "buildPower": 100,
         "ecmID": "ZNULLECM",
         "height": 1,
@@ -44,7 +44,7 @@
     "InfFactory": {
         "armour": 5,
         "breadth": 1,
-        "buildPoints": 1,
+        "buildPoints": 400,
         "buildPower": 20,
         "ecmID": "ZNULLECM",
         "height": 2,
@@ -66,7 +66,7 @@
     "InfFlameTower": {
         "armour": 7,
         "breadth": 1,
-        "buildPoints": 10,
+        "buildPoints": 150,
         "buildPower": 100,
         "ecmID": "ZNULLECM",
         "height": 2,
@@ -89,7 +89,7 @@
     "InfGunTower": {
         "armour": 7,
         "breadth": 1,
-        "buildPoints": 10,
+        "buildPoints": 150,
         "buildPower": 100,
         "ecmID": "ZNULLECM",
         "height": 2,
@@ -112,7 +112,7 @@
     "InfGunTowerEND": {
         "armour": 7,
         "breadth": 1,
-        "buildPoints": 10,
+        "buildPoints": 150,
         "buildPower": 20,
         "ecmID": "ZNULLECM",
         "height": 2,
@@ -135,7 +135,7 @@
     "InfHorizontalWall": {
         "armour": 7,
         "breadth": 1,
-        "buildPoints": 10,
+        "buildPoints": 50,
         "buildPower": 10,
         "ecmID": "ZNULLECM",
         "height": 2,
@@ -154,7 +154,7 @@
     "InfMortarPit": {
         "armour": 10,
         "breadth": 1,
-        "buildPoints": 1,
+        "buildPoints": 200,
         "buildPower": 10,
         "ecmID": "ZNULLECM",
         "height": 1,
@@ -177,7 +177,7 @@
     "InfPowerGenerator": {
         "armour": 5,
         "breadth": 1,
-        "buildPoints": 1,
+        "buildPoints": 200,
         "buildPower": 10,
         "ecmID": "ZNULLECM",
         "height": 2,
@@ -199,7 +199,7 @@
     "InfRocketPit": {
         "armour": 10,
         "breadth": 1,
-        "buildPoints": 1,
+        "buildPoints": 200,
         "buildPower": 10,
         "ecmID": "ZNULLECM",
         "height": 1,
@@ -222,7 +222,7 @@
     "InfRocketPitAT": {
         "armour": 10,
         "breadth": 1,
-        "buildPoints": 1,
+        "buildPoints": 200,
         "buildPower": 10,
         "ecmID": "ZNULLECM",
         "height": 1,
@@ -245,7 +245,7 @@
     "InfCornerWall": {
         "armour": 5,
         "breadth": 1,
-        "buildPoints": 3,
+        "buildPoints": 50,
         "buildPower": 20,
         "ecmID": "ZNULLECM",
         "height": 2,
@@ -264,7 +264,7 @@
     "InfCannonTower": {
         "armour": 10,
         "breadth": 1,
-        "buildPoints": 5,
+        "buildPoints": 150,
         "buildPower": 10,
         "ecmID": "ZNULLECM",
         "height": 2,
@@ -287,7 +287,7 @@
     "InfestedLookOutTower": {
         "armour": 5,
         "breadth": 1,
-        "buildPoints": 5,
+        "buildPoints": 100,
         "buildPower": 5,
         "ecmID": "ZNULLECM",
         "height": 2,
@@ -306,7 +306,7 @@
     "A0BaBaBunker": {
         "armour": 12,
         "breadth": 1,
-        "buildPoints": 10,
+        "buildPoints": 300,
         "buildPower": 100,
         "ecmID": "ZNULLECM",
         "height": 1,
@@ -329,7 +329,7 @@
     "A0BaBaFactory": {
         "armour": 5,
         "breadth": 1,
-        "buildPoints": 1,
+        "buildPoints": 400,
         "buildPower": 20,
         "ecmID": "ZNULLECM",
         "height": 2,
@@ -351,7 +351,7 @@
     "A0BaBaFlameTower": {
         "armour": 7,
         "breadth": 1,
-        "buildPoints": 10,
+        "buildPoints": 150,
         "buildPower": 100,
         "ecmID": "ZNULLECM",
         "height": 2,
@@ -374,7 +374,7 @@
     "A0BaBaGunTower": {
         "armour": 7,
         "breadth": 1,
-        "buildPoints": 10,
+        "buildPoints": 150,
         "buildPower": 100,
         "ecmID": "ZNULLECM",
         "height": 2,
@@ -397,7 +397,7 @@
     "A0BaBaGunTowerEND": {
         "armour": 7,
         "breadth": 1,
-        "buildPoints": 10,
+        "buildPoints": 150,
         "buildPower": 20,
         "ecmID": "ZNULLECM",
         "height": 2,
@@ -420,7 +420,7 @@
     "A0BaBaHorizontalWall": {
         "armour": 7,
         "breadth": 1,
-        "buildPoints": 10,
+        "buildPoints": 50,
         "buildPower": 10,
         "ecmID": "ZNULLECM",
         "height": 2,
@@ -439,7 +439,7 @@
     "A0BaBaMortarPit": {
         "armour": 10,
         "breadth": 1,
-        "buildPoints": 1,
+        "buildPoints": 200,
         "buildPower": 10,
         "ecmID": "ZNULLECM",
         "height": 1,
@@ -462,7 +462,7 @@
     "A0BaBaPowerGenerator": {
         "armour": 5,
         "breadth": 1,
-        "buildPoints": 1,
+        "buildPoints": 200,
         "buildPower": 10,
         "ecmID": "ZNULLECM",
         "height": 2,
@@ -484,7 +484,7 @@
     "A0BaBaRocketPit": {
         "armour": 10,
         "breadth": 1,
-        "buildPoints": 1,
+        "buildPoints": 200,
         "buildPower": 10,
         "ecmID": "ZNULLECM",
         "height": 1,
@@ -507,7 +507,7 @@
     "A0BaBaRocketPitAT": {
         "armour": 10,
         "breadth": 1,
-        "buildPoints": 1,
+        "buildPoints": 200,
         "buildPower": 10,
         "ecmID": "ZNULLECM",
         "height": 1,
@@ -530,7 +530,7 @@
     "A0BaBaRocketPitAT-2": {
         "armour": 10,
         "breadth": 1,
-        "buildPoints": 1,
+        "buildPoints": 200,
         "buildPower": 10,
         "ecmID": "ZNULLECM",
         "height": 1,
@@ -553,7 +553,7 @@
     "A0BaBaCannonPit": {
         "armour": 10,
         "breadth": 1,
-        "buildPoints": 1,
+        "buildPoints": 200,
         "buildPower": 10,
         "ecmID": "ZNULLECM",
         "height": 1,
@@ -576,7 +576,7 @@
     "A0BaBaMRAPit": {
         "armour": 10,
         "breadth": 1,
-        "buildPoints": 1,
+        "buildPoints": 200,
         "buildPower": 10,
         "ecmID": "ZNULLECM",
         "height": 1,
@@ -599,7 +599,7 @@
     "A0BabaCornerWall": {
         "armour": 5,
         "breadth": 1,
-        "buildPoints": 3,
+        "buildPoints": 50,
         "buildPower": 20,
         "ecmID": "ZNULLECM",
         "height": 2,
@@ -618,7 +618,7 @@
     "A0CannonTower": {
         "armour": 10,
         "breadth": 1,
-        "buildPoints": 5,
+        "buildPoints": 150,
         "buildPower": 10,
         "ecmID": "ZNULLECM",
         "height": 2,
@@ -1870,7 +1870,7 @@
     "LookOutTower": {
         "armour": 5,
         "breadth": 1,
-        "buildPoints": 5,
+        "buildPoints": 50,
         "buildPower": 5,
         "ecmID": "ZNULLECM",
         "height": 2,

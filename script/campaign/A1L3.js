@@ -486,7 +486,6 @@ function eventStartLevel()
 		"redFactory5": { tech: "R-Wpn-Flamer-Damage03" }, // High Temperature Flamer Gel Mk3
 	});
 
-	setMissionTime(camChangeOnDiff(camHoursToSeconds(1)));
 	camCompleteRequiredResearch(mis_scavResearch, MIS_ORANGE_SCAVS);
 	camCompleteRequiredResearch(mis_scavResearch, MIS_RED_SCAVS);
 	camCompleteRequiredResearch(mis_collectiveResearch, CAM_THE_COLLECTIVE);
@@ -694,6 +693,88 @@ function eventStartLevel()
 	// Start these immediately
 	camEnableFactory("redFactory1");
 	camEnableFactory("redFactory3");
+
+	if (tweakOptions.rec_timerlessMode)
+	{
+		switch (difficulty)
+		{
+			case INSANE:
+				// Cranes for the red roadblock base and orange central crater base
+				camManageTrucks(MIS_ORANGE_SCAVS, {
+					label: "orangeSouthCraterBase",
+					rebuildBase: true,
+					respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
+					template: cTempl.crane,
+					structset: camAreaToStructSet("orangeBase3")
+				});
+				camManageTrucks(MIS_RED_SCAVS, {
+					label: "redRoadblockBase",
+					rebuildBase: true,
+					respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
+					template: cTempl.crane,
+					structset: camAreaToStructSet("redBase1")
+				});
+			case HARD: // NOTE: Fall-through here! We still add Cranes from lower difficulties!
+				// Cranes for the red north road base, and orange northeast crater base
+				camManageTrucks(MIS_RED_SCAVS, {
+					label: "redNorthRoadBase",
+					rebuildBase: true,
+					respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
+					template: cTempl.crane,
+					structset: camAreaToStructSet("redBase2")
+				});
+				camManageTrucks(MIS_ORANGE_SCAVS, {
+					label: "orangeNorthCraterBase",
+					rebuildBase: true,
+					respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
+					template: cTempl.crane,
+					structset: camAreaToStructSet("orangeBase4")
+				});
+			case MEDIUM:
+				// Cranes for the south red base and northwest orange base
+				camManageTrucks(MIS_RED_SCAVS, {
+					label: "redSouthRoadBase",
+					rebuildBase: true,
+					respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
+					template: cTempl.crane,
+					structset: camAreaToStructSet("redBase4")
+				});
+				camManageTrucks(MIS_ORANGE_SCAVS, {
+					label: "orangeNorthRoadBase",
+					rebuildBase: true,
+					respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
+					template: cTempl.crane,
+					structset: camAreaToStructSet("orangeBase1")
+				});
+			default:
+				// Cranes for the red uplink base, plateau base, and orange hill base
+				camManageTrucks(MIS_RED_SCAVS, {
+					label: "redUplinkBase",
+					rebuildBase: true,
+					respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
+					template: cTempl.crane,
+					structset: camAreaToStructSet("redBase5")
+				});
+				camManageTrucks(MIS_RED_SCAVS, {
+					label: "redPlateauBase",
+					rebuildBase: true,
+					respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
+					template: cTempl.crane,
+					structset: camAreaToStructSet("redBase3")
+				});
+				camManageTrucks(MIS_ORANGE_SCAVS, {
+					label: "orangePlateauBase",
+					rebuildBase: true,
+					respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
+					template: cTempl.crane,
+					structset: camAreaToStructSet("orangeBase2")
+				});
+		}
+	}
+	else
+	{
+		setMissionTime(camChangeOnDiff(camHoursToSeconds(1)));
+	}
 
 	// NOTE: The scavenger factories activate pretty quickly on this mission
 	queue("groupPatrol", camSecondsToMilliseconds(5));

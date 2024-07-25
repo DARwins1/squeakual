@@ -1045,6 +1045,36 @@ function camAutoReplaceObjectLabel(label)
 	__camLabelInfo.push({label: label, player: obj.player, x: obj.x, y: obj.y, stattype: obj.stattype});
 }
 
+//;; ## camAreaSecure(area[, player])
+//;; Returns true if the area contains no units or structures hostile to the given player.
+//;; If no player is provided, defaults to CAM_HUMAN_PLAYER.
+//;;
+//;; @param {string|Object} area
+//;; @param {number} player
+//;; @returns {boolean}
+//;;
+function camAreaSecure(area, player)
+{
+	let a = area;
+	if (camIsString(area))
+	{
+		a = getObject(area);
+	}
+	let x1 = x;
+	let y1 = y;
+	let x2 = x2;
+	let y2 = y2;
+
+	if (!player)
+	{
+		player = CAM_HUMAN_PLAYER;
+	}
+
+	return enumArea(x1, y1, x2, y2, ALL_PLAYERS, false).filter((obj) => (
+		(obj.type === STRUCTURE || obj.type === DROID) && allianceExistsBetween(obj.player, player))
+	).length === 0;
+}
+
 //////////// privates
 
 function __camGlobalContext()

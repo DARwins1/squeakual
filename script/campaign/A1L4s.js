@@ -5,7 +5,14 @@ function eventStartLevel()
 	camSetupTransporter(46, 11, 34, 2);
 	centreView(46, 11);
 	setNoGoArea(45, 10, 47, 12, CAM_HUMAN_PLAYER);
-	setMissionTime(camChangeOnDiff(camMinutesToSeconds(20)));
+	if (!tweakOptions.rec_timerlessMode)
+	{
+		setMissionTime(camChangeOnDiff(camMinutesToSeconds(20)));
+	}
+	else
+	{
+		setMissionTime(-1);
+	}
 	camSetStandardWinLossConditions(CAM_VICTORY_PRE_OFFWORLD, "A1L4");
 
 	// In case the player didn't get this in the last mission
