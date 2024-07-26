@@ -372,7 +372,7 @@ function eventStartLevel()
 	if (tweakOptions.rec_timerlessMode)
 	{
 		// Filter out non-scavenger structures in the SW base
-		const scavStructsSW = camAreaToStructSet("scavOuterBase4").filter((struct) => (
+		const scavStructsSW = camAreaToStructSet("scavBase1").filter((struct) => (
 			struct.stat !== "AASite-QuadMg1" && struct.stat !== "A0TankTrap" && struct.stat !== "GuardTower6")
 		);
 		// Southwest scav base
