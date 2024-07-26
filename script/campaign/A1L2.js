@@ -942,6 +942,8 @@ function eventStartLevel()
 		}
 	}
 
+	camAutoReplaceObjectLabel(["heliTower1", "heliTower2"]);
+
 	queue("groupPatrol", camChangeOnDiff(camMinutesToMilliseconds(0.25)));
 	queue("ambushLZ", camChangeOnDiff(camMinutesToMilliseconds(2.5)));
 	queue("enableFirstFactories", camChangeOnDiff(camMinutesToMilliseconds(2.5)));

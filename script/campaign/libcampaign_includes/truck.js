@@ -238,7 +238,7 @@ function camRebuildTruck(index, force)
 	if (!force && camDef(__camEnemyBases[ti.label]) && camBaseIsEliminated(ti.label) && ti.rebuildBase && !camAreaSecure(ti.area, ti.player))
 	{
 		// Truck's base area is compromised, requeue the rebuild request and check if it's clear later
-		queue("camRebuildTruck", ti.respawnDelay, index);
+		queue("camRebuildTruck", ti.respawnDelay, "" + index);
 		return false;
 	}
 
@@ -671,6 +671,12 @@ function __camAssignTruck(droid)
 		// This will be the index in __camTruckInfo that is awaiting a new truck
 		const __AWAITING_INDEX = __camTruckAssignList[i];
 		const ti = __camTruckInfo[__AWAITING_INDEX];
+
+		if (!camDef(ti.template))
+		{
+			// No template defined, skip this index
+			continue;
+		}
 
 		const __PLAYER = ti.player;
 		const __BODY = ti.template.body;

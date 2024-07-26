@@ -98,11 +98,15 @@ function __checkVtolSpawnObject()
 {
 	for (let idx = 0, len = __camVtolDataSystem.length; idx < len; ++idx)
 	{
-		if (__camVtolDataSystem[idx].active && camDef(__camVtolDataSystem[idx].spawnStopObject))
+		if (/*__camVtolDataSystem[idx].active && */camDef(__camVtolDataSystem[idx].spawnStopObject))
 		{
 			if (getObject(__camVtolDataSystem[idx].spawnStopObject) === null)
 			{
 				camSetVtolSpawnState(false, idx); //Deactivate hit and runner VTOLs.
+			}
+			else
+			{
+				camSetVtolSpawnState(true, idx); // Remain active/reactivate
 			}
 		}
 	}

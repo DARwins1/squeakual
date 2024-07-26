@@ -407,6 +407,8 @@ function eventStartLevel()
 		}
 	}
 
+	camAutoReplaceObjectLabel(["heliTower1", "heliTower2"]);
+
 	baitActive = false;
 	ambushSprung = false;
 	collectiveActive = false;

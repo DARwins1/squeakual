@@ -686,6 +686,8 @@ function eventStartLevel()
 		setReinforcementTime(camMinutesToSeconds(2)); // 2 min.
 	}
 
+	camAutoReplaceObjectLabel("heliTower");
+
 	orangeAggrod = false;
 	pinkAggrod = false;
 	redAggrod = false;

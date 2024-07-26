@@ -776,6 +776,8 @@ function eventStartLevel()
 		setMissionTime(camChangeOnDiff(camHoursToSeconds(1)));
 	}
 
+	camAutoReplaceObjectLabel(["heliTower1", "heliTower2"]);
+
 	// NOTE: The scavenger factories activate pretty quickly on this mission
 	queue("groupPatrol", camSecondsToMilliseconds(5));
 	queue("scavAttack1", camChangeOnDiff(camSecondsToMilliseconds(20)));
