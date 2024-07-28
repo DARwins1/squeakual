@@ -984,6 +984,14 @@ function camFactoryCanProduceTemplate(template, factory)
 		}
 		// NOTE: While Cyborg bodies are also technically "LIGHT", any sane cyborg template should be vetted by the next check.
 	}
+	else
+	{
+		if (tempate.body === "ScavCraneBody")
+		{
+			// Don't buid scav cranes out of normal factories
+			return false;
+		}
+	}
 
 	// Last, check if the propulsion matches the factory type
 	switch (factory.stattype)

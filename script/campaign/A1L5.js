@@ -47,7 +47,7 @@ function heliAttack1()
 		limit: [1, 1],
 		alternate: true
 	};
-	camSetVtolData(CAM_THE_COLLECTIVE, "heliAttackPos1", "heliRemoveZone", templates, camChangeOnDiff(camSecondsToMilliseconds(60)), "heliTower1", ext);
+	camSetVtolData(CAM_THE_COLLECTIVE, "heliAttackPos1", "heliRemoveZone", templates, camChangeOnDiff(camSecondsToMilliseconds(90)), "heliTower1", ext);
 }
 
 function heliAttack2()
@@ -56,7 +56,7 @@ function heliAttack2()
 	const ext = {
 		limit: 1
 	};
-	camSetVtolData(CAM_THE_COLLECTIVE, "heliAttackPos2", "heliRemoveZone", templates, camChangeOnDiff(camSecondsToMilliseconds(45)), "heliTower2", ext);
+	camSetVtolData(CAM_THE_COLLECTIVE, "heliAttackPos2", "heliRemoveZone", templates, camChangeOnDiff(camSecondsToMilliseconds(60)), "heliTower2", ext);
 }
 
 function activateBait()
@@ -373,7 +373,7 @@ function eventStartLevel()
 	{
 		// Filter out non-scavenger structures in the SW base
 		const scavStructsSW = camAreaToStructSet("scavBase1").filter((struct) => (
-			struct.stat !== "AASite-QuadMg1" && struct.stat !== "A0TankTrap" && struct.stat !== "GuardTower6")
+			struct.stat !== "AASite-QuadMg1" && struct.stat !== "A0TankTrap" && struct.stat !== "GuardTower6" && struct.stat !== "GuardTower3")
 		);
 		// Southwest scav base
 		camManageTrucks(CAM_THE_COLLECTIVE, {

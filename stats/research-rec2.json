@@ -1715,7 +1715,7 @@
         "requiredResearch": [
             "R-Defense-WallUpgrade01"
         ],
-        "researchPoints": 1200,
+        "researchPoints": 800,
         "researchPower": 37,
         "results": [
             {
@@ -1743,7 +1743,7 @@
         "requiredResearch": [
             "R-Struc-Materials01"
         ],
-        "researchPoints": 2400,
+        "researchPoints": 1000,
         "researchPower": 75,
         "results": [
             {
@@ -1773,7 +1773,7 @@
             "R-Defense-WallUpgrade03",
             "R-Struc-Materials02"
         ],
-        "researchPoints": 3600,
+        "researchPoints": 1200,
         "researchPower": 112,
         "results": [
             {
