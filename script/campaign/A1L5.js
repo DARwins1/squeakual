@@ -357,12 +357,14 @@ function eventStartLevel()
 	const colBaseStructs = camAreaToStructSet("colBase");
 	colTruckJob1 = camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colMainBase",
+		rebuildTruck: (tweakOptions.rec_timerlessMode || difficulty >= MEDIUM); // Don't rebuild this truck unless we're on timerless mode (or on Normal+)
 		respawnDelay: (tweakOptions.rec_timerlessMode) ? (TRUCK_TIME / 2) : TRUCK_TIME,
 		template: cTempl.coltruckht,
 		structset: colBaseStructs
 	});
 	colTruckJob2 = camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colMainBase",
+		rebuildTruck: tweakOptions.rec_timerlessMode; // Don't rebuild this truck unless we're on timerless mode
 		respawnDelay: (tweakOptions.rec_timerlessMode) ? (TRUCK_TIME / 2) : TRUCK_TIME,
 		template: cTempl.coltruckht,
 		structset: colBaseStructs
