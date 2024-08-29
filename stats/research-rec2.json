@@ -2533,8 +2533,7 @@
         "id": "R-Wpn-Flamer-Damage03",
         "name": "High Temperature Flamer Gel Mk3",
         "requiredResearch": [
-            "R-Wpn-Flamer-Damage02",
-            "R-Wpn-Flame2"
+            "R-Wpn-Flamer-Damage02"
         ],
         "researchPoints": 1100,
         "researchPower": 75,
@@ -4572,6 +4571,7 @@
     "R-Wpn-AAGun-Damage02": {
         "iconID": "IMAGE_RES_WEAPONTECH",
         "id": "R-Wpn-AAGun-Damage02",
+        "keyTopic": 1,
         "name": "AA HE Flak Mk2",
         "requiredResearch": [
             "R-Wpn-AAGun-Damage01"
@@ -4631,6 +4631,7 @@
     "R-Wpn-AAGun-ROF01": {
         "iconID": "IMAGE_RES_WEAPONTECH",
         "id": "R-Wpn-AAGun-ROF01",
+        "keyTopic": 1,
         "msgName": "RES_W_AAROF1",
         "name": "AA Ammunition Hopper",
         "requiredResearch": [

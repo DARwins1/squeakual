@@ -601,7 +601,7 @@ function eventStartLevel()
 	{
 		// Timerless mode disables the mission time limit on *almost* every mission.
 		// To balance this, the player's max power is severely limited and enemies rebuild stuff more frequently.
-		// This is to discourage the player from just mindlessly waiting around accumulating resources or "grinding" enemies down through sheer attrition.
+		// This is to discourage the player from just mindlessly waiting around accumulating resources or "grinding" enemies down over time through sheer attrition.
 		// This is pretty similar to how Fractured Kingdom is balanced without a timer.
 		// Also note that the player's power reserves are completely refilled between missions, so there's no point in loitering around purely for resources.
 

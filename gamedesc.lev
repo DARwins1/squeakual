@@ -133,3 +133,16 @@ expand		A1L6
 dataset		REC_2
 game		"wrf/act1/A1L6.gam"
 data		"wrf/act1/A1L6.wrf"
+
+/* act 2 */
+
+camstart	A2L1
+dataset		REC_2
+game		"wrf/act2/A2L1.gam"
+data		"wrf/act2/A2L1.wrf"
+
+camchange	A2L1
+dataset		REC_2
+data		"wrf/act2/cam3change.wrf"
+game		"wrf/act2/A2L1.gam"
+data		"wrf/act2/A2L1.wrf"

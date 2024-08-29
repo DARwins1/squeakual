@@ -986,7 +986,7 @@ function camFactoryCanProduceTemplate(template, factory)
 	}
 	else
 	{
-		if (tempate.body === "ScavCraneBody")
+		if (template.body === "ScavCraneBody")
 		{
 			// Don't buid scav cranes out of normal factories
 			return false;

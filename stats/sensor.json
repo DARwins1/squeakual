@@ -110,7 +110,7 @@
         "mountModel": "TRMSNSR2.PIE",
         "name": "CB Radar Turret",
         "power": 1000,
-        "range": 2048,
+        "range": 1536,
         "sensorModel": "GNMECM2.PIE",
         "type": "INDIRECT CB",
         "weight": 100
@@ -140,7 +140,7 @@
         "mountModel": "TRHSNSR3.PIE",
         "name": "VTOL CB Radar Turret",
         "power": 1000,
-        "range": 2048,
+        "range": 1536,
         "sensorModel": "GNHSNSR3.PIE",
         "type": "VTOL CB",
         "weight": 100
@@ -184,7 +184,7 @@
         "mountModel": "TRMECM2.PIE",
         "name": "VTOL Strike Turret",
         "power": 1000,
-        "range": 2048,
+        "range": 1536,
         "sensorModel": "GNMSNSR2.PIE",
         "type": "VTOL INTERCEPT",
         "weight": 100

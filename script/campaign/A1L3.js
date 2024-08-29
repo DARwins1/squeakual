@@ -461,9 +461,10 @@ function eventStructureBuilt(struct, droid)
 function adaptEnemyColors()
 {
 	// Make sure the scavengers aren't choosing conflicting colors with the player
-	changePlayerColour(CAM_THE_COLLECTIVE, (playerColour !== 2) ? 2 : 10); // Set to gray or white
-	changePlayerColour(MIS_ORANGE_SCAVS, (playerColour !== 1) ? 1 : 8); // Set to orange or yellow
-	changePlayerColour(MIS_RED_SCAVS, (playerColour !== 4) ? 4 : 13); // Set to red or infrared
+	const PLAYER_COLOR = playerData[0].colour;
+	changePlayerColour(CAM_THE_COLLECTIVE, (PLAYER_COLOR !== 2) ? 2 : 10); // Set to gray or white
+	changePlayerColour(MIS_ORANGE_SCAVS, (PLAYER_COLOR !== 1) ? 1 : 8); // Set to orange or yellow
+	changePlayerColour(MIS_RED_SCAVS, (PLAYER_COLOR !== 4) ? 4 : 13); // Set to red or infrared
 }
 
 function eventStartLevel()
@@ -476,7 +477,6 @@ function eventStartLevel()
 	centreView(startPos.x, startPos.y);
 	setNoGoArea(lz.x, lz.y, lz.x2, lz.y2, CAM_HUMAN_PLAYER);
 
-	playerColour = playerData[0].colour;
 	adaptEnemyColors();
 
 	// An artifact for the Heavy Machinegun is added later, once the Collective start building their LZ
