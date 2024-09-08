@@ -5,7 +5,7 @@
   "type": "alternateCampaign",
   "license": "GPL-2.0-or-later",
   "minVersionSupported": "4.4.2",
-  "maxVersionTested": "4.5.0",
+  "maxVersionTested": "4.5.2",
   "description": {
      "en": "(Prequel) Set out under the command of renowned General Edmund Clayde with the goal of laying the foundations of a new world. What could possibly go wrong?"
   },
