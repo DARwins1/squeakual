@@ -74,4 +74,12 @@ const camAct2StartResearch = [
 	"R-Defense-WallUpgrade02", "R-Struc-Materials01", "R-Struc-Materials02",
 ].concat(camA1L4AllyResearch);
 
+// Used to grant research to team Delta on A2L2
+const camA2L2AllyResearch = camAct2StartResearch.concat([
+	// A2L1
+	"R-Defense-WallUpgrade03", "R-Struc-Materials03", "R-Wpn-AAGun-Damage01",
+	"R-Struc-Factory-Module", "R-Struc-RepairFacility", "R-Vehicle-Body05",
+	"R-Wpn-Cannon2Mk1", "R-Defense-WallTower03", "R-Wpn-Cannon-Damage03",
+]);
+
 //...

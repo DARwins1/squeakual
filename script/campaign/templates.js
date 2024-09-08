@@ -57,9 +57,14 @@ pllmraw: { body: "Body1REC", prop: "wheeled01", weap: "Rocket-MRL" }, // Mini-Ro
 pllrepw: { body: "Body1REC", prop: "wheeled01", weap: "LightRepair1" }, // Repair Turret Viper Wheels
 pllpodw: { body: "Body1REC", prop: "wheeled01", weap: "Rocket-Pod" }, // Mini-Rocket Pod Viper Wheels
 pllsarw: { body: "Body1REC", prop: "wheeled01", weap: "Rocket-LtA-TMk1" }, // Sarissa Viper Wheels
+pllaaw: { body: "Body1REC", prop: "wheeled01", weap: "QuadMg1AAGun" }, // Hurricane Viper Wheels
 pllhmght: { body: "Body1REC", prop: "HalfTrack", weap: "MG3Mk1" }, // Heavy Machinegun Viper Half-tracks
 pllcanht: { body: "Body1REC", prop: "HalfTrack", weap: "Cannon1Mk1" }, // Light Cannon Viper Half-tracks
+pllpodht: { body: "Body1REC", prop: "HalfTrack", weap: "Rocket-Pod" }, // Mini-Rocket Pod Viper Half-tracks
+plllanht: { body: "Body1REC", prop: "HalfTrack", weap: "Rocket-LtA-T" }, // Lancer Viper Half-tracks
+pllmraht: { body: "Body1REC", prop: "HalfTrack", weap: "Rocket-MRL" }, // Mini-Rocket Array Viper Half-tracks
 pllcomht: { body: "Body1REC", prop: "HalfTrack", weap: "CommandBrain01" }, // Command Turret Viper Half-tracks
+pllstrikeht: { body: "Body1REC", prop: "HalfTrack", weap: "Sys-VstrikeTurret01" }, // VTOL Strike Turret Viper Half-tracks
 pllcant: { body: "Body1REC", prop: "tracked01", weap: "Cannon1Mk1" }, // Light Cannon Viper Tracks
 plltmgt: { body: "Body1REC", prop: "tracked01", weap: "MG2Mk1" }, // Twin Machinegun Viper Tracks
 pllpodt: { body: "Body1REC", prop: "tracked01", weap: "Rocket-Pod" }, // Mini-Rocket Pod Viper Tracks
@@ -76,13 +81,14 @@ plmatt: { body: "Body5REC", prop: "tracked01", weap: "Rocket-LtA-T" }, // Lancer
 plmrept: { body: "Body5REC", prop: "tracked01", weap: "LightRepair1" }, // Repair Turret Cobra Tracks
 plhasgnt: { body: "Body11ABT", prop: "tracked01", weap: "MG4ROTARYMk1" }, // Assault Gun Python Tracks
 plhhpvt: { body: "Body11ABT", prop: "tracked01", weap: "Cannon4AUTOMk1" }, // Hyper Velocity Cannon Python Tracks
-plhaacnt: { body: "Body11ABT", prop: "tracked01", weap: "AAGun2Mk1" }, // Whirlwind Python Tracks
+plhraat: { body: "Body11ABT", prop: "tracked01", weap: "AAGun2Mk1" }, // Whirlwind Python Tracks
 
 pllcanv: { body: "Body1REC", prop: "V-Tol", weap: "Cannon1-VTOL" }, // Light Cannon Viper VTOL
 pllpodv: { body: "Body1REC", prop: "V-Tol", weap: "Rocket-VTOL-Pod" }, // Mini-Rocket Pod Viper VTOL
 pllhmgv: { body: "Body1REC", prop: "V-Tol", weap: "MG3-VTOL" }, // Heavy Machinegun Viper VTOL
 pllsarv: { body: "Body1REC", prop: "V-Tol", weap: "Rocket-VTOL-LtA-TMk1" }, // Sarissa Viper VTOL
 plllanv: { body: "Body1REC", prop: "V-Tol", weap: "Rocket-VTOL-LtA-T" }, // Lancer Viper VTOL
+pllbombv: { body: "Body1REC", prop: "V-Tol", weap: "Bomb1-VTOL-LtHE" }, // Cluster Bomb Viper VTOL
 
 // Cyborgs:
 cybrp: { body: "CyborgLightBody", prop: "CyborgLegs", weap: "CyborgRepair" }, // Mechanic Cyborg

@@ -199,7 +199,7 @@ function eventTransporterLanded(transport)
 				donateObject(obj, CAM_HUMAN_PLAYER);
 			}
 
-			camSetStandardWinLossConditions(CAM_VICTORY_STANDARD, "THE_END");
+			camSetStandardWinLossConditions(CAM_VICTORY_STANDARD, "A2L2S");
 		}
 
 		transporterIndex += 1;

@@ -2394,8 +2394,7 @@
         "id": "R-Wpn-Cannon-Damage03",
         "name": "HEAT Cannon Shells Mk3",
         "requiredResearch": [
-            "R-Wpn-Rocket-Damage03",
-            "R-Wpn-Cannon-Damage02"
+            "R-Wpn-Cannon2Mk1"
         ],
         "researchPoints": 3600,
         "researchPower": 112,
@@ -3031,9 +3030,9 @@
     "R-Wpn-Rocket-Accuracy02": {
         "iconID": "IMAGE_RES_WEAPONTECH",
         "id": "R-Wpn-Rocket-Accuracy02",
-        "name": "Stabilized Mini-Rockets Mk2",
+        "keyTopic": 1,
+        "name": "Improved Rocket Wire Guidance",
         "requiredResearch": [
-            "R-Struc-Research-Upgrade02",
             "R-Wpn-Rocket-Accuracy01"
         ],
         "researchPoints": 7200,
@@ -4774,6 +4773,7 @@
     "R-Wpn-Bomb-Damage01": {
         "iconID": "IMAGE_RES_WEAPONTECH",
         "id": "R-Wpn-Bomb-Damage01",
+        "keyTopic": 1,
         "imdName": "trlvtlhe.PIE",
         "msgName": "RES_W_BAC1",
         "name": "HE Bomb Shells",
@@ -4886,6 +4886,7 @@
         "name": "Phosphor Bomb Bay",
         "requiredResearch": [
             "R-Wpn-Bomb01",
+            "R-Wpn-Flame2",
             "R-Wpn-Flamer-Damage04"
         ],
         "researchPoints": 7200,

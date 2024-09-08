@@ -146,3 +146,12 @@ dataset		REC_2
 data		"wrf/act2/cam3change.wrf"
 game		"wrf/act2/A2L1.gam"
 data		"wrf/act2/A2L1.wrf"
+
+between		A2L2S
+dataset		REC_2
+data		"wrf/act2/A2L2s.wrf"
+
+miss_keep	A2L2
+dataset		REC_2
+game		"wrf/act2/A2L2.gam"
+data		"wrf/act2/A2L2.wrf"

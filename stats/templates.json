@@ -705,6 +705,16 @@
             "Rocket-LtA-T"
         ]
     },
+    "CO-M-MRA-Hover": {
+        "body": "Body6SUPP",
+        "id": "CO-M-MRA-Hover",
+        "name": "*CCO-M-MRA-Hover*",
+        "propulsion": "hover01",
+        "type": "DROID",
+        "weapons": [
+            "Rocket-MRL"
+        ]
+    },
     "CO-M-MedCan-Tracks": {
         "body": "Body6SUPP",
         "id": "CO-M-MedCan-Tracks",
@@ -797,11 +807,40 @@
         "sensor": "Sys-VstrikeTurret01",
         "type": "DROID"
     },
+    "ViperStrikeHalftrack": {
+        "body": "Body1REC",
+        "id": "ViperStrikeHalftrack",
+        "name": "VTOL Strike Turret Viper Half-tracks",
+        "propulsion": "HalfTrack",
+        "sensor": "Sys-VstrikeTurret01",
+        "type": "DROID"
+    },
+    "ViperHurricaneWheel": {
+        "body": "Body1REC",
+        "id": "ViperHurricaneWheel",
+        "name": "Hurricane AA Viper Wheels",
+        "propulsion": "wheeled01",
+        "type": "DROID",
+        "weapons": [
+            "QuadMg1AAGun"
+        ]
+    },
     "CobraComHalftrack": {
         "body": "Body5REC",
         "brain": "CommandBrain01",
         "id": "CobraComHalftrack",
         "name": "Command Turret Cobra Half-tracks",
+        "propulsion": "HalfTrack",
+        "type": "DROID_COMMAND",
+        "weapons": [
+            "CommandTurret1"
+        ]
+    },
+    "ViperComHalftrack": {
+        "body": "Body1REC",
+        "brain": "CommandBrain01",
+        "id": "ViperComHalftrack",
+        "name": "Command Turret Viper Half-tracks",
         "propulsion": "HalfTrack",
         "type": "DROID_COMMAND",
         "weapons": [
