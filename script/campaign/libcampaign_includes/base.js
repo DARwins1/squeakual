@@ -401,7 +401,7 @@ function __camCheckBaseEliminated(group)
 		}
 
 		// Check if any trucks should self-destruct
-		__camCheckBaseTrucks("baseLabel")
+		__camCheckBaseTrucks(baseLabel);
 
 		__camSetupConsoleForVictoryConditions();
 	}
