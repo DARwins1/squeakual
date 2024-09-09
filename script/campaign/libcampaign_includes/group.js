@@ -130,8 +130,8 @@ function camNeverGroupDroid(what, playerFilter)
 //;;	  are destroyed. Useful to avoid needing to list every single factory label in `factories`.
 //;;	* `templates` The templates of units that this group is composed of. If units are missing from the 
 //;;	  group, the list missing units can be found with the `camGetRefillableGroupTemplates()` function.
-//;;	* `obj` An object, that when destroyed, disables this group from pulling from factories. Useful for commander
-//;;	  squads that should stop refilling when the commander is dead.
+//;;	* `obj` An object, that when destroyed, disables this group from pulling from factories. If an object with this label 
+//;;	is later found, resume automatic refilling. Useful for commander squads that should stop refilling when the commander is dead.
 //;; * `order` The group order. (see tactics.js)
 //;; * `orderData` The data associated with the group's order. (see tactics.js)
 //;;
@@ -174,13 +174,14 @@ function camSetRefillableGroupData(group, groupData)
 		factories: (camDef(groupData.factories)) ? groupData.factories : [],
 		globalFill: (camDef(groupData.globalFill) && groupData.globalFill) ? groupData.globalFill : false,
 		templates: (camDef(groupData.templates)) ? groupData.templates : [],
-		obj: groupData.obj // may be undefined. FIXME: Seems to get set to null instead?
+		obj: groupData.obj, // may be undefined. FIXME: Seems to get set to null instead?
+		enabled: true // set to `false` when a defined `obj` is destroyed
 	};
 }
 
 //;; ## camDisableRefillableGroup(group)
 //;;
-//;; Shortcut function that disables a group from pulling more units automatically.
+//;; Shortcut function that (permanently) disables a group from pulling more units automatically.
 //;;
 //;; @param {number} group
 //;; @returns {void}
@@ -189,7 +190,8 @@ function camDisableRefillableGroup(group)
 {
 	camSetRefillableGroupData(group, {
 		templates: __camRefillableGroupInfo[group].templates,
-		obj: __camRefillableGroupInfo[group].obj
+		obj: __camRefillableGroupInfo[group].obj,
+		enabled: true
 		// `factories` and `globalFill` are left blank
 	});
 }
@@ -355,6 +357,12 @@ function __camGetRefillableTemplateForFactory(factoryLabel, factory)
 	for (const group in __camRefillableGroupInfo)
 	{
 		const gi = __camRefillableGroupInfo[group];
+		
+		if (!gi.enabled)
+		{
+			continue; // Auto-refilling disabled
+		}
+
 		const __VALID_FACTORY = gi.factories.includes(factoryLabel);
 		
 		// Check if the given factory can resupply this group
@@ -375,13 +383,18 @@ function __checkRefillableGroupObject()
 {
 	for (const group in __camRefillableGroupInfo)
 	{
-		if (camDef(__camRefillableGroupInfo[group].obj) && getObject(__camRefillableGroupInfo[group].obj) === null)
+		if (camDef(__camRefillableGroupInfo[group].obj))
 		{
-			camSetRefillableGroupData(group, {
-				templates: __camRefillableGroupInfo[group].templates,
-				// `factories`, `globalFill`, and `obj` are left blank
-				// since `globalFill` is disabled and `factories` is blank, this group will no longer automatically refill itself
-			});
+			if (getObject(__camRefillableGroupInfo[group].obj) === null)
+			{
+				// `obj` destroyed, disable auto refilling
+				__camRefillableGroupInfo[group].enabled = false;
+			}
+			else
+			{
+				// `obj` rebuilt, re-enable auto refilling
+				__camRefillableGroupInfo[group].enabled = true;
+			}
 		}
 	}
 }

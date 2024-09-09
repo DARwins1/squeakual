@@ -276,6 +276,17 @@
             "All vehicle factories upgraded automatically"
         ]
     },
+    "RES_ST_FU7": {
+        "id": "RES_ST_FU7",
+        "imdName": "MICAPSUL.pie",
+        "sequenceName": "res_struttech.ogg",
+        "text": [
+            "Production Improved",
+            "New Advanced Technology improves factory production",
+            "Increases factory production rate",
+            "All factories upgraded automatically"
+        ]
+    },
     "RES_ST_MAT4": {
         "id": "RES_ST_MAT4",
         "imdName": "MICAPSUL.pie",

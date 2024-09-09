@@ -35,11 +35,13 @@ camAreaEvent("ambushTrigger", function(droid)
 			repairPos: camMakePos("colFallbackPos")
 		});
 		camManageGroup(camMakeGroup("colAmbushRepairGroup"), CAM_ORDER_DEFEND, {
-			pos: camMakePos("colFallbackPos")
+			pos: camMakePos("colFallbackPos"),
+			radius: 6
 		});
 
 		camManageGroup(camMakeGroup("deltaDefenseGroup"), CAM_ORDER_DEFEND, {
-			pos: camMakePos("deltaDefensePos")
+			pos: camMakePos("deltaDefensePos"),
+			radius: 10
 		});
 
 		setTimer("checkLzAmbushGroup", camSecondsToMilliseconds(1)); // Check when the LZ is safe
@@ -112,7 +114,7 @@ function expandMap()
 	mapExpanded = true;
 
 	// Donate Delta objects
-	const deltaObjs = enumDroid(MIS_TEAM_DELTA).filter((droid) => (droid.type !== DROID_SUPERTRANSPORTER)).concat(enumStruct(MIS_TEAM_DELTA));
+	const deltaObjs = enumDroid(MIS_TEAM_DELTA).filter((droid) => (droid.droidType !== DROID_SUPERTRANSPORTER)).concat(enumStruct(MIS_TEAM_DELTA));
 	for (const obj of deltaObjs)
 	{
 		// Donate team Delta's remaining stuff
@@ -196,6 +198,7 @@ function expandMap()
 		obj: "echoCommander" // Stop refilling this group when the commander dies
 		}, CAM_ORDER_FOLLOW, {
 		leader: "echoCommander",
+		repair: 50,
 		suborder: CAM_ORDER_ATTACK
 	});
 	// Strike "group" consisting of a single VTOL strike turret
@@ -216,12 +219,15 @@ function expandMap()
 			cTempl.pllpodv, cTempl.pllhmgv,
 		],
 		factories: ["colVtolFactory"],
+		obj: "echoVtolTower1", // Only refill this group if the tower is still alive
 		}, CAM_ORDER_FOLLOW, {
 		leader: "echoVtolTower1",
-		suborder: CAM_ORDER_DEFEND,
-		data:{
-			pos: camMakePos("colVtolAssembly")
-		}
+		// Originally these VTOLs would get CAM_ORDER_DEFEND instead
+		// But that would cause a hard-crash??? When the player tried to save after destroying the sensor??????
+		// So now they just attack instead.
+		// I have no idea what's going on here
+		// help
+		suborder: CAM_ORDER_ATTACK 
 	});
 	// Strike tower 2 (2 HMGs, 2 MRPs)
 	camMakeRefillableGroup(undefined, {
@@ -230,12 +236,10 @@ function expandMap()
 			cTempl.pllpodv, cTempl.pllhmgv,
 		],
 		factories: ["colVtolFactory"],
+		obj: "echoVtolTower2",
 		}, CAM_ORDER_FOLLOW, {
 		leader: "echoVtolTower2",
-		suborder: CAM_ORDER_DEFEND,
-		data:{
-			pos: camMakePos("colVtolAssembly")
-		}
+		suborder: CAM_ORDER_ATTACK
 	});
 	// Strike tower 3 (2 HMGs, 2 MRPs)
 	camMakeRefillableGroup(undefined, {
@@ -244,29 +248,25 @@ function expandMap()
 			cTempl.pllpodv, cTempl.pllhmgv,
 		],
 		factories: ["colVtolFactory"],
+		obj: "echoVtolTower3",
 		}, CAM_ORDER_FOLLOW, {
 		leader: "echoVtolTower3",
-		suborder: CAM_ORDER_DEFEND,
-		data:{
-			pos: camMakePos("colVtolAssembly")
-		}
+		suborder: CAM_ORDER_ATTACK
 	});
 	// Strike turret (2 Lancers, 2 Cluster Bombs)
 	camMakeRefillableGroup(undefined, {
 		templates: [
-			cTempl.plllanv, cTempl.pllbombv,
-			cTempl.plllanv, cTempl.pllbombv,
+			cTempl.pllbombv, cTempl.plllanv,
+			cTempl.pllbombv, cTempl.plllanv,
 		],
 		factories: ["colVtolFactory"],
+		obj: "echoVtolSensor",
 		}, CAM_ORDER_FOLLOW, {
-		leader: "echoVtolTower3",
-		suborder: CAM_ORDER_DEFEND,
-		data:{
-			pos: camMakePos("colVtolAssembly")
-		}
+		leader: "echoVtolSensor",
+		suborder: CAM_ORDER_ATTACK
 	});
 	// Trucks
-	const TRUCK_TIME = camChangeOnDiff(camSecondsToMilliseconds(90))
+	const TRUCK_TIME = camChangeOnDiff(camSecondsToMilliseconds(120))
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "echoSWBase",
 		rebuildTruck: (tweakOptions.rec_timerlessMode || difficulty >= MEDIUM),
@@ -360,7 +360,7 @@ function advanceTeamEcho()
 			repair: 75
 		});
 	}
-	camManageGroup(echoStrikeGroup, CAM_ORDER_ATTACK, {repair: 40});
+	camManageGroup(echoStrikeGroup, CAM_ORDER_ATTACK, {repair: 40, removable: false});
 }
 
 function enableFinalFactories()
@@ -537,7 +537,6 @@ function eventStartLevel()
 	const transportEntryPos = camMakePos("transportEntryPos");
 
 	camSetStandardWinLossConditions(CAM_VICTORY_OFFWORLD, "THE_END", {
-		area: "compromiseZone",
 		message: "DELTA_LZ",
 		reinforcements: -1, // will override later
 		callback: "echoEradicated"
@@ -562,7 +561,8 @@ function eventStartLevel()
 		"colVtolFactory": { tech: "R-Wpn-Bomb01" }, // Cluster Bomb Bay
 		"colResearch1": { tech: "R-Wpn-Rocket-Accuracy02" }, // Improved Rocket Wire Guidance
 		"colResearch2": { tech: "R-Wpn-MG-ROF02" }, // Rapid Fire Chaingun Upgrade
-		"colFactory2": { tech: "R-Wpn-Rocket-Damage03" }, // HE Rockets Mk3
+		"colFactory1": { tech: "R-Wpn-Rocket-Damage03" }, // HE Rockets Mk3
+		"colFactory2": { tech: "R-Struc-Factory-Upgrade01" }, // Automated Manufacturing
 	});
 
 	camSetEnemyBases({
@@ -575,8 +575,8 @@ function eventStartLevel()
 		"cScavWestBase": {
 			cleanup: "cScavBase2",
 			detectMsg: "CSCAV_BASE2",
-			detectSnd: cam_sounds.baseDetection.scavengerOutpostDetected,
-			eliminateSnd: cam_sounds.baseElimination.scavengerOutpostEradicated
+			detectSnd: cam_sounds.baseDetection.scavengerBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.scavengerBaseEradicated
 		},
 		"cScavNorthCanalBase": {
 			cleanup: "cScavBase3",
@@ -618,7 +618,7 @@ function eventStartLevel()
 				repair: 60
 			},
 			groupSize: 3,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(70)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(50)),
 			templates: [ cTempl.pllhmght, cTempl.pllpodht, cTempl.pllhmght, cTempl.pllmraht ]
 		},
 		"colFactory2": {
@@ -628,7 +628,7 @@ function eventStartLevel()
 				repair: 40
 			},
 			groupSize: 6,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(90)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(70)),
 			templates: [ cTempl.pllpodt, cTempl.plllant, cTempl.pllpodt ] // Rocket hell
 		},
 		"colCybFactory1": {
@@ -638,7 +638,7 @@ function eventStartLevel()
 				repair: 35
 			},
 			groupSize: 3,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(65)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(55)),
 			templates: [ cTempl.cybhg, cTempl.cybla, cTempl.cybhg ]
 		},
 		"colCybFactory2": {
@@ -648,21 +648,21 @@ function eventStartLevel()
 				repair: 35
 			},
 			groupSize: 5,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(85)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(65)),
 			templates: [ cTempl.cybhg ] // MG hell
 		},
 		"colVtolFactory": {
 			assembly: "colVtolAssembly",
 			order: CAM_ORDER_ATTACK,
 			groupSize: 4,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(75)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(45)),
 			templates: [] // Only resupplies VTOL groups
 		},
 		"cScavFactory1": {
 			assembly: "cScavAssembly1",
 			order: CAM_ORDER_ATTACK,
 			groupSize: 6,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(85)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(75)),
 			templates: [ cTempl.monfire, cTempl.rbjeep, cTempl.buscan, cTempl.bjeep, cTempl.flatmrl, cTempl.lance, cTempl.monhmg ]
 		},
 		"cScavFactory2": {

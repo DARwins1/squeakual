@@ -23,98 +23,6 @@
         "statID": "MG1Mk1",
         "techCode": 1
     },
-	"R-Vehicle-Prop-Halftracks02": {
-        "iconID": "IMAGE_RES_DROIDTECH",
-        "id": "R-Vehicle-Prop-Halftracks02",
-        "keyTopic": 1,
-        "msgName": "RES_HALFT2",
-        "name": "Half-tracked Propulsion II",
-        "requiredResearch": [
-            "R-Struc-Factory-Upgrade04"
-        ],
-        "researchPoints": 7200,
-        "researchPower": 225,
-        "resultComponents": [
-            "HalfTrack02"
-        ],
-        "statID": "HalfTrack02"
-    },
-    "R-Vehicle-Prop-Tracks02": {
-        "iconID": "IMAGE_RES_DROIDTECH",
-        "id": "R-Vehicle-Prop-Tracks02",
-        "keyTopic": 1,
-        "msgName": "RES_TRACK2",
-        "name": "Tracked Propulsion II",
-        "requiredResearch": [
-            "R-Struc-Factory-Upgrade04"
-        ],
-        "researchPoints": 7200,
-        "researchPower": 225,
-        "resultComponents": [
-            "tracked02"
-        ],
-        "statID": "tracked02"
-    },
-	"R-Vehicle-Prop-Hover02": {
-        "iconID": "IMAGE_RES_DROIDTECH",
-        "id": "R-Vehicle-Prop-Hover02",
-        "keyTopic": 1,
-        "msgName": "RES_V_P_H2",
-        "name": "Hover Propulsion II",
-        "requiredResearch": [
-            "R-Struc-Factory-Upgrade04"
-        ],
-        "researchPoints": 14400,
-        "researchPower": 450,
-        "resultComponents": [
-            "hover02"
-        ],
-        "statID": "hover02"
-    },
-    "R-Vehicle-Prop-VTOL02": {
-        "iconID": "IMAGE_RES_DROIDTECH",
-        "id": "R-Vehicle-Prop-VTOL02",
-        "imdName": "DPVTOL.PIE",
-        "keyTopic": 1,
-        "msgName": "RES_V_P_V2",
-        "name": "VTOL Propulsion II",
-        "researchPoints": 14400,
-        "researchPower": 450,
-        "resultComponents": [
-            "V-Tol02"
-        ]
-    },
-    "R-Vehicle-Prop-Wheels02": {
-        "iconID": "IMAGE_RES_DROIDTECH",
-        "id": "R-Vehicle-Prop-Wheels02",
-        "keyTopic": 1,
-        "msgName": "RES_V_P_W2",
-        "name": "Wheeled Propulsion II",
-        "requiredResearch": [
-            "R-Struc-Factory-Upgrade04"
-        ],
-        "researchPoints": 3600,
-        "researchPower": 112,
-        "resultComponents": [
-            "wheeled02"
-        ],
-        "statID": "wheeled02"
-    },
-	"R-Cyborg-Legs02": {
-        "iconID": "IMAGE_RES_CYBORGTECH",
-        "id": "R-Cyborg-Legs02",
-        "keyTopic": 1,
-        "name": "Cyborg Propulsion II",
-        "requiredResearch": [
-             "R-Struc-Factory-Upgrade04"
-        ],
-        "researchPoints": 7800,
-        "researchPower": 300,
-        "resultComponents": [
-            "CyborgLegs02"
-        ],
-        "statID": "CyborgLegs02"
-    },
     "R-Comp-CommandTurret01": {
         "iconID": "IMAGE_RES_COMPUTERTECH",
         "id": "R-Comp-CommandTurret01",
@@ -1648,14 +1556,14 @@
     "R-Struc-Factory-Upgrade01": {
         "iconID": "IMAGE_RES_STRUCTURETECH",
         "id": "R-Struc-Factory-Upgrade01",
-        "keyTopic": 1,
         "imdName": "BLFACT1.PIE",
+        "keyTopic": 1,
         "msgName": "RES_ST_FU1",
-        "name": "Automated Factory Production",
+        "name": "Automated Manufacturing",
         "requiredResearch": [
             "R-Struc-Factory-Module"
         ],
-        "researchPoints": 2400,
+        "researchPoints": 1400,
         "researchPower": 75,
         "results": [
             {
@@ -1670,11 +1578,13 @@
         "iconID": "IMAGE_RES_STRUCTURETECH",
         "id": "R-Struc-Factory-Upgrade02",
         "imdName": "BLFACT1.PIE",
-        "name": "Automated Factory Production Mk2",
+        "keyTopic": 1,
+        "msgName": "RES_ST_FU4",
+        "name": "Robotic Manufacturing",
         "requiredResearch": [
             "R-Struc-Factory-Upgrade01"
         ],
-        "researchPoints": 4800,
+        "researchPoints": 1800,
         "researchPower": 150,
         "results": [
             {
@@ -1683,20 +1593,20 @@
                 "value": 30
             }
         ],
-        "subgroupIconID": "IMAGE_RES_GRPUPG",
-        "techCode": 1
+        "subgroupIconID": "IMAGE_RES_GRPUPG"
     },
     "R-Struc-Factory-Upgrade03": {
         "iconID": "IMAGE_RES_STRUCTURETECH",
         "id": "R-Struc-Factory-Upgrade03",
         "imdName": "BLFACT1.PIE",
         "keyTopic": 1,
-        "name": "Automated Factory Production Mk3",
+        "msgName": "RES_ST_FU7",
+        "name": "Advanced Manufacturing",
         "requiredResearch": [
             "R-Struc-Factory-Upgrade02"
         ],
-        "researchPoints": 7200,
-        "researchPower": 225,
+        "researchPoints": 2100,
+        "researchPower": 230,
         "results": [
             {
                 "class": "Building",
@@ -1704,8 +1614,7 @@
                 "value": 30
             }
         ],
-        "subgroupIconID": "IMAGE_RES_GRPUPG",
-        "techCode": 1
+        "subgroupIconID": "IMAGE_RES_GRPUPG"
     },
     "R-Struc-Materials01": {
         "iconID": "IMAGE_RES_STRUCTURETECH",
@@ -1916,20 +1825,24 @@
     "R-Struc-RprFac-Upgrade01": {
         "iconID": "IMAGE_RES_SYSTEMTECH",
         "id": "R-Struc-RprFac-Upgrade01",
-        "keyTopic": 1,
         "msgName": "RES_ST_RFU1",
-        "name": "Automated Repair Facility",
+        "name": "Automated Repairing",
         "requiredResearch": [
             "R-Struc-RepairFacility",
             "R-Struc-Factory-Upgrade01"
         ],
-        "researchPoints": 2400,
+        "researchPoints": 1000,
         "researchPower": 75,
         "results": [
             {
                 "class": "Building",
                 "parameter": "RepairPoints",
-                "value": 50
+                "value": 30
+            },
+            {
+                "class": "Repair",
+                "parameter": "RepairPoints",
+                "value": 25
             }
         ],
         "statID": "A0RepairCentre3",
@@ -1938,44 +1851,54 @@
     "R-Struc-RprFac-Upgrade02": {
         "iconID": "IMAGE_RES_SYSTEMTECH",
         "id": "R-Struc-RprFac-Upgrade02",
-        "name": "Automated Repair Facility Upgrade Mk2",
+        "msgName": "RES_ST_RFU4",
+        "name": "Robotic Repairing",
         "requiredResearch": [
             "R-Struc-Factory-Upgrade02",
             "R-Struc-RprFac-Upgrade01"
         ],
-        "researchPoints": 3600,
+        "researchPoints": 1200,
         "researchPower": 112,
         "results": [
             {
                 "class": "Building",
                 "parameter": "RepairPoints",
-                "value": 50
+                "value": 30
+            },
+            {
+                "class": "Repair",
+                "parameter": "RepairPoints",
+                "value": 25
             }
         ],
         "statID": "A0RepairCentre3",
-        "subgroupIconID": "IMAGE_RES_GRPUPG",
-        "techCode": 1
+        "subgroupIconID": "IMAGE_RES_GRPUPG"
     },
     "R-Struc-RprFac-Upgrade03": {
         "iconID": "IMAGE_RES_SYSTEMTECH",
         "id": "R-Struc-RprFac-Upgrade03",
-        "name": "Automated Repair Facility Upgrade Mk3",
+        "msgName": "RES_ST_RFU7",
+        "name": "Advanced Repairing",
         "requiredResearch": [
             "R-Struc-Factory-Upgrade03",
             "R-Struc-RprFac-Upgrade02"
         ],
-        "researchPoints": 4800,
-        "researchPower": 150,
+        "researchPoints": 1400,
+        "researchPower": 224,
         "results": [
             {
                 "class": "Building",
                 "parameter": "RepairPoints",
-                "value": 50
+                "value": 30
+            },
+            {
+                "class": "Repair",
+                "parameter": "RepairPoints",
+                "value": 25
             }
         ],
         "statID": "A0RepairCentre3",
-        "subgroupIconID": "IMAGE_RES_GRPUPG",
-        "techCode": 1
+        "subgroupIconID": "IMAGE_RES_GRPUPG"
     },
     "R-Sys-Engineering01": {
         "iconID": "IMAGE_RES_SYSTEMTECH",
@@ -3854,67 +3777,6 @@
         "subgroupIconID": "IMAGE_RES_GRPUPG",
         "techCode": 1
     },
-    "R-Struc-Factory-Upgrade04": {
-        "iconID": "IMAGE_RES_STRUCTURETECH",
-        "id": "R-Struc-Factory-Upgrade04",
-        "imdName": "BLFACT1.PIE",
-        "keyTopic": 1,
-        "msgName": "RES_ST_FU4",
-        "name": "Robotic Factory Production",
-		"requiredResearch": [
-			"R-Struc-Factory-Upgrade03"
-        ],
-        "researchPoints": 9200,
-        "researchPower": 287,
-        "results": [
-            {
-                "class": "Building",
-                "parameter": "ProductionPoints",
-                "value": 30
-            }
-        ],
-        "subgroupIconID": "IMAGE_RES_GRPUPG"
-    },
-    "R-Struc-Factory-Upgrade05": {
-        "iconID": "IMAGE_RES_STRUCTURETECH",
-        "id": "R-Struc-Factory-Upgrade05",
-        "imdName": "BLFACT1.PIE",
-        "name": "Robotic Factory Production Mk2",
-        "requiredResearch": [
-			"R-Struc-Factory-Upgrade04"
-        ],
-        "researchPoints": 11200,
-        "researchPower": 350,
-        "results": [
-            {
-                "class": "Building",
-                "parameter": "ProductionPoints",
-                "value": 30
-            }
-        ],
-        "subgroupIconID": "IMAGE_RES_GRPUPG",
-        "techCode": 1
-    },
-    "R-Struc-Factory-Upgrade06": {
-        "iconID": "IMAGE_RES_STRUCTURETECH",
-        "id": "R-Struc-Factory-Upgrade06",
-        "imdName": "BLFACT1.PIE",
-        "name": "Robotic Factory Production Mk3",
-        "requiredResearch": [
-            "R-Struc-Factory-Upgrade05"
-        ],
-        "researchPoints": 13200,
-        "researchPower": 412,
-        "results": [
-            {
-                "class": "Building",
-                "parameter": "ProductionPoints",
-                "value": 30
-            }
-        ],
-        "subgroupIconID": "IMAGE_RES_GRPUPG",
-        "techCode": 1
-    },
     "R-Struc-Materials04": {
         "iconID": "IMAGE_RES_STRUCTURETECH",
         "id": "R-Struc-Materials04",
@@ -4082,69 +3944,6 @@
                 "value": 30
             }
         ],
-        "subgroupIconID": "IMAGE_RES_GRPUPG",
-        "techCode": 1
-    },
-    "R-Struc-RprFac-Upgrade04": {
-        "iconID": "IMAGE_RES_SYSTEMTECH",
-        "id": "R-Struc-RprFac-Upgrade04",
-        "msgName": "RES_ST_RFU4",
-        "name": "Robotic Repair Facility Upgrade",
-        "requiredResearch": [
-            "R-Struc-Factory-Upgrade04",
-			"R-Struc-RprFac-Upgrade03"
-        ],
-        "researchPoints": 6000,
-        "researchPower": 187,
-        "results": [
-            {
-                "class": "Building",
-                "parameter": "RepairPoints",
-                "value": 50
-            }
-        ],
-        "statID": "A0RepairCentre3",
-        "subgroupIconID": "IMAGE_RES_GRPUPG"
-    },
-    "R-Struc-RprFac-Upgrade05": {
-        "iconID": "IMAGE_RES_SYSTEMTECH",
-        "id": "R-Struc-RprFac-Upgrade05",
-        "name": "Robotic Repair Facility Upgrade Mk2",
-        "requiredResearch": [
-            "R-Struc-Factory-Upgrade05",
-			"R-Struc-RprFac-Upgrade04"
-        ],
-        "researchPoints": 8000,
-        "researchPower": 250,
-        "results": [
-            {
-                "class": "Building",
-                "parameter": "RepairPoints",
-                "value": 50
-            }
-        ],
-        "statID": "A0RepairCentre3",
-        "subgroupIconID": "IMAGE_RES_GRPUPG",
-        "techCode": 1
-    },
-    "R-Struc-RprFac-Upgrade06": {
-        "iconID": "IMAGE_RES_SYSTEMTECH",
-        "id": "R-Struc-RprFac-Upgrade06",
-        "name": "Robotic Repair Facility Upgrade Mk3",
-        "requiredResearch": [
-            "R-Struc-Factory-Upgrade06",
-			"R-Struc-RprFac-Upgrade05"
-        ],
-        "researchPoints": 10000,
-        "researchPower": 312,
-        "results": [
-            {
-                "class": "Building",
-                "parameter": "RepairPoints",
-                "value": 50
-            }
-        ],
-        "statID": "A0RepairCentre3",
         "subgroupIconID": "IMAGE_RES_GRPUPG",
         "techCode": 1
     },

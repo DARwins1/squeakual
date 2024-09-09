@@ -616,6 +616,7 @@ function __camTacticsTickForGroup(group)
 			{
 				// Is the leader dead? Let the group execute the suborder.
 				const newData = camDef(gi.data.data) ? gi.data.data : {}; // do you pronounce it "data" or "data"?
+				if (camDef(gi.data.removable) && !gi.data.removable) newData.removable = false;
 				newData.data = gi.data; // Hold onto the current group data in case we find a new leader.
 				camManageGroup(group, gi.data.suborder, newData);
 				return;
