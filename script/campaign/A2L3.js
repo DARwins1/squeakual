@@ -452,6 +452,7 @@ function eventStartLevel()
 	queue("heliAttack1", camChangeOnDiff(camMinutesToMilliseconds(5)));
 	queue("enableAllFactories", camChangeOnDiff(camMinutesToMilliseconds(6)));
 	queue("startCollectiveTransports", camChangeOnDiff(camMinutesToMilliseconds(8)));
+	queue("vtolAttack", camChangeOnDiff(camMinutesToMilliseconds(10)));
 	queue("aggroCommander", camChangeOnDiff(camMinutesToMilliseconds(12)));
 
 	// Placeholder for the actual briefing sequence

@@ -1434,14 +1434,14 @@
                 "filterParameter": "Type",
                 "filterValue": "Wall",
                 "parameter": "Armour",
-                "value": 45
+                "value": 35
             },
             {
                 "class": "Building",
                 "filterParameter": "Type",
                 "filterValue": "Wall",
                 "parameter": "HitPoints",
-                "value": 45
+                "value": 35
             }
         ],
         "subgroupIconID": "IMAGE_RES_GRPUPG"
@@ -1462,14 +1462,14 @@
                 "filterParameter": "Type",
                 "filterValue": "Wall",
                 "parameter": "Armour",
-                "value": 45
+                "value": 35
             },
             {
                 "class": "Building",
                 "filterParameter": "Type",
                 "filterValue": "Wall",
                 "parameter": "HitPoints",
-                "value": 45
+                "value": 35
             }
         ],
         "subgroupIconID": "IMAGE_RES_GRPUPG",
@@ -1492,14 +1492,14 @@
                 "filterParameter": "Type",
                 "filterValue": "Wall",
                 "parameter": "Armour",
-                "value": 45
+                "value": 35
             },
             {
                 "class": "Building",
                 "filterParameter": "Type",
                 "filterValue": "Wall",
                 "parameter": "HitPoints",
-                "value": 45
+                "value": 35
             }
         ],
         "subgroupIconID": "IMAGE_RES_GRPUPG",
@@ -1652,14 +1652,14 @@
                 "filterParameter": "Type",
                 "filterValue": "Structure",
                 "parameter": "Armour",
-                "value": 30
+                "value": 35
             },
             {
                 "class": "Building",
                 "filterParameter": "Type",
                 "filterValue": "Structure",
                 "parameter": "HitPoints",
-                "value": 30
+                "value": 35
             }
         ],
         "subgroupIconID": "IMAGE_RES_GRPUPG"
@@ -1680,14 +1680,14 @@
                 "filterParameter": "Type",
                 "filterValue": "Structure",
                 "parameter": "Armour",
-                "value": 30
+                "value": 35
             },
             {
                 "class": "Building",
                 "filterParameter": "Type",
                 "filterValue": "Structure",
                 "parameter": "HitPoints",
-                "value": 30
+                "value": 35
             }
         ],
         "subgroupIconID": "IMAGE_RES_GRPUPG",
@@ -1710,14 +1710,14 @@
                 "filterParameter": "Type",
                 "filterValue": "Structure",
                 "parameter": "Armour",
-                "value": 30
+                "value": 35
             },
             {
                 "class": "Building",
                 "filterParameter": "Type",
                 "filterValue": "Structure",
                 "parameter": "HitPoints",
-                "value": 30
+                "value": 35
             }
         ],
         "subgroupIconID": "IMAGE_RES_GRPUPG",
@@ -3745,14 +3745,14 @@
                 "filterParameter": "Type",
                 "filterValue": "Wall",
                 "parameter": "Armour",
-                "value": 45
+                "value": 35
             },
             {
                 "class": "Building",
                 "filterParameter": "Type",
                 "filterValue": "Wall",
                 "parameter": "HitPoints",
-                "value": 45
+                "value": 35
             }
         ],
         "subgroupIconID": "IMAGE_RES_GRPUPG"
@@ -3773,14 +3773,14 @@
                 "filterParameter": "Type",
                 "filterValue": "Wall",
                 "parameter": "Armour",
-                "value": 45
+                "value": 35
             },
             {
                 "class": "Building",
                 "filterParameter": "Type",
                 "filterValue": "Wall",
                 "parameter": "HitPoints",
-                "value": 45
+                "value": 35
             }
         ],
         "subgroupIconID": "IMAGE_RES_GRPUPG",
@@ -3802,14 +3802,14 @@
                 "filterParameter": "Type",
                 "filterValue": "Wall",
                 "parameter": "Armour",
-                "value": 45
+                "value": 35
             },
             {
                 "class": "Building",
                 "filterParameter": "Type",
                 "filterValue": "Wall",
                 "parameter": "HitPoints",
-                "value": 45
+                "value": 35
             }
         ],
         "subgroupIconID": "IMAGE_RES_GRPUPG",
@@ -3833,14 +3833,14 @@
                 "filterParameter": "Type",
                 "filterValue": "Structure",
                 "parameter": "Armour",
-                "value": 30
+                "value": 35
             },
             {
                 "class": "Building",
                 "filterParameter": "Type",
                 "filterValue": "Structure",
                 "parameter": "HitPoints",
-                "value": 30
+                "value": 35
             }
         ],
         "subgroupIconID": "IMAGE_RES_GRPUPG"
@@ -3861,14 +3861,14 @@
                 "filterParameter": "Type",
                 "filterValue": "Structure",
                 "parameter": "Armour",
-                "value": 30
+                "value": 35
             },
             {
                 "class": "Building",
                 "filterParameter": "Type",
                 "filterValue": "Structure",
                 "parameter": "HitPoints",
-                "value": 30
+                "value": 35
             }
         ],
         "subgroupIconID": "IMAGE_RES_GRPUPG",
@@ -3890,14 +3890,14 @@
                 "filterParameter": "Type",
                 "filterValue": "Structure",
                 "parameter": "Armour",
-                "value": 30
+                "value": 35
             },
             {
                 "class": "Building",
                 "filterParameter": "Type",
                 "filterValue": "Structure",
                 "parameter": "HitPoints",
-                "value": 30
+                "value": 35
             }
         ],
         "subgroupIconID": "IMAGE_RES_GRPUPG",
@@ -6471,14 +6471,14 @@
                 "filterParameter": "Type",
                 "filterValue": "Wall",
                 "parameter": "Armour",
-                "value": 45
+                "value": 35
             },
             {
                 "class": "Building",
                 "filterParameter": "Type",
                 "filterValue": "Wall",
                 "parameter": "HitPoints",
-                "value": 45
+                "value": 35
             }
         ],
         "subgroupIconID": "IMAGE_RES_GRPUPG"
@@ -6499,14 +6499,14 @@
                 "filterParameter": "Type",
                 "filterValue": "Wall",
                 "parameter": "Armour",
-                "value": 45
+                "value": 35
             },
             {
                 "class": "Building",
                 "filterParameter": "Type",
                 "filterValue": "Wall",
                 "parameter": "HitPoints",
-                "value": 45
+                "value": 35
             }
         ],
         "subgroupIconID": "IMAGE_RES_GRPUPG",
@@ -6528,14 +6528,14 @@
                 "filterParameter": "Type",
                 "filterValue": "Wall",
                 "parameter": "Armour",
-                "value": 45
+                "value": 35
             },
             {
                 "class": "Building",
                 "filterParameter": "Type",
                 "filterValue": "Wall",
                 "parameter": "HitPoints",
-                "value": 45
+                "value": 35
             }
         ],
         "subgroupIconID": "IMAGE_RES_GRPUPG",
@@ -6559,14 +6559,14 @@
                 "filterParameter": "Type",
                 "filterValue": "Structure",
                 "parameter": "Armour",
-                "value": 30
+                "value": 35
             },
             {
                 "class": "Building",
                 "filterParameter": "Type",
                 "filterValue": "Structure",
                 "parameter": "HitPoints",
-                "value": 30
+                "value": 35
             }
         ],
         "subgroupIconID": "IMAGE_RES_GRPUPG"
@@ -6587,14 +6587,14 @@
                 "filterParameter": "Type",
                 "filterValue": "Structure",
                 "parameter": "Armour",
-                "value": 30
+                "value": 35
             },
             {
                 "class": "Building",
                 "filterParameter": "Type",
                 "filterValue": "Structure",
                 "parameter": "HitPoints",
-                "value": 30
+                "value": 35
             }
         ],
         "subgroupIconID": "IMAGE_RES_GRPUPG",
@@ -6616,14 +6616,14 @@
                 "filterParameter": "Type",
                 "filterValue": "Structure",
                 "parameter": "Armour",
-                "value": 30
+                "value": 35
             },
             {
                 "class": "Building",
                 "filterParameter": "Type",
                 "filterValue": "Structure",
                 "parameter": "HitPoints",
-                "value": 30
+                "value": 35
             }
         ],
         "subgroupIconID": "IMAGE_RES_GRPUPG",

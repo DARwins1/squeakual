@@ -557,7 +557,7 @@ function eventStartLevel()
 			},
 			groupSize: 3,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(48)),
-			templates: [ cTempl.monsar, cTempl.rbjeep, cTempl.gbjeep, cTempl.flatmrl, cTempl.buscan, cTempl.minitruck ]
+			templates: [ cTempl.monhmg, cTempl.rbjeep, cTempl.gbjeep, cTempl.flatmrl, cTempl.buscan, cTempl.minitruck ]
 		},
 	});
 
