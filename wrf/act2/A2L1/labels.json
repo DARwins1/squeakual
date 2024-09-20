@@ -1,217 +1,217 @@
 {
 	"position_0": {
 		"label": "patrolPos1",
-		"pos": [1562, 2116]
+		"pos": [9786, 9039]
 	},
 
 
 	"position_1": {
 		"label": "patrolPos2",
-		"pos": [3685, 2249]
+		"pos": [11864, 9142]
 	},
 
 
 	"position_2": {
 		"label": "patrolPos3",
-		"pos": [5921, 2587]
+		"pos": [14047, 9619]
 	},
 
 
 	"position_3": {
 		"label": "colAssembly1",
-		"pos": [3957, 781]
+		"pos": [12168, 7732]
 	},
 
 
 	"position_4": {
 		"label": "colAssembly2",
-		"pos": [5910, 752]
+		"pos": [14129, 7745]
 	},
 
 
 	"position_5": {
 		"label": "scavAssembly1",
-		"pos": [2097, 7359]
+		"pos": [10299, 14295]
 	},
 
 
 	"position_6": {
 		"label": "scavAssembly2",
-		"pos": [491, 6524]
+		"pos": [8775, 13477]
 	},
 
 
 	"position_7": {
 		"label": "cScavAssembly1",
-		"pos": [2213, 3899]
+		"pos": [10463, 10844]
 	},
 
 
 	"position_8": {
 		"label": "cScavAssembly2",
-		"pos": [7746, 3780]
+		"pos": [15817, 10450]
 	},
 
 
 	"position_9": {
 		"label": "cScavAssembly3",
-		"pos": [7752, 961]
+		"pos": [15820, 7872]
 	},
 
 
 	"position_10": {
 		"label": "patrolPos4",
-		"pos": [1127, 7445]
+		"pos": [9319, 14263]
 	},
 
 
 	"position_11": {
 		"label": "patrolPos5",
-		"pos": [3953, 4169]
+		"pos": [12364, 11128]
 	},
 
 
 	"position_12": {
 		"label": "patrolPos6",
-		"pos": [5955, 4560]
+		"pos": [14052, 11549]
 	},
 
 
 	"position_13": {
-		"label": "vtolAttackPos",
-		"pos": [2994, 187]
+		"label": "heliAttackPos1",
+		"pos": [8512, 14654]
 	},
 
 
 	"position_14": {
-		"label": "heliAttackPos1",
-		"pos": [237, 7564]
+		"label": "heliAttackPos2",
+		"pos": [15906, 7155]
 	},
 
 
 	"position_15": {
-		"label": "heliAttackPos2",
-		"pos": [7693, 278]
+		"label": "vtolAttackPos",
+		"pos": [9264, 7106]
 	},
 
 
 	"area_0": {
 		"label": "landingZoneCollective",
-		"pos1": [896, 640],
-		"pos2": [1280, 1024]
+		"pos1": [9088, 7552],
+		"pos2": [9472, 7936]
 	},
 
 
 	"area_1": {
 		"label": "landingZone",
-		"pos1": [4608, 7808],
-		"pos2": [4992, 8192]
+		"pos1": [12672, 14592],
+		"pos2": [13184, 15104]
 	},
 
 
 	"area_2": {
 		"label": "colBase1",
-		"pos1": [256, 384],
-		"pos2": [2432, 2560]
+		"pos1": [8576, 7296],
+		"pos2": [10624, 9472]
 	},
 
 
 	"area_3": {
 		"label": "colBase2",
-		"pos1": [3072, 384],
-		"pos2": [4992, 1792]
+		"pos1": [11264, 7296],
+		"pos2": [13184, 8704]
 	},
 
 
 	"area_4": {
 		"label": "colBase3",
-		"pos1": [5120, 384],
-		"pos2": [6656, 2048]
+		"pos1": [13312, 7296],
+		"pos2": [14592, 8960]
 	},
 
 
 	"area_5": {
 		"label": "scavBase",
-		"pos1": [384, 5888],
-		"pos2": [2944, 7936]
+		"pos1": [8576, 12800],
+		"pos2": [11136, 14848]
 	},
 
 
 	"area_6": {
 		"label": "cScavBase1",
-		"pos1": [1920, 3712],
-		"pos2": [2944, 4480]
+		"pos1": [10112, 10496],
+		"pos2": [11136, 11392]
 	},
 
 
 	"area_7": {
-		"label": "cScavBase2",
-		"pos1": [4864, 3072],
-		"pos2": [6144, 3968]
+		"label": "cScavBase3",
+		"pos1": [15360, 9856],
+		"pos2": [16000, 11520]
 	},
 
 
 	"area_8": {
-		"label": "cScavBase3",
-		"pos1": [7168, 2944],
-		"pos2": [7808, 4608]
+		"label": "cScavBase4",
+		"pos1": [14976, 7680],
+		"pos2": [16000, 8576]
 	},
 
 
 	"area_9": {
-		"label": "cScavBase4",
-		"pos1": [6784, 640],
-		"pos2": [7808, 1664]
+		"label": "colLZStructs",
+		"pos1": [8960, 7424],
+		"pos2": [9600, 8064]
 	},
 
 
 	"area_10": {
-		"label": "colLZStructs",
-		"pos1": [768, 512],
-		"pos2": [1408, 1152]
+		"label": "cScavBase2",
+		"pos1": [13056, 9984],
+		"pos2": [14336, 10880]
 	},
 
 
 	"area_11": {
 		"label": "colPatrolGroup",
-		"pos1": [1536, 384],
-		"pos2": [1792, 1024]
+		"pos1": [9728, 7296],
+		"pos2": [9984, 7936]
 	},
 
 
 	"area_12": {
 		"label": "colCyborgAttackGroup",
-		"pos1": [6272, 1024],
-		"pos2": [6656, 1408]
+		"pos1": [14464, 7936],
+		"pos2": [14848, 8320]
 	},
 
 
 	"area_13": {
 		"label": "scavPatrolGroup",
-		"pos1": [384, 7552],
-		"pos2": [768, 7936]
+		"pos1": [8576, 14464],
+		"pos2": [8960, 14848]
 	},
 
 
 	"area_14": {
 		"label": "cScavPatrolGroup",
-		"pos1": [4224, 2432],
-		"pos2": [4864, 2688]
+		"pos1": [12416, 9344],
+		"pos2": [13056, 9600]
 	},
 
 
 	"object_0": {
-		"label": "colFactory2",
-		"id": 74,
+		"label": "cScavHeliTower",
+		"id": 369,
 		"player": 2,
 		"type": 1
 	},
 
 
 	"object_1": {
-		"label": "cScavFactory1",
-		"id": 295,
-		"player": 2,
+		"label": "scavHeliTower",
+		"id": 359,
+		"player": 5,
 		"type": 1
 	},
 
@@ -225,62 +225,6 @@
 
 
 	"object_3": {
-		"label": "colResearch",
-		"id": 159,
-		"player": 2,
-		"type": 1
-	},
-
-
-	"object_4": {
-		"label": "cScavHeliTower",
-		"id": 369,
-		"player": 2,
-		"type": 1
-	},
-
-
-	"object_5": {
-		"label": "colCC",
-		"id": 73,
-		"player": 2,
-		"type": 1
-	},
-
-
-	"object_6": {
-		"label": "cScavFactory2",
-		"id": 79,
-		"player": 2,
-		"type": 1
-	},
-
-
-	"object_7": {
-		"label": "scavFactory2",
-		"id": 136,
-		"player": 5,
-		"type": 1
-	},
-
-
-	"object_8": {
-		"label": "scavFactory1",
-		"id": 135,
-		"player": 5,
-		"type": 1
-	},
-
-
-	"object_9": {
-		"label": "scavHeliTower",
-		"id": 359,
-		"player": 5,
-		"type": 1
-	},
-
-
-	"object_10": {
 		"label": "cScavFactory3",
 		"id": 78,
 		"player": 2,
@@ -288,7 +232,39 @@
 	},
 
 
-	"object_11": {
+	"object_4": {
+		"label": "colCC",
+		"id": 73,
+		"player": 2,
+		"type": 1
+	},
+
+
+	"object_5": {
+		"label": "colFactory2",
+		"id": 74,
+		"player": 2,
+		"type": 1
+	},
+
+
+	"object_6": {
+		"label": "colResearch",
+		"id": 159,
+		"player": 2,
+		"type": 1
+	},
+
+
+	"object_7": {
+		"label": "cScavFactory2",
+		"id": 79,
+		"player": 2,
+		"type": 1
+	},
+
+
+	"object_8": {
 		"label": "colAAEmp",
 		"id": 242,
 		"player": 2,
@@ -296,9 +272,33 @@
 	},
 
 
+	"object_9": {
+		"label": "cScavFactory1",
+		"id": 295,
+		"player": 2,
+		"type": 1
+	},
+
+
+	"object_10": {
+		"label": "scavFactory1",
+		"id": 136,
+		"player": 5,
+		"type": 1
+	},
+
+
+	"object_11": {
+		"label": "scavFactory2",
+		"id": 135,
+		"player": 5,
+		"type": 1
+	},
+
+
 	"radius_0": {
 		"label": "vtolRemoveZone",
-		"pos": [320, 2368],
+		"pos": [11328, 6976],
 		"radius": 256,
 		"subscriber": 2
 	}

@@ -475,5 +475,30 @@
             "Obsoletes and replaces Machinegunner Cyborg",
             "Requires Cyborg factory to produce"
         ]
+    },
+    "RES_W_RK_MRL2": {
+        "id": "RES_W_RK_MRL2",
+        "imdName": "MICAPSUL.PIE",
+        "sequenceName": "res_weapons.ogg",
+        "text": [
+            "New Weapon Turret Available",
+            "Short-ranged artillery firing salvoes of high-explosive rockets",
+            "Effective against: Cyborgs, Hover vehicles and structures",
+            "Ineffective against: Tracked vehicles and bunkers",
+            "Indirect weapon; does not require line of sight to a target and can be assigned to a sensor",
+            "Greater accuracy at longer ranges",
+            "Obsoletes Mini-Rocket Array"
+        ]
+    },
+    "RES_EMP_MRLHVY": {
+        "id": "RES_EMP_MRL",
+        "imdName": "MICAPSUL.pie",
+        "sequenceName": "res_struttech.ogg",
+        "text": [
+            "New Defensive Structure Available",
+            "Mini-rocket armored strongpoint",
+            "Assigned automatically to nearest sensor or CB tower",
+            "Defensive Strength: Medium"
+        ]
     }
 }

@@ -2,9 +2,9 @@ include("script/campaign/libcampaign.js");
 
 function eventStartLevel()
 {
-	camSetupTransporter(37, 62, 60, 52);
-	centreView(37, 62);
-	setNoGoArea(36, 61, 38, 63, CAM_HUMAN_PLAYER); // TODO: These coordinates will need to be updated once the full hub map is complete
+	camSetupTransporter(101, 116, 118, 118);
+	centreView(101, 116);
+	setNoGoArea(100, 115, 102, 117, CAM_HUMAN_PLAYER); // TODO: These coordinates will need to be updated once the full hub map is complete
 	if (!tweakOptions.rec_timerlessMode)
 	{
 		setMissionTime(camChangeOnDiff(camHoursToSeconds(0.5)));

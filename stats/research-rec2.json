@@ -1163,6 +1163,25 @@
         ],
         "statID": "Emplacement-MRL-pit"
     },
+    "R-Defense-MRLHvy": {
+        "iconID": "IMAGE_RES_DEFENCE",
+        "id": "R-Defense-MRLHvy",
+        "msgName": "RES_EMP_MRL",
+        "name": "Heavy Rocket Battery",
+        "redStructures": [
+            "Emplacement-MRL-pit"
+        ],
+        "requiredResearch": [
+            "R-Defense-HardcreteWall",
+            "R-Wpn-Rocket02-MRLHvy"
+        ],
+        "researchPoints": 400,
+        "researchPower": 67,
+        "resultStructures": [
+            "Emplacement-MRLHvy-pit"
+        ],
+        "statID": "Emplacement-MRLHvy-pit"
+    },
     "R-Defense-MortarPit": {
         "iconID": "IMAGE_RES_DEFENCE",
         "id": "R-Defense-MortarPit",
@@ -2976,7 +2995,7 @@
                 "value": 10
             }
         ],
-        "statID": "Rocket-Pod",
+        "statID": "Rocket-LtA-T",
         "subgroupIconID": "IMAGE_RES_GRPACC",
         "techCode": 1
     },
@@ -3035,7 +3054,7 @@
                 "value": 25
             }
         ],
-        "statID": "Rocket-Pod",
+        "statID": "Rocket-LtA-TMk1",
         "subgroupIconID": "IMAGE_RES_GRPDAM",
         "techCode": 1
     },
@@ -3065,7 +3084,7 @@
                 "value": 25
             }
         ],
-        "statID": "Rocket-LtA-TMk1",
+        "statID": "Rocket-LtA-T",
         "subgroupIconID": "IMAGE_RES_GRPDAM",
         "techCode": 1
     },
@@ -3210,6 +3229,25 @@
             "Rocket-MRL"
         ],
         "statID": "Rocket-MRL"
+    },
+    "R-Wpn-Rocket02-MRLHvy": {
+        "iconID": "IMAGE_RES_WEAPONTECH",
+        "id": "R-Wpn-Rocket02-MRLHvy",
+        "keyTopic": 1,
+        "msgName": "RES_W_RK_MRL2",
+        "name": "Heavy Rocket Array",
+        "redComponents": [
+            "Rocket-MRL"
+        ],
+        "requiredResearch": [
+            "R-Wpn-Rocket02-MRL"
+        ],
+        "researchPoints": 1600,
+        "researchPower": 123,
+        "resultComponents": [
+            "Rocket-MRL-Hvy"
+        ],
+        "statID": "Rocket-MRL-Hvy"
     },
     "R-Wpn-Rocket03-HvAT": {
         "iconID": "IMAGE_RES_WEAPONTECH",

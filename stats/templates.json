@@ -407,6 +407,17 @@
             "RustRocket-Pod-VTOL"
         ]
     },
+    "CO-M-COM-Track": {
+        "body": "Body6SUPP",
+        "brain": "CommandBrain01",
+        "id": "CO-M-COM-Track",
+        "name": "Command Turret Panther Tracks",
+        "propulsion": "tracked01",
+        "type": "DROID_COMMAND",
+        "weapons": [
+            "CommandTurret1"
+        ]
+    },
     "CO-H-COM-H": {
         "body": "Body9REC",
         "brain": "CommandBrain01",
@@ -1160,6 +1171,83 @@
         "type": "CYBORG",
         "weapons": [
             "Cyb-Wpn-Grenade"
+        ]
+    },
+    "Cyb-Hvy-A-T": {
+        "available": true,
+        "body": "CyborgHeavyBody",
+        "id": "Cyb-Hvy-A-T",
+        "name": "Super Scourge Cyborg",
+        "propulsion": "CyborgLegs",
+        "type": "CYBORG_SUPER",
+        "weapons": [
+            "Cyb-Hvywpn-A-T"
+        ]
+    },
+    "Cyb-Hvy-Acannon": {
+        "available": true,
+        "body": "CyborgHeavyBody",
+        "id": "Cyb-Hvy-Acannon",
+        "name": "Super Auto-Cannon Cyborg",
+        "propulsion": "CyborgLegs",
+        "type": "CYBORG_SUPER",
+        "weapons": [
+            "Cyb-Hvywpn-Acannon"
+        ]
+    },
+    "Cyb-Hvy-HPV": {
+        "available": true,
+        "body": "CyborgHeavyBody",
+        "id": "Cyb-Hvy-HPV",
+        "name": "Super HPC Cyborg",
+        "propulsion": "CyborgLegs",
+        "type": "CYBORG_SUPER",
+        "weapons": [
+            "Cyb-Hvywpn-HPV"
+        ]
+    },
+    "Cyb-Hvy-Mcannon": {
+        "available": true,
+        "body": "CyborgHeavyBody",
+        "id": "Cyb-Hvy-Mcannon",
+        "name": "Super Heavy-Gunner Cyborg",
+        "propulsion": "CyborgLegs",
+        "type": "CYBORG_SUPER",
+        "weapons": [
+            "Cyb-Hvywpn-Mcannon"
+        ]
+    },
+    "Cyb-Hvy-PulseLsr": {
+        "available": true,
+        "body": "CyborgHeavyBody",
+        "id": "Cyb-Hvy-PulseLsr",
+        "name": "Super Pulse Laser Cyborg",
+        "propulsion": "CyborgLegs",
+        "type": "CYBORG_SUPER",
+        "weapons": [
+            "Cyb-Hvywpn-PulseLsr"
+        ]
+    },
+    "Cyb-Hvy-RailGunner": {
+        "available": true,
+        "body": "CyborgHeavyBody",
+        "id": "Cyb-Hvy-RailGunner",
+        "name": "Super Rail-Gunner Cyborg",
+        "propulsion": "CyborgLegs",
+        "type": "CYBORG_SUPER",
+        "weapons": [
+            "Cyb-Hvywpn-RailGunner"
+        ]
+    },
+    "Cyb-Hvy-TK": {
+        "available": true,
+        "body": "CyborgHeavyBody",
+        "id": "Cyb-Hvy-TK",
+        "name": "Super Tank-Killer Cyborg",
+        "propulsion": "CyborgLegs",
+        "type": "CYBORG_SUPER",
+        "weapons": [
+            "Cyb-Hvywpn-TK"
         ]
     },
     "Cyb-Laser1-GROUND": {

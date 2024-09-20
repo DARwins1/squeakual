@@ -122,7 +122,7 @@ function expandMap()
 	}
 
 	// Adjust the victory conditions and enable reinforcements
-	camSetStandardWinLossConditions(CAM_VICTORY_OFFWORLD, "THE_END", {
+	camSetStandardWinLossConditions(CAM_VICTORY_OFFWORLD, "A2L3", {
 		area: "compromiseZone",
 		message: "DELTA_LZ",
 		reinforcements: camMinutesToSeconds(1.75), // Reinforcements enabled
@@ -223,7 +223,7 @@ function expandMap()
 		}, CAM_ORDER_FOLLOW, {
 		leader: "echoVtolTower1",
 		// Originally these VTOLs would get CAM_ORDER_DEFEND instead
-		// But that would cause a hard-crash??? When the player tried to save after destroying the sensor??????
+		// But that would cause a hard-crash??? when the player tried to save after destroying the sensor??????
 		// So now they just attack instead.
 		// I have no idea what's going on here
 		// help
@@ -536,7 +536,7 @@ function eventStartLevel()
 	const lz = getObject("landingZone1"); //player lz
 	const transportEntryPos = camMakePos("transportEntryPos");
 
-	camSetStandardWinLossConditions(CAM_VICTORY_OFFWORLD, "THE_END", {
+	camSetStandardWinLossConditions(CAM_VICTORY_OFFWORLD, "A2L3", {
 		message: "DELTA_LZ",
 		reinforcements: -1, // will override later
 		callback: "echoEradicated"

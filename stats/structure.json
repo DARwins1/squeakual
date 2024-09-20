@@ -1131,6 +1131,29 @@
         "thermal": 12,
         "type": "DEFENSE",
         "weapons": [
+            "AAGun2Mk1"
+        ],
+        "width": 1
+    },
+    "AASite-RustQuadBof": {
+        "armour": 12,
+        "breadth": 1,
+        "buildPoints": 300,
+        "buildPower": 175,
+        "ecmID": "ZNULLECM",
+        "height": 1,
+        "hitpoints": 400,
+        "id": "AASite-RustQuadBof",
+        "name": "Rusty Cyclone AA Flak Site",
+        "resistance": 150,
+        "sensorID": "DefaultSensor1Mk1",
+        "strength": "MEDIUM",
+        "structureModel": [
+            "Blaamnt1.PIE"
+        ],
+        "thermal": 12,
+        "type": "DEFENSE",
+        "weapons": [
             "RustyAAGun2Mk1"
         ],
         "width": 1
@@ -1335,6 +1358,28 @@
         "type": "DEFENSE",
         "weapons": [
             "Rocket-MRL"
+        ],
+        "width": 1
+    },
+    "Emplacement-MRLHvy-pit": {
+        "armour": 10,
+        "breadth": 1,
+        "buildPoints": 400,
+        "buildPower": 150,
+        "height": 1,
+        "hitpoints": 400,
+        "id": "Emplacement-MRLHvy-pit",
+        "name": "Heavy Rocket Battery",
+        "resistance": 150,
+        "sensorID": "DefaultSensor1Mk1",
+        "strength": "MEDIUM",
+        "structureModel": [
+            "BLHARDPT.PIE"
+        ],
+        "thermal": 10,
+        "type": "DEFENSE",
+        "weapons": [
+            "Rocket-MRL-Hvy"
         ],
         "width": 1
     },
@@ -2392,6 +2437,75 @@
         "type": "DEFENSE",
         "weapons": [
             "Rocket-LtA-T"
+        ],
+        "width": 1
+    },
+    "PillBoxHPC": {
+        "armour": 20,
+        "breadth": 1,
+        "buildPoints": 400,
+        "buildPower": 175,
+        "ecmID": "ZNULLECM",
+        "height": 1,
+        "hitpoints": 700,
+        "id": "PillBoxHPC",
+        "name": "Hyper Velocity Cannon Bunker",
+        "resistance": 150,
+        "sensorID": "DefaultSensor1Mk1",
+        "strength": "BUNKER",
+        "structureModel": [
+            "Blcanpil_col.pie"
+        ],
+        "thermal": 20,
+        "type": "DEFENSE",
+        "weapons": [
+            "Cannon4AUTOMk1"
+        ],
+        "width": 1
+    },
+    "PillBoxTK": {
+        "armour": 20,
+        "breadth": 1,
+        "buildPoints": 400,
+        "buildPower": 225,
+        "ecmID": "ZNULLECM",
+        "height": 1,
+        "hitpoints": 700,
+        "id": "PillBoxTK",
+        "name": "Tank Killer Bunker",
+        "resistance": 150,
+        "sensorID": "DefaultSensor1Mk1",
+        "strength": "BUNKER",
+        "structureModel": [
+            "Blcanpil_col.pie"
+        ],
+        "thermal": 20,
+        "type": "DEFENSE",
+        "weapons": [
+            "Rocket-HvyA-T"
+        ],
+        "width": 1
+    },
+    "PillBoxFlash": {
+        "armour": 20,
+        "breadth": 1,
+        "buildPoints": 400,
+        "buildPower": 225,
+        "ecmID": "ZNULLECM",
+        "height": 1,
+        "hitpoints": 700,
+        "id": "PillBoxFlash",
+        "name": "Flashlight Bunker",
+        "resistance": 150,
+        "sensorID": "DefaultSensor1Mk1",
+        "strength": "BUNKER",
+        "structureModel": [
+            "Blcanpil_col.pie"
+        ],
+        "thermal": 20,
+        "type": "DEFENSE",
+        "weapons": [
+            "Laser3BEAMMk1"
         ],
         "width": 1
     },

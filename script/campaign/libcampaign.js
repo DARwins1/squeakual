@@ -157,9 +157,9 @@ const __cam_act1Levels = [
 const __cam_act2Levels = [
 	"A2L1", // HOT DROP
 	"A2L2S", "A2L2", // DISILLUSIONED
-	"A2L3S", "A2L3", // IRONE DOME
-	"A2L4", // ROCK AND A HARD PLACE
-	"A2L5S", "A2L5", // SPEARHEAD
+	"A2L3", // A LIGHT
+	"A2L4S", "A2L4", // IRON DOME
+	"A2L5", // CHOKEHOLD
 	"A2L6S", "A2L6", // BREAKOUT
 	"A2L7", // ONSLAUGHT
 ];

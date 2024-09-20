@@ -5,7 +5,8 @@ include("script/campaign/templates.js");
 const MIS_NUM_TRANSPORTS = (difficulty < HARD) ? 4 : (difficulty < INSANE) ? 3 : 2; // Good enough for now...
 const MIS_TEAM_CHARLIE = 1;
 const MIS_CYAN_SCAVS = 5;
-const transportEntryPos = { x: 31, y: 68 };
+const transportEntryPos = { x: 96, y: 122 };
+const colTransportEntryPos = { x: 124, y: 90 };
 
 var transporterIndex; //Number of transport loads sent into the level
 var startedFromMenu;
@@ -274,8 +275,8 @@ function sendCollectiveTransporter()
 	// Send the transport!
 	camSendReinforcement(CAM_THE_COLLECTIVE, camMakePos("landingZoneCollective"), droids,
 		CAM_REINFORCE_TRANSPORT, {
-			entry: {x: 60, y: 30},
-			exit: {x: 60, y: 30},
+			entry: colTransportEntryPos,
+			exit: colTransportEntryPos,
 			order: CAM_ORDER_ATTACK,
 			data: {
 				targetPlayer: CAM_HUMAN_PLAYER,
