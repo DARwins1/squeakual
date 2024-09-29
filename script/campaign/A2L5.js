@@ -2,12 +2,13 @@ include("script/campaign/libcampaign.js");
 include("script/campaign/templates.js");
 
 const mis_collectiveResearch = [
-	"R-Wpn-MG-Damage02", "R-Wpn-Rocket-Damage02", "R-Wpn-Mortar-Damage01", 
-	"R-Wpn-Flamer-Damage03", "R-Wpn-Cannon-Damage02", "R-Wpn-MG-ROF02",
-	"R-Wpn-Rocket-ROF02", "R-Wpn-Mortar-ROF01", "R-Wpn-Flamer-ROF01",
-	"R-Wpn-Cannon-ROF02", "R-Vehicle-Metals02", "R-Struc-Materials02", 
-	"R-Defense-WallUpgrade02", "R-Sys-Engineering01", "R-Cyborg-Metals02",
-	"R-Wpn-Cannon-Accuracy01", "R-Wpn-Rocket-Accuracy01",
+	"R-Wpn-MG-Damage04", "R-Wpn-Rocket-Damage03", "R-Wpn-Mortar-Damage03", 
+	"R-Wpn-Flamer-Damage03", "R-Wpn-Cannon-Damage03", "R-Wpn-MG-ROF02",
+	"R-Wpn-Rocket-ROF02", "R-Wpn-Mortar-ROF02", "R-Wpn-Flamer-ROF02",
+	"R-Wpn-Cannon-ROF02", "R-Vehicle-Metals03", "R-Struc-Materials03", 
+	"R-Defense-WallUpgrade03", "R-Sys-Engineering01", "R-Cyborg-Metals03",
+	"R-Wpn-Cannon-Accuracy01", "R-Wpn-Rocket-Accuracy02", "R-Wpn-AAGun-ROF01",
+	"R-Vehicle-Engine03", "R-Struc-RprFac-Upgrade01",
 ];
 
 camAreaEvent("heliRemoveZone", function(droid)
@@ -157,7 +158,7 @@ function eventStartLevel()
 		"colBombardPit": { tech: "R-Wpn-Mortar02Hvy" }, // Bombard
 		"colFactory1": { tech: "R-Wpn-Rocket03-HvAT" }, // Bunker Buster
 		"colCycloneEmp": { tech: "R-Wpn-AAGun02" }, // Cyclone
-		"colResearch": { tech: "R-Wpn-Rocket-ROF02" }, // Rocket Autoloader Mk2
+		"colResearch": { tech: "R-Struc-Research-Module" }, // Research Module
 	});
 
 	camCompleteRequiredResearch(mis_collectiveResearch, CAM_THE_COLLECTIVE);

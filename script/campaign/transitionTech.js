@@ -45,7 +45,7 @@ const camAct1StartResearch = camRec2StartResearch.concat(camRec2PrologueResearch
 const camA1L2AllyResearch = camAct1StartResearch.concat([
 	// A1L1
 	"R-Wpn-Mortar-ROF01", "R-Wpn-Flamer-ROF01", "R-Wpn-Flamer-Damage02",
-	"R-Wpn-Rocket02-MRL", "R-Defense-MRL", 
+	"R-Wpn-Rocket02-MRL", "R-Defense-MRL",
 ]);
 
 // Used to grant research to allies on A1L4
@@ -56,23 +56,25 @@ const camA1L4AllyResearch = camA1L2AllyResearch.concat([
 	"R-Struc-PowerModuleMk1", "R-Vehicle-Prop-VTOL", "R-Struc-VTOLFactory",
 	"R-Struc-VTOLPad", "R-Sys-VTOLStrike-Turret01", "R-Sys-VTOLStrike-Tower01",
 	"R-Wpn-MG3Mk1", "R-Wpn-MG-Damage03", "R-Cyborg-Wpn-HvyMG",
+	"R-Vehicle-Engine01",
 	// A1L3
 	"R-Vehicle-Prop-Halftracks", 
 	"R-Defense-Tower01", "R-Wpn-Flamer-Damage03",
 	"R-Wpn-Mortar-Damage02", "R-Wpn-MG-ROF01",
 ]);
 
-const camAct2StartResearch = [
+const camAct2StartResearch = camA1L4AllyResearch.concat([
 	// A1L5
 	"R-Vehicle-Body02", "R-Vehicle-Metals02", "R-Cyborg-Metals02",
 	"R-Wpn-AAGun03", "R-Defense-AASite-QuadMg1", "R-Struc-CommandRelay",
 	"R-Comp-CommandTurret01", "R-Wpn-Rocket01-LtAT", "R-Cyborg-Wpn-Rocket",
 	"R-Defense-Pillbox06", "R-Defense-LancerTower", "R-Defense-WallTower06",
 	"R-Defense-HardcreteWall", "R-Defense-HardcreteGate", "R-Defense-MortarPit",
-	"R-Defense-Pillbox01", "R-Defense-Pillbox04", "R-Defense-Pillbox05", 
+	"R-Defense-Pillbox01", "R-Defense-Pillbox04", "R-Defense-Pillbox05",
 	"R-Defense-WallTower01", "R-Defense-WallTower02", "R-Defense-WallUpgrade01",
 	"R-Defense-WallUpgrade02", "R-Struc-Materials01", "R-Struc-Materials02",
-].concat(camA1L4AllyResearch);
+	"R-Vehicle-Engine02",
+]);
 
 // Used to grant research to team Delta on A2L2
 const camA2L2AllyResearch = camAct2StartResearch.concat([
@@ -85,17 +87,28 @@ const camA2L2AllyResearch = camAct2StartResearch.concat([
 // Used to grant research to teams Charlie and Golf on A2L6
 const camA2L6AllyResearch = camA2L2AllyResearch.concat([
 	// A2L2
-	"R-Wpn-Bomb01", "R-Wpn-Rocket-Accuracy02", "R-Wpn-MG-ROF02", 
+	"R-Wpn-Bomb01", "R-Wpn-Rocket-Accuracy02", "R-Wpn-MG-ROF02",
 	"R-Wpn-Rocket-Damage03", "R-Struc-Factory-Upgrade01", "R-Struc-RprFac-Upgrade01",
 	// A2L3
-	"R-Vehicle-Prop-Hover", "R-Wpn-Cannon-ROF02",
+	"R-Vehicle-Prop-Hover", "R-Vehicle-Engine03", "R-Wpn-Cannon-ROF02",
+	"R-Wpn-Mortar-ROF02", "R-Wpn-MG-Damage04",
 	// A2L4
 	"R-Vehicle-Body06", "R-Sys-CBSensor-Turret01", "R-Sys-CBSensor-Tower01",
 	"R-Sys-VTOLCBS-Turret01", "R-Sys-VTOLCBS-Tower01", "R-Wpn-Mortar-Acc01",
 	"R-Vehicle-Metals03", "R-Cyborg-Metals03", "R-Cyborg-Hvywpn-Mcannon",
+	"R-Wpn-AAGun-ROF01", "R-Wpn-AAGun-Accuracy01",
 	// A2L5
-	"R-Wpn-Mortar02Hvy", "R-Defense-HvyMor", "R-Wpn-Rocket03-HvAT",
-	"R-Wpn-AAGun02", "R-Defense-AASite-QuadBof", "R-Wpn-Rocket-ROF02",
+	"R-Wpn-Mortar02Hvy", "R-Defense-HvyMor", "R-Wpn-Mortar-Damage03",
+	"R-Wpn-Rocket03-HvAT", "R-Wpn-AAGun02", "R-Defense-AASite-QuadBof",
+	"R-Struc-Research-Module",
+]);
+
+const camAct3StartResearch = camA1L4AllyResearch.concat([
+	// A2L6
+	"R-Wpn-Cannon4AMk1", "R-Defense-Emplacement-HPVcannon", "R-Wpn-Rocket-ROF02",
+	"R-Defense-WallTower-HPVcannon", "R-Cyborg-Hvywpn-HPV", "R-Sys-Engineering02",
+	"R-Sys-MobileRepairTurretHvy", "R-Defense-WallUpgrade04", "R-Struc-Materials04",
+	"R-Struc-VTOLPad-Upgrade01",
 ]);
 
 //...

@@ -9,12 +9,14 @@ const MIS_TEAM_GOLF = 6;
 const transportEntryPosCharlie = { x: 2, y: 2 };
 const transportEntryPosGolf = { x: 30, y: 2 };
 const mis_collectiveResearch = [
-	"R-Wpn-MG-Damage02", "R-Wpn-Rocket-Damage02", "R-Wpn-Mortar-Damage01", 
-	"R-Wpn-Flamer-Damage03", "R-Wpn-Cannon-Damage02", "R-Wpn-MG-ROF02",
-	"R-Wpn-Rocket-ROF02", "R-Wpn-Mortar-ROF01", "R-Wpn-Flamer-ROF01",
-	"R-Wpn-Cannon-ROF02", "R-Vehicle-Metals02", "R-Struc-Materials02", 
-	"R-Defense-WallUpgrade02", "R-Sys-Engineering01", "R-Cyborg-Metals02",
-	"R-Wpn-Cannon-Accuracy01", "R-Wpn-Rocket-Accuracy01",
+	"R-Wpn-MG-Damage04", "R-Wpn-Rocket-Damage03", "R-Wpn-Mortar-Damage03", 
+	"R-Wpn-Flamer-Damage03", "R-Wpn-Cannon-Damage03", "R-Wpn-MG-ROF02",
+	"R-Wpn-Rocket-ROF02", "R-Wpn-Mortar-ROF02", "R-Wpn-Flamer-ROF02",
+	"R-Wpn-Cannon-ROF02", "R-Vehicle-Metals03", "R-Struc-Materials03", 
+	"R-Defense-WallUpgrade03", "R-Sys-Engineering02", "R-Cyborg-Metals03",
+	"R-Wpn-Cannon-Accuracy01", "R-Wpn-Rocket-Accuracy02", "R-Wpn-AAGun-ROF01",
+	"R-Wpn-AAGun-Damage01", "R-Vehicle-Engine03", "R-Wpn-AAGun-Accuracy01",
+	"R-Struc-RprFac-Upgrade01",
 ];
 
 var stealthPhase;
@@ -62,7 +64,7 @@ function vtolAttack1()
 // Called after a long delay or when the player advances far enough
 function vtolAttack2()
 {
-	const templates = [cTempl.colatv, cTempl.colbombv]; // Lancers and Cluster Bombs
+	const templates = [cTempl.colatv, ((difficulty >= HARD) ? comhbombv : cTempl.combombv)]; // Lancers and Cluster Bombs (or HEAP Bombs on Hard+)
 	const ext = {
 		limit: [((difficulty >= HARD) ? 3 : 2), 2],
 		targetPlayer: CAM_HUMAN_PLAYER,
@@ -118,6 +120,8 @@ function camEnemyBaseEliminated_scavLZBase()
 {
 	const lz = getObject("landingZone2");
 	setNoGoArea(lz.x, lz.y, lz.x2, lz.y2, CAM_HUMAN_PLAYER);
+
+	hackRemoveMessage("CLEAR_LZ", PROX_MSG, CAM_HUMAN_PLAYER);
 	
 
 	if (!tweakOptions.rec_timerlessMode)
@@ -652,7 +656,7 @@ function eventStartLevel()
 	setAlliance(MIS_LZ_SCAVS, CAM_THE_COLLECTIVE, true);
 
 	camSetArtifacts({
-		"colResearch": { tech: "R-Struc-Research-Module" }, // Research Module
+		"colResearch": { tech: "R-Wpn-Rocket-ROF02" }, // Rocket Autoloader Mk2
 		"colFactory3": { tech: "R-Wpn-Cannon4AMk1" }, // Hyper Velocity Cannon
 		"colCC2": { tech: "R-Sys-Engineering02" }, // Improved Engineering
 	});

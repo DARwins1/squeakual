@@ -2,12 +2,13 @@ include("script/campaign/libcampaign.js");
 include("script/campaign/templates.js");
 
 const mis_collectiveResearch = [
-	"R-Wpn-MG-Damage02", "R-Wpn-Rocket-Damage02", "R-Wpn-Mortar-Damage01", 
+	"R-Wpn-MG-Damage04", "R-Wpn-Rocket-Damage02", "R-Wpn-Mortar-Damage02", 
 	"R-Wpn-Flamer-Damage03", "R-Wpn-Cannon-Damage02", "R-Wpn-MG-ROF02",
-	"R-Wpn-Rocket-ROF02", "R-Wpn-Mortar-ROF01", "R-Wpn-Flamer-ROF01",
-	"R-Wpn-Cannon-ROF02", "R-Vehicle-Metals02", "R-Struc-Materials02", 
-	"R-Defense-WallUpgrade02", "R-Sys-Engineering01", "R-Cyborg-Metals02",
-	"R-Wpn-Cannon-Accuracy01", "R-Wpn-Rocket-Accuracy01",
+	"R-Wpn-Rocket-ROF02", "R-Wpn-Mortar-ROF02", "R-Wpn-Flamer-ROF02",
+	"R-Wpn-Cannon-ROF02", "R-Vehicle-Metals02", "R-Struc-Materials03", 
+	"R-Defense-WallUpgrade03", "R-Sys-Engineering01", "R-Cyborg-Metals02",
+	"R-Wpn-Cannon-Accuracy01", "R-Wpn-Rocket-Accuracy02", "R-Wpn-AAGun-ROF01",
+	"R-Vehicle-Engine02", "R-Struc-RprFac-Upgrade01",
 ];
 
 var lzCyborgGroup;
@@ -225,6 +226,7 @@ function eventStartLevel()
 		"colFactory1": { tech: "R-Vehicle-Body06" }, // Panther
 		"colCBTower": { tech: "R-Sys-CBSensor-Turret01" }, // CB Turret
 		"colCybFactory2": { tech: "R-Cyborg-Hvywpn-Mcannon" }, // Super Heavy-Gunner
+		"colAAEmp": { tech: "R-Wpn-AAGun-ROF01" }, // AA Ammunition Hopper
 		// "colBombardPit": { tech: "R-Wpn-Mortar02Hvy" }, // Bombard
 	});
 

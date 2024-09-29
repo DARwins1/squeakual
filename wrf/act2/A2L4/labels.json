@@ -61,7 +61,7 @@
 
 	"position_10": {
 		"label": "hoverPatrolPos4",
-		"pos": [2428, 8445]
+		"pos": [1660, 8573]
 	},
 
 
@@ -239,6 +239,14 @@
 	"object_8": {
 		"label": "heliTower",
 		"id": 149,
+		"player": 2,
+		"type": 1
+	},
+
+
+	"object_9": {
+		"label": "colAAEmp",
+		"id": 348,
 		"player": 2,
 		"type": 1
 	},
