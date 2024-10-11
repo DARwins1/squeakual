@@ -1260,7 +1260,7 @@
         "buildPower": 50,
         "class": "Cyborgs",
         "droidType": "CYBORG_SUPER",
-        "hitpoints": 100,
+        "hitpoints": 300,
         "id": "CyborgHeavyBody",
         "model": "scbd_std.pie",
         "name": "Cyborg Heavy Body",

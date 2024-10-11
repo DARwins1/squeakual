@@ -207,6 +207,7 @@ function expandMap()
 			cTempl.pllstrikeht,
 		],
 		factories: ["colFactory1", "colFactory2"],
+		obj: "colVtolFactory"
 		}, CAM_ORDER_DEFEND, { // This order is overwritten later...
 		pos: camMakePos("patrolPos3"),
 		repair: 40

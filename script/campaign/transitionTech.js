@@ -32,6 +32,26 @@ const camRec2StartResearch = [
 	"R-Cyborg-Wpn-Flamer", "R-Wpn-Flamer-Damage01",
 ].concat(camRec1StartResearch);
 
+// Contains the Rec 1 research after L3
+// For documentation purposes only
+// const camRec1RemainingResearch = [
+// 	// L4
+// 	"R-Struc-Research-Module", // Artifact
+// 	"R-Wpn-Rocket-Accuracy01", "R-Wpn-Rocket-Damage02", "R-Wpn-Cannon-Accuracy01",
+// 	"R-Wpn-Cannon-Damage02",
+// 	"R-Wpn-MG3Mk1", // Artifact
+// 	"R-Defense-Tower01", "R-Wpn-MG-Damage02",
+// 	// L5
+// 	"R-Wpn-Flamer-ROF02", // Artifact
+// 	"R-Vehicle-Prop-Halftracks", // Artifact
+// 	// L6
+// 	"R-Wpn-Rocket-LtA-TMk1", // Artifact
+// 	"R-Defense-Sarissa", "R-Cyborg-Wpn-LtRocket", "R-Wpn-Rocket-Damage03",
+// 	"R-Wpn-Cannon-Damage03",
+// 	"R-Wpn-Rocket02-MRL", // Artifact
+// 	"R-Defense-MRL", "R-Wpn-Rocket-ROF02", "R-Wpn-Cannon-ROF02",
+// ].concat(camRec2StartResearch);
+
 // What is acquired during the Prologue
 const camRec2PrologueResearch = [
 	//PL2
@@ -56,10 +76,10 @@ const camA1L4AllyResearch = camA1L2AllyResearch.concat([
 	"R-Struc-PowerModuleMk1", "R-Vehicle-Prop-VTOL", "R-Struc-VTOLFactory",
 	"R-Struc-VTOLPad", "R-Sys-VTOLStrike-Turret01", "R-Sys-VTOLStrike-Tower01",
 	"R-Wpn-MG3Mk1", "R-Wpn-MG-Damage03", "R-Cyborg-Wpn-HvyMG",
-	"R-Vehicle-Engine01",
+	"R-Vehicle-Engine01", "R-Defense-Tower01",
 	// A1L3
 	"R-Vehicle-Prop-Halftracks", 
-	"R-Defense-Tower01", "R-Wpn-Flamer-Damage03",
+	"R-Wpn-Flamer-Damage03",
 	"R-Wpn-Mortar-Damage02", "R-Wpn-MG-ROF01",
 ]);
 

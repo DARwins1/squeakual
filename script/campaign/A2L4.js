@@ -89,7 +89,7 @@ function enableAllFactories()
 	const TRUCK_TIME = camChangeOnDiff(camSecondsToMilliseconds(120))
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colAABase1",
-		rebuildTruck: (tweakOptions.rec_timerlessMode || difficulty >= MEDIUM),
+		rebuildTruck: (tweakOptions.rec_timerlessMode || difficulty >= HARD),
 		respawnDelay: ((tweakOptions.rec_timerlessMode) ? (TRUCK_TIME / 2) : TRUCK_TIME),
 		rebuildBase: tweakOptions.rec_timerlessMode,
 		template: cTempl.coltruckht,
@@ -97,7 +97,7 @@ function enableAllFactories()
 	});
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colAABase2",
-		rebuildTruck: (tweakOptions.rec_timerlessMode || difficulty >= EASY),
+		rebuildTruck: (tweakOptions.rec_timerlessMode || difficulty >= HARD),
 		respawnDelay: ((tweakOptions.rec_timerlessMode) ? (TRUCK_TIME / 2) : TRUCK_TIME),
 		rebuildBase: tweakOptions.rec_timerlessMode,
 		template: ((difficulty >= MEDIUM) ? cTempl.comtruckt : cTempl.coltruckht),
@@ -105,7 +105,7 @@ function enableAllFactories()
 	});
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colAABase3",
-		rebuildTruck: (tweakOptions.rec_timerlessMode),
+		rebuildTruck: (tweakOptions.rec_timerlessMode || difficulty >= MEDIUM),
 		respawnDelay: ((tweakOptions.rec_timerlessMode) ? (TRUCK_TIME / 2) : TRUCK_TIME),
 		rebuildBase: tweakOptions.rec_timerlessMode,
 		template: cTempl.comtruckt,

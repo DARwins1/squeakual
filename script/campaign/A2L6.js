@@ -138,6 +138,7 @@ function camEnemyBaseEliminated_scavLZBase()
 	camSetStandardWinLossConditions(CAM_VICTORY_OFFWORLD, "A2L7", {
 		reinforcements: camMinutesToSeconds(1.75),
 		callback: "playerDetected", // Will change once the stealth phase is officially "ended"
+		retlz: true,
 	});
 	camSetExtraObjectiveMessage("Avoid detection by the Collective");
 
@@ -166,7 +167,7 @@ function endStealthPhase()
 	camSetStandardWinLossConditions(CAM_VICTORY_OFFWORLD, "A2L7", {
 		reinforcements: camMinutesToSeconds(1.75),
 		area: "lzScavBase",
-		returnToLZ: true,
+		retlz: true,
 		callback: "campClear", // No longer fail when detected
 	});
 	camSetExtraObjectiveMessage("Clear the Collective prison camp");
@@ -537,7 +538,7 @@ function eventTransporterLanded(transport)
 	for (const droid of transOther)
 	{
 		// Check if we have an open job and an available truck
-		if (droid.type === DROID_COMMAND)
+		if (droid.droidType === DROID_COMMAND)
 		{
 			// New Charlie command tank
 			addLabel(droid, "charlieCommander");
@@ -546,7 +547,7 @@ function eventTransporterLanded(transport)
 			camSetDroidRank(droid, CHARLIE_RANK);
 
 		}
-		else if (droid.type === DROID_SENSOR)
+		else if (droid.droidType === DROID_SENSOR)
 		{
 			// New Golf sensor tank
 			addLabel(droid, "golfSensor");

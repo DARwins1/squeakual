@@ -109,7 +109,7 @@ function camManageGroup(group, order, data)
 		if (leaderObj !== null && leaderObj.type === DROID) // command or sensor droid
 		{
 			camTrace("Group", group, "assigned to follow droid", leaderObj.id);
-			// Give the suborder to the leader
+			// Give the leader order to the leader
 			if (camDef(data.leaderOrder))
 			{
 				camManageGroup(camMakeGroup(leaderObj), data.leaderOrder, data.data);
@@ -452,6 +452,19 @@ function __camTacticsTickForGroup(group)
 		return;
 	}
 
+	// Check if this group has a (rebuilt) leader
+	if (camDef(gi.data.leaderData))
+	{
+		const leaderObj = getObject(gi.data.leaderData.leader);
+		if (leaderObj !== null)
+		{
+			// If we find a new leader, follow it instead
+			// The old follow order data was stored in the data's "leaderData" field
+			camManageGroup(group, CAM_ORDER_FOLLOW, gi.data.leaderData);
+			return;
+		}
+	}
+
 	const __CLOSE_Z = 1;
 	let healthyDroids = [];
 	const repair = {
@@ -615,9 +628,11 @@ function __camTacticsTickForGroup(group)
 			if (leaderObj === null)
 			{
 				// Is the leader dead? Let the group execute the suborder.
-				const newData = camDef(gi.data.data) ? gi.data.data : {}; // do you pronounce it "data" or "data"?
+				// Make a new copy of the suborder data
+				const newData = camDef(gi.data.data) ? {...gi.data.data} : {};
+				newData.leaderData = gi.data; // Store the current data in case we find a group later
+				// Make sure that the group doesn't become removable
 				if (camDef(gi.data.removable) && !gi.data.removable) newData.removable = false;
-				newData.data = gi.data; // Hold onto the current group data in case we find a new leader.
 				camManageGroup(group, gi.data.suborder, newData);
 				return;
 			}
@@ -875,27 +890,5 @@ function __camCheckGroupMorale(group)
 			camDebug("Group order doesn't support morale", camOrderToString(gi.order));
 			break;
 		}
-	}
-}
-
-// Called when an object's label is automatically reapplied
-// Checks all groups to see if any should start following a new leader
-function __camCheckReplacementLeader()
-{
-	for (const group in __camGroupInfo)
-	{
-		const gi = __camGroupInfo[group];
-
-		if (camDef(gi.data.data) && camDef(gi.data.data.leader))
-		{
-			const leaderObj = getObject(gi.data.data.leader);
-			if (leaderObj !== null)
-			{
-				// If we find a new leader, follow it instead
-				// The old follow order data was stored in the data's "data" field (yes i know this is confusing)
-				camManageGroup(group, CAM_ORDER_FOLLOW, gi.data.data);
-			}
-		}
-
 	}
 }

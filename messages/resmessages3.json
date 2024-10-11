@@ -411,8 +411,17 @@
         "imdName": "MICAPSUL.pie",
         "sequenceName": "res_struttech.ogg",
         "text": [
-            "VTOL Rearming Times Reduced",
-            "Robotic VTOL Rearming",
+            "New robotic rearm and repair systems",
+            "Reduces rearming time",
+            "All rearming pads upgraded automatically"
+        ]
+    },
+    "RES_ST_VPU7": {
+        "id": "RES_ST_VPU7",
+        "imdName": "MICAPSUL.pie",
+        "sequenceName": "res_struttech.ogg",
+        "text": [
+            "New advanced rearm and repair systems",
             "Reduces rearming time",
             "All rearming pads upgraded automatically"
         ]

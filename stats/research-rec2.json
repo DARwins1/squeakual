@@ -4354,6 +4354,7 @@
     "R-Vehicle-Engine04": {
         "iconID": "IMAGE_RES_DROIDTECH",
         "id": "R-Vehicle-Engine04",
+        "keyTopic": 1,
         "imdName": "iceng.pie",
         "msgName": "RES_V_EN4",
         "name": "Turbo-Charged Engine",
@@ -5565,6 +5566,7 @@
     },
     "R-Wpn-MG-Damage05": {
         "iconID": "IMAGE_RES_WEAPONTECH",
+        "keyTopic": 1,
         "id": "R-Wpn-MG-Damage05",
         "msgName": "RES_W_MG_D5",
         "name": "Tungsten-Tipped MG Bullets",

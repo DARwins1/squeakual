@@ -232,9 +232,6 @@ function cam_eventStructureBuilt(struct, droid)
 				// console("re-applied label: " + labelInfo.label)
 				addLabel(struct, labelInfo.label);
 
-				// Check if any groups should "follow" this object
-				__camCheckReplacementLeader();
-
 				break;
 			}
 		}

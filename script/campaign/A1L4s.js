@@ -16,7 +16,7 @@ function eventStartLevel()
 	camSetStandardWinLossConditions(CAM_VICTORY_PRE_OFFWORLD, "A1L4");
 
 	// In case the player didn't get this in the last mission
-	enableResearch("R-Wpn-MG3Mk1", CAM_HUMAN_PLAYER);
+	enableResearch("R-Wpn-MG-ROF01", CAM_HUMAN_PLAYER);
 
 	// Give player briefing.
 	// camPlayVideos({video: "L2_BRIEF", type: MISS_MSG});
