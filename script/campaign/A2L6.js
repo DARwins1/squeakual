@@ -18,6 +18,16 @@ const mis_collectiveResearch = [
 	"R-Wpn-AAGun-Damage01", "R-Vehicle-Engine03", "R-Wpn-AAGun-Accuracy01",
 	"R-Struc-RprFac-Upgrade01",
 ];
+const mis_infestedResearch = [
+	"R-Wpn-MG-Damage04", "R-Wpn-Rocket-Damage03", "R-Wpn-Mortar-Damage03", 
+	"R-Wpn-Flamer-Damage03", "R-Wpn-Cannon-Damage03", "R-Wpn-MG-ROF02",
+	"R-Wpn-Rocket-ROF02", "R-Wpn-Mortar-ROF02", "R-Wpn-Flamer-ROF02",
+	"R-Wpn-Cannon-ROF02", "R-Vehicle-Metals03", "R-Struc-Materials03", 
+	"R-Defense-WallUpgrade03", "R-Sys-Engineering02", "R-Cyborg-Metals03",
+	"R-Wpn-Cannon-Accuracy01", "R-Wpn-Rocket-Accuracy02", "R-Wpn-AAGun-ROF01",
+	"R-Wpn-AAGun-Damage01", "R-Vehicle-Engine03", "R-Wpn-AAGun-Accuracy01",
+	"R-Struc-RprFac-Upgrade01",
+];
 
 var stealthPhase;
 var playerHidden;
@@ -118,8 +128,8 @@ function activateLzScavs()
 // Place a new LZ, enable reinforcements, and queue the end of the stealth phase
 function camEnemyBaseEliminated_scavLZBase()
 {
-	const lz = getObject("landingZone2");
-	setNoGoArea(lz.x, lz.y, lz.x2, lz.y2, CAM_HUMAN_PLAYER);
+	// const lz = getObject("landingZone2");
+	// setNoGoArea(lz.x, lz.y, lz.x2, lz.y2, CAM_HUMAN_PLAYER);
 
 	hackRemoveMessage("CLEAR_LZ", PROX_MSG, CAM_HUMAN_PLAYER);
 	
@@ -137,6 +147,7 @@ function camEnemyBaseEliminated_scavLZBase()
 
 	camSetStandardWinLossConditions(CAM_VICTORY_OFFWORLD, "A2L7", {
 		reinforcements: camMinutesToSeconds(1.75),
+		area: "compromiseZone",
 		callback: "playerDetected", // Will change once the stealth phase is officially "ended"
 		retlz: true,
 	});
@@ -153,7 +164,7 @@ function camEnemyBaseEliminated_scavLZBase()
 function sendCollectiveScouts()
 {
 	camManageGroup(camMakeGroup("colScoutGroup"), CAM_ORDER_COMPROMISE, {
-		pos: camMakePos("landingZone2"),
+		pos: camMakePos("landingZone1"),
 		morale: 20,
 		fallback: camMakePos("cScavAssembly1"),
 	});
@@ -166,7 +177,7 @@ function endStealthPhase()
 
 	camSetStandardWinLossConditions(CAM_VICTORY_OFFWORLD, "A2L7", {
 		reinforcements: camMinutesToSeconds(1.75),
-		area: "lzScavBase",
+		area: "compromiseZone",
 		retlz: true,
 		callback: "campClear", // No longer fail when detected
 	});
@@ -422,6 +433,8 @@ function activateCollective()
 	// NOTE: These factories only resupply refillable groups for now
 	camEnableFactory("colFactory4");
 	camEnableFactory("colCybFactory5");
+
+	setTimer("sendInfestedReinforcements", camMinutesToMilliseconds(1.1));
 }
 
 function sendCharlieTransporter()
@@ -598,6 +611,72 @@ function enableFinalFactories()
 	camEnableFactory("colCybFactory5");
 }
 
+// Damage infested reinforcements
+// TODO: Move this into a general libcampaign function
+function preDamageInfestedGroup(group)
+{
+	const units = enumGroup(group);
+	for (let i = 0; i < units.length; ++i)
+	{
+		if (units[i].body !== "CrawlerBody") // Don't damage crawlers
+		{
+			// 50% to 80% base HP
+			setHealth(units[i], 50 + camRand(31));
+		}
+	}
+}
+
+// Randomize the provided list of units and tack on a bunch of extra rocket fodder
+// TODO: Move this into a general libcampaign function
+function randomizeTemplates(list)
+{
+	const droids = [];
+	const CORE_SIZE = 4 + camRand(5); // Maximum of 8 core units.
+	const FODDER_SIZE = 14 + camRand(3); // 14 - 16 extra Infested Civilians to the swarm.
+
+	for (let i = 0; i < CORE_SIZE; ++i)
+	{
+		droids.push(list[camRand(list.length)]);
+	}
+
+	// Add a bunch of Infested Civilians.
+	for (let i = 0; i < FODDER_SIZE; ++i)
+	{
+		droids.push(cTempl.infciv);
+	}
+
+	// Chance to add a Boom Tick on Hard (10%) or Insane (20%)
+	if ((difficulty === HARD && camRand(101) < 10) || (difficulty === INSANE && camRand(101) < 20))
+	{
+		droids.push(cTempl.boomtick);
+	}
+
+	return droids;
+}
+
+// Start sending Infested waves once the player progresses far enough
+function sendInfestedReinforcements()
+{
+	// NE entrance
+	if (camBaseIsEliminated("colCraterBase") || camBaseIsEliminated("colMainBase"))
+	{
+		const droids = [cTempl.stinger, cTempl.infbloke, cTempl.infbloke, cTempl.infminitruck, cTempl.infbuggy, cTempl.infrbuggy];
+		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, getObject("infestedEntry3"), randomizeTemplates(droids), CAM_REINFORCE_GROUND));
+	}
+
+	// SE entrances
+	if (camBaseIsEliminated("colEastCanalBase") || camBaseIsEliminated("colMainBase"))
+	{
+		const droids1 = [cTempl.stinger, cTempl.inffiretruck, cTempl.infbloke, cTempl.inflance, cTempl.infbuggy, cTempl.infrbuggy];
+		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, getObject("infestedEntry1"), randomizeTemplates(droids1), CAM_REINFORCE_GROUND, 
+			{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}} // Annoy the player specifically
+		));
+
+		const droids2 = [cTempl.stinger, cTempl.inflance, cTempl.infbuscan, cTempl.infbloke, cTempl.infbjeep, cTempl.infrbjeep];
+		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, getObject("infestedEntry2"), randomizeTemplates(droids2), CAM_REINFORCE_GROUND));
+	}
+}
+
 function playerDetected()
 {
 	if (!playerHidden)
@@ -624,6 +703,7 @@ function eventStartLevel()
 	const transportEntryPos = {x: 2, y: 48};
 
 	camSetStandardWinLossConditions(CAM_VICTORY_OFFWORLD, "A2L7", {
+		area: "landingZone1",
 		reinforcements: -1, // will override later
 		callback: "playerDetected",
 	});
@@ -636,12 +716,14 @@ function eventStartLevel()
 
 	// Make sure the scavengers/allies aren't choosing conflicting colors with the player
 	const PLAYER_COLOR = playerData[0].colour;
+	changePlayerColour(CAM_INFESTED, (PLAYER_COLOR !== 9) ? 9 : 4); // Infested to purple or red
 	changePlayerColour(MIS_LZ_SCAVS, (PLAYER_COLOR !== 2) ? 2 : 10); // Scavs to gray or white
 	changePlayerColour(MIS_TEAM_CHARLIE, (PLAYER_COLOR !== 5) ? 5 : 11); // Charlie to blue or bright blue
 	changePlayerColour(MIS_TEAM_GOLF, (PLAYER_COLOR !== 7) ? 7 : 0); // Golf to cyan or green
 
 	camCompleteRequiredResearch(mis_collectiveResearch, CAM_THE_COLLECTIVE);
 	camCompleteRequiredResearch(mis_collectiveResearch, MIS_LZ_SCAVS);
+	camCompleteRequiredResearch(mis_infestedResearch, CAM_INFESTED);
 	camCompleteRequiredResearch(camA2L6AllyResearch, MIS_TEAM_CHARLIE);
 	camCompleteRequiredResearch(camA2L6AllyResearch, MIS_TEAM_GOLF);
 

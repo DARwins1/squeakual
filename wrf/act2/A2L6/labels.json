@@ -322,63 +322,35 @@
 	},
 
 
+	"area_23": {
+		"label": "infestedEntry1",
+		"pos1": [15360, 6656],
+		"pos2": [16128, 6912]
+	},
+
+
+	"area_24": {
+		"label": "infestedEntry2",
+		"pos1": [18432, 6656],
+		"pos2": [18944, 6912]
+	},
+
+
+	"area_25": {
+		"label": "infestedEntry3",
+		"pos1": [17152, 256],
+		"pos2": [17792, 512]
+	},
+
+
+	"area_26": {
+		"label": "compromiseZone",
+		"pos1": [128, 5248],
+		"pos2": [2048, 7040]
+	},
+
+
 	"object_0": {
-		"label": "colCC2",
-		"id": 5,
-		"player": 2,
-		"type": 1
-	},
-
-
-	"object_1": {
-		"label": "colFactory4",
-		"id": 1,
-		"player": 2,
-		"type": 1
-	},
-
-
-	"object_2": {
-		"label": "charlieEngineer",
-		"id": 751,
-		"player": 5,
-		"type": 0
-	},
-
-
-	"object_3": {
-		"label": "cScavFactory3",
-		"id": 211,
-		"player": 2,
-		"type": 1
-	},
-
-
-	"object_4": {
-		"label": "colFactory1",
-		"id": 146,
-		"player": 2,
-		"type": 1
-	},
-
-
-	"object_5": {
-		"label": "colCybFactory2",
-		"id": 165,
-		"player": 2,
-		"type": 1
-	},
-
-
-	"object_6": {
-		"label": "cScavFactory2",
-		"id": 210,
-		"player": 2,
-		"type": 1
-	},
-
-
-	"object_7": {
 		"label": "cScavFactory1",
 		"id": 66,
 		"player": 2,
@@ -386,9 +358,65 @@
 	},
 
 
-	"object_8": {
+	"object_1": {
+		"label": "colCC2",
+		"id": 5,
+		"player": 2,
+		"type": 1
+	},
+
+
+	"object_2": {
+		"label": "colCybFactory1",
+		"id": 107,
+		"player": 2,
+		"type": 1
+	},
+
+
+	"object_3": {
+		"label": "charlieEngineer",
+		"id": 751,
+		"player": 5,
+		"type": 0
+	},
+
+
+	"object_4": {
+		"label": "cScavFactory3",
+		"id": 211,
+		"player": 2,
+		"type": 1
+	},
+
+
+	"object_5": {
+		"label": "colFactory3",
+		"id": 148,
+		"player": 2,
+		"type": 1
+	},
+
+
+	"object_6": {
+		"label": "colCybFactory2",
+		"id": 165,
+		"player": 2,
+		"type": 1
+	},
+
+
+	"object_7": {
 		"label": "colResearch",
 		"id": 201,
+		"player": 2,
+		"type": 1
+	},
+
+
+	"object_8": {
+		"label": "colFactory1",
+		"id": 146,
 		"player": 2,
 		"type": 1
 	},
@@ -403,26 +431,26 @@
 
 
 	"object_10": {
-		"label": "colCybFactory1",
-		"id": 107,
-		"player": 2,
-		"type": 1
+		"label": "golfSensor",
+		"id": 765,
+		"player": 6,
+		"type": 0
 	},
 
 
 	"object_11": {
-		"label": "colCC1",
-		"id": 6,
+		"label": "colCybFactory5",
+		"id": 4,
 		"player": 2,
 		"type": 1
 	},
 
 
 	"object_12": {
-		"label": "golfSensor",
-		"id": 765,
-		"player": 6,
-		"type": 0
+		"label": "colCybFactory3",
+		"id": 316,
+		"player": 2,
+		"type": 1
 	},
 
 
@@ -435,30 +463,14 @@
 
 
 	"object_14": {
-		"label": "colFactory3",
-		"id": 148,
+		"label": "colFactory4",
+		"id": 1,
 		"player": 2,
 		"type": 1
 	},
 
 
 	"object_15": {
-		"label": "colCybFactory5",
-		"id": 4,
-		"player": 2,
-		"type": 1
-	},
-
-
-	"object_16": {
-		"label": "colCybFactory3",
-		"id": 316,
-		"player": 2,
-		"type": 1
-	},
-
-
-	"object_17": {
 		"label": "colCommander1",
 		"id": 242,
 		"player": 2,
@@ -466,7 +478,7 @@
 	},
 
 
-	"object_18": {
+	"object_16": {
 		"label": "lzScavFactory",
 		"id": 8,
 		"player": 1,
@@ -474,7 +486,7 @@
 	},
 
 
-	"object_19": {
+	"object_17": {
 		"label": "charlieCommander",
 		"id": 739,
 		"player": 5,
@@ -482,7 +494,7 @@
 	},
 
 
-	"object_20": {
+	"object_18": {
 		"label": "golfTruck1",
 		"id": 750,
 		"player": 6,
@@ -490,9 +502,25 @@
 	},
 
 
+	"object_19": {
+		"label": "colCommander2",
+		"id": 241,
+		"player": 2,
+		"type": 0
+	},
+
+
+	"object_20": {
+		"label": "colCC1",
+		"id": 6,
+		"player": 2,
+		"type": 1
+	},
+
+
 	"object_21": {
-		"label": "heliTower",
-		"id": 264,
+		"label": "cScavFactory2",
+		"id": 210,
 		"player": 2,
 		"type": 1
 	},
@@ -507,10 +535,10 @@
 
 
 	"object_23": {
-		"label": "colCommander2",
-		"id": 241,
+		"label": "heliTower",
+		"id": 264,
 		"player": 2,
-		"type": 0
+		"type": 1
 	},
 
 
