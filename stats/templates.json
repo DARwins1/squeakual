@@ -62,6 +62,7 @@
         ]
     },
     "BaBaCivilian": {
+        "available": true,
         "body": "CivilianBody",
         "id": "BaBaCivilian",
         "name": "Civilian",
@@ -69,6 +70,7 @@
         "type": "PERSON"
     },
     "BaBaPeople": {
+        "available": true,
         "body": "B1BaBaPerson01",
         "id": "BaBaPeople",
         "name": "Scavenger",
@@ -79,6 +81,7 @@
         ]
     },
     "ScavLance": {
+        "available": true,
         "body": "BaBaLanceBody",
         "id": "ScavLance",
         "name": "Scavenger Lance",
@@ -89,9 +92,21 @@
         ]
     },
     "InfCivilian": {
+        "available": true,
         "body": "InfestedCivilianBody",
-        "id": "BaBaPeople",
-        "name": "Scavenger",
+        "id": "InfCivilian",
+        "name": "Infested Civilian",
+        "propulsion": "BaBaLegs",
+        "type": "PERSON",
+        "weapons": [
+            "InfestedMelee"
+        ]
+    },
+    "InfCivilian2": {
+        "available": true,
+        "body": "InfestedCivilianBodyAlt",
+        "id": "InfCivilian2",
+        "name": "Infested Civilian",
         "propulsion": "BaBaLegs",
         "type": "PERSON",
         "weapons": [
@@ -99,9 +114,10 @@
         ]
     },
     "InfScav": {
+        "available": true,
         "body": "InfestedScavBody",
-        "id": "BaBaPeople",
-        "name": "Scavenger",
+        "id": "InfScav",
+        "name": "Infested Scavenger",
         "propulsion": "BaBaLegs",
         "type": "PERSON",
         "weapons": [
@@ -109,9 +125,10 @@
         ]
     },
     "InfLance": {
-        "body": "BaBaLanceBody",
+        "available": true,
+        "body": "InfestedLanceBody",
         "id": "InfLance",
-        "name": "Scavenger Lance",
+        "name": "Infested Scavenger Lance",
         "propulsion": "BaBaLegs",
         "type": "PERSON",
         "weapons": [

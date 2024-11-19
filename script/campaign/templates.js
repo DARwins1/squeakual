@@ -12,7 +12,7 @@ buggy: { body: "B3body-sml-buggy01", prop: "BaBaProp", weap: "BabaBuggyMG" }, //
 bjeep: { body: "B2JeepBody", prop: "BaBaProp", weap: "BabaJeepMG" }, // Jeep
 rbjeep: { body: "B2RKJeepBody", prop: "BaBaProp", weap: "BabaRocket" }, // Rocket Jeep
 rbuggy: { body: "B3bodyRKbuggy01", prop: "BaBaProp", weap: "BabaRocket" }, // Rocket Buggy
-civ: { body: "CivilianBody", prop: "BaBaLegs", weap: "BabaMG" }, // Civilian
+civ: { body: "CivilianBody", prop: "BaBaLegs", weap: "InfestedMelee" }, // Civilian
 helcan: { body: "ScavengerChopper", prop: "Helicopter", weap: "RustCannon1-VTOL" }, // Light Cannon Helicopter
 helhmg: { body: "ScavengerChopper", prop: "Helicopter", weap: "RustMG3-VTOL" }, // HMG Helicopter
 moncan: { body: "MonsterBus", prop: "tracked01", weap: "RustCannon1Mk1" }, // Light Cannon Monster Bus Tank

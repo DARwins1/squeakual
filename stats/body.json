@@ -310,6 +310,21 @@
         "weaponSlots": 1,
         "weight": 100
     },
+    "InfestedCivilianBodyAlt": {
+        "armourHeat": 1,
+        "armourKinetic": 1,
+        "buildPoints": 20,
+        "buildPower": 1,
+        "droidType": "PERSON",
+        "hitpoints": 49,
+        "id": "InfestedCivilianBodyAlt",
+        "model": "infciv2.pie",
+        "name": "*Alternate Infested Civilian Body*",
+        "powerOutput": 125,
+        "size": "LIGHT",
+        "weaponSlots": 1,
+        "weight": 100
+    },
     "BoomBaitBody": {
         "armourHeat": 1,
         "armourKinetic": 1,
@@ -349,7 +364,7 @@
         "hitpoints": 49,
         "id": "InfestedLanceBody",
         "model": "inflance.pie",
-        "name": "*Scavenger Lance Body*",
+        "name": "*Infested Scavenger Lance Body*",
         "powerOutput": 125,
         "size": "LIGHT",
         "weaponSlots": 1,
