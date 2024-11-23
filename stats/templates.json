@@ -80,11 +80,33 @@
             "BabaMG"
         ]
     },
+    "BaBaKevPeople": {
+        "available": true,
+        "body": "B1BaBaPerson01-Kev",
+        "id": "BaBaKevPeople",
+        "name": "Armored Scavenger",
+        "propulsion": "BaBaLegs",
+        "type": "PERSON",
+        "weapons": [
+            "BabaMG"
+        ]
+    },
     "ScavLance": {
         "available": true,
         "body": "BaBaLanceBody",
         "id": "ScavLance",
         "name": "Scavenger Lance",
+        "propulsion": "BaBaLegs",
+        "type": "PERSON",
+        "weapons": [
+            "BabaLance"
+        ]
+    },
+    "ScavKevLance": {
+        "available": true,
+        "body": "BaBaLanceBody-Kev",
+        "id": "ScavKevLance",
+        "name": "Armored Scavenger Lance",
         "propulsion": "BaBaLegs",
         "type": "PERSON",
         "weapons": [
@@ -124,11 +146,33 @@
             "BabaMG"
         ]
     },
+    "InfKevScav": {
+        "available": true,
+        "body": "InfestedScavBody-Kev",
+        "id": "InfKevScav",
+        "name": "Infested Armored Scavenger",
+        "propulsion": "BaBaLegs",
+        "type": "PERSON",
+        "weapons": [
+            "BabaMG"
+        ]
+    },
     "InfLance": {
         "available": true,
         "body": "InfestedLanceBody",
         "id": "InfLance",
         "name": "Infested Scavenger Lance",
+        "propulsion": "BaBaLegs",
+        "type": "PERSON",
+        "weapons": [
+            "BabaLance"
+        ]
+    },
+    "InfKevLance": {
+        "available": true,
+        "body": "InfestedLanceBody-Kev",
+        "id": "InfKevLance",
+        "name": "Infested Armored Scavenger Lance",
         "propulsion": "BaBaLegs",
         "type": "PERSON",
         "weapons": [

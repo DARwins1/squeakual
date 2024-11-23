@@ -7,6 +7,7 @@ truck: { body: "Body1REC", prop: "wheeled01", weap: "Spade1Mk1" }, // Truck Vipe
 
 // Scavenger Units:
 bloke: { body: "B1BaBaPerson01", prop: "BaBaLegs", weap: "BabaMG" }, // Bloke
+kevbloke: { body: "B1BaBaPerson01-Kev", prop: "BaBaLegs", weap: "BabaMG" }, // Armored Bloke
 trike: { body: "B4body-sml-trike01", prop: "BaBaProp", weap: "BabaTrikeMG" }, // Trike
 buggy: { body: "B3body-sml-buggy01", prop: "BaBaProp", weap: "BabaBuggyMG" }, // Buggy
 bjeep: { body: "B2JeepBody", prop: "BaBaProp", weap: "BabaJeepMG" }, // Jeep
@@ -24,11 +25,14 @@ firetruck: { body: "FireBody", prop: "BaBaProp", weap: "RustFlame1Mk1" }, // Fla
 minitruck: { body: "FireBody", prop: "BaBaProp", weap: "RustRocket-Pod" }, // Mini-Rocket Pod firetruck
 sartruck: { body: "FireBody", prop: "BaBaProp", weap: "RustRocket-LtA-TMk1" }, // Sarissa firetruck
 lance: { body: "BaBaLanceBody", prop: "BaBaLegs", weap: "BabaLance" }, // Rocket scav
+kevlance: { body: "BaBaLanceBody-Kev", prop: "BaBaLegs", weap: "BabaLance" }, // Armored Rocket scav
 
 // Infested Units:
 infciv: { body: "InfestedCivilianBody", prop: "BaBaLegs", weap: "InfestedMelee" }, // Infested civilian (melee unit)
 infbloke: { body: "InfestedScavBody", prop: "BaBaLegs", weap: "BabaMG" }, // Infested bloke
+infkevbloke: { body: "InfestedScavBody-Kev", prop: "BaBaLegs", weap: "BabaMG" }, // Infested Armored bloke
 inflance: { body: "InfestedLanceBody", prop: "BaBaLegs", weap: "BabaLance" }, // Infested rocket scav
+infkevlance: { body: "InfestedLanceBody-Kev", prop: "BaBaLegs", weap: "BabaLance" }, // Infested Armored rocket scav
 infhelcan: { body: "InfestedScavengerChopper", prop: "Helicopter", weap: "RustCannon1-VTOL" }, // Infested Light Cannon Helicopter
 infhelhmg: { body: "InfestedScavengerChopper", prop: "Helicopter", weap: "RustMG3-VTOL" }, // Infested HMG Helicopter
 infmoncan: { body: "InfestedMonsterBus", prop: "tracked01", weap: "RustCannon1Mk1" }, // Infested Light Cannon Monster Bus Tank
