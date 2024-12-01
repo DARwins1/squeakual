@@ -500,5 +500,16 @@
             "Assigned automatically to nearest sensor or CB tower",
             "Defensive Strength: Medium"
         ]
+    },
+    "RES_CYW_HVYMOR": {
+        "id": "RES_CYW_HVYMOR",
+        "imdName": "MICAPSUL.pie",
+        "sequenceName": "res_droid.ogg",
+        "text": [
+            "New Cyborg Available",
+            "Armed with Cyborg Heavy Grenade Launcher",
+            "Body Points: Medium",
+            "Requires Cyborg factory to produce"
+        ]
     }
 }

@@ -155,9 +155,9 @@ function sendCollectiveTransporter()
 		cTempl.colcanht, cTempl.colcanht,
 		cTempl.colhmght, cTempl.colhmght,
 	];
-	// Add Medium Cannon(s) on Hard+
-	if (difficulty >= HARD) droids.push(cTempl.commcant);
-	if (difficulty === INSANE) droids.push(cTempl.commcant);
+	// Add Medium Cannon(s) on Normal+
+	if (difficulty >= MEDIUM && difficulty !== INSANE) droids.push(cTempl.colmcant); // Leopard
+	if (difficulty === INSANE) droids.push(cTempl.commcant); // Panther
 
 	// Get all available LZs
 	const lzPool = [];
@@ -370,9 +370,9 @@ function collectiveAttackWaves()
 
 	const nePlateauDroids = [cTempl.bjeep, cTempl.minitruck, cTempl.buscan, cTempl.monhmg, cTempl.sartruck];
 
-	const eastPlateauDroids = [cTempl.flatmrl, cTempl.gbjeep, cTempl.bloke, cTempl.lance, cTempl.buggy, cTempl.rbuggy];
+	const eastPlateauDroids = [cTempl.flatmrl, cTempl.gbjeep, cTempl.kevbloke, cTempl.kevlance, cTempl.buggy, cTempl.rbuggy];
 
-	const nwCraterDroids = [cTempl.monmrl, cTempl.gbjeep, cTempl.minitruck, cTempl.lance, cTempl.bjeep];
+	const nwCraterDroids = [cTempl.monmrl, cTempl.gbjeep, cTempl.minitruck, cTempl.kevlance, cTempl.bjeep];
 
 	const eastValleyDroids = [cTempl.flatat, cTempl.minitruck, cTempl.gbjeep, cTempl.trike, cTempl.moncan];
 
@@ -387,9 +387,10 @@ function collectiveAttackWaves()
 		cTempl.colflamt, cTempl.colflamt, // Flamer
 		cTempl.colaaht, // Hurricane
 	];
-	if (phaseTwo) colOverrideDroids.push(cTempl.commcant); // Add chance for Medium Cannon
-	if (difficulty >= HARD) colOverrideDroids.push(cTempl.commcant); // Add chance for Medium Cannon
-	if (difficulty === INSANE) colOverrideDroids.push(cTempl.comatt); // Add chance for Lancer
+	if (waveIndex >= 10) colOverrideDroids.push(cTempl.colmcant); // Add chance for Medium Cannon (Leopard)
+	if (difficulty >= HARD) colOverrideDroids.push(cTempl.colmcant); // Add another chance for Medium Cannon (Leopard)
+	if (phaseTwo && difficulty >= HARD) colOverrideDroids.push(cTempl.commcant); // Add chance for Medium Cannon (Panther)
+	if (phaseTwo && difficulty === INSANE) colOverrideDroids.push(cTempl.comatt); // Add chance for Lancer
 
 	// This block handles activating new entrances
 	const waveEntrances = [];
@@ -413,7 +414,7 @@ function collectiveAttackWaves()
 	if (waveIndex >= 10)
 	{
 		waveEntrances.push("colEntrance4");
-			waveTemplates.push(nePlateauDroids);
+		waveTemplates.push(nePlateauDroids);
 	}
 	if (waveIndex >= 14)
 	{

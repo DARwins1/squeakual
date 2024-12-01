@@ -1363,6 +1363,17 @@
             "Cyb-Hvywpn-Mcannon"
         ]
     },
+    "Cyb-Hvy-Gren": {
+        "available": true,
+        "body": "CyborgHeavyBody",
+        "id": "Cyb-Hvy-Gren",
+        "name": "Super Heavy Grenadier Cyborg",
+        "propulsion": "CyborgLegs",
+        "type": "CYBORG_SUPER",
+        "weapons": [
+            "Cyb-Hvywpn-Grenade"
+        ]
+    },
     "Cyb-Hvy-PulseLsr": {
         "available": true,
         "body": "CyborgHeavyBody",

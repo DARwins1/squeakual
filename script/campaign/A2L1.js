@@ -472,7 +472,7 @@ function eventStartLevel()
 			},
 			groupSize: 4,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(45)),
-			templates: [ cTempl.colpodt, cTempl.colhmght, cTempl.colmrat, cTempl.colflamt, cTempl.colcanht ]
+			templates: [ cTempl.colpodt, cTempl.colhmght, cTempl.colmrat, cTempl.colflamt, cTempl.colcanht, cTempl.colmcant ]
 		},
 		"colFactory2": {
 			assembly: "colAssembly2",
@@ -494,7 +494,7 @@ function eventStartLevel()
 			},
 			groupSize: 3,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(22)),
-			templates: [ cTempl.bjeep, cTempl.rbjeep, cTempl.bloke, cTempl.buscan]
+			templates: [ cTempl.bjeep, cTempl.rbjeep, cTempl.kevbloke, cTempl.buscan]
 		},
 		"scavFactory2": {
 			assembly: "scavAssembly2",
@@ -504,7 +504,7 @@ function eventStartLevel()
 			},
 			groupSize: 6,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(28)),
-			templates: [ cTempl.gbjeep, cTempl.minitruck, cTempl.lance, cTempl.sartruck, cTempl.bjeep ]
+			templates: [ cTempl.gbjeep, cTempl.minitruck, cTempl.kevlance, cTempl.sartruck, cTempl.bjeep ]
 		},
 		"cScavFactory1": {
 			assembly: "cScavAssembly1",

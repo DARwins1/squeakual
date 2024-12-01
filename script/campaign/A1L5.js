@@ -313,21 +313,21 @@ function eventStartLevel()
 			order: CAM_ORDER_ATTACK,
 			groupSize: 3,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(36)),
-			templates: [cTempl.flatat, cTempl.rbjeep, cTempl.gbjeep, cTempl.lance, cTempl.minitruck]
+			templates: [cTempl.flatat, cTempl.rbjeep, cTempl.gbjeep, cTempl.kevlance, cTempl.minitruck]
 		},
 		"scavFactory2": {
 			assembly: "scavAssembly2",
 			order: CAM_ORDER_ATTACK,
 			groupSize: 3,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(18)),
-			templates: [cTempl.trike, cTempl.rbuggy, cTempl.bjeep, cTempl.bloke, cTempl.lance, cTempl.firetruck]
+			templates: [cTempl.trike, cTempl.rbuggy, cTempl.bjeep, cTempl.kevbloke, cTempl.kevlance, cTempl.firetruck]
 		},
 		"scavFactory3": {
 			assembly: "scavAssembly3",
 			order: CAM_ORDER_ATTACK,
 			groupSize: 3,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(28)),
-			templates: [cTempl.moncan, cTempl.bloke, cTempl.bloke, cTempl.buggy, cTempl.sartruck]
+			templates: [cTempl.moncan, cTempl.kevbloke, cTempl.kevbloke, cTempl.buggy, cTempl.sartruck]
 		},
 		"scavFactory4": {
 			assembly: "scavAssembly4",
@@ -341,7 +341,7 @@ function eventStartLevel()
 			order: CAM_ORDER_ATTACK,
 			groupSize: 4,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(35)),
-			templates: [ cTempl.colcanht, cTempl.colcanht, cTempl.colflamt, cTempl.colmrat, cTempl.colhmght]
+			templates: [cTempl.colcanht, cTempl.colcanht, cTempl.colflamt, cTempl.colmrat, cTempl.colhmght, cTempl.colmcant]
 		},
 	});
 

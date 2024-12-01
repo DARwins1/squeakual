@@ -777,7 +777,7 @@ function eventStartLevel()
 			groupSize: 6,
 			maxSize: 3,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(16)),
-			templates: [ cTempl.monhmg, cTempl.bloke, cTempl.lance, cTempl.bloke, cTempl.lance, cTempl.bloke, cTempl.lance, cTempl.bjeep ]
+			templates: [ cTempl.monhmg, cTempl.kevbloke, cTempl.kevlance, cTempl.kevbloke, cTempl.kevlance, cTempl.kevbloke, cTempl.kevlance, cTempl.bjeep ]
 		},
 		"scavInnerFactory2": {
 			assembly: "scavInnerAssembly2",
@@ -785,7 +785,7 @@ function eventStartLevel()
 			groupSize: 3,
 			maxSize: 3,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(30)),
-			templates: [ cTempl.moncan, cTempl.minitruck, cTempl.flatmrl, cTempl.monfire, cTempl.lance, cTempl.monmrl, cTempl.sartruck ]
+			templates: [ cTempl.moncan, cTempl.minitruck, cTempl.flatmrl, cTempl.monfire, cTempl.kevlance, cTempl.monmrl, cTempl.sartruck ]
 		},
 		"scavInnerFactory3": {
 			assembly: "scavInnerAssembly3",

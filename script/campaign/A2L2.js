@@ -260,12 +260,10 @@ function expandMap()
 		obj: "echoVtolTower1", // Only refill this group if the tower is still alive
 		}, CAM_ORDER_FOLLOW, {
 		leader: "echoVtolTower1",
-		// Originally these VTOLs would get CAM_ORDER_DEFEND instead
-		// But that would cause a hard-crash??? when the player tried to save after destroying the sensor??????
-		// So now they just attack instead.
-		// I have no idea what's going on here
-		// help
-		suborder: CAM_ORDER_ATTACK 
+		suborder: CAM_ORDER_DEFEND,
+		data: {
+			pos: camMakePos("colVtolAssembly")
+		}
 	});
 	// Strike tower 2 (2 HMGs, 2 MRPs)
 	camMakeRefillableGroup(undefined, {
@@ -277,7 +275,10 @@ function expandMap()
 		obj: "echoVtolTower2",
 		}, CAM_ORDER_FOLLOW, {
 		leader: "echoVtolTower2",
-		suborder: CAM_ORDER_ATTACK
+		suborder: CAM_ORDER_DEFEND,
+		data: {
+			pos: camMakePos("colVtolAssembly")
+		}
 	});
 	// Strike tower 3 (2 HMGs, 2 MRPs)
 	camMakeRefillableGroup(undefined, {
@@ -289,7 +290,10 @@ function expandMap()
 		obj: "echoVtolTower3",
 		}, CAM_ORDER_FOLLOW, {
 		leader: "echoVtolTower3",
-		suborder: CAM_ORDER_ATTACK
+		suborder: CAM_ORDER_DEFEND,
+		data: {
+			pos: camMakePos("colVtolAssembly")
+		}
 	});
 	// Strike turret (2 Lancers, 2 Cluster Bombs)
 	camMakeRefillableGroup(undefined, {
@@ -750,7 +754,7 @@ function eventStartLevel()
 			order: CAM_ORDER_ATTACK,
 			groupSize: 4,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(45)),
-			templates: [ cTempl.buggy, cTempl.lance, cTempl.bloke, cTempl.buscan, cTempl.minitruck ]
+			templates: [ cTempl.buggy, cTempl.kevlance, cTempl.kevbloke, cTempl.buscan, cTempl.minitruck ]
 		},
 		"cScavFactory3": {
 			assembly: "cScavAssembly3",
@@ -764,7 +768,7 @@ function eventStartLevel()
 			order: CAM_ORDER_ATTACK,
 			groupSize: 3,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(65)),
-			templates: [ cTempl.flatat, cTempl.buscan, cTempl.bloke, cTempl.lance, ]
+			templates: [ cTempl.flatat, cTempl.buscan, cTempl.bloke, cTempl.kevlance, ]
 		},
 	});
 

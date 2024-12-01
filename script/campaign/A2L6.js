@@ -791,7 +791,7 @@ function sendInfestedReinforcements()
 	if (camBaseIsEliminated("colCraterBase") || camBaseIsEliminated("colMainBase"))
 	{
 		camCallOnce("diversionDialogue");
-		const droids = [cTempl.stinger, cTempl.infbloke, cTempl.infbloke, cTempl.infminitruck, cTempl.infbuggy, cTempl.infrbuggy];
+		const droids = [cTempl.stinger, cTempl.infbloke, cTempl.infkevbloke, cTempl.infminitruck, cTempl.infbuggy, cTempl.infrbuggy];
 		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, getObject("infestedEntry3"), randomizeTemplates(droids), CAM_REINFORCE_GROUND));
 	}
 
@@ -799,12 +799,12 @@ function sendInfestedReinforcements()
 	if (camBaseIsEliminated("colEastCanalBase") || camBaseIsEliminated("colMainBase"))
 	{
 		camCallOnce("diversionDialogue");
-		const droids1 = [cTempl.stinger, cTempl.inffiretruck, cTempl.infbloke, cTempl.inflance, cTempl.infbuggy, cTempl.infrbuggy];
+		const droids1 = [cTempl.stinger, cTempl.inffiretruck, cTempl.infkevbloke, cTempl.inflance, cTempl.infbuggy, cTempl.infrbuggy];
 		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, getObject("infestedEntry1"), randomizeTemplates(droids1), CAM_REINFORCE_GROUND, 
 			{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}} // Annoy the player specifically
 		));
 
-		const droids2 = [cTempl.stinger, cTempl.inflance, cTempl.infbuscan, cTempl.infbloke, cTempl.infbjeep, cTempl.infrbjeep];
+		const droids2 = [cTempl.stinger, cTempl.infkevlance, cTempl.infbuscan, cTempl.infbloke, cTempl.infbjeep, cTempl.infrbjeep];
 		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, getObject("infestedEntry2"), randomizeTemplates(droids2), CAM_REINFORCE_GROUND));
 	}
 }
@@ -873,6 +873,7 @@ function eventStartLevel()
 	camSetArtifacts({
 		"colResearch": { tech: "R-Wpn-Rocket-ROF02" }, // Rocket Autoloader Mk2
 		"colFactory3": { tech: "R-Wpn-Cannon4AMk1" }, // Hyper Velocity Cannon
+		"colCybFactory4": { tech: "R-Cyb-Hvywpn-Grenade" }, // Super Heavy Grenadier
 		"colCC2": { tech: "R-Sys-Engineering02" }, // Improved Engineering
 	});
 
@@ -990,7 +991,7 @@ function eventStartLevel()
 			},
 			groupSize: 6,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(32)),
-			templates: [ cTempl.cybgr ] // All Grenadiers
+			templates: [ cTempl.cybgr, cTempl.cybhg ] // Grenadiers and Heavy Machinegunners
 		},
 		"colCybFactory2": {
 			assembly: "colCybAssembly2",
@@ -1018,9 +1019,9 @@ function eventStartLevel()
 			data: {
 				repair: 35
 			},
-			groupSize: 4,
+			groupSize: 5,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(34)),
-			templates: [ cTempl.cybgr, cTempl.cybhg ] // Grenadiers and Heavy Machinegunners
+			templates: [ cTempl.cybgr, cTempl.cybgr, cTempl.cybgr, cTempl.scygr ] // Grenadiers and Super Heavy Grenadiers
 		},
 		"colCybFactory5": {
 			assembly: "colCybAssembly5",
@@ -1041,14 +1042,14 @@ function eventStartLevel()
 			order: CAM_ORDER_ATTACK,
 			groupSize: 4,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(42)),
-			templates: [ cTempl.buscan, cTempl.monhmg, cTempl.minitruck, cTempl.gbjeep, cTempl.monfire, cTempl.monmrl ] // Durable stuff
+			templates: [ cTempl.buscan, cTempl.monhmg, cTempl.minitruck, cTempl.gbjeep, cTempl.monfire, cTempl.monmrl ] // Durable stuff (at least in terms of scavenger stuff)
 		},
 		"cScavFactory3": {
 			assembly: "cScavAssembly3",
 			order: CAM_ORDER_ATTACK,
 			groupSize: 3,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(32)),
-			templates: [ cTempl.minitruck, cTempl.flatmrl, cTempl.firetruck, cTempl.lance, cTempl.rbuggy, cTempl.gbjeep, cTempl.flatat ] // Stuff that hurts
+			templates: [ cTempl.minitruck, cTempl.flatmrl, cTempl.firetruck, cTempl.kevlance, cTempl.rbuggy, cTempl.gbjeep, cTempl.flatat ] // Stuff that hurts
 		},
 		"lzScavFactory": {
 			assembly: "lzAssembly",

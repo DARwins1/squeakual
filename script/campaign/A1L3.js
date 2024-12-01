@@ -581,7 +581,7 @@ function eventStartLevel()
 			groupSize: 3,
 			maxSize: 3,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(20)),
-			templates: [ cTempl.bloke, cTempl.lance, cTempl.sartruck, cTempl.rbjeep, cTempl.lance ]
+			templates: [ cTempl.kevbloke, cTempl.kevlance, cTempl.sartruck, cTempl.rbjeep, cTempl.kevlance ]
 		},
 		"redFactory2": {
 			assembly: "redAssembly2",
@@ -592,7 +592,7 @@ function eventStartLevel()
 			groupSize: 3,
 			maxSize: 3,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(40)),
-			templates: [ cTempl.flatmrl, cTempl.firetruck, cTempl.rbjeep, cTempl.monmrl, cTempl.minitruck, cTempl.lance ]
+			templates: [ cTempl.flatmrl, cTempl.firetruck, cTempl.rbjeep, cTempl.monmrl, cTempl.minitruck, cTempl.kevlance ]
 		},
 		"redFactory3": {
 			assembly: "redAssembly3",
@@ -603,7 +603,7 @@ function eventStartLevel()
 			groupSize: 3,
 			maxSize: 3,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(32)),
-			templates: [ cTempl.minitruck, cTempl.lance, cTempl.rbjeep, cTempl.firetruck, cTempl.bloke, cTempl.monhmg ]
+			templates: [ cTempl.minitruck, cTempl.kevlance, cTempl.rbjeep, cTempl.firetruck, cTempl.kevbloke, cTempl.monhmg ]
 		},
 		"redFactory4": {
 			assembly: "redAssembly4",
@@ -614,7 +614,7 @@ function eventStartLevel()
 			groupSize: 3,
 			maxSize: 3,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(44)),
-			templates: [ cTempl.flatat, cTempl.lance, cTempl.monfire, cTempl.rbjeep, cTempl.minitruck, cTempl.bjeep, cTempl.bloke ]
+			templates: [ cTempl.flatat, cTempl.kevlance, cTempl.monfire, cTempl.rbjeep, cTempl.minitruck, cTempl.bjeep, cTempl.kevbloke ]
 		},
 		"redFactory5": {
 			assembly: "redAssembly5",

@@ -582,7 +582,7 @@ function eventStartLevel()
 			groupSize: 3,
 			maxSize: 3,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(20)),
-			templates: [ cTempl.minitruck, cTempl.lance, cTempl.firetruck, cTempl.bjeep, cTempl.firetruck ]
+			templates: [ cTempl.minitruck, cTempl.kevlance, cTempl.firetruck, cTempl.bjeep, cTempl.firetruck ]
 		},
 		"redFactory2": {
 			assembly: "redAssemblyPos2",

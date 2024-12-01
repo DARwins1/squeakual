@@ -81,8 +81,8 @@ function collectiveAttackWaves()
 	// Each entrance shares a C-Scav and a Collective pool.
 	// Each attack wave can draw from either pool.
 	const cScavDroidPool = [ // NOTE: Templates that appear multiple times are more common
-		cTempl.bloke, cTempl.bloke, cTempl.bloke,
-		cTempl.lance, cTempl.lance,
+		cTempl.bloke, cTempl.kevbloke, cTempl.kevbloke,
+		cTempl.lance, cTempl.kevlance,
 		cTempl.trike, cTempl.trike,
 		cTempl.buggy, cTempl.buggy, cTempl.buggy,
 		cTempl.rbuggy, cTempl.rbuggy,
@@ -255,6 +255,7 @@ function sendCollectiveTransporter()
 		cTempl.colhmght, cTempl.colhmght,
 		cTempl.colflamt, cTempl.colflamt,
 		cTempl.colmrat, cTempl.colmrat,
+		cTempl.colmcant,
 		cTempl.commcant,
 		cTempl.comatt,
 	];

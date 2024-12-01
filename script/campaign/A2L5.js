@@ -232,7 +232,7 @@ function eventStartLevel()
 			order: CAM_ORDER_ATTACK,
 			groupSize: 3,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(22)),
-			templates: [ cTempl.monmrl, cTempl.gbjeep, cTempl.buscan, cTempl.trike, cTempl.bloke, cTempl.lance, cTempl.bloke ]
+			templates: [ cTempl.monmrl, cTempl.gbjeep, cTempl.buscan, cTempl.trike, cTempl.kevbloke, cTempl.kevlance, cTempl.kevbloke ]
 		},
 		"cScavFactory2": {
 			assembly: "cScavAssembly2",
@@ -246,14 +246,14 @@ function eventStartLevel()
 			order: CAM_ORDER_ATTACK,
 			groupSize: 5,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(32)),
-			templates: [ cTempl.monlan, cTempl.minitruck, cTempl.firetruck, cTempl.rbuggy, cTempl.bloke ]
+			templates: [ cTempl.monlan, cTempl.minitruck, cTempl.firetruck, cTempl.rbuggy, cTempl.kevbloke ]
 		},
 		"cScavFactory4": {
 			assembly: "cScavAssembly4",
 			order: CAM_ORDER_ATTACK,
 			groupSize: 5,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(28)),
-			templates: [ cTempl.flatmrl, cTempl.moncan, cTempl.rbjeep, cTempl.buggy, cTempl.bloke, cTempl.lance, cTempl.monhmg ]
+			templates: [ cTempl.flatmrl, cTempl.moncan, cTempl.rbjeep, cTempl.buggy, cTempl.kevbloke, cTempl.kevlance, cTempl.monhmg ]
 		},
 		"colFactory1": {
 			assembly: "colAssembly1",
@@ -388,7 +388,7 @@ function eventStartLevel()
 		obj: "colVtolSensor",
 		}, CAM_ORDER_FOLLOW, {
 		leader: "colVtolSensor",
-		suborder: CAM_ORDER_ATTACK
+		suborder: CAM_ORDER_ATTACK // Just attack normally when sensor is destroyed
 	});
 	// Assigned to the VTOL Radar Tower (northwest)
 	camMakeRefillableGroup(undefined, {
@@ -400,7 +400,10 @@ function eventStartLevel()
 		obj: "colVtolTower1",
 		}, CAM_ORDER_FOLLOW, {
 		leader: "colVtolTower1",
-		suborder: CAM_ORDER_ATTACK
+		suborder: CAM_ORDER_DEFEND, // Tower groups defend until tower is rebuilt
+		data: {
+			pos: camMakePos("colVtolAssembly")
+		}
 	});
 	// Assigned to the VTOL Radar Tower (center)
 	camMakeRefillableGroup(undefined, {
@@ -412,7 +415,10 @@ function eventStartLevel()
 		obj: "colVtolTower2",
 		}, CAM_ORDER_FOLLOW, {
 		leader: "colVtolTower2",
-		suborder: CAM_ORDER_ATTACK
+		suborder: CAM_ORDER_DEFEND,
+		data: {
+			pos: camMakePos("colVtolAssembly")
+		}
 	});
 	// Assigned to the VTOL Radar Tower (east)
 	camMakeRefillableGroup(undefined, {
@@ -424,7 +430,10 @@ function eventStartLevel()
 		obj: "colVtolTower3",
 		}, CAM_ORDER_FOLLOW, {
 		leader: "colVtolTower3",
-		suborder: CAM_ORDER_ATTACK
+		suborder: CAM_ORDER_DEFEND,
+		data: {
+			pos: camMakePos("colVtolAssembly")
+		}
 	});
 	// Assigned to the VTOL CB Tower
 	camMakeRefillableGroup(undefined, {
@@ -436,7 +445,10 @@ function eventStartLevel()
 		obj: "colVtolCBTower",
 		}, CAM_ORDER_FOLLOW, {
 		leader: "colVtolCBTower",
-		suborder: CAM_ORDER_ATTACK
+		suborder: CAM_ORDER_DEFEND,
+		data: {
+			pos: camMakePos("colVtolAssembly")
+		}
 	});
 	// Trucks
 	const TRUCK_TIME = camChangeOnDiff(camSecondsToMilliseconds(70))
