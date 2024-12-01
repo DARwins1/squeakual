@@ -7,7 +7,7 @@
 //;; ## camQueueDialogue(text, delay[, sound])
 //;;
 //;; Queues up a dialogue, consisting of the text to be displayed, 
-//;; the delay, and the sound file to be played (if any).
+//;; the delay (in seconds), and the sound file to be played (if any).
 //;; NOTE: Delay is amount of time to wait AFTER playing the previous dialogue,
 //;; NOT how long to wait after this function is called
 //;;
@@ -23,7 +23,7 @@ function camQueueDialogue(text, delay, sound)
 		for (const diaInfo of text)
 		{
 			const text = diaInfo.text;
-			const delay = diaInfo.delay;
+			const delay = camSecondsToMilliseconds(diaInfo.delay);
 			const sound = diaInfo.sound;
 			camQueueDialogue(text, delay, sound);
 		}
@@ -98,10 +98,10 @@ function __camPlayScheduledDialogues()
 	__camQueuedDialogue = newQueue;
 }
 
-// Simple wrapper for playSound() that replaces CAM_RADIO_CLICK with a random radio click sound
+// Simple wrapper for playSound() that replaces CAM_RCLICK with a random radio click sound
 function __camPlayDialogueSound(sound)
 {
-	if (sound === CAM_RADIO_CLICK)
+	if (sound === CAM_RCLICK)
 	{
 		const radioClicks = [
 			cam_sounds.radio.click1, cam_sounds.radio.click2,

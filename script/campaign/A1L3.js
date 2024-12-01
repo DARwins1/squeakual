@@ -129,13 +129,13 @@ function activateSecondFactories()
 
 	// Dialogue about Collective sightings
 	camQueueDialogue([
-		{text: "GOLF: General, we've had some odd, uhh, sightings.", delay: 0, sound: CAM_RADIO_CLICK},
-		{text: "GOLF: We've spotted some... strange looking vehicles moving through our AO, sir.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "GOLF: They, uhh... don't look like scavengers, sir.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: ...And what do you expect me to make of this, Commander Golf?", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-		{text: "GOLF: I don't know, it's just...", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-		{text: "GOLF: Their vehicles look more like ours than scavengers.", delay: camSecondsToMilliseconds(2), sound: CAM_RADIO_CLICK},
-		{text: "GOLF: ...I think there may be another force operating in this sector.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
+		{text: "GOLF: General, we've had some odd, uhh, sightings.", delay: 0, sound: CAM_RCLICK},
+		{text: "GOLF: We've spotted some... strange looking vehicles moving through our AO, sir.", delay: 3, sound: CAM_RCLICK},
+		{text: "GOLF: They, uhh... don't look like scavengers, sir.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: ...And what do you expect me to make of this, Commander Golf?", delay: 4, sound: CAM_RCLICK},
+		{text: "GOLF: I don't know, it's just...", delay: 4, sound: CAM_RCLICK},
+		{text: "GOLF: Their vehicles look more like ours than scavengers.", delay: 2, sound: CAM_RCLICK},
+		{text: "GOLF: ...I think there may be another force operating in this sector.", delay: 3, sound: CAM_RCLICK},
 	]);
 }
 
@@ -335,13 +335,13 @@ function introduceCollective()
 
 	// Dialogue about unknown transmissions
 	camQueueDialogue([
-		{text: "LIEUTENANT: Sir, I'm picking up some strange transmissions.", delay: 0, sound: CAM_RADIO_CLICK},
-		{text: "LIEUTENANT: They're originating east of team Bravo's current position.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: Have you been able to decipher them?", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-		{text: "LIEUTENANT: No sir. They appear to have some level of encryption.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: Encrypted scavenger radio broadcasts? What are the odds of them having that kind of tech?", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "LIEUTENANT: Not likely, sir.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "LIEUTENANT: Commander Bravo; please proceed with caution.", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
+		{text: "LIEUTENANT: Sir, I'm picking up some strange transmissions.", delay: 0, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: They're originating east of team Bravo's current position.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Have you been able to decipher them?", delay: 4, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: No sir. They appear to have some level of encryption.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Encrypted scavenger radio broadcasts? What are the odds of them having that kind of tech?", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Not likely, sir.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Commander Bravo; please proceed with caution.", delay: 4, sound: CAM_RCLICK},
 	]);
 }
 
@@ -361,16 +361,16 @@ function eventAttacked(victim, attacker)
 
 		// Dialogue encountering the Collective
 		camQueueDialogue([
-			{text: "LIEUTENANT: Are you seeing this sir...?", delay: camSecondsToMilliseconds(6), sound: CAM_RADIO_CLICK},
-			{text: "CLAYDE: Oh, I'm seeing it alright.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-			{text: "CLAYDE: All Commanders be advised; we have confirmed accounts of an advanced, hostile force operating in this sector.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-			{text: "CLAYDE: Proceed with extreme caution.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-			{text: "CLAYDE: Commander Bravo.", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-			{text: "CLAYDE: Your objective remains the same, capture that uplink and clear the area.", delay: camSecondsToMilliseconds(2), sound: CAM_RADIO_CLICK},
-			{text: "CLAYDE: If they are here for that uplink station, then we CANNOT let them have it.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-			{text: "CLAYDE: Use whatever means necessary to complete your objective.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-			{text: "LIEUTENANT: Tread carefully, Commander.", delay: camSecondsToMilliseconds(5), sound: CAM_RADIO_CLICK},
-			{text: "LIEUTENANT: We don't know what we're up against here...", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
+			{text: "LIEUTENANT: Are you seeing this sir...?", delay: 6, sound: CAM_RCLICK},
+			{text: "CLAYDE: Oh, I'm seeing it alright.", delay: 3, sound: CAM_RCLICK},
+			{text: "CLAYDE: All Commanders be advised; we have confirmed accounts of an advanced, hostile force operating in this sector.", delay: 3, sound: CAM_RCLICK},
+			{text: "CLAYDE: Proceed with extreme caution.", delay: 3, sound: CAM_RCLICK},
+			{text: "CLAYDE: Commander Bravo.", delay: 4, sound: CAM_RCLICK},
+			{text: "CLAYDE: Your objective remains the same, capture that uplink and clear the area.", delay: 2, sound: CAM_RCLICK},
+			{text: "CLAYDE: If they are here for that uplink station, then we CANNOT let them have it.", delay: 3, sound: CAM_RCLICK},
+			{text: "CLAYDE: Use whatever means necessary to complete your objective.", delay: 3, sound: CAM_RCLICK},
+			{text: "LIEUTENANT: Tread carefully, Commander.", delay: 5, sound: CAM_RCLICK},
+			{text: "LIEUTENANT: We don't know what we're up against here...", delay: 3, sound: CAM_RCLICK},
 		]);
 	}
 
@@ -791,22 +791,22 @@ function eventStartLevel()
 	// Placeholder for the actual briefing sequence
 	camQueueDialogue([
 		{text: "---- BRIEFING PLACEHOLDER ----", delay: 0},
-		{text: "LIEUTENANT: Sir, we've begun inspecting NASDA Central's core systems.", delay: camSecondsToMilliseconds(2), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: What's the status? How long until the systems are operational?", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-		{text: "LIEUTENANT: It's hard to give a full analysis at this point.", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-		{text: "LIEUTENANT: NASDA's computer systems are vast and we've only been able to examine a portion of it.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "LIEUTENANT: So far, we've found signs of electromagnetic damage, likely as a result of the Collapse.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "LIEUTENANT: Entire memory banks appear to have been fried, and the core processor is shattered.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: What of the satellite control systems?", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-		{text: "LIEUTENANT: Well, it seems that some subsystems might have been spared from damage.", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-		{text: "LIEUTENANT: But the uplink systems are non-functional.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "LIEUTENANT: However, while scanning NASDA's memory banks, we found what appear to be coordinates to nearby satellite uplink stations.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "LIEUTENANT: If any of these uplinks are still operational, it's possible that they could be used as relay to connect NASDA's control systems and the satellites.", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: I see. Then our next objective is clear.", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: While I help the Council settle into our new base of operations, the Commanders will search for these uplink sites.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: Commander Bravo. One of these uplinks appears to lie east of your current position.", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: Take your forces there and secure the area.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "LIEUTENANT: Don't forget to examine the technology recovered from NASDA Central, Commander!", delay: camSecondsToMilliseconds(5), sound: CAM_RADIO_CLICK},
-		{text: "LIEUTENANT: I have a feeling that they'll prove to be very useful.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
+		{text: "LIEUTENANT: Sir, we've begun inspecting NASDA Central's core systems.", delay: 2, sound: CAM_RCLICK},
+		{text: "CLAYDE: What's the status? How long until the systems are operational?", delay: 4, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: It's hard to give a full analysis at this point.", delay: 4, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: NASDA's computer systems are vast and we've only been able to examine a portion of it.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: So far, we've found signs of electromagnetic damage, likely as a result of the Collapse.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Entire memory banks appear to have been fried, and the core processor is shattered.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: What of the satellite control systems?", delay: 4, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Well, it seems that some subsystems might have been spared from damage.", delay: 4, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: But the uplink systems are non-functional.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: However, while scanning NASDA's memory banks, we found what appear to be coordinates to nearby satellite uplink stations.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: If any of these uplinks are still operational, it's possible that they could be used as relay to connect NASDA's control systems and the satellites.", delay: 4, sound: CAM_RCLICK},
+		{text: "CLAYDE: I see. Then our next objective is clear.", delay: 4, sound: CAM_RCLICK},
+		{text: "CLAYDE: While I help the Council settle into our new base of operations, the Commanders will search for these uplink sites.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Commander Bravo. One of these uplinks appears to lie east of your current position.", delay: 4, sound: CAM_RCLICK},
+		{text: "CLAYDE: Take your forces there and secure the area.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Don't forget to examine the technology recovered from NASDA Central, Commander!", delay: 5, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: I have a feeling that they'll prove to be very useful.", delay: 3, sound: CAM_RCLICK},
 	]);
 }

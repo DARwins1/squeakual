@@ -154,6 +154,14 @@ function enableAllFactories()
 			repair: 60
 		});
 	}
+
+	camQueueDialogue([
+		{text: "CLAYDE: Hmm. It seems that there's still a significant amount of scavengers opposing the Collective's presence.", delay: 0, sound: CAM_RCLICK},
+		{text: "CLAYDE: I wonder if we can work this to our advantage...", delay: 3, sound: CAM_RCLICK},
+		{text: "CHARLIE: Do you think we could form some sort of alliance with them, General?", delay: 6, sound: CAM_RCLICK},
+		{text: "CLAYDE: Hmm...", delay: 5, sound: CAM_RCLICK},
+		{text: "CLAYDE: Perhaps in a manner of speaking...", delay: 2},
+	]);
 }
 
 // If the Collective commander is still alive, order it to attack the player directly (no more patrolling)
@@ -456,24 +464,35 @@ function eventStartLevel()
 	queue("aggroCommander", camChangeOnDiff(camMinutesToMilliseconds(12)));
 
 	// Placeholder for the actual briefing sequence
-	// camQueueDialogue([
-	// 	{text: "---- BRIEFING PLACEHOLDER ----", delay: 0},
-	// 	{text: "LIEUTENANT: Sir, we've begun inspecting NASDA Central's core systems.", delay: camSecondsToMilliseconds(2), sound: CAM_RADIO_CLICK},
-	// 	{text: "CLAYDE: What's the status? How long until the systems are operational?", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-	// 	{text: "LIEUTENANT: It's hard to give a full analysis at this point.", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-	// 	{text: "LIEUTENANT: NASDA's computer systems are vast and we've only been able to examine a portion of it.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-	// 	{text: "LIEUTENANT: So far, we've found signs of electromagnetic damage, likely as a result of the Collapse.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-	// 	{text: "LIEUTENANT: Entire memory banks appear to have been fried, and the core processor is shattered.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-	// 	{text: "CLAYDE: What of the satellite control systems?", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-	// 	{text: "LIEUTENANT: Well, it seems that some subsystems might have been spared from damage.", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-	// 	{text: "LIEUTENANT: But the uplink systems are non-functional.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-	// 	{text: "LIEUTENANT: However, while scanning NASDA's memory banks, we found what appear to be coordinates to nearby satellite uplink stations.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-	// 	{text: "LIEUTENANT: If any of these uplinks are still operational, it's possible that they could be used as relay to connect NASDA's control systems and the satellites.", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-	// 	{text: "CLAYDE: I see. Then our next objective is clear.", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-	// 	{text: "CLAYDE: While I help the Council settle into our new base of operations, the Commanders will search for these uplink sites.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-	// 	{text: "CLAYDE: Commander Bravo. One of these uplinks appears to lie east of your current position.", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-	// 	{text: "CLAYDE: Take your forces there and secure the area.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-	// 	{text: "LIEUTENANT: Don't forget to examine the technology recovered from NASDA Central, Commander!", delay: camSecondsToMilliseconds(5), sound: CAM_RADIO_CLICK},
-	// 	{text: "LIEUTENANT: I have a feeling that they'll prove to be very useful.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-	// ]);
+	camQueueDialogue([
+		{text: "---- BRIEFING PLACEHOLDER ----", delay: 0},
+		{text: "LIEUTENANT: General, sir, we have more intel on how the Collective are recruiting scavengers.", delay: 2, sound: CAM_RCLICK},
+		{text: "CLAYDE: Get on with it, then.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Right...", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: We still haven't been able to fully decrypt most of the transmissions we've intercepted.", delay: 2, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: However, from what we have decoded, it seems that the Collective doesn't \"recruit\" their scavengers, but rather assimilates them.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: ...", delay: 2, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: The Collective seem to have a... deep fascination with what they call \"The Machine\"", delay: 2, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Given everything we know about them, it seems that their entire command structure is devoted to it.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: So the Collective is a cult that worships machines?", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Well... uhh... maybe.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: It seems that they'll accept anyone into their ranks as long as they share enough devotion.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: We're... still not sure if this \"Machine\" is a singular entity or not.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: And if it is, who or what it may be.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Well, I'm sure you'll find out given some more time.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Continue your work, Lieutenant.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: On it, Sir!", delay: 2, sound: CAM_RCLICK},
+		{text: "CLAYDE: ...", delay: 2, sound: CAM_RCLICK},
+		{text: "CLAYDE: As for you, Commander Bravo.", delay: 1, sound: CAM_RCLICK},
+		{text: "CLAYDE: You have my personal gratitude for dealing with that...", delay: 2, sound: CAM_RCLICK},
+		{text: "CLAYDE: ...Situation with team Echo.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: As for your next objective...", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: We're still trying to locate the Collective's main prisoner camp.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: And by extension, the locations of team Foxtrot, most of the Council, and any remaining allied POWs.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Commander Charlie has informed me that of a Collective base to the west of your position.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: It appears that the Collective is using this base to round up prisoners and potential \"recruits\" before sending them to their main site.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Your orders are to secure this base, and gather any intel you can find so that we may pinpoint the Collective's main prisoner processing facility.", delay: 4, sound: CAM_RCLICK},
+		{text: "CLAYDE: Expect enemy ground and air reinforcements as you approach their base.", delay: 4, sound: CAM_RCLICK},
+		{text: "CLAYDE: Good luck, Commander.", delay: 3, sound: CAM_RCLICK},
+	]);
 }

@@ -52,6 +52,34 @@ function vtolAttack()
 	vtolsCalled = true;
 }
 
+function eventTransporterLanded(transport)
+{
+	if (transport.player === CAM_HUMAN_PLAYER)
+	{
+		camCallOnce("landingDialogue");
+	}
+}
+
+// Dialogue after landing next to a bunch of enemy cyborgs
+function landingDialogue()
+{
+	camQueueDialogue([
+		{text: "CLAYDE: Well...", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: So much for the element of surprise.", delay: 4, sound: CAM_RCLICK},
+	]);
+}
+
+// Dialogue after all AA sites are neutralized
+function clearDialogue()
+{
+	camQueueDialogue([
+		{text: "CLAYDE: Well done, Commander Bravo.", delay: 2, sound: CAM_RCLICK},
+		{text: "CLAYDE: We're reinforcing Golf's position now.", delay: 2, sound: CAM_RCLICK},
+		{text: "CLAYDE: Your objective has been accomplished.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Return to base and await further orders.", delay: 2, sound: CAM_RCLICK},
+	]);
+}
+
 // Have the Collective ambush the player's LZ
 // Queued to occur roughly after the player's second transport arrives
 // Activates several factories, and immediately attacks the player's LZ with a Helicopter, Cyborgs, C-Scavs, and Hovers
@@ -195,6 +223,7 @@ function antiAirSitesClear()
 	if (AA_SITES1 === 0 && AA_SITES2 === 0 && AA_SITES3 === 0)
 	{
 		// All clear!
+		camCallOnce("clearDialogue");
 		return true;
 	}
 	else

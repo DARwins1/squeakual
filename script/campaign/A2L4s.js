@@ -23,22 +23,26 @@ function eventStartLevel()
 	// camSetFog(182, 225, 236);
 
 	// Placeholder for the actual briefing sequence
-	// camQueueDialogue([
-	// 	{text: "---- BRIEFING PLACEHOLDER ----", delay: 0},
-	// 	{text: "LIEUTENANT: Sir, all teams are settled in and awaiting orders.", delay: camSecondsToMilliseconds(2), sound: CAM_RADIO_CLICK},
-	// 	{text: "CLAYDE: Excellent.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-	// 	{text: "CLAYDE: Lieutenant, have you scouted NASDA Central? What are we up against?", delay: camSecondsToMilliseconds(2), sound: CAM_RADIO_CLICK},
-	// 	{text: "LIEUTENANT: Yes sir. We've done some limited aerial reconnaissance using our transporters.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-	// 	{text: "LIEUTENANT: But to avoid alerting any inhabitants, I have avoided sending our transports too close.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-	// 	{text: "LIEUTENANT: Our observations are limited, but we've detected a large scavenger presence around NASDA Central.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-	// 	{text: "LIEUTENANT: It seems one of the local factions has been using it as their base of operations.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-	// 	{text: "CLAYDE: I see.", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-	// 	{text: "CLAYDE: Still, I'm sure it's nothing that we can't handle.", delay: camSecondsToMilliseconds(2), sound: CAM_RADIO_CLICK},
-	// 	{text: "CLAYDE: Commander Bravo, seeing as you have the most combat experience, you will serve as a pathfinder.", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-	// 	{text: "CLAYDE: You will transport your forces to the outskirts of NASDA Central.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-	// 	{text: "CLAYDE: From there, you will clear landing zones for teams Charlie, Foxtrot, and Golf.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-	// 	{text: "CLAYDE: Then together, clear the area of hostiles and capture NASDA Central.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-	// 	{text: "CLAYDE: With any luck, NASDA Central will be ours by the end of the day.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-	// 	{text: "LIEUTENANT: Good luck, Commander.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-	// ]);
+	camQueueDialogue([
+		{text: "---- BRIEFING PLACEHOLDER ----", delay: 0},
+		{text: "CHARLIE: General, by tracing the routes of Collective transports and with the data at the previous base, we were able to locate the Collective's main prisoner camp.", delay: 2, sound: CAM_RCLICK},
+		{text: "CLAYDE: Excellent. Have team Delta perform reconnaissance in the area.", delay: 4, sound: CAM_RCLICK},
+		{text: "CLAYDE: We should know what we're up against before we even consider making any moves towards it.", delay: 2, sound: CAM_RCLICK},
+		{text: "CLAYDE: Lieutenant, when can we expect the Collective to amass another large-scale attack against one of our teams?", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: ...It's hard to say, sir. We're tracking plenty of enemy movement all over the city.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: But so far their movements seem disorganized and sporadic, likely a symptom of a poor command structure or logistics system.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: If we're lucky, it should take them time before they can organize another assault.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: I see.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: For now, we'll have to work with the time we have.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Commander Bravo, during your last mission, we regained contact with team Golf.", delay: 4, sound: CAM_RCLICK},
+		{text: "CLAYDE: They've managed to hold off the Collective so far, but they're running low on resources, and need reinforcements.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: However, the Collective have surrounded their position with anti-aircraft sites, and we can't get any transports through safely.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Your objective is to land your forces outside the range of these AA sites, and neutralize them with a ground assault.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Once enough of these sites are gone, we'll be able to send reinforcements to team Golf.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Good luck, Commander.", delay: 3, sound: CAM_RCLICK},
+		// Separate from the mission briefing
+		{text: "LIEUTENANT: Commander, those AA sites are located in the flooded portion of the city.", delay: 12, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: It'll be challenging to navigate the terrain their with conventional ground forces.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: ...But the propulsion that you found the in the previous Collective base may prove to be useful there.", delay: 3, sound: CAM_RCLICK},
+	]);
 }

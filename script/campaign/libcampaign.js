@@ -294,7 +294,7 @@ var __camEnemyBases;
 var __camNumEnemyBases;
 
 //dialogue
-const CAM_RADIO_CLICK = "RADIO_CLICK";
+const CAM_RCLICK = "RADIO_CLICK";
 var __camQueuedDialogue;
 var __camLatestDialogueTime;
 

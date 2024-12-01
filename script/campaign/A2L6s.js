@@ -23,22 +23,31 @@ function eventStartLevel()
 	// camSetFog(182, 225, 236);
 
 	// Placeholder for the actual briefing sequence
-	// camQueueDialogue([
-	// 	{text: "---- BRIEFING PLACEHOLDER ----", delay: 0},
-	// 	{text: "LIEUTENANT: Sir, all teams are settled in and awaiting orders.", delay: camSecondsToMilliseconds(2), sound: CAM_RADIO_CLICK},
-	// 	{text: "CLAYDE: Excellent.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-	// 	{text: "CLAYDE: Lieutenant, have you scouted NASDA Central? What are we up against?", delay: camSecondsToMilliseconds(2), sound: CAM_RADIO_CLICK},
-	// 	{text: "LIEUTENANT: Yes sir. We've done some limited aerial reconnaissance using our transporters.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-	// 	{text: "LIEUTENANT: But to avoid alerting any inhabitants, I have avoided sending our transports too close.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-	// 	{text: "LIEUTENANT: Our observations are limited, but we've detected a large scavenger presence around NASDA Central.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-	// 	{text: "LIEUTENANT: It seems one of the local factions has been using it as their base of operations.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-	// 	{text: "CLAYDE: I see.", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-	// 	{text: "CLAYDE: Still, I'm sure it's nothing that we can't handle.", delay: camSecondsToMilliseconds(2), sound: CAM_RADIO_CLICK},
-	// 	{text: "CLAYDE: Commander Bravo, seeing as you have the most combat experience, you will serve as a pathfinder.", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-	// 	{text: "CLAYDE: You will transport your forces to the outskirts of NASDA Central.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-	// 	{text: "CLAYDE: From there, you will clear landing zones for teams Charlie, Foxtrot, and Golf.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-	// 	{text: "CLAYDE: Then together, clear the area of hostiles and capture NASDA Central.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-	// 	{text: "CLAYDE: With any luck, NASDA Central will be ours by the end of the day.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-	// 	{text: "LIEUTENANT: Good luck, Commander.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-	// ]);
+	camQueueDialogue([
+		{text: "---- BRIEFING PLACEHOLDER ----", delay: 0},
+		{text: "LIEUTENANT: Sir, Commander Bravo has cleared the Collective's northern positions.", delay: 2, sound: CAM_RCLICK},
+		{text: "CLAYDE: Good.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: And what of the Collective's counter attack?", delay: 2, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Well, this should disrupt their movements for some time.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: But I doubt it will delay the Collective forever.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: We'll have to make do, then. This is the best chance we'll get.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Commanders Bravo, Charlie, Golf.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: It's time to assault the Collective's main prisoner camp.", delay: 2, sound: CAM_RCLICK},
+		{text: "CLAYDE: I'll let the Lieutenant brief you all on the plan.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: ...Yes, sir.", delay: 4, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: We've already found suitable LZs for your forces to the west of the compound.", delay: 2, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Each of you will send a strike team to these positions.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Once you land, you'll need to act quickly and clear any nearby enemies, before they can alert the Collective to our arrival.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Once your LZs are secure, call for reinforcements and wait for the General's signal.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Correct.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Once all teams are in place, I'll personally command some forces to initiate a diversion.", delay: 1, sound: CAM_RCLICK},
+		{text: "CLAYDE: When that happens, I'll have to maintain radio silence.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: The Lieutenant will take charge of operations from there.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Now, let's move. We don't have any time to dawdle.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Good luck, Commanders.", delay: 3, sound: CAM_RCLICK},
+		// Separate from the mission briefing
+		{text: "LIEUTENANT: Bravo, remember that you'll need to clear the LZ before you can call in any reinforcements.", delay: 12, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: We can't risk the Collective detecting us before Clayde has launched his diversion.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Make sure you bring enough combat units in your first transport.", delay: 3, sound: CAM_RCLICK},
+	]);
 }

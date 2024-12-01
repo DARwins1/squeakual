@@ -1321,7 +1321,7 @@
         "droidType": "CYBORG_SUPER",
         "hitpoints": 100,
         "id": "CrawlerBody",
-        "model": "spiderstand.pie",
+        "model": "spiderbody.pie",
         "name": "Crawler Body",
         "powerOutput": 500,
         "size": "LIGHT",

@@ -584,24 +584,28 @@ function eventStartLevel()
 	queue("aggroCommander", camChangeOnDiff(camMinutesToMilliseconds(22)));
 
 	// Placeholder for the actual briefing sequence
-	// camQueueDialogue([
-	// 	{text: "---- BRIEFING PLACEHOLDER ----", delay: 0},
-	// 	{text: "LIEUTENANT: Sir, we've begun inspecting NASDA Central's core systems.", delay: camSecondsToMilliseconds(2), sound: CAM_RADIO_CLICK},
-	// 	{text: "CLAYDE: What's the status? How long until the systems are operational?", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-	// 	{text: "LIEUTENANT: It's hard to give a full analysis at this point.", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-	// 	{text: "LIEUTENANT: NASDA's computer systems are vast and we've only been able to examine a portion of it.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-	// 	{text: "LIEUTENANT: So far, we've found signs of electromagnetic damage, likely as a result of the Collapse.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-	// 	{text: "LIEUTENANT: Entire memory banks appear to have been fried, and the core processor is shattered.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-	// 	{text: "CLAYDE: What of the satellite control systems?", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-	// 	{text: "LIEUTENANT: Well, it seems that some subsystems might have been spared from damage.", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-	// 	{text: "LIEUTENANT: But the uplink systems are non-functional.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-	// 	{text: "LIEUTENANT: However, while scanning NASDA's memory banks, we found what appear to be coordinates to nearby satellite uplink stations.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-	// 	{text: "LIEUTENANT: If any of these uplinks are still operational, it's possible that they could be used as relay to connect NASDA's control systems and the satellites.", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-	// 	{text: "CLAYDE: I see. Then our next objective is clear.", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-	// 	{text: "CLAYDE: While I help the Council settle into our new base of operations, the Commanders will search for these uplink sites.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-	// 	{text: "CLAYDE: Commander Bravo. One of these uplinks appears to lie east of your current position.", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-	// 	{text: "CLAYDE: Take your forces there and secure the area.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-	// 	{text: "LIEUTENANT: Don't forget to examine the technology recovered from NASDA Central, Commander!", delay: camSecondsToMilliseconds(5), sound: CAM_RADIO_CLICK},
-	// 	{text: "LIEUTENANT: I have a feeling that they'll prove to be very useful.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-	// ]);
+	camQueueDialogue([
+		{text: "---- BRIEFING PLACEHOLDER ----", delay: 0},
+		{text: "CHARLIE: General, team Delta has reported back from reconnaissance, sir.", delay: 2, sound: CAM_RCLICK},
+		{text: "CLAYDE: And?", delay: 3, sound: CAM_RCLICK},
+		{text: "CHARLIE: That place is a deathtrap, sir. It's easily the most heavily defended position in this sector.", delay: 3, sound: CAM_RCLICK},
+		{text: "CHARLIE: Or rather, the most heavily defended that we've found so-", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Enough! Are there any points when the camp has less defenders?", delay: 2, sound: CAM_RCLICK},
+		{text: "CHARLIE: W-Well, yes. The Collective patrols come and go with their transports.", delay: 3, sound: CAM_RCLICK},
+		{text: "CHARLIE: But we've also detected numerous smaller bases in the area.", delay: 3, sound: CAM_RCLICK},
+		{text: "CHARLIE: If we were to launch a direct assault, these bases would surely send reinforcements.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: ...I'm sure we could expect even more reinforcements after that.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: The Collective don't seem to be fond of letting their prisoners go.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: ...We're going to need a diversion, to draw their forces away from the camp.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: General, please excuse the interruption, but we have a developing situation.", delay: 4, sound: CAM_RCLICK},
+		{text: "CLAYDE: What is it, Lieutenant?", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: We've picked up enemy movement to the north of team Bravo's position.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: We believe that the Collective may be gathering their forces for another assault.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Wonderful. This is going to complicate everything.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Commanders Charlie and Golf, prepare your forces. We'll need to attack the Collective site sooner than previously planned.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Commander Bravo, take your forces and secure the area north of your position.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Destroy any Collective bases that they may have before they can rally their forces.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: If we're lucky, that should disrupt their movements and give us enough of an opening to raid their prisoner camp.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Good luck, Commander Bravo.", delay: 3, sound: CAM_RCLICK},
+	]);
 }

@@ -79,14 +79,14 @@ function vtolAttack()
 
 	// Dialogue about VTOLs
 	camQueueDialogue([
-		{text: "LIEUTENANT: General! Sir!", delay: 0, sound: CAM_RADIO_CLICK},
-		{text: "LIEUTENANT: Enemy air units closing in fast!", delay: camSecondsToMilliseconds(2), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: Hold your positions!", delay: camSecondsToMilliseconds(8), sound: CAM_RADIO_CLICK},
-		{text: "LIEUTENANT: But sir, we don't have enough firepower to deal with those VTOLs!", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: I said hold!", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: NASDA Central is NOT for the taking.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: Commanders Charlie, Golf, Echo. Bring your forces to NASDA Central ASAP.", delay: camSecondsToMilliseconds(8), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: We cannot let the Collective have this site!", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
+		{text: "LIEUTENANT: General! Sir!", delay: 0, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Enemy air units closing in fast!", delay: 2, sound: CAM_RCLICK},
+		{text: "CLAYDE: Hold your positions!", delay: 8, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: But sir, we don't have enough firepower to deal with those VTOLs!", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: I said hold!", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: NASDA Central is NOT for the taking.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Commanders Charlie, Golf, Echo. Bring your forces to NASDA Central ASAP.", delay: 8, sound: CAM_RCLICK},
+		{text: "CLAYDE: We cannot let the Collective have this site!", delay: 3, sound: CAM_RCLICK},
 	]);
 }
 
@@ -527,15 +527,15 @@ function collectiveAttackWaves()
 function collectiveDialogue()
 {
 	camQueueDialogue([
-		{text: "FOXTROT: General, sir!", delay: 0, sound: CAM_RADIO_CLICK},
-		{text: "FOXTROT: We're spotting groups of enemy tanks rolling over the hills.", delay: camSecondsToMilliseconds(2), sound: CAM_RADIO_CLICK},
-		{text: "FOXTROT: They look a lot tougher than scavengers, sir.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: The Collective.", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: Why are they here?", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "LIEUTENANT: The Collective must be leading this assault, sir.", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-		{text: "LIEUTENANT: Although I don't know how or why these scavengers are working with them.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: Whatever it is, it probably has to do with this site.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: Which means they're not going to get it.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
+		{text: "FOXTROT: General, sir!", delay: 0, sound: CAM_RCLICK},
+		{text: "FOXTROT: We're spotting groups of enemy tanks rolling over the hills.", delay: 2, sound: CAM_RCLICK},
+		{text: "FOXTROT: They look a lot tougher than scavengers, sir.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: The Collective.", delay: 4, sound: CAM_RCLICK},
+		{text: "CLAYDE: Why are they here?", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: The Collective must be leading this assault, sir.", delay: 4, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Although I don't know how or why these scavengers are working with them.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Whatever it is, it probably has to do with this site.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Which means they're not going to get it.", delay: 3, sound: CAM_RCLICK},
 	]);
 }
 
@@ -566,27 +566,27 @@ function setPhaseTwo()
 	// Dialogue about evacuating
 	// Also tell the player to destroy NASDA's power systems.
 	camQueueDialogue([
-		{text: "FOXTROT: General!", delay: 0, sound: CAM_RADIO_CLICK},
-		{text: "FOXTROT: We're holding off the Collective as best we can!", delay: camSecondsToMilliseconds(2), sound: CAM_RADIO_CLICK},
-		{text: "FOXTROT: But there's so many, of them. They just keep coming!", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "FOXTROT: I don't know how much longer we ca-", delay: camSecondsToMilliseconds(2), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: Foxtrot, come in!", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: Commander Foxtrot, do you read?", delay: camSecondsToMilliseconds(2), sound: CAM_RADIO_CLICK},
-		{text: "LIEUTENANT: Sir, we've lost contact with team Foxtrot!", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-		{text: "LIEUTENANT: I'm picking up hostiles closing in from every direction.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "LIEUTENANT: Teams Golf and Echo report that they're under attack as well.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "LIEUTENANT: And team Charlie won't be able to reinforce us in time.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "LIEUTENANT: What do we do, sir?", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "LIEUTENANT: ...General, sir?", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: Attention all forces, I'm authorizing an immediate withdrawal.", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: Evacuate NASDA Central!", delay: camSecondsToMilliseconds(2), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: Regroup at your bases and await further orders.", delay: camSecondsToMilliseconds(2), sound: CAM_RADIO_CLICK},
-		{text: "LIEUTENANT: Commander Bravo, before you evacuate...", delay: camSecondsToMilliseconds(6), sound: CAM_RADIO_CLICK},
-		{text: "LIEUTENANT: You need to destroy NASDA Central's power systems.", delay: camSecondsToMilliseconds(2), sound: CAM_RADIO_CLICK},
-		{text: "LIEUTENANT: We can't allow the Collective to access NASDA's control systems.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "LIEUTENANT: If we cut the power by destroying that reactor, we can deny access and buy ourselves some time.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "LIEUTENANT: But you'll have to move fast.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "LIEUTENANT: Your position is about to be overrun, and those defenses aren't going to last.", delay: camSecondsToMilliseconds(2), sound: CAM_RADIO_CLICK},
+		{text: "FOXTROT: General!", delay: 0, sound: CAM_RCLICK},
+		{text: "FOXTROT: We're holding off the Collective as best we can!", delay: 2, sound: CAM_RCLICK},
+		{text: "FOXTROT: But there's so many, of them. They just keep coming!", delay: 3, sound: CAM_RCLICK},
+		{text: "FOXTROT: I don't know how much longer we ca-", delay: 2, sound: CAM_RCLICK},
+		{text: "CLAYDE: Foxtrot, come in!", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Commander Foxtrot, do you read?", delay: 2, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Sir, we've lost contact with team Foxtrot!", delay: 4, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: I'm picking up hostiles closing in from every direction.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Teams Golf and Echo report that they're under attack as well.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: And team Charlie won't be able to reinforce us in time.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: What do we do, sir?", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: ...General, sir?", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Attention all forces, I'm authorizing an immediate withdrawal.", delay: 4, sound: CAM_RCLICK},
+		{text: "CLAYDE: Evacuate NASDA Central!", delay: 2, sound: CAM_RCLICK},
+		{text: "CLAYDE: Regroup at your bases and await further orders.", delay: 2, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Commander Bravo, before you evacuate...", delay: 6, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: You need to destroy NASDA Central's power systems.", delay: 2, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: We can't allow the Collective to access NASDA's control systems.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: If we cut the power by destroying that reactor, we can deny access and buy ourselves some time.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: But you'll have to move fast.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Your position is about to be overrun, and those defenses aren't going to last.", delay: 2, sound: CAM_RCLICK},
 	]);
 }
 
@@ -957,10 +957,10 @@ function eventStartLevel()
 
 	// Dialogue when arriving
 	camQueueDialogue([
-		{text: "CLAYDE: Commander Bravo.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: My engineers have set up an LZ for you outside of NASDA Central.", delay: camSecondsToMilliseconds(2), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: Teams Foxtrot and Delta have already taken up positions to the southwest and southeast.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: Use your forces and defend the northern approach.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: Defend NASDA Central at all costs!", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
+		{text: "CLAYDE: Commander Bravo.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: My engineers have set up an LZ for you outside of NASDA Central.", delay: 2, sound: CAM_RCLICK},
+		{text: "CLAYDE: Teams Foxtrot and Delta have already taken up positions to the southwest and southeast.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Use your forces and defend the northern approach.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Defend NASDA Central at all costs!", delay: 3, sound: CAM_RCLICK},
 	]);
 }

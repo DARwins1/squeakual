@@ -114,6 +114,19 @@ function eventAttacked(victim, attacker)
 			camCallOnce("activateCollective");
 		}
 	}
+	if (victim.player === CAM_INFESTED)
+	{
+		if (attacker.player === MIS_TEAM_CHARLIE || attacker.player === MIS_TEAM_GOLF)
+		{
+			// An ally has encountered the Infested
+			camCallOnce("allyInfestedDialogue");
+		}
+		else if (attacker.player === CAM_HUMAN_PLAYER)
+		{
+			// The player has encountered the Infested
+			camCallOnce("playerInfestedDialogue");
+		}
+	}
 }
 
 function activateLzScavs()
@@ -145,6 +158,26 @@ function camEnemyBaseEliminated_scavLZBase()
 		setMissionTime(-1);
 	}
 
+	// Dialogue about reinforcements and clear LZs
+	camQueueDialogue([
+		{text: "LIEUTENANT: Good job, Bravo. Your LZ is secure.", delay: 2, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Call in the reinforcements you need, but do not engage the Collective base.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: We need to wait until the other teams are ready and in place.", delay: 3, sound: CAM_RCLICK},
+		// Long delay...
+		{text: "CHARLIE: Team Charlie here; our LZ is secure.", delay: 16, sound: CAM_RCLICK},
+		{text: "CHARLIE: We'll standing by for your signal, Lieutenant.", delay: 3, sound: CAM_RCLICK},
+		// Long delay...
+		{text: "GOLF: Team Golf here, we're ready to go.", delay: 12, sound: CAM_RCLICK},
+		{text: "GOLF: Let's break that prison and get everyone home in one piece.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: General, all teams are ready to assault the Collective's prisoner camp.", delay: 5, sound: CAM_RCLICK},
+		{text: "CLAYDE: Perfect. We're deploying our diversion now.", delay: 4, sound: CAM_RCLICK},
+		{text: "CLAYDE: Lieutenant, you're in charge of the assault now.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Destroy that camp, and get our people home safely.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: General Clayde, signing off.", delay: 3, sound: CAM_RCLICK},
+	]);
+
+	queue("stealthBreakDialogue", camSecondsToMilliseconds(6));
+
 	camSetStandardWinLossConditions(CAM_VICTORY_OFFWORLD, "A2L7", {
 		reinforcements: camMinutesToSeconds(1.75),
 		area: "compromiseZone",
@@ -153,7 +186,7 @@ function camEnemyBaseEliminated_scavLZBase()
 	});
 	camSetExtraObjectiveMessage("Avoid detection by the Collective");
 
-	queue("endStealthPhase", camSecondsToMilliseconds(20));
+	queue("endStealthPhase", camSecondsToMilliseconds(60));
 	queue("sendCollectiveScouts", camChangeOnDiff(camMinutesToMilliseconds(4)));
 }
 
@@ -168,6 +201,14 @@ function sendCollectiveScouts()
 		morale: 20,
 		fallback: camMakePos("cScavAssembly1"),
 	});
+
+	if (!playerHidden) return; // Don't play dialogue if the player has already been revealed
+	// Dialogue warning of Collective scouts
+	camQueueDialogue([
+		{text: "LIEUTENANT: Team Bravo, the Collective have sent scouts towards your LZ.", delay: 0, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Seems like they're wondering why that outpost hasn't reported back.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Your cover won't last much longer, get ready to fight!", delay: 3, sound: CAM_RCLICK},
+	]);
 }
 
 // End the stealth phase expand the map
@@ -435,6 +476,14 @@ function activateCollective()
 	camEnableFactory("colCybFactory5");
 
 	setTimer("sendInfestedReinforcements", camMinutesToMilliseconds(1.1));
+
+	// Dialogue when the cool epic fighting starts
+	camQueueDialogue([
+		{text: "GOLF: Fire at will!", delay: 2, sound: CAM_RCLICK},
+		{text: "CHARLIE: Let's move!", delay: 1, sound: CAM_RCLICK},
+		{text: "GOLF: We can't stop until we breach that camp!", delay: 3, sound: CAM_RCLICK},
+		{text: "CHARLIE: Push up before they can regroup!", delay: 5, sound: CAM_RCLICK},
+	]);
 }
 
 function sendCharlieTransporter()
@@ -503,7 +552,8 @@ function eventTransporterLanded(transport)
 {
 	if (transport.player == CAM_HUMAN_PLAYER)
 	{
-		return; // don't care
+		camCallOnce("landingDialogue");
+		return; // don't care afterwards
 	}
 
 	const transDroids = camGetTransporterDroids(transport.player);
@@ -579,6 +629,14 @@ function enableMoreFactories()
 	camEnableFactory("colFactory3");
 	camEnableFactory("colCybFactory3");
 	camEnableFactory("colCybFactory4");
+
+	// Dialogue about Clayde's diversion
+	camQueueDialogue([
+		{text: "CHARLIE: Lieutenant! It looks like the General's plan is working!", delay: 0, sound: CAM_RCLICK},
+		{text: "CHARLIE: Whatever he's doing, Collective aren't bringing in any reinforcements!", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Yes, I haven't detected any Collective transports.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: But be careful, the Collective are likely to regroup and counter attack soon!", delay: 3, sound: CAM_RCLICK},
+	]);
 }
 
 // Allow the final factories to start making their "own" units
@@ -609,6 +667,7 @@ function enableFinalFactories()
 
 	camEnableFactory("colFactory4");
 	camEnableFactory("colCybFactory5");
+	camCallOnce("diversionDialogue");
 }
 
 // Damage infested reinforcements
@@ -654,12 +713,84 @@ function randomizeTemplates(list)
 	return droids;
 }
 
+// Dialogue telling the player to clear the LZ
+function landingDialogue()
+{
+	camQueueDialogue([
+		{text: "LIEUTENANT: Commander Bravo, you'll need to neutralize the small outpost next to your LZ.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Remember that once you attack, you'll only have a small window of time before that outpost alerts the main base to our presence.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Make sure that you destroy it before it can sound the alarm.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: We can't let the Collective know we're here yet.", delay: 3, sound: CAM_RCLICK},
+	]);
+}
+
+// Dialogue telling the player that they can break stealth
+function stealthBreakDialogue()
+{
+	if (!playerHidden) return; // Don't play if the player has already been revealed
+	camQueueDialogue([
+		{text: "LIEUTENANT: Commander Bravo, I'll leave the first strike to you.", delay: 0, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Once you open fire, Commanders Charlie and Golf will support you.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Remember; even though Clayde's diversion should prevent enemy reinforcements, the Collective still have a large force stationed here.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Make sure you're ready when you attack, because there's no going back now...", delay: 4, sound: CAM_RCLICK},
+	]);
+}
+
+// Dialogue on Clayde's mysteriously effective diversion
+// Called when the final factories activate, or when the first Infested group spawns
+function diversionDialogue()
+{
+	camQueueDialogue([
+		{text: "LIEUTENANT: Whatever the General's been doing, it's surely working...", delay: 0, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: I'm picking up activity all over the city.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: The Collective is scrambling their forces all over the map...", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: ...But where did Clayde get the manpower to attack all of these places at once?", delay: 5, sound: CAM_RCLICK},
+		{text: "GOLF: Who cares?", delay: 3, sound: CAM_RCLICK},
+		{text: "GOLF: Now we can put the hurt on these Collective dummies!", delay: 1, sound: CAM_RCLICK},
+	]);
+}
+
+// Dialogue on an ally encountering the Infested
+function allyInfestedDialogue()
+{
+	camQueueDialogue([
+		{text: "GOLF: Lieutenant, sir... uhh", delay: 0, sound: CAM_RCLICK},
+		{text: "GOLF: We seemed to have encountered some unknown forces.", delay: 2, sound: CAM_RCLICK},
+		{text: "GOLF: They seem very hostile...", delay: 2, sound: CAM_RCLICK},
+		{text: "GOLF: ...and VERY ugly, sir.", delay: 2, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Commander Golf, can you give any more details?", delay: 3, sound: CAM_RCLICK},
+		{text: "GOLF: ...Oops, They're dead. Heh, heh heh.", delay: 4, sound: CAM_RCLICK},
+		{text: "GOLF: Hey, wait! Here comes more of em!", delay: 4, sound: CAM_RCLICK},
+		{text: "GOLF: Light em up!", delay: 2, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Commander Golf?!", delay: 3, sound: CAM_RCLICK},
+	]);
+}
+
+// Dialogue on the player encountering the Infested
+function playerInfestedDialogue()
+{
+	camQueueDialogue([
+		{text: "CHARLIE: Are those things...", delay: 4},
+		{text: "CHARLIE: The same things we fought in the mountains...?", delay: 2, sound: CAM_RCLICK},
+		{text: "CHARLIE: The things that team Alpha...", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: This can't be happening..!", delay: 2, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Oh... Clayde...", delay: 3},
+		{text: "LIEUTENANT: ...What have you done..?", delay: 2, sound: CAM_RCLICK},
+		{text: "CHARLIE: Lieutenant!", delay: 2, sound: CAM_RCLICK},
+		{text: "CHARLIE: We still need to bust that Collective prison!", delay: 2, sound: CAM_RCLICK},
+		{text: "GOLF: Yeah, these ugly creeps can't stop us!", delay: 3, sound: CAM_RCLICK},
+		{text: "GOLF: We've gotta save our guys!", delay: 2, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: ...", delay: 4},
+	]);
+}
+
 // Start sending Infested waves once the player progresses far enough
 function sendInfestedReinforcements()
 {
 	// NE entrance
 	if (camBaseIsEliminated("colCraterBase") || camBaseIsEliminated("colMainBase"))
 	{
+		camCallOnce("diversionDialogue");
 		const droids = [cTempl.stinger, cTempl.infbloke, cTempl.infbloke, cTempl.infminitruck, cTempl.infbuggy, cTempl.infrbuggy];
 		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, getObject("infestedEntry3"), randomizeTemplates(droids), CAM_REINFORCE_GROUND));
 	}
@@ -667,6 +798,7 @@ function sendInfestedReinforcements()
 	// SE entrances
 	if (camBaseIsEliminated("colEastCanalBase") || camBaseIsEliminated("colMainBase"))
 	{
+		camCallOnce("diversionDialogue");
 		const droids1 = [cTempl.stinger, cTempl.inffiretruck, cTempl.infbloke, cTempl.inflance, cTempl.infbuggy, cTempl.infrbuggy];
 		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, getObject("infestedEntry1"), randomizeTemplates(droids1), CAM_REINFORCE_GROUND, 
 			{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}} // Annoy the player specifically

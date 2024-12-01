@@ -70,13 +70,13 @@ camAreaEvent("powerCaptureZone", function(droid)
 		enableResearch("R-Struc-PowerModuleMk1", CAM_HUMAN_PLAYER);
 
 		camQueueDialogue([
-			{text: "LIEUTENANT: That appears to be an in-house nuclear reactor.", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-			{text: "LIEUTENANT: ...It's a bit smaller than the ones usually hooked up to electrical grids.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-			{text: "LIEUTENANT: It seems like its sole purpose was to power NASDA's core systems.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-			{text: "LIEUTENANT: Thankfully, it appears to be mostly intact.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-			// {text: "LIEUTENANT: Seems like these scavengers here didn't want to mess with something with \"nuclear\" in the name.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-			{text: "LIEUTENANT: ...And what's this?", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-			{text: "LIEUTENANT: The auxiliary generators seem to have a special module that we can use as well!", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
+			{text: "LIEUTENANT: That appears to be an in-house nuclear reactor.", delay: 4, sound: CAM_RCLICK},
+			{text: "LIEUTENANT: ...It's a bit smaller than the ones usually hooked up to electrical grids.", delay: 3, sound: CAM_RCLICK},
+			{text: "LIEUTENANT: It seems like its sole purpose was to power NASDA's core systems.", delay: 3, sound: CAM_RCLICK},
+			{text: "LIEUTENANT: Thankfully, it appears to be mostly intact.", delay: 3, sound: CAM_RCLICK},
+			// {text: "LIEUTENANT: Seems like these scavengers here didn't want to mess with something with \"nuclear\" in the name.", delay: camSecondsToMilliseconds(3), sound: CAM_RCLICK},
+			{text: "LIEUTENANT: ...And what's this?", delay: 4, sound: CAM_RCLICK},
+			{text: "LIEUTENANT: The auxiliary generators seem to have a special module that we can use as well!", delay: 3, sound: CAM_RCLICK},
 		]);
 	}
 	else
@@ -97,11 +97,11 @@ camAreaEvent("uplinkCaptureZone", function(droid)
 		hackRemoveMessage("UPLINK_ZONE", PROX_MSG, CAM_HUMAN_PLAYER);
 
 		camQueueDialogue([
-			{text: "CLAYDE: Well look at that. NASDA Central.", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-			{text: "LIEUTENANT: From the outside, it seems to be in decent condition.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-			{text: "LIEUTENANT: But we won't know more until we can get a look inside.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-			{text: "CLAYDE: Don't worry.", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-			{text: "CLAYDE: Once these scavengers are cleared out, we'll have all the time in the world.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
+			{text: "CLAYDE: Well look at that. NASDA Central.", delay: 4, sound: CAM_RCLICK},
+			{text: "LIEUTENANT: From the outside, it seems to be in decent condition.", delay: 3, sound: CAM_RCLICK},
+			{text: "LIEUTENANT: But we won't know more until we can get a look inside.", delay: 3, sound: CAM_RCLICK},
+			{text: "CLAYDE: Don't worry.", delay: 4, sound: CAM_RCLICK},
+			{text: "CLAYDE: Once these scavengers are cleared out, we'll have all the time in the world.", delay: 3, sound: CAM_RCLICK},
 		]);
 	}
 	else
@@ -124,18 +124,18 @@ camAreaEvent("vtolFactoryCaptureZone", function(droid)
 		enableResearch("R-Vehicle-Prop-VTOL", CAM_HUMAN_PLAYER);
 
 		camQueueDialogue([
-			{text: "CLAYDE: Lieutenant, what am I looking at here?", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-			{text: "LIEUTENANT: That..!", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-			{text: "LIEUTENANT: THAT is a Pre-Collapse VTOL Factory!", delay: camSecondsToMilliseconds(2), sound: CAM_RADIO_CLICK},
-			{text: "LIEUTENANT: I never thought I'd see one of these again!", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-			{text: "CLAYDE: Slow down, Lieutenant.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-			{text: "LIEUTENANT: Sorry, sir.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-			{text: "LIEUTENANT: These scavengers were likely using this to assemble and store their helicopters.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-			{text: "LIEUTENANT: ...But with any luck, we should be able to...", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-			{text: "LIEUTENANT: Yes!", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-			{text: "LIEUTENANT: There are still Pre-Collapse designs inside this factory!", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-			{text: "LIEUTENANT: We'll be able to use them to design our own VTOL aircraft.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-			{text: "CLAYDE: Excellent.", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
+			{text: "CLAYDE: Lieutenant, what am I looking at here?", delay: 4, sound: CAM_RCLICK},
+			{text: "LIEUTENANT: That..!", delay: 4, sound: CAM_RCLICK},
+			{text: "LIEUTENANT: THAT is a Pre-Collapse VTOL Factory!", delay: 2, sound: CAM_RCLICK},
+			{text: "LIEUTENANT: I never thought I'd see one of these again!", delay: 3, sound: CAM_RCLICK},
+			{text: "CLAYDE: Slow down, Lieutenant.", delay: 3, sound: CAM_RCLICK},
+			{text: "LIEUTENANT: Sorry, sir.", delay: 3, sound: CAM_RCLICK},
+			{text: "LIEUTENANT: These scavengers were likely using this to assemble and store their helicopters.", delay: 3, sound: CAM_RCLICK},
+			{text: "LIEUTENANT: ...But with any luck, we should be able to...", delay: 3, sound: CAM_RCLICK},
+			{text: "LIEUTENANT: Yes!", delay: 3, sound: CAM_RCLICK},
+			{text: "LIEUTENANT: There are still Pre-Collapse designs inside this factory!", delay: 3, sound: CAM_RCLICK},
+			{text: "LIEUTENANT: We'll be able to use them to design our own VTOL aircraft.", delay: 3, sound: CAM_RCLICK},
+			{text: "CLAYDE: Excellent.", delay: 4, sound: CAM_RCLICK},
 		]);
 	}
 	else
@@ -409,10 +409,10 @@ function eventAttacked(victim, attacker)
 function nasdaStructDialogue()
 {
 	camQueueDialogue([
-		{text: "LIEUTENANT: It seems that these scavengers are repurposing NASDA's Pre-Collapse defense systems.", delay: camSecondsToMilliseconds(2), sound: CAM_RADIO_CLICK},
-		{text: "LIEUTENANT: They look like they're in rather poor condition though.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: A few rusty, crumbling turrets aren't going to stop us today.", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: Continue your assault, Commander.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
+		{text: "LIEUTENANT: It seems that these scavengers are repurposing NASDA's Pre-Collapse defense systems.", delay: 2, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: They look like they're in rather poor condition though.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: A few rusty, crumbling turrets aren't going to stop us today.", delay: 4, sound: CAM_RCLICK},
+		{text: "CLAYDE: Continue your assault, Commander.", delay: 3, sound: CAM_RCLICK},
 	]);
 }
 
@@ -425,8 +425,8 @@ function camEnemyBaseEliminated_charlieLZBase()
 	hackRemoveMessage("CHARLIE_LZ", PROX_MSG, CAM_HUMAN_PLAYER);
 
 	camQueueDialogue([
-		{text: "CHARLIE: Thanks, Bravo.", delay: camSecondsToMilliseconds(6), sound: CAM_RADIO_CLICK},
-		{text: "CHARLIE: We'll help keep the scavengers off your back while you clear the other LZs.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
+		{text: "CHARLIE: Thanks, Bravo.", delay: 6, sound: CAM_RCLICK},
+		{text: "CHARLIE: We'll help keep the scavengers off your back while you clear the other LZs.", delay: 3, sound: CAM_RCLICK},
 	]);
 
 	charlieLZSecure = true;
@@ -443,8 +443,8 @@ function camEnemyBaseEliminated_foxtrotLZBase()
 	hackRemoveMessage("FOXTROT_LZ", PROX_MSG, CAM_HUMAN_PLAYER);
 
 	camQueueDialogue([
-		{text: "FOXTROT: Good work clearing our LZ, Bravo.", delay: camSecondsToMilliseconds(6), sound: CAM_RADIO_CLICK},
-		{text: "FOXTROT: Let's show these scavs what REAL military muscle looks like!", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
+		{text: "FOXTROT: Good work clearing our LZ, Bravo.", delay: 6, sound: CAM_RCLICK},
+		{text: "FOXTROT: Let's show these scavs what REAL military muscle looks like!", delay: 3, sound: CAM_RCLICK},
 	]);
 
 	foxtrotLZSecure = true;
@@ -463,8 +463,8 @@ function camEnemyBaseEliminated_golfLZBase()
 	hackRemoveMessage("GOLF_LZ", PROX_MSG, CAM_HUMAN_PLAYER);
 
 	camQueueDialogue([
-		{text: "GOLF: Nice job, Bravo.", delay: camSecondsToMilliseconds(6), sound: CAM_RADIO_CLICK},
-		{text: "GOLF: We'll help you bust down those defenses around NASDA Central.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
+		{text: "GOLF: Nice job, Bravo.", delay: 6, sound: CAM_RCLICK},
+		{text: "GOLF: We'll help you bust down those defenses around NASDA Central.", delay: 3, sound: CAM_RCLICK},
 	]);
 
 	golfLZSecure = true;
@@ -487,9 +487,9 @@ function updateExtraObjectiveMessage()
 	if (charlieLZSecure && foxtrotLZSecure && golfLZSecure)
 	{
 		camQueueDialogue([
-			{text: "LIEUTENANT: Excellent. All LZs secure.", delay: camSecondsToMilliseconds(6), sound: CAM_RADIO_CLICK},
-			{text: "LIEUTENANT: Good work, Commander Bravo.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-			{text: "LIEUTENANT: I'm sure the General will commend you once this battle is over.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
+			{text: "LIEUTENANT: Excellent. All LZs secure.", delay: 6, sound: CAM_RCLICK},
+			{text: "LIEUTENANT: Good work, Commander Bravo.", delay: 3, sound: CAM_RCLICK},
+			{text: "LIEUTENANT: I'm sure the General will commend you once this battle is over.", delay: 3, sound: CAM_RCLICK},
 		]);
 	}
 }
@@ -526,8 +526,8 @@ function eventDestroyed(obj)
 function captureDialogue()
 {
 	camQueueDialogue([
-		{text: "LIEUTENANT: Commander Bravo, one of NASDA Central's components is clear of hostiles.", delay: camSecondsToMilliseconds(2), sound: CAM_RADIO_CLICK},
-		{text: "LIEUTENANT: Move your units nearby to capture it.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
+		{text: "LIEUTENANT: Commander Bravo, one of NASDA Central's components is clear of hostiles.", delay: 2, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Move your units nearby to capture it.", delay: 3, sound: CAM_RCLICK},
 	]);
 }
 
@@ -565,14 +565,14 @@ function isNasdaStructure(struct)
 function finalDialogue()
 {
 	camQueueDialogue([
-		{text: "CLAYDE: Excellent work, Commanders.", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: NASDA Central is ours.", delay: camSecondsToMilliseconds(2), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: Commander Bravo, return to base.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: Charlie, Foxtrot, Golf. You three secure the area.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: I'll send some forces over shortly to fortify NASDA Central.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: Good work, everyone.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: Let today's victory mark the start of a bright new age.", delay: camSecondsToMilliseconds(2), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: General Clayde, signing off.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
+		{text: "CLAYDE: Excellent work, Commanders.", delay: 4, sound: CAM_RCLICK},
+		{text: "CLAYDE: NASDA Central is ours.", delay: 2, sound: CAM_RCLICK},
+		{text: "CLAYDE: Commander Bravo, return to base.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Charlie, Foxtrot, Golf. You three secure the area.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: I'll send some forces over shortly to fortify NASDA Central.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Good work, everyone.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Let today's victory mark the start of a bright new age.", delay: 2, sound: CAM_RCLICK},
+		{text: "CLAYDE: General Clayde, signing off.", delay: 3, sound: CAM_RCLICK},
 	]);
 }
 

@@ -12,6 +12,7 @@ var firstTransport; // Whether the player's first transport has landed
 var startedFromMenu;
 var playerColour;
 var colLZBlip;
+var vtolDialogueTime; // Point in time the player triggered the first VTOL dialogue
 
 const mis_scavResearch = [
 	"R-Wpn-MG-Damage03", "R-Wpn-Rocket-Damage02", "R-Wpn-Mortar-Damage02", 
@@ -235,9 +236,21 @@ function eventAttacked(victim, attacker)
 	}
 
 	if (victim.player == CAM_THE_COLLECTIVE && attacker.player == CAM_HUMAN_PLAYER
-		&& victim.type == DROID && victim.droidType == DROID_CYBORG)
+		&& victim.type == DROID)
 	{
-		camCallOnce("cyborgDialogue");
+		if (victim.droidType == DROID_CYBORG)
+		{
+			camCallOnce("cyborgDialogue");
+		}
+		else if (victim.propulsion == "V-Tol")
+		{
+			camCallOnce("vtolDialogue1");
+			if (vtolDialogueTime != 0 && gameTime >= vtolDialogueTime + camSecondsToMilliseconds(60))
+			{
+				// Wait for at least a minute before playing the second dialogue
+				camCallOnce("vtolDialogue2");
+			}
+		}
 	}
 }
 
@@ -254,9 +267,34 @@ function eventDestroyed(obj)
 
 function cyborgDialogue()
 {
-	// Dialogue Collective Cyborgs...
+	// Dialogue on Collective Cyborgs...
 	camQueueDialogue([
-		{text: "CLAYDE: omg cyborgs !!1!", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK}
+		{text: "CLAYDE: Lieutenant, are those cyborgs ours?", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: No sir, I'm not reading any friendly identification.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Those must belong to the Collective.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Damn, another problem to add to the list.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Commander Bravo, expect the Collective to have more of those cyborgs deployed.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Make sure you arm your forces appropriately.", delay: 3, sound: CAM_RCLICK}
+	]);
+}
+
+function vtolDialogue1()
+{
+	vtolDialogueTime = gameTime;
+	// Dialogue on Collective VTOLs and their HQ...
+	camQueueDialogue([
+		{text: "LIEUTENANT: Commander Bravo, the Collective are likely coordinating those VTOLs through a local relay.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Look for some sort of headquarters or command center.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: If you destroy it, you'll likely cut off the Collective's air support.", delay: 3, sound: CAM_RCLICK}
+	]);
+}
+
+function vtolDialogue2()
+{
+	// Dialogue on shooting down Collective VTOLs...
+	camQueueDialogue([
+		{text: "CLAYDE: Commander, make sure you take down as many of those VTOLs as you can.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: The more of them that you destroy, the longer it'll take the Collective to muster more air strikes.", delay: 3, sound: CAM_RCLICK}
 	]);
 }
 
@@ -679,6 +717,7 @@ function eventStartLevel()
 
 	colLZBlip = false;
 	firstTransport = true;
+	vtolDialogueTime = 0;
 
 	camAutoReplaceObjectLabel("scavHeliTower");
 	camAutoReplaceObjectLabel("cScavHeliTower");
@@ -694,4 +733,25 @@ function eventStartLevel()
 	queue("activateFinalFactories", camChangeOnDiff(camMinutesToMilliseconds(6)));
 	queue("vtolAttack", camChangeOnDiff(camMinutesToMilliseconds(8)));
 	queue("startCollectiveTransports", camChangeOnDiff(camMinutesToMilliseconds(12)));
+
+	// Placeholder for the actual briefing sequence
+	camQueueDialogue([
+		{text: "---- BRIEFING PLACEHOLDER ----", delay: 0},
+		{text: "LIEUTENANT: Sir, Team Bravo's evacuation was a success, and they're awaiting further orders.", delay: 2, sound: CAM_RCLICK},
+		{text: "CLAYDE: Well done, Commander Bravo.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: If we're to salvage this operation, we'll need as many able-bodied men as possible.", delay: 2, sound: CAM_RCLICK},
+		{text: "CLAYDE: Commander Charlie, report your situation.", delay: 3, sound: CAM_RCLICK},
+		{text: "CHARLIE: We're holed up alright sir.", delay: 3, sound: CAM_RCLICK},
+		{text: "CHARLIE: But we've spotted Collective forces to the north of our position.", delay: 2, sound: CAM_RCLICK},
+		{text: "CHARLIE: It looks like they're setting up some defenses.", delay: 3, sound: CAM_RCLICK},
+		{text: "CHARLIE: There's also a lot of fighting between the local scavengers.", delay: 3, sound: CAM_RCLICK},
+		{text: "CHARLIE: Looks like some of the scavengers are working with the Collective.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: I don't have a hard time believing that.", delay: 4, sound: CAM_RCLICK},
+		{text: "CLAYDE: Lieutenant, keep parsing through the Collective's transmissions.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Find out why these scavengers are working along with the Collective.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: On it, sir.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Commander Bravo, take your forces and assume command of Charlie's base.", delay: 2, sound: CAM_RCLICK},
+		{text: "CLAYDE: Team Charlie will reposition to a new location.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Secure the area, and hold for further instructions once the base site is secure.", delay: 3, sound: CAM_RCLICK},
+	]);
 }

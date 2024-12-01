@@ -195,12 +195,12 @@ function ambushLZ()
 
 	// Dialogue about scavenger encampments...
 	camQueueDialogue([
-		{text: "LIEUTENANT: Sir, we have confirmed reports of scavengers in our AO.", delay: camSecondsToMilliseconds(8), sound: CAM_RADIO_CLICK},
-		{text: "LIEUTENANT: Multiple encampments within close proximity of several LZs.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: That's to be expected, this city used to hold millions, after all.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: All Commanders be advised; the Council has authorized the use of lethal force.", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: Remember that our primary objective is secure NASDA Central.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: Use whatever means necessary to achieve it.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
+		{text: "LIEUTENANT: Sir, we have confirmed reports of scavengers in our AO.", delay: 8, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Multiple encampments within close proximity of several LZs.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: That's to be expected, this city used to hold millions, after all.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: All Commanders be advised; the Council has authorized the use of lethal force.", delay: 4, sound: CAM_RCLICK},
+		{text: "CLAYDE: Remember that our primary objective is secure NASDA Central.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Use whatever means necessary to achieve it.", delay: 3, sound: CAM_RCLICK},
 	]);
 }
 
@@ -287,16 +287,16 @@ function scavDialogue()
 {
 	// Dialogue about scavenger encampments...
 	camQueueDialogue([
-		{text: "LIEUTENANT: Sir, we're encountering more scavengers as we settle our forces in.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "LIEUTENANT: It seems that far more people survived the Collapse here than we predicted.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "LIEUTENANT: I wonder...", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "LIEUTENANT: ...Have these guys been fighting each other this whole time?", delay: camSecondsToMilliseconds(2), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: Hmm...", delay: camSecondsToMilliseconds(4), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: These scavengers could complicate our mission.", delay: camSecondsToMilliseconds(2), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: Lieutenant, as soon as possible, I want reconnaissance on NASDA Central.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: Find out what we'll be dealing with when we move to capture it.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "CLAYDE: I don't want any surprises this time.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
-		{text: "LIEUTENANT: Roger that, sir.", delay: camSecondsToMilliseconds(3), sound: CAM_RADIO_CLICK},
+		{text: "LIEUTENANT: Sir, we're encountering more scavengers as we settle our forces in.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: It seems that far more people survived the Collapse here than we predicted.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: I wonder...", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: ...Have these guys been fighting each other this whole time?", delay: 2, sound: CAM_RCLICK},
+		{text: "CLAYDE: Hmm...", delay: 4, sound: CAM_RCLICK},
+		{text: "CLAYDE: These scavengers could complicate our mission.", delay: 2, sound: CAM_RCLICK},
+		{text: "CLAYDE: Lieutenant, as soon as possible, I want reconnaissance on NASDA Central.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Find out what we'll be dealing with when we move to capture it.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: I don't want any surprises this time.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Roger that, sir.", delay: 3, sound: CAM_RCLICK},
 	]);
 }
 

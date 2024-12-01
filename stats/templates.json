@@ -30,28 +30,29 @@
         ]
     },
     "Stinger": {
+        "available": true,
         "body": "CrawlerBody",
         "id": "Stinger",
         "name": "Stinger Crawler",
         "propulsion": "CyborgLegs",
         "type": "CYBORG_SUPER",
         "weapons": [
-            "StingerTail",
-            "InfestedMelee"
+            "StingerTail"
         ]
     },
     "VileStinger": {
+        "available": true,
         "body": "CrawlerBody",
         "id": "VileStinger",
         "name": "Vile Stinger Crawler",
         "propulsion": "CyborgLegs",
         "type": "CYBORG_SUPER",
         "weapons": [
-            "VileStingerTail",
-            "InfestedMelee"
+            "VileStingerTail"
         ]
     },
     "BoomTick": {
+        "available": true,
         "body": "CrawlerBody",
         "id": "BoomTick",
         "name": "Boom Tick Crawler",
