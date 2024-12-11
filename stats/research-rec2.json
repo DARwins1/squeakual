@@ -1279,7 +1279,7 @@
         "requiredResearch": [
             "R-Wpn-Rocket02-MRL"
         ],
-        "researchPoints": 1200,
+        "researchPoints": 400,
         "researchPower": 37,
         "resultStructures": [
             "Emplacement-MRL-pit"
@@ -2491,7 +2491,7 @@
         "requiredResearch": [
             "R-Wpn-MG-Damage01"
         ],
-        "researchPoints": 2400,
+        "researchPoints": 1200,
         "researchPower": 75,
         "resultComponents": [
             "Cannon1-VTOL",
@@ -2509,7 +2509,7 @@
             "R-Struc-Factory-Module",
             "R-Wpn-Cannon-Damage01"
         ],
-        "researchPoints": 1100,
+        "researchPoints": 1600,
         "researchPower": 150,
         "resultComponents": [
             "Cannon2A-TMk1"
@@ -2841,7 +2841,7 @@
         "redComponents": [
             "MG2-VTOL"
         ],
-        "researchPoints": 2400,
+        "researchPoints": 1200,
         "researchPower": 75,
         "resultComponents": [
             "MG3-VTOL",
@@ -3332,7 +3332,7 @@
         "keyTopic": 1,
         "msgName": "RES_W_RK_LTAT1MK1",
         "name": "Sarissa AT Rocket",
-        "researchPoints": 3600,
+        "researchPoints": 1200,
         "researchPower": 112,
         "resultComponents": [
             "Rocket-LtA-TMk1",
@@ -3349,7 +3349,7 @@
         "requiredResearch": [
             "R-Wpn-Rocket-Damage01"
         ],
-        "researchPoints": 2400,
+        "researchPoints": 1400,
         "researchPower": 75,
         "resultComponents": [
             "Rocket-MRL"
@@ -5964,7 +5964,7 @@
         "id": "R-Wpn-Rocket-Damage04",
         "keyTopic": 1,
         "msgName": "RES_W_RK_D4",
-        "name": "HEAP Mini-Rockets",
+        "name": "HEAT Rocket Warhead",
         "requiredResearch": [
             "R-Wpn-Cannon-Damage04",
             "R-Wpn-Rocket-Damage03"
@@ -5998,7 +5998,7 @@
             "R-Wpn-Rocket-Damage04",
             "R-Wpn-RocketSlow-Damage05"
         ],
-        "researchPoints": 6000,
+        "researchPoints": 1500,
         "researchPower": 187,
         "results": [
             {

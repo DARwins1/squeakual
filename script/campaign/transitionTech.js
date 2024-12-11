@@ -30,8 +30,8 @@ const camRec2StartResearch = [
 	"R-Wpn-Mortar01Lt", // Artifact
 	"R-Wpn-Mortar-Damage01", "R-Cyb-Wpn-Grenade",
 	"R-Wpn-Cannon1Mk1", // Artifact
-	"R-Defense-Cannon", "R-Defense-Cannon", "R-Cyborg-Wpn-Cannon", 
-	"R-Wpn-Cannon-Damage01", "R-Wpn-Cannon-ROF01",
+	"R-Defense-Cannon", "R-Cyborg-Wpn-Cannon", "R-Wpn-Cannon-Damage01",
+	"R-Wpn-Cannon-ROF01",
 
 	// L3
 	"R-Wpn-MG2Mk1", // Artifact
@@ -55,7 +55,7 @@ const camRec2StartResearch = [
 // 	// L5
 // 	"R-Wpn-Flamer-ROF02", // Artifact
 // 	"R-Wpn-MG3Mk1", // Artifact
-// 	"R-Defense-Tower01", "R-Wpn-MG-Damage02", "R-Cyborg-Wpn-HvyMG",
+// 	"R-Defense-Tower01", "R-Wpn-MG-Damage03", "R-Cyborg-Wpn-HvyMG",
 // 	"R-Wpn-Rocket-LtA-TMk1", // Artifact
 // 	"R-Defense-Sarissa", "R-Cyborg-Wpn-LtRocket", "R-Wpn-Rocket-Damage03",
 // 	"R-Wpn-Cannon-Damage03",
