@@ -466,6 +466,7 @@ function eventStartLevel()
 	camSetArtifacts({
 		"cScavFactory": { tech: "R-Wpn-MG3Mk1" }, // Heavy Machinegun
 		"yScavFactory1": { tech: "R-Wpn-Flamer-ROF02" }, // Flamer Autoloader Mk2
+		"yScavFactory2": { tech: "R-Wpn-Mortar-ROF01" }, // Mortar Autoloader
 		"sarissaPit": { tech: "R-Wpn-Rocket-LtA-TMk1" }, // Sarissa AT Rocket
 	});
 

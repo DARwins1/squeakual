@@ -450,7 +450,7 @@ function eventStartLevel()
 	camSetArtifacts({
 		"redMiniPit": { tech: "R-Wpn-Rocket02-MRL" }, // Mini-Rocket Array
 		"orangeFactory1": { tech: "R-Wpn-Mortar-ROF01" }, // Mortar Autoloader
-		"redFactory2": { tech: "R-Wpn-Flamer-ROF01" }, // Flamer Autoloader
+		// "redFactory2": { tech: "R-Wpn-Flamer-ROF01" }, // Flamer Autoloader
 	});
 
 	setPower(PLAYER_POWER, CAM_HUMAN_PLAYER);

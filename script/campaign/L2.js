@@ -200,6 +200,7 @@ function eventStartLevel()
 	changePlayerColour(MIS_CIVILIANS, 10); // Civilians to white (The scavengers keep their colours from last mission)
 
 	camSetArtifacts({
+		"yScavFactory" { tech: "R-Wpn-Rocket-ROF01" }, // Rocket Autoloader
 		"mortarPit": { tech: "R-Wpn-Mortar01Lt" }, // Mortar
 		"cScavFactory2": { tech: "R-Wpn-Cannon1Mk1" }, // Light Cannon
 	});

@@ -26,11 +26,12 @@ const camRec2StartResearch = [
 	"R-Vehicle-Prop-Tracks", // Artifact
 
 	// L2
+	"R-Wpn-Rocket-ROF01", // Artifact
 	"R-Wpn-Mortar01Lt", // Artifact
 	"R-Wpn-Mortar-Damage01", "R-Cyb-Wpn-Grenade",
 	"R-Wpn-Cannon1Mk1", // Artifact
 	"R-Defense-Cannon", "R-Defense-Cannon", "R-Cyborg-Wpn-Cannon", 
-	"R-Wpn-Cannon-Damage01",
+	"R-Wpn-Cannon-Damage01", "R-Wpn-Cannon-ROF01",
 
 	// L3
 	"R-Wpn-MG2Mk1", // Artifact
@@ -39,6 +40,7 @@ const camRec2StartResearch = [
 	"R-Cyborg-Metals01",
 	"R-Wpn-Flamer01Mk1", // Artifact
 	"R-Cyborg-Wpn-Flamer", "R-Wpn-Flamer-Damage01", "R-Defense-Flamer",
+	"R-Wpn-Flamer-ROF01",
 ].concat(camRec1StartResearch);
 
 // Contains the Rec 1 research after L3
@@ -46,8 +48,6 @@ const camRec2StartResearch = [
 // const camRec1RemainingResearch = [
 // 	// L4
 //	"R-Wpn-MG-ROF01", // Artifact
-//	"R-Wpn-Cannon-ROF01", "R-Wpn-Rocket-ROF01", "R-Wpn-Flamer-ROF01",
-//	"R-Wpn-Mortar-ROF01",
 // 	"R-Struc-Research-Module", // Artifact
 // 	"R-Wpn-Rocket-Accuracy01", "R-Wpn-Rocket-Damage02", "R-Wpn-Cannon-Accuracy01",
 // 	"R-Wpn-Cannon-Damage02",
@@ -59,6 +59,7 @@ const camRec2StartResearch = [
 // 	"R-Wpn-Rocket-LtA-TMk1", // Artifact
 // 	"R-Defense-Sarissa", "R-Cyborg-Wpn-LtRocket", "R-Wpn-Rocket-Damage03",
 // 	"R-Wpn-Cannon-Damage03",
+//	"R-Wpn-Mortar-ROF01", // Artifact
 // 	// L6
 // 	"R-Wpn-Rocket02-MRL", // Artifact
 // 	"R-Defense-MRL", "R-Wpn-Rocket-ROF02", "R-Wpn-Cannon-ROF02",
@@ -80,7 +81,6 @@ const camAct1StartResearch = camRec2StartResearch.concat(camRec2PrologueResearch
 const camA1L2AllyResearch = camAct1StartResearch.concat([
 	// A1L1
 	"R-Wpn-Mortar-ROF01", // Artifact
-	"R-Wpn-Flamer-ROF01", // Artifact
 	"R-Wpn-Flamer-Damage02",
 	"R-Wpn-Rocket02-MRL", // Artifact
 	"R-Defense-MRL",
@@ -90,9 +90,9 @@ const camA1L2AllyResearch = camAct1StartResearch.concat([
 const camA1L4AllyResearch = camA1L2AllyResearch.concat([
 	// A1L2
 	"R-Wpn-Cannon-Accuracy01", // Artifact
-	"R-Wpn-Cannon-ROF01", "R-Wpn-Cannon-Damage02",
+	"R-Wpn-Cannon-Damage02",
 	"R-Wpn-Rocket-Accuracy01", // Artifact
-	"R-Wpn-Rocket-ROF01", "R-Wpn-Rocket-Damage02",
+	"R-Wpn-Rocket-Damage02",
 	"R-Struc-PowerModuleMk1", // Found by capturing NASDA power systems
 	"R-Vehicle-Engine01",
 	"R-Vehicle-Prop-VTOL", // Found by capturing NASDA VTOL Factory

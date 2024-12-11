@@ -3221,7 +3221,6 @@
         "msgName": "RES_W_RK_ROF1",
         "name": "Rocket Autoloader",
         "requiredResearch": [
-            "R-Wpn-Rocket-Accuracy01",
             "R-Wpn-Rocket-Damage01"
         ],
         "researchPoints": 1400,
@@ -4995,8 +4994,7 @@
         "msgName": "RES_W_CN_ROF1",
         "name": "Cannon Autoloader",
         "requiredResearch": [
-            "R-Wpn-Cannon1Mk1",
-            "R-Wpn-Cannon-Accuracy01"
+            "R-Wpn-Cannon1Mk1"
         ],
         "researchPoints": 1200,
         "researchPower": 125,
