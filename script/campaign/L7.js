@@ -5,11 +5,11 @@ include("script/campaign/templates.js");
 const MIS_CIVILIANS = 1; // Used for civilian groups
 const MIS_TRANSPORT = 2; // Used for the transport that comes to pick them up
 
-var numWaves = 0; // How many infested attack waves have occured
-var phaseTwo = false; // Spawning behaviour changes at 10 minutes remaining
-var killSweepY = 30; // The height of the area where everything dies at the end of the level
+var numWaves; // How many infested attack waves have occured
+var phase; // Spawning behaviour changes at 10 minutes remaining
+var killSweepY; // The height of the area where everything dies at the end of the level
 
-var detonateInfo;
+// var detonateInfo;
 
 const mis_infestedRes = [
 	"R-Wpn-MG-Damage02", "R-Wpn-Rocket-Damage02",
@@ -74,94 +74,131 @@ function eventObjectTransfer(obj, from)
 // This function should always be called around when the timer hits 12 minutes remaining
 function startPhaseTwo()
 {
-	phaseTwo = true;
+	phase = 2;
 
 	// Stop spawning new attacks for now
 	removeTimer("infestedAttackWaves");
 	camSetVtolSpawnStateAll(false);
 
+	// Stop sending transports
+	removeTimer("transportEvac");
+	const civs = enumDroid(MIS_CIVILIANS);
+	for (const civilian of civs)
+	{
+		// Quietly remove any remaining civilians on the map
+		camSafeRemoveObject(civilian);
+	}
+
 	// Queue delivering the message of the big kaboom that's gonna badoom
-	queue("detonationMessage", camMinutesToMilliseconds(1));
+	queue("startPhaseThree", camMinutesToMilliseconds(6.75));
 
 	// Set up the verbal countdown until detonation
-	setTimer("countDown", camSecondsToMilliseconds(0.4));
+	// setTimer("countDown", camSecondsToMilliseconds(0.4));
 
 	// Also queue the return of the infested attacks, but meaner this time
 	queue("startAttackWaves", camSecondsToMilliseconds(125));
+
+	// Play a message assuring the player that they just need to hold on a little longer
+	camPlayVideos([cam_sounds.incoming.incomingTransmission, {video: "L7_TRANSMSG", type: MISS_MSG}]);
+	queue("messageAlert", camSecondsToMilliseconds(3.4));
 }
 
-// Give a message and change the objective text
-function detonationMessage()
+// Reveal Clayde's betrayal
+// After this point, Infested units will pour in at an absurd rate, but """victory""" is guaranteed.
+// The timer will disappear, and the mission will end once the silos are gone
+// This function should be called at around 5 minutes remaining
+function startPhaseThree()
 {
-	// Stop sending transports
-	removeTimer("transportEvac");
+	phase = 3;
 
 	camPlayVideos([cam_sounds.incoming.incomingTransmission, {video: "L7_DETMSG", type: MISS_MSG}]);
 	queue("messageAlert", camSecondsToMilliseconds(3.4));
-	camSetExtraObjectiveMessage("Defend the missile silos until nuclear detonation");
+	camSetExtraObjectiveMessage();
+	// Remove the mission timer
+	setMissionTime(-1);
+
+	// Change the win conditions, this basically makes it so the player can't die normally
+	camSetStandardWinLossConditions(CAM_VICTORY_SCRIPTED, "THE_END");
+
+	// Give one last (very short) break before going absolutely ballistic
+	removeTimer("infestedAttackWaves");
+	queue("startAttackWaves", camSecondsToMilliseconds(30));
+
+	// Set up a timer for checking if the ending sequence should start
+	setTimer("checkEndingStart", camSecondsToMilliseconds(0.4));
+}
+
+// Check if the nukes should blow up
+function checkEndingStart()
+{
+	if (!checkMissileSilos())
+	{
+		// The missile silos are gone...
+		removeTimer("checkEndingStart");
+		camCallOnce("prepareEnding"); // Start mini-blasts and transfer any remaining player objects
+		queue("endEffects", camSecondsToMilliseconds(5)); // Kaboom
+	}
 }
 
 // Play countdown sounds as the timer ticks down
 // Also calls the functions that do all the cool stuff at the end
-function countDown()
-{
-	let skip = false;
-	const CURRENT_TIME = getMissionTime();
+// function countDown()
+// {
+// 	let skip = false;
+// 	const CURRENT_TIME = getMissionTime();
 
-	for (let i = 0, len = detonateInfo.length; i < len; ++i)
-	{
-		if (CURRENT_TIME <= detonateInfo[0].time)
-		{
-			if (len > 1 && (CURRENT_TIME <= detonateInfo[1].time))
-			{
-				skip = true; //Huge time jump?
-			}
-			if (!skip)
-			{
-				playSound(detonateInfo[0].sound, CAM_HUMAN_PLAYER);
-			}
+// 	for (let i = 0, len = detonateInfo.length; i < len; ++i)
+// 	{
+// 		if (CURRENT_TIME <= detonateInfo[0].time)
+// 		{
+// 			if (len > 1 && (CURRENT_TIME <= detonateInfo[1].time))
+// 			{
+// 				skip = true; //Huge time jump?
+// 			}
+// 			if (!skip)
+// 			{
+// 				playSound(detonateInfo[0].sound, CAM_HUMAN_PLAYER);
+// 			}
 
-			detonateInfo.shift();
+// 			detonateInfo.shift();
 
-			break;
-		}
-	}
+// 			break;
+// 		}
+// 	}
 
-	// Get ready for the cool explosions
-	if (CURRENT_TIME < 5)
-	{
-		camCallOnce("prepareEnding");
-	}
+// 	// Get ready for the cool explosions
+// 	if (CURRENT_TIME < 5)
+// 	{
+// 		camCallOnce("prepareEnding");
+// 	}
 
-	// Start the cool explosions
-	if (CURRENT_TIME < 1)
-	{
-		camCallOnce("endEffects");
-	}
-}
+// 	// Start the cool explosions
+// 	if (CURRENT_TIME < 1)
+// 	{
+// 		camCallOnce("endEffects");
+// 	}
+// }
 
 // Make preparations for all the cool stuff at the end
-// Getting all of this stuff to work is really hacky and I wouldn't be suprised if this code makes someone cry
+// Getting all of this stuff to work is really hacky and I wouldn't be surprised if this code makes someone cry
 function prepareEnding()
 {
-	// Change the win conditions, this basically makes it so the player won't die and the timer won't end the level
-	camSetStandardWinLossConditions(CAM_VICTORY_SCRIPTED, "THE_END");
-
 	// Give everything the player has to the "transport" team
-	// This is done so that when everything explodes in a few seconds, the player won't get a bunch of losses reported on the end screen
+	// This is done so that when everything explodes in a few seconds, the player get a bunch of messages about "unit lost/under attack"
 	// Also it's so the player can sit back and watch the fireworks
 	camAbsorbPlayer(CAM_HUMAN_PLAYER, MIS_TRANSPORT);
 
-	// Give the player full vision of the map by placing a spotter on the LZ that has an absurdley long radius
+	// Give the player full vision of the map by placing a spotter on the LZ that has an absurdly long radius
 	addSpotter(32, 20, CAM_HUMAN_PLAYER, 16384, false, 0);
 
 	// Start causing a bunch of tiny explosions around the player's base
 	setTimer("smallExplosionFX", camSecondsToMilliseconds(0.3));
 
 	// Move the camera towards the player's base
-	cameraSlide(4032, 2624);
+	const startpos = getObject("startPosition");
+	cameraSlide(startpos.x, startpos.y);
 
-	// Force the minimap to be active.
+	// Force the minimap to be active (since the player no longer has an HQ).
 	setMiniMap(true);
 }
 
@@ -243,18 +280,27 @@ function hintMessage()
 // Start sending attack waves
 function startAttackWaves()
 {
-	if (!phaseTwo)
+	if (phase == 1)
 	{
 		setTimer("infestedAttackWaves", camChangeOnDiff(camSecondsToMilliseconds(40)));
 		queue("heliAttack", camChangeOnDiff(camMinutesToMilliseconds(6)));
 	}
-	else
+	else if (phase == 2)
 	{
+		// Much faster attack waves
 		setTimer("infestedAttackWaves", camChangeOnDiff(camSecondsToMilliseconds(25)));
 		heliAttack();
 
 		// Change the fog colour to a dark purple
 		camSetFog(114, 73, 156);
+	}
+	else if (phase == 3)
+	{
+		// Make the attack waves go absolutely nuts
+		setTimer("infestedAttackWaves", camChangeOnDiff(camSecondsToMilliseconds(12)));
+
+		// Change the fog colour to a darker purple
+		camSetFog(95, 60, 130);
 	}
 }
 
@@ -268,7 +314,7 @@ function heliAttack()
 		altIdx: 0
 	};
 
-	if (!phaseTwo)
+	if (phase == 0)
 	{
 		const heliPositions = [camMakePos("heliSpawn1"), camMakePos("heliSpawn2")];
 
@@ -282,7 +328,7 @@ function heliAttack()
 	}
 }
 
-// Infested attack waves progressor
+// Infested attack waves progression
 function infestedAttackWaves()
 {
 	numWaves++;
@@ -321,7 +367,7 @@ function infestedAttackWaves()
 	// This switch block handles spawning waves of civilians from different entrances
 	// Civilians will run towards the LZ for evac by transport
 	// They also serve to clue in the player of where the infested are going to attack from next
-	if (!phaseTwo)
+	if (phase == 0)
 	{
 		switch(numWaves)
 		{
@@ -507,16 +553,16 @@ function eventStartLevel()
 
 	// Sounds to play before detonation (ripped straight from cam3-1 lol)
 	// Lists sound files to play and the time remaining (in seconds) for them to be played
-	detonateInfo = [
-		{sound: cam_sounds.missile.detonate.detonationIn10Minutes, time: camMinutesToSeconds(10)},
-		{sound: cam_sounds.missile.detonate.detonationIn5Minutes, time: camMinutesToSeconds(5)},
-		{sound: cam_sounds.missile.detonate.detonationIn4Minutes, time: camMinutesToSeconds(4)},
-		{sound: cam_sounds.missile.detonate.detonationIn3Minutes, time: camMinutesToSeconds(3)},
-		{sound: cam_sounds.missile.detonate.detonationIn2Minutes, time: camMinutesToSeconds(2)},
-		{sound: cam_sounds.missile.detonate.detonationIn1Minute, time: camMinutesToSeconds(1)},
-		{sound: cam_sounds.missile.detonate.finalDetonationSequenceInitiated, time: 20},
-		{sound: cam_sounds.missile.countdown, time: 10},
-	];
+	// detonateInfo = [
+	// 	{sound: cam_sounds.missile.detonate.detonationIn10Minutes, time: camMinutesToSeconds(10)},
+	// 	{sound: cam_sounds.missile.detonate.detonationIn5Minutes, time: camMinutesToSeconds(5)},
+	// 	{sound: cam_sounds.missile.detonate.detonationIn4Minutes, time: camMinutesToSeconds(4)},
+	// 	{sound: cam_sounds.missile.detonate.detonationIn3Minutes, time: camMinutesToSeconds(3)},
+	// 	{sound: cam_sounds.missile.detonate.detonationIn2Minutes, time: camMinutesToSeconds(2)},
+	// 	{sound: cam_sounds.missile.detonate.detonationIn1Minute, time: camMinutesToSeconds(1)},
+	// 	{sound: cam_sounds.missile.detonate.finalDetonationSequenceInitiated, time: 20},
+	// 	{sound: cam_sounds.missile.countdown, time: 10},
+	// ];
 
    	camSetStandardWinLossConditions(CAM_VICTORY_TIMEOUT, "THE_END", {
 		callback: "checkMissileSilos"
@@ -538,6 +584,10 @@ function eventStartLevel()
 
 	changePlayerColour(MIS_TRANSPORT, playerData[0].colour); // Transport to the player's colour
 	changePlayerColour(MIS_CIVILIANS, 10); // Civilians to white
+
+	numWaves = 0;
+	phase = 1;
+	killSweepY = 30;
 
 	// Give player briefing about the incoming infested waves.
 	camPlayVideos({video: "L7_BRIEF", type: MISS_MSG});

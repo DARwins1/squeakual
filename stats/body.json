@@ -132,7 +132,7 @@
         "buildPoints": 75,
         "buildPower": 4,
         "class": "Droids",
-        "hitpoints": 200,
+        "hitpoints": 125,
         "id": "InfestedScavengerChopper",
         "model": "infscavchop.pie",
         "name": "Infested Scavenger Chopper",

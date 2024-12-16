@@ -2680,7 +2680,7 @@
     "Sys-SensoTower01": {
         "armour": 10,
         "breadth": 1,
-        "buildPoints": 300,
+        "buildPoints": 250,
         "buildPower": 60,
         "ecmID": "ZNULLECM",
         "height": 3,
@@ -2700,7 +2700,7 @@
     "Sys-RustSensoTower01": {
         "armour": 10,
         "breadth": 1,
-        "buildPoints": 300,
+        "buildPoints": 250,
         "buildPower": 60,
         "ecmID": "ZNULLECM",
         "height": 3,
