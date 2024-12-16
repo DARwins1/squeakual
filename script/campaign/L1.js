@@ -12,9 +12,10 @@ const MIS_CYAN_SCAVS = 2; // Cyan Scavengers
 const MIS_YELLOW_SCAVS = 3; // Yellow Scavengers
 
 // Whether the player has been detected by either of the scavenger factions
-var playerDetected = false;
+var playerCyanDetected;
+var playerYellowDetected;
 // Whether the player can use the chat to change colors, disabled when capturing the NASDA base.
-var allowColourChange = true;
+var allowColourChange;
 // Changing the player's colour only updates playerData after save-loading or level progression.
 // This variable is to make sure the transport correctly matches the player's colour on this level.
 var playerColour;
@@ -144,12 +145,12 @@ function eventAttacked(victim, attacker)
 	{
 		return;
 	}
-	if (victim.player === MIS_CYAN_SCAVS && attacker.player === CAM_HUMAN_PLAYER && !playerDetected)
+	if (victim.player === MIS_CYAN_SCAVS && attacker.player === CAM_HUMAN_PLAYER && !playerCyanDetected)
 	{
 		camCallOnce("cScavDetectCountdown");
 		return;
 	}
-	if (victim.player === MIS_YELLOW_SCAVS && attacker.player === CAM_HUMAN_PLAYER && !playerDetected)
+	if (victim.player === MIS_YELLOW_SCAVS && attacker.player === CAM_HUMAN_PLAYER && !playerYellowDetected)
 	{
 		camCallOnce("yScavDetectCountdown");
 		return;
@@ -190,20 +191,19 @@ function yScavDetectCountdown()
 function yScavPlayerDetected()
 {
 	removeTimer("yScavPlayerDetected");
+	playerYellowDetected = true;
 
 	// Tell the player that they've been detected if they haven't already recieved a message before.
-	// Also disable the cyan factory so it doesn't fill the town area with units
-	if (!playerDetected)
+	if (!playerCyanDetected)
 	{
-		camSetFactories({"cScavFactory": {}}); // Clears factory data (disabling the factory)
+		// camSetFactories({"cScavFactory": {}}); // Clears factory data (disabling the factory)
 
 		camPlayVideos({video: "L1_DETMSG", type: MISS_MSG});
 		queue("messageAlert", camSecondsToMilliseconds(0.2));
-		playerDetected = true;
-		// Stop refilling these groups
-		camLockRefillableGroup(yScavCentralPatrol);
-		camLockRefillableGroup(cScavCentralPatrol);
 	}
+
+	// Stop refilling the central patrol group
+	camLockRefillableGroup(yScavCentralPatrol);
 
 	// Set the first yellow factory to attack the player (if it still exists)
 	camSetFactories({
@@ -229,20 +229,19 @@ function yScavPlayerDetected()
 function cScavPlayerDetected()
 {
 	removeTimer("cScavPlayerDetected");
+	playerCyanDetected = true;
 
 	// Tell the player that they've been detected if they haven't already recieved a message before.
-	// Also disable the yellow factory so it doesn't fill the town area with units
-	if (!playerDetected)
+	if (!playerYellowDetected)
 	{
-		camSetFactories({"yScavFactory1": {}}); // Clears factory data (disabling the factory)
+		// camSetFactories({"yScavFactory1": {}}); // Clears factory data (disabling the factory)
 
 		camPlayVideos({video: "L1_DETMSG", type: MISS_MSG});
 		queue("messageAlert", camSecondsToMilliseconds(0.2));
-		playerDetected = true;
-		// Stop refilling these groups
-		camLockRefillableGroup(yScavCentralPatrol);
-		camLockRefillableGroup(cScavCentralPatrol);
 	}
+
+	// Stop refilling the central patrol group
+	camLockRefillableGroup(cScavCentralPatrol);
 
 	// Set the cyan factory to attack the player (if it still exists)
 	camSetFactories({
@@ -570,6 +569,10 @@ function eventStartLevel()
 			camMakePos("scavPatrol2"),
 		]
 	});
+
+	playerCyanDetected = false;
+	playerYellowDetected = false;
+	allowColourChange = true;
 
 	// Place a beacon on the NASDA base
 	hackAddMessage("NASDA_BASE", PROX_MSG, CAM_HUMAN_PLAYER);

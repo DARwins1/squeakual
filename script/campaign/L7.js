@@ -197,7 +197,7 @@ function prepareEnding()
 
 	// Move the camera towards the player's base
 	const startpos = getObject("startPosition");
-	cameraSlide(startpos.x, startpos.y);
+	cameraSlide(startpos.x * 128, startpos.y * 128);
 
 	// Force the minimap to be active (since the player no longer has an HQ).
 	setMiniMap(true);
@@ -315,7 +315,7 @@ function heliAttack()
 		altIdx: 0
 	};
 
-	if (phase == 0)
+	if (phase == 1)
 	{
 		const heliPositions = [camMakePos("heliSpawn1"), camMakePos("heliSpawn2")];
 
@@ -373,7 +373,7 @@ function infestedAttackWaves()
 	// This switch block handles spawning waves of civilians from different entrances
 	// Civilians will run towards the LZ for evac by transport
 	// They also serve to clue in the player of where the infested are going to attack from next
-	if (phase == 0)
+	if (phase == 1)
 	{
 		switch(numWaves)
 		{

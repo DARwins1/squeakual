@@ -137,7 +137,7 @@ function activateNorthInfested()
 {
 	// Activate the north infested base
 	camEnableFactory("northInfestedFactory");
-	setTimer("infestedReinforcements", camChangeOnDiff(camSecondsToMilliseconds(45)));
+	setTimer("infestedReinforcements", camChangeOnDiff(camSecondsToMilliseconds(35)));
 
 	// Also activate the eastern scav factory
 	camEnableFactory("eastScavFactory");
@@ -152,7 +152,7 @@ function infestedReinforcements()
 	// Stop if the level is in its ending phase
 	if (wavePhase)
 	{
-		removeTimer("westInfestedReinforcements");
+		removeTimer("infestedReinforcements");
 		return;
 	}
 
@@ -368,7 +368,7 @@ function infestedEndWaves()
 	*/
 
 	// Each entrance has it's own "core" unit compositions, with a bunch of Infested Civilians added on top:
-	const nwBaseDroids = [cTempl.stinger, cTempl.stinger, cTempl.infbloke, cTempl.infbloke, cTempl.inflance, cTempl.infbuggy];
+	const nBaseDroids = [cTempl.stinger, cTempl.stinger, cTempl.infbloke, cTempl.infbloke, cTempl.inflance, cTempl.infbuggy];
 	const neRoadDroids = [cTempl.stinger, cTempl.stinger, cTempl.infbuggy, cTempl.infbuggy, cTempl.infrbuggy, cTempl.inftrike];
 
 	const nwRoadDroids = [cTempl.inftrike, cTempl.infminitruck, cTempl.infbuggy, cTempl.infrbuggy, cTempl.infbuscan, cTempl.inffiretruck];
@@ -377,27 +377,17 @@ function infestedEndWaves()
 	const wHighwayDroids = [cTempl.stinger, cTempl.infbjeep, cTempl.infrbjeep, cTempl.infminitruck, cTempl.infbloke, cTempl.inflance];
 	const eHighwayDroids = [cTempl.stinger, cTempl.infbjeep, cTempl.infrbjeep, cTempl.infsartruck, cTempl.infbloke, cTempl.inflance];
 
-	preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, camMakePos("nwBaseEntry"), randomTemplates(nwBaseDroids), CAM_REINFORCE_GROUND, 
-		{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}}
-	));
-	preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, camMakePos("neRoadEntry"), randomTemplates(neRoadDroids), CAM_REINFORCE_GROUND, 
-		{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}}
-	));
+	preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, camMakePos("nBaseEntry"), randomTemplates(nBaseDroids), CAM_REINFORCE_GROUND));
+	preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, camMakePos("neRoadEntry"), randomTemplates(neRoadDroids), CAM_REINFORCE_GROUND));
 
 	if (numWaves > 5)
 	{
-		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, camMakePos("nwRoadEntry"), randomTemplates(nwRoadDroids), CAM_REINFORCE_GROUND, 
-			{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}}
-		));
+		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, camMakePos("nwRoadEntry"), randomTemplates(nwRoadDroids), CAM_REINFORCE_GROUND));
 	}
 	if (numWaves > 11)
 	{
-		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, camMakePos("wHighwayEntry"), randomTemplates(wHighwayDroids), CAM_REINFORCE_GROUND, 
-			{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}}
-		));
-		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, camMakePos("eHighwayEntry"), randomTemplates(eHighwayDroids), CAM_REINFORCE_GROUND, 
-			{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}}
-		));
+		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, camMakePos("wHighwayEntry"), randomTemplates(wHighwayDroids), CAM_REINFORCE_GROUND));
+		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, camMakePos("eHighwayEntry"), randomTemplates(eHighwayDroids), CAM_REINFORCE_GROUND));
 	}
 	if (numWaves === 16)
 	{

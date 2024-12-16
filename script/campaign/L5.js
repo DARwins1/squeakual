@@ -229,7 +229,7 @@ function sendInfestedReinforcements()
 	// NW entrance
 	if (getObject("infestedFactory3") !== null)
 	{
-		const droids = [cTempl.stinger, cTempl.inffiretruck, cTempl.infbloke, cTempl.inflance, cTempl.infbuggy, cTempl.infrbuggy];
+		const droids = [cTempl.stinger, cTempl.infbloke, cTempl.infbloke, cTempl.inflance, cTempl.infbuggy, cTempl.infrbuggy];
 		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, camMakePos("infestedEntry1"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
 			{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}}
 		));
