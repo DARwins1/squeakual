@@ -1222,7 +1222,16 @@ function __camDetonateBoomtick(boomBaitId)
 	else
 	{
 		fireWeaponAtObj("BoomTickBlast", bait, CAM_INFESTED);
+		// Failsafe in case the bait doesn't actually die
+		queue("__camRemoveBoomBait", __CAM_TICKS_PER_FRAME * 10, boomBaitId + "");
 	}
+}
+
+// Quietly remove the bait object if it wasn't destroyed in the blast for some reason
+function __camRemoveBoomBait(boomBaitId)
+{
+	const bait = getObject(DROID, CAM_INFESTED, boomBaitId);
+	camSafeRemoveObject(bait);
 }
 
 function camSetDroidExperience(droid)

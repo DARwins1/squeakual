@@ -668,6 +668,54 @@ function eventStartLevel()
 	// Infested start out partially damaged
 	preDamageInfested();
 
+	// If we're in Timerless mode, set up scavenger Cranes
+	if (tweakOptions.rec_timerlessMode)
+	{
+		// Scav main base (cyan)
+		camManageTrucks(MIS_CYAN_SCAVS, {
+			label: "scavAllianceBase",
+			respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
+			template: cTempl.crane,
+			structset: camAreaToStructSet("scavBase", MIS_CYAN_SCAVS)
+		});
+		if (difficulty >= MEDIUM)
+		{
+			// Scav main base (yellow)
+			camManageTrucks(MIS_YELLOW_SCAVS, {
+				label: "scavAllianceBase",
+				respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(90)),
+				template: cTempl.crane,
+				structset: camAreaToStructSet("scavBase", MIS_YELLOW_SCAVS)
+			});
+			// Central scav outpost
+			camManageTrucks(MIS_YELLOW_SCAVS, {
+				label: "scavOutpost",
+				respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(90)),
+				template: cTempl.crane,
+				structset: camAreaToStructSet("yScavBase1")
+			});
+		}
+		if (difficulty >= HARD)
+		{
+			// Yellow scav southern bases
+			camManageTrucks(MIS_YELLOW_SCAVS, {
+				label: "scavCamp",
+				rebuildBase: true,
+				respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(110)),
+				template: cTempl.crane,
+				structset: camAreaToStructSet("yScavBase2")
+			});
+			// Yellow scav southern bases
+			camManageTrucks(MIS_YELLOW_SCAVS, {
+				label: "scavRoadblock",
+				rebuildBase: true,
+				respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(110)),
+				template: cTempl.crane,
+				structset: camAreaToStructSet("yScavBase3")
+			});
+		}
+	}
+
 	// Change the fog colour to a light pink/purple
 	camSetFog(185, 182, 236);
 

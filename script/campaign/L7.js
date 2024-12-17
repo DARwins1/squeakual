@@ -575,6 +575,7 @@ function eventStartLevel()
 	});
 	camSetExtraObjectiveMessage(["Survive until evacuation", "Defend the missile silos"]);
 	setMissionTime(camMinutesToSeconds(30));
+	// NOTE: This mission is basically unchanged in timerless mode
 
 	// Setup lz and starting camera
 	centreView(startpos.x, startpos.y);

@@ -318,6 +318,44 @@ function eventStartLevel()
 		camSafeRemoveObject("removablePit");
 	}
 
+	// If we're in Timerless mode, set up scavenger Cranes
+	if (tweakOptions.rec_timerlessMode)
+	{
+		if (difficulty >= EASY)
+		{
+			// Cyan scav main base
+			camManageTrucks(MIS_CYAN_SCAVS, {
+				label: "cyanBase",
+				rebuildBase: true,
+				respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
+				template: cTempl.crane,
+				structset: camAreaToStructSet("cScavBase3")
+			});
+		}
+		if (difficulty >= HARD)
+		{
+			// Cyan scav depot base
+			camManageTrucks(MIS_CYAN_SCAVS, {
+				label: "cyanDepot",
+				rebuildBase: true,
+				respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(120)),
+				template: cTempl.crane,
+				structset: camAreaToStructSet("cScavBase1")
+			});
+		}
+		if (difficulty >= INSANE)
+		{
+			// Yellow scav mountain base
+			camManageTrucks(MIS_YELLOW_SCAVS, {
+				label: "yellowBase",
+				rebuildBase: false,
+				respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(120)),
+				template: cTempl.crane,
+				structset: camAreaToStructSet("yScavBase1")
+			});
+		}
+	}
+
 	// Spawn civilians in their zones
 	populateCivilians();
 

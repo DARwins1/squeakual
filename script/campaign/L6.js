@@ -646,6 +646,61 @@ function eventStartLevel()
 	// All infested structures start out partially damaged
 	preDamageInfested();
 
+	// If we're in Timerless mode, set up scavenger Cranes
+	if (tweakOptions.rec_timerlessMode)
+	{
+		// Large scavenger bases (with AA sites)
+		camManageTrucks(MIS_CYAN_SCAVS, {
+			label: "northWestScavBase",
+			rebuildBase: (difficulty >= HARD),
+			respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
+			template: cTempl.crane,
+			// Don't try to rebuild the AA sites
+			structset: camAreaToStructSet("nwScavFactoryBase").filter((struct) => (struct.stat !== "AASite-RustQuadBof"))
+		});
+		camManageTrucks(MIS_CYAN_SCAVS, {
+			label: "eastScavBase",
+			rebuildBase: (difficulty >= HARD),
+			respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
+			template: cTempl.crane,
+			structset: camAreaToStructSet("eScavBase").filter((struct) => (struct.stat !== "AASite-RustQuadBof"))
+		});
+		camManageTrucks(MIS_CYAN_SCAVS, {
+			label: "southWestScavBase",
+			rebuildBase: (difficulty >= INSANE),
+			respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
+			template: cTempl.crane,
+			structset: camAreaToStructSet("swScavBase").filter((struct) => (struct.stat !== "AASite-RustQuadBof"))
+		});
+		if (difficulty >= EASY)
+		{
+			// Scav mountain base
+			camManageTrucks(MIS_CYAN_SCAVS, {
+				label: "scavAllianceBase",
+				rebuildBase: (difficulty >= MEDIUM),
+				respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
+				template: cTempl.crane,
+				structset: camAreaToStructSet("scavBase")
+			});
+		}
+		if (difficulty >= MEDIUM)
+		{
+			// Scav outposts
+			camManageTrucks(MIS_CYAN_SCAVS, {
+				label: "northWestScavOutpost",
+				respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(90)),
+				template: cTempl.crane,
+				structset: camAreaToStructSet("wScavOutpost")
+			});
+			camManageTrucks(MIS_CYAN_SCAVS, {
+				label: "northEastScavOutpost",
+				respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(90)),
+				template: cTempl.crane,
+				structset: camAreaToStructSet("neScavOutpost")
+			});
+		}
+	}
+
 	// Change the fog colour to a light pink/purple
 	camSetFog(185, 182, 236);
 

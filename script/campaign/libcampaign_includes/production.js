@@ -441,7 +441,7 @@ function __camFactoryUpdateTactics(flabel)
 		{
 			pos = camMakePos(flabel);
 		}
-		camManageGroup(fi.group, CAM_ORDER_DEFEND, { pos: pos });
+		camManageGroup(fi.group, CAM_ORDER_DEFEND, { pos: pos, radius: __CAM_ASSEMBLY_DEFENSE_RADIUS });
 	}
 }
 
@@ -597,18 +597,59 @@ function __camContinueProduction(structure)
 
 	// check factory queue
 	const __PLAYER = struct.player;
-	const structPos = camMakePos(struct);
+	// const structPos = camMakePos(struct);
 	if (camDef(__camFactoryQueue[__PLAYER]) && __camFactoryQueue[__PLAYER].length > 0)
 	{
-		// TODO: Check past the first item in the queue
+		// TODO: Check past the first item in the queue?
 		// Only build if destination is reachable or undefined
 		const destPos = __camFactoryQueue[__PLAYER][0].position;
-		if ((!camDef(destPos) || propulsionCanReach(__camFactoryQueue[__PLAYER][0].template.prop, structPos.x, structPos.y, destPos.x, destPos.y)) 
-			&& camFactoryCanProduceTemplate(__camFactoryQueue[__PLAYER][0].template, struct)
-			&& __camBuildDroid(__camFactoryQueue[__PLAYER][0].template, struct))
+		if (camDef(destPos))
 		{
-			__camFactoryQueue[__PLAYER].shift();
-			return; // Don't update the last production time
+			// If a position is defined, only build this droid if we are the closest viable factory
+			let closestLabel = null;
+			let closestDist = -1;
+			// Loop through each factory label
+			for (const compareLabel in __camFactoryInfo)
+			{
+				// If the factory exists and is enabled...
+				if (getObject(compareLabel) !== null && __camFactoryInfo[compareLabel].enabled === true)
+				{
+					const factoryStruct = getObject(compareLabel);
+					const structPos = camMakePos(struct);
+					// Check if the factory can produce this template and the template can reach the position...
+					if (propulsionCanReach(__camFactoryQueue[__PLAYER][0].template.prop, structPos.x, structPos.y, destPos.x, destPos.y)
+						&& camFactoryCanProduceTemplate(__camFactoryQueue[__PLAYER][0].template, factoryStruct))
+					{
+						const FACTORY_DIST = camDist(structPos.x, structPos.y, destPos.x, destPos.y);
+						// ...Then check if this factory is the closest one we've found...
+						if (FACTORY_DIST < closestDist || closestDist < 0)
+						{
+							closestDist = FACTORY_DIST;
+							closestLabel = compareLabel;
+						}
+					}
+				}
+
+				// Check if this factory is the closest viable one we've found
+				if (closestDist > 0 && flabel === closestLabel)
+				{
+					// If so, then attempt
+					if (__camBuildDroid(__camFactoryQueue[__PLAYER][0].template, struct))
+					{
+						__camFactoryQueue[__PLAYER].shift();
+						return; // Don't update the last production time
+					}
+				}
+			}
+		}
+		else
+		{
+			// No position set, just build the droid here...
+			if (__camBuildDroid(__camFactoryQueue[__PLAYER][0].template, struct))
+			{
+				__camFactoryQueue[__PLAYER].shift();
+				return; // Don't update the last production time
+			}
 		}
 	}
 

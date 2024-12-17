@@ -117,7 +117,25 @@ function expandMap()
 		callback: "checkMissileSilos"
 	});
 
-	setMissionTime(camMinutesToSeconds(60)); // Set mission timer to 60 minutes
+	if (tweakOptions.rec_timerlessMode)
+	{
+		if (difficulty >= HARD)
+		{
+			// Crane for the cyan scav bases
+			// NOTE: The player doesn't really have any effective anti-structure weapons at this point, so we're being nice with the Cranes for now...
+			camManageTrucks(MIS_CYAN_SCAVS, {
+				label: "CyanBase",
+				rebuildBase: false,
+				respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(120)),
+				template: cTempl.crane,
+				structset: camAreaToStructSet("cScavBase3")
+			});
+		}
+	}
+	else
+	{
+		setMissionTime(camMinutesToSeconds(60)); // Set mission timer to 60 minutes
+	}
 
 	camSetExtraObjectiveMessage(_("Defend the missile silos"));
 

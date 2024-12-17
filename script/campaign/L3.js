@@ -70,8 +70,61 @@ function expandMap()
 	hackRemoveMessage("WEST_ATTACK", PROX_MSG, CAM_HUMAN_PLAYER);
 	hackRemoveMessage("EAST_ATTACK", PROX_MSG, CAM_HUMAN_PLAYER);
 
-	// Set the mission time to it's actual allotment
-	setMissionTime(camChangeOnDiff(camMinutesToSeconds(90)));
+	// Set the mission time to its actual allotment
+	// Also set up cranes on timerless mode
+	if (tweakOptions.rec_timerlessMode)
+	{
+		switch (difficulty)
+		{
+			case INSANE:
+				// Cranes for the mortars on the ridge
+				camManageTrucks(MIS_CYAN_SCAVS, {
+					label: "mortarRidge",
+					rebuildBase: true,
+					respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(100)),
+					template: cTempl.crane,
+					structset: camAreaToStructSet("cScavBase3")
+				});
+			case HARD: // NOTE: Fall-through here! We still add Cranes from lower difficulties!
+				// Crane for the ramp defenses
+				camManageTrucks(MIS_CYAN_SCAVS, {
+					label: "rampDefenses",
+					rebuildBase: (difficulty === INSANE),
+					respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(90)),
+					template: cTempl.crane,
+					structset: camAreaToStructSet("cScavBase2")
+				});
+			case MEDIUM:
+				// Crane for the west cyan base
+				camManageTrucks(MIS_CYAN_SCAVS, {
+					label: "factoryZone",
+					rebuildBase: true,
+					respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
+					template: cTempl.crane,
+					structset: camAreaToStructSet("cScavBase1")
+				});
+			default:
+				// Cranes for the southernmost cyan bases
+				camManageTrucks(MIS_CYAN_SCAVS, {
+					label: "mountainBase",
+					rebuildBase: (difficulty >= MEDIUM),
+					respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
+					template: cTempl.crane,
+					structset: camAreaToStructSet("cScavBase4")
+				});
+				camManageTrucks(MIS_CYAN_SCAVS, {
+					label: "cityBase",
+					rebuildBase: (difficulty >= MEDIUM),
+					respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
+					template: cTempl.crane,
+					structset: camAreaToStructSet("cScavBase5")
+				});
+		}
+	}
+	else
+	{
+		setMissionTime(camChangeOnDiff(camMinutesToSeconds(90)));
+	}
 
 	// Fully expand the map
 	setScrollLimits(0, 0, 64, 128);
@@ -256,8 +309,16 @@ function eventStartLevel()
 		callback: "checkMissileSilos"
 	});
 	camSetExtraObjectiveMessage("Defend the missile silos");
-	setMissionTime(camChangeOnDiff(camMinutesToSeconds(45))); // For the beginning "mission".
 
+	if (!tweakOptions.rec_timerlessMode)
+	{
+		setMissionTime(camChangeOnDiff(camMinutesToSeconds(45))); // For the beginning "mission".
+	}
+	else
+	{
+		setMissionTime(-1);
+	}
+	
 	// Setup lz and starting camera
 	centreView(startpos.x, startpos.y);
 	setNoGoArea(lz.x, lz.y, lz.x2, lz.y2, CAM_HUMAN_PLAYER);

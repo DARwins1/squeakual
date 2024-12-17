@@ -21,7 +21,6 @@ function eventStartLevel()
 	camSetupTransporter(31, 20, 39, 46);
 	centreView(32, 20);
 	setNoGoArea(30, 19, 33, 22, CAM_HUMAN_PLAYER);
-	setMissionTime(camChangeOnDiff(camMinutesToSeconds(105)));
 	camSetStandardWinLossConditions(CAM_VICTORY_PRE_OFFWORLD, "L6");
 
 	// Set a timer for checking that the player didn't demolish the missile silos.
@@ -30,6 +29,15 @@ function eventStartLevel()
 	// Give player briefing.
 	camPlayVideos({video: "L6_BRIEF", type: MISS_MSG});
 	queue("messageAlert", camSecondsToMilliseconds(0.2));
+
+	if (!tweakOptions.rec_timerlessMode)
+	{
+		setMissionTime(camChangeOnDiff(camMinutesToSeconds(105)));
+	}
+	else
+	{
+		setMissionTime(-1);
+	}
 
 	setTimer("check", camSecondsToMilliseconds(1));
 

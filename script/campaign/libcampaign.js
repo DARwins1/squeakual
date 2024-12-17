@@ -356,6 +356,7 @@ var __camNexusActivated;
 var __camFactoryInfo;
 var __camFactoryQueue;
 var __camPropulsionTypeLimit;
+const __CAM_ASSEMBLY_DEFENSE_RADIUS = 8;
 
 //tactics
 const CAM_ORDER_ATTACK = 0;

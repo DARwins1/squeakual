@@ -650,6 +650,20 @@ function eventStartLevel()
 	// Change the fog colour to a light pink/purple
 	camSetFog(185, 182, 236);
 
+	// If we're in Timerless mode, set up a scavenger crane
+	if (tweakOptions.rec_timerlessMode && difficulty >= EASY)
+	{
+		// Cyan scav main base
+		camManageTrucks(MIS_CYAN_SCAVS, {
+			label: "scavCamp",
+			rebuildBase: false,
+			rebuildTruck: (difficulty >= MEDIUM),
+			respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
+			template: cTempl.crane,
+			structset: camAreaToStructSet("scavBase1")
+		});
+	}
+
 	// Clear the infested from the LZ
 	queue("clearLZ", camSecondsToMilliseconds(0.1));
 
