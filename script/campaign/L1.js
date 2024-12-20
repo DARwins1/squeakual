@@ -56,8 +56,15 @@ camAreaEvent("captureZone", function(droid)
 	queue("researchFlash", camSecondsToMilliseconds(1));
 
 	// Tell the player to use the inbound trucks
-	camPlayVideos([cam_sounds.objectiveCaptured, {video: "L1_BASEMSG", type: MISS_MSG}]);
-	queue("messageAlert", camSecondsToMilliseconds(3.4));
+	// camPlayVideos([cam_sounds.objectiveCaptured, {video: "L1_BASEMSG", type: MISS_MSG}]);
+	// queue("messageAlert", camSecondsToMilliseconds(3.4));
+	camQueueDialogue([
+		{text: "CLAYDE: Well done, Commander.", delay: 0, sound: CAM_RCLICK},
+		{text: "CLAYDE: I'm sure the Council will be pleased to know of our success.", delay: 2, sound: CAM_RCLICK},
+		{text: "CLAYDE: I've dispatched a transport with trucks to your position.", delay: 4, sound: CAM_RCLICK},
+		{text: "CLAYDE: Use them to get this base up and running as soon as possible.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Make sure to construct a generator and investigate that research facility for anything useful.", delay: 4, sound: CAM_RCLICK},
+	]);
 
 	// Activate scavenger factories after a 35 second delay
 	queue("expandMap", camSecondsToMilliseconds(35));
@@ -98,8 +105,16 @@ camAreaEvent("townMsg", function(droid)
 	if (droid.player === CAM_HUMAN_PLAYER)
 	{
 		// Tell the player about the scavengers fighting in the town
-		camPlayVideos({video: "L1_TOWNMSG", type: MISS_MSG});
-		queue("messageAlert", camSecondsToMilliseconds(0.2));
+		// camPlayVideos({video: "L1_TOWNMSG", type: MISS_MSG});
+		// queue("messageAlert", camSecondsToMilliseconds(0.2));
+		camQueueDialogue([
+			{text: "CLAYDE: Look how this small town has been torn apart by these warring gangs...", delay: 4, sound: CAM_RCLICK},
+			{text: "CLAYDE: If we succeed in our goal, we can bring an end to all this chaos.", delay: 3, sound: CAM_RCLICK},
+			{text: "CLAYDE: We will build a new world.", delay: 3, sound: CAM_RCLICK},
+			{text: "CLAYDE: A better world.", delay: 3, sound: CAM_RCLICK},
+			{text: "CLAYDE: But for now...", delay: 4, sound: CAM_RCLICK},
+			{text: "CLAYDE: These scavengers only serve to stand in our way.", delay: 3, sound: CAM_RCLICK},
+		]);
 	}
 	else
 	{
@@ -216,8 +231,15 @@ function yScavPlayerDetected()
 	{
 		// camSetFactories({"cScavFactory": {}}); // Clears factory data (disabling the factory)
 
-		camPlayVideos({video: "L1_DETMSG", type: MISS_MSG});
-		queue("messageAlert", camSecondsToMilliseconds(0.2));
+		// camPlayVideos({video: "L1_DETMSG", type: MISS_MSG});
+		// queue("messageAlert", camSecondsToMilliseconds(0.2));
+		camQueueDialogue([
+			{text: "CLAYDE: Commander, we've been monitoring scavenger radio chatter from your area.", delay: 0, sound: CAM_RCLICK},
+			{text: "CLAYDE: It would appear that some of the scavengers near you are now aware of your presence.", delay: 3, sound: CAM_RCLICK},
+			{text: "CLAYDE: If their chatter is anything to go by, it looks like they're preparing to retaliate.", delay: 3, sound: CAM_RCLICK},
+			{text: "CLAYDE: Be ready to defend our base.", delay: 4, sound: CAM_RCLICK},
+			{text: "CLAYDE: Do not allow them to compromise the mission!", delay: 2, sound: CAM_RCLICK},
+		]);
 	}
 
 	// Stop refilling the central patrol group
@@ -254,14 +276,31 @@ function cScavPlayerDetected()
 	{
 		// camSetFactories({"yScavFactory1": {}}); // Clears factory data (disabling the factory)
 
-		camPlayVideos({video: "L1_DETMSG", type: MISS_MSG});
-		queue("messageAlert", camSecondsToMilliseconds(0.2));
+		// camPlayVideos({video: "L1_DETMSG", type: MISS_MSG});
+		// queue("messageAlert", camSecondsToMilliseconds(0.2));
+		camQueueDialogue([
+			{text: "CLAYDE: Commander, we've been monitoring scavenger radio chatter from your area.", delay: 0, sound: CAM_RCLICK},
+			{text: "CLAYDE: It would appear that some of the scavengers near you are now aware of your presence.", delay: 3, sound: CAM_RCLICK},
+			{text: "CLAYDE: If their chatter is anything to go by, it looks like they're preparing to retaliate.", delay: 3, sound: CAM_RCLICK},
+			{text: "CLAYDE: Be ready to defend our base.", delay: 4, sound: CAM_RCLICK},
+			{text: "CLAYDE: Do not allow them to compromise the mission!", delay: 2, sound: CAM_RCLICK},
+		]);
 	}
 
 	// Stop refilling the central patrol group
 	camLockRefillableGroup(cScavCentralPatrol);
 
 	// Set the cyan factory to attack the player (if it still exists)
+	const templates = [cTempl.bjeep, cTempl.bloke, cTempl.rbjeep];
+	if (difficulty <= HARD)
+	{
+		templates.push(cTempl.bloke);
+	}
+	else
+	{
+		// Add a kevlar bloke on Hard+
+		templates.push(cTempl.kevbloke);
+	}
 	camSetFactories({
 		"cScavFactory": {
 			assembly: "cScavAssembly",
@@ -278,7 +317,7 @@ function cScavPlayerDetected()
 				regroup: true,
 				count: -1,
 			},
-			templates: [ cTempl.bjeep, cTempl.bloke, cTempl.rbjeep, cTempl.bloke ]
+			templates: templates
 		},
 	});
 
@@ -290,8 +329,14 @@ function cScavPlayerDetected()
 camAreaEvent("wallMsg", function(droid)
 {
 	// Tell the player to break through the wall
-	camPlayVideos({video: "L1_WALLMSG", type: MISS_MSG});
-	queue("messageAlert", camSecondsToMilliseconds(0.2));
+	// camPlayVideos({video: "L1_WALLMSG", type: MISS_MSG});
+	// queue("messageAlert", camSecondsToMilliseconds(0.2));
+	camQueueDialogue([
+		{text: "CLAYDE: You're almost there now, Commander.", delay: 0, sound: CAM_RCLICK},
+		{text: "CLAYDE: This appears to be the base's eastern wall.", delay: 2, sound: CAM_RCLICK},
+		{text: "CLAYDE: Use your weapons to bring it down.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Then move inside and secure the area.", delay: 2, sound: CAM_RCLICK}
+	]);
 });
 
 function sendPlayerTransporter()

@@ -176,8 +176,14 @@ function camEnemyBaseDetected_scavOutpost()
 	});
 
 	// Tell the player to go destroy the scavengers (again)
-	camPlayVideos([cam_sounds.incoming.incomingTransmission, {video: "L5_SCAVMSG", type: MISS_MSG}]);
-	queue("messageAlert", camSecondsToMilliseconds(3.4));
+	// camPlayVideos([cam_sounds.incoming.incomingTransmission, {video: "L5_SCAVMSG", type: MISS_MSG}]);
+	// queue("messageAlert", camSecondsToMilliseconds(3.4));
+	camQueueDialogue([
+		{text: "CLAYDE: Commander, continue forward and eradicate that scavenger base.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Infested or not, they still pose a threat to our cause.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: As such, they must be rooted out.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: If we are to succeed, we cannot allow any loose ends to remain.", delay: 4, sound: CAM_RCLICK},
+	]);
 }
 
 // Triggered when entering the scavenger outpost
@@ -238,7 +244,7 @@ function sendInfestedReinforcements()
 	// West entrance
 	if (getObject("infestedFactory4") !== null)
 	{
-		const droids = [cTempl.stinger, cTempl.inflance, cTempl.infbloke, cTempl.infbjeep, cTempl.infrbjeep];
+		const droids = [cTempl.stinger, cTempl.infkevlance, cTempl.infkevbloke, cTempl.infbjeep, cTempl.infrbjeep];
 		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, camMakePos("infestedEntry4"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
 			{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}}
 		));
@@ -549,7 +555,7 @@ function eventStartLevel()
 				count: -1,
 				targetPlayer: CAM_HUMAN_PLAYER
 			},
-			templates: [cTempl.bloke, cTempl.firetruck, cTempl.buggy, cTempl.lance, cTempl.bloke, cTempl.rbuggy, cTempl.buscan, cTempl.buggy, cTempl.minitruck] // Mix of infantry and vehicles
+			templates: [cTempl.kevbloke, cTempl.firetruck, cTempl.buggy, cTempl.kevlance, cTempl.kevbloke, cTempl.rbuggy, cTempl.buscan, cTempl.buggy, cTempl.minitruck] // Mix of infantry and vehicles
 		},
 		"yScavFactory3": {
 			assembly: "yScavAssembly2",
@@ -613,7 +619,7 @@ function eventStartLevel()
 			groupSize: 1,
 			maxSize: 8,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(10)),
-			templates: [cTempl.infrbuggy, cTempl.infminitruck, cTempl.infbuggy, cTempl.infbloke] // Mixed light units and MRP trucks
+			templates: [cTempl.infrbuggy, cTempl.infminitruck, cTempl.infbuggy, cTempl.infkevbloke] // Mixed light units and MRP trucks
 		},
 		"infestedFactory3": {
 			assembly: "infestedAssembly3",
@@ -624,7 +630,7 @@ function eventStartLevel()
 			groupSize: 1,
 			maxSize: 8,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(10)),
-			templates: [cTempl.inflance, cTempl.inffiretruck, cTempl.infbloke] // Infantry and firetrucks
+			templates: [cTempl.infkevlance, cTempl.inffiretruck, cTempl.infkevbloke] // Infantry and firetrucks
 		},
 		"infestedFactory4": {
 			assembly: "infestedAssembly4",

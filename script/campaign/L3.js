@@ -64,6 +64,21 @@ function heliAttack()
 	camSetVtolData(MIS_CYAN_SCAVS, "heliSpawn", "heliExit", list, camChangeOnDiff(camMinutesToMilliseconds(3)), "radarTower", ext);
 }
 
+// Check if we can expand the map
+function expandMapCheck()
+{
+	if (enumArea(0, 0, 64, 60, MIS_CYAN_SCAVS, false).length == 0)
+	{
+		// No attacking scavs left, expand the map
+		camCallOnce("expandMap");
+	}
+	else
+	{
+		// Some attackers remain, check again later...
+		queue("expandMapCheck", camSecondsToMilliseconds(3));
+	}
+}
+
 function expandMap()
 {
 	// Remove the scav attack beacons
@@ -130,8 +145,18 @@ function expandMap()
 	setScrollLimits(0, 0, 64, 128);
 
 	// Tell the player to go kill everything again
-	camPlayVideos([cam_sounds.incoming.incomingTransmission, {video: "L3_KILLMSG", type: MISS_MSG}]);
-	queue("messageAlert", camSecondsToMilliseconds(3.4));
+	// camPlayVideos([cam_sounds.incoming.incomingTransmission, {video: "L3_KILLMSG", type: MISS_MSG}]);
+	// queue("messageAlert", camSecondsToMilliseconds(3.4));
+	camQueueDialogue([
+		{text: "CLAYDE: Helicopters?", delay: 2, sound: CAM_RCLICK},
+		{text: "CLAYDE: Perhaps I have truly underestimated these scavengers after all...", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: But we've come too far to be outplayed now.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Commander, I'm overriding your previous objective.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: That research facility can wait.", delay: 2, sound: CAM_RCLICK},
+		{text: "CLAYDE: Make your way south, and eradicate those scavengers.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Wipe out anything that gets in your way.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: We must enure that this site is secure at all costs!", delay: 3, sound: CAM_RCLICK},
+	]);
 
 	// Setup patrol groups and repeating helicopter attacks
 	activateScavGroups();
@@ -198,7 +223,7 @@ function sendScavAttackWaves()
 
 		// Spawn no more waves, and queue up the map expansion
 		removeTimer("sendScavAttackWaves");
-		queue("expandMap", camSecondsToMilliseconds(30));
+		queue("expandMapCheck", camSecondsToMilliseconds(30));
 	}
 
 	++waveNum
@@ -212,6 +237,17 @@ function camEnemyBaseDetected_scavHideout()
 function camEnemyBaseDetected_rampDefenses()
 {
 	camCallOnce("activateYellowScavs");
+}
+
+function camEnemyBaseDetected_mountainBase()
+{
+	// Tell the player to destroy the scavenger's VTOL tower
+	camQueueDialogue([
+		{text: "CLAYDE: Commander, those scavenger helicopters are flying in from an off-site location.", delay: 0, sound: CAM_RCLICK},
+		{text: "CLAYDE: These scavengers must be coordinating their attacks from a relay located nearby.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Look for some sort of radar structure or device.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: If you can disrupt their communications, they should be unable to coordinate any more air attacks. ", delay: 2, sound: CAM_RCLICK},
+	]);
 }
 
 function activateYellowScavs()
@@ -274,8 +310,13 @@ function startScavAttack()
 	queue("removeTransport", camSecondsToMilliseconds(5));
 
 	// Tell the player about incoming scavs
-	camPlayVideos([cam_sounds.incoming.incomingIntelligenceReport, {video: "L3_ATTACKMSG", type: MISS_MSG}]);
-	queue("messageAlert", camSecondsToMilliseconds(3.4));
+	// camPlayVideos([cam_sounds.incoming.incomingIntelligenceReport, {video: "L3_ATTACKMSG", type: MISS_MSG}]);
+	// queue("messageAlert", camSecondsToMilliseconds(3.4));
+	camQueueDialogue([
+		{text: "CLAYDE: Commander, we're detecting a scavenger attack coming in from the south!", delay: 0, sound: CAM_RCLICK},
+		{text: "CLAYDE: We cannot afford to lose this site!", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Repulse this attack, immediately!", delay: 2, sound: CAM_RCLICK},
+	]);
 
 	// Send the first attack wave after a delay, and cue up additional waves
 	queue("sendScavAttackWaves", camSecondsToMilliseconds(5));
@@ -372,6 +413,20 @@ function eventStartLevel()
 		}
 	});
 
+	let templates1 = [cTempl.bloke, cTempl.lance, cTempl.bjeep, cTempl.buscan, cTempl.rbjeep, cTempl.lance, cTempl.minitruck];
+	let templates3 = [cTempl.bloke, cTempl.bjeep, cTempl.moncan, cTempl.rbjeep, cTempl.lance, cTempl.monhmg];
+	if (difficulty >= HARD)
+	{
+		// Armor-up the city factory blokes
+		templates2 = camArrayReplaceWith(templates2, cTempl.bloke, cTempl.kevbloke);
+		templates2 = camArrayReplaceWith(templates2, cTempl.lance, cTempl.kevlance);
+		if (difficulty >= INSANE)
+		{
+			// Armor-up the eastern factory blokes
+			templates1 = camArrayReplaceWith(templates1, cTempl.bloke, cTempl.kevbloke);
+			templates1 = camArrayReplaceWith(templates1, cTempl.lance, cTempl.kevlance);
+		}
+	}
 	camSetFactories({
 		"yScavFactory": {
 			assembly: "yScavAssembly",
@@ -397,7 +452,7 @@ function eventStartLevel()
 				count: -1,
 				targetPlayer: CAM_HUMAN_PLAYER
 			},
-			templates: [cTempl.bloke, cTempl.lance, cTempl.bjeep, cTempl.buscan, cTempl.rbjeep, cTempl.lance, cTempl.minitruck] // Variety
+			templates: templates1 // Variety
 		},
 		"cScavFactory2": {
 			assembly: "cScavAssembly2",
@@ -412,7 +467,7 @@ function eventStartLevel()
 				count: -1,
 				targetPlayer: CAM_HUMAN_PLAYER
 			},
-			templates: [cTempl.bloke, cTempl.minitruck, cTempl.bjeep, cTempl.buscan, cTempl.rbjeep, cTempl.lance, cTempl.firetruck] // Mix of light and heavy vehicles
+			templates: [cTempl.kevbloke, cTempl.minitruck, cTempl.bjeep, cTempl.buscan, cTempl.rbjeep, cTempl.kevlance, cTempl.firetruck] // Mix of light and heavy vehicles
 		},
 		"cScavFactory3": {
 			assembly: "cScavAssembly3",
@@ -427,8 +482,7 @@ function eventStartLevel()
 				count: -1,
 				targetPlayer: CAM_HUMAN_PLAYER
 			},
-			// Mostly light units, but will also build monster bus tanks
-			templates: [cTempl.bloke, cTempl.bjeep, cTempl.moncan, cTempl.rbjeep, cTempl.lance, cTempl.monhmg]
+			templates: templates3 // Mostly light units, but will also build monster bus tanks
 		}
 	});
 

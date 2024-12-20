@@ -50,7 +50,7 @@ const camRec2StartResearch = [
 //	"R-Wpn-MG-ROF01", // Artifact
 // 	"R-Struc-Research-Module", // Artifact
 // 	"R-Wpn-Rocket-Accuracy01", "R-Wpn-Rocket-Damage02", "R-Wpn-Cannon-Accuracy01",
-// 	"R-Wpn-Cannon-Damage02",
+// 	"R-Wpn-Cannon-Damage02", "R-Vehicle-Engine01",
 // 	"R-Vehicle-Prop-Halftracks", // Artifact
 // 	// L5
 // 	"R-Wpn-Flamer-ROF02", // Artifact

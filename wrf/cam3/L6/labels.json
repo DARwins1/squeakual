@@ -355,12 +355,5 @@
 		"id": 1418,
 		"player": 2,
 		"type": 1
-	},
-
-	"radius_0": {
-        "label": "heliRemoveZone",
-        "subscriber": 2,
-        "pos": [9792, 448],
-        "radius": 250
-    }
+	}
 }

@@ -47,8 +47,14 @@ camAreaEvent("yScavAttack", function(droid)
 		camEnableFactory("yScavFactory");
 
 		// Message about scavengers being dug in
-		camPlayVideos([cam_sounds.incoming.incomingTransmission, {video: "L2_SCAVMSG", type: MISS_MSG}]);
-		queue("messageAlert", camSecondsToMilliseconds(3.4));
+		// camPlayVideos([cam_sounds.incoming.incomingTransmission, {video: "L2_SCAVMSG", type: MISS_MSG}]);
+		// queue("messageAlert", camSecondsToMilliseconds(3.4));
+		camQueueDialogue([
+			{text: "CLAYDE: These scavengers are proving to be more than a nuisance.", delay: 0, sound: CAM_RCLICK},
+			{text: "CLAYDE: But the more they obstruct us...", delay: 3, sound: CAM_RCLICK},
+			{text: "CLAYDE: The more destruction they will bring upon themselves.", delay: 3, sound: CAM_RCLICK},
+			{text: "CLAYDE: Go on, Commander.", delay: 3, sound: CAM_RCLICK},
+		]);
 	}
 	else
 	{
@@ -73,8 +79,13 @@ camAreaEvent("cScavAttack", function(droid)
 		});
 
 		// Message about scavengers being cool
-		camPlayVideos([cam_sounds.incoming.incomingTransmission, {video: "L2_SCAV2MSG", type: MISS_MSG}]);
-		queue("messageAlert", camSecondsToMilliseconds(3.4));
+		// camPlayVideos([cam_sounds.incoming.incomingTransmission, {video: "L2_SCAV2MSG", type: MISS_MSG}]);
+		// queue("messageAlert", camSecondsToMilliseconds(3.4));
+		camQueueDialogue([
+			{text: "CLAYDE: Once you've finished your work out there, I'll have some extra questions for our contacts.", delay: 0, sound: CAM_RCLICK},
+			{text: "CLAYDE: These scavengers seem to have an interest in them.", delay: 3, sound: CAM_RCLICK},
+			{text: "CLAYDE: Which means that they may be after the same goal...", delay: 3, sound: CAM_RCLICK},
+		]);
 	}
 	else
 	{
@@ -245,6 +256,23 @@ function eventStartLevel()
 		},
 	});
 
+	let infantryTemplates = [cTempl.bloke, cTempl.lance, cTempl.bjeep];
+	if (difficulty <= MEDIUM)
+	{
+		templates.push(cTempl.bloke);
+	}
+	else
+	{
+		// Add a kevlar bloke on Medium+
+		templates.push(cTempl.kevbloke);
+		if (difficulty >= HARD)
+		{
+			// Replace armor up all infantry on Hard+
+			infantryTemplates = camArrayReplaceWith(infantryTemplates, cTempl.bloke, cTempl.kevbloke);
+			infantryTemplates = camArrayReplaceWith(infantryTemplates, cTempl.lance, cTempl.kevlance);
+		}
+	}
+
 	camSetFactories({
 		"yScavFactory": {
 			assembly: "yScavAssembly",
@@ -274,7 +302,7 @@ function eventStartLevel()
 				count: -1,
 				targetPlayer: CAM_HUMAN_PLAYER
 			},
-			templates: [cTempl.bloke, cTempl.lance, cTempl.bloke, cTempl.bjeep] // Mostly infantry
+			templates: infantryTemplates // Mostly infantry
 		},
 		"cScavFactory2": {
 			assembly: "cScavAssembly2",
@@ -289,7 +317,7 @@ function eventStartLevel()
 				count: -1,
 				targetPlayer: CAM_HUMAN_PLAYER
 			},
-			templates: [cTempl.buscan, cTempl.bloke, cTempl.bjeep, cTempl.rbjeep, cTempl.firetruck] // Mostly vehicles
+			templates: [cTempl.buscan, cTempl.kevbloke, cTempl.bjeep, cTempl.rbjeep, cTempl.firetruck] // Mostly vehicles
 		},
 	});
 

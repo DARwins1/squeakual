@@ -100,8 +100,15 @@ function startPhaseTwo()
 	queue("startAttackWaves", camSecondsToMilliseconds(125));
 
 	// Play a message assuring the player that they just need to hold on a little longer
-	camPlayVideos([cam_sounds.incoming.incomingTransmission, {video: "L7_TRANSMSG", type: MISS_MSG}]);
-	queue("messageAlert", camSecondsToMilliseconds(3.4));
+	// camPlayVideos([cam_sounds.incoming.incomingTransmission, {video: "L7_TRANSMSG", type: MISS_MSG}]);
+	// queue("messageAlert", camSecondsToMilliseconds(3.4));
+	camQueueDialogue([
+		{text: "ASSOCIATE: Excellent work, Commander Alpha.", delay: 0, sound: CAM_RCLICK},
+		{text: "ASSOCIATE: All civilians and critical personnel are being transported to a safe distance.", delay: 2, sound: CAM_RCLICK},
+		{text: "ASSOCIATE: We'll be sending the transports back around for you soon.", delay: 3, sound: CAM_RCLICK},
+		{text: "ASSOCIATE: Just hold your position for another few minutes.", delay: 3, sound: CAM_RCLICK},
+		{text: "ASSOCIATE: This will all be over soon...", delay: 4, sound: CAM_RCLICK},
+	]);
 }
 
 // Reveal Clayde's betrayal
@@ -360,13 +367,13 @@ function infestedAttackWaves()
 
 	const southEastMountainDroids = [cTempl.inftrike, cTempl.infminitruck, cTempl.infbuggy, cTempl.infmoncan, cTempl.infbuscan, cTempl.inffiretruck];
 
-	const westMarshDroids = [cTempl.infmonhmg, cTempl.infbuscan, cTempl.inffiretruck, cTempl.boomtick, cTempl.infbloke, cTempl.infbjeep];
+	const westMarshDroids = [cTempl.infmonhmg, cTempl.infbuscan, cTempl.inffiretruck, cTempl.boomtick, cTempl.infkevbloke, cTempl.infbjeep];
 
-	const eastIndustryDroids = [cTempl.stinger, cTempl.infmoncan, cTempl.infrbjeep, cTempl.infbuscan, cTempl.inflance, cTempl.infbloke];
+	const eastIndustryDroids = [cTempl.stinger, cTempl.infmoncan, cTempl.infrbjeep, cTempl.infbuscan, cTempl.infkevlance, cTempl.infkevbloke];
 
 	const eastRoadDroids = [cTempl.boomtick, cTempl.infmoncan, cTempl.infrbjeep, cTempl.infsartruck, cTempl.infbloke, cTempl.inffiretruck];
 
-	const westRoadDroids = [cTempl.stinger, cTempl.infbjeep, cTempl.infmonhmg, cTempl.infminitruck, cTempl.infbloke, cTempl.inflance];
+	const westRoadDroids = [cTempl.stinger, cTempl.infbjeep, cTempl.infmonhmg, cTempl.infminitruck, cTempl.infkevbloke, cTempl.inflance];
 
 	const northMountainDroids = [cTempl.stinger, cTempl.vilestinger, cTempl.infrbjeep, cTempl.stinger, cTempl.inffiretruck];
 
