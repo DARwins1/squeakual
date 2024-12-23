@@ -674,7 +674,7 @@
         "sensorID": "CCSensor",
         "strength": "HARD",
         "structureModel": [
-            "blhq.pie"
+            "blhqalt.pie"
         ],
         "thermal": 10,
         "type": "HQ",

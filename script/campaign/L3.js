@@ -9,14 +9,14 @@ const MIS_YELLOW_SCAVS = 3; // Yellow Scavengers
 var waveNum = 1; // How many scavenger attack waves have occured
 
 const mis_yellowScavRes = [
-	"R-Wpn-MG-Damage01", "R-Wpn-Rocket-Damage02",
+	"R-Wpn-MG-Damage01", "R-Wpn-Rocket-Damage01",
 	"R-Wpn-Mortar-Damage01", "R-Wpn-Flamer-Damage02",
-	"R-Wpn-Cannon-Damage02",
+	"R-Wpn-Cannon-Damage01",
 ];
 const mis_cyanScavRes = [
-	"R-Wpn-MG-Damage01", "R-Wpn-Rocket-Damage02",
+	"R-Wpn-MG-Damage01", "R-Wpn-Rocket-Damage01",
 	"R-Wpn-Mortar-Damage01", "R-Wpn-Flamer-Damage02",
-	"R-Wpn-Cannon-Damage02", "R-Wpn-MG-ROF01", "R-Wpn-Rocket-ROF01",
+	"R-Wpn-Cannon-Damage01", "R-Wpn-MG-ROF01", "R-Wpn-Rocket-ROF01",
 	"R-Wpn-Mortar-ROF01", "R-Wpn-Flamer-ROF01", "R-Wpn-Cannon-ROF01",
 	"R-Vehicle-Metals01", "R-Struc-Materials01", "R-Defense-WallUpgrade01",
 ];
