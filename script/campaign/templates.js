@@ -72,6 +72,7 @@ pllstrikeht: { body: "Body1REC", prop: "HalfTrack", weap: "Sys-VstrikeTurret01" 
 pllcant: { body: "Body1REC", prop: "tracked01", weap: "Cannon1Mk1" }, // Light Cannon Viper Tracks
 plltmgt: { body: "Body1REC", prop: "tracked01", weap: "MG2Mk1" }, // Twin Machinegun Viper Tracks
 pllpodt: { body: "Body1REC", prop: "tracked01", weap: "Rocket-Pod" }, // Mini-Rocket Pod Viper Tracks
+pllflamt: { body: "Body1REC", prop: "tracked01", weap: "Flame1Mk1" }, // Flamer Viper Tracks
 pllsart: { body: "Body1REC", prop: "tracked01", weap: "Rocket-LtA-TMk1" }, // Sarissa Viper Tracks
 plllant: { body: "Body1REC", prop: "tracked01", weap: "Rocket-LtA-T" }, // Lancer Viper Tracks
 pllmrat: { body: "Body1REC", prop: "tracked01", weap: "Rocket-MRL" }, // Mini-Rocket Array Viper Tracks

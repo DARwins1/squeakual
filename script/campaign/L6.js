@@ -3,7 +3,7 @@ include("script/campaign/templates.js");
 
 const mis_scavRes = [
 	"R-Wpn-MG-Damage03", "R-Wpn-Rocket-Damage03",
-	"R-Wpn-Mortar-Damage01", "R-Wpn-Flamer-Damage02",
+	"R-Wpn-Mortar-Damage02", "R-Wpn-Flamer-Damage02",
 	"R-Wpn-Cannon-Damage03", "R-Wpn-MG-ROF01", "R-Wpn-Rocket-ROF02",
 	"R-Wpn-Mortar-ROF01", "R-Wpn-Flamer-ROF02", "R-Wpn-Cannon-ROF02",
 	"R-Vehicle-Metals01", "R-Struc-Materials01", "R-Defense-WallUpgrade01",

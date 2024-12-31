@@ -3879,7 +3879,7 @@
     "BabaMiniMortar": {
         "buildPoints": 320,
         "buildPower": 80,
-        "damage": 60,
+        "damage": 50,
         "effectSize": 75,
         "explosionWav": "smlexpl.ogg",
         "facePlayer": 1,

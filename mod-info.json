@@ -12,7 +12,7 @@
   "updatesUrl": "https://github.com/DARwins1/reclamation/releases/latest",
   "campaigns": [
     "rec1.json",
-    "rec2act0.json",
+    "prologue.json",
     "rec2act1.json",
     "rec2act2.json",
     "rec2act3.json",

@@ -1223,6 +1223,64 @@
         "type": "DEFENSE",
         "width": 1
     },
+    "CivWarehouse1": {
+        "armour": 10,
+        "breadth": 1,
+        "buildPoints": 350,
+        "buildPower": 50,
+        "ecmID": "ZNULLECM",
+        "height": 2,
+        "hitpoints": 500,
+        "id": "CivWarehouse1",
+        "name": "Safehouse",
+        "sensorID": "ZNULLSENSOR",
+        "strength": "MEDIUM",
+        "structureModel": [
+            "BLWARE1.pie"
+        ],
+        "thermal": 10,
+        "type": "GENERIC",
+        "width": 2
+    },
+    "CivWarehouse2": {
+        "armour": 10,
+        "breadth": 1,
+        "buildPoints": 350,
+        "buildPower": 50,
+        "ecmID": "ZNULLECM",
+        "height": 2,
+        "hitpoints": 500,
+        "id": "CivWarehouse2",
+        "name": "Warehouse",
+        "sensorID": "ZNULLSENSOR",
+        "strength": "MEDIUM",
+        "structureModel": [
+            "BLWARE2.pie"
+        ],
+        "thermal": 10,
+        "type": "GENERIC",
+        "width": 2
+    },
+    "Sys-InfLure": {
+        "armour": 15,
+        "breadth": 1,
+        "buildPoints": 300,
+        "buildPower": 100,
+        "ecmID": "ZNULLECM",
+        "height": 1,
+        "hitpoints": 400,
+        "id": "Sys-InfLure",
+        "name": "Infested Lure",
+        "resistance": 150,
+        "sensorID": "LureSensor",
+        "strength": "MEDIUM",
+        "structureModel": [
+            "BLHARDPT.PIE"
+        ],
+        "thermal": 15,
+        "type": "DEFENSE",
+        "width": 1
+    },
     "Emplacement-HPVcannon": {
         "armour": 10,
         "breadth": 1,

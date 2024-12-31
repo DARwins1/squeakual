@@ -41,6 +41,21 @@
         "range": 2048,
         "type": "STANDARD"
     },
+    "LureSensor": {
+        "buildPoints": 100,
+        "buildPower": 20,
+        "designable": 1,
+        "hitpoints": 200,
+        "id": "LureSensor",
+        "location": "TURRET",
+        "mountModel": "TRMECM2.PIE",
+        "name": "Infested Lure",
+        "power": 500,
+        "range": 1024,
+        "sensorModel": "RADARSENSOR.PIE",
+        "type": "STANDARD",
+        "weight": 100
+    },
     "SensorTower1Mk1": {
         "buildPoints": 25,
         "buildPower": 5,

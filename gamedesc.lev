@@ -23,6 +23,14 @@ data		"wrf/audio.wrf"
 data		"wrf/stats.wrf"
 data		"wrf/camres.wrf"
 
+campaign	PROLOGUE
+data		"wrf/vidmem3.wrf"
+data		"wrf/basic.wrf"
+data		"wrf/cam3.wrf"
+data		"wrf/audio.wrf"
+data		"wrf/stats.wrf"
+data		"wrf/camres2.wrf"
+
 campaign	REC_2
 data		"wrf/vidmem2.wrf"
 data		"wrf/basic.wrf"
@@ -83,6 +91,13 @@ game		"wrf/cam3/L7.gam"
 data		"wrf/cam3/L7.wrf"
 
 /* end of reclamation 1 campaign */
+
+/* prologue */
+
+camstart	P1
+dataset		PROLOGUE
+game		"wrf/prologue/P1.gam"
+data		"wrf/prologue/P1.wrf"
 
 /* act 1 */
 
