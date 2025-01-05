@@ -450,7 +450,7 @@ function eventStartLevel()
 	camSetArtifacts({
 		"redMiniPit": { tech: "R-Wpn-Rocket02-MRL" }, // Mini-Rocket Array
 		"orangeFactory1": { tech: "R-Wpn-Mortar-ROF01" }, // Mortar Autoloader
-		// "redFactory2": { tech: "R-Wpn-Flamer-ROF01" }, // Flamer Autoloader
+		"redFactory2": { tech: "R-Wpn-Flamer-Damage02" }, // High Temperature Flamer Gel Mk2
 	});
 
 	setPower(PLAYER_POWER, CAM_HUMAN_PLAYER);
@@ -674,17 +674,18 @@ function eventStartLevel()
 
 	startedFromMenu = false;
 
-	// Only if starting Act 1 directly from the menu
-	if (enumDroid(CAM_HUMAN_PLAYER, DROID_SUPERTRANSPORTER).length === 0)
+	if (getResearch("R-Script-ProloguePlayed", CAM_HUMAN_PLAYER).done)
 	{
-		startedFromMenu = true;
-		sendPlayerTransporter();
-		setTimer("sendPlayerTransporter", camMinutesToMilliseconds(2));
+		// Player transitioned from the prologue
+		setReinforcementTime(camMinutesToSeconds(2)); // 2 min.
 	}
 	else
 	{
-		setReinforcementTime(camMinutesToSeconds(2)); // 2 min.
+		// Player started from the menu
+		startedFromMenu = true;
+		setTimer("sendPlayerTransporter", camMinutesToMilliseconds(2));
 	}
+	sendPlayerTransporter();
 
 	camAutoReplaceObjectLabel("heliTower");
 

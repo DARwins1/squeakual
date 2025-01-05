@@ -54,6 +54,7 @@ const camRec2StartResearch = [
 // 	"R-Vehicle-Prop-Halftracks", // Artifact
 // 	// L5
 // 	"R-Wpn-Flamer-ROF02", // Artifact
+//	"R-Wpn-Flamer-Damage02",
 // 	"R-Wpn-MG3Mk1", // Artifact
 // 	"R-Defense-Tower01", "R-Wpn-MG-Damage03", "R-Cyborg-Wpn-HvyMG",
 // 	"R-Wpn-Rocket-LtA-TMk1", // Artifact

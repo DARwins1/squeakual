@@ -14,13 +14,23 @@
         "name": "CAM3 RESEARCH",
         "techCode": 1
     },
+    "R-Script-ProloguePlayed": {
+        "excludeFromCheats": 1,
+        "iconID": "IMAGE_RES_SYSTEMTECH",
+        "id": "R-Script-ProloguePlayed",
+        "imdName": "blhqalt.PIE",
+        "keyTopic": 1,
+        "name": "Prologue Played",
+        "researchPoints": 10,
+        "researchPower": 10
+    },
     "R-Script-Sensor-Debuff": {
         "excludeFromCheats": 1,
         "iconID": "IMAGE_RES_SYSTEMTECH",
-        "id": "R-Sys-Sensor-Upgrade01",
+        "id": "R-Script-Sensor-Debuff",
         "imdName": "GNLSNSR1.PIE",
         "keyTopic": 1,
-        "name": "Sensor Debuff",
+        "name": "Sensor Super Debuff",
         "researchPoints": 10,
         "researchPower": 10,
         "results": [
@@ -34,10 +44,10 @@
     "R-Script-Sensor-Debuff-Undo": {
         "excludeFromCheats": 1,
         "iconID": "IMAGE_RES_SYSTEMTECH",
-        "id": "R-Sys-Sensor-Upgrade01",
+        "id": "R-Script-Sensor-Debuff-Undo",
         "imdName": "GNLSNSR1.PIE",
         "keyTopic": 1,
-        "name": "Undo Sensor Debuff",
+        "name": "Undo Sensor Super Debuff",
         "researchPoints": 10,
         "researchPower": 10,
         "results": [
@@ -45,6 +55,40 @@
                 "class": "Sensor",
                 "parameter": "Range",
                 "value": 75
+            }
+        ]
+    },
+    "R-Script-TunnelVision": {
+        "excludeFromCheats": 1,
+        "iconID": "IMAGE_RES_SYSTEMTECH",
+        "id": "R-Script-TunnelVision",
+        "imdName": "GNLSNSR1.PIE",
+        "keyTopic": 1,
+        "name": "Tunnel-Vision-ification",
+        "researchPoints": 10,
+        "researchPower": 10,
+        "results": [
+            {
+                "class": "Sensor",
+                "parameter": "Range",
+                "value": -50
+            }
+        ]
+    },
+    "R-Script-TunnelVision-Undo": {
+        "excludeFromCheats": 1,
+        "iconID": "IMAGE_RES_SYSTEMTECH",
+        "id": "R-Script-TunnelVision-Undo",
+        "imdName": "GNLSNSR1.PIE",
+        "keyTopic": 1,
+        "name": "Undo Tunnel-Vision-ification",
+        "researchPoints": 10,
+        "researchPower": 10,
+        "results": [
+            {
+                "class": "Sensor",
+                "parameter": "Range",
+                "value": 50
             }
         ]
     },
@@ -2567,6 +2611,7 @@
     "R-Wpn-Flamer-Damage02": {
         "iconID": "IMAGE_RES_WEAPONTECH",
         "id": "R-Wpn-Flamer-Damage02",
+        "keyTopic": 1,
         "name": "High Temperature Flamer Gel Mk2",
         "requiredResearch": [
             "R-Wpn-Flamer-Damage01",

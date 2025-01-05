@@ -1,0 +1,16 @@
+/*
+ * P2.wrf
+ *
+ */
+
+/* Directory for Proximity messages and mission briefs */
+directory	"messages"
+
+file		SMSG		"briefP2.txt"
+file		SMSG		"proxP2.txt"
+
+directory "script"
+file JAVASCRIPT "rules.js"
+
+directory "script/campaign"
+file JAVASCRIPT "P2.js"

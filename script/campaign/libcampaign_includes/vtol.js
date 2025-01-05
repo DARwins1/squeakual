@@ -166,6 +166,7 @@ function __camSpawnVtols()
 		const droids = [];
 		let pos;
 		let targetPlayer;
+		let ignorePlayers;
 		let targetPos;
 		let targetRadius;
 
@@ -196,6 +197,7 @@ function __camSpawnVtols()
 			let lim = __AMOUNT;
 			let alternate = false;
 			targetPlayer = __camVtolDataSystem[idx].extras.targetPlayer;
+			ignorePlayers = __camVtolDataSystem[idx].extras.ignorePlayers;
 			targetPos = __camVtolDataSystem[idx].extras.pos;
 			targetRadius = __camVtolDataSystem[idx].extras.radius;
 			if (camDef(__camVtolDataSystem[idx].extras.alternate))
@@ -245,7 +247,7 @@ function __camSpawnVtols()
 		// (Also store the group of the new VTOLs)
 		const group = camSendReinforcement(__camVtolDataSystem[idx].player, camMakePos(pos), droids, CAM_REINFORCE_GROUND, {
 			order: CAM_ORDER_ATTACK,
-			data: { regroup: false, count: -1, targetPlayer: targetPlayer, pos: targetPos, radius: targetRadius}
+			data: { regroup: false, count: -1, targetPlayer: targetPlayer, ignorePlayers: ignorePlayers, pos: targetPos, radius: targetRadius}
 		});
 
 		if (__camVtolDataSystem[idx].dynamic)

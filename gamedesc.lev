@@ -7,14 +7,6 @@
 /******************************************************/
 /*     reclamation campaign dataset and levels        */
 
-campaign	CAM_3
-data		"wrf/vidmem3.wrf"
-data		"wrf/basic.wrf"
-data		"wrf/cam3.wrf"
-data		"wrf/audio.wrf"
-data		"wrf/stats.wrf"
-data		"wrf/camres.wrf"
-
 campaign	REC_1
 data		"wrf/vidmem3.wrf"
 data		"wrf/basic.wrf"
@@ -22,22 +14,6 @@ data		"wrf/cam3.wrf"
 data		"wrf/audio.wrf"
 data		"wrf/stats.wrf"
 data		"wrf/camres.wrf"
-
-campaign	PROLOGUE
-data		"wrf/vidmem3.wrf"
-data		"wrf/basic.wrf"
-data		"wrf/cam3.wrf"
-data		"wrf/audio.wrf"
-data		"wrf/stats.wrf"
-data		"wrf/camres2.wrf"
-
-campaign	REC_2
-data		"wrf/vidmem2.wrf"
-data		"wrf/basic.wrf"
-data		"wrf/cam3.wrf"
-data		"wrf/audio.wrf"
-data		"wrf/stats.wrf"
-data		"wrf/camres2.wrf"
 
 camstart	L1
 dataset		REC_1
@@ -94,12 +70,38 @@ data		"wrf/cam3/L7.wrf"
 
 /* prologue */
 
-camstart	P1
+campaign	PROLOGUE
+data		"wrf/vidmem3.wrf"
+data		"wrf/basic.wrf"
+data		"wrf/cam3.wrf"
+data		"wrf/audio.wrf"
+data		"wrf/stats.wrf"
+data		"wrf/camres2.wrf"
+
+camstart	P0
+dataset		PROLOGUE
+game		"wrf/prologue/P0.gam"
+data		"wrf/prologue/P0.wrf"
+
+miss_keep_limbo	P1
 dataset		PROLOGUE
 game		"wrf/prologue/P1.gam"
 data		"wrf/prologue/P1.wrf"
 
+expand_limbo	P2
+dataset		PROLOGUE
+game		"wrf/prologue/P2.gam"
+data		"wrf/prologue/P2.wrf"
+
 /* act 1 */
+
+campaign	REC_2
+data		"wrf/vidmem2.wrf"
+data		"wrf/basic.wrf"
+data		"wrf/cam3.wrf"
+data		"wrf/audio.wrf"
+data		"wrf/stats.wrf"
+data		"wrf/camres2.wrf"
 
 camstart	A1L1
 dataset		REC_2
@@ -107,7 +109,7 @@ game		"wrf/act1/A1L1.gam"
 data		"wrf/act1/A1L1.wrf"
 
 camchange	A1L1
-dataset		REC_2
+dataset		PROLOGUE
 data		"wrf/rec2change.wrf"
 game		"wrf/act1/A1L1.gam"
 data		"wrf/act1/A1L1.wrf"
