@@ -332,7 +332,7 @@ function sendInfestedReinforcements()
 	if (stage == 1 && getObject("infFactory1") !== null) // Stop if the infested factory was destroyed
 	{
 		const droids = [cTempl.stinger, cTempl.infbloke];
-		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, camMakePos("infEntry1"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
+		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, getObject("infEntry1"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
 			{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}}
 		));
 	}
@@ -340,7 +340,7 @@ function sendInfestedReinforcements()
 	else if (stage == 2 && getObject("infFactory2") !== null)
 	{
 		const droids = [cTempl.stinger, cTempl.infbloke, cTempl.infbjeep];
-		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, camMakePos("infEntry2"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
+		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, getObject("infEntry2"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
 			{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}}
 		));
 	}
@@ -348,7 +348,7 @@ function sendInfestedReinforcements()
 	else if (stage == 3 && getObject("infFactory3") !== null)
 	{
 		const droids = [cTempl.stinger, cTempl.infbjeep, cTempl.infrbjeep];
-		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, camMakePos("infEntry3"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
+		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, getObject("infEntry3"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
 			{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}}
 		));
 	}
@@ -356,7 +356,7 @@ function sendInfestedReinforcements()
 	else if (stage == 4 && getObject("infFactory4") !== null)
 	{
 		const droids = [cTempl.stinger, cTempl.stinger, cTempl.infbjeep, cTempl.infkevbloke];
-		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, camMakePos("infEntry4"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
+		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, getObject("infEntry4"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
 			{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}}
 		));
 	}
@@ -586,11 +586,11 @@ function eventDestroyed(obj)
 				hackRemoveMessage("OLD_TOWN", PROX_MSG, CAM_HUMAN_PLAYER);
 			}
 		}
-		else
-		{
-			// Warehouse destroyed early; replace it
-			addStructure("CivWarehouse2", MIS_CIVS, pos.x * 128, pos.y * 128);
-		}
+	else if (obj.type === STRUCTURE && obj.player === MIS_CIVS)
+	{
+		// Warehouse destroyed early; replace it
+		addStructure("CivWarehouse2", MIS_CIVS, pos.x * 128, pos.y * 128);
+	}
 	}
 }
 

@@ -125,7 +125,8 @@ camAreaEvent("ambushTrigger", function(droid)
 	{
 		camManageGroup(camMakeGroup("scavAmbushGroup"), CAM_ORDER_ATTACK, {
 			morale: 50,
-			fallback: camMakePos("scavBase1")
+			fallback: camMakePos("scavBase1"),
+			targetPlayer: CAM_HUMAN_PLAYER
 		});
 		camManageGroup(camMakeGroup("charlieDefenseGroup"), CAM_ORDER_DEFEND, {
 			radius: 12,
@@ -198,7 +199,7 @@ function donateBase()
 		{text: "CLAYDE: Commander Bravo, find the any civilian holdouts in your area, and escort them back to the haven.", delay: 3, sound: CAM_RCLICK},
 		{text: "CHARLIE: Commander Bravo, if I can give a suggestion?", delay: 5, sound: CAM_RCLICK},
 		{text: "CHARLIE: Escorting the civilians on foot would be risky.", delay: 3, sound: CAM_RCLICK},
-		{text: "CHARLIE: We load the civilians onto the backs of our Trucks instead.", delay: 3, sound: CAM_RCLICK},
+		{text: "CHARLIE: We could load the civilians onto the backs of our Trucks instead.", delay: 3, sound: CAM_RCLICK},
 		{text: "CHARLIE: That way we could just drive the civilians back to the haven ourselves.", delay: 3, sound: CAM_RCLICK},
 		{text: "CLAYDE: That's... a sound idea, Commander Charlie.", delay: 3, sound: CAM_RCLICK},
 		{text: "CHARLIE: Commander Bravo, bring a truck to each of the civilian holdouts, and then escort the truck back to haven.", delay: 2, sound: CAM_RCLICK},
@@ -364,9 +365,11 @@ camAreaEvent("civZone1", function(droid)
 	if (droid.player === CAM_HUMAN_PLAYER && droid.droidType === DROID_CONSTRUCT 
 		&& droid.propulsion !== "CyborgLegs" && !camDef(getLabel(droid)))
 	{
+		const pos = camMakePos(droid);
 		for (const civ of enumGroup(civGroup1))
 		{
-			orderDroidObj(civ, DORDER_GUARD, droid);
+			// Move the civs towards the truck
+			orderDroidLoc(civ, DORDER_MOVE, pos.x, pos.y);
 		}
 
 		queue("loadTruck1", camSecondsToMilliseconds(3));
@@ -431,9 +434,11 @@ camAreaEvent("civZone2", function(droid)
 	if (droid.player === CAM_HUMAN_PLAYER && droid.droidType === DROID_CONSTRUCT 
 		&& droid.propulsion !== "CyborgLegs" && !camDef(getLabel(droid)))
 	{
+		const pos = camMakePos(droid);
 		for (const civ of enumGroup(civGroup2))
 		{
-			orderDroidObj(civ, DORDER_GUARD, droid);
+			// Move the civs towards the truck
+			orderDroidLoc(civ, DORDER_MOVE, pos.x, pos.y);
 		}
 
 		queue("loadTruck2", camSecondsToMilliseconds(3));
@@ -493,9 +498,11 @@ camAreaEvent("civZone3", function(droid)
 	if (droid.player === CAM_HUMAN_PLAYER && droid.droidType === DROID_CONSTRUCT 
 		&& droid.propulsion !== "CyborgLegs" && !camDef(getLabel(droid)))
 	{
+		const pos = camMakePos(droid);
 		for (const civ of enumGroup(civGroup3))
 		{
-			orderDroidObj(civ, DORDER_GUARD, droid);
+			// Move the civs towards the truck
+			orderDroidLoc(civ, DORDER_MOVE, pos.x, pos.y);
 		}
 
 		queue("loadTruck3", camSecondsToMilliseconds(3));
@@ -555,9 +562,11 @@ camAreaEvent("civZone4", function(droid)
 	if (droid.player === CAM_HUMAN_PLAYER && droid.droidType === DROID_CONSTRUCT 
 		&& droid.propulsion !== "CyborgLegs" && !camDef(getLabel(droid)))
 	{
+		const pos = camMakePos(droid);
 		for (const civ of enumGroup(civGroup4))
 		{
-			orderDroidObj(civ, DORDER_GUARD, droid);
+			// Move the civs towards the truck
+			orderDroidLoc(civ, DORDER_MOVE, pos.x, pos.y);
 		}
 
 		queue("loadTruck4", camSecondsToMilliseconds(3));
@@ -803,14 +812,14 @@ function sendInfestedReinforcements()
 	{
 		// East entrance
 		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, getObject("infEntry1"), droids, CAM_REINFORCE_GROUND, 
-			{order: CAM_ORDER_DEFEND, data: {pos: camMakePos("infExit"), radius: 1}}
+			{order: CAM_ORDER_DEFEND, data: {pos: camMakePos("infExit"), radius: 0}}
 		));
 	}
 	else
 	{
 		// West entrance
 		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, getObject("infEntry2"), droids, CAM_REINFORCE_GROUND, 
-			{order: CAM_ORDER_DEFEND, data: {pos: camMakePos("infExit"), radius: 1}}
+			{order: CAM_ORDER_DEFEND, data: {pos: camMakePos("infExit"), radius: 0}}
 		));
 	}
 
@@ -843,7 +852,11 @@ function eventAttacked(victim, attacker)
 		{
 			// The player has attacked one of the meandering Infested groups
 			// Re-order the Infested group to attack the player instead
-			camManageGroup(victim.group, CAM_ORDER_ATTACK, {targetPlayer: CAM_HUMAN_PLAYER, ignorePlayers: MIS_CIVS});
+			camManageGroup(victim.group, CAM_ORDER_ATTACK, {
+				targetPlayer: CAM_HUMAN_PLAYER,
+				ignorePlayers: MIS_CIVS,
+				pos: camMakePos("landingZone")
+			});
 
 			// Increase the spiciness of future Infested waves
 			infestedThreatFactor += difficulty;
@@ -866,7 +879,7 @@ function eventTransporterLanded(transport)
 	{
 		if (!camIsTransporter(droid))
 		{
-			donateObject(droid, CAM_HUMAN_PLAYER);
+			camSafeRemoveObject(droid);
 		}
 	}
 
@@ -1048,7 +1061,7 @@ function nukeMap()
 		{text: "CLAYDE: The Infested have been eradicated.", delay: 2, sound: CAM_RCLICK},
 		{text: "CLAYDE: There's nothing left here but smoldering ruins.", delay: 2, sound: CAM_RCLICK},
 		{text: "CHARLIE: If it's all gone...", delay: 4, sound: CAM_RCLICK},
-		{text: "CHARLIE: Then what was the point of this operation?", delay: 2, sound: CAM_RCLICK},
+		{text: "CHARLIE: Then what was the point in all of this?", delay: 2, sound: CAM_RCLICK},
 		{text: "CLAYDE: ...We may have have been set back today.", delay: 4, sound: CAM_RCLICK},
 		{text: "CLAYDE: But.", delay: 2, sound: CAM_RCLICK},
 		{text: "CLAYDE: This operation was not in vain.", delay: 2, sound: CAM_RCLICK},
@@ -1061,6 +1074,7 @@ function nukeMap()
 
 	// Used to allow the player to bring prologue units into A1L1
 	camCompleteRequiredResearch(["R-Script-ProloguePlayed"], CAM_HUMAN_PLAYER);
+	setReticuleFlash(2, false);
 
 	// End the mission after the dialogue is finished
 	queue("camScriptedVictory", camSecondsToMilliseconds(52));
@@ -1166,7 +1180,7 @@ function eventStartLevel()
 	});
 
 	camSetArtifacts({
-		"scavFactory2": { tech: "R-Wpn-Rocket-LtA-TMk1" }, // Sarissa
+		"scavFactory1": { tech: "R-Wpn-Rocket-LtA-TMk1" }, // Sarissa
 	});
 
 	// Place a beacon in Charlie's safe haven

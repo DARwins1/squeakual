@@ -218,14 +218,6 @@
 
 
 	"object_0": {
-		"label": "landingZoneGuardTower",
-		"id": 5,
-		"player": 4,
-		"type": 1
-	},
-
-
-	"object_1": {
 		"label": "infFactory1",
 		"id": 164,
 		"player": 4,
@@ -233,7 +225,7 @@
 	},
 
 
-	"object_2": {
+	"object_1": {
 		"label": "infFactory4",
 		"id": 167,
 		"player": 4,
@@ -241,7 +233,7 @@
 	},
 
 
-	"object_3": {
+	"object_2": {
 		"label": "infFactory3",
 		"id": 166,
 		"player": 4,
@@ -249,7 +241,7 @@
 	},
 
 
-	"object_4": {
+	"object_3": {
 		"label": "infFactory2",
 		"id": 165,
 		"player": 4,
@@ -257,9 +249,17 @@
 	},
 
 
-	"object_5": {
+	"object_4": {
 		"label": "infFactory5",
 		"id": 168,
+		"player": 4,
+		"type": 1
+	},
+
+
+	"object_5": {
+		"label": "landingZoneGuardTower",
+		"id": 5,
 		"player": 4,
 		"type": 1
 	}
