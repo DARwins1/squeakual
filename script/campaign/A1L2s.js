@@ -19,8 +19,12 @@ function eventStartLevel()
 	// camPlayVideos({video: "L2_BRIEF", type: MISS_MSG});
 	// queue("messageAlert", camSecondsToMilliseconds(0.2));
 
-	// Set the fog to it's default colours
-	// camSetFog(182, 225, 236);
+	// Lighten the fog to *more or less* 2x default brightness
+	camSetFog(32, 32, 96);
+	// Shift the sun towards the east
+	camSetSunPos(-450.0, -400.0, 225.0);
+	// Increase the lighting
+	camSetSunIntensity(.6,.6,.6);
 
 	// Placeholder for the actual briefing sequence
 	camQueueDialogue([

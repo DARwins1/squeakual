@@ -435,4 +435,9 @@ function eventStartLevel()
 	queue("activateFinalCScavFactories", camChangeOnDiff(camMinutesToMilliseconds(6)));
 	queue("heliAttack2", camChangeOnDiff(camMinutesToMilliseconds(6)));
 	queue("aggroCommander", camChangeOnDiff(camMinutesToMilliseconds(12)));
+
+	// Add a slight blue hue to the lighting
+	camSetSunIntensity(.5, .5, .6);
+	// Shift the sun towards the east
+	camSetSunPos(-450.0, -400.0, 225.0);
 }

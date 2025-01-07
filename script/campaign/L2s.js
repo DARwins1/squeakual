@@ -40,8 +40,8 @@ function eventStartLevel()
 
 	// Increase the lighting
 	camSetSunIntensity(.6,.6,.6);
-	// Shift the sun towards the west
-	camSetSunPos(450.0, -400.0, 225.0);
+	// Shift the sun towards the east
+	camSetSunPos(-450.0, -400.0, 225.0);
 	// Clear the skies
 	camSetWeather(CAM_WEATHER_CLEAR);
 }

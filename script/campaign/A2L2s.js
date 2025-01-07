@@ -34,4 +34,9 @@ function eventStartLevel()
 		{text: "LIEUTENANT: General, sir, has their been any transmission from team Echo?", delay: 3, sound: CAM_RCLICK},
 		{text: "CLAYDE: No... and that's what concerns me the most.", delay: 3, sound: CAM_RCLICK},
 	]);
+
+	// Shift the sun towards the west
+	camSetSunPos(450.0, -400.0, 225.0);
+	// Add a pinch of darker and gritty blue
+	camSetSunIntensity(.45, .45, .5);
 }

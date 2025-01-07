@@ -981,4 +981,12 @@ function eventStartLevel()
 	hackAddMessage("CHARLIE_LZ", PROX_MSG, CAM_HUMAN_PLAYER);
 	hackAddMessage("FOXTROT_LZ", PROX_MSG, CAM_HUMAN_PLAYER);
 	hackAddMessage("GOLF_LZ", PROX_MSG, CAM_HUMAN_PLAYER);
+
+	// Lighten the fog to *more or less* 2x default brightness
+	camSetFog(32, 32, 96);
+	// Shift the sun slightly the east
+	camSetSunPos(-225.0, -600.0, 450.0);
+	// Increase the lighting
+	camSetSunIntensity(.6,.6,.6);
+	camSetWeather(CAM_WEATHER_CLEAR);
 }

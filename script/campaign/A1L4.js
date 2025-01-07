@@ -915,4 +915,11 @@ function eventStartLevel()
 		{text: "CLAYDE: Use your forces and defend the northern approach.", delay: 3, sound: CAM_RCLICK},
 		{text: "CLAYDE: We must hold NASDA Central at all costs!", delay: 3, sound: CAM_RCLICK},
 	]);
+
+	// Darken the fog to 1/2 default brightness
+	camSetFog(8, 8, 32);
+	// Darken the lighting and add a slight blue hue
+	camSetSunIntensity(.4, .4, .45);
+	camSetWeather(CAM_WEATHER_RAINSTORM);
+	camSetSkyType(CAM_SKY_NIGHT);
 }

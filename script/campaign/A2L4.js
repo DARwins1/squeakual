@@ -398,4 +398,9 @@ function eventStartLevel()
 	queue("lzAmbush", camMinutesToMilliseconds(2.5));
 	queue("enableAllFactories", camChangeOnDiff(camMinutesToMilliseconds(10)));
 	queue("vtolAttack", camChangeOnDiff(camMinutesToMilliseconds(16)));
+
+	// Shift the sun towards the west
+	camSetSunPos(450.0, -400.0, 225.0);
+	camSetSunIntensity(.4, .4, .5);
+	camSetWeather(CAM_WEATHER_RAINSTORM);
 }

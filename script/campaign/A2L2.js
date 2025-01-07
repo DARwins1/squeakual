@@ -785,4 +785,10 @@ function eventStartLevel()
 	setScrollLimits(0, 0, 42, 48);
 
 	hackAddMessage("DELTA_LZ", PROX_MSG, CAM_HUMAN_PLAYER);
+
+	// Darken the fog to 1/2 default brightness
+	camSetFog(8, 8, 32);
+	// Darken the lighting and add a blue hue
+	camSetSunIntensity(.35, .35, .45);
+	camSetSkyType(CAM_SKY_NIGHT);
 }

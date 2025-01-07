@@ -46,4 +46,6 @@ function eventStartLevel()
 		{text: "LIEUTENANT: It'll be challenging to navigate the terrain there with conventional ground forces.", delay: 3, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: ...But the propulsion that you found the in the that last Collective base may prove to be useful there.", delay: 3, sound: CAM_RCLICK},
 	]);
+
+	camSetSunIntensity(.35, .35, .45);
 }

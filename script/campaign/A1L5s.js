@@ -19,8 +19,12 @@ function eventStartLevel()
 	// camPlayVideos({video: "L2_BRIEF", type: MISS_MSG});
 	// queue("messageAlert", camSecondsToMilliseconds(0.2));
 
-	// Set the fog to it's default colours
-	// camSetFog(182, 225, 236);
+	// Darken the fog to 1/2 default brightness
+	camSetFog(8, 8, 32);
+	// Darken the lighting and add a slight blue hue
+	camSetSunIntensity(.4, .4, .5);
+	camSetWeather(CAM_WEATHER_RAINSTORM);
+	camSetSkyType(CAM_SKY_NIGHT);
 
 	// Place the satellite uplink from A1L3
 	const NASDA = 1;

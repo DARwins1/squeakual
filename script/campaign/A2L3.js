@@ -474,7 +474,7 @@ function eventStartLevel()
 		{text: "CLAYDE: ...", delay: 2, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: The Collective seem to have a... deep fascination with what they call \"The Machine\"", delay: 2, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: Given everything we know about them, it seems that their entire command structure is devoted to it.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: So they're a cult that worships machines?", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: They're a cult that worships machines?", delay: 3, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: Well... uhh... maybe.", delay: 3, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: It seems that they'll accept anyone into their ranks as long as they share enough devotion.", delay: 3, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: We're... still not sure if this \"Machine\" is a singular entity or not.", delay: 3, sound: CAM_RCLICK},
@@ -495,4 +495,12 @@ function eventStartLevel()
 		{text: "CLAYDE: Expect enemy ground and air reinforcements as you approach their base.", delay: 4, sound: CAM_RCLICK},
 		{text: "CLAYDE: Good luck, Commander.", delay: 3, sound: CAM_RCLICK},
 	]);
+
+	// Lighten the fog to *more or less* 2x default brightness
+	camSetFog(32, 32, 96);
+	// Shift the sun towards the east
+	camSetSunPos(-450.0, -400.0, 225.0);
+	// Increase the lighting
+	camSetSunIntensity(.6,.6,.6);
+	camSetWeather(CAM_WEATHER_CLEAR);
 }

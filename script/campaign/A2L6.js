@@ -170,7 +170,7 @@ function camEnemyBaseEliminated_scavLZBase()
 		{text: "GOLF: Team Golf here, we're ready to go.", delay: 12, sound: CAM_RCLICK},
 		{text: "GOLF: Let's break that prison and get everyone home in one piece.", delay: 3, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: General, all teams are ready to assault the Collective's prisoner camp.", delay: 5, sound: CAM_RCLICK},
-		{text: "CLAYDE: Perfect. We're deploying our diversion now.", delay: 4, sound: CAM_RCLICK},
+		{text: "CLAYDE: Perfect. I'm deploying my diversion now.", delay: 4, sound: CAM_RCLICK},
 		{text: "CLAYDE: Lieutenant, you're in charge of the assault.", delay: 3, sound: CAM_RCLICK},
 		{text: "CLAYDE: Destroy that camp, and get our people home safely.", delay: 3, sound: CAM_RCLICK},
 		{text: "CLAYDE: General Clayde, signing off.", delay: 3, sound: CAM_RCLICK},
@@ -226,6 +226,9 @@ function endStealthPhase()
 
 	// Expand the map boundaries
 	setScrollLimits(0, 0, 160, 56);
+
+	// HACK: Move the sun position slightly to avoid weird shadows when expanding the map
+	camSetSunPos(-225.0, -600.0, 450.0);
 }
 
 // Activate the Collective and all allies
@@ -1093,4 +1096,9 @@ function eventStartLevel()
 	camSetDroidRank(getObject("charlieCommander"), CHARLIE_RANK);
 	camSetDroidRank(getObject("colCommander1"), COL_RANK1);
 	camSetDroidRank(getObject("colCommander2"), COL_RANK2);
+
+	// Shift the sun slightly the east
+	camSetSunPos(-225.0, -600.0, 450.0);
+	camSetSunIntensity(.45,.45,.5);
+	camSetWeather(CAM_WEATHER_RAINSTORM);
 }

@@ -783,4 +783,11 @@ function eventStartLevel()
 		{text: "CLAYDE: Team Charlie will reposition to a new location.", delay: 3, sound: CAM_RCLICK},
 		{text: "CLAYDE: Secure the area, and hold for further instructions once the base site is secure.", delay: 3, sound: CAM_RCLICK},
 	]);
+
+	// Lighten the fog to *more or less* 2x default brightness
+	camSetFog(32, 32, 96);
+	// Shift the sun towards the west
+	camSetSunPos(450.0, -400.0, 225.0);
+	// Add a wee bit o' blue
+	camSetSunIntensity(.5, .5, .55);
 }

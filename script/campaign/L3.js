@@ -166,8 +166,8 @@ function expandMap()
 	camEnableFactory("cScavFactory1");
 	camEnableFactory("cScavFactory3");
 
-	// HACK: reset the sun's position to remove the lingering shadow effect from the map border
-	camSetSunPos(-450.0, -400.0, 225.0);
+	// HACK: Move the sun's position to remove the lingering shadow effect from the map border
+	camSetSunPos(-450.0, -400.0, 225.1);
 }
 
 // Send scavenger attack waves

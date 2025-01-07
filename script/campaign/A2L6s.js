@@ -50,4 +50,12 @@ function eventStartLevel()
 		{text: "LIEUTENANT: We can't risk the Collective detecting us before Clayde has launched his diversion.", delay: 3, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: Make sure you bring enough combat units in your first transport.", delay: 3, sound: CAM_RCLICK},
 	]);
+
+	// Lighten the fog to *more or less* 2x default brightness
+	camSetFog(32, 32, 96);
+	// Shift the sun towards the east
+	camSetSunPos(-450.0, -400.0, 225.0);
+	// Increase the lighting
+	camSetSunIntensity(.6,.6,.6);
+	camSetWeather(CAM_WEATHER_CLEAR);
 }

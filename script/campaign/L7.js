@@ -629,8 +629,8 @@ function eventStartLevel()
 	camSetFog(185, 182, 236);
 	// Increase the lighting, and give it a SLIGHT pink/purple hue
 	camSetSunIntensity(.6,.58,.6);
-	// Shift the sun towards the west
-	camSetSunPos(450.0, -400.0, 225.0);
+	// Shift the sun towards the east
+	camSetSunPos(-450.0, -400.0, 225.0);
 	// Clear skies
 	camSetWeather(CAM_WEATHER_CLEAR);
 }

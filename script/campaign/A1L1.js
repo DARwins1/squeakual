@@ -700,4 +700,12 @@ function eventStartLevel()
 	queue("pinkAggro", camChangeOnDiff(camMinutesToMilliseconds(12)));
 	queue("redAggro", camChangeOnDiff(camMinutesToMilliseconds(16)));
 	queue("heliAttack", camChangeOnDiff(camMinutesToMilliseconds(16)));
+
+	// Constant rain
+	camSetWeather(CAM_WEATHER_RAINSTORM);
+	camSetSkyType(CAM_SKY_NIGHT);
+	// Darken the fog to 1/4 default brightness
+	camSetFog(4, 4, 16);
+	// Darken the lighting and add a slight blue hue
+	camSetSunIntensity(.4, .4, .5);
 }

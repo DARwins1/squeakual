@@ -437,4 +437,8 @@ function eventStartLevel()
 		{text: "LIEUTENANT: And remember that anything not evacuated will be lost!", delay: 3, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: Good luck, Commander.", delay: 4, sound: CAM_RCLICK},
 	]);
+
+	// Add a slight blue hue to the lighting
+	camSetSunIntensity(.45, .45, .55);
+	camSetWeather(CAM_WEATHER_RAINSTORM);
 }

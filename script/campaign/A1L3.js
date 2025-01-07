@@ -809,4 +809,7 @@ function eventStartLevel()
 		{text: "LIEUTENANT: Don't forget to examine the technology recovered from NASDA Central, Commander!", delay: 5, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: I have a feeling that they'll prove to be very useful.", delay: 3, sound: CAM_RCLICK},
 	]);
+
+	// Shift the sun towards the west
+	camSetSunPos(450.0, -400.0, 225.0);
 }

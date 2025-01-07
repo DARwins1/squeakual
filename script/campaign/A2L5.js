@@ -602,7 +602,7 @@ function eventStartLevel()
 		{text: "CLAYDE: And?", delay: 3, sound: CAM_RCLICK},
 		{text: "CHARLIE: That place is a deathtrap, sir. It's easily the most heavily defended position in this sector.", delay: 3, sound: CAM_RCLICK},
 		{text: "CHARLIE: Or at least... the most heavily defended that we've found so-", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: Enough! Are there any points when the camp has less defenders?", delay: 2, sound: CAM_RCLICK},
+		{text: "CLAYDE: Enough! Are there any periods when the camp has less defenders?", delay: 2, sound: CAM_RCLICK},
 		{text: "CHARLIE: W-Well, yes. The Collective patrols come and go with their transports.", delay: 3, sound: CAM_RCLICK},
 		{text: "CHARLIE: But we've also detected numerous smaller bases in the area.", delay: 3, sound: CAM_RCLICK},
 		{text: "CHARLIE: If we were to launch a direct assault, these bases would surely send reinforcements.", delay: 3, sound: CAM_RCLICK},
@@ -620,4 +620,9 @@ function eventStartLevel()
 		{text: "CLAYDE: If we're lucky, that should disrupt their movements and give us enough of an opening to raid their prisoner camp.", delay: 3, sound: CAM_RCLICK},
 		{text: "CLAYDE: Good luck, Commander Bravo.", delay: 3, sound: CAM_RCLICK},
 	]);
+
+	camSetSkyType(CAM_SKY_NIGHT);
+	// Darken the fog to 1/4 default brightness
+	camSetFog(4, 4, 16);
+	camSetSunIntensity(.4, .4, .45);
 }
