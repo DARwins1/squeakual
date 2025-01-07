@@ -259,12 +259,12 @@ function eventStartLevel()
 	let infantryTemplates = [cTempl.bloke, cTempl.lance, cTempl.bjeep];
 	if (difficulty <= MEDIUM)
 	{
-		templates.push(cTempl.bloke);
+		infantryTemplates.push(cTempl.bloke);
 	}
 	else
 	{
 		// Add a kevlar bloke on Medium+
-		templates.push(cTempl.kevbloke);
+		infantryTemplates.push(cTempl.kevbloke);
 		if (difficulty >= HARD)
 		{
 			// Replace armor up all infantry on Hard+
@@ -392,7 +392,4 @@ function eventStartLevel()
 
 	// Check the civilian groups on loop
 	setTimer("checkCivilianGuards", camSecondsToMilliseconds(2));
-
-	// Set the fog to it's default colours
-	camSetFog(182, 225, 236);
 }

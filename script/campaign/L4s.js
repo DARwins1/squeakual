@@ -38,6 +38,12 @@ function eventStartLevel()
 		setMissionTime(-1);
 	}
 
-	// Set the fog to it's default colours
-	camSetFog(182, 225, 236);
+	// Set the sky to night
+	camSetSkyType(CAM_SKY_NIGHT);
+	// Darken the lighting somewhat
+	camSetSunIntensity(.4,.4,.4);
+	// Darken the fog to 1/4 default brightness
+	camSetFog(45, 56, 59);
+	// Clear skies
+	camSetWeather(CAM_WEATHER_CLEAR);
 }

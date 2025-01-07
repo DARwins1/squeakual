@@ -640,8 +640,14 @@ function eventStartLevel()
 	// Place a beacon on the NASDA base
 	hackAddMessage("NASDA_BASE", PROX_MSG, CAM_HUMAN_PLAYER);
 
-	// Set the fog to it's default colours
-	camSetFog(182, 225, 236);
+	// Set the sky to night
+	camSetSkyType(CAM_SKY_NIGHT);
+	// Darken the lighting somewhat
+	camSetSunIntensity(.4,.4,.4);
+	// Darken the fog to 1/4 default brightness
+	camSetFog(45, 56, 59);
+	// Make it snow constantly
+	camSetWeather(CAM_WEATHER_SNOWSTORM);
 
 	// All NASDA structures start out partially damaged
 	preDamageNasdaStructs();

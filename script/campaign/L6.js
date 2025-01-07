@@ -361,7 +361,13 @@ function checkForLZReturn()
 		camSetExtraObjectiveMessage("Escape the incoming infested waves");
 
 		// Change the fog colour to a dark purple
-		camSetFog(114, 73, 156);
+		// camSetFog(114, 73, 156);
+		// Change the fog colour to a half-light thick purple
+		camSetFog(57, 36, 78);
+		// Give the lighting a stronger purple hue
+		camSetSunIntensity(.4,.35,.4);
+		// Constant snow
+		camSetWeather(CAM_WEATHER_SNOWSTORM);
 	}
 }
 
@@ -723,8 +729,12 @@ function eventStartLevel()
 		}
 	}
 
-	// Change the fog colour to a light pink/purple
-	camSetFog(185, 182, 236);
+	// Set the sky to night
+	camSetSkyType(CAM_SKY_NIGHT);
+	// Darken the lighting somewhat and give a SLIGHT pink/purple hue
+	camSetSunIntensity(.4,.38,.4);
+	// Change the fog to half-light pink/purple
+	camSetFog(90, 90, 118);
 
 	// Place beacons near the AA emplacements
 	hackAddMessage("AA_SITE_S", PROX_MSG, CAM_HUMAN_PLAYER, false);

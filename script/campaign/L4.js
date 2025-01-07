@@ -665,7 +665,15 @@ function eventStartLevel()
 	preDamageScavs();
 
 	// Change the fog colour to a light pink/purple
-	camSetFog(185, 182, 236);
+	// camSetFog(185, 182, 236);
+	// Set the sky to night
+	camSetSkyType(CAM_SKY_NIGHT);
+	// Darken the lighting somewhat and give a SLIGHT pink/purple hue
+	camSetSunIntensity(.4,.38,.4);
+	// Change the fog to 1/4th-light pink/purple
+	camSetFog(45, 45, 59);
+	// Constant snow
+	camSetWeather(CAM_WEATHER_SNOWSTORM);
 
 	// If we're in Timerless mode, set up a scavenger crane
 	if (tweakOptions.rec_timerlessMode && difficulty >= EASY)

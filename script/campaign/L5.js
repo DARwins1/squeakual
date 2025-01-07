@@ -708,8 +708,12 @@ function eventStartLevel()
 		}
 	}
 
-	// Change the fog colour to a light pink/purple
-	camSetFog(185, 182, 236);
+	// Change the fog to half-light pink/purple
+	camSetFog(90, 90, 118);
+	// Darken the lighting a wee bit and add a purple hue
+	camSetSunIntensity(.45,.43,.45);
+	// Constant snow
+	camSetWeather(CAM_WEATHER_SNOWSTORM);
 
 	// Damage the Boom Tick showcase group
 	const units = enumArea("boomShowcaseGroup");

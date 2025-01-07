@@ -217,9 +217,7 @@ function endEffects()
 	fireWeaponAtLoc("LargeExplosion", 32, 17, CAM_HUMAN_PLAYER);
 	removeTimer("smallExplosionFX");
 
-	// Adjust the lighting
-	setSunPosition(0, -0.2, -0.3);
-	setSunIntensity(0.7, 0.5, 0.5, 1.4, 0.6, 0.6, 1.4, 0.6, 0.6);
+	
 
 	// Procedurally blow up everything on the map
 	setTimer("killSweep", camSecondsToMilliseconds(0.3));
@@ -229,7 +227,11 @@ function endEffects()
 	camSetVtolSpawnStateAll(false);
 
 	// Set the fog to it's default colours
-	camSetFog(182, 225, 236);
+	camSetFog();
+	// Adjust the lighting
+	camSetSunPos(0, -0.2, -0.3);
+	camSetSunIntensity(0.7, 0.5, 0.5, 1.4, 0.6, 0.6);
+	camSetWeather(CAM_WEATHER_CLEAR);
 }
 
 // Small explosions effects
@@ -301,6 +303,9 @@ function startAttackWaves()
 
 		// Change the fog colour to a dark purple
 		camSetFog(114, 73, 156);
+		// Decrease the lighting, and give it a stronger pink/purple hue
+		camSetSunIntensity(.5,.45,.5);
+		camSetWeather(CAM_WEATHER_SNOW);
 	}
 	else if (phase == 3)
 	{
@@ -309,6 +314,9 @@ function startAttackWaves()
 
 		// Change the fog colour to a darker purple
 		camSetFog(95, 60, 130);
+		// MORE PURPLE !!!
+		camSetSunIntensity(.5,.4,.5);
+		camSetWeather(CAM_WEATHER_SNOWSTORM);
 	}
 }
 
@@ -619,4 +627,10 @@ function eventStartLevel()
 
 	// Change the fog colour to a light pink/purple
 	camSetFog(185, 182, 236);
+	// Increase the lighting, and give it a SLIGHT pink/purple hue
+	camSetSunIntensity(.6,.58,.6);
+	// Shift the sun towards the west
+	camSetSunPos(450.0, -400.0, 225.0);
+	// Clear skies
+	camSetWeather(CAM_WEATHER_CLEAR);
 }

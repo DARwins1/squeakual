@@ -38,6 +38,10 @@ function eventStartLevel()
 		setMissionTime(-1);
 	}
 
-	// Set the fog to it's default colours
-	camSetFog(182, 225, 236);
+	// Darken the fog to 1/2 default brightness
+	camSetFog(90, 112, 118);
+	// Darken the lighting a wee bit
+	camSetSunIntensity(.45,.45,.45);
+	// Constant snow
+	camSetWeather(CAM_WEATHER_SNOWSTORM);
 }

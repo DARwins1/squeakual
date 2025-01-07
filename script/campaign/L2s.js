@@ -38,6 +38,10 @@ function eventStartLevel()
 		setMissionTime(-1);
 	}
 
-	// Set the fog to it's default colours
-	camSetFog(182, 225, 236);
+	// Increase the lighting
+	camSetSunIntensity(.6,.6,.6);
+	// Shift the sun towards the west
+	camSetSunPos(450.0, -400.0, 225.0);
+	// Clear the skies
+	camSetWeather(CAM_WEATHER_CLEAR);
 }

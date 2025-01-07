@@ -301,7 +301,9 @@ function startInfestedWaves()
 	camQueueDialogue([
 		{text: "CHARLIE: General!", delay: 0, sound: CAM_RCLICK},
 		{text: "CHARLIE: We've detected groups of infested moving along the roads nearby!", delay: 2, sound: CAM_RCLICK},
-		{text: "CLAYDE: Well, then it appears that these Lures really do work after all...", delay: 4, sound: CAM_RCLICK},
+		{text: "CLAYDE: There's no need for alarm, Commander Charlie.", delay: 4, sound: CAM_RCLICK},
+		{text: "CLAYDE: Those infested are being drawn away by a Lure.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: They shouldn't pose a threat to your mission.", delay: 3, sound: CAM_RCLICK},
 		{text: "CLAYDE: Commander Bravo, try to avoid the Infested if you can.", delay: 3, sound: CAM_RCLICK},
 		{text: "CLAYDE: Focus on escorting those civilians back to the haven.", delay: 5, sound: CAM_RCLICK},
 		{text: "CLAYDE: The Infested should be avoidable if you can maintain your distance from them.", delay: 3, sound: CAM_RCLICK},
@@ -1047,13 +1049,13 @@ function nukeMap()
 
 	// Make the world go red
 	camSetSunPos(0, -0.2, 0.3);
-	camSetSunIntensity(0.7, 0.5, 0.5, 1.4, 0.6, 0.6, 1.4, 0.6, 0.6);
+	camSetSunIntensity(0.7, 0.5, 0.5, 1.4, 0.6, 0.6);
 
 	// Stop snowing
 	camSetWeather(CAM_WEATHER_CLEAR);
 
 	// Set the fog to its default colours
-	camSetFog(182, 225, 236);
+	camSetFog();
 
 	// End-mission dialogue
 	camQueueDialogue([
@@ -1192,8 +1194,8 @@ function eventStartLevel()
 	// Change the fog colour to a light pink/purple
 	camSetFog(185, 182, 236);
 	// Increase the lighting, and give it a SLIGHT pink/purple hue
-	camSetSunIntensity(.6,.58,.6,1.2,1.15,1.2,1.2,1.15,1.2);
-	// Shift the sun towards
+	camSetSunIntensity(.6,.58,.6);
+	// Shift the sun towards the west
 	camSetSunPos(450.0, -400.0, 225.0);
 
 	// All Infested structures start out partially damaged

@@ -636,8 +636,12 @@ function camSetSunPos(x, y, z)
 	setSunPosition(x, y, z);
 }
 
-//;; ## camSetSunIntensity(ar, ag, ab, dr, dg, db, sr, sg, sb)
+//;; ## camSetSunIntensity(ar, ag, ab[, dr, dg, db[, sr, sg, sb]])
 //;; Changes the intensity of the sun and stores its RGB lighting values for save-loading.
+//;; If only ambient RGB values are provided, then diffuse and specular values will be assigned
+//;; 2x their respective ambient values.
+//;; If only speculative RGB values are NOT provided, then they will be assigned the same values
+//;; as their respective diffuse values.
 //;; If no arguments are provided, sets the sun to its default RGB values.
 //;;
 //;; @param {number} ar
@@ -665,6 +669,23 @@ function camSetSunIntensity(ar, ag, ab, dr, dg, db, sr, sg, sb)
 		sr = __camDefaultSunStats.sr;
 		sg = __camDefaultSunStats.sg;
 		sb = __camDefaultSunStats.sb;
+	}
+	else if (!camDef(dr))
+	{
+		// Only ambient values provided
+		dr = ar * 2;
+		dg = ag * 2;
+		db = ab * 2;
+		sr = ar * 2;
+		sg = ag * 2;
+		sb = ab * 2;
+	}
+	else if (!camDef(sr))
+	{
+		// Ambient and diffuse values provided
+		sr = dr;
+		sg = dg;
+		sb = db;
 	}
 
 	__camSunStats.ar = ar;

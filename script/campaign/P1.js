@@ -857,12 +857,12 @@ function eventStartLevel()
 	// Place a beacon in the main town
 	hackAddMessage("OLD_TOWN", PROX_MSG, CAM_HUMAN_PLAYER);
 
-	// Change the fog colour to a dark purple
-	camSetFog(114, 73, 156);
+	// Change the fog colour to a 1/4th-light thick purple
+	camSetFog(28, 18, 39);
 	// Set the sky to night
 	camSetSkyType(CAM_SKY_NIGHT);
 	// Darken and purple-ify the lighting somewhat
-	camSetSunIntensity(.4,.35,.4,.9,.9,.9,.9,.9,.9);
+	camSetSunIntensity(.4,.35,.4);
 	// Make it snow constantly
 	camSetWeather(CAM_WEATHER_SNOWSTORM);
 

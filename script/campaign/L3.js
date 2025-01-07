@@ -166,8 +166,8 @@ function expandMap()
 	camEnableFactory("cScavFactory1");
 	camEnableFactory("cScavFactory3");
 
-	// Hack to prevent the south half of the map from being dark after the expansion
-	setSunPosition(225.0, -601.0, 450.0); // Move the sun just a wee bit (default is 225.0, -600.0, 450.0)
+	// HACK: reset the sun's position to remove the lingering shadow effect from the map border
+	camSetSunPos(-450.0, -400.0, 225.0);
 }
 
 // Send scavenger attack waves
@@ -418,8 +418,8 @@ function eventStartLevel()
 	if (difficulty >= HARD)
 	{
 		// Armor-up the city factory blokes
-		templates2 = camArrayReplaceWith(templates2, cTempl.bloke, cTempl.kevbloke);
-		templates2 = camArrayReplaceWith(templates2, cTempl.lance, cTempl.kevlance);
+		templates3 = camArrayReplaceWith(templates3, cTempl.bloke, cTempl.kevbloke);
+		templates3 = camArrayReplaceWith(templates3, cTempl.lance, cTempl.kevlance);
 		if (difficulty >= INSANE)
 		{
 			// Armor-up the eastern factory blokes
@@ -506,6 +506,6 @@ function eventStartLevel()
 	// Restrict the map to the original level for now
 	setScrollLimits(0, 0, 64, 64);
 
-	// Set the fog to it's default colours
-	camSetFog(182, 225, 236);
+	// Shift the sun towards the east
+	camSetSunPos(-450.0, -400.0, 225.0);
 }

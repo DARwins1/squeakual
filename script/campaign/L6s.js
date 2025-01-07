@@ -43,6 +43,12 @@ function eventStartLevel()
 
 	// Change the fog colour to a light pink/purple
 	camSetFog(185, 182, 236);
+	// Shift the sun towards the east
+	camSetSunPos(-450.0, -400.0, 225.0);
+	// Add a slight purple hue
+	camSetSunIntensity(.5,.45,.5);
+	// Clear skies
+	camSetWeather(CAM_WEATHER_CLEAR);
 }
 
 

@@ -50,7 +50,7 @@ infbjeep: { body: "InfestedJeepBody", prop: "BaBaProp", weap: "InfJeepMG" }, // 
 infrbjeep: { body: "InfestedRKJeepBody", prop: "BaBaProp", weap: "BabaRocket" }, // Infested Rocket Jeep
 stinger: { body: "CrawlerBody", prop: "CyborgLegs", weap: "StingerTail" }, // Stinger Crawler
 vilestinger: { body: "CrawlerBody", prop: "CyborgLegs", weap: "VileStingerTail" }, // Vile Stinger Crawler
-boomtick: { body: "CrawlerBody", prop: "BoomTickLegs", weap: "BoomTickSac" }, // Boom Tick Crawler
+boomtick: { body: "BoomTickBody", prop: "BoomTickLegs", weap: "BoomTickSac" }, // Boom Tick Crawler
 
 
 // Reclamation 2 Campaign
