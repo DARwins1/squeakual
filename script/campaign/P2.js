@@ -1114,7 +1114,7 @@ function eventStartLevel()
 	// All other factions should retain their color from the previous mission
 
 	// The player only loses if they run out of units
-	camSetStandardWinLossConditions(CAM_VICTORY_SCRIPTED, "P2", {
+	camSetStandardWinLossConditions(CAM_VICTORY_SCRIPTED, "A1L1", {
 		showArtifacts: false,
 		defeatOnDeath: false, // Player doesn't have any trucks or factories for the first section
 		callback: "playerReallyAlive"

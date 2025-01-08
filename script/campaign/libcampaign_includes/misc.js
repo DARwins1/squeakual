@@ -1488,6 +1488,10 @@ function __camWeatherCycle()
 			{
 				setWeather(WEATHER_RAIN);
 			}
+			else
+			{
+				setWeather(WEATHER_CLEAR);
+			}
 			return;
 		case CAM_WEATHER_RAINSTORM: // Constant rain
 			setWeather(WEATHER_RAIN);
@@ -1496,6 +1500,10 @@ function __camWeatherCycle()
     		if (RAND_WEATHER)
     		{
     			setWeather(WEATHER_SNOW);
+    		}
+    		else
+    		{
+    			setWeather(WEATHER_CLEAR);
     		}
     		return;
     	case CAM_WEATHER_SNOWSTORM: // Constant snow

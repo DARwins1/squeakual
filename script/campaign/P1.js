@@ -31,7 +31,10 @@ var playerColour;
 var playerTemplateList;
 // Number of warehouses destroyed
 var numWarehousesDestroyed;
-var lzBeaconPlaced;
+var lz1BeaconPlaced;
+var lz2BeaconPlaced;
+var lz3BeaconPlaced;
+var lz4BeaconPlaced;
 
 // All factory-produced infested units are automatically assigned to this group
 var infGlobalAttackGroup;
@@ -110,7 +113,7 @@ camAreaEvent("attackTrigger1", function(droid)
 				{text: "CLAYDE: If you can clear them, I can deliver you reinforcements.", delay: 3, sound: CAM_RCLICK},
 			]);
 			hackAddMessage("LZ1", PROX_MSG, CAM_HUMAN_PLAYER);
-			lzBeaconPlaced = true;
+			lz1BeaconPlaced = true;
 		}
 		else
 		{
@@ -123,6 +126,7 @@ camAreaEvent("attackTrigger1", function(droid)
 			]);
 		}
 		hackAddMessage("LZ2", PROX_MSG, CAM_HUMAN_PLAYER);
+		lz2BeaconPlaced = true;
 	}
 	else
 	{
@@ -172,6 +176,7 @@ camAreaEvent("progTrigger1", function(droid)
 			{text: "CHARLIE: Commander Bravo, we've spotted another LZ to the south of your position.", delay: 2, sound: CAM_RCLICK},
 		]);
 		hackAddMessage("LZ3", PROX_MSG, CAM_HUMAN_PLAYER);
+		lz3BeaconPlaced = true;
 	}
 	else
 	{
@@ -191,6 +196,7 @@ camAreaEvent("progTrigger2", function(droid)
 			{text: "CHARLIE: Make sure you secure it before you push into the main town.", delay: 3, sound: CAM_RCLICK},
 		]);
 		hackAddMessage("LZ4", PROX_MSG, CAM_HUMAN_PLAYER);
+		lz4BeaconPlaced = true;
 	}
 	else
 	{
@@ -417,7 +423,7 @@ function sendTransport1()
 		}
 	);
 
-	if (lzBeaconPlaced)
+	if (lz1BeaconPlaced)
 	{
 		hackRemoveMessage("LZ1", PROX_MSG, CAM_HUMAN_PLAYER);
 	}
@@ -451,7 +457,10 @@ function sendTransport2()
 		{text: "CHARLIE: ...Just keep their short range in mind.", delay: 4, sound: CAM_RCLICK},
 	]);
 
-	hackRemoveMessage("LZ2", PROX_MSG, CAM_HUMAN_PLAYER);
+	if (lz2BeaconPlaced)
+	{
+		hackRemoveMessage("LZ2", PROX_MSG, CAM_HUMAN_PLAYER);
+	}
 
 	const lz = getObject("landingZone2");
 	setNoGoArea(lz.x, lz.y, lz.x2, lz.y2, CAM_HUMAN_PLAYER);
@@ -481,7 +490,10 @@ function sendTransport3()
 		{text: "CHARLIE: ...They're definitely not the sturdiest vehicles we've got.", delay: 3, sound: CAM_RCLICK},
 	]);
 
-	hackRemoveMessage("LZ3", PROX_MSG, CAM_HUMAN_PLAYER);
+	if (lz3BeaconPlaced)
+	{
+		hackRemoveMessage("LZ3", PROX_MSG, CAM_HUMAN_PLAYER);
+	}
 
 	const lz = getObject("landingZone3");
 	setNoGoArea(lz.x, lz.y, lz.x2, lz.y2, CAM_HUMAN_PLAYER);
@@ -511,7 +523,10 @@ function sendTransport4()
 		{text: "CHARLIE: ...It looks pretty ugly in there.", delay: 4, sound: CAM_RCLICK},
 	]);
 
-	hackRemoveMessage("LZ4", PROX_MSG, CAM_HUMAN_PLAYER);
+	if (lz4BeaconPlaced)
+	{
+		hackRemoveMessage("LZ4", PROX_MSG, CAM_HUMAN_PLAYER);
+	}
 
 	const lz = getObject("landingZone4");
 	setNoGoArea(lz.x, lz.y, lz.x2, lz.y2, CAM_HUMAN_PLAYER);
@@ -861,7 +876,10 @@ function eventStartLevel()
 		cTempl.cybmg, cTempl.cybmg, cTempl.cybmg, cTempl.cybmg,
 	];
 	numWarehousesDestroyed = 0;
-	lzBeaconPlaced = false;
+	lz1BeaconPlaced = false;
+	lz2BeaconPlaced = false;
+	lz3BeaconPlaced = false;
+	lz4BeaconPlaced = false;
 
 	setTimer("checkLZ1Tower", camSecondsToMilliseconds(1));
 

@@ -2,13 +2,12 @@ include("script/campaign/transitionTech.js");
 include("script/campaign/libcampaign.js");
 include("script/campaign/templates.js");
 
-const MIS_TRANSPORT_LIMIT = 3;
 const MIS_ORANGE_SCAVS = 4;
 const MIS_PINK_SCAVS = 5;
 const MIS_RED_SCAVS = 6;
 const transportEntryPos = { x: 60, y: 4 };
 
-var transporterIndex; //Number of transport loads sent into the level
+var firstTransportLanded;
 var startedFromMenu;
 var orangeAggrod;
 var pinkAggrod;
@@ -43,35 +42,13 @@ camAreaEvent("heliRemoveZone", function(droid)
 // Otherwise a player can just bring in units from the Prologue.
 function sendPlayerTransporter()
 {
-	if (!camDef(transporterIndex))
-	{
-		transporterIndex = 0;
-	}
-
-	if (transporterIndex >= MIS_TRANSPORT_LIMIT)
-	{
-		removeTimer("sendPlayerTransporter");
-		return;
-	}
-
 	// The transport contents are always the same:
 	const firstTransportDroids = [ // 4 Trucks, 4 Light Cannons, 2 Repair Turrets
 		cTempl.truck, cTempl.truck, cTempl.truck, cTempl.truck,
 		cTempl.pllcanw, cTempl.pllcanw, cTempl.pllcanw, cTempl.pllcanw,
 		cTempl.pllrepw, cTempl.pllrepw,
 	];
-	const secondTransportDroids = [ // 4 Machinegunner Cyborgs, 4 Sarissas, 2 Repair Turrets
-		cTempl.cybmg, cTempl.cybmg, cTempl.cybmg, cTempl.cybmg,
-		cTempl.pllsart, cTempl.pllsart, cTempl.pllsart, cTempl.pllsart,
-		cTempl.pllrepw, cTempl.pllrepw,
-	];
-	const thirdTransportDroids = [ // 6 Flamer Cyborgs, 4 Twin Machineguns
-		cTempl.cybfl, cTempl.cybfl, cTempl.cybfl, cTempl.cybfl, cTempl.cybfl, cTempl.cybfl,
-		cTempl.plltmgt, cTempl.plltmgt, cTempl.plltmgt, cTempl.plltmgt,
-	];
-	const transportDroidLists = [firstTransportDroids, secondTransportDroids, thirdTransportDroids];
-
-	camSendReinforcement(CAM_HUMAN_PLAYER, camMakePos("landingZone"), transportDroidLists[transporterIndex],
+	camSendReinforcement(CAM_HUMAN_PLAYER, camMakePos("landingZone"), firstTransportDroids,
 		CAM_REINFORCE_TRANSPORT, {
 			entry: transportEntryPos,
 			exit: transportEntryPos
@@ -128,13 +105,13 @@ function grantPlayerTech()
 		enableStructure(camBasicStructs[x], CAM_HUMAN_PLAYER);
 	}
 
-	camCompleteRequiredResearch(camAct1StartResearch, CAM_HUMAN_PLAYER);
+	camCompleteRequiredResearch(camRec2StartResearch, CAM_HUMAN_PLAYER);
 }
 
 // Get some higher rank droids.
 function setUnitRank(transport)
 {
-	const droidExp = [16, 8, 4];
+	const EXP = (firstTransportLanded) ? 8 : 16;
 	let droids;
 
 	if (transport)
@@ -147,7 +124,7 @@ function setUnitRank(transport)
 		const droid = droids[i];
 		if (droid.droidType !== DROID_CONSTRUCT && droid.droidType !== DROID_REPAIR)
 		{
-			setDroidExperience(droid, droidExp[(transporterIndex - 1)]);
+			setDroidExperience(droid, EXP);
 		}
 	}
 }
@@ -157,20 +134,15 @@ function eventTransporterLanded(transport)
 {
 	if (transport.player === CAM_HUMAN_PLAYER)
 	{
-		if (!camDef(transporterIndex))
+		if (!firstTransportLanded)
 		{
-			transporterIndex = 0;
-		}
-
-		if (transporterIndex == 0)
-		{
+			setUnitRank(transport);
 			camCallOnce("ambushLZ");
+			firstTransportLanded = true;
 		}
-
-		transporterIndex += 1;
-
-		if (startedFromMenu)
+		else if (startedFromMenu)
 		{
+			// Only grant more exp if starting from the menu
 			setUnitRank(transport);
 		}
 	}
@@ -673,25 +645,52 @@ function eventStartLevel()
 	}
 
 	startedFromMenu = false;
-
-	if (getResearch("R-Script-ProloguePlayed", CAM_HUMAN_PLAYER).done)
-	{
-		// Player transitioned from the prologue
-		setReinforcementTime(camMinutesToSeconds(2)); // 2 min.
-	}
-	else
+	if (!getResearch("R-Script-ProloguePlayed", CAM_HUMAN_PLAYER).done)
 	{
 		// Player started from the menu
 		startedFromMenu = true;
-		setTimer("sendPlayerTransporter", camMinutesToMilliseconds(2));
+
+		// Total units (not including the first transport):
+		// 4 Machinegunner Cyborgs
+		// 4 Sarissas
+		// 2 Repair Turrets
+		// 6 Flamer Cyborgs
+		// 4 Twin Machineguns
+		const droids = [
+			cTempl.cybmg, cTempl.cybmg, cTempl.cybmg, cTempl.cybmg,
+			cTempl.pllsart, cTempl.pllsart, cTempl.pllsart, cTempl.pllsart,
+			cTempl.pllrepw, cTempl.pllrepw,
+			cTempl.cybfl, cTempl.cybfl, cTempl.cybfl, cTempl.cybfl, cTempl.cybfl, cTempl.cybfl,
+			cTempl.plltmgt, cTempl.plltmgt, cTempl.plltmgt, cTempl.plltmgt,
+		];
+		// Store units "offworld" so that the player can bring them in via transport.
+		for (const template of droids)
+		{
+			// Create the droid
+			addDroid(CAM_HUMAN_PLAYER, -1, -1, 
+				camNameTemplate(template), template.body, template.prop, "", "", template.weap);
+			// NOTE: We can't give the offworld droid XP here, since the scripting API can't find it.
+			// Instead, we'll grant XP when the transport drops it off.
+		}
+
+		// Also grant research from the prologue
+		camCompleteRequiredResearch(camRec2PrologueResearch, CAM_HUMAN_PLAYER);
 	}
+	else if (enumResearch().length == 0 && !getResearch("R-Wpn-Rocket-LtA-TMk1").done)
+	{
+		// The player didn't find the Sarissa in the prologue...
+		camAddArtifact({"redFactory1": { tech: "R-Wpn-Rocket-LtA-TMk1" }}); // Sarissa
+	}
+
 	sendPlayerTransporter();
+	setReinforcementTime(camMinutesToSeconds(2)); // 2 min.
 
 	camAutoReplaceObjectLabel("heliTower");
 
 	orangeAggrod = false;
 	pinkAggrod = false;
 	redAggrod = false;
+	firstTransportLanded = false;
 	camEnableFactory("orangeFactory2");
 	camEnableFactory("pinkFactory3");
 
