@@ -146,6 +146,7 @@ function cam_eventStartLevel()
 	__camQueuedDialogue = [];
 	__camLatestDialogueTime = 0;
 	__camSunStats = {};
+	__camBonusPowerGranted = false;
 	camSetPropulsionTypeLimit(); //disable the propulsion changer by default
 	__camAiPowerReset(); //grant power to the AI
 	camSetFog(); // Set fog to it's default color
@@ -323,8 +324,8 @@ function cam_eventTransporterExit(transport)
 				setReinforcementTime(__camVictoryData.reinforcements);
 			}
 		}
-		// Show how long until the transporter comes back on Beta End.
-		if (__camWinLossCallback === CAM_VICTORY_TIMEOUT)
+		// Show how long until the transporter comes on evacuation missions
+		if (__camWinLossCallback === CAM_VICTORY_EVACUATION)
 		{
 			setReinforcementTime(__camVictoryData.reinforcements);
 		}
@@ -351,8 +352,8 @@ function cam_eventTransporterLanded(transport)
 	}
 	else
 	{
-		// Make the transporter timer on Beta End disappear, since the transporter has arrived.
-		if (__camWinLossCallback === CAM_VICTORY_TIMEOUT)
+		// Make the transporter timer on evac missions disappear, since the transporter has arrived.
+		if (__camWinLossCallback === CAM_VICTORY_EVACUATION)
 		{
 			setReinforcementTime(-1);
 		}
@@ -368,7 +369,7 @@ function cam_eventMissionTimeout()
 		camTrace("0 minutes remaining.");
 		__camGameLost();
 	}
-	else if (!camIsScripted())
+	else if (__camWinLossCallback !== CAM_VICTORY_SCRIPTED)
 	{
 		const __WON = camCheckExtraObjective();
 		if (!__WON)
@@ -446,11 +447,17 @@ function cam_eventGameLoaded()
 	camSetSkyType();
 	__camWeatherCycle();
 
-	if (__camWinLossCallback === CAM_VICTORY_TIMEOUT
+	if (__camWinLossCallback === CAM_VICTORY_EVACUATION
 		&& enumDroid(CAM_HUMAN_PLAYER, DROID_SUPERTRANSPORTER).length === 0)
 	{
-		// If the transport is gone on Beta End, put a timer up to show when it'll be back
+		// If the transport is gone on an evac mission, put a timer up to show when it'll be back
 		setReinforcementTime(__camVictoryData.reinforcements);
+	}
+
+	if (__camBonusPowerGranted)
+	{
+		// Bonus power has already been granted, don't let the player generate more power
+		setPowerModifier(0, CAM_HUMAN_PLAYER);
 	}
 
 	//Subscribe to eventGroupSeen again.

@@ -349,7 +349,7 @@ function eventStartLevel()
    	camSetStandardWinLossConditions(CAM_VICTORY_STANDARD, "L4S", {
 		callback: "checkMissileSilos"
 	});
-	camSetExtraObjectiveMessage("Defend the missile silos");
+	camSetExtraObjectiveMessage(_("Defend the missile silos"));
 
 	if (!tweakOptions.rec_timerlessMode)
 	{
@@ -502,6 +502,8 @@ function eventStartLevel()
 
 	camUpgradeOnMapStructures("Sys-SensoTower01", "Sys-RustSensoTower01", MIS_CYAN_SCAVS);
 	camUpgradeOnMapStructures("Sys-VTOL-RadarTower01", "Sys-VTOL-RustyRadarTower01", MIS_CYAN_SCAVS);
+
+	camAutoReplaceObjectLabel("radarTower");
 
 	// Restrict the map to the original level for now
 	setScrollLimits(0, 0, 64, 64);

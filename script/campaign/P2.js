@@ -232,7 +232,7 @@ function expandMap()
 	hackAddMessage("CIVS3", PROX_MSG, CAM_HUMAN_PLAYER);
 	hackAddMessage("CIVS4", PROX_MSG, CAM_HUMAN_PLAYER);
 
-	camSetStandardWinLossConditions(CAM_VICTORY_STANDARD, "A1L1");
+	camSetStandardWinLossConditions(CAM_VICTORY_SCRIPTED, "A1L1", {showArtifacts: false});
 	camSetExtraObjectiveMessage(["Use Trucks to escort civilians back to the haven", "Don't lose " + MIS_LOST_THRESHOLD + " Transport Trucks (0 LOST)"]);
 
 	// Queue the start of the infested waves and scavenger bases
@@ -974,6 +974,7 @@ function checkCivsDone()
 
 		// Re-place a beacon in Charlie's safe haven
 		hackAddMessage("SAFE_HAVEN", PROX_MSG, CAM_HUMAN_PLAYER);
+		camSetExtraObjectiveMessage(_("Move all units into the haven"));
 	}
 }
 
@@ -1004,7 +1005,7 @@ function checkHaven()
 
 		queue("nukeMap", camSecondsToMilliseconds(6));
 
-		camSetStandardWinLossConditions(CAM_VICTORY_SCRIPTED, "A1L1");
+		camSetExtraObjectiveMessage();
 		setMissionTime(-1);
 
 		hackRemoveMessage("SAFE_HAVEN", PROX_MSG, CAM_HUMAN_PLAYER);
@@ -1082,7 +1083,7 @@ function nukeMap()
 	setReticuleFlash(2, false);
 
 	// End the mission after the dialogue is finished
-	queue("camScriptedVictory", camSecondsToMilliseconds(52));
+	queue("camEndMission", camSecondsToMilliseconds(52));
 }
 
 function checkTrucksLost()
@@ -1098,6 +1099,13 @@ function checkTrucksLost()
 	}
 }
 
+// Returns false if the player if the player has no units, true otherwise
+// Used until the player gains access to Charlie's base
+function playerReallyAlive()
+{
+	return enumDroid(DROID_ANY, CAM_HUMAN_PLAYER).length > 0;
+}
+
 function eventStartLevel()
 {
 	const PLAYER_COLOR = playerData[0].colour;
@@ -1105,7 +1113,12 @@ function eventStartLevel()
 	// All other factions should retain their color from the previous mission
 
 	// The player only loses if they run out of units
-	camSetStandardWinLossConditions(CAM_VICTORY_TIMEOUT, "A1L1", {reinforcements: -1});
+	camSetStandardWinLossConditions(CAM_VICTORY_SCRIPTED, "P2", {
+		showArtifacts: false,
+		defeatOnDeath: false, // Player doesn't have any trucks or factories for the first section
+		callback: "playerReallyAlive"
+	});
+	camSetExtraObjectiveMessage(_("Regroup with Team Charlie"));
 
 	// Set alliances
 	setAlliance(MIS_CIVS, CAM_HUMAN_PLAYER, true);

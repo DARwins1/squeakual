@@ -296,7 +296,7 @@ function scavDialogue()
 		{text: "CLAYDE: Lieutenant, as soon as possible, I want reconnaissance on NASDA Central.", delay: 3, sound: CAM_RCLICK},
 		{text: "CLAYDE: Find out what we'll be dealing with when we move to capture it.", delay: 3, sound: CAM_RCLICK},
 		{text: "CLAYDE: I don't want any surprises this time.", delay: 3, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: Roger that, sir.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Understood, sir.", delay: 3, sound: CAM_RCLICK},
 	]);
 }
 

@@ -321,7 +321,7 @@ function checkIfLaunched()
 // It's basically impossible for the player to truly "lose" this level. Instead, the player has to focus on saving as many of their units/resources as possible
 function eventStartLevel()
 {
-	camSetStandardWinLossConditions(CAM_VICTORY_TIMEOUT, "A2L1", {
+	camSetStandardWinLossConditions(CAM_VICTORY_EVACUATION, "A2L1", {
 		reinforcements: camMinutesToSeconds(4), // Duration the transport "leaves" map.
 		gameOverOnDeath: false, // Don't fail when the player runs out of stuff
 		callback: "checkIfLaunched"

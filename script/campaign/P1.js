@@ -561,7 +561,7 @@ function disableWarehouseDestruction()
 	]);
 
 	// End the mission after the dialogue is finished
-	queue("camScriptedVictory", camSecondsToMilliseconds(22));
+	queue("camEndMission", camSecondsToMilliseconds(22));
 }
 
 function eventDestroyed(obj)
@@ -715,6 +715,12 @@ function resetMinimap()
 	setMiniMap(true);
 }
 
+// Returns false if the player if the player has no units, true otherwise
+function playerReallyAlive()
+{
+	return enumDroid(DROID_ANY, CAM_HUMAN_PLAYER).length > 0;
+}
+
 function eventStartLevel()
 {
 	playerColour = playerData[0].colour;
@@ -724,7 +730,12 @@ function eventStartLevel()
 	changePlayerColour(CAM_INFESTED, (playerColour !== 9) ? 9 : 4); // Infested to purple or red
 
 	// The player only loses if they run out of units
-	camSetStandardWinLossConditions(CAM_VICTORY_TIMEOUT, "P2", {reinforcements: -1});
+	camSetStandardWinLossConditions(CAM_VICTORY_SCRIPTED, "P2", {
+		showArtifacts: false,
+		defeatOnDeath: false, // Player doesn't have any trucks or factories, so technically they are always "dead"
+		callback: "playerReallyAlive"
+	});
+	camSetExtraObjectiveMessage(_("Investigate the infested town"));
 
 	// Grant the player a minimap
 	// The player will get a real HQ in P2

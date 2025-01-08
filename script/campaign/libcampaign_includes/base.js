@@ -125,7 +125,10 @@ function camSetEnemyBases(bases)
 			camTrace("Base", baseLabel, "defined as empty group");
 			bi.eliminated = true;
 			bi.detected = true;
-			++__camNumEnemyBases; // Consider it "destroyed"
+			if (!__RELOAD)
+			{
+				++__camNumEnemyBases; // Consider it "destroyed"
+			}
 		}
 		else if (!__RELOAD)
 		{
@@ -240,6 +243,17 @@ function camBaseIsEliminated(baseLabel)
 function camBaseIsFriendly(baseLabel)
 {
 	return __camEnemyBases[baseLabel].friendly;
+}
+
+//;; ## camNumEnemyBasesRemaining()
+//;;
+//;; Returns the number of enemy bases left standing.
+//;;
+//;; @returns {number}
+//;;
+function camNumEnemyBasesRemaining()
+{
+	return Object.keys(__camEnemyBases).length - __camNumEnemyBases;
 }
 
 //////////// privates

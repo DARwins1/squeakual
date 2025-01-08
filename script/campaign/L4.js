@@ -256,7 +256,7 @@ function infestedAmbush2()
 		{text: "CLAYDE: Don't let anything here survive.", delay: 2, sound: CAM_RCLICK},
 		{text: "CLAYDE: ...Scavenger or otherwise.", delay: 3, sound: CAM_RCLICK},
 	]);
-	camSetExtraObjectiveMessage("Destroy the Research Facility");
+	camSetExtraObjectiveMessage(_("Destroy the Research Facility"));
 
 	if (getObject("researchFacility") !== null)
 	{
@@ -468,7 +468,7 @@ function eventStartLevel()
 		callback: "checkResearchFacility",
 		annihilate: true
 	});
-	camSetExtraObjectiveMessage(["Investigate the Research Facility"]);
+	camSetExtraObjectiveMessage(_("Investigate the Research Facility"));
 
 	// set up alliances
 	setAlliance(MIS_RESEARCH_FACILITY, MIS_CYAN_SCAVS, true);

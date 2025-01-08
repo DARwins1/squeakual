@@ -358,7 +358,7 @@ function checkForLZReturn()
 		// Give a message about the imminent infested waves
 		camPlayVideos([cam_sounds.incoming.incomingIntelligenceReport, {video: "L6_WAVEMSG", type: MISS_MSG}]);
 		queue("messageAlert", camSecondsToMilliseconds(3.4));
-		camSetExtraObjectiveMessage("Escape the incoming infested waves");
+		camSetExtraObjectiveMessage(_("Escape the incoming infested waves"));
 
 		// Change the fog colour to a dark purple
 		// camSetFog(114, 73, 156);
@@ -743,4 +743,6 @@ function eventStartLevel()
 
 	camUpgradeOnMapStructures("Sys-SensoTower01", "Sys-RustSensoTower01", MIS_CYAN_SCAVS);
 	camUpgradeOnMapStructures("Sys-VTOL-RadarTower01", "Sys-VTOL-RustyRadarTower01", MIS_CYAN_SCAVS);
+
+	camAutoReplaceObjectLabel(["nwRadarTower", "eRadarTower"]);
 }

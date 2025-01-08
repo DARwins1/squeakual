@@ -277,7 +277,7 @@ function killSweep()
 // Show the ending screen.
 function youWin()
 {
-	camScriptedVictory();
+	camEndMission();
 }
 
 // Give a hint on how to do something i guess.
@@ -585,10 +585,10 @@ function eventStartLevel()
 	// 	{sound: cam_sounds.missile.countdown, time: 10},
 	// ];
 
-   	camSetStandardWinLossConditions(CAM_VICTORY_TIMEOUT, "THE_END", {
+   	camSetStandardWinLossConditions(CAM_VICTORY_SCRIPTED, "THE_END", {
 		callback: "checkMissileSilos"
 	});
-	camSetExtraObjectiveMessage(["Survive until evacuation", "Defend the missile silos"]);
+	camSetExtraObjectiveMessage([_("Survive until evacuation"), _("Defend the missile silos")]);
 	setMissionTime(camMinutesToSeconds(30));
 	// NOTE: This mission is basically unchanged in timerless mode
 

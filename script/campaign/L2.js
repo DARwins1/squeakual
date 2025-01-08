@@ -191,7 +191,7 @@ function eventStartLevel()
 		reinforcements: camMinutesToSeconds(1.5),
 		annihilate: true
 	});
-	camSetExtraObjectiveMessage("Rescue the civilian hostages");
+	camSetExtraObjectiveMessage(_("Rescue the civilian hostages"));
 
 	// ally scavengers with civilians
 	setAlliance(MIS_CIVILIANS, CAM_HUMAN_PLAYER, true);

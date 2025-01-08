@@ -420,8 +420,8 @@ var __camTruckAssignList;
 const CAM_VICTORY_STANDARD = "__camVictoryStandard";
 const CAM_VICTORY_PRE_OFFWORLD = "__camVictoryPreOffworld";
 const CAM_VICTORY_OFFWORLD = "__camVictoryOffworld";
-const CAM_VICTORY_TIMEOUT = "__camVictoryTimeout";
-const CAM_VICTORY_SCRIPTED = "__camVictoryScripted"; // Added by Reclamation
+const CAM_VICTORY_EVACUATION = "__camVictoryEvacuation";
+const CAM_VICTORY_SCRIPTED = "__camVictoryScripted";
 var __camWinLossCallback;
 var __camNextLevel;
 var __camNeedBonusTime;
@@ -433,6 +433,7 @@ var __camLastAttackTriggered;
 var __camLevelEnded;
 var __camExtraObjectiveMessage;
 var __camAllowVictoryMsgClear;
+var __camBonusPowerGranted;
 
 //video
 var __camVideoSequences;
