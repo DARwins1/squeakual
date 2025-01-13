@@ -39,63 +39,6 @@ var lz4BeaconPlaced;
 // All factory-produced infested units are automatically assigned to this group
 var infGlobalAttackGroup;
 
-// Damage infested stuff
-function preDamageInfested()
-{
-	const structures = enumStruct(CAM_INFESTED);
-	for (let i = 0; i < structures.length; ++i)
-	{
-		// 30% to 60% base HP
-		setHealth(structures[i], 30 + camRand(31));
-	}
-
-	const units = enumDroid(CAM_INFESTED);
-	for (let i = 0; i < units.length; ++i)
-	{
-		if (units[i].body !== "CrawlerBody") // Don't damage crawlers
-		{
-			// 50% to 80% base HP
-			setHealth(units[i], 50 + camRand(31));
-		}
-	}
-}
-
-// Damage infested units when they're built
-function eventDroidBuilt(droid, structure)
-{
-	if (droid.player === CAM_INFESTED)
-	{
-		if (droid.body !== "CrawlerBody")
-		{
-			// 50% to 80% base HP
-			setHealth(droid, 50 + camRand(41));
-		}
-		if (!camDef(infGlobalAttackGroup))
-		{
-			infGlobalAttackGroup = camMakeGroup(droid);
-			camManageGroup(infGlobalAttackGroup, CAM_ORDER_ATTACK, {removable: false, targetPlayer: CAM_HUMAN_PLAYER})
-		}
-		else
-		{
-			groupAdd(infGlobalAttackGroup, droid);
-		}
-	}
-}
-
-// Damage infested reinforcements
-function preDamageInfestedGroup(group)
-{
-	const units = enumGroup(group);
-	for (let i = 0; i < units.length; ++i)
-	{
-		if (units[i].body !== "CrawlerBody") // Don't damage crawlers
-		{
-			// 50% to 80% base HP
-			setHealth(units[i], 50 + camRand(31));
-		}
-	}
-}
-
 // Triggered when the player approaches the first MRP emplacement
 camAreaEvent("attackTrigger1", function(droid)
 {
@@ -338,33 +281,33 @@ function sendInfestedReinforcements()
 	if (stage == 1 && getObject("infFactory1") !== null) // Stop if the infested factory was destroyed
 	{
 		const droids = [cTempl.stinger, cTempl.infbloke];
-		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, getObject("infEntry1"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry1"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
 			{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}}
-		));
+		);
 	}
 	// Southeast entrance
 	else if (stage == 2 && getObject("infFactory2") !== null)
 	{
 		const droids = [cTempl.stinger, cTempl.infbloke, cTempl.infbjeep];
-		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, getObject("infEntry2"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry2"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
 			{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}}
-		));
+		);
 	}
 	// Northeast entrance
 	else if (stage == 3 && getObject("infFactory3") !== null)
 	{
 		const droids = [cTempl.stinger, cTempl.infbjeep, cTempl.infrbjeep];
-		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, getObject("infEntry3"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry3"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
 			{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}}
-		));
+		);
 	}
 	// North entrance
 	else if (stage == 4 && getObject("infFactory4") !== null)
 	{
 		const droids = [cTempl.stinger, cTempl.stinger, cTempl.infbjeep, cTempl.infkevbloke];
-		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, getObject("infEntry4"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry4"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
 			{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}}
-		));
+		);
 	}
 }
 
@@ -896,7 +839,8 @@ function eventStartLevel()
 	camSetWeather(CAM_WEATHER_SNOWSTORM);
 
 	// All Infested structures start out partially damaged
-	preDamageInfested();
+	// preDamageInfested();
+	camSetPreDamageModifier(CAM_INFESTED, [50, 80], [30, 60]);
 
 	// NOTE: Timerless mode does not affect this mission at all
 	setMissionTime(-1);

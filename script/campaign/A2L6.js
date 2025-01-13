@@ -672,21 +672,6 @@ function enableFinalFactories()
 	camCallOnce("diversionDialogue");
 }
 
-// Damage infested reinforcements
-// TODO: Move this into a general libcampaign function
-function preDamageInfestedGroup(group)
-{
-	const units = enumGroup(group);
-	for (let i = 0; i < units.length; ++i)
-	{
-		if (units[i].body !== "CrawlerBody") // Don't damage crawlers
-		{
-			// 50% to 80% base HP
-			setHealth(units[i], 50 + camRand(31));
-		}
-	}
-}
-
 // Randomize the provided list of units and tack on a bunch of extra rocket fodder
 // TODO: Move this into a general libcampaign function
 function randomizeTemplates(list)
@@ -808,7 +793,7 @@ function sendInfestedReinforcements()
 	{
 		camCallOnce("diversionDialogue");
 		const droids = [cTempl.stinger, cTempl.infbloke, cTempl.infkevbloke, cTempl.infminitruck, cTempl.infbuggy, cTempl.infrbuggy];
-		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, getObject("infestedEntry3"), randomizeTemplates(droids), CAM_REINFORCE_GROUND));
+		camSendReinforcement(CAM_INFESTED, getObject("infestedEntry3"), randomizeTemplates(droids), CAM_REINFORCE_GROUND);
 	}
 
 	// SE entrances
@@ -816,12 +801,12 @@ function sendInfestedReinforcements()
 	{
 		camCallOnce("diversionDialogue");
 		const droids1 = [cTempl.stinger, cTempl.inffiretruck, cTempl.infkevbloke, cTempl.inflance, cTempl.infbuggy, cTempl.infrbuggy];
-		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, getObject("infestedEntry1"), randomizeTemplates(droids1), CAM_REINFORCE_GROUND, 
+		camSendReinforcement(CAM_INFESTED, getObject("infestedEntry1"), randomizeTemplates(droids1), CAM_REINFORCE_GROUND, 
 			{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}} // Annoy the player specifically
-		));
+		);
 
 		const droids2 = [cTempl.stinger, cTempl.infkevlance, cTempl.infbuscan, cTempl.infbloke, cTempl.infbjeep, cTempl.infrbjeep];
-		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, getObject("infestedEntry2"), randomizeTemplates(droids2), CAM_REINFORCE_GROUND));
+		camSendReinforcement(CAM_INFESTED, getObject("infestedEntry2"), randomizeTemplates(droids2), CAM_REINFORCE_GROUND);
 	}
 }
 
@@ -1096,6 +1081,9 @@ function eventStartLevel()
 	camSetDroidRank(getObject("charlieCommander"), CHARLIE_RANK);
 	camSetDroidRank(getObject("colCommander1"), COL_RANK1);
 	camSetDroidRank(getObject("colCommander2"), COL_RANK2);
+
+	// Most Infested units start out pre-damaged
+	camSetPreDamageModifier(CAM_INFESTED, [50, 80], [60, 90], CAM_INFESTED_PREDAMAGE_EXCLUSIONS);
 
 	// Shift the sun slightly the east
 	camSetSunPos(-225.0, -600.0, 450.0);

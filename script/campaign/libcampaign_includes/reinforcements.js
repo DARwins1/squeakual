@@ -73,6 +73,7 @@ function camSendReinforcement(playerId, position, templates, kind, data)
 				}
 				
 				camSetDroidExperience(droid);
+				__camPreDamageDroid(droid);
 				droids.push(droid);
 			}
 			const __GROUP = camMakeGroup(droids);

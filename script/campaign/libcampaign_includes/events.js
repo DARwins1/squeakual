@@ -147,6 +147,7 @@ function cam_eventStartLevel()
 	__camLatestDialogueTime = 0;
 	__camSunStats = {};
 	__camBonusPowerGranted = false;
+	__camPreDamageModifier = [];
 	camSetPropulsionTypeLimit(); //disable the propulsion changer by default
 	__camAiPowerReset(); //grant power to the AI
 	camSetFog(); // Set fog to it's default color
@@ -181,6 +182,19 @@ function cam_eventDroidBuilt(droid, structure)
 	{
 		return;
 	}
+	if (droid.player === CAM_INFESTED)
+	{
+		// If an Infested droid was produced from a factory, immediately set it to target the player
+		if (!camDef(__camInfestedGlobalAttackGroup))
+		{
+			__camInfestedGlobalAttackGroup = camMakeGroup(droid);
+			camManageGroup(__camInfestedGlobalAttackGroup, CAM_ORDER_ATTACK, {removable: false, targetPlayer: CAM_HUMAN_PLAYER})
+		}
+		else
+		{
+			groupAdd(__camInfestedGlobalAttackGroup, droid);
+		}
+	}
 	if (camGetNexusState() && droid.player === CAM_NEXUS && __camNextLevel === "CAM3C" && camRand(100) < 7)
 	{
 		// Occasionally hint that NEXUS is producing units on Gamma 5.
@@ -208,6 +222,7 @@ function cam_eventDroidBuilt(droid, structure)
 		return;
 	}
 	camSetDroidExperience(droid);
+	__camPreDamageDroid(droid);
 	__camAddDroidToFactoryGroup(droid, structure);
 }
 

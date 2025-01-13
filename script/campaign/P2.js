@@ -82,41 +82,6 @@ function heliAttack()
 	camSetVtolData(MIS_CYAN_SCAVS, "heliAttackPos", "heliRemoveZone", list, camChangeOnDiff(camMinutesToMilliseconds(2)), "heliTower", ext);
 }
 
-// Damage infested stuff
-function preDamageInfested()
-{
-	const structures = enumStruct(CAM_INFESTED);
-	for (let i = 0; i < structures.length; ++i)
-	{
-		// 30% to 60% base HP
-		setHealth(structures[i], 30 + camRand(31));
-	}
-
-	const units = enumDroid(CAM_INFESTED);
-	for (let i = 0; i < units.length; ++i)
-	{
-		if (units[i].body !== "CrawlerBody") // Don't damage crawlers
-		{
-			// 50% to 80% base HP
-			setHealth(units[i], 50 + camRand(31));
-		}
-	}
-}
-
-// Damage infested reinforcements
-function preDamageInfestedGroup(group)
-{
-	const units = enumGroup(group);
-	for (let i = 0; i < units.length; ++i)
-	{
-		if (units[i].body !== "CrawlerBody") // Don't damage crawlers
-		{
-			// 50% to 80% base HP
-			setHealth(units[i], 50 + camRand(31));
-		}
-	}
-}
-
 // Triggered when the player moves towards the haven
 camAreaEvent("ambushTrigger", function(droid)
 {
@@ -813,16 +778,16 @@ function sendInfestedReinforcements()
 	if (camRand(2) == 0)
 	{
 		// East entrance
-		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, getObject("infEntry1"), droids, CAM_REINFORCE_GROUND, 
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry1"), droids, CAM_REINFORCE_GROUND, 
 			{order: CAM_ORDER_DEFEND, data: {pos: camMakePos("infExit"), radius: 0}}
-		));
+		);
 	}
 	else
 	{
 		// West entrance
-		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, getObject("infEntry2"), droids, CAM_REINFORCE_GROUND, 
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry2"), droids, CAM_REINFORCE_GROUND, 
 			{order: CAM_ORDER_DEFEND, data: {pos: camMakePos("infExit"), radius: 0}}
-		));
+		);
 	}
 
 	// Decrease the threat factor over time if it's above the minimum
@@ -1212,8 +1177,8 @@ function eventStartLevel()
 	// Shift the sun towards the east
 	camSetSunPos(-450.0, -400.0, 225.0);
 
-	// All Infested structures start out partially damaged
-	preDamageInfested(); // TODO: ARE there any structures???
+	// All Infested start out partially damaged
+	camSetPreDamageModifier(CAM_INFESTED, [50, 80], [60, 90], CAM_INFESTED_PREDAMAGE_EXCLUSIONS);
 
 	setMissionTime(-1);
 

@@ -46,63 +46,6 @@ camAreaEvent("heliRemoveZone", function(droid)
 	resetLabel("heliRemoveZone", MIS_CYAN_SCAVS);
 });
 
-// Damage infested units when they're built
-function eventDroidBuilt(droid, structure)
-{
-	if (droid.player === CAM_INFESTED)
-	{
-		if (droid.body !== "CrawlerBody")
-		{
-			// 50% to 80% base HP
-			setHealth(droid, 50 + camRand(41));
-		}
-		if (!camDef(infGlobalAttackGroup))
-		{
-			infGlobalAttackGroup = camMakeGroup(droid);
-			camManageGroup(infGlobalAttackGroup, CAM_ORDER_ATTACK, {removable: false, targetPlayer: CAM_HUMAN_PLAYER})
-		}
-		else
-		{
-			groupAdd(infGlobalAttackGroup, droid);
-		}
-	}
-}
-
-// Damage infested structures
-function preDamageInfested()
-{
-	const structures = enumStruct(CAM_INFESTED);
-	for (let i = 0; i < structures.length; ++i)
-	{
-		// 60% to 90% base HP
-		setHealth(structures[i], 60 + camRand(31));
-	}
-
-	const units = enumDroid(CAM_INFESTED);
-	for (let i = 0; i < units.length; ++i)
-	{
-		if (units[i].body !== "CrawlerBody") // Don't damage crawlers
-		{
-			// 50% to 80% base HP
-			setHealth(units[i], 50 + camRand(41));
-		}
-	}
-}
-
-// Damage infested reinforcements
-function preDamageInfestedGroup(group)
-{
-	const units = enumGroup(group);
-	for (let i = 0; i < units.length; ++i)
-	{
-		if (units[i].body !== "CrawlerBody") // Don't damage crawlers
-		{
-			// 50% to 80% base HP
-			setHealth(units[i], 50 + camRand(31));
-		}
-	}
-}
-
 // This function is called after a video is played, a delay is required for the 'alert' sound to play properly in all cases
 function messageAlert()
 {
@@ -173,16 +116,16 @@ function infestedReinforcements()
 	if (getObject("westInfestedFactory") !== null && (!camDef(randValue) || randValue == 0))
 	{
 		const westDroids = [cTempl.stinger, cTempl.infbuscan, cTempl.infbuggy, cTempl.infrbuggy, cTempl.infbloke];
-		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, camMakePos("wHighwayEntry"), randomTemplates(westDroids), CAM_REINFORCE_GROUND, 
+		camSendReinforcement(CAM_INFESTED, camMakePos("wHighwayEntry"), randomTemplates(westDroids), CAM_REINFORCE_GROUND, 
 			{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}}
-		));
+		);
 	}
 	if (getObject("northInfestedFactory") !== null && (!camDef(randValue) || randValue == 1))
 	{
 		const northDroids = [cTempl.stinger, cTempl.boomtick, cTempl.infminitruck, cTempl.inftrike, cTempl.infrbuggy, cTempl.inflance];
-		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, camMakePos("neRoadEntry"), randomTemplates(northDroids), CAM_REINFORCE_GROUND, 
+		camSendReinforcement(CAM_INFESTED, camMakePos("neRoadEntry"), randomTemplates(northDroids), CAM_REINFORCE_GROUND, 
 			{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}}
-		));
+		);
 	}
 }
 
@@ -394,17 +337,17 @@ function infestedEndWaves()
 	const wHighwayDroids = [cTempl.stinger, cTempl.infbjeep, cTempl.infrbjeep, cTempl.infminitruck, cTempl.infkevbloke, cTempl.infkevlance];
 	const eHighwayDroids = [cTempl.stinger, cTempl.infbjeep, cTempl.infrbjeep, cTempl.infsartruck, cTempl.infkevbloke, cTempl.infkevlance];
 
-	preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, camMakePos("nBaseEntry"), randomTemplates(nBaseDroids), CAM_REINFORCE_GROUND));
-	preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, camMakePos("neRoadEntry"), randomTemplates(neRoadDroids), CAM_REINFORCE_GROUND));
+	camSendReinforcement(CAM_INFESTED, camMakePos("nBaseEntry"), randomTemplates(nBaseDroids), CAM_REINFORCE_GROUND);
+	camSendReinforcement(CAM_INFESTED, camMakePos("neRoadEntry"), randomTemplates(neRoadDroids), CAM_REINFORCE_GROUND);
 
 	if (numWaves > 5)
 	{
-		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, camMakePos("nwRoadEntry"), randomTemplates(nwRoadDroids), CAM_REINFORCE_GROUND));
+		camSendReinforcement(CAM_INFESTED, camMakePos("nwRoadEntry"), randomTemplates(nwRoadDroids), CAM_REINFORCE_GROUND);
 	}
 	if (numWaves > 11)
 	{
-		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, camMakePos("wHighwayEntry"), randomTemplates(wHighwayDroids), CAM_REINFORCE_GROUND));
-		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, camMakePos("eHighwayEntry"), randomTemplates(eHighwayDroids), CAM_REINFORCE_GROUND));
+		camSendReinforcement(CAM_INFESTED, camMakePos("wHighwayEntry"), randomTemplates(wHighwayDroids), CAM_REINFORCE_GROUND);
+		camSendReinforcement(CAM_INFESTED, camMakePos("eHighwayEntry"), randomTemplates(eHighwayDroids), CAM_REINFORCE_GROUND);
 	}
 	if (numWaves === 16)
 	{
@@ -672,7 +615,7 @@ function eventStartLevel()
 	setTimer("checkForLZReturn", camSecondsToMilliseconds(3));
 
 	// All infested structures start out partially damaged
-	preDamageInfested();
+	camSetPreDamageModifier(CAM_INFESTED, [50, 80], [60, 90], CAM_INFESTED_PREDAMAGE_EXCLUSIONS);
 
 	// If we're in Timerless mode, set up scavenger Cranes
 	if (tweakOptions.rec_timerlessMode)

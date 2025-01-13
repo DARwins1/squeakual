@@ -175,6 +175,7 @@ const camAct3StartResearch = camA2L6AllyResearch.concat([
 	"R-Wpn-Cannon4AMk1", // Artifact
 	"R-Defense-Emplacement-HPVcannon", "R-Defense-WallTower-HPVcannon", "R-Cyborg-Hvywpn-HPV", 
 	"R-Wpn-Rocket-ROF02", // Artifact
+	"R-Cyb-Hvywpn-Grenade", // Artifact
 	"R-Sys-Engineering02", // Artifact
 	"R-Sys-MobileRepairTurretHvy", "R-Defense-WallUpgrade04", "R-Struc-Materials04",
 	"R-Struc-VTOLPad-Upgrade01",

@@ -24,6 +24,12 @@
 		},
 		{
 			"stat": {
+				"id": "Rocket-Ballista",
+				"onlyIfKnown": "campaign"
+			}
+		},
+		{
+			"stat": {
 				"id": "Rocket-HvyA-T",
 				"onlyIfKnown": "campaign"
 			}

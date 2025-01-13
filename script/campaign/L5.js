@@ -92,63 +92,6 @@ function eventDestroyed(obj)
 	}
 }
 
-// Damage infested units when they're built
-function eventDroidBuilt(droid, structure)
-{
-	if (droid.player === CAM_INFESTED)
-	{
-		if (droid.body !== "CrawlerBody")
-		{
-			// 50% to 80% base HP
-			setHealth(droid, 50 + camRand(41));
-		}
-		if (!camDef(infGlobalAttackGroup))
-		{
-			infGlobalAttackGroup = camMakeGroup(droid);
-			camManageGroup(infGlobalAttackGroup, CAM_ORDER_ATTACK, {removable: false, targetPlayer: CAM_HUMAN_PLAYER})
-		}
-		else
-		{
-			groupAdd(infGlobalAttackGroup, droid);
-		}
-	}
-}
-
-// Damage infested structures
-function preDamageInfested()
-{
-	const structures = enumStruct(CAM_INFESTED);
-	for (let i = 0; i < structures.length; ++i)
-	{
-		// 60% to 90% base HP
-		setHealth(structures[i], 60 + camRand(31));
-	}
-
-	const units = enumDroid(CAM_INFESTED);
-	for (let i = 0; i < units.length; ++i)
-	{
-		if (units[i].body !== "CrawlerBody") // Don't damage crawlers
-		{
-			// 50% to 80% base HP
-			setHealth(units[i], 50 + camRand(41));
-		}
-	}
-}
-
-// Damage infested reinforcements
-function preDamageInfestedGroup(group)
-{
-	const units = enumGroup(group);
-	for (let i = 0; i < units.length; ++i)
-	{
-		if (units[i].body !== "CrawlerBody") // Don't damage crawlers
-		{
-			// 50% to 80% base HP
-			setHealth(units[i], 50 + camRand(31));
-		}
-	}
-}
-
 // Used to trigger Boom Tick demonstration (when the player sees the monste bus)
 function eventGroupSeen(viewer, group)
 {
@@ -207,12 +150,12 @@ camAreaEvent("outpostAmbushTrigger", function(droid)
 
 		// Two groups at once, from both sides
 		const group1 = [cTempl.stinger, cTempl.stinger, cTempl.infrbjeep, cTempl.infbuscan, cTempl.infbuggy, cTempl.inffiretruck];
-		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, camMakePos("ambushSpawn1"), randomTemplates(group1), CAM_REINFORCE_GROUND));
-		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, camMakePos("ambushSpawn1"), randomTemplates(group1), CAM_REINFORCE_GROUND));
+		camSendReinforcement(CAM_INFESTED, camMakePos("ambushSpawn1"), randomTemplates(group1), CAM_REINFORCE_GROUND);
+		camSendReinforcement(CAM_INFESTED, camMakePos("ambushSpawn1"), randomTemplates(group1), CAM_REINFORCE_GROUND);
 
 		const group2 = [cTempl.stinger, cTempl.inftrike, cTempl.infbuggy, cTempl.infbjeep, cTempl.infrbuggy, cTempl.infbjeep];
-		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, camMakePos("ambushSpawn2"), randomTemplates(group2), CAM_REINFORCE_GROUND));
-		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, camMakePos("ambushSpawn2"), randomTemplates(group2), CAM_REINFORCE_GROUND));
+		camSendReinforcement(CAM_INFESTED, camMakePos("ambushSpawn2"), randomTemplates(group2), CAM_REINFORCE_GROUND);
+		camSendReinforcement(CAM_INFESTED, camMakePos("ambushSpawn2"), randomTemplates(group2), CAM_REINFORCE_GROUND);
 	}
 	else
 	{
@@ -226,27 +169,27 @@ function sendInfestedReinforcements()
 	if (getObject("infestedFactory2") !== null) // Stop if the infested factory was destroyed
 	{
 		const droids = [cTempl.stinger, cTempl.infbloke, cTempl.infbloke, cTempl.infminitruck, cTempl.infbuggy, cTempl.infrbuggy];
-		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, camMakePos("infestedEntry2"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
+		camSendReinforcement(CAM_INFESTED, camMakePos("infestedEntry2"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
 			{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}}
-		));
+		);
 	}
 
 	// NW entrance
 	if (getObject("infestedFactory3") !== null)
 	{
 		const droids = [cTempl.stinger, cTempl.infbloke, cTempl.infbloke, cTempl.inflance, cTempl.infbuggy, cTempl.infrbuggy];
-		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, camMakePos("infestedEntry1"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
+		camSendReinforcement(CAM_INFESTED, camMakePos("infestedEntry1"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
 			{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}}
-		));
+		);
 	}
 
 	// West entrance
 	if (getObject("infestedFactory4") !== null)
 	{
 		const droids = [cTempl.stinger, cTempl.infkevlance, cTempl.infkevbloke, cTempl.infbjeep, cTempl.infrbjeep];
-		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, camMakePos("infestedEntry4"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
+		camSendReinforcement(CAM_INFESTED, camMakePos("infestedEntry4"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
 			{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}}
-		));
+		);
 	}
 }
 
@@ -310,9 +253,9 @@ function townAmbush2()
 	camManageGroup(camMakeGroup("boomTownGroup2"), CAM_ORDER_ATTACK, {targetPlayer: CAM_HUMAN_PLAYER});
 
 	const droids = [cTempl.stinger, cTempl.stinger, cTempl.infciv, cTempl.infciv, cTempl.infciv, cTempl.infciv, cTempl.infmoncan];
-	preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, camMakePos("infestedEntry3"), droids, CAM_REINFORCE_GROUND,
+	camSendReinforcement(CAM_INFESTED, camMakePos("infestedEntry3"), droids, CAM_REINFORCE_GROUND,
 		{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}}
-	));
+	);
 
 	// Also enables the cyan scav's factory
 	camEnableFactory("cScavFactory");
@@ -658,7 +601,7 @@ function eventStartLevel()
 	});
 
 	// Infested start out partially damaged
-	preDamageInfested();
+	camSetPreDamageModifier(CAM_INFESTED, [50, 80], [60, 90], CAM_INFESTED_PREDAMAGE_EXCLUSIONS);
 
 	// If we're in Timerless mode, set up scavenger Cranes
 	if (tweakOptions.rec_timerlessMode)

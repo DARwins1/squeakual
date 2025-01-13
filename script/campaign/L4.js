@@ -68,63 +68,6 @@ function eventDestroyed(obj)
 	}
 }
 
-// Damage infested units when they're built
-function eventDroidBuilt(droid, structure)
-{
-	if (droid.player === CAM_INFESTED)
-	{
-		if (droid.body !== "CrawlerBody")
-		{
-			// 50% to 80% base HP
-			setHealth(droid, 50 + camRand(41));
-		}
-		if (!camDef(infGlobalAttackGroup))
-		{
-			infGlobalAttackGroup = camMakeGroup(droid);
-			camManageGroup(infGlobalAttackGroup, CAM_ORDER_ATTACK, {removable: false, targetPlayer: CAM_HUMAN_PLAYER})
-		}
-		else
-		{
-			groupAdd(infGlobalAttackGroup, droid);
-		}
-	}
-}
-
-// Damage infested stuff
-function preDamageInfested()
-{
-	const structures = enumStruct(CAM_INFESTED);
-	for (let i = 0; i < structures.length; ++i)
-	{
-		// 60% to 90% base HP
-		setHealth(structures[i], 60 + camRand(31));
-	}
-
-	const units = enumDroid(CAM_INFESTED);
-	for (let i = 0; i < units.length; ++i)
-	{
-		if (units[i].body !== "CrawlerBody") // Don't damage crawlers
-		{
-			// 50% to 80% base HP
-			setHealth(units[i], 50 + camRand(31));
-		}
-	}
-}
-
-// Damage infested reinforcements
-function preDamageInfestedGroup(group)
-{
-	const units = enumGroup(group);
-	for (let i = 0; i < units.length; ++i)
-	{
-		if (units[i].body !== "CrawlerBody") // Don't damage crawlers
-		{
-			// 50% to 80% base HP
-			setHealth(units[i], 50 + camRand(31));
-		}
-	}
-}
-
 // Damage some scav stuff
 function preDamageScavs()
 {
@@ -301,9 +244,9 @@ function infestedAmbush3()
 	{
 		dorids.push(cTempl.boomtick);
 	}
-	preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, camMakePos("infestedEntryPos6"), droids, CAM_REINFORCE_GROUND, 
+	camSendReinforcement(CAM_INFESTED, camMakePos("infestedEntryPos6"), droids, CAM_REINFORCE_GROUND, 
 		{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}}
-	));
+	);
 }
 
 // Off-map infested reinforcements, disabled when the corresponding factory is destroyed
@@ -313,45 +256,45 @@ function sendInfestedReinforcements()
 	if (getObject("infestedFactory1") !== null) // Stop if the infested factory was destroyed
 	{
 		const droids = [cTempl.stinger, cTempl.infbloke];
-		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, camMakePos("infestedEntryPos1"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
+		camSendReinforcement(CAM_INFESTED, camMakePos("infestedEntryPos1"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
 			{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}}
-		));
+		);
 	}
 
 	// SW entrance
 	if (getObject("infestedFactory2") !== null)
 	{
 		const droids = [cTempl.stinger, cTempl.infbloke, cTempl.infbjeep];
-		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, camMakePos("infestedEntryPos2"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
+		camSendReinforcement(CAM_INFESTED, camMakePos("infestedEntryPos2"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
 			{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}}
-		));
+		);
 	}
 
 	// NE entrance
 	if (getObject("infestedFactory3") !== null)
 	{
 		const droids = [cTempl.stinger, cTempl.infbjeep, cTempl.infrbjeep];
-		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, camMakePos("infestedEntryPos3"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
+		camSendReinforcement(CAM_INFESTED, camMakePos("infestedEntryPos3"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
 			{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}}
-		));
+		);
 	}
 
 	// SE entrance 1
 	if (getObject("infestedFactory4") !== null && infestedTier2)
 	{
 		const droids = [cTempl.stinger, cTempl.stinger, cTempl.infbjeep, cTempl.infkevbloke];
-		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, camMakePos("infestedEntryPos4"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
+		camSendReinforcement(CAM_INFESTED, camMakePos("infestedEntryPos4"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
 			{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}}
-		));
+		);
 	}
 
 	// SE entrance 2
 	if (getObject("infestedFactory4") !== null && infestedTier3)
 	{
 		const droids = [cTempl.stinger, cTempl.inflance, cTempl.infbuscan, cTempl.infrbjeep, cTempl.infbjeep];
-		preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, camMakePos("infestedEntryPos5"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
+		camSendReinforcement(CAM_INFESTED, camMakePos("infestedEntryPos5"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
 			{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}}
-		));
+		);
 	}
 }
 
@@ -659,7 +602,7 @@ function eventStartLevel()
 		"MonsterBus", "tracked01", "", "", "RustMG3Mk1");
 
 	// Infested start out partially damaged
-	preDamageInfested();
+	camSetPreDamageModifier(CAM_INFESTED, [50, 80], [60, 90], CAM_INFESTED_PREDAMAGE_EXCLUSIONS);
 
 	// Some scavs start out damaged too
 	preDamageScavs();

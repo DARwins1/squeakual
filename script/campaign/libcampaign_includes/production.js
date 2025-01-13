@@ -349,74 +349,40 @@ function camUpgradeOnMapStructures(struct1, struct2, playerId, excluded)
 	}
 }
 
-// //;; ## camUpgradeOnMapFeatures(feat1, feat2[, excluded])
-// //;;
-// //;; Search for feat1, save its coordinates, remove it, and then replace with it
-// //;; with feat2. A third parameter can be specified to ignore specific object
-// //;; IDs. Useful if a feature is assigned to an object label. It can be either an array
-// //;; or a single ID number. Unortunatly, feature rotation is not preserved.
-// //;; If a feature has a label or group, it will be transferred to the replacement, but if the
-// //;; feature has multiple labels, then only one label will be transferred.
-// //;;
-// //;; @param {Object} struct1
-// //;; @param {Object} struct2
-// //;; @param {number|number[]} [excluded]
-// //;; @returns {void}
-// //;;
-// function camUpgradeOnMapFeatures(feat1, feat2, excluded)
-// {
-// 	if (!camDef(feat1) || !camDef(feat2))
-// 	{
-// 		camDebug("Not enough parameters specified for upgrading on map features");
-// 		return;
-// 	}
+//;; ## camSetPreDamageModifier(playerId, droidRange, structRange, excludedTemplates)
+//;;
+//;; Damages all units and structures belonging to the given player to the given HP ranges.
+//;; Applies this modifier to all units and structures currently on the map, as well as any units
+//;; either produced or brought in via reinforcements later in the mission.
+//;; Ignores any units that match the list of excluded templates.
+//;; Ranges should be specified as [LOWER_BOUND, UPPER_BOUND] (e.g. [40, 70] for 40% to 70% HP)
+//;;
+//;; @param {number} playerId
+//;; @param {number[]} droidRange
+//;; @param {number[]} structRange
+//;; @param {Object[]} [excluded]
+//;; @returns {void}
+//;;
+function camSetPreDamageModifier(playerId, droidRange, structRange, excludedTemplates)
+{
+	__camPreDamageModifier[playerId] = {
+		droidRange: droidRange,
+		structRange: structRange,
+		excludedTemplates: excludedTemplates
+	};
 
-// 	const featsOnMap = enumFeature(ALL_PLAYERS, feat1);
+	const droids = enumDroid(playerId);
+	for (droid of droids)
+	{
+		__camPreDamageDroid(droid);
+	}
 
-// 	for (let i = 0, l = featsOnMap.length; i < l; ++i)
-// 	{
-// 		const feature = featsOnMap[i];
-// 		let skip = false;
-		
-// 		//Check if this object should be excluded from the upgrades
-// 		if (camDef(excluded))
-// 		{
-// 			if (excluded instanceof Array)
-// 			{
-// 				for (let j = 0, c = excluded.length; j < c; ++j)
-// 				{
-// 					if (feature.id === excluded[j])
-// 					{
-// 						skip = true;
-// 						break;
-// 					}
-// 				}
-// 				if (skip === true)
-// 				{
-// 					continue;
-// 				}
-// 			}
-// 			else if (feature.id === excluded)
-// 			{
-// 				continue;
-// 			}
-// 		}
-
-// 		//Check if this object has a label assigned to it
-// 		// FIXME: O(n) lookup here
-// 		const __FEATURE_LABEL = getLabel(feature);
-
-// 		//Replace it
-// 		const featInfo = {x: feature.x, y: feature.y};
-// 		camSafeRemoveObject(feature, false);
-// 		const newFeat = addFeature(feat2, featInfo.x, featInfo.y);
-		
-// 		if (camDef(__FEATURE_LABEL)) 
-// 		{
-// 			addLabel(newFeat, __FEATURE_LABEL);
-// 		}
-// 	}
-// }
+	const structures = enumStruct(playerId);
+	for (struct of structures)
+	{
+		__camPreDamageStruct(struct)
+	}
+}
 
 //////////// privates
 
@@ -520,13 +486,27 @@ function __camBuildDroid(template, structure)
 	{
 		return false;
 	}
-	//if not a normal factory and the template is a constructor then keep it in the
-	//queue until a factory can deal with it.
-	if (template.weap === "Spade1Mk1" && structure.stattype !== FACTORY)
+
+	if (template.prop === __camChangePropulsion("V-Tol", structure.player) && structure.stattype !== VTOL_FACTORY)
 	{
+		// If not a VTOL factory and the template is a VTOL then keep it in the
+		// queue until a factory can deal with it.
 		return false;
 	}
-	// TODO: Also check for engineers here?
+	if (template.prop === __camChangePropulsion("CyborgLegs", structure.player) && structure.stattype !== CYBORG_FACTORY)
+	{
+		// Likewise, if not a cyborg factory and the template is a cyborg then
+		// keep it in the queue until a cyborg factory can deal with it.
+		return false;
+	}
+	if ((template.prop === __camChangePropulsion("wheeled01", structure.player) || template.prop === __camChangePropulsion("HalfTrack", structure.player) 
+		|| template.prop === __camChangePropulsion("tracked01", structure.player) || template.prop === __camChangePropulsion("hover01", structure.player)) 
+		&& structure.stattype !== FACTORY)
+	{
+		// Finally, don't build normal units in cyborg or VTOL factories
+		return false;
+	}
+
 	const __PROP = __camChangePropulsion(template.prop, structure.player);
 	makeComponentAvailable(template.body, structure.player);
 	makeComponentAvailable(__PROP, structure.player);
@@ -711,4 +691,58 @@ function __camContinueProduction(structure)
 		}
 	}
 	fi.lastprod = gameTime;
+}
+
+// Pre-damage a newly spawned droid
+function __camPreDamageDroid(droid)
+{
+	if (!camDef(__camPreDamageModifier[droid.player]) && __camPreDamageModifier[droid.player] !== null)
+	{
+		// No modifier set
+		return;
+	}
+
+	// Check if this droid is excluded
+	const droidRange = __camPreDamageModifier[droid.player].droidRange;
+	const DIFF = droidRange[1] - droidRange[0];
+	const excludedTemplates = __camPreDamageModifier[droid.player].excludedTemplates;
+	if (camDef(excludedTemplates))
+	{
+		// Check if this droid is excluded
+		let excluded = false;
+		for (template of excludedTemplates)
+		{
+			if (camDroidMatchesTemplate(droid, template))
+			{
+				excluded = true;
+				break;
+			}
+		}
+
+		if (!excluded)
+		{
+			// Apply pre-damage to this droid...
+			setHealth(droid, droidRange[0] + camRand(DIFF + 1));
+		}
+	}
+	else
+	{
+		// Apply pre-damage to this droid...
+		setHealth(droid, droidRange[0] + camRand(DIFF + 1));
+	}
+}
+
+// Pre-damage a structure
+function __camPreDamageStruct(struct)
+{
+	if (!camDef(__camPreDamageModifier[droid.player]) && __camPreDamageModifier[droid.player] !== null)
+	{
+		// No modifier set
+		return;
+	}
+
+	// Apply pre-damage to this structure...
+	const structRange = __camPreDamageModifier[droid.player].structRange;
+	const DIFF = structRange[1] - structRange[0];
+	setHealth(struct, structRange[0] + camRand(DIFF + 1));
 }

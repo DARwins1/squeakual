@@ -1489,14 +1489,14 @@
                 "filterParameter": "Type",
                 "filterValue": "Wall",
                 "parameter": "Armour",
-                "value": 45
+                "value": 35
             },
             {
                 "class": "Building",
                 "filterParameter": "Type",
                 "filterValue": "Wall",
                 "parameter": "HitPoints",
-                "value": 45
+                "value": 35
             }
         ],
         "subgroupIconID": "IMAGE_RES_GRPUPG"

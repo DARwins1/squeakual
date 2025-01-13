@@ -2469,9 +2469,9 @@
         "id": "NX-CruiseSite",
         "name": "Missile Silo",
         "sensorID": "DefaultSensor1Mk1",
-        "strength": "BUNKER",
+        "strength": "HARD",
         "structureModel": [
-            "blbunkms.pie"
+            "blmssilo.pie"
         ],
         "thermal": 20,
         "type": "DEFENSE",
@@ -3547,7 +3547,7 @@
         "id": "UplinkCentre",
         "name": "Uplink Centre",
         "sensorID": "UplinkSensor",
-        "strength": "MEDIUM",
+        "strength": "HARD",
         "structureModel": [
             "miupbase.pie"
         ],

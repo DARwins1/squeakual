@@ -588,9 +588,10 @@ function __camShowVictoryConditions()
 		return; // do not need this on these missions.
 	}
 
-	if (__camVictoryData.showArtifacts)
+	const __TOTAL_ARTIFACTS = Object.keys(__camArtifacts).length;
+	if (__camVictoryData.showArtifacts && __TOTAL_ARTIFACTS > 0)
 	{
-		console(__camNumArtifacts + "/" + Object.keys(__camArtifacts).length + " " + _("Artifacts collected"));
+		console(__camNumArtifacts + "/" + __TOTAL_ARTIFACTS + " " + _("Artifacts collected"));
 	}
 
 	const __ANNIHILATE_OBJ = (camDef(__camVictoryData.annihilate) && __camVictoryData.annihilate) || __camWinLossCallback === CAM_VICTORY_STANDARD;

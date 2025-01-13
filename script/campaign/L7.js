@@ -20,20 +20,6 @@ const mis_infestedRes = [
 	"R-Vehicle-Metals01", "R-Struc-Materials01", "R-Defense-WallUpgrade01",
 ];
 
-// Damage infested reinforcements
-function preDamageInfestedGroup(group)
-{
-	const units = enumGroup(group);
-	for (let i = 0; i < units.length; ++i)
-	{
-		if (units[i].body !== "CrawlerBody") // Don't damage crawlers
-		{
-			// 50% to 80% base HP
-			setHealth(units[i], 50 + camRand(31));
-		}
-	}
-}
-
 //Remove infested helicopters.
 camAreaEvent("heliRemoveZone", function(droid)
 {
@@ -477,9 +463,9 @@ function sendCivGroup(entrance)
 // Spawn a group of infested at a given entrance
 function sendInfestedGroup(entrance, droids)
 {
-	preDamageInfestedGroup(camSendReinforcement(CAM_INFESTED, camMakePos(entrance), randomTemplates(droids), CAM_REINFORCE_GROUND, 
+	camSendReinforcement(CAM_INFESTED, camMakePos(entrance), randomTemplates(droids), CAM_REINFORCE_GROUND, 
 		{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}}
-	));
+	);
 }
 
 // Randomize the provided list of units and tack on a bunch of extra rocket fodder
@@ -624,6 +610,8 @@ function eventStartLevel()
 
 	// Start phase two when there's 12 minutes remaining
 	queue("startPhaseTwo", camMinutesToMilliseconds(18))
+
+	camSetPreDamageModifier(CAM_INFESTED, [50, 80], [60, 90], CAM_INFESTED_PREDAMAGE_EXCLUSIONS);
 
 	// Change the fog colour to a light pink/purple
 	camSetFog(185, 182, 236);
