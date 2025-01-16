@@ -304,11 +304,11 @@ function vtolDialogue2()
 // Do this until the spawned unit has no EXP
 function drainPlayerExp()
 {
-	pos = camMakePos("landingZone");
-	droidExp = -1;
+	const pos = camMakePos("landingZone");
+	let droidExp = -1;
 	while (droidExp != 0)
 	{
-		droid = addDroid(CAM_HUMAN_PLAYER, pos.x, pos.y, "EXP Sink", "Body1REC", "wheeled01", "", "", "MG1Mk1");
+		const droid = addDroid(CAM_HUMAN_PLAYER, pos.x, pos.y, "EXP Sink", "Body1REC", "wheeled01", "", "", "MG1Mk1");
 		droidExp = droid.experience;
 		camSafeRemoveObject(droid);
 	}

@@ -181,4 +181,49 @@ const camAct3StartResearch = camA2L6AllyResearch.concat([
 	"R-Struc-VTOLPad-Upgrade01",
 ]);
 
+// Used to grant research to team Delta on A3L7
+const camA3L7AllyResearch = camAct3StartResearch.concat([
+	// A3L1
+	"R-Wpn-Flame2", // Artifact
+	"R-Wpn-Flamer-Damage04", "R-Cyb-Wpn-Thermite", "R-Defense-HvyFlamer",
+	"R-Wpn-Bomb03",
+	// A3L2
+	"R-Wpn-Mortar3", // Artifact
+	"R-Defense-RotMor",
+	"R-Wpn-Rocket02-MRLHvy", // Artifact
+	"R-Defense-MRLHvy",
+	// A3L3
+	"R-Wpn-MG4", // Artifact
+	"R-Cyborg-Wpn-RotMG", "R-Defense-RotMG", "R-Defense-Wall-RotMg",
+	"R-Defense-Pillbox-RotMG",
+	// A3L4
+	"R-Wpn-Cannon5", // Artifact
+	"R-Defense-Wall-VulcanCan", "R-Cyborg-Hvywpn-Acannon",
+	// A3L5
+	// "BALLISTA", // Artifact
+	// "BALLISTA_DEFENSE", "R-Wpn-RocketSlow-Accuracy03",
+	// A3L6
+	"R-Vehicle-Metals04", // Artifact
+	"R-Vehicle-Body11", "R-Cyborg-Metals04",
+	"R-Wpn-Rocket07-Tank-Killer", // Artifact
+	"R-Cyborg-Hvywpn-TK", "R-Defense-WallTower-HvyA-Trocket", "R-Defense-HvyA-Trocket",
+]);
+
+// Used to grant research to teams Foxtrot and Golf on A3L9
+// Note that the tech gained on A3L8 is not included here
+const camA3L9EnemyResearch = camA3L7AllyResearch.concat([
+	// A3L7
+	"R-Wpn-HowitzerMk1", // Artifact
+	"R-Defense-Howitzer",
+]);
+
+const camAct4StartResearch = camA3L9EnemyResearch.concat([
+	// A3L8
+	"R-Wpn-Cannon3Mk1", // Artifact
+	"R-Defense-WallTower04",
+	"R-Wpn-Bomb02", // Artifact
+	"R-Wpn-Rocket06-IDF", // Artifact
+	"R-Defense-IDFRocket",
+]);
+
 //...

@@ -735,14 +735,14 @@ function __camPreDamageDroid(droid)
 // Pre-damage a structure
 function __camPreDamageStruct(struct)
 {
-	if (!camDef(__camPreDamageModifier[droid.player]) && __camPreDamageModifier[droid.player] !== null)
+	if (!camDef(__camPreDamageModifier[struct.player]) && __camPreDamageModifier[struct.player] !== null)
 	{
 		// No modifier set
 		return;
 	}
 
 	// Apply pre-damage to this structure...
-	const structRange = __camPreDamageModifier[droid.player].structRange;
+	const structRange = __camPreDamageModifier[struct.player].structRange;
 	const DIFF = structRange[1] - structRange[0];
 	setHealth(struct, structRange[0] + camRand(DIFF + 1));
 }

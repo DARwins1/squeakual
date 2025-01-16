@@ -1747,7 +1747,7 @@
         "weaponEffect": "ALL ROUNDER",
         "weaponSubClass": "CANNON",
         "weaponWav": "hivelcan.ogg",
-        "weight": 3000
+        "weight": 2500
     },
     "Cannon5Vulcan-VTOL": {
         "buildPoints": 700,
@@ -1828,7 +1828,7 @@
         "weaponEffect": "ALL ROUNDER",
         "weaponSubClass": "CANNON",
         "weaponWav": "rapdcan.ogg",
-        "weight": 2500
+        "weight": 3000
     },
     "CommandTurret1": {
         "buildPoints": 500,
@@ -2721,7 +2721,7 @@
         "weaponEffect": "FLAMER",
         "weaponSubClass": "FLAME",
         "weaponWav": "flmthrow.ogg",
-        "weight": 5000
+        "weight": 4000
     },
     "Howitzer03-Rot": {
         "buildPoints": 1600,

@@ -1297,6 +1297,72 @@
         "weaponSlots": 1,
         "weight": 3300
     },
+    "Body9RECBroken": {
+        "armourHeat": 15,
+        "armourKinetic": 22,
+        "buildPoints": 420,
+        "buildPower": 71,
+        "class": "Droids",
+        "designable": 1,
+        "hitpoints": 284,
+        "id": "Body9RECBroken",
+        "model": "drhbod09.pie",
+        "name": "Derelict Tiger",
+        "powerOutput": 0,
+        "propulsionExtraModels": {
+            "HalfTrack": {
+                "left": "prhhtr3.pie"
+            },
+            "HalfTrack02": {
+                "left": "prhhtr3.pie"
+            },
+            "HalfTrack03": {
+                "left": "prhhtr3.pie"
+            },
+            "V-Tol": {
+                "left": "prhvtl1.pie",
+                "moving": "fxvtl09.pie"
+            },
+            "V-Tol02": {
+                "left": "prhvtl1.pie",
+                "moving": "fxvtl09.pie"
+            },
+            "V-Tol03": {
+                "left": "prhvtl1.pie",
+                "moving": "fxvtl09.pie"
+            },
+            "hover01": {
+                "left": "prhhov1.pie"
+            },
+            "hover02": {
+                "left": "prhhov1.pie"
+            },
+            "hover03": {
+                "left": "prhhov1.pie"
+            },
+            "tracked01": {
+                "left": "prhtrk3.pie"
+            },
+            "tracked02": {
+                "left": "prhtrk3.pie"
+            },
+            "tracked03": {
+                "left": "prhtrk3.pie"
+            },
+            "wheeled01": {
+                "left": "prhwhl1.pie"
+            },
+            "wheeled02": {
+                "left": "prhwhl1.pie"
+            },
+            "wheeled03": {
+                "left": "prhwhl1.pie"
+            }
+        },
+        "size": "HEAVY",
+        "weaponSlots": 1,
+        "weight": 3300
+    },
     "BusBody": {
         "armourHeat": 1,
         "armourKinetic": 4,

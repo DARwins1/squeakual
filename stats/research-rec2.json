@@ -3720,7 +3720,6 @@
     "R-Defense-HvyFlamer": {
         "iconID": "IMAGE_RES_DEFENCE",
         "id": "R-Defense-HvyFlamer",
-        "keyTopic": 1,
         "msgName": "RES_EMP_HVFL",
         "name": "Inferno Bunker",
         "redStructures": [
@@ -4745,8 +4744,7 @@
         "msgName": "RES_W_AA2",
         "name": "Cyclone Flak Turret",
         "requiredResearch": [
-            "R-Wpn-AAGun03",
-            "R-Wpn-AAGun-Damage02"
+            "R-Wpn-AAGun03"
         ],
         "researchPoints": 1800,
         "researchPower": 150,
@@ -5175,7 +5173,6 @@
     "R-Wpn-Flamer-Damage04": {
         "iconID": "IMAGE_RES_WEAPONTECH",
         "id": "R-Wpn-Flamer-Damage04",
-        "keyTopic": 1,
         "msgName": "RES_W_FL_D4",
         "name": "Superhot Flamer Gel",
         "requiredResearch": [
@@ -5206,6 +5203,7 @@
     "R-Wpn-Flamer-Damage05": {
         "iconID": "IMAGE_RES_WEAPONTECH",
         "id": "R-Wpn-Flamer-Damage05",
+        "keyTopic": 1,
         "name": "Superhot Flamer Gel Mk2",
         "requiredResearch": [
             "R-Wpn-Flamer-Damage04",
@@ -5296,6 +5294,7 @@
     "R-Wpn-Flamer-ROF03": {
         "iconID": "IMAGE_RES_WEAPONTECH",
         "id": "R-Wpn-Flamer-ROF03",
+        "keyTopic": 1,
         "name": "Flamer Autoloader Mk3",
         "requiredResearch": [
             "R-Wpn-Flamer-ROF02",
@@ -6383,16 +6382,16 @@
         "iconID": "IMAGE_RES_DEFENCE",
         "id": "R-Defense-HvyA-Trocket",
         "msgName": "RES_EMP_HVATR",
-        "name": "Tank Killer Emplacement",
+        "name": "Tank Killer Bunker",
         "requiredResearch": [
             "R-Wpn-Rocket07-Tank-Killer"
         ],
         "researchPoints": 4800,
         "researchPower": 150,
         "resultStructures": [
-            "Emplacement-HvyATrocket"
+            "PillBoxTK"
         ],
-        "statID": "Emplacement-HvyATrocket"
+        "statID": "PillBoxTK"
     },
     "R-Defense-HvyArtMissile": {
         "iconID": "IMAGE_RES_DEFENCE",
@@ -7467,6 +7466,7 @@
     "R-Wpn-Bomb04": {
         "iconID": "IMAGE_RES_WEAPONTECH",
         "id": "R-Wpn-Bomb04",
+        "keyTopic": 1,
         "imdName": "trmvtlin.PIE",
         "msgName": "RES_W_BMB4",
         "name": "Thermite Bomb Bay",
@@ -8762,6 +8762,7 @@
     "R-Defense-Inferno": {
         "iconID": "IMAGE_RES_DEFENCE",
         "id": "R-Defense-HvyFlamer",
+        "keyTopic": 1,
         "msgName": "RES_EMP_HFLA",
         "name": "Inferno Emplacement",
         "redStructures": [

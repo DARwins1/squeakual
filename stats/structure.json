@@ -550,6 +550,29 @@
         ],
         "width": 1
     },
+    "InfRocketPitAT-2": {
+        "armour": 10,
+        "breadth": 1,
+        "buildPoints": 200,
+        "buildPower": 10,
+        "ecmID": "ZNULLECM",
+        "height": 1,
+        "hitpoints": 250,
+        "id": "InfRocketPitAT-2",
+        "name": "Infested Scavenger AT-Rocket Pit 2",
+        "resistance": 150,
+        "sensorID": "DefaultSensor1Mk1",
+        "strength": "MEDIUM",
+        "structureModel": [
+            "infEXROCKET.PIE"
+        ],
+        "thermal": 10,
+        "type": "DEFENSE",
+        "weapons": [
+            "RustRocket-LtA-T"
+        ],
+        "width": 1
+    },
     "A0BaBaCannonPit": {
         "armour": 10,
         "breadth": 1,
@@ -573,6 +596,29 @@
         ],
         "width": 1
     },
+    "InfCannonPit": {
+        "armour": 10,
+        "breadth": 1,
+        "buildPoints": 200,
+        "buildPower": 10,
+        "ecmID": "ZNULLECM",
+        "height": 1,
+        "hitpoints": 250,
+        "id": "InfCannonPit",
+        "name": "Infested Scavenger Cannon Pit",
+        "resistance": 150,
+        "sensorID": "DefaultSensor1Mk1",
+        "strength": "MEDIUM",
+        "structureModel": [
+            "infEXROCKET.PIE"
+        ],
+        "thermal": 10,
+        "type": "DEFENSE",
+        "weapons": [
+            "RustCannon2A-TMk1"
+        ],
+        "width": 1
+    },
     "A0BaBaMRAPit": {
         "armour": 10,
         "breadth": 1,
@@ -588,6 +634,29 @@
         "strength": "MEDIUM",
         "structureModel": [
             "BLBRMRTP.PIE"
+        ],
+        "thermal": 10,
+        "type": "DEFENSE",
+        "weapons": [
+            "RustRocket-MRL"
+        ],
+        "width": 1
+    },
+    "InfMRAPit": {
+        "armour": 10,
+        "breadth": 1,
+        "buildPoints": 200,
+        "buildPower": 10,
+        "ecmID": "ZNULLECM",
+        "height": 1,
+        "hitpoints": 250,
+        "id": "InfMRAPit",
+        "name": "Infested Scavenger MRA Pit",
+        "resistance": 150,
+        "sensorID": "DefaultSensor1Mk1",
+        "strength": "MEDIUM",
+        "structureModel": [
+            "infBLBRMRTP.PIE"
         ],
         "thermal": 10,
         "type": "DEFENSE",

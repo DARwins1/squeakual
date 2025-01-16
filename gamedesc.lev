@@ -200,3 +200,16 @@ miss_keep	A2L6
 dataset		REC_2
 game		"wrf/act2/A2L6.gam"
 data		"wrf/act2/A2L6.wrf"
+
+/* act 3 */
+
+camstart	A3L1
+dataset		REC_2
+game		"wrf/act3/A3L1.gam"
+data		"wrf/act3/A3L1.wrf"
+
+camchange	A3L1
+dataset		REC_2
+data		"wrf/rec2change.wrf"
+game		"wrf/act3/A3L1.gam"
+data		"wrf/act3/A3L1.wrf"
