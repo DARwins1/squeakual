@@ -25,6 +25,20 @@
         "type": "STANDARD",
         "weight": 1
     },
+    "InfCCSensor": {
+        "buildPoints": 1,
+        "buildPower": 1,
+        "hitpoints": 200,
+        "id": "InfCCSensor",
+        "location": "TURRET",
+        "mountModel": "TRLSNSR1.PIE",
+        "name": "*Infested CC Sensor*",
+        "power": 500,
+        "range": 1024,
+        "sensorModel": "misensor.PIE",
+        "type": "STANDARD",
+        "weight": 1
+    },
     "DefaultSensor1Mk1": {
         "id": "DefaultSensor1Mk1",
         "location": "DEFAULT",

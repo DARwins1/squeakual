@@ -761,7 +761,7 @@
         "id": "InfCommandCentre",
         "name": "Infested Command Center",
         "resistance": 300,
-        "sensorID": "CCSensor",
+        "sensorID": "InfCCSensor",
         "strength": "HARD",
         "structureModel": [
             "blinfhqalt.pie"
@@ -803,7 +803,7 @@
         "id": "InfCommandCentreCO",
         "name": "Infested Collective Command Center",
         "resistance": 300,
-        "sensorID": "CCSensor",
+        "sensorID": "InfCCSensor",
         "strength": "HARD",
         "structureModel": [
             "blinfhq3.pie"
@@ -1387,6 +1387,29 @@
         ],
         "width": 1
     },
+    "InfAASite-QuadBof": {
+        "armour": 12,
+        "breadth": 1,
+        "buildPoints": 300,
+        "buildPower": 175,
+        "ecmID": "ZNULLECM",
+        "height": 1,
+        "hitpoints": 400,
+        "id": "InfAASite-QuadBof",
+        "name": "Infested Cyclone AA Flak Site",
+        "resistance": 150,
+        "sensorID": "DefaultSensor1Mk1",
+        "strength": "MEDIUM",
+        "structureModel": [
+            "InfBlaamnt1.PIE"
+        ],
+        "thermal": 12,
+        "type": "DEFENSE",
+        "weapons": [
+            "AAGun2Mk1"
+        ],
+        "width": 1
+    },
     "AASite-RustQuadBof": {
         "armour": 12,
         "breadth": 1,
@@ -1433,6 +1456,29 @@
         ],
         "width": 1
     },
+    "InfAASite-QuadMg1": {
+        "armour": 12,
+        "breadth": 1,
+        "buildPoints": 250,
+        "buildPower": 125,
+        "ecmID": "ZNULLECM",
+        "height": 1,
+        "hitpoints": 400,
+        "id": "InfAASite-QuadMg1",
+        "name": "Infested Hurricane AA Site",
+        "resistance": 150,
+        "sensorID": "DefaultSensor1Mk1",
+        "strength": "MEDIUM",
+        "structureModel": [
+            "InfBlaamnt1.PIE"
+        ],
+        "thermal": 12,
+        "type": "DEFENSE",
+        "weapons": [
+            "QuadMg1AAGun"
+        ],
+        "width": 1
+    },
     "AASite-QuadRotMg": {
         "armour": 12,
         "breadth": 1,
@@ -1448,6 +1494,29 @@
         "strength": "MEDIUM",
         "structureModel": [
             "Blaamnt1.PIE"
+        ],
+        "thermal": 12,
+        "type": "DEFENSE",
+        "weapons": [
+            "QuadRotAAGun"
+        ],
+        "width": 1
+    },
+    "InfAASite-QuadRotMg": {
+        "armour": 12,
+        "breadth": 1,
+        "buildPoints": 275,
+        "buildPower": 175,
+        "ecmID": "ZNULLECM",
+        "height": 1,
+        "hitpoints": 400,
+        "id": "InfAASite-QuadRotMg",
+        "name": "Infested Whirlwind AA Site",
+        "resistance": 150,
+        "sensorID": "DefaultSensor1Mk1",
+        "strength": "MEDIUM",
+        "structureModel": [
+            "InfBlaamnt1.PIE"
         ],
         "thermal": 12,
         "type": "DEFENSE",
