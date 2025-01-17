@@ -94,3 +94,29 @@ const camA1L6ColLZ4Structs = [
 	{stat: "A0TankTrap", x: 5, y: 47}, {stat: "GuardTower6H", x: 5, y: 48}, {stat: "A0TankTrap", x: 6, y: 48},
 	{stat: "A0TankTrap", x: 9, y: 48}, {stat: "Sys-SensoTower02", x: 9, y: 49}, {stat: "A0TankTrap", x: 10, y: 49},
 ];
+
+// A2L7
+// Collective LZ defenses
+
+// A3L4
+// Collective LZ defenses
+const camA3L4ColLZ1Structs = [
+	{stat: "PillBoxHPC", x: 102, y: 32}, {stat: "AASite-QuadBof", x: 104, y: 33, rot: 1}, {stat: "WallTower-HPVcannon", x: 105, y: 35},
+	{stat: "WallTower-HPVcannon", x: 104, y: 38}, {stat: "Sys-SensoTower02", x: 103, y: 37}, {stat: "Emplacement-MortarPit02", x: 101, y: 37},
+	{stat: "Emplacement-MortarPit02", x: 100, y: 36}, {stat: "AASite-QuadBof", x: 99, y: 38},
+];
+const camA3L4ColLZ2Structs = [
+	{stat: "Pillbox-RotMG", x: 120, y: 7}, {stat: "AASite-QuadBof", x: 122, y: 6, rot: 2}, {stat: "Wall-VulcanCan", x: 124, y: 7},
+	{stat: "Wall-VulcanCan", x: 120, y: 11}, {stat: "AASite-QuadBof", x: 123, y: 11}, {stat: "Pillbox-RotMG", x: 125, y: 10},
+	{stat: "A0TankTrap", x: 123, y: 12}, {stat: "A0TankTrap", x: 124, y: 11},
+];
+const camA3L4ColLZ3Structs = [
+	{stat: "WallTower04", x: 106, y: 57}, {stat: "Wall-VulcanCan", x: 110, y: 58}, {stat: "AASite-QuadBof", x: 104, y: 58, rot: 3},
+	{stat: "AASite-QuadBof", x: 104, y: 60, rot: 3}, {stat: "Emplacement-MRLHvy-pit", x: 106, y: 60}, {stat: "Emplacement-MRLHvy-pit", x: 107, y: 61},
+	{stat: "Wall-VulcanCan", x: 109, y: 61},
+];
+const camA3L4ColLZ4Structs = [
+	{stat: "WallTower-HvATrocket", x: 132, y: 49}, {stat: "AASite-QuadBof", x: 134, y: 48}, {stat: "Wall-VulcanCan", x: 136, y: 49},
+	{stat: "PillBoxHPC", x: 132, y: 52}, {stat: "Wall-VulcanCan", x: 135, y: 53}, {stat: "Pillbox-RotMG", x: 137, y: 51},
+	{stat: "AASite-QuadBof", x: 132, y: 54, rot: 2},
+];

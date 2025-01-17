@@ -163,7 +163,6 @@ function sendInfestedReinforcements()
 			camSendReinforcement(CAM_INFESTED, getObject("infEntry9"), northwestDroids, CAM_REINFORCE_GROUND);
 		}
 	}
-	
 }
 
 function eventStartLevel()

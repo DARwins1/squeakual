@@ -1,4 +1,102 @@
 include("script/campaign/libcampaign.js");
+include("script/campaign/templates.js");
+
+const mis_infestedResearch = [
+	"R-Wpn-MG-Damage04", "R-Wpn-Rocket-Damage03", "R-Wpn-Mortar-Damage03", 
+	"R-Wpn-Flamer-Damage03", "R-Wpn-Cannon-Damage03", "R-Wpn-MG-ROF02",
+	"R-Wpn-Rocket-ROF02", "R-Wpn-Mortar-ROF02", "R-Wpn-Flamer-ROF02",
+	"R-Wpn-Cannon-ROF02", "R-Vehicle-Metals03", "R-Struc-Materials03", 
+	"R-Defense-WallUpgrade03", "R-Sys-Engineering02", "R-Cyborg-Metals03",
+	"R-Wpn-Cannon-Accuracy01", "R-Wpn-Rocket-Accuracy02", "R-Wpn-AAGun-ROF01",
+	"R-Wpn-AAGun-Damage01", "R-Vehicle-Engine03", "R-Wpn-AAGun-Accuracy01",
+	"R-Struc-RprFac-Upgrade01",
+];
+const infEntry1 = {x: 196, y: 7, x2: 197, y2: 10};
+const infEntry2 = {x: 196, y: 22, x2: 197, y2: 25};
+const infEntry3 = {x: 157, y: 76, x2: 160, y2: 77};
+const infEntry4 = {x: 134, y: 76, x2: 138, y2: 77};
+const infEntry5 = {x: 102, y: 76, x2: 104, y2: 77};
+// const infEntry6 = {x: 82, y: 49, x2: 83, y2: 53};
+const infEntry7 = {x: 129, y: 2, x2: 133, y2: 3};
+const infEntry8 = {x: 107, y: 2, x2: 111, y2: 3};
+const infEntry9 = {x: 82, y: 7, x2: 83, y2: 10};
+
+
+function sendInfestedReinforcements()
+{	
+	const CORE_SIZE = 2 + camRand(5);
+	const FODDER_SIZE = 8 + camRand(3);
+
+	// North east entrances
+	// Choose one to spawn from...
+	let northeastEntrance;
+	switch (camRand(2))
+	{
+	case 0:
+		// Road entrance
+		northeastEntrance = infEntry1;
+		break;
+	case 1:
+		// Trench entrance
+		northeastEntrance = infEntry2;
+		break;
+	}
+	const neDroids = camRandInfTemplates(
+		[cTempl.stinger, cTempl.infbloke, cTempl.infkevbloke, cTempl.infminitruck, cTempl.infbuggy, cTempl.infrbuggy, cTempl.infcybhg, cTempl.infcybca, cTempl.infcolpodt], 
+		CORE_SIZE / 2, FODDER_SIZE * 2/3
+	);
+	camSendReinforcement(CAM_INFESTED, northeastEntrance, neDroids, CAM_REINFORCE_GROUND);
+
+	// South canal entrance
+	const canalDroids = camRandInfTemplates(
+		[cTempl.basher, cTempl.inffiretruck, cTempl.infkevbloke, cTempl.inflance, cTempl.infbuggy, cTempl.infrbuggy],
+		CORE_SIZE / 2, 2 * FODDER_SIZE / 3
+	);
+	camSendReinforcement(CAM_INFESTED, infEntry3, canalDroids, CAM_REINFORCE_GROUND);
+
+	// South trench entrance
+	const southDroids = camRandInfTemplates(
+		[cTempl.stinger, cTempl.infkevlance, cTempl.infbuscan, cTempl.infbloke, cTempl.infbjeep, cTempl.infrbjeep, cTempl.infcybca, cTempl.infcolhmght],
+		CORE_SIZE / 2, FODDER_SIZE / 3
+	);
+	// Chance of adding a Medium Cannon
+	if (camRand(3) == 0) southDroids.push(cTempl.infcommcant);
+	camSendReinforcement(CAM_INFESTED, infEntry4, southDroids, CAM_REINFORCE_GROUND);
+
+	// South west trench entrance
+	const southwestDroids = camRandInfTemplates(
+		[cTempl.infkevlance, cTempl.infmoncan, cTempl.infbloke, cTempl.infbjeep, cTempl.infrbjeep],
+		CORE_SIZE / 2, 2 * FODDER_SIZE / 3
+	);
+	camSendReinforcement(CAM_INFESTED, infEntry5, southwestDroids, CAM_REINFORCE_GROUND);
+
+	// North trench entrances
+	// Choose one to spawn from...
+	let northTrenchEntrance;
+	switch (camRand(2))
+	{
+	case 0:
+		// Road entrance
+		northTrenchEntrance = infEntry7;
+		break;
+	case 1:
+		// Trench entrance
+		northTrenchEntrance = infEntry8;
+		break;
+	}
+	const nTrenchDroids = camRandInfTemplates(
+		[cTempl.stinger, cTempl.infbloke, cTempl.infkevbloke, cTempl.infminitruck, cTempl.infbuggy, cTempl.infrbuggy, cTempl.infcybhg, cTempl.infcybca, cTempl.infcolpodt], 
+		CORE_SIZE, FODDER_SIZE
+	);
+	camSendReinforcement(CAM_INFESTED, northTrenchEntrance, nTrenchDroids, CAM_REINFORCE_GROUND);
+
+	// North west road entrance
+	const northwestDroids = camRandInfTemplates(
+		[cTempl.infkevlance, cTempl.infmoncan, cTempl.infbloke, cTempl.infbjeep, cTempl.infrbjeep],
+		CORE_SIZE / 2, 2 * FODDER_SIZE / 3
+	);
+	camSendReinforcement(CAM_INFESTED, infEntry9, northwestDroids, CAM_REINFORCE_GROUND);	
+}
 
 function eventStartLevel()
 {
@@ -34,6 +132,9 @@ function eventStartLevel()
 	// 	{text: "LIEUTENANT: General, sir, has their been any transmission from team Echo?", delay: 3, sound: CAM_RCLICK},
 	// 	{text: "CLAYDE: No... and that's what concerns me the most.", delay: 3, sound: CAM_RCLICK},
 	// ]);
+
+	camCompleteRequiredResearch(mis_infestedResearch, CAM_INFESTED);
+	setTimer("sendInfestedReinforcements", camChangeOnDiff(camSecondsToMilliseconds(105)));
 
 	camSetSkyType(CAM_SKY_NIGHT);
 	// Give the fog a dark purple hue

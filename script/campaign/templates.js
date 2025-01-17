@@ -179,7 +179,9 @@ colpodt: { body: "Body2SUP", prop: "tracked01", weap: "Rocket-Pod" }, // Mini-Ro
 comatht: { body: "Body6SUPP", prop: "HalfTrack", weap: "Rocket-LtA-T" }, // Lancer Panther Half-tracks
 comatt: { body: "Body6SUPP", prop: "tracked01", weap: "Rocket-LtA-T" }, // Lancer Panther Tracks
 comath: { body: "Body6SUPP", prop: "hover01", weap: "Rocket-LtA-T" }, // Lancer Panther Hover
+comhatht: { body: "Body6SUPP", prop: "HalfTrack", weap: "Rocket-HvyA-T" }, // Tank Killer Panther Half-tracks
 comhatt: { body: "Body6SUPP", prop: "tracked01", weap: "Rocket-HvyA-T" }, // Tank Killer Panther Tracks
+comhath: { body: "Body6SUPP", prop: "hover01", weap: "Rocket-HvyA-T" }, // Tank Killer Panther Hover
 
 combbh: { body: "Body6SUPP", prop: "hover01", weap: "Rocket-BB" }, // Bunker Buster Panther Hover
 cohbbt: { body: "Body9REC", prop: "tracked01", weap: "Rocket-BB" }, // Bunker Buster Tiger Tracks
@@ -191,6 +193,7 @@ comsenst: { body: "Body6SUPP", prop: "tracked01", weap: "SensorTurret1Mk1" }, //
 comstriket: { body: "Body6SUPP", prop: "tracked01", weap: "Sys-VstrikeTurret01" }, // Sensor Panther Tracks
 
 coltruckht: { body: "Body2SUP", prop: "HalfTrack", weap: "Spade1Mk1" }, // Truck Leopard Half-tracks
+comtruckht: { body: "Body6SUPP", prop: "HalfTrack", weap: "Spade1Mk1" }, // Truck Panther Half-tracks
 comtruckt: { body: "Body6SUPP", prop: "tracked01", weap: "Spade1Mk1" }, // Truck Panther Tracks
 
 colmortht: { body: "Body2SUP", prop: "HalfTrack", weap: "Mortar1Mk1" }, // Mortar Leopard Half-tracks
@@ -203,6 +206,7 @@ comrmortt: { body: "Body6SUPP", prop: "tracked01", weap: "Mortar3ROTARYMk1" }, /
 cohhowt: { body: "Body9REC", prop: "tracked01", weap: "Howitzer105Mk1" }, // Howitzer Tiger Tracks
 
 colmrat: { body: "Body2SUP", prop: "tracked01", weap: "Rocket-MRL" }, // Mini-Rocket Array Leopard Tracks
+commraht: { body: "Body6SUPP", prop: "HalfTrack", weap: "Rocket-MRL" }, // Mini-Rocket Array Panther Half-tracks
 commrat: { body: "Body6SUPP", prop: "tracked01", weap: "Rocket-MRL" }, // Mini-Rocket Array Panther Tracks
 commrah: { body: "Body6SUPP", prop: "hover01", weap: "Rocket-MRL" }, // Mini-Rocket Array Panther Hover
 cohhrah: { body: "Body9REC", prop: "hover01", weap: "Rocket-MRL-Hvy" }, // Heavy Rocket Array Tiger Hover
@@ -219,9 +223,10 @@ colmcant: { body: "Body2SUP", prop: "tracked01", weap: "Cannon2A-TMk1" }, // Med
 commcant: { body: "Body6SUPP", prop: "tracked01", weap: "Cannon2A-TMk1" }, // Medium Cannon Panther Tracks
 comhpvt: { body: "Body6SUPP", prop: "tracked01", weap: "Cannon4AUTOMk1" }, // Hyper Velocity Cannon Panther Tracks
 comhpvh: { body: "Body6SUPP", prop: "hover01", weap: "Cannon4AUTOMk1" }, // Hyper Velocity Cannon Panther Hover
-cohhcant: { body: "Body9REC", prop: "tracked01", weap: "Cannon375mmMk1" }, // Heavy Cannon Tiger Tracks
+comacant: { body: "Body6SUPP", prop: "tracked01", weap: "Cannon5VulcanMk1" }, // Assault Cannon Panther Tracks
 cohhpvt: { body: "Body9REC", prop: "tracked01", weap: "Cannon4AUTOMk1" }, // Hyper Velocity Cannon Tiger Tracks
 cohacant: { body: "Body9REC", prop: "tracked01", weap: "Cannon5VulcanMk1" }, // Assault Cannon Tiger Tracks
+cohhcant: { body: "Body9REC", prop: "tracked01", weap: "Cannon375mmMk1" }, // Heavy Cannon Tiger Tracks
 
 colflamht: { body: "Body2SUP", prop: "HalfTrack", weap: "Flame1Mk1" }, // Flamer Leopard Half-tracks
 colflamt: { body: "Body2SUP", prop: "tracked01", weap: "Flame1Mk1" }, // Flamer Leopard Tracks

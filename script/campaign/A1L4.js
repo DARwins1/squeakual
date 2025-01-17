@@ -608,10 +608,9 @@ function spawnCollectiveCommander()
 		cTempl.colmrat, cTempl.colmrat, cTempl.colmrat, cTempl.colmrat,
 		cTempl.colaaht,
 		cTempl.comatt,
-		]
+	];
 	const colCommanderGroup = camSendReinforcement(CAM_THE_COLLECTIVE, getObject("colEntrance8"), commanderTemplates, CAM_REINFORCE_GROUND);
 	camManageGroup(colCommanderGroup, CAM_ORDER_FOLLOW, {leader: "colCommander", suborder: CAM_ORDER_ATTACK});
-
 }
 
 function eventDestroyed(obj)

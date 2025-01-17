@@ -148,6 +148,7 @@ function camSetStandardWinLossConditions(kind, nextLevel, data)
 	__camVictoryData.waitForDialogue = (camDef(__camVictoryData.waitForDialogue)) ? __camVictoryData.waitForDialogue : false;
 	__camVictoryData.earlyPowerBonus = (camDef(__camVictoryData.earlyPowerBonus)) ? __camVictoryData.earlyPowerBonus : false;
 	__camVictoryData.showArtifacts = (camDef(__camVictoryData.showArtifacts)) ? __camVictoryData.showArtifacts : true;
+	__camVictoryData.ignoreInfestedUnits = (camDef(__camVictoryData.ignoreInfestedUnits)) ? __camVictoryData.ignoreInfestedUnits : false;
 
 	__camNextLevel = nextLevel;
 }
@@ -351,7 +352,13 @@ function __camVictoryStandard()
 	// check if game is won
 	if (camAllArtifactsPickedUp() && camAllEnemyBasesEliminated() && __EXTRA_OBJ)
 	{
-		if (enumArea(0, 0, mapWidth, mapHeight, ENEMIES, false).length === 0)
+		let enemiesRemaining = enumArea(0, 0, mapWidth, mapHeight, ENEMIES, false).length;
+		if (__camVictoryData.ignoreInfestedUnits)
+		{
+			// If we're to ignore Infested units, subtract them from the number of enemies remaining
+			enemiesRemaining -= countDroid(DROID_ANY, CAM_INFESTED);
+		}
+		if (enemiesRemaining === 0)
 		{
 			if (!__camVictoryData.waitForDialogue || camDialogueDone())
 			{
@@ -625,7 +632,7 @@ function __camShowVictoryConditions()
 				}
 			});
 
-			if (camDef(ignoreInfestedUnits) && ignoreInfestedUnits)
+			if (__camVictoryData.ignoreInfestedUnits)
 			{
 				// If we're to ignore Infested units, remove them from the unit count
 				unitsOnMap -= countDroid(DROID_ANY, CAM_INFESTED);

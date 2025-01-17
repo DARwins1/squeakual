@@ -1875,7 +1875,7 @@
         "facePlayer": 1,
         "firePause": 80,
         "flags": "ShootAir",
-        "flightGfx": "FXMPLME.PIE",
+        "flightGfx": "FXMPLMI.PIE",
         "flightSpeed": 1350,
         "hitGfx": "FXMExp.PIE",
         "hitpoints": 100,

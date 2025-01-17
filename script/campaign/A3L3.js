@@ -302,6 +302,7 @@ function eventPickup(feature, droid)
 		queue("enableAllFactories", camChangeOnDiff(camSecondsToMilliseconds(12)));
 
 		hackRemoveMessage("COL_CONVOY", PROX_MSG, CAM_HUMAN_PLAYER);
+		camSetExtraObjectiveMessage();
 	}
 }
 
@@ -318,7 +319,7 @@ function eventStartLevel()
 	const lz = getObject("landingZone"); //player lz
 	const transportEntryPos = camMakePos("transportEntryPos");
 
-	camSetStandardWinLossConditions(CAM_VICTORY_OFFWORLD, "THE_END", {
+	camSetStandardWinLossConditions(CAM_VICTORY_OFFWORLD, "A3L4", {
 		message: "RET_LZ",
 		reinforcements: -1,
 		retlz: true,
