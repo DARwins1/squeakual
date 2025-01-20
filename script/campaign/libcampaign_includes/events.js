@@ -12,7 +12,6 @@ function cam_eventPickup(feature, droid)
 	else if (feature.stattype === ARTIFACT && droid.droidType === DROID_CONSTRUCT)
 	{
 		// AI Truck picking up the artifact
-		// console("enemy picking up artifact")
 		__camStoreArtifact(feature);
 	}
 }

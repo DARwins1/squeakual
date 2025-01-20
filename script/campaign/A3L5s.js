@@ -14,18 +14,17 @@ const mis_infestedResearch = [
 const infEntry1 = {x: 196, y: 7, x2: 197, y2: 10};
 const infEntry2 = {x: 196, y: 22, x2: 197, y2: 25};
 const infEntry3 = {x: 157, y: 76, x2: 160, y2: 77};
-const infEntry4 = {x: 134, y: 76, x2: 138, y2: 77};
-const infEntry5 = {x: 102, y: 76, x2: 104, y2: 77};
+// const infEntry4 = {x: 134, y: 76, x2: 138, y2: 77};
+// const infEntry5 = {x: 102, y: 76, x2: 104, y2: 77};
 // const infEntry6 = {x: 82, y: 49, x2: 83, y2: 53};
 const infEntry7 = {x: 129, y: 2, x2: 133, y2: 3};
 const infEntry8 = {x: 107, y: 2, x2: 111, y2: 3};
-const infEntry9 = {x: 82, y: 7, x2: 83, y2: 10};
-
+// const infEntry9 = {x: 82, y: 7, x2: 83, y2: 10};
 
 function sendInfestedReinforcements()
 {	
-	const CORE_SIZE = 2 + camRand(5);
-	const FODDER_SIZE = 8 + camRand(3);
+	const CORE_SIZE = 4 + camRand(5);
+	const FODDER_SIZE = 12 + camRand(3);
 
 	// North east entrances
 	// Choose one to spawn from...
@@ -54,22 +53,6 @@ function sendInfestedReinforcements()
 	);
 	camSendReinforcement(CAM_INFESTED, infEntry3, canalDroids, CAM_REINFORCE_GROUND);
 
-	// South trench entrance
-	const southDroids = camRandInfTemplates(
-		[cTempl.stinger, cTempl.infkevlance, cTempl.infbuscan, cTempl.infbloke, cTempl.infbjeep, cTempl.infrbjeep, cTempl.infcybca, cTempl.infcolhmght],
-		CORE_SIZE / 2, FODDER_SIZE / 3
-	);
-	// Chance of adding a Medium Cannon
-	if (camRand(3) == 0) southDroids.push(cTempl.infcommcant);
-	camSendReinforcement(CAM_INFESTED, infEntry4, southDroids, CAM_REINFORCE_GROUND);
-
-	// South west trench entrance
-	const southwestDroids = camRandInfTemplates(
-		[cTempl.infkevlance, cTempl.infmoncan, cTempl.infbloke, cTempl.infbjeep, cTempl.infrbjeep],
-		CORE_SIZE / 2, 2 * FODDER_SIZE / 3
-	);
-	camSendReinforcement(CAM_INFESTED, infEntry5, southwestDroids, CAM_REINFORCE_GROUND);
-
 	// North trench entrances
 	// Choose one to spawn from...
 	let northTrenchEntrance;
@@ -89,13 +72,6 @@ function sendInfestedReinforcements()
 		CORE_SIZE, FODDER_SIZE
 	);
 	camSendReinforcement(CAM_INFESTED, northTrenchEntrance, nTrenchDroids, CAM_REINFORCE_GROUND);
-
-	// North west road entrance
-	const northwestDroids = camRandInfTemplates(
-		[cTempl.infkevlance, cTempl.infmoncan, cTempl.infbloke, cTempl.infbjeep, cTempl.infrbjeep],
-		CORE_SIZE / 2, 2 * FODDER_SIZE / 3
-	);
-	camSendReinforcement(CAM_INFESTED, infEntry9, northwestDroids, CAM_REINFORCE_GROUND);	
 }
 
 function eventStartLevel()
@@ -105,13 +81,13 @@ function eventStartLevel()
 	setNoGoArea(192, 72, 194, 74, CAM_HUMAN_PLAYER);
 	if (!tweakOptions.rec_timerlessMode)
 	{
-		setMissionTime(camChangeOnDiff(camMinutesToSeconds(30)));
+		setMissionTime(camChangeOnDiff(camMinutesToSeconds(35)));
 	}
 	else
 	{
 		setMissionTime(-1);
 	}
-	camSetStandardWinLossConditions(CAM_VICTORY_PRE_OFFWORLD, "A3L3");
+	camSetStandardWinLossConditions(CAM_VICTORY_PRE_OFFWORLD, "A3L5");
 
 	// Give player briefing.
 	// camPlayVideos({video: "L2_BRIEF", type: MISS_MSG});
@@ -133,12 +109,14 @@ function eventStartLevel()
 	// 	{text: "CLAYDE: No... and that's what concerns me the most.", delay: 3, sound: CAM_RCLICK},
 	// ]);
 
-	camCompleteRequiredResearch(mis_infestedResearch, CAM_INFESTED);
-	setTimer("sendInfestedReinforcements", camChangeOnDiff(camSecondsToMilliseconds(105)));
+	// In case the player didn't get this in the last mission
+	enableResearch("R-Wpn-Cannon5", CAM_HUMAN_PLAYER);
 
-	camSetSkyType(CAM_SKY_NIGHT);
-	// Give the fog a dark purple hue
-	camSetFog(32, 12, 64);
+	camCompleteRequiredResearch(mis_infestedResearch, CAM_INFESTED);
+	setTimer("sendInfestedReinforcements", camChangeOnDiff(camSecondsToMilliseconds(95)));
+
+	// Lighten the fog to *more or less* 2x default brightness with a slight pink color
+	camSetFog(48, 32, 96);
 	// Add a purple-blue tint
-	camSetSunIntensity(.45, .35, .45);
+	camSetSunIntensity(.5, .45, .55);
 }

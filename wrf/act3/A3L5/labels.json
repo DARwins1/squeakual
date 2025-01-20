@@ -1,0 +1,221 @@
+{
+	"position_0": {
+		"label": "hoverPatrolPos1",
+		"pos": [7580, 6749]
+	},
+
+
+	"position_1": {
+		"label": "hoverPatrolPos2",
+		"pos": [7519, 1161]
+	},
+
+
+	"position_2": {
+		"label": "patrolPos1",
+		"pos": [5348, 1945]
+	},
+
+
+	"position_3": {
+		"label": "patrolPos2",
+		"pos": [5999, 1231]
+	},
+
+
+	"position_4": {
+		"label": "heliAttackPos1",
+		"pos": [216, 3474]
+	},
+
+
+	"position_5": {
+		"label": "heliAttackPos2",
+		"pos": [214, 6487]
+	},
+
+
+	"position_6": {
+		"label": "infAssembly1",
+		"pos": [722, 7430]
+	},
+
+
+	"position_7": {
+		"label": "infAssembly2",
+		"pos": [762, 5723]
+	},
+
+
+	"position_8": {
+		"label": "infAssembly3",
+		"pos": [5197, 5224]
+	},
+
+
+	"position_9": {
+		"label": "infAssembly4",
+		"pos": [6153, 4860]
+	},
+
+
+	"position_10": {
+		"label": "infAssembly5",
+		"pos": [6069, 3935]
+	},
+
+
+	"area_0": {
+		"label": "landingZone",
+		"pos1": [7168, 7168],
+		"pos2": [7552, 7552]
+	},
+
+
+	"area_1": {
+		"label": "landingZoneCollective",
+		"pos1": [2816, 2432],
+		"pos2": [3200, 2816]
+	},
+
+
+	"area_2": {
+		"label": "colLzStructs",
+		"pos1": [2304, 1920],
+		"pos2": [3584, 3200]
+	},
+
+
+	"area_3": {
+		"label": "colPatrolGroup",
+		"pos1": [2944, 1664],
+		"pos2": [3584, 2048]
+	},
+
+
+	"area_4": {
+		"label": "colArtiGroup",
+		"pos1": [640, 1664],
+		"pos2": [1280, 1920]
+	},
+
+
+	"area_5": {
+		"label": "infEntry1",
+		"pos1": [768, 7808],
+		"pos2": [1280, 8064]
+	},
+
+
+	"area_6": {
+		"label": "infEntry2",
+		"pos1": [128, 5120],
+		"pos2": [384, 5632]
+	},
+
+
+	"area_7": {
+		"label": "infEntry3",
+		"pos1": [5760, 128],
+		"pos2": [6272, 384]
+	},
+
+
+	"area_8": {
+		"label": "blockadeStructs",
+		"pos1": [5760, 384],
+		"pos2": [6272, 768]
+	},
+
+
+	"area_9": {
+		"label": "infBase1",
+		"pos1": [384, 6784],
+		"pos2": [1536, 7808]
+	},
+
+
+	"area_10": {
+		"label": "infBase2",
+		"pos1": [384, 5120],
+		"pos2": [1280, 6144]
+	},
+
+
+	"area_11": {
+		"label": "infBase3",
+		"pos1": [3840, 3328],
+		"pos2": [6784, 5888]
+	},
+
+
+	"area_12": {
+		"label": "compromiseZone",
+		"pos1": [6400, 6528],
+		"pos2": [7936, 7936]
+	},
+
+
+	"object_0": {
+		"label": "infFactory3",
+		"id": 78,
+		"player": 4,
+		"type": 1
+	},
+
+
+	"object_1": {
+		"label": "infFactory5",
+		"id": 7,
+		"player": 4,
+		"type": 1
+	},
+
+
+	"object_2": {
+		"label": "colTruck",
+		"id": 33,
+		"player": 2,
+		"type": 0
+	},
+
+
+	"object_3": {
+		"label": "infResearch",
+		"id": 1,
+		"player": 1,
+		"type": 1
+	},
+
+
+	"object_4": {
+		"label": "infFactory4",
+		"id": 8,
+		"player": 4,
+		"type": 1
+	},
+
+
+	"object_5": {
+		"label": "infFactory2",
+		"id": 6,
+		"player": 4,
+		"type": 1
+	},
+
+
+	"object_6": {
+		"label": "infFactory1",
+		"id": 5,
+		"player": 4,
+		"type": 1
+	},
+
+
+	"radius_0": {
+		"label": "heliRemoveZone",
+		"pos": [3823, 7948],
+		"subscriber": 4,
+		"radius": 256
+	}
+}

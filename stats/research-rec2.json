@@ -1218,7 +1218,7 @@
         "requiredResearch": [
             "R-Wpn-MG4"
         ],
-        "researchPoints": 7200,
+        "researchPoints": 1200,
         "researchPower": 225,
         "resultComponents": [
             "CyborgRotMG"
@@ -2647,7 +2647,7 @@
         "requiredResearch": [
             "R-Wpn-Flamer-Damage02"
         ],
-        "researchPoints": 1100,
+        "researchPoints": 1200,
         "researchPower": 75,
         "results": [
             {
@@ -3728,7 +3728,7 @@
         "requiredResearch": [
             "R-Wpn-Flame2"
         ],
-        "researchPoints": 1800,
+        "researchPoints": 500,
         "researchPower": 125,
         "resultStructures": [
             "Tower-Projector"
@@ -3797,24 +3797,12 @@
         "requiredResearch": [
             "R-Wpn-MG4"
         ],
-        "researchPoints": 4800,
+        "researchPoints": 400,
         "researchPower": 150,
         "resultStructures": [
             "Pillbox-RotMG"
         ],
         "statID": "Pillbox-RotMG"
-    },
-    "R-Defense-RotCannon": {
-        "iconID": "IMAGE_RES_DEFENCE",
-        "id": "R-Defense-RotCannon",
-        "msgName": "RES_EMP_RotCan",
-        "name": "Assault Cannon Emplacement",
-        "researchPoints": 6000,
-        "researchPower": 187,
-        "resultStructures": [
-            "Wall-VulcanCan"
-        ],
-        "statID": "Wall-VulcanCan"
     },
     "R-Defense-RotMG": {
         "iconID": "IMAGE_RES_DEFENCE",
@@ -3824,7 +3812,7 @@
         "requiredResearch": [
             "R-Wpn-MG4"
         ],
-        "researchPoints": 4800,
+        "researchPoints": 300,
         "researchPower": 150,
         "resultStructures": [
             "GuardTower-RotMg"
@@ -3842,7 +3830,7 @@
         "requiredResearch": [
             "R-Wpn-Mortar3"
         ],
-        "researchPoints": 4800,
+        "researchPoints": 500,
         "researchPower": 150,
         "resultStructures": [
             "Emplacement-RotMor"
@@ -3861,7 +3849,7 @@
             "R-Wpn-MG4",
             "R-Defense-RotMG"
         ],
-        "researchPoints": 900,
+        "researchPoints": 400,
         "researchPower": 150,
         "resultStructures": [
             "Wall-RotMg"
@@ -3879,7 +3867,7 @@
         "requiredResearch": [
             "R-Wpn-Cannon5"
         ],
-        "researchPoints": 900,
+        "researchPoints": 400,
         "researchPower": 120,
         "resultStructures": [
             "Wall-VulcanCan"
@@ -4743,6 +4731,9 @@
         "keyTopic": 1,
         "msgName": "RES_W_AA2",
         "name": "Cyclone Flak Turret",
+        "redComponents": [
+            "QuadMg1AAGun"
+        ],
         "requiredResearch": [
             "R-Wpn-AAGun03"
         ],
@@ -4905,7 +4896,7 @@
             "R-Wpn-Flame2",
             "R-Wpn-Flamer-Damage04"
         ],
-        "researchPoints": 7200,
+        "researchPoints": 1600,
         "researchPower": 225,
         "resultComponents": [
             "Bomb3-VTOL-LtINC"
@@ -5093,12 +5084,13 @@
     "R-Wpn-Cannon-ROF03": {
         "iconID": "IMAGE_RES_WEAPONTECH",
         "id": "R-Wpn-Cannon-ROF03",
+        "keyTopic": 1,
         "name": "Cannon Autoloader Mk3",
         "requiredResearch": [
             "R-Wpn-Cannon5",
             "R-Wpn-Cannon-ROF02"
         ],
-        "researchPoints": 8000,
+        "researchPoints": 2000,
         "researchPower": 250,
         "results": [
             {
@@ -5126,6 +5118,10 @@
         "keyTopic": 1,
         "msgName": "RES_W_CN_4A",
         "name": "Hyper Velocity Cannon",
+        "redComponents": [
+            "Cannon1Mk1",
+            "Cannon1-VTOL"
+        ],
         "requiredResearch": [
 			"R-Wpn-Cannon2Mk1"
         ],
@@ -5143,10 +5139,13 @@
         "keyTopic": 1,
         "msgName": "RES_W_CN5",
         "name": "Assault Cannon",
+        "redComponents": [
+            "Cannon2A-TMk1"
+        ],
         "requiredResearch": [
 			"R-Wpn-Cannon4AMk1"
         ],
-        "researchPoints": 9000,
+        "researchPoints": 1800,
         "researchPower": 281,
         "resultComponents": [
             "Cannon5VulcanMk1",
@@ -5160,6 +5159,9 @@
         "keyTopic": 1,
         "msgName": "RES_FLAME2",
         "name": "Heavy Flamer - Inferno",
+        "redComponents": [
+          "Flame1Mk1"  
+        ],
         "requiredResearch": [
 			"R-Wpn-Flamer01Mk1"
         ],
@@ -5179,7 +5181,7 @@
             "R-Wpn-Flame2",
             "R-Wpn-Flamer-Damage03"
         ],
-        "researchPoints": 7200,
+        "researchPoints": 1500,
         "researchPower": 225,
         "results": [
             {
@@ -5209,7 +5211,7 @@
             "R-Wpn-Flamer-Damage04",
             "R-Wpn-Flamer-ROF02"
         ],
-        "researchPoints": 9200,
+        "researchPoints": 1800,
         "researchPower": 287,
         "results": [
             {
@@ -5239,7 +5241,7 @@
             "R-Wpn-Flamer-Damage05",
             "R-Wpn-Flamer-ROF03"
         ],
-        "researchPoints": 11200,
+        "researchPoints": 2100,
         "researchPower": 350,
         "results": [
             {
@@ -5300,7 +5302,7 @@
             "R-Wpn-Flamer-ROF02",
             "R-Wpn-Flame2"
         ],
-        "researchPoints": 1600,
+        "researchPoints": 2300,
         "researchPower": 250,
         "results": [
             {
@@ -5736,7 +5738,7 @@
         "requiredResearch": [
 			"R-Wpn-MG-ROF02"
         ],
-        "researchPoints": 6800,
+        "researchPoints": 1700,
         "researchPower": 212,
         "results": [
             {
@@ -5776,7 +5778,7 @@
 			"R-Wpn-MG-Damage05",
 			"R-Wpn-MG-ROF03"
         ],
-        "researchPoints": 7200,
+        "researchPoints": 1800,
         "researchPower": 225,
         "resultComponents": [
             "MG4ROTARY-VTOL",
@@ -5996,7 +5998,7 @@
 			"R-Wpn-Mortar02Hvy",
 			"R-Wpn-Mortar-ROF03"
         ],
-        "researchPoints": 10000,
+        "researchPoints": 1800,
         "researchPower": 312,
         "resultComponents": [
             "Mortar3ROTARYMk1"
@@ -6118,16 +6120,38 @@
         "keyTopic": 1,
         "msgName": "RES_W_RK_HvAT",
         "name": "Tank Killer Rocket",
+        "redComponents": [
+            "Rocket-LtA-T",
+            "Rocket-VTOL-LtA-T",
+            "Rocket-Pod",
+            "Rocket-VTOL-Pod"
+        ],
         "requiredResearch": [
             "R-Wpn-Rocket03-HvAT"
         ],
-        "researchPoints": 10000,
+        "researchPoints": 2000,
         "researchPower": 312,
         "resultComponents": [
             "Rocket-HvyA-T",
             "Rocket-VTOL-HvyA-T"
         ],
         "statID": "Rocket-HvyA-T"
+    },
+    "R-Wpn-Rocket08-Ballista": {
+        "iconID": "IMAGE_RES_WEAPONTECH",
+        "id": "R-Wpn-Rocket08-Ballista",
+        "keyTopic": 1,
+        "msgName": "RES_W_RK_BALAT",
+        "name": "Ballista AT Rocket",
+        "requiredResearch": [
+            "R-Wpn-Rocket03-HvAT"
+        ],
+        "researchPoints": 2100,
+        "researchPower": 334,
+        "resultComponents": [
+            "Rocket-Ballista"
+        ],
+        "statID": "Rocket-Ballista"
     },
     "R-Wpn-RocketSlow-Damage04": {
         "iconID": "IMAGE_RES_WEAPONTECH",
@@ -6392,6 +6416,21 @@
             "PillBoxTK"
         ],
         "statID": "PillBoxTK"
+    },
+    "R-Defense-Ballista": {
+        "iconID": "IMAGE_RES_DEFENCE",
+        "id": "R-Defense-Ballista",
+        "msgName": "RES_EMP_BALAT",
+        "name": "Ballista Emplacement",
+        "requiredResearch": [
+            "R-Wpn-Rocket08-Ballista"
+        ],
+        "researchPoints": 450,
+        "researchPower": 167,
+        "resultStructures": [
+            "Emplacement-Ballista"
+        ],
+        "statID": "Emplacement-Ballista"
     },
     "R-Defense-HvyArtMissile": {
         "iconID": "IMAGE_RES_DEFENCE",

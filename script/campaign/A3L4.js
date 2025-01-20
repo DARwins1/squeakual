@@ -488,7 +488,7 @@ function eventStartLevel()
 	centreView(startPos.x, startPos.y);
 	setNoGoArea(lz.x, lz.y, lz.x2, lz.y2, CAM_HUMAN_PLAYER);
 	
-	camSetStandardWinLossConditions(CAM_VICTORY_STANDARD, "THE_END", {
+	camSetStandardWinLossConditions(CAM_VICTORY_STANDARD, "A3L5S", {
 		ignoreInfestedUnits: true,
 		callback: "wavesOver"
 	});

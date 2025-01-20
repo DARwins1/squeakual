@@ -48,16 +48,16 @@ function sendInfestedGroup()
 	let droids;
 	switch (infGroupIdx % 6) // Cycle through each entrance
 	{
-	case 0: // Travel from entrances 1 -> 4
-		entryIdx = 1;
-		exitIdx = 4;
-		droids = camRandInfTemplates(
-			// Misc. units
-			[cTempl.stinger, cTempl.infbloke, cTempl.infkevbloke, cTempl.infminitruck, cTempl.infbuggy, cTempl.infrbuggy], 
-			4 + camRand(5), // 4 - 8 core units
-			14 + camRand(3) // 14 - 16 fodder
-		);
-		break;
+	// case 0: // Travel from entrances 1 -> 4
+	// 	entryIdx = 1;
+	// 	exitIdx = 4;
+	// 	droids = camRandInfTemplates(
+	// 		// Misc. units
+	// 		[cTempl.stinger, cTempl.infbloke, cTempl.infkevbloke, cTempl.infminitruck, cTempl.infbuggy, cTempl.infrbuggy], 
+	// 		4 + camRand(5), // 4 - 8 core units
+	// 		14 + camRand(3) // 14 - 16 fodder
+	// 	);
+	// 	break;
 	case 1: // Travel from entrances 5 -> 1
 		entryIdx = 5;
 		exitIdx = 1;
@@ -110,6 +110,9 @@ function sendInfestedGroup()
 		);
 		if (difficulty >= MEDIUM) droids.push(cTempl.boomtick); // Add an extra Boom Tick
 		break;
+	default:
+		infGroupIdx++;
+		return;
 	}
 
 	const newGroup = camSendReinforcement(CAM_INFESTED, getObject(entrances[entryIdx]), droids, CAM_REINFORCE_GROUND, {
@@ -404,7 +407,7 @@ function eventStartLevel()
 	// Most Infested units start out pre-damaged
 	camSetPreDamageModifier(CAM_INFESTED, [50, 80], [60, 90], CAM_INFESTED_PREDAMAGE_EXCLUSIONS);
 
-	setTimer("sendInfestedGroup", camChangeOnDiff(camSecondsToMilliseconds(20)));
+	setTimer("sendInfestedGroup", camChangeOnDiff(camSecondsToMilliseconds(30)));
 
 	camSetWeather(CAM_WEATHER_RAINSTORM);
 	camSetSkyType(CAM_SKY_NIGHT);

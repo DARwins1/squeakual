@@ -232,3 +232,12 @@ expand		A3L4
 dataset		REC_2
 game		"wrf/act3/A3L4.gam"
 data		"wrf/act3/A3L4.wrf"
+
+between		A3L5S
+dataset		REC_2
+data		"wrf/act3/A3L5s.wrf"
+
+miss_keep	A3L5
+dataset		REC_2
+game		"wrf/act3/A3L5.gam"
+data		"wrf/act3/A3L5.wrf"

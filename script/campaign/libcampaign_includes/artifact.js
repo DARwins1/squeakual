@@ -92,6 +92,43 @@ function camAddArtifact(artifact)
 	}
 }
 
+//;; ## camDeleteArtifact(artiLabel)
+//;;
+//;; Deletes the artifact from the list of managed artifacts.
+//;;
+//;; @param {String} artiLabel
+//;; @returns {void}
+//;;
+function camDeleteArtifact(artiLabel, warnIfNotFound)
+{
+	if (!camDef(warnIfNotFound))
+	{
+		warnIfNotFound = true;
+	}
+	if (!camDef(artiLabel))
+	{
+		camDebug("Tried to delete undefined artifact label");
+		return;
+	}
+	if (!(artiLabel in __camArtifacts))
+	{
+		if (warnIfNotFound)
+		{
+			camDebug("Artifact label doesn't exist in list of artifacts");
+		}
+		return;
+	}
+	if (__camArtifacts[artiLabel].placed)
+	{
+		const obj = getObject(__camGetArtifactLabel(artiLabel));
+		if (camDef(obj) && obj !== null)
+		{
+			camSafeRemoveObject(obj, false);
+		}
+	}
+	delete __camArtifacts[artiLabel];
+}
+
 //;; ## camAllArtifactsPickedUp()
 //;;
 //;; Returns `true` if all artifacts managed by `libcampaign.js` were picked up.

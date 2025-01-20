@@ -153,7 +153,7 @@ function startCollectiveTransports()
 	setTimer("sendCollectiveTransporter", camChangeOnDiff(camMinutesToMilliseconds(8)));
 }
 
-function sendCollectiveTransporter() 
+function sendCollectiveTransporter()
 {
 	// First, check if the LZ is still alive
 	if (camBaseIsEliminated("colLZBase"))

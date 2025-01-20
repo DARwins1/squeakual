@@ -888,7 +888,7 @@
     "CO-M-HRepair-T": {
         "body": "Body6SUPP",
         "id": "CO-M-HRepair-T",
-        "name": "*CO-M-Repair-T*",
+        "name": "*CO-M-HRepair-T*",
         "propulsion": "tracked01",
         "repair": "HeavyRepair",
         "type": "DROID"

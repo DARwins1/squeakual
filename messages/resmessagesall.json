@@ -511,5 +511,31 @@
             "Body Points: Medium",
             "Requires Cyborg factory to produce"
         ]
+    },
+    "RES_W_RK_BALAT": {
+        "id": "RES_W_RK_BALAT",
+        "imdName": "MICAPSUL.PIE",
+        "sequenceName": "res_weapons.ogg",
+        "text": [
+            "New Weapon Turret Available",
+            "Heavy rocket launcher firing heavy, long range anti-tank rockets",
+            "Effective against: Vehicles",
+            "Ineffective against: Cyborgs and structures",
+            "Greater accuracy at longer ranges",
+            "Has a long weapon range",
+            "Must be stationary to fire",
+            "Unable to fire at enemies that are within a close proximity"
+        ]
+    },
+    "RES_EMP_BALAT": {
+        "id": "RES_EMP_BALAT",
+        "imdName": "MICAPSUL.pie",
+        "sequenceName": "res_struttech.ogg",
+        "text": [
+            "New Defensive Structure Available",
+            "Armored strongpoint with Ballista rocket",
+            "Automatically targets enemies in range",
+            "Defensive Strength: Medium"
+        ]
     }
 }
