@@ -401,51 +401,37 @@ function sendInfestedReinforcements()
 	const CORE_SIZE = 4 + camRand(5);
 	const FODDER_SIZE = 14 + camRand(3);
 
+	const nTrenchCoreDroids = [
+		cTempl.stinger, cTempl.infbloke, cTempl.infkevbloke,
+		cTempl.infminitruck, cTempl.infbuggy, cTempl.infrbuggy,
+		cTempl.infcybhg, cTempl.infcybca, cTempl.infcolpodt
+	];
+	const neCoreDroids = [
+		cTempl.stinger, cTempl.infbloke, cTempl.infkevbloke,
+		cTempl.infminitruck, cTempl.infbuggy, cTempl.infrbuggy,
+		cTempl.infcybhg, cTempl.infcybca, cTempl.infcolpodt
+	];
+	const canalCoreDroids = [
+		cTempl.basher, cTempl.inffiretruck, cTempl.infkevbloke,
+		cTempl.inflance, cTempl.infbuggy, cTempl.infrbuggy
+	];
+
 	// North trench entrances
 	// Choose one to spawn from...
-	let northTrenchEntrance;
-	switch (camRand(2))
-	{
-	case 0:
-		// Road entrance
-		northTrenchEntrance = getObject("infEntry1");
-		break;
-	case 1:
-		// Trench entrance
-		northTrenchEntrance = getObject("infEntry2");
-		break;
-	}
-	const nTrenchDroids = camRandInfTemplates(
-		[cTempl.stinger, cTempl.infbloke, cTempl.infkevbloke, cTempl.infminitruck, cTempl.infbuggy, cTempl.infrbuggy, cTempl.infcybhg, cTempl.infcybca, cTempl.infcolpodt], 
-		CORE_SIZE, FODDER_SIZE
-	);
+	const northEntrances = ["infEntry1", "infEntry2"];
+	const northTrenchEntrance = getObject(northEntrances[camRand(northEntrances.length)]);
+	const nTrenchDroids = camRandInfTemplates(nTrenchCoreDroids, CORE_SIZE, FODDER_SIZE);
 	camSendReinforcement(CAM_INFESTED, northTrenchEntrance, nTrenchDroids, CAM_REINFORCE_GROUND);
 
 	// North east entrances
 	// Choose one to spawn from...
-	let northeastEntrance;
-	switch (camRand(2))
-	{
-	case 0:
-		// Road entrance
-		northeastEntrance = getObject("infEntry3");
-		break;
-	case 1:
-		// Trench entrance
-		northeastEntrance = getObject("infEntry4");
-		break;
-	}
-	const neDroids = camRandInfTemplates(
-		[cTempl.stinger, cTempl.infbloke, cTempl.infkevbloke, cTempl.infminitruck, cTempl.infbuggy, cTempl.infrbuggy, cTempl.infcybhg, cTempl.infcybca, cTempl.infcolpodt], 
-		CORE_SIZE / 2, FODDER_SIZE * 2/3
-	);
+	const nwEntrances = ["infEntry3", "infEntry4"];
+	const northeastEntrance = getObject(nwEntrances[camRand(nwEntrances.length)]);
+	const neDroids = camRandInfTemplates(neCoreDroids, CORE_SIZE / 2, FODDER_SIZE * 2/3);
 	camSendReinforcement(CAM_INFESTED, northeastEntrance, neDroids, CAM_REINFORCE_GROUND);
 
 	// South canal entrance
-	const canalDroids = camRandInfTemplates(
-		[cTempl.basher, cTempl.inffiretruck, cTempl.infkevbloke, cTempl.inflance, cTempl.infbuggy, cTempl.infrbuggy],
-		CORE_SIZE / 2, 2 * FODDER_SIZE / 3
-	);
+	const canalDroids = camRandInfTemplates(canalCoreDroids, CORE_SIZE / 2, 2 * FODDER_SIZE / 3);
 	camSendReinforcement(CAM_INFESTED, getObject("infEntry5"), canalDroids, CAM_REINFORCE_GROUND);
 }
 
@@ -482,8 +468,6 @@ function eventStartLevel()
 {
 	const startPos = camMakePos("landingZone");
 	const lz = getObject("landingZone"); //player lz
-
-	setReinforcementTime(LZ_COMPROMISED_TIME);
 
 	centreView(startPos.x, startPos.y);
 	setNoGoArea(lz.x, lz.y, lz.x2, lz.y2, CAM_HUMAN_PLAYER);

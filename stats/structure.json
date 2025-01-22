@@ -3847,7 +3847,7 @@
         "height": 2,
         "hitpoints": 800,
         "id": "InfWallTower-HPVcannon",
-        "name": "Hyper Velocity Cannon Hardpoint",
+        "name": "Infested Hyper Velocity Cannon Hardpoint",
         "resistance": 150,
         "sensorID": "DefaultSensor1Mk1",
         "strength": "HARD",

@@ -1,0 +1,16 @@
+/*
+ * A3L6.wrf
+ *
+ */
+
+/* Directory for Proximity messages and mission briefs */
+directory	"messages"
+
+file		SMSG		"briefA3L6.txt"
+file		SMSG		"proxA3L6.txt"
+
+directory "script"
+file JAVASCRIPT "rules.js"
+
+directory "script/campaign"
+file JAVASCRIPT "A3L6.js"

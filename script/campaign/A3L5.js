@@ -351,7 +351,7 @@ function eventStartLevel()
 	const lz = getObject("landingZone"); //player lz
 	const transportEntryPos = camMakePos("transportEntryPos");
 
-	camSetStandardWinLossConditions(CAM_VICTORY_OFFWORLD, "THE_END", {
+	camSetStandardWinLossConditions(CAM_VICTORY_OFFWORLD, "A3L6", {
 		message: "RET_LZ",
 		reinforcements: camMinutesToSeconds(1.5),
 		retlz: true,

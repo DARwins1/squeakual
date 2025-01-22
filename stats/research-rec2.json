@@ -319,14 +319,14 @@
 	"R-Cyborg-Metals04": {
         "iconID": "IMAGE_RES_CYBORGTECH",
         "id": "R-Cyborg-Metals04",
-        "keyTopic": 1,
         "imdName": "icmolql.pie",
         "msgName": "RES_CYMET4",
         "name": "Cyborg Dense Composite Alloys",
         "requiredResearch": [
-			"R-Cyborg-Metals03"
+			"R-Cyborg-Metals03",
+            "R-Vehicle-Metals04"
         ],
-        "researchPoints": 5600,
+        "researchPoints": 1900,
         "researchPower": 175,
         "results": [
             {
@@ -349,6 +349,7 @@
     "R-Cyborg-Metals05": {
         "iconID": "IMAGE_RES_CYBORGTECH",
         "id": "R-Cyborg-Metals05",
+        "keyTopic": 1,
         "imdName": "icmolql.pie",
         "name": "Cyborg Dense Composite Alloys Mk2",
         "requiredResearch": [
@@ -730,7 +731,7 @@
             "R-Vehicle-Body06",
 			"R-Vehicle-Metals03"
         ],
-        "researchPoints": 7600,
+        "researchPoints": 2000,
         "researchPower": 237,
         "results": [
             {
@@ -753,6 +754,7 @@
     "R-Vehicle-Metals05": {
         "iconID": "IMAGE_RES_DROIDTECH",
         "id": "R-Vehicle-Metals05",
+        "keyTopic": 1,
         "imdName": "icmolql.pie",
         "name": "Dense Composite Alloys Mk2",
         "requiredResearch": [
@@ -2250,8 +2252,7 @@
         "msgName": "RES_V_B11",
         "name": "Heavy Body - Python",
         "requiredResearch": [
-            "R-Vehicle-Body05",
-            "R-Vehicle-Metals02"
+            "R-Vehicle-Metals04"
         ],
         "researchPoints": 2400,
         "researchPower": 75,

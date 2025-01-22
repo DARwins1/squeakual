@@ -170,15 +170,13 @@ function eventStartLevel()
 	const startPos = camMakePos("landingZone");
 	const lz = getObject("landingZone"); //player lz
 
-	setReinforcementTime(LZ_COMPROMISED_TIME);
-
 	centreView(startPos.x, startPos.y);
 	setNoGoArea(lz.x, lz.y, lz.x2, lz.y2, CAM_HUMAN_PLAYER);
 	
 	camSetStandardWinLossConditions(CAM_VICTORY_STANDARD, "A3L3S", {
 		ignoreInfestedUnits: true
 	});
-	camSetExtraObjectiveMessage(_("Locate team Golf's missing convoy"))
+	camSetExtraObjectiveMessage(_("Locate team Golf's missing convoy"));
 
 	setAlliance(MIS_TEAM_GOLF, CAM_HUMAN_PLAYER, true);
 	setAlliance(MIS_TEAM_GOLF, CAM_THE_COLLECTIVE, true);
