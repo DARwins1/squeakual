@@ -3710,7 +3710,7 @@
         "requiredResearch": [
             "R-Wpn-HowitzerMk1"
         ],
-        "researchPoints": 4800,
+        "researchPoints": 800,
         "researchPower": 150,
         "resultStructures": [
             "Emplacement-Howitzer105"
@@ -5386,6 +5386,7 @@
     "R-Wpn-Howitzer-Damage01": {
         "iconID": "IMAGE_RES_WEAPONTECH",
         "id": "R-Wpn-Howitzer-Damage01",
+        "keyTopic": 1,
         "msgName": "RES_W_HOWD1",
         "name": "HE Howitzer Shells",
         "requiredResearch": [
@@ -5495,6 +5496,7 @@
     "R-Wpn-Howitzer-ROF01": {
         "iconID": "IMAGE_RES_WEAPONTECH",
         "id": "R-Wpn-Howitzer-ROF01",
+        "keyTopic": 1,
         "msgName": "RES_W_HOWRF1",
         "name": "Howitzer Autoloader",
         "requiredResearch": [
@@ -5606,7 +5608,7 @@
         "keyTopic": 1,
         "msgName": "RES_W_HMK1",
         "name": "Howitzer",
-        "researchPoints": 9000,
+        "researchPoints": 1800,
         "researchPower": 281,
         "resultComponents": [
             "Howitzer105Mk1"
