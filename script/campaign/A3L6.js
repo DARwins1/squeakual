@@ -176,8 +176,8 @@ function sendInfestedReinforcements()
 
 	// North east entrances
 	// Choose one to spawn from...
-	const nwEntrances = ["infEntry3", "infEntry4"];
-	const northeastEntrance = getObject(nwEntrances[camRand(nwEntrances.length)]);
+	const neEntrances = ["infEntry3", "infEntry4"];
+	const northeastEntrance = getObject(neEntrances[camRand(neEntrances.length)]);
 	const neDroids = camRandInfTemplates(neCoreDroids, CORE_SIZE / 2, FODDER_SIZE * 2/3);
 	camSendReinforcement(CAM_INFESTED, northeastEntrance, neDroids, CAM_REINFORCE_GROUND);
 
@@ -224,7 +224,7 @@ function eventStartLevel()
 	centreView(startPos.x, startPos.y);
 	setNoGoArea(lz.x, lz.y, lz.x2, lz.y2, CAM_HUMAN_PLAYER);
 	
-	camSetStandardWinLossConditions(CAM_VICTORY_STANDARD, "THE_END", {
+	camSetStandardWinLossConditions(CAM_VICTORY_STANDARD, "A3L7S", {
 		ignoreInfestedUnits: true
 	});
 
@@ -304,7 +304,7 @@ function eventStartLevel()
 			groupSize: 3,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(135)),
 			// Oops all heavies!
-			templates: [ cTempl.cohhcant, cTempl.cohacant, cTempl.cohhrat, cTempl.cohacant ]
+			templates: [ cTempl.cohhcant, cTempl.cohacant, cTempl.cohhrat, cTempl.cohacant, cTempl.cohbbt ]
 		},
 		"colFactory2": {
 			assembly: "colAssembly2",
@@ -385,7 +385,7 @@ function eventStartLevel()
 	});
 
 	// Set up Collective trucks...
-	const TRUCK_TIME = camChangeOnDiff(camSecondsToMilliseconds((tweakOptions.rec_timerlessMode) ? 45 : 90))
+	const TRUCK_TIME = camChangeOnDiff(camSecondsToMilliseconds((tweakOptions.rec_timerlessMode) ? 45 : 90));
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colWestRoadblock",
 		rebuildTruck: true,
@@ -512,8 +512,7 @@ function eventStartLevel()
 		leader: "colSensor",
 		repair: 60,
 		suborder: CAM_ORDER_DEFEND,
-		pos: camMakePos("colAssembly2"),
-		targetPlayer: CAM_HUMAN_PLAYER
+		pos: camMakePos("colAssembly2")
 	})
 
 	camAutoReplaceObjectLabel("colCC");

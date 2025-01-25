@@ -61,6 +61,8 @@ pllcanht: { body: "Body1REC", prop: "HalfTrack", weap: "Cannon1Mk1" }, // Light 
 pllcant: { body: "Body1REC", prop: "tracked01", weap: "Cannon1Mk1" }, // Light Cannon Viper Tracks
 plmhpvht: { body: "Body5REC", prop: "HalfTrack", weap: "Cannon4AUTOMk1" }, // Hyper Velocity Cannon Cobra Half-tracks
 plhhpvt: { body: "Body11ABT", prop: "tracked01", weap: "Cannon4AUTOMk1" }, // Hyper Velocity Cannon Python Tracks
+plmacant: { body: "Body5REC", prop: "tracked01", weap: "Cannon5VulcanMk1" }, // Assault Cannon Cobra Tracks
+plhacant: { body: "Body11ABT", prop: "tracked01", weap: "Cannon5VulcanMk1" }, // Assault Cannon Python Tracks
 plhhct: { body: "Body11ABT", prop: "tracked01", weap: "Cannon375mmMk1" }, // Heavy Cannon Python Tracks
 
 pllmortw: { body: "Body1REC", prop: "wheeled01", weap: "Mortar1Mk1" }, // Mortar Viper Wheels
@@ -91,6 +93,7 @@ plhraat: { body: "Body11ABT", prop: "tracked01", weap: "AAGun2Mk1" }, // Whirlwi
 pllrepw: { body: "Body1REC", prop: "wheeled01", weap: "LightRepair1" }, // Repair Turret Viper Wheels
 pllrept: { body: "Body1REC", prop: "tracked01", weap: "LightRepair1" }, // Repair Turret Viper Tracks
 plmrept: { body: "Body5REC", prop: "tracked01", weap: "LightRepair1" }, // Repair Turret Cobra Tracks
+plmhrept: { body: "Body5REC", prop: "tracked01", weap: "HeavyRepair" }, // Heavy Repair Turret Cobra Tracks
 
 plltmgt: { body: "Body1REC", prop: "tracked01", weap: "MG2Mk1" }, // Twin Machinegun Viper Tracks
 pllhmght: { body: "Body1REC", prop: "HalfTrack", weap: "MG3Mk1" }, // Heavy Machinegun Viper Half-tracks
@@ -148,9 +151,15 @@ helpod: { body: "ScavengerHvyChopper", prop: "Helicopter", weap: "RustRocket-Pod
 monfire: { body: "MonsterFireBody", prop: "tracked01", weap: "RustFlame1Mk1" }, // Monster Fire Truck
 monlan: { body: "MonsterBus", prop: "tracked01", weap: "RustRocket-LtA-T" }, // Lancer Monster Bus Tank
 monmcan: { body: "MonsterBus", prop: "tracked01", weap: "RustCannon2A-TMk1" }, // Medium Cannon Monster Bus Tank
-crane: { body: "ScavCraneBody", prop: "HalfTrack", weap: "ScavCrane" }, // Scavenger Crane (Truck)
+crane: { body: "ScavCraneBody", prop: "HalfTrack", weap: "ScavCrane" }, // Scavenger Crane (Constructor)
 
 // Infested Units:
+infgbjeep: { body: "InfestedRKJeepBody", prop: "BaBaProp", weap: "BabaMiniMortar" }, // Infested Grenade Jeep
+infmonlan: { body: "InfestedMonsterBus", prop: "tracked01", weap: "RustRocket-LtA-T" }, // Infested Lancer Monster Bus Tank
+infflatmrl: { body: "InfScavTruckBody", prop: "BaBaProp", weap: ["RustRocket-Pod", "RustRocket-MRL"] }, // Infested MRA Flatbed Truck
+infflatat: { body: "InfScavTruckBody", prop: "BaBaProp", weap: ["RustRocket-Pod", "RustRocket-LtA-T"] }, // Infested Lancer Flatbed Truck
+infhelpod: { body: "InfScavengerHvyChopper", prop: "Helicopter", weap: "RustRocket-Pod-VTOL" }, // Infested MRP Helicopter
+
 infcybmg: { body: "CyborgLightBody", prop: "CyborgLegs", weap: "InfCyborgChaingun" }, // Infested Machinegunner Cyborg
 infcybhg: { body: "CyborgLightBody", prop: "CyborgLegs", weap: "InfCyborgHeavyChaingun" }, // Infested Heavy Machinegunner Cyborg
 infcybag: { body: "CyborgLightBody", prop: "CyborgLegs", weap: "InfCyborgRotMG" }, // Infested Assault Gunner Cyborg
@@ -170,6 +179,7 @@ infcolpodt: { body: "InfBody2SUP", prop: "tracked01", weap: "Rocket-Pod" }, // I
 infcolhmght: { body: "InfBody2SUP", prop: "HalfTrack", weap: "MG3Mk1" }, // Infested Heavy Machinegun Leopard Half-tracks
 infcomatt: { body: "InfBody6SUPP", prop: "tracked01", weap: "Rocket-LtA-T" }, // Infested Lancer Panther Tracks
 infcommcant: { body: "InfBody6SUPP", prop: "tracked01", weap: "Cannon2A-TMk1" }, // Infested Medium Cannon Panther Tracks
+infcomtruckt: { body: "InfBody6SUPP", prop: "tracked01", weap: "InfestedSpade1Trans" }, // Infested Truck Panther Tracks
 infcohhcant: { body: "InfBody9REC", prop: "tracked01", weap: "Cannon375mmMk1" }, // Infested Heavy Cannon Tiger Tracks
 
 basher: { body: "BasherBody", prop: "BoomTickLegs", weap: "BasherMelee" }, // Basher
@@ -260,6 +270,7 @@ combombv: { body: "Body6SUPP", prop: "V-Tol", weap: "Bomb1-VTOL-LtHE" }, // Clus
 comhbombv: { body: "Body6SUPP", prop: "V-Tol", weap: "Bomb2-VTOL-HvHE" }, // HEAP Bomb Panther VTOL
 comtbombv: { body: "Body6SUPP", prop: "V-Tol", weap: "Bomb4-VTOL-HvyINC" }, // Thermite Bomb Panther VTOL
 comhatv: { body: "Body6SUPP", prop: "V-Tol", weap: "Rocket-VTOL-HvyA-T" }, // Tank Killer Panther VTOL
+comacanv: { body: "Body6SUPP", prop: "V-Tol", weap: "Cannon5Vulcan-VTOL" }, // Assault Cannon Panther VTOL
 
 // NEXUS Units
 // CAM_3_A

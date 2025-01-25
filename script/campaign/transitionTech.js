@@ -200,8 +200,8 @@ const camA3L7AllyResearch = camAct3StartResearch.concat([
 	"R-Wpn-Cannon5", // Artifact
 	"R-Defense-Wall-VulcanCan", "R-Cyborg-Hvywpn-Acannon",
 	// A3L5
-	// "BALLISTA", // Artifact
-	// "BALLISTA_DEFENSE", "R-Wpn-RocketSlow-Accuracy03",
+	"R-Wpn-Rocket08-Ballista", // Artifact
+	"R-Defense-Ballista", // "THERMAL_IMAGING_ROCKETS",
 	// A3L6
 	"R-Vehicle-Metals04", // Artifact
 	"R-Vehicle-Body11", "R-Cyborg-Metals04",

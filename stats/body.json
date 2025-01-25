@@ -89,6 +89,21 @@
         "weaponSlots": 3,
         "weight": 2000
     },
+    "InfScavTruckBody": {
+        "armourHeat": 5,
+        "armourKinetic": 9,
+        "buildPoints": 65,
+        "buildPower": 15,
+        "class": "Babas",
+        "hitpoints": 190,
+        "id": "InfScavTruckBody",
+        "model": "infflatbed.pie",
+        "name": "Infested Scavenger Flatbed",
+        "powerOutput": 8000,
+        "size": "LIGHT",
+        "weaponSlots": 3,
+        "weight": 2000
+    },
     "ScavCraneBody": {
         "armourHeat": 4,
         "armourKinetic": 10,
@@ -157,6 +172,27 @@
         "id": "ScavengerHvyChopper",
         "model": "hvychop.pie",
         "name": "Scavenger Heavy Chopper",
+        "powerOutput": 4000,
+        "propulsionExtraModels": {
+            "Helicopter": {
+                "moving": "hvyblades.pie",
+                "still": "hvyblades-still.pie"
+            }
+        },
+        "size": "LIGHT",
+        "weaponSlots": 1,
+        "weight": 2400
+    },
+    "InfScavengerHvyChopper": {
+        "armourHeat": 1,
+        "armourKinetic": 6,
+        "buildPoints": 75,
+        "buildPower": 4,
+        "class": "Droids",
+        "hitpoints": 185,
+        "id": "InfScavengerHvyChopper",
+        "model": "infhvychop.pie",
+        "name": "Infested Scavenger Heavy Chopper",
         "powerOutput": 4000,
         "propulsionExtraModels": {
             "Helicopter": {
@@ -272,7 +308,7 @@
         "buildPower": 4,
         "class": "Babas",
         "hitpoints": 210,
-        "id": "InfestedB2RKJeepBody",
+        "id": "InfestedRKJeepBody",
         "model": "infexjeeprk.pie",
         "name": "*Infested Rocket Jeep Body*",
         "powerOutput": 2200,

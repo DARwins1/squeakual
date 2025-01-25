@@ -246,3 +246,12 @@ expand		A3L6
 dataset		REC_2
 game		"wrf/act3/A3L6.gam"
 data		"wrf/act3/A3L6.wrf"
+
+between		A3L7S
+dataset		REC_2
+data		"wrf/act3/A3L7s.wrf"
+
+miss_keep	A3L7
+dataset		REC_2
+game		"wrf/act3/A3L7.gam"
+data		"wrf/act3/A3L7.wrf"

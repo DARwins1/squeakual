@@ -348,6 +348,16 @@
             "BabaMiniMortar"
         ]
     },
+    "InfBabaGrenJeep": {
+        "body": "InfestedRKJeepBody",
+        "id": "InfBabaGrenJeep",
+        "name": "Grenade Jeep",
+        "propulsion": "BaBaProp",
+        "type": "DROID",
+        "weapons": [
+            "BabaMiniMortar"
+        ]
+    },
     "BarbarianBuggy": {
         "body": "B3body-sml-buggy01",
         "id": "BarbarianBuggy",
@@ -507,6 +517,16 @@
         "id": "CO-H-HRA-H",
         "name": "Heavy Rocket Array Tiger Hover",
         "propulsion": "hover01",
+        "type": "DROID",
+        "weapons": [
+            "Rocket-MRL-Hvy"
+        ]
+    },
+    "CO-H-HRA-T": {
+        "body": "Body9REC",
+        "id": "CO-H-HRA-T",
+        "name": "Heavy Rocket Array Tiger Tracks",
+        "propulsion": "tracked01",
         "type": "DROID",
         "weapons": [
             "Rocket-MRL-Hvy"
@@ -747,6 +767,14 @@
         "propulsion": "tracked01",
         "type": "CONSTRUCT"
     },
+    "CO-M-Con-HT": {
+        "body": "Body6SUPP",
+        "construct": "Spade1Mk1",
+        "id": "CO-M-Con-HT",
+        "name": "Truck Panther Half-tracks",
+        "propulsion": "HalfTrack",
+        "type": "CONSTRUCT"
+    },
     "CO-M-HMG-T": {
         "body": "Body6SUPP",
         "id": "CO-M-HMG-T",
@@ -765,6 +793,16 @@
         "type": "DROID",
         "weapons": [
             "Cannon4AUTOMk1"
+        ]
+    },
+    "CO-M-ACannon-Tracks": {
+        "body": "Body6SUPP",
+        "id": "CO-M-ACannon-Tracks",
+        "name": "Assault Cannon Panther Tracks",
+        "propulsion": "tracked01",
+        "type": "DROID",
+        "weapons": [
+            "Cannon5VulcanMk1"
         ]
     },
     "CO-M-HVAT-Hover": {

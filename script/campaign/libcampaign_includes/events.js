@@ -291,11 +291,20 @@ function cam_eventDestroyed(obj)
 				delete __camPlayerTransports[obj.player];
 			}
 		}
-		else if (camDef(obj.weapons[0]) && obj.weapons[0].id === _("BoomTickSac"))
+		else if (camDef(obj.weapons[0]))
 		{
-			const BOOM_BAIT_ID = addDroid(CAM_INFESTED, obj.x, obj.y, "Boom Bait",
-				"BoomBaitBody", "BaBaLegs", "", "", "InfestedMelee").id; // Spawn an infested civilian where the boom tick died...
-			queue("__camDetonateBoomtick", __CAM_TICKS_PER_FRAME, BOOM_BAIT_ID + ""); // ...then blow them up
+			if (obj.weapons[0].id === "BoomTickSac")
+			{
+				const BOOM_BAIT_ID = addDroid(CAM_INFESTED, obj.x, obj.y, "Boom Bait",
+					"BoomBaitBody", "BaBaLegs", "", "", "InfestedMelee").id; // Spawn an infested civilian where the boom tick died...
+				queue("__camDetonateBoomtick", __CAM_TICKS_PER_FRAME, BOOM_BAIT_ID + ""); // ...then blow them up
+			}
+			else if (obj.weapons[0].id === "InfestedSpade1Trans")
+			{
+				// Summon one last group of Infested on death
+				camSendReinforcement(obj.player, camMakePos(obj), 
+					camRandInfTemplates(CAM_INFTRUCK_SUMMON_TEMPLATES, difficulty, CAM_INFTRUCK_FODDER_COUNT), CAM_REINFORCE_GROUND);
+			}
 		}
 	}
 	else if (obj.type === STRUCTURE)
@@ -443,6 +452,15 @@ function cam_eventAttacked(victim, attacker)
 					}
 				}
 			}
+		}
+
+		if (victim.type === DROID && victim.id === attacker.id
+			&& victim.droidType === DROID_WEAPON && camDef(victim.weapons[0]) 
+			&& victim.weapons[0].name === "InfestedSpade1Trans")
+		{
+			// Release a group of Infested from the Infested Truck...
+			camSendReinforcement(victim.player, camMakePos(victim), 
+				camRandInfTemplates(CAM_INFTRUCK_SUMMON_TEMPLATES, difficulty, CAM_INFTRUCK_FODDER_COUNT), CAM_REINFORCE_GROUND);
 		}
 	}
 }

@@ -113,18 +113,43 @@ const __CAM_BETA_CAMPAIGN_NUMBER = 2;
 const __CAM_GAMMA_CAMPAIGN_NUMBER = 3;
 const __CAM_UNKNOWN_CAMPAIGN_NUMBER = 1000;
 const __cam_alphaLevels = [
-	"CAM_1A", "CAM_1B", "SUB_1_1S", "SUB_1_1", "SUB_1_2S", "SUB_1_2", "SUB_1_3S",
-	"SUB_1_3", "CAM_1C", "CAM_1CA", "SUB_1_4AS", "SUB_1_4A", "SUB_1_5S", "SUB_1_5",
-	"CAM_1A-C", "SUB_1_7S", "SUB_1_7", "SUB_1_DS", "SUB_1_D", "CAM_1END"
+	"CAM_1A",
+	"CAM_1B",
+	"SUB_1_1S", "SUB_1_1",
+	"SUB_1_2S", "SUB_1_2",
+	"SUB_1_3S", "SUB_1_3",
+	"CAM_1C",
+	"CAM_1CA",
+	"SUB_1_4AS", "SUB_1_4A",
+	"SUB_1_5S", "SUB_1_5",
+	"CAM_1A-C",
+	"SUB_1_7S", "SUB_1_7",
+	"SUB_1_DS", "SUB_1_D",
+	"CAM_1END"
 ]; // 12 missions
 const __cam_betaLevels = [
-	"CAM_2A", "SUB_2_1S", "SUB_2_1", "CAM_2B", "SUB_2_2S", "SUB_2_2", "CAM_2C",
-	"SUB_2_5S", "SUB_2_5", "SUB_2DS", "SUB_2D", "SUB_2_6S", "SUB_2_6", "SUB_2_7S",
-	"SUB_2_7", "SUB_2_8S", "SUB_2_8", "CAM_2END"
+	"CAM_2A",
+	"SUB_2_1S", "SUB_2_1",
+	"CAM_2B",
+	"SUB_2_2S", "SUB_2_2",
+	"CAM_2C",
+	"SUB_2_5S", "SUB_2_5",
+	"SUB_2DS", "SUB_2D",
+	"SUB_2_6S", "SUB_2_6",
+	"SUB_2_7S", "SUB_2_7",
+	"SUB_2_8S", "SUB_2_8",
+	"CAM_2END"
 ]; // 11 missions
 const __cam_gammaLevels = [
-	"CAM_3A", "SUB_3_1S", "SUB_3_1", "CAM_3B", "SUB_3_2S", "SUB_3_2", "CAM3A-B",
-	"CAM3C", "CAM3A-D1", "CAM3A-D2", "CAM_3_4S", "CAM_3_4"
+	"CAM_3A",
+	"SUB_3_1S", "SUB_3_1",
+	"CAM_3B",
+	"SUB_3_2S","SUB_3_2",
+	"CAM3A-B",
+	"CAM3C",
+	"CAM3A-D1",
+	"CAM3A-D2",
+	"CAM_3_4S", "CAM_3_4"
 ]; // 9 missions
 // total missions: 32
 const __CAM_RECLAMATION_CAMPAIGN_NUMBER = 0;
@@ -144,7 +169,7 @@ const __cam_reclamationLevels = [
 	"L7", // EVACUATION
 ]; // 7 missions
 const __cam_prologueLevels = [
-	"PL1", // PUTRID
+	"PL1", // THE SUCCESSOR
 	"PL2", // SAFE HAVEN
 ]; // 2 missions
 const __cam_act1Levels = [
@@ -326,6 +351,19 @@ var __camTracedOnce = {};
 //events
 var __camSaveLoading;
 var __camInfestedGlobalAttackGroup;
+const CAM_INFTRUCK_SUMMON_TEMPLATES = [
+	{ body: "InfestedScavBody", prop: "BaBaLegs", weap: "BabaMG" }, // Infested Blokes
+	{ body: "InfestedScavBody", prop: "BaBaLegs", weap: "BabaMG" },
+	{ body: "InfestedScavBody", prop: "BaBaLegs", weap: "BabaMG" },
+	{ body: "InfestedScavBody", prop: "BaBaLegs", weap: "BabaMG" },
+	{ body: "InfestedScavBody-Kev", prop: "BaBaLegs", weap: "BabaMG" },
+	{ body: "InfestedLanceBody", prop: "BaBaLegs", weap: "BabaLance" }, // Infested Rocket Scavs
+	{ body: "InfestedLanceBody-Kev", prop: "BaBaLegs", weap: "BabaLance" },
+];
+// const CAM_INFTRUCK_DEATH_TEMPLATES = [
+// 	{ body: "BasherBody", prop: "BoomTickLegs", weap: "BasherMelee" }, // Basher
+// ];
+const CAM_INFTRUCK_FODDER_COUNT = 6;
 
 //group
 var __camNewGroupCounter;

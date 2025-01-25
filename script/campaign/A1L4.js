@@ -659,7 +659,7 @@ function eventStartLevel()
 	changePlayerColour(MIS_NASDA, 10); // NASDA is white in all cases
 	changePlayerColour(MIS_NASDA_POWER, 10);
 	changePlayerColour(MIS_CLAYDE, (PLAYER_COLOR !== 15) ? 15 : 0); // Clayde to brown or green
-	changePlayerColour(MIS_TEAM_DELTA, (PLAYER_COLOR !== 1) ? 1 : 8); // Golf to orange or yellow
+	changePlayerColour(MIS_TEAM_DELTA, (PLAYER_COLOR !== 1) ? 1 : 8); // Delta to orange or yellow
 	// NOTE: The Collective keep their color from the previous mission
 
 	camCompleteRequiredResearch(mis_collectiveResearch, CAM_THE_COLLECTIVE);
