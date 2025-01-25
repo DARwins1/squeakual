@@ -45,30 +45,30 @@ function sendInfestedReinforcements()
 	// North trench entrances
 	// Choose one to spawn from...
 	const northEntrances = [infEntry1, infEntry2];
-	const northTrenchEntrance = getObject(northEntrances[camRand(northEntrances.length)]);
+	const northTrenchEntrance = northEntrances[camRand(northEntrances.length)];
 	camSendReinforcement(CAM_INFESTED, northTrenchEntrance, camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 
 	// North east entrances
 	// Choose one to spawn from...
 	const neEntrances = [infEntry3, infEntry4];
-	const northeastEntrance = getObject(neEntrances[camRand(neEntrances.length)]);
+	const northeastEntrance = neEntrances[camRand(neEntrances.length)];
 	camSendReinforcement(CAM_INFESTED, northeastEntrance, camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 
 	// South east entrances
 	// Choose one to spawn from...
 	const seEntrances = [infEntry5, infEntry6];
-	const southeastEntrance = getObject(seEntrances[camRand(seEntrances.length)]);
+	const southeastEntrance = seEntrances[camRand(seEntrances.length)];
 	camSendReinforcement(CAM_INFESTED, southeastEntrance, camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 
 	// South canal entrances
 	const canalEntrances = [infEntry7, infEntry8];
-	const canalEntrance = getObject(canalEntrances[camRand(canalEntrances.length)]);
+	const canalEntrance = canalEntrances[camRand(canalEntrances.length)];
 	camSendReinforcement(CAM_INFESTED, canalEntrance, camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 
 	// South west trench entrances
 	// Choose one to spawn from...
 	const swEntrances = [infEntry9, infEntry10];
-	const southwestEntrance = getObject(swEntrances[camRand(swEntrances.length)]);
+	const southwestEntrance = swEntrances[camRand(swEntrances.length)];
 	camSendReinforcement(CAM_INFESTED, southwestEntrance, camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 }
 
