@@ -115,6 +115,9 @@ function eventStartLevel()
 	camCompleteRequiredResearch(mis_infestedResearch, CAM_INFESTED);
 	setTimer("sendInfestedReinforcements", camChangeOnDiff(camSecondsToMilliseconds(95)));
 
+	// Most Infested units start out pre-damaged
+	camSetPreDamageModifier(CAM_INFESTED, [50, 80], [60, 90], CAM_INFESTED_PREDAMAGE_EXCLUSIONS);
+
 	// Lighten the fog to *more or less* 2x default brightness with a slight pink color
 	camSetFog(48, 32, 96);
 	// Add a purple-blue tint

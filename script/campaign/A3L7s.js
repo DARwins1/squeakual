@@ -110,8 +110,12 @@ function eventStartLevel()
 	camCompleteRequiredResearch(mis_infestedResearch, CAM_INFESTED);
 	setTimer("sendInfestedReinforcements", camChangeOnDiff(camSecondsToMilliseconds(115)));
 
-	// Lighten the fog to *more or less* 2x default brightness with a slight pink color
-	camSetFog(48, 32, 96);
+	// Most Infested units start out pre-damaged
+	camSetPreDamageModifier(CAM_INFESTED, [50, 80], [60, 90], CAM_INFESTED_PREDAMAGE_EXCLUSIONS);
+
+	camSetSkyType(CAM_SKY_NIGHT);
+	// Give the fog a dark purple hue
+	camSetFog(32, 12, 64);
 	// Add a purple-blue tint
-	camSetSunIntensity(.5, .45, .55);
+	camSetSunIntensity(.45, .35, .45);
 }

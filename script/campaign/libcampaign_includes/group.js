@@ -352,6 +352,8 @@ function __camGetMissingGroupTemplates(group, returnFirst, factory)
 }
 
 // Gets a template to be built by the given factory
+// FIXME: Refillable groups currently do no player affiliation checking
+// Factories from OTHER PLAYERS can refill groups!!!
 function __camGetRefillableTemplateForFactory(factoryLabel, factory)
 {
 	for (const group in __camRefillableGroupInfo)

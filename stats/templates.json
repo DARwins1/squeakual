@@ -563,6 +563,16 @@
             "Howitzer105Mk1"
         ]
     },
+    "CO-H-IDF-Tracks": {
+        "body": "Body9REC",
+        "id": "CO-H-IDF-Tracks",
+        "name": "Ripple Rocket Tiger Tracks",
+        "propulsion": "tracked01",
+        "type": "DROID",
+        "weapons": [
+            "Rocket-IDF"
+        ]
+    },
     "CO-H-How150-Tracks": {
         "body": "Body9REC",
         "id": "CO-H-How150-Tracks",
@@ -587,6 +597,16 @@
         "body": "InfBody9REC",
         "id": "INF-H-HvyCan-Tracks",
         "name": "Infested Heavy Cannon Tiger Tracks",
+        "propulsion": "tracked01",
+        "type": "DROID",
+        "weapons": [
+            "Cannon375mmMk1"
+        ]
+    },
+    "INF-H-HvyCan-Tracks-Broken": {
+        "body": "Body9RECBroken",
+        "id": "INF-H-HvyCan-Tracks-Broken",
+        "name": "Infested Derelict Heavy Cannon Tiger Tracks",
         "propulsion": "tracked01",
         "type": "DROID",
         "weapons": [
@@ -855,6 +875,26 @@
             "Rocket-LtA-T"
         ]
     },
+    "INF-M-LTAT-T": {
+        "body": "InfBody6SUPP",
+        "id": "INF-M-LTAT-T",
+        "name": "Infested Lancer Panther Tracks",
+        "propulsion": "tracked01",
+        "type": "DROID",
+        "weapons": [
+            "Rocket-LtA-T"
+        ]
+    },
+    "INF-M-LTAT-T-Broken": {
+        "body": "Body6SUPPBroken",
+        "id": "INF-M-LTAT-T-Broken",
+        "name": "Infested Derelict Lancer Panther Tracks",
+        "propulsion": "tracked01",
+        "type": "DROID",
+        "weapons": [
+            "Rocket-LtA-T"
+        ]
+    },
     "CO-M-LTAT-Hover": {
         "body": "Body6SUPP",
         "id": "CO-M-LTAT-Hover",
@@ -889,6 +929,16 @@
         "body": "InfBody6SUPP",
         "id": "INF-M-MedCan-Tracks",
         "name": "Infested Medium Cannon Panther Tracks",
+        "propulsion": "tracked01",
+        "type": "DROID",
+        "weapons": [
+            "Cannon2A-TMk1"
+        ]
+    },
+    "INF-M-MedCan-Tracks-Broken": {
+        "body": "Body6SUPPBroken",
+        "id": "INF-M-MedCan-Tracks-Broken",
+        "name": "Infested Derelict Medium Cannon Panther Tracks",
         "propulsion": "tracked01",
         "type": "DROID",
         "weapons": [

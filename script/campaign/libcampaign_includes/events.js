@@ -425,7 +425,8 @@ function cam_eventAttacked(victim, attacker)
 					(obj.canHitGround || obj.isSensor) &&
 					obj.droidType !== DROID_CONSTRUCT &&
 					!camIsTransporter(obj) &&
-					!camInNeverGroup(obj)
+					!camInNeverGroup(obj) &&
+					obj.body.indexOf("Broken") == -1 // Do not autogroup "derelict" units
 				));
 				if (droids.length === 0)
 				{

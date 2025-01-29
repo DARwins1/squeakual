@@ -83,7 +83,7 @@ function sendInfestedReinforcements()
 	];
 
 	// If there's an onslaught occurring, target the player instead of the Collective
-	const data = {order: CAM_ORDER_ATTACK, data: {targetPlayer: (infestedOnslaught) ? CAM_HUMAN_PLAYER : CAM_THE_COLLECTIVE}}
+	const data = {order: CAM_ORDER_ATTACK, data: {targetPlayer: (infestedOnslaught) ? CAM_HUMAN_PLAYER : CAM_THE_COLLECTIVE}};
 
 	// South entrance
 	camSendReinforcement(CAM_INFESTED, getObject("infEntry1"), camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND, data);
@@ -148,6 +148,9 @@ function eventDestroyed(obj)
 			camEnableFactory("colFactory3");
 			camEnableFactory("colCybFactory2");
 			camEnableFactory("colCybFactory3");
+
+			// Stop rebuilding the Collective sensor
+			camLockRefillableGroup(colSensorGroup);
 		}
 	}
 }
@@ -444,6 +447,11 @@ function sendCollectiveTransporter()
 	);
 }
 
+function removeUplinkBlip()
+{
+	hackRemoveMessage("UPLINK_BEACON", PROX_MSG, CAM_HUMAN_PLAYER);
+}
+
 // Returns true if the final Collective base is destroyed
 // Returns false if the Uplink itself is destroyed
 function uplinkSecure()
@@ -456,7 +464,7 @@ function uplinkSecure()
 
 	if (camBaseIsEliminated("colUplinkBase"))
 	{
-		camCallOnce("removeUplinkBlip")
+		camCallOnce("removeUplinkBlip");
 		return true;
 	}
 }
@@ -467,7 +475,7 @@ function eventStartLevel()
 	const lz = getObject("landingZone"); //player lz
 	const transportEntryPos = camMakePos("transportEntryPos");
 
-	camSetStandardWinLossConditions(CAM_VICTORY_OFFWORLD, "THE_END", {
+	camSetStandardWinLossConditions(CAM_VICTORY_OFFWORLD, "A3L8", {
 		message: "RET_LZ",
 		reinforcements: camMinutesToSeconds(4),
 		area: "compromiseZone",
@@ -635,7 +643,7 @@ function eventStartLevel()
 			cTempl.colagv, cTempl.colphosv,
 		],
 		factories: ["colVtolFactory"],
-		obj: "colVtolTower1",
+		obj: "colVtolTower1", // Southeast tower
 		}, CAM_ORDER_FOLLOW, {
 			leader: "colVtolTower1",
 			suborder: CAM_ORDER_DEFEND, // Tower groups defend until tower is rebuilt
@@ -650,7 +658,7 @@ function eventStartLevel()
 			cTempl.comhatv, cTempl.comhbombv,
 		],
 		factories: ["colVtolFactory"],
-		obj: "colVtolTower2",
+		obj: "colVtolTower2", // North outpost tower
 		}, CAM_ORDER_FOLLOW, {
 			leader: "colVtolTower2",
 			suborder: CAM_ORDER_DEFEND,
@@ -665,7 +673,7 @@ function eventStartLevel()
 			cTempl.colagv, cTempl.colphosv,
 		],
 		factories: ["colVtolFactory"],
-		obj: "colVtolTower3",
+		obj: "colVtolTower3", // LZ tower
 		}, CAM_ORDER_FOLLOW, {
 			leader: "colVtolTower3",
 			suborder: CAM_ORDER_DEFEND,
@@ -680,7 +688,7 @@ function eventStartLevel()
 			cTempl.colagv, cTempl.comacanv,
 		],
 		factories: ["colVtolFactory"],
-		obj: "colVtolTower4",
+		obj: "colVtolTower4", // Trench outpost tower
 		}, CAM_ORDER_FOLLOW, {
 			leader: "colVtolTower4",
 			suborder: CAM_ORDER_DEFEND,
@@ -695,7 +703,7 @@ function eventStartLevel()
 			cTempl.comhatv, cTempl.comacanv,
 		],
 		factories: ["colVtolFactory"],
-		obj: "colVtolCBTower",
+		obj: "colVtolCBTower", // Howitzer VTOL CB tower
 		}, CAM_ORDER_FOLLOW, {
 			leader: "colVtolCBTower",
 			suborder: CAM_ORDER_DEFEND,
@@ -852,8 +860,9 @@ function eventStartLevel()
 	setTimer("sendCollectiveTransporter", camChangeOnDiff(camMinutesToMilliseconds(8)));
 	setTimer("sendDeltaReinforcements", camMinutesToMilliseconds(2.5));
 
-	// Lighten the fog to *more or less* 2x default brightness with a slight pink color
-	camSetFog(48, 32, 96);
+	camSetSkyType(CAM_SKY_NIGHT);
+	// Give the fog a dark purple hue
+	camSetFog(32, 12, 64);
 	// Add a purple-blue tint
-	camSetSunIntensity(.5, .45, .55);
+	camSetSunIntensity(.45, .35, .45);
 }

@@ -1465,6 +1465,27 @@
         "weaponSlots": 1,
         "weight": 2500
     },
+    "Body6SUPPBroken": {
+        "armourHeat": 9,
+        "armourKinetic": 18,
+        "buildPoints": 254,
+        "buildPower": 57,
+        "class": "Droids",
+        "designable": 1,
+        "hitpoints": 193,
+        "id": "Body6SUPPBroken",
+        "model": "deredrmbod06.pie",
+        "name": "Derelict Panther",
+        "powerOutput": 0,
+        "propulsionExtraModels": {
+            "tracked01": {
+                "left": "dereprmtrk2.pie"
+            }
+        },
+        "size": "MEDIUM",
+        "weaponSlots": 1,
+        "weight": 2500
+    },
     "Body7ABT": {
         "armourHeat": 20,
         "armourKinetic": 24,
@@ -1738,57 +1759,12 @@
         "designable": 1,
         "hitpoints": 284,
         "id": "Body9RECBroken",
-        "model": "drhbod09.pie",
+        "model": "deredrhbod09.pie",
         "name": "Derelict Tiger",
         "powerOutput": 0,
         "propulsionExtraModels": {
-            "HalfTrack": {
-                "left": "prhhtr3.pie"
-            },
-            "HalfTrack02": {
-                "left": "prhhtr3.pie"
-            },
-            "HalfTrack03": {
-                "left": "prhhtr3.pie"
-            },
-            "V-Tol": {
-                "left": "prhvtl1.pie",
-                "moving": "fxvtl09.pie"
-            },
-            "V-Tol02": {
-                "left": "prhvtl1.pie",
-                "moving": "fxvtl09.pie"
-            },
-            "V-Tol03": {
-                "left": "prhvtl1.pie",
-                "moving": "fxvtl09.pie"
-            },
-            "hover01": {
-                "left": "prhhov1.pie"
-            },
-            "hover02": {
-                "left": "prhhov1.pie"
-            },
-            "hover03": {
-                "left": "prhhov1.pie"
-            },
             "tracked01": {
-                "left": "prhtrk3.pie"
-            },
-            "tracked02": {
-                "left": "prhtrk3.pie"
-            },
-            "tracked03": {
-                "left": "prhtrk3.pie"
-            },
-            "wheeled01": {
-                "left": "prhwhl1.pie"
-            },
-            "wheeled02": {
-                "left": "prhwhl1.pie"
-            },
-            "wheeled03": {
-                "left": "prhwhl1.pie"
+                "left": "dereprhtrk3.pie"
             }
         },
         "size": "HEAVY",

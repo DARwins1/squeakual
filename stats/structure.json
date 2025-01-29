@@ -4186,7 +4186,7 @@
         "sensorID": "DefaultSensor1Mk1",
         "strength": "HARD",
         "structureModel": [
-            "BLGUARD1.pie"
+            "BLGUARDold.pie"
         ],
         "thermal": 15,
         "type": "DEFENSE",

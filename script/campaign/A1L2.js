@@ -754,12 +754,9 @@ function eventStartLevel()
 		},
 		"scavOuterFactory3": {
 			assembly: "scavOuterAssembly3",
-			order: CAM_ORDER_PATROL,
+			order: CAM_ORDER_ATTACK,
 			data: {
-				// Patrol and harass the player's LZ
-				pos: [ "scavPatrolPos1", "scavPatrolPos2", "scavPatrolPos3", "scavPatrolPos4" ],
-				interval: camSecondsToMilliseconds(20),
-				radius: 8
+				regroup: true
 			},
 			groupSize: 4,
 			maxSize: 4,
@@ -830,8 +827,21 @@ function eventStartLevel()
 	golfLZSecure = false;
 	updateExtraObjectiveMessage();
 
-	// Set up (new!) refillable groups for the player's allies
+	// Set up (new!) refillable groups
 	// Also set up allied trucks
+
+	// Scav patrol group (2 MRPs, 4 Grenade Jeeps)
+	camMakeRefillableGroup(undefined, {templates: [
+		cTempl.minitruck, cTempl.minitruck,
+		cTempl.gbjeep, cTempl.gbjeep, cTempl.gbjeep, cTempl.gbjeep,
+		],
+		factories: ["scavOuterFactory3"]
+	}, CAM_ORDER_PATROL, {
+		// Patrol and harass the player's LZ
+		pos: [ "scavPatrolPos1", "scavPatrolPos2", "scavPatrolPos3", "scavPatrolPos4" ],
+		interval: camSecondsToMilliseconds(20),
+		radius: 8
+	});
 
 	// Charlie slow attack group (6 Mini-Rockets, 4 Twin Machineguns)
 	charlieSlowAttackGroup = camMakeRefillableGroup(undefined, {templates: [

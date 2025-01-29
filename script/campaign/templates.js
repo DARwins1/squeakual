@@ -177,8 +177,10 @@ infscyac: { body: "CyborgHeavyBody", prop: "CyborgLegs", weap: "InfCyb-Hvywpn-Ac
 infcolcanht: { body: "InfBody2SUP", prop: "HalfTrack", weap: "Cannon1Mk1" }, // Infested Light Cannon Leopard Half-tracks
 infcolpodt: { body: "InfBody2SUP", prop: "tracked01", weap: "Rocket-Pod" }, // Infested Mini-Rocket Pod Leopard Tracks
 infcolhmght: { body: "InfBody2SUP", prop: "HalfTrack", weap: "MG3Mk1" }, // Infested Heavy Machinegun Leopard Half-tracks
+infcomhmgt: { body: "InfBody6SUPP", prop: "tracked01", weap: "MG3Mk1" }, // Infested Heavy Machinegun Panther Tracks
 infcomatt: { body: "InfBody6SUPP", prop: "tracked01", weap: "Rocket-LtA-T" }, // Infested Lancer Panther Tracks
 infcommcant: { body: "InfBody6SUPP", prop: "tracked01", weap: "Cannon2A-TMk1" }, // Infested Medium Cannon Panther Tracks
+infcomtruckht: { body: "InfBody6SUPP", prop: "HalfTrack", weap: "InfestedSpade1Trans" }, // Infested Truck Panther Half-tracks
 infcomtruckt: { body: "InfBody6SUPP", prop: "tracked01", weap: "InfestedSpade1Trans" }, // Infested Truck Panther Tracks
 infcohhcant: { body: "InfBody9REC", prop: "tracked01", weap: "Cannon375mmMk1" }, // Infested Heavy Cannon Tiger Tracks
 
@@ -195,6 +197,7 @@ comhath: { body: "Body6SUPP", prop: "hover01", weap: "Rocket-HvyA-T" }, // Tank 
 
 combbh: { body: "Body6SUPP", prop: "hover01", weap: "Rocket-BB" }, // Bunker Buster Panther Hover
 cohbbt: { body: "Body9REC", prop: "tracked01", weap: "Rocket-BB" }, // Bunker Buster Tiger Tracks
+cohbbh: { body: "Body9REC", prop: "hover01", weap: "Rocket-BB" }, // Bunker Buster Tiger Hover
 
 colsensht: { body: "Body2SUP", prop: "HalfTrack", weap: "SensorTurret1Mk1" }, // Sensor Leopard Half-tracks
 colsenst: { body: "Body2SUP", prop: "tracked01", weap: "SensorTurret1Mk1" }, // Sensor Leopard Tracks
@@ -248,6 +251,7 @@ cominfh: { body: "Body6SUPP", prop: "hover01", weap: "Flame2" }, // Inferno Pant
 colrepht: { body: "Body2SUP", prop: "HalfTrack", weap: "LightRepair1" }, // Repair Turret Leopard Half-tracks
 colrept: { body: "Body2SUP", prop: "tracked01", weap: "LightRepair1" }, // Repair Turret Leopard Tracks
 comrept: { body: "Body6SUPP", prop: "tracked01", weap: "LightRepair1" }, // Repair Turret Panther Tracks
+comhrepht: { body: "Body6SUPP", prop: "HalfTrack", weap: "HeavyRepair" }, // Heavy Repair Turret Panther Half-tracks
 comhrept: { body: "Body6SUPP", prop: "tracked01", weap: "HeavyRepair" }, // Heavy Repair Turret Panther Tracks
 
 colaaht: { body: "Body2SUP", prop: "HalfTrack", weap: "QuadMg1AAGun" }, // Hurricane Leopard Half-tracks

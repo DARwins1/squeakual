@@ -1562,7 +1562,7 @@
             "R-Defense-WallTower03",
             "R-Wpn-Cannon3Mk1"
         ],
-        "researchPoints": 1200,
+        "researchPoints": 950,
         "researchPower": 175,
         "resultStructures": [
             "WallTower04"
@@ -2156,8 +2156,7 @@
         "msgName": "RES_SY_SU1",
         "name": "Sensor Upgrade",
         "requiredResearch": [
-            "R-Sys-Sensor-Tower01",
-            "R-Struc-Research-Upgrade01"
+            "R-Sys-Sensor-Tower01"
         ],
         "researchPoints": 1800,
         "researchPower": 56,
@@ -2572,7 +2571,7 @@
             "R-Vehicle-Body11",
             "R-Wpn-Cannon-Damage03"
         ],
-        "researchPoints": 7200,
+        "researchPoints": 2200,
         "researchPower": 225,
         "resultComponents": [
             "Cannon375mmMk1"
@@ -3779,7 +3778,7 @@
             "R-Wpn-Rocket06-IDF",
             "R-Defense-MRL"
         ],
-        "researchPoints": 4800,
+        "researchPoints": 1200,
         "researchPower": 150,
         "resultStructures": [
             "Emplacement-Rocket06-IDF"
@@ -4876,10 +4875,9 @@
         "msgName": "RES_W_BMB2",
         "name": "HEAP Bomb Bay",
         "requiredResearch": [
-            "R-Wpn-Bomb01",
-            "R-Wpn-Bomb-Damage01"
+            "R-Wpn-Bomb01"
         ],
-        "researchPoints": 7200,
+        "researchPoints": 2400,
         "researchPower": 225,
         "resultComponents": [
             "Bomb2-VTOL-HvHE"
@@ -4965,6 +4963,7 @@
     "R-Wpn-Cannon-Damage05": {
         "iconID": "IMAGE_RES_WEAPONTECH",
         "id": "R-Wpn-Cannon-Damage05",
+        "keyTopic": 1,
         "name": "APFSDS Cannon Rounds Mk2",
         "requiredResearch": [
             "R-Wpn-Cannon3Mk1",
@@ -6106,10 +6105,9 @@
         "name": "Ripple Rockets",
         "requiredResearch": [
             "R-Wpn-Rocket02-MRL",
-            "R-Sys-CBSensor-Tower01",
-            "R-Wpn-RocketSlow-ROF01"
+            "R-Sys-CBSensor-Tower01"
         ],
-        "researchPoints": 7200,
+        "researchPoints": 2200,
         "researchPower": 225,
         "resultComponents": [
             "Rocket-IDF"
@@ -6219,6 +6217,7 @@
     "R-Wpn-RocketSlow-Damage06": {
         "iconID": "IMAGE_RES_WEAPONTECH",
         "id": "R-Wpn-RocketSlow-Damage06",
+        "keyTopic": 1,
         "name": "HESH Rocket Warhead Mk3",
         "requiredResearch": [
             "R-Wpn-RocketSlow-Damage05",
@@ -6409,10 +6408,13 @@
         "id": "R-Defense-HvyA-Trocket",
         "msgName": "RES_EMP_HVATR",
         "name": "Tank Killer Bunker",
+        "redStructures": [
+            "PillBox6"
+        ],
         "requiredResearch": [
             "R-Wpn-Rocket07-Tank-Killer"
         ],
-        "researchPoints": 4800,
+        "researchPoints": 1200,
         "researchPower": 150,
         "resultStructures": [
             "PillBoxTK"
@@ -6617,6 +6619,9 @@
         "id": "R-Defense-WallTower-HvyA-Trocket",
         "msgName": "RES_WT12_HAT",
         "name": "Tank Killer Hardpoint",
+        "redStructures": [
+            "WallTower06"
+        ],
         "requiredResearch": [
             "R-Wpn-Rocket07-Tank-Killer"
         ],

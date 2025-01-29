@@ -23,7 +23,7 @@
     "Extra": {
         "_name": "Extra sounds",
         "data": [
-            { "fileName": "pcv635.ogg", "loop": false, "range": 1800, "volume": 100, "z_comment": "We can't add new weapon SFX, so this is the Super Heavy Grenadier SFX" }
+            { "fileName": "pcv635.ogg", "loop": false, "range": 1800, "volume": 135, "z_comment": "We can't add new weapon SFX, so this is the Super Heavy Grenadier SFX" }
         ]
     }
 }
