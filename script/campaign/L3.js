@@ -18,7 +18,7 @@ const mis_cyanScavRes = [
 	"R-Wpn-Mortar-Damage01", "R-Wpn-Flamer-Damage02",
 	"R-Wpn-Cannon-Damage01", "R-Wpn-MG-ROF01", "R-Wpn-Rocket-ROF01",
 	"R-Wpn-Mortar-ROF01", "R-Wpn-Flamer-ROF01", "R-Wpn-Cannon-ROF01",
-	"R-Vehicle-Metals01", "R-Struc-Materials01", "R-Defense-WallUpgrade01",
+	"R-Vehicle-Metals01", "R-Struc-Materials01",
 ];
 
 //Remove scav helicopters.

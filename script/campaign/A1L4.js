@@ -105,8 +105,8 @@ function weakenZuluDefenses()
 	const structs = enumArea("claydeStructSetArea", MIS_CLAYDE, false).filter((obj) => (obj.type === STRUCTURE));
 	for (structure of structs)
 	{
-		if (structure.name === _("Heavy Machinegun Guard Tower") || structure.name === _("Tank Traps") 
-			|| structure.name === _("Sarissa Guard Tower") || structure.name === _("Mini-Rocket Battery"))
+		if (structure.name === "Heavy Machinegun Guard Tower" || structure.name === "Tank Traps"
+			|| structure.name === "Sarissa Guard Tower" || structure.name === "Mini-Rocket Battery")
 		{
 			camSafeRemoveObject(structure);
 		}
@@ -168,7 +168,7 @@ function sendCollectiveTransporter()
 	// If we have a valid LZ, send the transport
 	if (lzPool.length > 0)
 	{
-		camSendReinforcement(CAM_THE_COLLECTIVE, lzPool[camRand(lzPool.length)], droids,
+		camSendReinforcement(CAM_THE_COLLECTIVE, camRandFrom(lzPool), droids,
 			CAM_REINFORCE_TRANSPORT, {
 				entry: camGenerateRandomMapEdgeCoordinate(),
 				exit: camGenerateRandomMapEdgeCoordinate(),
@@ -437,7 +437,7 @@ function collectiveAttackWaves()
 		for (let j = 0; j < NUM_DROIDS; j++)
 		{
 			const templateList = chosenTemplates[i];
-			droids.push(templateList[camRand(templateList.length)]);
+			droids.push(camRandFrom(templateList));
 		}
 
 		camSendReinforcement(CAM_THE_COLLECTIVE, getObject(chosenEntrances[i]), droids, CAM_REINFORCE_GROUND, {

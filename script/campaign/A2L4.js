@@ -148,16 +148,16 @@ function enableAllFactories()
 function antiAirSitesClear()
 {
 	const AA_SITES1 = enumArea("colBase1", CAM_THE_COLLECTIVE, false).filter((obj) => (
-		obj.name === _("Hurricane AA Site")
-		|| obj.name === _("Cyclone AA Flak Site"))
+		obj.name === "Hurricane AA Site"
+		|| obj.name === "Cyclone AA Flak Site")
 	).length;
 	const AA_SITES2 = enumArea("colBase2", CAM_THE_COLLECTIVE, false).filter((obj) => (
-		obj.name === _("Hurricane AA Site")
-		|| obj.name === _("Cyclone AA Flak Site"))
+		obj.name === "Hurricane AA Site"
+		|| obj.name === "Cyclone AA Flak Site")
 	).length;
 	const AA_SITES3 = enumArea("checkZone3", CAM_THE_COLLECTIVE, false).filter((obj) => (
-		obj.name === _("Hurricane AA Site")
-		|| obj.name === _("Cyclone AA Flak Site"))
+		obj.name === "Hurricane AA Site"
+		|| obj.name === "Cyclone AA Flak Site")
 	).length;
 
 	// Add/remove objective blips

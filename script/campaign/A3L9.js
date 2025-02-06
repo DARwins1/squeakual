@@ -3,6 +3,15 @@ include("script/campaign/libcampaign.js");
 include("script/campaign/templates.js");
 include("script/campaign/structSets.js");
 
+const mis_infestedResearch = [
+	"R-Wpn-MG-Damage04", "R-Wpn-Rocket-Damage04", "R-Wpn-Mortar-Damage04", 
+	"R-Wpn-Flamer-Damage04", "R-Wpn-Cannon-Damage04", "R-Wpn-MG-ROF03",
+	"R-Wpn-Rocket-ROF02", "R-Wpn-Mortar-ROF03", "R-Wpn-Flamer-ROF02",
+	"R-Wpn-Cannon-ROF03", "R-Vehicle-Metals04", "R-Struc-Materials05", 
+	"R-Defense-WallUpgrade05", "R-Cyborg-Metals04", "R-Wpn-AAGun-ROF02", 
+	"R-Wpn-AAGun-Damage02", "R-Vehicle-Engine04",
+];
+
 var allowWin;
 var savedPower;
 var phase;
@@ -78,72 +87,100 @@ function vtolAttack()
 
 function sendInfestedReinforcements()
 {	
+	const coreDroids = [
+		[ // Scavs & crawlers
+			cTempl.vilestinger, // Vile Stingers
+			cTempl.stinger, cTempl.stinger, cTempl.stinger, // Stingers
+			cTempl.basher, cTempl.basher, // Bashers
+			cTempl.boomtick, // Boom Ticks
+			cTempl.infmoncan, cTempl.infmoncan, // Bus Tanks
+			cTempl.infmonhmg,
+			cTempl.infmonmrl,
+			cTempl.infflatmrl, cTempl.infflatmrl, // Flatbeds
+			cTempl.infflatat,
+			cTempl.infminitruck, // MRP Trucks
+			cTempl.infsartruck, // Sarissa Trucks
+			cTempl.infbuscan, cTempl.infbuscan, // School Buses
+			cTempl.firetruck, // Fire Trucks
+			cTempl.infbjeep, cTempl.infbjeep, cTempl.infbjeep, // Jeeps
+			cTempl.infrbjeep, cTempl.infrbjeep, // Rocket Jeeps
+			cTempl.infrbjeep, cTempl.infrbjeep, // Grenade Jeeps
+			cTempl.infbloke,  cTempl.infbloke, cTempl.infbloke, // Blokes
+			cTempl.infkevbloke, cTempl.infkevbloke,
+			cTempl.inflance, // Lances
+			cTempl.infkevlance, cTempl.infkevlance,
+		],
+		[ // Light tanks & cyborgs + some scav stuff
+			cTempl.stinger, cTempl.stinger, cTempl.stinger, // Stingers
+			cTempl.infcybca, cTempl.infcybca, cTempl.infcybca, cTempl.infcybca, // Heavy Gunners
+			cTempl.infcybhg, cTempl.infcybhg, cTempl.infcybhg, // Heavy Machinegunners
+			cTempl.infcolpodt, cTempl.infcolpodt, cTempl.infcolpodt, // MRPs
+			cTempl.infcolhmght, cTempl.infcolhmght, cTempl.infcolhmght, // HMGs
+			cTempl.infcommcant, cTempl.infcommcant, // Medium Cannons
+			cTempl.infcomatt, // Lancers
+			cTempl.infbuggy, cTempl.infbuggy, // Buggies
+			cTempl.infrbuggy, // Rocket Buggies
+			cTempl.inftrike, // Trikes
+			cTempl.infbloke,  cTempl.infbloke, cTempl.infbloke, cTempl.infbloke, cTempl.infbloke, // Blokes
+			cTempl.infkevbloke, cTempl.infkevbloke, cTempl.infkevbloke,
+			cTempl.inflance, cTempl.inflance, cTempl.inflance, // Lances
+			cTempl.infkevlance, cTempl.infkevlance,
+		].push((difficulty >= EASY) ? cTempl.infcohhcant : undefined), // Add a Heavy Cannon tank 
+		[ // Bashers, Stingers, and Infantry
+			cTempl.vilestinger, // Vile Stingers
+			cTempl.stinger, cTempl.stinger, cTempl.stinger, cTempl.stinger, // Stingers
+			cTempl.basher, cTempl.basher, cTempl.basher, cTempl.basher, cTempl.basher, cTempl.basher, // Bashers
+			cTempl.boomtick, cTempl.boomtick, // Boom Ticks
+			cTempl.infbloke,  cTempl.infbloke, cTempl.infbloke, // Blokes
+			cTempl.infkevbloke, cTempl.infkevbloke,
+			cTempl.inflance, // Lances
+		].push((difficulty >= EASY) ? cTempl.infcomtruckt : undefined), // Add an Infested Truck
+	];
 	const CORE_SIZE = 4;
 	const FODDER_SIZE = 12;
-
-	const coreDroids = [
-		cTempl.stinger, cTempl.stinger, cTempl.stinger,
-		cTempl.infbloke,  cTempl.infbloke,
-		cTempl.infkevbloke, cTempl.infkevbloke, cTempl.infkevbloke,
-		cTempl.infminitruck, cTempl.infminitruck,
-		cTempl.infbuggy, cTempl.infbuggy, cTempl.infbuggy,
-		cTempl.infrbuggy, cTempl.infrbuggy, cTempl.infrbuggy,
-		cTempl.infcybhg, cTempl.infcybhg,
-		cTempl.infcybca, cTempl.infcybca,
-		cTempl.infcolpodt, cTempl.infcolpodt,
-		cTempl.basher, cTempl.basher,
-		cTempl.inflance,
-		cTempl.boomtick,
-	];
 
 	// North trench entrances
 	// Choose one to spawn from...
 	const northEntrances = ["infEntry1", "infEntry2"];
-	const northTrenchEntrance = getObject(northEntrances[camRand(northEntrances.length)]);
-	camSendReinforcement(CAM_INFESTED, northTrenchEntrance, camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+	camSendReinforcement(CAM_INFESTED, getObject(camRandFrom(northEntrances)), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 
 	// North east entrance
 	// Choose one to spawn from...
-	camSendReinforcement(CAM_INFESTED, getObject("infEntry3"), camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+	camSendReinforcement(CAM_INFESTED, getObject("infEntry3"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 
 	// South east entrances
 	const seEntrances = ["infEntry4", "infEntry5"];
-	const southwestEntrance = getObject(seEntrances[camRand(seEntrances.length)]);
-	camSendReinforcement(CAM_INFESTED, southwestEntrance, camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+	camSendReinforcement(CAM_INFESTED, getObject(camRandFrom(seEntrances)), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 
 	if (phase < 2) // Disable these once Foxtrot becomes active
 	{
 		// South canal entrances
 		const canalEntrances = ["infEntry6", "infEntry7"];
-		const canalEntrance = getObject(canalEntrances[camRand(canalEntrances.length)]);
-		camSendReinforcement(CAM_INFESTED, canalEntrance, camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+		camSendReinforcement(CAM_INFESTED, getObject(camRandFrom(canalEntrances)), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 
 		// South small trench entrances
 		const southEntrances = ["infEntry8", "infEntry9"];
-		const southEntrance = getObject(southEntrances[camRand(southEntrances.length)]);
-		camSendReinforcement(CAM_INFESTED, southEntrance, camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+		camSendReinforcement(CAM_INFESTED, getObject(camRandFrom(southEntrances)), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 	}
 
 	// South large trench entrance
-	camSendReinforcement(CAM_INFESTED, getObject("infEntry10"), camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+	camSendReinforcement(CAM_INFESTED, getObject("infEntry10"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 
 	if (phase < 3) // Disable these once Golf becomes active
 	{
 		// Southwest corner entrances
 		const swEntrances = ["infEntry11", "infEntry12", "infEntry13"];
-		const southwestEntrance = getObject(swEntrances[camRand(swEntrances.length)]);
-		camSendReinforcement(CAM_INFESTED, southwestEntrance, camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+		camSendReinforcement(CAM_INFESTED, getObject(camRandFrom(swEntrances)), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 
 		// West small trench entrance
-		camSendReinforcement(CAM_INFESTED, getObject("infEntry14"), camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry14"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 
 		// Northwest trench entrances
 		const northwestEntrances = ["infEntry15", "infEntry17"];
-		const northwestEntrance = getObject(northwestEntrances[camRand(northwestEntrances.length)]);
-		camSendReinforcement(CAM_INFESTED, northwestEntrance, camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+		camSendReinforcement(CAM_INFESTED, getObject(camRandFrom(northwestEntrances)), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 
 		// Northwest small trench entrance
-		camSendReinforcement(CAM_INFESTED, getObject("infEntry16"), camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry16"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 	}
 	
 }
@@ -155,7 +192,7 @@ function setPhaseTwo()
 
 	// TODO: Dialogue here...
 
-	setTimer("sendFoxtrotGroundReinforcements", camChangeOnDiff(camMinutesToMilliseconds(1.75)));
+	setTimer("sendFoxtrotGroundReinforcements", camChangeOnDiff(camMinutesToMilliseconds(2.5)));
 	setTimer("sendFoxtrotTransporter", camChangeOnDiff(camMinutesToMilliseconds(1.5)));
 }
 
@@ -166,7 +203,7 @@ function setPhaseThree()
 
 	// TODO: Dialogue here...
 
-	setTimer("sendGolfGroundReinforcements", camChangeOnDiff(camMinutesToMilliseconds(1.75)));
+	setTimer("sendGolfGroundReinforcements", camChangeOnDiff(camMinutesToMilliseconds(2.5)));
 	setTimer("sendGolfTransporter", camChangeOnDiff(camMinutesToMilliseconds(1.5)));
 	setTimer("vtolAttack", camChangeOnDiff(camMinutesToMilliseconds(2))); // Start sending Golf VTOLs as well
 }
@@ -214,7 +251,7 @@ function sendFoxtrotGroundReinforcements()
 	for (const job of jobList)
 	{
 		// Bring in the trucks!
-		const tPos = camMakePos(entrances[camRand(entrances.length)]);
+		const tPos = camMakePos(camRandFrom(entrances));
 		const tTemp = (phase >= 3 || difficulty >= HARD) ? cTempl.plhtruckht : cTempl.plmtruckht;
 		const newTruck = addDroid(MIS_TEAM_FOXTROT, tPos.x, tPos.y, 
 			camNameTemplate(tTemp.weap, tTemp.body, tTemp.prop), 
@@ -236,14 +273,14 @@ function sendFoxtrotGroundReinforcements()
 	const NUM_SPAWNS = 3;
 	for (let i = 0; i < NUM_SPAWNS; i++)
 	{
-		entrance = getObject(entrances[camRand(entrances.length)]);
+		entrance = getObject(camRandFrom(entrances));
 		camSendReinforcement(MIS_TEAM_FOXTROT, entrance, templates, CAM_REINFORCE_GROUND, data);
 	}
 
 	if (phase > 3 && foxtrotIdx % 10 === 0)
 	{
 		// Increase the number of ground attacks every 10 waves in phase 4
-		setTimer("sendFoxtrotGroundReinforcements", camChangeOnDiff(camMinutesToMilliseconds(1.75)));
+		setTimer("sendFoxtrotGroundReinforcements", camChangeOnDiff(camMinutesToMilliseconds(2.5)));
 	}
 	foxtrotIdx++;
 }
@@ -340,7 +377,7 @@ function sendGolfGroundReinforcements()
 	for (const job of jobList)
 	{
 		// Bring in the trucks!
-		const tPos = camMakePos(entrances[camRand(entrances.length)]);
+		const tPos = camMakePos(camRandFrom(entrances));
 		const tTemp = (phase > 3 || difficulty >= HARD) ? cTempl.plhtruckt : cTempl.plmtruckt;
 		const newTruck = addDroid(MIS_TEAM_GOLF, tPos.x, tPos.y, 
 			camNameTemplate(tTemp.weap, tTemp.body, tTemp.prop), 
@@ -360,14 +397,14 @@ function sendGolfGroundReinforcements()
 	const NUM_SPAWNS = 1;
 	for (let i = 0; i < NUM_SPAWNS; i++)
 	{
-		entrance = getObject(entrances[camRand(entrances.length)]);
+		entrance = getObject(camRandFrom(entrances));
 		camSendReinforcement(MIS_TEAM_GOLF, entrance, templates, CAM_REINFORCE_GROUND, data);
 	}
 
 	if (phase > 3 && golfIdx % 10 === 0)
 	{
 		// Increase the number of ground attacks every 10 waves in phase 4
-		setTimer("sendGolfGroundReinforcements", camChangeOnDiff(camMinutesToMilliseconds(1.75)));
+		setTimer("sendGolfGroundReinforcements", camChangeOnDiff(camMinutesToMilliseconds(2.5)));
 	}
 	golfIdx++;
 }
@@ -416,7 +453,7 @@ function sendGolfTransporter()
 		else
 		{
 			// If the queue is depleted, choose an artillery template instead
-			droids.push(artTemplates[camRand(artTemplates.length)]);
+			droids.push(camRandFrom(artTemplates));
 		}
 	}
 
@@ -614,6 +651,7 @@ function eventStartLevel()
 	// Grant the teams all the tech the player has found until A3L7, plus the Sensor Upgrade
 	const teamResearch = camA3L9EnemyResearch.concat(["R-Sys-Sensor-Upgrade01"]);
 
+	camCompleteRequiredResearch(mis_infestedResearch, CAM_INFESTED);
 	camCompleteRequiredResearch(teamResearch, MIS_TEAM_FOXTROT);
 	camCompleteRequiredResearch(teamResearch, MIS_TEAM_GOLF);
 

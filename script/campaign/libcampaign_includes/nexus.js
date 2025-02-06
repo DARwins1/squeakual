@@ -15,7 +15,7 @@ function camNexusLaugh()
 	if (camRand(100) < __LAUGH_CHANCE)
 	{
 		const laughs = [cam_sounds.nexus.laugh1, cam_sounds.nexus.laugh2, cam_sounds.nexus.laugh3];
-		playSound(laughs[camRand(laughs.length)]);
+		playSound(camRandFrom(laughs));
 	}
 }
 
@@ -104,7 +104,7 @@ function camHackIntoPlayer(player, to)
 	}
 
 	__camLastNexusAttack = gameTime;
-	target = objects[camRand(objects.length)];
+	target = camRandFrom(objects);
 
 	if ((camRand(100) < __GIFT_CHANCE) && !(target.type === STRUCTURE && target.stattype === WALL))
 	{

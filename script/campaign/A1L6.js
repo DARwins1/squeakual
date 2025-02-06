@@ -179,7 +179,7 @@ function collectiveAttackWaves()
 		{
 			// Choose either Collective or C-Scav templates
 			const templatePool = (camRand(40) < waveIndex) ? colDroidPool : cScavDroidPool;
-			droids.push(templatePool[camRand(templatePool.length)]);
+			droids.push(camRandFrom(templatePool));
 		}
 
 		camSendReinforcement(CAM_THE_COLLECTIVE, getObject(chosenEntrances[i]), droids, CAM_REINFORCE_GROUND);
@@ -262,7 +262,7 @@ function sendCollectiveTransporter()
 	const droids = [];
 	for (let i = 0; i < 10; i++)
 	{
-		droids.push(droidPool[camRand(droidPool.length)]);
+		droids.push(camRandFrom(droidPool));
 	}
 
 	// Get all available LZs
@@ -275,7 +275,7 @@ function sendCollectiveTransporter()
 	// If we have a valid LZ, send the transport
 	if (lzPool.length > 0)
 	{
-		camSendReinforcement(CAM_THE_COLLECTIVE, lzPool[camRand(lzPool.length)], droids,
+		camSendReinforcement(CAM_THE_COLLECTIVE, camRandFrom(lzPool), droids,
 			CAM_REINFORCE_TRANSPORT, {
 				entry: camGenerateRandomMapEdgeCoordinate(),
 				exit: camGenerateRandomMapEdgeCoordinate(),

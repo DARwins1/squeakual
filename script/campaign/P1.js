@@ -277,11 +277,15 @@ function checkLZ1Tower()
 // Off-map infested reinforcements from the entryway specified by the stage, disabled if the required factory is destroyed
 function sendInfestedReinforcements()
 {
+	let coreSize = camRand(3); // 0 - 2 core units.
+	if (stage >= 3) coreSize += 2; // 2 - 4 core units.
+	const FODDER_SIZE = 8 + camRand(5); // 8 - 12 extra Infested Civilians to the swarm.
+
 	// South entrance
 	if (stage == 1 && getObject("infFactory1") !== null) // Stop if the infested factory was destroyed
 	{
 		const droids = [cTempl.stinger, cTempl.infbloke];
-		camSendReinforcement(CAM_INFESTED, getObject("infEntry1"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry1"), camRandInfTemplates(droids, coreSize, FODDER_SIZE), CAM_REINFORCE_GROUND, 
 			{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}}
 		);
 	}
@@ -289,7 +293,7 @@ function sendInfestedReinforcements()
 	else if (stage == 2 && getObject("infFactory2") !== null)
 	{
 		const droids = [cTempl.stinger, cTempl.infbloke, cTempl.infbjeep];
-		camSendReinforcement(CAM_INFESTED, getObject("infEntry2"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry2"), camRandInfTemplates(droids, coreSize, FODDER_SIZE), CAM_REINFORCE_GROUND, 
 			{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}}
 		);
 	}
@@ -297,7 +301,7 @@ function sendInfestedReinforcements()
 	else if (stage == 3 && getObject("infFactory3") !== null)
 	{
 		const droids = [cTempl.stinger, cTempl.infbjeep, cTempl.infrbjeep];
-		camSendReinforcement(CAM_INFESTED, getObject("infEntry3"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry3"), camRandInfTemplates(droids, coreSize, FODDER_SIZE), CAM_REINFORCE_GROUND, 
 			{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}}
 		);
 	}
@@ -305,32 +309,10 @@ function sendInfestedReinforcements()
 	else if (stage == 4 && getObject("infFactory4") !== null)
 	{
 		const droids = [cTempl.stinger, cTempl.stinger, cTempl.infbjeep, cTempl.infkevbloke];
-		camSendReinforcement(CAM_INFESTED, getObject("infEntry4"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry4"), camRandInfTemplates(droids, coreSize, FODDER_SIZE), CAM_REINFORCE_GROUND, 
 			{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}}
 		);
 	}
-}
-
-// Randomize the provided list of units and tack on a bunch of extra rocket fodder
-function randomTemplates(coreUnits)
-{
-	const droids = [];
-	let coreSize = camRand(3); // 0 - 2 core units.
-	if (stage >= 3) coreSize += 2; // 2 - 4 core units.
-	const FODDER_SIZE = 8 + camRand(5); // 8 - 12 extra Infested Civilians to the swarm.
-
-	for (let i = 0; i < coreSize; ++i)
-	{
-		droids.push(coreUnits[camRand(coreUnits.length)]);
-	}
-
-	// Add a bunch of Infested Civilians.
-	for (let i = 0; i < FODDER_SIZE; ++i)
-	{
-		droids.push(cTempl.infciv);
-	}
-
-	return droids;
 }
 
 // Give reinforcements to the player

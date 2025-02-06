@@ -12,14 +12,12 @@ const mis_collectiveResearch = [
 	"R-Struc-RprFac-Upgrade02",
 ];
 const mis_infestedResearch = [
-	"R-Wpn-MG-Damage04", "R-Wpn-Rocket-Damage03", "R-Wpn-Mortar-Damage04", 
+	"R-Wpn-MG-Damage03", "R-Wpn-Rocket-Damage03", "R-Wpn-Mortar-Damage03", 
 	"R-Wpn-Flamer-Damage03", "R-Wpn-Cannon-Damage03", "R-Wpn-MG-ROF02",
 	"R-Wpn-Rocket-ROF02", "R-Wpn-Mortar-ROF02", "R-Wpn-Flamer-ROF02",
-	"R-Wpn-Cannon-ROF02", "R-Vehicle-Metals03", "R-Struc-Materials03", 
-	"R-Defense-WallUpgrade03", "R-Sys-Engineering02", "R-Cyborg-Metals03",
-	"R-Wpn-Cannon-Accuracy01", "R-Wpn-Rocket-Accuracy02", "R-Wpn-AAGun-ROF01",
-	"R-Wpn-AAGun-Damage01", "R-Vehicle-Engine03", "R-Wpn-AAGun-Accuracy01",
-	"R-Struc-RprFac-Upgrade01",
+	"R-Wpn-Cannon-ROF02", "R-Vehicle-Metals03", "R-Struc-Materials04", 
+	"R-Defense-WallUpgrade04", "R-Cyborg-Metals03", "R-Wpn-AAGun-ROF01", 
+	"R-Wpn-AAGun-Damage01", "R-Vehicle-Engine03",
 ];
 
 const MIS_RESEARCH_FACILITY = 1;
@@ -41,7 +39,7 @@ camAreaEvent("heliRemoveZone", function(droid)
 
 function heliAttack()
 {
-	const templates = [cTempl.infhelcan, cTempl.infhelhmg];
+	const templates = [cTempl.infhelcan, cTempl.infhelhmg, cTempl.infhelpod];
 	const ext = {
 		limit: 1,
 		alternate: true,
@@ -51,38 +49,74 @@ function heliAttack()
 
 function sendInfestedReinforcements()
 {	
-	const CORE_SIZE = 4 + camRand(5);
-	const FODDER_SIZE = 12 + camRand(3);
+	const coreDroids = [
+		[ // Scavs & crawlers
+			cTempl.vilestinger, // Vile Stingers
+			cTempl.stinger, cTempl.stinger, cTempl.stinger, // Stingers
+			cTempl.basher, cTempl.basher, // Bashers
+			cTempl.boomtick, // Boom Ticks
+			cTempl.infmoncan, cTempl.infmoncan, // Bus Tanks
+			cTempl.infmonhmg,
+			cTempl.infmonmrl,
+			cTempl.infflatmrl, // Flatbeds
+			cTempl.infflatat,
+			cTempl.infminitruck, // MRP Trucks
+			cTempl.infsartruck, // Sarissa Trucks
+			cTempl.infbuscan, cTempl.infbuscan, // School Buses
+			cTempl.firetruck, // Fire Trucks
+			cTempl.infbjeep, cTempl.infbjeep, cTempl.infbjeep, // Jeeps
+			cTempl.infrbjeep, cTempl.infrbjeep, // Rocket Jeeps
+			cTempl.infrbjeep, cTempl.infrbjeep, // Grenade Jeeps
+			cTempl.infbuggy, cTempl.infbuggy, // Buggies
+			cTempl.infrbuggy, cTempl.infrbuggy, // Rocket Buggies
+			cTempl.inftrike, // Trikes
+			cTempl.infbloke,  cTempl.infbloke, cTempl.infbloke, // Blokes
+			cTempl.infkevbloke, cTempl.infkevbloke,
+			cTempl.inflance, // Lances
+			cTempl.infkevlance, cTempl.infkevlance,
+		],
+		[ // Light tanks & cyborgs + some scav stuff
+			cTempl.stinger, cTempl.stinger, cTempl.stinger, // Stingers
+			cTempl.infcybca, cTempl.infcybca, // Heavy Gunners
+			cTempl.infcybhg, // Heavy Machinegunners
+			cTempl.infcolpodt, // MRPs
+			cTempl.infcolhmght, // HMGs
+			cTempl.infcommcant, // Medium Cannons
+			cTempl.infbuggy, cTempl.infbuggy, cTempl.infbuggy, cTempl.infbuggy, // Buggies
+			cTempl.infrbuggy, cTempl.infrbuggy, cTempl.infrbuggy, // Rocket Buggies
+			cTempl.inftrike, cTempl.inftrike, cTempl.inftrike, // Trikes
+			cTempl.infbloke,  cTempl.infbloke, cTempl.infbloke, cTempl.infbloke, cTempl.infbloke, // Blokes
+			cTempl.infkevbloke, cTempl.infkevbloke, cTempl.infkevbloke,
+			cTempl.inflance, cTempl.inflance, cTempl.inflance, // Lances
+			cTempl.infkevlance, cTempl.infkevlance,
+		].push((difficulty >= MEDIUM) ? cTempl.infcomatt : undefined), // Add a Lancer tank
+		[ // Bashers, Stingers, and Infantry
+			cTempl.vilestinger, // Vile Stingers
+			cTempl.stinger, cTempl.stinger, cTempl.stinger, cTempl.stinger, // Stingers
+			cTempl.basher, cTempl.basher, cTempl.basher, cTempl.basher, cTempl.basher, cTempl.basher, // Bashers
+			cTempl.boomtick, // Boom Ticks
+			cTempl.infbloke,  cTempl.infbloke, cTempl.infbloke, // Blokes
+			cTempl.infkevbloke, cTempl.infkevbloke,
+			cTempl.inflance, // Lances
+		],
+	];
+	const CORE_SIZE = 4;
+	const FODDER_SIZE = 12;
 
 	// South west entrance
-	const swDroids = camRandInfTemplates(
-		[cTempl.stinger, cTempl.infbloke, cTempl.infkevbloke, cTempl.infminitruck, cTempl.infbuggy, cTempl.infrbuggy, cTempl.infcybhg, cTempl.infcybca, cTempl.infcolpodt], 
-		CORE_SIZE, FODDER_SIZE
-	);
-	camSendReinforcement(CAM_INFESTED, getObject("infEntry1"), swDroids, CAM_REINFORCE_GROUND, {order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}});
+	camSendReinforcement(CAM_INFESTED, getObject("infEntry1"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND, {
+		order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}
+	});
 
 	// West entrance
-	// (Gets weaker when factory is destroyed)
-	// if (collectiveActive)
-	// {
-		const WEST_FACTORY_DESTROYED = getObject("infFactory2") === null;
-		const westDroids = camRandInfTemplates(
-			[cTempl.basher, cTempl.basher, cTempl.infkevbloke, cTempl.inflance, cTempl.infbuggy, cTempl.infrbuggy, cTempl.stinger, cTempl.boomtick],
-			(WEST_FACTORY_DESTROYED) ? CORE_SIZE / 2 : CORE_SIZE, (WEST_FACTORY_DESTROYED) ? FODDER_SIZE * 2 / 3 : FODDER_SIZE
-		);
-		camSendReinforcement(CAM_INFESTED, getObject("infEntry2"), westDroids, CAM_REINFORCE_GROUND);
-	// }
+	camSendReinforcement(CAM_INFESTED, getObject("infEntry2"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 	
 	// North road entrances
 	// (Only spawns units if the nearby Collective structures are cleared)
 	const BLOCKADE_STRUCTURES = enumArea("blockadeStructs", CAM_THE_COLLECTIVE, false).filter((obj) => (obj.type === STRUCTURE)).length;
-	if (BLOCKADE_STRUCTURES === 0)
+	if (!BLOCKADE_STRUCTURES)
 	{
-		const northDroids = camRandInfTemplates(
-			[cTempl.stinger, cTempl.infbloke, cTempl.infkevbloke, cTempl.infminitruck, cTempl.infbuggy, cTempl.infrbuggy, cTempl.infcybhg, cTempl.infcybca, cTempl.infcolpodt], 
-			CORE_SIZE, FODDER_SIZE
-		);
-		camSendReinforcement(CAM_INFESTED, getObject("infEntry3"), northDroids, CAM_REINFORCE_GROUND);
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry3"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 	}
 }
 
@@ -176,7 +210,6 @@ function manageArtifactGroup()
 		camManageGroup(colArtiGroup, CAM_ORDER_ATTACK, {
 			targetPlayer: MIS_RESEARCH_FACILITY,
 			pos: camMakePos("infResearch"),
-			repair: 25,
 			removable: false
 		});
 
@@ -190,7 +223,6 @@ function manageArtifactGroup()
 		// Move towards the artifact crate
 		camManageGroup(colArtiGroup, CAM_ORDER_DEFEND, {
 			pos: camMakePos(realCrate),
-			repair: 25,
 			radius: 0,
 			removable: false
 		});
@@ -235,7 +267,6 @@ function manageArtifactGroup()
 	// Run for the LZ!
 	camManageGroup(colArtiGroup, CAM_ORDER_DEFEND, {
 		pos: camMakePos("landingZoneCollective"),
-		repair: 25,
 		radius: 0,
 		removable: false
 	});
@@ -461,21 +492,19 @@ function eventStartLevel()
 		templates: [
 			cTempl.cohhcant, cTempl.cohhcant, // 2 Heavy Cannons
 			cTempl.comagt, cTempl.comagt, cTempl.comagt, cTempl.comagt, // 4 Assault Guns
-			cTempl.cominft, cTempl.cominft, // 2 Infernos
+			cTempl.comacant, cTempl.comacant, cTempl.comacant, cTempl.comacant, // 4 Assault Cannons
+			cTempl.cominft, cTempl.cominft, cTempl.cominft, // 3 Infernos
 			cTempl.comhatt, cTempl.comhatt, // 2 Tank Killers
 			cTempl.comhrept, // 1 Heavy Repair Turret
 		]}, CAM_ORDER_DEFEND, {
-		pos: camMakePos("colArtiGroup"),
-		repair: 50
+		pos: camMakePos("colArtiGroup")
 	});
 	colPatrolGroup = camMakeRefillableGroup(camMakeGroup("colPatrolGroup"), {
 		templates: [
 			cTempl.cohraat, // 1 Whirlwind
-			cTempl.cohhcant, cTempl.cohhcant, // 2 Heavy Cannons
 			cTempl.cybla, cTempl.cybla, cTempl.cybla, cTempl.cybla, // 4 Lancer Cyborgs
 			cTempl.scytk, cTempl.scytk, // 2 Super Tank Killer Cyborgs
-			cTempl.comhatt, cTempl.comhatt, // 2 Tank Killers
-			cTempl.cybth, cTempl.cybth, cTempl.cybth, cTempl.cybth, // 4 Thermite Flamer Cyborgs
+			cTempl.cybth, cTempl.cybth, // 2 Thermite Flamer Cyborgs
 		]}, CAM_ORDER_PATROL, {
 		pos: [
 			camMakePos("patrolPos1"),

@@ -13,14 +13,12 @@ const mis_collectiveResearch = [
 	"R-Struc-RprFac-Upgrade01",
 ];
 const mis_infestedResearch = [
-	"R-Wpn-MG-Damage04", "R-Wpn-Rocket-Damage03", "R-Wpn-Mortar-Damage04", 
+	"R-Wpn-MG-Damage03", "R-Wpn-Rocket-Damage03", "R-Wpn-Mortar-Damage03", 
 	"R-Wpn-Flamer-Damage03", "R-Wpn-Cannon-Damage03", "R-Wpn-MG-ROF02",
 	"R-Wpn-Rocket-ROF02", "R-Wpn-Mortar-ROF02", "R-Wpn-Flamer-ROF02",
-	"R-Wpn-Cannon-ROF02", "R-Vehicle-Metals03", "R-Struc-Materials03", 
-	"R-Defense-WallUpgrade03", "R-Sys-Engineering02", "R-Cyborg-Metals03",
-	"R-Wpn-Cannon-Accuracy01", "R-Wpn-Rocket-Accuracy02", "R-Wpn-AAGun-ROF01",
-	"R-Wpn-AAGun-Damage01", "R-Vehicle-Engine03", "R-Wpn-AAGun-Accuracy01",
-	"R-Struc-RprFac-Upgrade01",
+	"R-Wpn-Cannon-ROF02", "R-Vehicle-Metals03", "R-Struc-Materials04", 
+	"R-Defense-WallUpgrade04", "R-Cyborg-Metals03", "R-Wpn-AAGun-ROF01", 
+	"R-Wpn-AAGun-Damage01", "R-Vehicle-Engine03",
 ];
 
 var heavyWaveIdx;
@@ -51,6 +49,16 @@ function vtolAttack()
 		dynamic: true
 	};
 	camSetVtolData(CAM_THE_COLLECTIVE, ["vtolAttackPos1", "vtolAttackPos2"], "vtolRemoveZone", templates, camChangeOnDiff(camMinutesToMilliseconds(2)), undefined, ext);
+}
+
+function heliAttack()
+{
+	const templates = [cTempl.infhelcan, cTempl.infhelhmg, cTempl.infhelpod];
+	const ext = {
+		limit: 1,
+		alternate: true,
+	};
+	camSetVtolData(CAM_INFESTED, undefined, "vtolRemoveZone", templates, camChangeOnDiff(camMinutesToMilliseconds(0.75)), undefined, ext);
 }
 
 // Starts the Collective wave loops
@@ -274,7 +282,7 @@ function sendCollectiveSupportWave()
 	// Entrances used by non-hover groups
 	const supportEntrances = ["colEntry4", "colEntry7", "colEntry8"];
 	if (supportWaveIdx >= 5) supportEntrances.push("colEntry2");
-	const chosenEntrance = getObject(supportEntrances[camRand(supportEntrances.length)])
+	const chosenEntrance = getObject(camRandFrom(supportEntrances))
 
 	const orderData = {order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}};
 	let spawnTruck = false;
@@ -310,6 +318,7 @@ function sendCollectiveSupportWave()
 			cTempl.comhmortht, cTempl.comhmortht, cTempl.comhmortht, cTempl.comhmortht, cTempl.comhmortht, cTempl.comhmortht, // 6 Bombards
 			cTempl.comatht, cTempl.comatht, // 2 Lancers
 		];
+		if (supportWaveIdx >= 5 || difficulty >= HARD) sensorEscortDroids = sensorEscortDroids.concat([cTempl.cohhowt, cTempl.cohhowt]); // Add Howitzers
 		if (supportWaveIdx >= 5) sensorEscortDroids = camArrayReplaceWith(sensorEscortDroids, cTempl.comatht, cTempl.comhatht); // Replace with Tank Killers
 		const colSensorGroup = camSendReinforcement(CAM_THE_COLLECTIVE, chosenEntrance, sensorEscortDroids, CAM_REINFORCE_GROUND);
 		camManageGroup(colSensorGroup, CAM_ORDER_FOLLOW, {leader: sensorLabel, suborder: CAM_ORDER_ATTACK});
@@ -373,7 +382,7 @@ function sendCollectiveTransporter()
 	const droids = [];
 	for (let i = 0; i < 10; i++)
 	{
-		droids.push(cyborgPool[camRand(cyborgPool.length)]);
+		droids.push(camRandFrom(cyborgPool));
 	}
 
 	// Get all available LZs
@@ -386,7 +395,7 @@ function sendCollectiveTransporter()
 	// If we have a valid LZ, send the transport
 	if (lzPool.length > 0)
 	{
-		camSendReinforcement(CAM_THE_COLLECTIVE, lzPool[camRand(lzPool.length)], droids,
+		camSendReinforcement(CAM_THE_COLLECTIVE, camRandFrom(lzPool), droids,
 			CAM_REINFORCE_TRANSPORT, {
 				entry: {x: 80, y: 20},
 				exit: {x: 80, y: 20},
@@ -397,42 +406,70 @@ function sendCollectiveTransporter()
 
 function sendInfestedReinforcements()
 {	
-	// NOTE: These entrance numbers are different from A2L2...
-	const CORE_SIZE = 4 + camRand(5);
-	const FODDER_SIZE = 14 + camRand(3);
+	
+	const coreDroids = [
+		[ // Scavs & crawlers
+			cTempl.stinger, cTempl.stinger, cTempl.stinger, // Stingers
+			cTempl.basher, cTempl.basher, // Bashers
+			cTempl.boomtick, // Boom Ticks
+			cTempl.infmoncan, cTempl.infmoncan, // Bus Tanks
+			cTempl.infmonhmg,
+			cTempl.infmonmrl,
+			cTempl.infminitruck, // MRP Trucks
+			cTempl.infsartruck, // Sarissa Trucks
+			cTempl.infbuscan, cTempl.infbuscan, // School Buses
+			cTempl.firetruck, // Fire Trucks
+			cTempl.infbjeep, cTempl.infbjeep, cTempl.infbjeep, // Jeeps
+			cTempl.infrbjeep, cTempl.infrbjeep, // Rocket Jeeps
+			cTempl.infrbjeep, // Grenade Jeeps
+			cTempl.infbuggy, cTempl.infbuggy, // Buggies
+			cTempl.infrbuggy, cTempl.infrbuggy, // Rocket Buggies
+			cTempl.inftrike, // Trikes
+			cTempl.infbloke,  cTempl.infbloke, cTempl.infbloke, // Blokes
+			cTempl.infkevbloke, cTempl.infkevbloke,
+			cTempl.inflance, // Lances
+			cTempl.infkevlance, cTempl.infkevlance,
+		].push((difficulty >= EASY) ? cTempl.vilestinger : undefined), // Add a Vile Stinger
+		[ // Light tanks & cyborgs + some scav stuff
+			cTempl.stinger, cTempl.stinger, cTempl.stinger, // Stingers
+			cTempl.infcybca, cTempl.infcybca, // Heavy Gunners
+			cTempl.infcybhg, // Heavy Machinegunners
+			cTempl.infcolpodt, // MRPs
+			cTempl.infcolhmght, // HMGs
+			cTempl.infbuggy, cTempl.infbuggy, cTempl.infbuggy, cTempl.infbuggy, // Buggies
+			cTempl.infrbuggy, cTempl.infrbuggy, cTempl.infrbuggy, // Rocket Buggies
+			cTempl.inftrike, cTempl.inftrike, cTempl.inftrike, // Trikes
+			cTempl.infbloke,  cTempl.infbloke, cTempl.infbloke, cTempl.infbloke, cTempl.infbloke, // Blokes
+			cTempl.infkevbloke, cTempl.infkevbloke, cTempl.infkevbloke,
+			cTempl.inflance, cTempl.inflance, cTempl.inflance, // Lances
+			cTempl.infkevlance, cTempl.infkevlance,
+		].push((difficulty >= EASY) ? cTempl.infcommcant : undefined), // Add a Medium Cannon tank
+		[ // Bashers, Stingers, and Infantry
+			cTempl.stinger, cTempl.stinger, cTempl.stinger, cTempl.stinger, // Stingers
+			cTempl.basher, cTempl.basher, cTempl.basher, cTempl.basher, cTempl.basher, cTempl.basher, // Bashers
+			cTempl.boomtick, // Boom Ticks
+			cTempl.infbloke,  cTempl.infbloke, cTempl.infbloke, // Blokes
+			cTempl.infkevbloke, cTempl.infkevbloke,
+			cTempl.inflance, // Lances
+		].push((difficulty >= EASY) ? cTempl.vilestinger : undefined), // Add a Vile Stinger
+	];
+	const CORE_SIZE = 4;
+	const FODDER_SIZE = 14;
 
-	const nTrenchCoreDroids = [
-		cTempl.stinger, cTempl.infbloke, cTempl.infkevbloke,
-		cTempl.infminitruck, cTempl.infbuggy, cTempl.infrbuggy,
-		cTempl.infcybhg, cTempl.infcybca, cTempl.infcolpodt
-	];
-	const neCoreDroids = [
-		cTempl.stinger, cTempl.infbloke, cTempl.infkevbloke,
-		cTempl.infminitruck, cTempl.infbuggy, cTempl.infrbuggy,
-		cTempl.infcybhg, cTempl.infcybca, cTempl.infcolpodt
-	];
-	const canalCoreDroids = [
-		cTempl.basher, cTempl.inffiretruck, cTempl.infkevbloke,
-		cTempl.inflance, cTempl.infbuggy, cTempl.infrbuggy
-	];
+	// NOTE: The entrances are numbered differently from A2L2...
 
 	// North trench entrances
 	// Choose one to spawn from...
 	const northEntrances = ["infEntry1", "infEntry2"];
-	const northTrenchEntrance = getObject(northEntrances[camRand(northEntrances.length)]);
-	const nTrenchDroids = camRandInfTemplates(nTrenchCoreDroids, CORE_SIZE, FODDER_SIZE);
-	camSendReinforcement(CAM_INFESTED, northTrenchEntrance, nTrenchDroids, CAM_REINFORCE_GROUND);
+	camSendReinforcement(CAM_INFESTED, getObject(camRandFrom(northEntrances)), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 
 	// North east entrances
 	// Choose one to spawn from...
 	const nwEntrances = ["infEntry3", "infEntry4"];
-	const northeastEntrance = getObject(nwEntrances[camRand(nwEntrances.length)]);
-	const neDroids = camRandInfTemplates(neCoreDroids, CORE_SIZE / 2, FODDER_SIZE * 2/3);
-	camSendReinforcement(CAM_INFESTED, northeastEntrance, neDroids, CAM_REINFORCE_GROUND);
+	camSendReinforcement(CAM_INFESTED, getObject(camRandFrom(nwEntrances)), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 
 	// South canal entrance
-	const canalDroids = camRandInfTemplates(canalCoreDroids, CORE_SIZE / 2, 2 * FODDER_SIZE / 3);
-	camSendReinforcement(CAM_INFESTED, getObject("infEntry5"), canalDroids, CAM_REINFORCE_GROUND);
+	camSendReinforcement(CAM_INFESTED, getObject("infEntry5"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 }
 
 // Finish spawning Collective waves, and start a time limit for the player to clean up the map
@@ -538,7 +575,7 @@ function eventStartLevel()
 
 	queue("startCollectiveAttacks", camChangeOnDiff(camSecondsToMilliseconds(20)));
 	queue("vtolAttack", camChangeOnDiff(camMinutesToMilliseconds(6)));
-	// sendInfestedReinforcements();
+	heliAttack();
 	setTimer("sendInfestedReinforcements", camChangeOnDiff(camSecondsToMilliseconds(60)));
 	setTimer("sendCollectiveTransporter", camChangeOnDiff(camMinutesToMilliseconds(3)));
 

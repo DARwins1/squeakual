@@ -364,6 +364,13 @@ function camAreaToStructSet(area, player)
 	return structSet;
 }
 
+//;; ## camIsScavStruct(struct)
+//;; Returns true if the given structure appears in libcampaign's list of scavenger structures.
+function camIsScavStruct(struct)
+{
+	return __camScavStructList.includes(struct);
+}
+
 //////////// privates
 
 // Check if a truck is busy doing a building-related action

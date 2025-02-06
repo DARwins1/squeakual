@@ -15,12 +15,10 @@ const mis_collectiveResearch = [
 const mis_infestedResearch = [
 	"R-Wpn-MG-Damage04", "R-Wpn-Rocket-Damage03", "R-Wpn-Mortar-Damage04", 
 	"R-Wpn-Flamer-Damage03", "R-Wpn-Cannon-Damage03", "R-Wpn-MG-ROF02",
-	"R-Wpn-Rocket-ROF02", "R-Wpn-Mortar-ROF02", "R-Wpn-Flamer-ROF02",
-	"R-Wpn-Cannon-ROF02", "R-Vehicle-Metals03", "R-Struc-Materials03", 
-	"R-Defense-WallUpgrade03", "R-Sys-Engineering02", "R-Cyborg-Metals03",
-	"R-Wpn-Cannon-Accuracy01", "R-Wpn-Rocket-Accuracy02", "R-Wpn-AAGun-ROF01",
-	"R-Wpn-AAGun-Damage01", "R-Vehicle-Engine03", "R-Wpn-AAGun-Accuracy01",
-	"R-Struc-RprFac-Upgrade01",
+	"R-Wpn-Rocket-ROF02", "R-Wpn-Mortar-ROF03", "R-Wpn-Flamer-ROF02",
+	"R-Wpn-Cannon-ROF03", "R-Vehicle-Metals04", "R-Struc-Materials05", 
+	"R-Defense-WallUpgrade05", "R-Cyborg-Metals04", "R-Wpn-AAGun-ROF02", 
+	"R-Wpn-AAGun-Damage02", "R-Vehicle-Engine04",
 ];
 
 const MIS_UPLINK = 1;
@@ -64,50 +62,86 @@ function eventDroidBuilt(droid, structure)
 // Normal infested waves unrelated to the onslaught waves
 function sendInfestedReinforcements()
 {	
+	const coreDroids = [
+		[ // Scavs & crawlers
+			cTempl.vilestinger, // Vile Stingers
+			cTempl.stinger, cTempl.stinger, cTempl.stinger, // Stingers
+			cTempl.basher, cTempl.basher, // Bashers
+			cTempl.boomtick, // Boom Ticks
+			cTempl.infmoncan, cTempl.infmoncan, // Bus Tanks
+			cTempl.infmonhmg,
+			cTempl.infmonmrl,
+			cTempl.infflatmrl, // Flatbeds
+			cTempl.infflatat,
+			cTempl.infminitruck, // MRP Trucks
+			cTempl.infsartruck, // Sarissa Trucks
+			cTempl.infbuscan, cTempl.infbuscan, // School Buses
+			cTempl.firetruck, // Fire Trucks
+			cTempl.infbjeep, cTempl.infbjeep, cTempl.infbjeep, // Jeeps
+			cTempl.infrbjeep, cTempl.infrbjeep, // Rocket Jeeps
+			cTempl.infrbjeep, cTempl.infrbjeep, // Grenade Jeeps
+			cTempl.infbuggy, // Buggies
+			cTempl.infrbuggy, // Rocket Buggies
+			cTempl.infbloke,  cTempl.infbloke, cTempl.infbloke, // Blokes
+			cTempl.infkevbloke, cTempl.infkevbloke,
+			cTempl.inflance, // Lances
+			cTempl.infkevlance, cTempl.infkevlance,
+		],
+		[ // Light tanks & cyborgs + some scav stuff
+			cTempl.stinger, cTempl.stinger, cTempl.stinger, // Stingers
+			cTempl.infcybca, cTempl.infcybca, cTempl.infcybca, // Heavy Gunners
+			cTempl.infcybhg, cTempl.infcybhg, // Heavy Machinegunners
+			cTempl.infcolpodt, cTempl.infcolpodt, // MRPs
+			cTempl.infcolhmght, cTempl.infcolhmght, // HMGs
+			cTempl.infcommcant, // Medium Cannons
+			cTempl.infcomatt, // Lancers
+			cTempl.infbuggy, cTempl.infbuggy, cTempl.infbuggy, // Buggies
+			cTempl.infrbuggy, cTempl.infrbuggy, // Rocket Buggies
+			cTempl.inftrike, cTempl.inftrike, // Trikes
+			cTempl.infbloke,  cTempl.infbloke, cTempl.infbloke, cTempl.infbloke, cTempl.infbloke, // Blokes
+			cTempl.infkevbloke, cTempl.infkevbloke, cTempl.infkevbloke,
+			cTempl.inflance, cTempl.inflance, cTempl.inflance, // Lances
+			cTempl.infkevlance, cTempl.infkevlance,
+		],
+		[ // Bashers, Stingers, and Infantry
+			cTempl.vilestinger, // Vile Stingers
+			cTempl.stinger, cTempl.stinger, cTempl.stinger, cTempl.stinger, // Stingers
+			cTempl.basher, cTempl.basher, cTempl.basher, cTempl.basher, cTempl.basher, cTempl.basher, // Bashers
+			cTempl.boomtick, // Boom Ticks
+			cTempl.infbloke,  cTempl.infbloke, cTempl.infbloke, // Blokes
+			cTempl.infkevbloke, cTempl.infkevbloke,
+			cTempl.inflance, // Lances
+		],
+	];
 	const CORE_SIZE = 4;
 	const FODDER_SIZE = 12;
-
-	const coreDroids = [
-		cTempl.stinger, cTempl.stinger, cTempl.stinger,
-		cTempl.infbloke,  cTempl.infbloke,
-		cTempl.infkevbloke, cTempl.infkevbloke, cTempl.infkevbloke,
-		cTempl.infminitruck, cTempl.infminitruck,
-		cTempl.infbuggy, cTempl.infbuggy, cTempl.infbuggy,
-		cTempl.infrbuggy, cTempl.infrbuggy, cTempl.infrbuggy,
-		cTempl.infcybhg, cTempl.infcybhg,
-		cTempl.infcybca, cTempl.infcybca,
-		cTempl.infcolpodt, cTempl.infcolpodt,
-		cTempl.basher, cTempl.basher,
-		cTempl.inflance,
-		cTempl.boomtick,
-	];
 
 	// If there's an onslaught occurring, target the player instead of the Collective
 	const data = {order: CAM_ORDER_ATTACK, data: {targetPlayer: (infestedOnslaught) ? CAM_HUMAN_PLAYER : CAM_THE_COLLECTIVE}};
 
 	// South entrance
-	camSendReinforcement(CAM_INFESTED, getObject("infEntry1"), camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND, data);
+	camSendReinforcement(CAM_INFESTED, getObject("infEntry1"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND, data);
 
 	// Southeast entrance
-	camSendReinforcement(CAM_INFESTED, getObject("infEntry2"), camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND, data);
+	camSendReinforcement(CAM_INFESTED, getObject("infEntry2"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND, data);
 
 	// Canal entrance
-	camSendReinforcement(CAM_INFESTED, getObject("infEntry3"), camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND, data);
+	camSendReinforcement(CAM_INFESTED, getObject("infEntry3"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND, data);
 
 	// Southwest entrance
-	camSendReinforcement(CAM_INFESTED, getObject("infEntry4"), camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND, data);
+	camSendReinforcement(CAM_INFESTED, getObject("infEntry4"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND, data);
 
 	// West entrance (only if west base is destroyed)
 	if (camBaseIsEliminated("colWestOutpost"))
 	{
-		camSendReinforcement(CAM_INFESTED, getObject("infEntry5"), camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND, data);
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry5"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND, data);
 	}
 
 	// East entrance
-	camSendReinforcement(CAM_INFESTED, getObject("infEntry6"), camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND, data);
+	camSendReinforcement(CAM_INFESTED, getObject("infEntry6"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND, data);
 
 	// West Trench entrance
-	camSendReinforcement(CAM_INFESTED, getObject("infEntry7"), camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND, data);
+	camSendReinforcement(CAM_INFESTED, getObject("infEntry7"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND, data);
 }
 
 // Count the number of (non-wall) structures remaining in the final base
@@ -348,7 +382,7 @@ function spawnOnslaughtWaves()
 
 		// Send them in!
 		camSendReinforcement(CAM_INFESTED, getObject(entrance), 
-			camRandInfTemplates(coreTemplates[camRand(coreTemplates.length)], CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND, data);
+			camRandInfTemplates(camRandFrom(coreTemplates), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND, data);
 	}
 }
 
@@ -430,7 +464,7 @@ function sendCollectiveTransporter()
 	const droids = [];
 	for (let i = 0; i < TRANSPORT_SIZE; i++)
 	{
-		droids.push(droidPool[camRand(droidPool.length)]);
+		droids.push(camRandFrom(droidPool));
 	}
 
 	// Send the transport!

@@ -456,7 +456,7 @@ function sendCollectiveTransporter()
 	const droids = [];
 	for (let i = 0; i < TRANSPORT_SIZE; i++)
 	{
-		droids.push(droidPool[camRand(droidPool.length)]);
+		droids.push(camRandFrom(droidPool));
 	}
 
 	// Send the transport!

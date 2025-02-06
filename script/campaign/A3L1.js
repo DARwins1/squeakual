@@ -23,14 +23,12 @@ const mis_collectiveResearch = [
 	"R-Struc-RprFac-Upgrade01",
 ];
 const mis_infestedResearch = [
-	"R-Wpn-MG-Damage04", "R-Wpn-Rocket-Damage03", "R-Wpn-Mortar-Damage04", 
+	"R-Wpn-MG-Damage03", "R-Wpn-Rocket-Damage03", "R-Wpn-Mortar-Damage03", 
 	"R-Wpn-Flamer-Damage03", "R-Wpn-Cannon-Damage03", "R-Wpn-MG-ROF02",
 	"R-Wpn-Rocket-ROF02", "R-Wpn-Mortar-ROF02", "R-Wpn-Flamer-ROF02",
 	"R-Wpn-Cannon-ROF02", "R-Vehicle-Metals03", "R-Struc-Materials03", 
-	"R-Defense-WallUpgrade03", "R-Sys-Engineering02", "R-Cyborg-Metals03",
-	"R-Wpn-Cannon-Accuracy01", "R-Wpn-Rocket-Accuracy02", "R-Wpn-AAGun-ROF01",
-	"R-Wpn-AAGun-Damage01", "R-Vehicle-Engine03", "R-Wpn-AAGun-Accuracy01",
-	"R-Struc-RprFac-Upgrade01",
+	"R-Defense-WallUpgrade03", "R-Cyborg-Metals03", "R-Wpn-AAGun-ROF01", 
+	"R-Wpn-AAGun-Damage01", "R-Vehicle-Engine03",
 ];
 
 camAreaEvent("vtolRemoveZone", function(droid)
@@ -191,7 +189,7 @@ function sendCollectiveTransporter()
 	const droids = [];
 	for (let i = 0; i < TRANSPORT_SIZE; i++)
 	{
-		droids.push(droidPool[camRand(droidPool.length)]);
+		droids.push(camRandFrom(droidPool));
 	}
 
 	// Send the transport!
@@ -210,16 +208,33 @@ function sendCollectiveTransporter()
 
 function sendInfestedReinforcements()
 {	
-	const CORE_SIZE = 4 + camRand(5);
-	const FODDER_SIZE = 14 + camRand(3);
+	const coreDroids = [ // Just scavs and crawlers
+		cTempl.stinger, cTempl.stinger, cTempl.stinger, // Stingers
+		cTempl.basher, cTempl.basher, // Bashers
+		cTempl.boomtick, // Boom Ticks
+		cTempl.infmoncan, // Bus Tanks
+		cTempl.infminitruck, // MRP Trucks
+		cTempl.infsartruck, // Sarissa Trucks
+		cTempl.infbuscan, // School Buses
+		cTempl.infbjeep, cTempl.infbjeep, // Jeeps
+		cTempl.infrbjeep, // Rocket Jeeps
+		cTempl.infbuggy, cTempl.infbuggy, cTempl.infbuggy, // Buggies
+		cTempl.infrbuggy, cTempl.infrbuggy, cTempl.infrbuggy, // Rocket Buggies
+		cTempl.inftrike, cTempl.inftrike, // Trikes
+		cTempl.infbloke,  cTempl.infbloke, cTempl.infbloke, cTempl.infbloke, // Blokes
+		cTempl.infkevbloke,
+		cTempl.inflance, cTempl.inflance, // Lances
+		cTempl.infkevlance,
+	];
+	const CORE_SIZE = 4;
+	const FODDER_SIZE = 14;
 
 	// South road entrance
 	// (Stops entirely when factory is destroyed)
 	if (getObject("infFactory1") !== null)
 	{
-		const droids = [cTempl.stinger, cTempl.infbloke, cTempl.infkevbloke, cTempl.infminitruck, cTempl.infbuggy, cTempl.infrbuggy];
 		const TARGET = (camBaseIsEliminated("colSouthRoadblock")) ? undefined : CAM_THE_COLLECTIVE;
-		camSendReinforcement(CAM_INFESTED, getObject("infEntry1"), camRandInfTemplates(droids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND,
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry1"), camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND,
 			{order: CAM_ORDER_ATTACK, data: {targetPlayer: TARGET}}
 		);
 	}
@@ -228,40 +243,31 @@ function sendInfestedReinforcements()
 	// (Does NOT stop for the entire mission!)
 	if (allowExtraWaves)
 	{
-		const droids = [cTempl.stinger, cTempl.inffiretruck, cTempl.infkevbloke, cTempl.inflance, cTempl.infbuggy, cTempl.infrbuggy];
 		const TARGET = (camBaseIsEliminated("colSouthRoadblock")) ? undefined : CAM_THE_COLLECTIVE;
-		camSendReinforcement(CAM_INFESTED, getObject("infEntry2"), camRandInfTemplates(droids, CORE_SIZE / 2, 2 * FODDER_SIZE / 3), CAM_REINFORCE_GROUND, 
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry2"), camRandInfTemplates(coreDroids, CORE_SIZE / 2, 2 * FODDER_SIZE / 3), CAM_REINFORCE_GROUND, 
 			{order: CAM_ORDER_ATTACK, data: {targetPlayer: TARGET}}
 		);
-
 	}
 
 	// East base entrance
 	if (getObject("infFactory2") !== null && allowExtraWaves)
 	{
-		const droids = [cTempl.stinger, cTempl.infkevlance, cTempl.infbuscan, cTempl.infbloke, cTempl.infbjeep, cTempl.infrbjeep];
-		camSendReinforcement(CAM_INFESTED, getObject("infEntry3"), camRandInfTemplates(droids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry3"), camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 	}
 
 	// East trench entrance
 	if (allowExtraWaves)
 	{
-		const droids = [cTempl.stinger, cTempl.infkevlance, cTempl.infmoncan, cTempl.infbloke, cTempl.infbjeep, cTempl.infrbjeep];
 		const TARGET = (camBaseIsEliminated("colEastRoadblock")) ? undefined : CAM_THE_COLLECTIVE;
-		camSendReinforcement(CAM_INFESTED, getObject("infEntry4"), camRandInfTemplates(droids, CORE_SIZE / 2, 2 * FODDER_SIZE / 3), CAM_REINFORCE_GROUND,
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry4"), camRandInfTemplates(coreDroids, CORE_SIZE / 2, 2 * FODDER_SIZE / 3), CAM_REINFORCE_GROUND,
 			{order: CAM_ORDER_ATTACK, data: {targetPlayer: TARGET}}
 		);
 	}
 
 	// East road entrance
-	// (Gets weaker when factory is destroyed)
-	// Make these waves smaller once the factory is destroyed
-	const EAST_CORE_SIZE = (getObject("infFactory3") !== null) ? CORE_SIZE : CORE_SIZE / 2;
-	const EAST_FODDER_SIZE = (getObject("infFactory3") !== null) ? FODDER_SIZE : 2 * FODDER_SIZE / 3;
-
-	const droids = [cTempl.stinger, cTempl.infbloke, cTempl.infkevbloke, cTempl.infminitruck, cTempl.infbuggy, cTempl.infrbuggy];
-	const TARGET = (camBaseIsEliminated("colEastRoadblock")) ? undefined : CAM_THE_COLLECTIVE;
-	camSendReinforcement(CAM_INFESTED, getObject("infEntry5"), camRandInfTemplates(droids, EAST_CORE_SIZE, EAST_FODDER_SIZE), CAM_REINFORCE_GROUND,
+	// (Stops entirely when factory is destroyed)
+	const TARGET = (camBaseIsEliminated("colEastRoadblock")) ? CAM_HUMAN_PLAYER : CAM_THE_COLLECTIVE;
+	camSendReinforcement(CAM_INFESTED, getObject("infEntry5"), camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND,
 		{order: CAM_ORDER_ATTACK, data: {targetPlayer: TARGET}}
 	);
 }
@@ -517,8 +523,8 @@ function eventStartLevel()
 		rebuildTruck: true,
 		respawnDelay: ((tweakOptions.rec_timerlessMode) ? (TRUCK_TIME / 2) : TRUCK_TIME),
 		rebuildBase: tweakOptions.rec_timerlessMode,
-		truckDroid: getObject("colTruck1"), // TODO: Exclude scav structures here
-		structset: camAreaToStructSet("colRoadblock1")
+		truckDroid: getObject("colTruck1"),
+		structset: camAreaToStructSet("colRoadblock1").filter((struct) => (!camIsScavStruct(struct.stat)))
 	});
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colEastRoadblock",
@@ -526,7 +532,7 @@ function eventStartLevel()
 		respawnDelay: ((tweakOptions.rec_timerlessMode) ? (TRUCK_TIME / 2) : TRUCK_TIME),
 		rebuildBase: tweakOptions.rec_timerlessMode,
 		truckDroid: getObject("colTruck2"),
-		structset: camAreaToStructSet("colRoadblock2")
+		structset: camAreaToStructSet("colRoadblock2").filter((struct) => (!camIsScavStruct(struct.stat)))
 	});
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colMainBase",
@@ -668,24 +674,24 @@ function eventStartLevel()
 			if (numAttackDroids > 0) choice.push("attack");
 			if (numArtilleryDroids > 0) choice.push("artillery");
 			if (numVtolDroids > 0) choice.push("vtol");
-			switch (choice[camRand(choice.length)])
+			switch (camRandFrom(choice))
 			{
 				case "attack":
 				{
 					// Choose a random attack template
-					template = attackPool[camRand(attackPool.length)];
+					template = camRandFrom(attackPool);
 					break;
 				}
 				case "artillery":
 				{
 					// Choose a random artillery template
-					template = artPool[camRand(artPool.length)];
+					template = camRandFrom(artPool);
 					break;
 				}
 				case "vtol":
 				{
 					// Choose a random vtol template
-					template = vtolPool[camRand(vtolPool.length)];
+					template = camRandFrom(vtolPool);
 					break;
 				}
 			}

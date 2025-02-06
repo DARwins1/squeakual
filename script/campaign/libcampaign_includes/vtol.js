@@ -173,7 +173,7 @@ function __camSpawnVtols()
 		//Make sure to catch multiple start positions also.
 		if (__camVtolDataSystem[idx].startPosition instanceof Array)
 		{
-			pos = __camVtolDataSystem[idx].startPosition[camRand(__camVtolDataSystem[idx].startPosition.length)];
+			pos = camRandFrom(__camVtolDataSystem[idx].startPosition);
 		}
 		else if (camDef(__camVtolDataSystem[idx].startPosition) && __camVtolDataSystem[idx].startPosition)
 		{
@@ -189,7 +189,7 @@ function __camSpawnVtols()
 			//Pick some droids randomly.
 			for (let i = 0; i < __AMOUNT; ++i)
 			{
-				droids.push(__camVtolDataSystem[idx].templates[camRand(__camVtolDataSystem[idx].templates.length)]);
+				droids.push(camRandFrom(__camVtolDataSystem[idx].templates));
 			}
 		}
 		else
@@ -225,7 +225,7 @@ function __camSpawnVtols()
 			{
 				if (!alternate)
 				{
-					droids.push(__camVtolDataSystem[idx].templates[camRand(__camVtolDataSystem[idx].templates.length)]);
+					droids.push(camRandFrom(__camVtolDataSystem[idx].templates));
 				}
 				else
 				{

@@ -272,6 +272,10 @@ const cam_sounds = {
 		unitAbsorbed: "untabsrd.ogg",
 		unitNeutralized: "untnut.ogg",
 	},
+	infested: {
+		structureInfected: "pcv623.ogg",
+		unitInfected: "pcv624.ogg",
+	},
 	missile: {
 		launch: {
 			missileLaunchAborted: "labort.ogg",
@@ -351,7 +355,8 @@ var __camTracedOnce = {};
 //events
 var __camSaveLoading;
 var __camInfestedGlobalAttackGroup;
-const CAM_INFTRUCK_SUMMON_TEMPLATES = [
+var __camDisableFactoryAutoManagement;
+const __camInfTruckSummonTemplates = [
 	{ body: "InfestedScavBody", prop: "BaBaLegs", weap: "BabaMG" }, // Infested Blokes
 	{ body: "InfestedScavBody", prop: "BaBaLegs", weap: "BabaMG" },
 	{ body: "InfestedScavBody", prop: "BaBaLegs", weap: "BabaMG" },
@@ -360,10 +365,10 @@ const CAM_INFTRUCK_SUMMON_TEMPLATES = [
 	{ body: "InfestedLanceBody", prop: "BaBaLegs", weap: "BabaLance" }, // Infested Rocket Scavs
 	{ body: "InfestedLanceBody-Kev", prop: "BaBaLegs", weap: "BabaLance" },
 ];
-// const CAM_INFTRUCK_DEATH_TEMPLATES = [
+// const __camInfTruckDeathTemplates = [
 // 	{ body: "BasherBody", prop: "BoomTickLegs", weap: "BasherMelee" }, // Basher
 // ];
-const CAM_INFTRUCK_FODDER_COUNT = 6;
+const __CAM_INFTRUCK_FODDER_COUNT = 6;
 
 //group
 var __camNewGroupCounter;
@@ -475,6 +480,27 @@ var __camTransporterMessage;
 //truck
 var __camTruckInfo;
 var __camTruckAssignList;
+const __camScavStructList = [ // List of structures that can generally be rebuilt by scavengers
+	"A0BaBaBunker",
+	"A0BaBaFactory",
+	"A0BaBaFlameTower",
+	"A0BaBaGunTower",
+	"A0BaBaGunTowerEND",
+	"A0BaBaHorizontalWall",
+	"A0BaBaMortarPit",
+	"A0BaBaPowerGenerator",
+	"A0BaBaRocketPit",
+	"A0BaBaRocketPitAT",
+	"A0BaBaRocketPitAT-2",
+	"A0BaBaCannonPit",
+	"A0BaBaMRAPit",
+	"A0BabaCornerWall",
+	"LookOutTower",
+	"A0CannonTower",
+	"Sys-RustSensoTower01",
+	"Sys-VTOL-RustyRadarTower01",
+	"A0TankTrap",
+];
 
 //victory
 const CAM_VICTORY_STANDARD = "__camVictoryStandard";

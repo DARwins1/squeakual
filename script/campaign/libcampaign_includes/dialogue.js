@@ -131,7 +131,7 @@ function __camPlayDialogueSound(sound)
 			cam_sounds.radio.click3, cam_sounds.radio.click4,
 			cam_sounds.radio.click5, cam_sounds.radio.click6,
 		];
-		playSound(radioClicks[camRand(radioClicks.length)]);
+		playSound(camRandFrom(radioClicks));
 	}
 	else
 	{

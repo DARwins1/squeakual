@@ -6,14 +6,14 @@ const mis_scavRes = [
 	"R-Wpn-Mortar-Damage01", "R-Wpn-Flamer-Damage02",
 	"R-Wpn-Cannon-Damage02", "R-Wpn-MG-ROF01", "R-Wpn-Rocket-ROF02",
 	"R-Wpn-Mortar-ROF01", "R-Wpn-Flamer-ROF02", "R-Wpn-Cannon-ROF02",
-	"R-Vehicle-Metals01", "R-Struc-Materials01", "R-Defense-WallUpgrade01",
+	"R-Vehicle-Metals01", "R-Struc-Materials01",
 ];
 const mis_infestedRes = [
 	"R-Wpn-MG-Damage02", "R-Wpn-Rocket-Damage01",
 	"R-Wpn-Mortar-Damage01", "R-Wpn-Flamer-Damage02",
 	"R-Wpn-Cannon-Damage02", "R-Wpn-MG-ROF01", "R-Wpn-Rocket-ROF01",
 	"R-Wpn-Mortar-ROF01", "R-Wpn-Flamer-ROF01", "R-Wpn-Cannon-ROF01",
-	"R-Vehicle-Metals01", "R-Struc-Materials01", "R-Defense-WallUpgrade01",
+	"R-Vehicle-Metals01", "R-Struc-Materials01",
 ];
 
 // Player values
@@ -148,14 +148,17 @@ camAreaEvent("outpostAmbushTrigger", function(droid)
 
 		setTimer("sendInfestedReinforcements", camChangeOnDiff(camSecondsToMilliseconds(105)));
 
+		const CORE_SIZE = 5;
+		const FODDER_SIZE = 12;
+
 		// Two groups at once, from both sides
 		const group1 = [cTempl.stinger, cTempl.stinger, cTempl.infrbjeep, cTempl.infbuscan, cTempl.infbuggy, cTempl.inffiretruck];
-		camSendReinforcement(CAM_INFESTED, camMakePos("ambushSpawn1"), randomTemplates(group1), CAM_REINFORCE_GROUND);
-		camSendReinforcement(CAM_INFESTED, camMakePos("ambushSpawn1"), randomTemplates(group1), CAM_REINFORCE_GROUND);
+		camSendReinforcement(CAM_INFESTED, camMakePos("ambushSpawn1"), camRandInfTemplates(group1, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+		camSendReinforcement(CAM_INFESTED, camMakePos("ambushSpawn1"), camRandInfTemplates(group1, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 
 		const group2 = [cTempl.stinger, cTempl.inftrike, cTempl.infbuggy, cTempl.infbjeep, cTempl.infrbuggy, cTempl.infbjeep];
-		camSendReinforcement(CAM_INFESTED, camMakePos("ambushSpawn2"), randomTemplates(group2), CAM_REINFORCE_GROUND);
-		camSendReinforcement(CAM_INFESTED, camMakePos("ambushSpawn2"), randomTemplates(group2), CAM_REINFORCE_GROUND);
+		camSendReinforcement(CAM_INFESTED, camMakePos("ambushSpawn2"), camRandInfTemplates(group2, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+		camSendReinforcement(CAM_INFESTED, camMakePos("ambushSpawn2"), camRandInfTemplates(group2, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 	}
 	else
 	{
@@ -165,11 +168,20 @@ camAreaEvent("outpostAmbushTrigger", function(droid)
 
 function sendInfestedReinforcements()
 {
+	const CORE_SIZE = 3 + camRand(4); // Maximum of 6 core units.
+	const FODDER_SIZE = 14 + camRand(3); // 14 - 16 extra Infested Civilians to the swarm.
+
 	// NE entrance
 	if (getObject("infestedFactory2") !== null) // Stop if the infested factory was destroyed
 	{
-		const droids = [cTempl.stinger, cTempl.infbloke, cTempl.infbloke, cTempl.infminitruck, cTempl.infbuggy, cTempl.infrbuggy];
-		camSendReinforcement(CAM_INFESTED, camMakePos("infestedEntry2"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
+		const coreDroids = [cTempl.stinger, cTempl.infbloke, cTempl.infbloke, cTempl.infminitruck, cTempl.infbuggy, cTempl.infrbuggy];
+		const droids = camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE);
+		// Chance to add a Boom Tick on Hard (10%) or Insane (20%)
+		if ((difficulty === HARD && camRand(101) < 10) || (difficulty === INSANE && camRand(101) < 20))
+		{
+			droids.push(cTempl.boomtick);
+		}
+		camSendReinforcement(CAM_INFESTED, camMakePos("infestedEntry2"), droids, CAM_REINFORCE_GROUND, 
 			{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}}
 		);
 	}
@@ -177,8 +189,13 @@ function sendInfestedReinforcements()
 	// NW entrance
 	if (getObject("infestedFactory3") !== null)
 	{
-		const droids = [cTempl.stinger, cTempl.infbloke, cTempl.infbloke, cTempl.inflance, cTempl.infbuggy, cTempl.infrbuggy];
-		camSendReinforcement(CAM_INFESTED, camMakePos("infestedEntry1"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
+		const coreDroids = [cTempl.stinger, cTempl.infbloke, cTempl.infbloke, cTempl.inflance, cTempl.infbuggy, cTempl.infrbuggy];
+		const droids = camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE);
+		if ((difficulty === HARD && camRand(101) < 10) || (difficulty === INSANE && camRand(101) < 20))
+		{
+			droids.push(cTempl.boomtick);
+		}
+		camSendReinforcement(CAM_INFESTED, camMakePos("infestedEntry1"), droids, CAM_REINFORCE_GROUND, 
 			{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}}
 		);
 	}
@@ -186,8 +203,13 @@ function sendInfestedReinforcements()
 	// West entrance
 	if (getObject("infestedFactory4") !== null)
 	{
-		const droids = [cTempl.stinger, cTempl.infkevlance, cTempl.infkevbloke, cTempl.infbjeep, cTempl.infrbjeep];
-		camSendReinforcement(CAM_INFESTED, camMakePos("infestedEntry4"), randomTemplates(droids), CAM_REINFORCE_GROUND, 
+		const coreDroids = [cTempl.stinger, cTempl.infkevlance, cTempl.infkevbloke, cTempl.infbjeep, cTempl.infrbjeep];
+		const droids = camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE);
+		if ((difficulty === HARD && camRand(101) < 10) || (difficulty === INSANE && camRand(101) < 20))
+		{
+			droids.push(cTempl.boomtick);
+		}
+		camSendReinforcement(CAM_INFESTED, camMakePos("infestedEntry4"), droids, CAM_REINFORCE_GROUND, 
 			{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}}
 		);
 	}
@@ -330,33 +352,6 @@ function heliAttack()
 	camSetVtolData(MIS_CYAN_SCAVS, "heliSpawn", "heliRemoveZone", list, camChangeOnDiff(camMinutesToMilliseconds(1.5)), "radarTower", ext);
 }
 
-// Randomize the provided list of units and tack on a bunch of extra rocket fodder
-function randomTemplates(list)
-{
-	const droids = [];
-	const CORE_SIZE = 3 + camRand(4); // Maximum of 6 core units.
-	const FODDER_SIZE = 14 + camRand(3); // 14 - 16 extra Infested Civilians to the swarm.
-
-	for (let i = 0; i < CORE_SIZE; ++i)
-	{
-		droids.push(list[camRand(list.length)]);
-	}
-
-	// Add a bunch of Infested Civilians.
-	for (let i = 0; i < FODDER_SIZE; ++i)
-	{
-		droids.push(cTempl.infciv);
-	}
-
-	// Chance to add a Boom Tick on Hard (10%) or Insane (20%)
-	if ((difficulty === HARD && camRand(101) < 10) || (difficulty === INSANE && camRand(101) < 20))
-	{
-		droids.push(cTempl.boomtick);
-	}
-
-	return droids;
-}
-
 function camEnemyBaseDetected_scavCamp()
 {
 	// Activate factories in the south
@@ -400,7 +395,7 @@ function eventStartLevel()
 
 	camSetArtifacts({
 		"cScavFactory": { tech: "R-Wpn-MG3Mk1" }, // Heavy Machinegun
-		"yScavFactory1": { tech: "R-Wpn-Flamer-ROF02" }, // Flamer Autoloader Mk2
+		"yScavFactory1": { tech: "R-Struc-Materials01" }, // Reinforced Structure Materials
 		"yScavFactory2": { tech: "R-Wpn-Mortar-ROF01" }, // Mortar Autoloader
 		"sarissaPit": { tech: "R-Wpn-Rocket-LtA-TMk1" }, // Sarissa AT Rocket
 	});

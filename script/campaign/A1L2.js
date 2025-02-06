@@ -568,13 +568,13 @@ function preDamageStuff()
 // Returns true if the given structure is considered belonging to NASDA
 function isNasdaStructure(struct)
 {
-	return (struct.name == _("Rusty Medium Cannon Hardpoint") ||
-		struct.name == _("Rusty Heavy Machinegun Tower") ||
-		struct.name == _("Rusty Mini-Rocket Tower") ||
-		struct.name == _("Old Hardcrete Wall") ||
-		struct.name == _("Old Hardcrete Corner Wall") ||
-		struct.name == _("Old Heavy Machinegun Bunker") ||
-		struct.name == _("VTOL Rearming Pad"));
+	return (struct.name == "Rusty Medium Cannon Hardpoint" ||
+		struct.name == "Rusty Heavy Machinegun Tower" ||
+		struct.name == "Rusty Mini-Rocket Tower" ||
+		struct.name == "Old Hardcrete Wall" ||
+		struct.name == "Old Hardcrete Corner Wall" ||
+		struct.name == "Old Heavy Machinegun Bunker" ||
+		struct.name == "VTOL Rearming Pad");
 }
 
 // Victory dialogue

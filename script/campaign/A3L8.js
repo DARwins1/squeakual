@@ -5,7 +5,7 @@ include("script/campaign/templates.js");
 const mis_collectiveResearch = [
 	"R-Wpn-MG-Damage06", "R-Wpn-Rocket-Damage06", "R-Wpn-Mortar-Damage05", 
 	"R-Wpn-Flamer-Damage05", "R-Wpn-Cannon-Damage06", "R-Wpn-MG-ROF03",
-	"R-Wpn-Rocket-ROF02", "R-Wpn-Mortar-ROF03", "R-Wpn-Flamer-ROF02",
+	"R-Wpn-Rocket-ROF03", "R-Wpn-Mortar-ROF03", "R-Wpn-Flamer-ROF02",
 	"R-Wpn-Cannon-ROF03", "R-Vehicle-Metals05", "R-Struc-Materials05", 
 	"R-Defense-WallUpgrade05", "R-Sys-Engineering02", "R-Cyborg-Metals05",
 	"R-Wpn-Cannon-Accuracy02", "R-Wpn-Rocket-Accuracy03", "R-Wpn-AAGun-ROF02",
@@ -13,14 +13,12 @@ const mis_collectiveResearch = [
 	"R-Struc-RprFac-Upgrade02", "R-Struc-VTOLPad-Upgrade01", "R-Sys-Sensor-Upgrade01",
 ];
 const mis_infestedResearch = [
-	"R-Wpn-MG-Damage04", "R-Wpn-Rocket-Damage03", "R-Wpn-Mortar-Damage04", 
-	"R-Wpn-Flamer-Damage03", "R-Wpn-Cannon-Damage03", "R-Wpn-MG-ROF02",
-	"R-Wpn-Rocket-ROF02", "R-Wpn-Mortar-ROF02", "R-Wpn-Flamer-ROF02",
-	"R-Wpn-Cannon-ROF02", "R-Vehicle-Metals03", "R-Struc-Materials03", 
-	"R-Defense-WallUpgrade03", "R-Sys-Engineering02", "R-Cyborg-Metals03",
-	"R-Wpn-Cannon-Accuracy01", "R-Wpn-Rocket-Accuracy02", "R-Wpn-AAGun-ROF01",
-	"R-Wpn-AAGun-Damage01", "R-Vehicle-Engine03", "R-Wpn-AAGun-Accuracy01",
-	"R-Struc-RprFac-Upgrade01",
+	"R-Wpn-MG-Damage04", "R-Wpn-Rocket-Damage04", "R-Wpn-Mortar-Damage04",
+	"R-Wpn-Flamer-Damage04", "R-Wpn-Cannon-Damage04", "R-Wpn-MG-ROF03",
+	"R-Wpn-Rocket-ROF02", "R-Wpn-Mortar-ROF03", "R-Wpn-Flamer-ROF02",
+	"R-Wpn-Cannon-ROF03", "R-Vehicle-Metals04", "R-Struc-Materials05", 
+	"R-Defense-WallUpgrade05", "R-Cyborg-Metals04", "R-Wpn-AAGun-ROF02",
+	"R-Wpn-AAGun-Damage02", "R-Vehicle-Engine04",
 ];
 
 var colCommanderGroup1;
@@ -64,89 +62,119 @@ function eventDroidBuilt(droid, structure)
 
 function sendInfestedReinforcements()
 {	
+	const coreDroids = [
+		[ // Scavs & crawlers
+			cTempl.vilestinger, // Vile Stingers
+			cTempl.stinger, cTempl.stinger, cTempl.stinger, // Stingers
+			cTempl.basher, cTempl.basher, // Bashers
+			cTempl.boomtick, // Boom Ticks
+			cTempl.infmoncan, cTempl.infmoncan, // Bus Tanks
+			cTempl.infmonhmg,
+			cTempl.infmonmrl,
+			cTempl.infflatmrl, cTempl.infflatmrl, // Flatbeds
+			cTempl.infflatat,
+			cTempl.infminitruck, // MRP Trucks
+			cTempl.infsartruck, // Sarissa Trucks
+			cTempl.infbuscan, cTempl.infbuscan, // School Buses
+			cTempl.firetruck, // Fire Trucks
+			cTempl.infbjeep, cTempl.infbjeep, cTempl.infbjeep, // Jeeps
+			cTempl.infrbjeep, cTempl.infrbjeep, // Rocket Jeeps
+			cTempl.infrbjeep, cTempl.infrbjeep, // Grenade Jeeps
+			cTempl.infbloke,  cTempl.infbloke, cTempl.infbloke, // Blokes
+			cTempl.infkevbloke, cTempl.infkevbloke,
+			cTempl.inflance, // Lances
+			cTempl.infkevlance, cTempl.infkevlance,
+		],
+		[ // Light tanks & cyborgs + some scav stuff
+			cTempl.stinger, cTempl.stinger, cTempl.stinger, // Stingers
+			cTempl.infcybca, cTempl.infcybca, cTempl.infcybca, cTempl.infcybca, // Heavy Gunners
+			cTempl.infcybhg, cTempl.infcybhg, cTempl.infcybhg, // Heavy Machinegunners
+			cTempl.infcolpodt, cTempl.infcolpodt, cTempl.infcolpodt, // MRPs
+			cTempl.infcolhmght, cTempl.infcolhmght, cTempl.infcolhmght, // HMGs
+			cTempl.infcommcant, cTempl.infcommcant, // Medium Cannons
+			cTempl.infcomatt, // Lancers
+			cTempl.infbuggy, cTempl.infbuggy, // Buggies
+			cTempl.infrbuggy, // Rocket Buggies
+			cTempl.inftrike, // Trikes
+			cTempl.infbloke,  cTempl.infbloke, cTempl.infbloke, cTempl.infbloke, cTempl.infbloke, // Blokes
+			cTempl.infkevbloke, cTempl.infkevbloke, cTempl.infkevbloke,
+			cTempl.inflance, cTempl.inflance, cTempl.inflance, // Lances
+			cTempl.infkevlance, cTempl.infkevlance,
+		].push((difficulty >= MEDIUM) ? cTempl.infcohhcant : undefined), // Add a Heavy Cannon tank 
+		[ // Bashers, Stingers, and Infantry
+			cTempl.vilestinger, // Vile Stingers
+			cTempl.stinger, cTempl.stinger, cTempl.stinger, cTempl.stinger, // Stingers
+			cTempl.basher, cTempl.basher, cTempl.basher, cTempl.basher, cTempl.basher, cTempl.basher, // Bashers
+			cTempl.boomtick, cTempl.boomtick, // Boom Ticks
+			cTempl.infbloke,  cTempl.infbloke, cTempl.infbloke, // Blokes
+			cTempl.infkevbloke, cTempl.infkevbloke,
+			cTempl.inflance, // Lances
+		].push((difficulty >= MEDIUM) ? cTempl.infcomtruckt : undefined), // Add an Infested Truck
+	];
 	const CORE_SIZE = 4;
 	const FODDER_SIZE = 12;
-
-	const coreDroids = [
-		cTempl.stinger, cTempl.stinger, cTempl.stinger,
-		cTempl.infbloke,  cTempl.infbloke,
-		cTempl.infkevbloke, cTempl.infkevbloke, cTempl.infkevbloke,
-		cTempl.infminitruck, cTempl.infminitruck,
-		cTempl.infbuggy, cTempl.infbuggy, cTempl.infbuggy,
-		cTempl.infrbuggy, cTempl.infrbuggy, cTempl.infrbuggy,
-		cTempl.infcybhg, cTempl.infcybhg,
-		cTempl.infcybca, cTempl.infcybca,
-		cTempl.infcolpodt, cTempl.infcolpodt,
-		cTempl.basher, cTempl.basher,
-		cTempl.inflance,
-		cTempl.boomtick,
-	];
 
 	// North trench entrances
 	// Choose one to spawn from...
 	const northEntrances = ["infEntry1", "infEntry2"];
-	const northTrenchEntrance = getObject(northEntrances[camRand(northEntrances.length)]);
-	camSendReinforcement(CAM_INFESTED, northTrenchEntrance, camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+	camSendReinforcement(CAM_INFESTED, getObject(camRandFrom(northEntrances)), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 
 	// North east entrance
-	// Choose one to spawn from...
-	camSendReinforcement(CAM_INFESTED, getObject("infEntry3"), camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+	camSendReinforcement(CAM_INFESTED, getObject("infEntry3"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 
 	// South east entrances
+	// Choose one to spawn from...
 	const seEntrances = ["infEntry4", "infEntry5"];
-	const southwestEntrance = getObject(seEntrances[camRand(seEntrances.length)]);
-	camSendReinforcement(CAM_INFESTED, southwestEntrance, camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+	camSendReinforcement(CAM_INFESTED, getObject(camRandFrom(seEntrances)), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 
 	// South canal entrances
+	// Choose one to spawn from...
 	const canalEntrances = ["infEntry6", "infEntry7"];
-	const canalEntrance = getObject(canalEntrances[camRand(canalEntrances.length)]);
-	camSendReinforcement(CAM_INFESTED, canalEntrance, camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+	camSendReinforcement(CAM_INFESTED, getObject(camRandFrom(canalEntrances)), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 
 	// South small trench entrances
+	// Choose one to spawn from...
 	const southEntrances = ["infEntry8", "infEntry9"];
-	const southEntrance = getObject(southEntrances[camRand(southEntrances.length)]);
-	camSendReinforcement(CAM_INFESTED, southEntrance, camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+	camSendReinforcement(CAM_INFESTED, getObject(camRandFrom(southEntrances)), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 
 	// South large trench entrance
-	// Gets weaker when factory is destroyed
 	const STRENCH_FACTORY_DESTROYED = getObject("infFactory") === null;
-	let southTrenchCoreSize = (STRENCH_FACTORY_DESTROYED) ? CORE_SIZE : CORE_SIZE * 2;
 	const southTrenchData = {order: CAM_ORDER_ATTACK, data: {targetPlayer: (STRENCH_FACTORY_DESTROYED) ? undefined : CAM_HUMAN_PLAYER}};
-	camSendReinforcement(CAM_INFESTED, getObject("infEntry10"), camRandInfTemplates(coreDroids, southTrenchCoreSize, FODDER_SIZE), CAM_REINFORCE_GROUND, southTrenchData);
+	camSendReinforcement(CAM_INFESTED, getObject("infEntry10"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND, southTrenchData);
 
 	// Southwest corner entrances
 	// Only if southwest base is destroyed
 	if (camBaseIsEliminated("colMainBase"))
 	{
+		// Choose one to spawn from...
 		const swEntrances = ["infEntry11", "infEntry12", "infEntry13"];
-		const southwestEntrance = getObject(swEntrances[camRand(swEntrances.length)]);
-		camSendReinforcement(CAM_INFESTED, southwestEntrance, camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+		camSendReinforcement(CAM_INFESTED, getObject(camRandFrom(swEntrances)), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 	}
 	
 	// West small trench entrance
 	// Only if the VTOL base is destroyed
 	if (camBaseIsEliminated("colVtolBase"))
 	{
-		camSendReinforcement(CAM_INFESTED, getObject("infEntry14"), camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry14"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 	}
 
 	// Northwest trench entrances
+	// Choose one to spawn from...
 	const northwestEntrances = ["infEntry15", "infEntry17"];
-	const northwestEntrance = getObject(northwestEntrances[camRand(northwestEntrances.length)]);
-	camSendReinforcement(CAM_INFESTED, northwestEntrance, camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+	camSendReinforcement(CAM_INFESTED, getObject(camRandFrom(northwestEntrances)), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 
 	// Northwest small trench entrance
 	// Only if the northwest base is destroyed
 	if (camBaseIsEliminated("colNorthwestBase"))
 	{
-		camSendReinforcement(CAM_INFESTED, getObject("infEntry16"), camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry16"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 	}
 
 	// North small trench entrance
 	// Only if the Infested heavy factory is alive
 	if (getObject("infHvyFactory") !== null)
 	{
-		camSendReinforcement(CAM_INFESTED, getObject("infEntry18"), camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry18"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 	}
 }
 
@@ -225,7 +253,7 @@ function sendCollectiveTransporter()
 	const droids = [];
 	for (let i = 0; i < TRANSPORT_SIZE; i++)
 	{
-		droids.push(droidPool[camRand(droidPool.length)]);
+		droids.push(camRandFrom(droidPool));
 	}
 
 	// Send the transport!

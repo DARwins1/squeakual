@@ -17,7 +17,7 @@ const mis_infestedRes = [
 	"R-Wpn-Mortar-Damage01", "R-Wpn-Flamer-Damage02",
 	"R-Wpn-Cannon-Damage02", "R-Wpn-MG-ROF01", "R-Wpn-Rocket-ROF02",
 	"R-Wpn-Mortar-ROF01", "R-Wpn-Flamer-ROF02", "R-Wpn-Cannon-ROF02",
-	"R-Vehicle-Metals01", "R-Struc-Materials01", "R-Defense-WallUpgrade01",
+	"R-Vehicle-Metals01", "R-Struc-Materials01",
 ];
 
 //Remove infested helicopters.
@@ -41,20 +41,20 @@ function messageAlert()
 }
 
 // Play alerts if the player's stuff gets infected by a Vile Stinger
-function eventObjectTransfer(obj, from)
-{
-	if (from === CAM_HUMAN_PLAYER && obj.player === CAM_INFESTED)
-	{
-		if (obj.type === STRUCTURE)
-		{
-			playSound("pcv623.ogg"); // "Structure Infected"
-		}
-		else if (obj.type === DROID)
-		{
-			playSound("pcv624.ogg"); // "Unit Infected"
-		}
-	}
-}
+// function eventObjectTransfer(obj, from)
+// {
+// 	if (from === CAM_HUMAN_PLAYER && obj.player === CAM_INFESTED)
+// 	{
+// 		if (obj.type === STRUCTURE)
+// 		{
+// 			playSound("pcv623.ogg"); // "Structure Infected"
+// 		}
+// 		else if (obj.type === DROID)
+// 		{
+// 			playSound("pcv624.ogg"); // "Unit Infected"
+// 		}
+// 	}
+// }
 
 // Transition the level into phase two
 // At this point, both ground and air attack waves will stop spawning to give the player some time to reorganize
@@ -461,32 +461,12 @@ function sendCivGroup(entrance)
 }
 
 // Spawn a group of infested at a given entrance
-function sendInfestedGroup(entrance, droids)
+function sendInfestedGroup(entrance, coreDroids)
 {
-	camSendReinforcement(CAM_INFESTED, camMakePos(entrance), randomTemplates(droids), CAM_REINFORCE_GROUND, 
-		{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}}
-	);
-}
-
-// Randomize the provided list of units and tack on a bunch of extra rocket fodder
-// Each individual wave is a bit smaller than in L6, to compensate for there being way more of them
-// Each wave also has a chance to include an extra Vile Stinger
-function randomTemplates(coreUnits)
-{
-	const droids = [];
 	const CORE_SIZE = 2 + camRand(3); // Maximum of 4 core units.
 	const FODDER_SIZE = 8 + camRand(5); // 8 - 12 extra Infested Civilians to the swarm.
 
-	for (let i = 0; i < CORE_SIZE; ++i)
-	{
-		droids.push(coreUnits[camRand(coreUnits.length)]);
-	}
-
-	// Add a bunch of Infested Civilians.
-	for (let i = 0; i < FODDER_SIZE; ++i)
-	{
-		droids.push(cTempl.infciv);
-	}
+	const droids = camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE);
 
 	// Random chance of adding a Vile Stinger, scales with difficulty
 	if (camRand(101) > camChangeOnDiff(80))
@@ -494,7 +474,9 @@ function randomTemplates(coreUnits)
 		droids.push(cTempl.vilestinger);
 	}
 
-	return droids;
+	camSendReinforcement(CAM_INFESTED, camMakePos(entrance), droids, CAM_REINFORCE_GROUND, 
+		{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}}
+	);
 }
 
 // Check if there are any civilians near the LZ, if there are go pick them up with a transport

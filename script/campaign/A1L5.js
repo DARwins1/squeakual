@@ -375,8 +375,8 @@ function eventStartLevel()
 	{
 		// Filter out non-scavenger structures in the SW base
 		const scavStructsSW = camAreaToStructSet("scavBase1").filter((struct) => (
-			struct.stat !== "AASite-QuadMg1" && struct.stat !== "A0TankTrap" && struct.stat !== "GuardTower6" && struct.stat !== "GuardTower3")
-		);
+			camIsScavStruct(struct.stat) && struct.stat !== "A0TankTrap"
+		));
 		// Southwest scav base
 		camManageTrucks(CAM_THE_COLLECTIVE, {
 			label: "scavSWBase",

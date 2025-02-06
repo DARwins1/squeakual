@@ -728,7 +728,7 @@ function __camTacticsTickForGroup(group)
 							list.push(j);
 						}
 					}
-					gi.lastspot = list[camRand(list.length)];
+					gi.lastspot = camRandFrom(list);
 					gi.lastmove = gameTime;
 				}
 			}
@@ -794,7 +794,7 @@ function __camTacticsTickForGroup(group)
 			{
 				// Only target vehicles if there are any in range
 				const tankList = closeBy.filter(function(obj) {
-					return (obj.type === DROID && obj.propulsion !== "CyborgLegs")
+					return (obj.type === DROID && obj.droidType !== DROID_CYBORG && obj.droidType !== DROID_PERSON)
 				});;
 				if (tankList.length > 0)
 				{
@@ -805,7 +805,7 @@ function __camTacticsTickForGroup(group)
 			{
 				// Only target cyborgs if there are any in range
 				const cybList = closeBy.filter(function(obj) {
-					return (obj.type === DROID && obj.propulsion === "CyborgLegs")
+					return (obj.type === DROID && (obj.droidType === DROID_CYBORG || obj.droidType === DROID_PERSON))
 				});;
 				if (cybList.length > 0)
 				{

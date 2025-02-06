@@ -686,6 +686,7 @@ function eventStartLevel()
 	setReinforcementTime(camMinutesToSeconds(2)); // 2 min.
 
 	camAutoReplaceObjectLabel("heliTower");
+	camDisableInfAutoManagement(); // MIS_ORANGE_SCAVS uses the same player number as CAM_INFESTED
 
 	orangeAggrod = false;
 	pinkAggrod = false;

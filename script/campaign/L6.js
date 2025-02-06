@@ -6,7 +6,7 @@ const mis_scavRes = [
 	"R-Wpn-Mortar-Damage02", "R-Wpn-Flamer-Damage02",
 	"R-Wpn-Cannon-Damage03", "R-Wpn-MG-ROF01", "R-Wpn-Rocket-ROF02",
 	"R-Wpn-Mortar-ROF01", "R-Wpn-Flamer-ROF02", "R-Wpn-Cannon-ROF02",
-	"R-Vehicle-Metals01", "R-Struc-Materials01", "R-Defense-WallUpgrade01",
+	"R-Vehicle-Metals01", "R-Struc-Materials01",
 	"R-Wpn-Cannon-Accuracy01", "R-Wpn-Rocket-Accuracy01",
 ];
 const mis_infestedRes = [
@@ -14,7 +14,7 @@ const mis_infestedRes = [
 	"R-Wpn-Mortar-Damage01", "R-Wpn-Flamer-Damage02",
 	"R-Wpn-Cannon-Damage02", "R-Wpn-MG-ROF01", "R-Wpn-Rocket-ROF02",
 	"R-Wpn-Mortar-ROF01", "R-Wpn-Flamer-ROF02", "R-Wpn-Cannon-ROF02",
-	"R-Vehicle-Metals01", "R-Struc-Materials01", "R-Defense-WallUpgrade01",
+	"R-Vehicle-Metals01", "R-Struc-Materials01",
 ];
 
 // Player values
@@ -53,20 +53,20 @@ function messageAlert()
 }
 
 // Play alerts if the player's stuff gets infected by a Vile Stinger
-function eventObjectTransfer(obj, from)
-{
-	if (from === CAM_HUMAN_PLAYER && obj.player === CAM_INFESTED)
-	{
-		if (obj.type === STRUCTURE)
-		{
-			playSound("pcv623.ogg"); // "Structure Infected"
-		}
-		else if (obj.type === DROID)
-		{
-			playSound("pcv624.ogg"); // "Unit Infected"
-		}
-	}
-}
+// function eventObjectTransfer(obj, from)
+// {
+// 	if (from === CAM_HUMAN_PLAYER && obj.player === CAM_INFESTED)
+// 	{
+// 		if (obj.type === STRUCTURE)
+// 		{
+// 			playSound("pcv623.ogg"); // "Structure Infected"
+// 		}
+// 		else if (obj.type === DROID)
+// 		{
+// 			playSound("pcv624.ogg"); // "Unit Infected"
+// 		}
+// 	}
+// }
 
 function camEnemyBaseDetected_infestedHighwayCamp()
 {
@@ -113,17 +113,20 @@ function infestedReinforcements()
 		randValue = camRand(2);
 	}
 
+	const CORE_SIZE = 4 + camRand(3); // Maximum of 6 core units.
+	const FODDER_SIZE = 14 + camRand(3); // 14 - 16 extra Infested Civilians to the swarm.
+
 	if (getObject("westInfestedFactory") !== null && (!camDef(randValue) || randValue == 0))
 	{
 		const westDroids = [cTempl.stinger, cTempl.infbuscan, cTempl.infbuggy, cTempl.infrbuggy, cTempl.infbloke];
-		camSendReinforcement(CAM_INFESTED, camMakePos("wHighwayEntry"), randomTemplates(westDroids), CAM_REINFORCE_GROUND, 
+		camSendReinforcement(CAM_INFESTED, camMakePos("wHighwayEntry"), camRandInfTemplates(westDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND, 
 			{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}}
 		);
 	}
 	if (getObject("northInfestedFactory") !== null && (!camDef(randValue) || randValue == 1))
 	{
 		const northDroids = [cTempl.stinger, cTempl.boomtick, cTempl.infminitruck, cTempl.inftrike, cTempl.infrbuggy, cTempl.inflance];
-		camSendReinforcement(CAM_INFESTED, camMakePos("neRoadEntry"), randomTemplates(northDroids), CAM_REINFORCE_GROUND, 
+		camSendReinforcement(CAM_INFESTED, camMakePos("neRoadEntry"), camRandInfTemplates(northDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND, 
 			{order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}}
 		);
 	}
@@ -253,7 +256,8 @@ function checkAA()
 	// Check the southern base
 	if (!southAADestroyed && enumArea("swScavBase", MIS_CYAN_SCAVS, false).filter(
 		function(object) {
-			return object.name === _("Rusty Cyclone AA Flak Site");
+			// NOTE: We DON'T want to wrap this name with "_()", since the .name field does NOT change with language settings!
+			return object.name === "Rusty Cyclone AA Flak Site";
 		}).length === 0)
 	{
 		southAADestroyed = true;
@@ -263,7 +267,7 @@ function checkAA()
 	// Check the eastern base
 	if (!eastAADestroyed && enumArea("eScavBase", MIS_CYAN_SCAVS, false).filter(
 		function(object) {
-			return object.name === _("Rusty Cyclone AA Flak Site");
+			return object.name === "Rusty Cyclone AA Flak Site";
 		}).length === 0)
 	{
 		eastAADestroyed = true;
@@ -273,7 +277,7 @@ function checkAA()
 	// Check the northwest base
 	if (!nwAADestroyed && enumArea("nwScavFactoryBase", MIS_CYAN_SCAVS, false).filter(
 		function(object) {
-			return object.name === _("Rusty Cyclone AA Flak Site");
+			return object.name === "Rusty Cyclone AA Flak Site";
 		}).length === 0)
 	{
 		nwAADestroyed = true;
@@ -337,17 +341,20 @@ function infestedEndWaves()
 	const wHighwayDroids = [cTempl.stinger, cTempl.infbjeep, cTempl.infrbjeep, cTempl.infminitruck, cTempl.infkevbloke, cTempl.infkevlance];
 	const eHighwayDroids = [cTempl.stinger, cTempl.infbjeep, cTempl.infrbjeep, cTempl.infsartruck, cTempl.infkevbloke, cTempl.infkevlance];
 
-	camSendReinforcement(CAM_INFESTED, camMakePos("nBaseEntry"), randomTemplates(nBaseDroids), CAM_REINFORCE_GROUND);
-	camSendReinforcement(CAM_INFESTED, camMakePos("neRoadEntry"), randomTemplates(neRoadDroids), CAM_REINFORCE_GROUND);
+	const CORE_SIZE = 4 + camRand(3); // Maximum of 6 core units.
+	const FODDER_SIZE = 14 + camRand(3); // 14 - 16 extra Infested Civilians to the swarm.
+
+	camSendReinforcement(CAM_INFESTED, camMakePos("nBaseEntry"), camRandInfTemplates(nBaseDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+	camSendReinforcement(CAM_INFESTED, camMakePos("neRoadEntry"), camRandInfTemplates(neRoadDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 
 	if (numWaves > 5)
 	{
-		camSendReinforcement(CAM_INFESTED, camMakePos("nwRoadEntry"), randomTemplates(nwRoadDroids), CAM_REINFORCE_GROUND);
+		camSendReinforcement(CAM_INFESTED, camMakePos("nwRoadEntry"), camRandInfTemplates(nwRoadDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 	}
 	if (numWaves > 11)
 	{
-		camSendReinforcement(CAM_INFESTED, camMakePos("wHighwayEntry"), randomTemplates(wHighwayDroids), CAM_REINFORCE_GROUND);
-		camSendReinforcement(CAM_INFESTED, camMakePos("eHighwayEntry"), randomTemplates(eHighwayDroids), CAM_REINFORCE_GROUND);
+		camSendReinforcement(CAM_INFESTED, camMakePos("wHighwayEntry"), camRandInfTemplates(wHighwayDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+		camSendReinforcement(CAM_INFESTED, camMakePos("eHighwayEntry"), camRandInfTemplates(eHighwayDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 	}
 	if (numWaves === 16)
 	{
@@ -364,33 +371,6 @@ function infestedEndWaves()
 			{text: "ASSOCIATE: ...Unless you'd rather we call off the transports and leave you behind.", delay: 3, sound: CAM_RCLICK},
 		]);
 	}
-}
-
-// Randomize the provided list of units and tack on a bunch of extra rocket fodder
-function randomTemplates(coreUnits)
-{
-	const droids = [];
-	const CORE_SIZE = 4 + camRand(3); // Maximum of 6 core units.
-	const FODDER_SIZE = 14 + camRand(3); // 14 - 16 extra Infested Civilians to the swarm.
-
-	for (let i = 0; i < CORE_SIZE; ++i)
-	{
-		droids.push(coreUnits[camRand(coreUnits.length)]);
-	}
-
-	// Add a bunch of Infested Civilians.
-	for (let i = 0; i < FODDER_SIZE; ++i)
-	{
-		droids.push(cTempl.infciv);
-	}
-
-	// Chance to add a Vile Stinger on Hard (10%) or Insane (20%)
-	if ((difficulty === HARD && camRand(101) < 10) || (difficulty === INSANE && camRand(101) < 20))
-	{
-		droids.push(cTempl.vilestinger);
-	}
-
-	return droids;
 }
 
 // Change the transport's entry position to be closer to the LZ (and away from the AA)

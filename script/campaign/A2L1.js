@@ -204,7 +204,7 @@ function sendCollectiveTransporter()
 	const droids = [];
 	for (let i = 0; i < TRANSPORT_SIZE; i++)
 	{
-		droids.push(cyborgPool[camRand(cyborgPool.length)]);
+		droids.push(camRandFrom(cyborgPool));
 	}
 
 	// Send the transport!
@@ -698,24 +698,24 @@ function eventStartLevel()
 			if (numAttackDroids > 0) choice.push("attack");
 			if (numArtilleryDroids > 0) choice.push("artillery");
 			if (numVtolDroids > 0) choice.push("vtol");
-			switch (choice[camRand(choice.length)])
+			switch (camRandFrom(choice))
 			{
 				case "attack":
 				{
 					// Choose a random attack template
-					template = attackPool[camRand(attackPool.length)];
+					template = camRandFrom(attackPool);
 					break;
 				}
 				case "artillery":
 				{
 					// Choose a random artillery template
-					template = artPool[camRand(artPool.length)];
+					template = camRandFrom(artPool);
 					break;
 				}
 				case "vtol":
 				{
 					// Choose a random vtol template
-					template = vtolPool[camRand(vtolPool.length)];
+					template = camRandFrom(vtolPool);
 					break;
 				}
 			}

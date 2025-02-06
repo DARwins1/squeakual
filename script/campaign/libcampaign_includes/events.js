@@ -147,6 +147,7 @@ function cam_eventStartLevel()
 	__camSunStats = {};
 	__camBonusPowerGranted = false;
 	__camPreDamageModifier = [];
+	__camDisableFactoryAutoManagement = false;
 	camSetPropulsionTypeLimit(); //disable the propulsion changer by default
 	__camAiPowerReset(); //grant power to the AI
 	camSetFog(); // Set fog to it's default color
@@ -181,7 +182,7 @@ function cam_eventDroidBuilt(droid, structure)
 	{
 		return;
 	}
-	if (droid.player === CAM_INFESTED)
+	if (droid.player === CAM_INFESTED && !__camDisableFactoryAutoManagement)
 	{
 		// If an Infested droid was produced from a factory, immediately set it to target the player
 		if (!camDef(__camInfestedGlobalAttackGroup))
@@ -301,9 +302,9 @@ function cam_eventDestroyed(obj)
 			}
 			else if (obj.weapons[0].id === "InfestedSpade1Trans")
 			{
-				// Summon one last group of Infested on death
+				// Summon one last group of Infested on death__camScavStructList
 				camSendReinforcement(obj.player, camMakePos(obj), 
-					camRandInfTemplates(CAM_INFTRUCK_SUMMON_TEMPLATES, difficulty, CAM_INFTRUCK_FODDER_COUNT), CAM_REINFORCE_GROUND);
+					camRandInfTemplates(__camInfTruckSummonTemplates, difficulty, __CAM_INFTRUCK_FODDER_COUNT), CAM_REINFORCE_GROUND);
 			}
 		}
 	}
@@ -461,7 +462,7 @@ function cam_eventAttacked(victim, attacker)
 		{
 			// Release a group of Infested from the Infested Truck...
 			camSendReinforcement(victim.player, camMakePos(victim), 
-				camRandInfTemplates(CAM_INFTRUCK_SUMMON_TEMPLATES, difficulty, CAM_INFTRUCK_FODDER_COUNT), CAM_REINFORCE_GROUND);
+				camRandInfTemplates(__camInfTruckSummonTemplates, difficulty, __CAM_INFTRUCK_FODDER_COUNT), CAM_REINFORCE_GROUND);
 		}
 	}
 }
@@ -540,6 +541,24 @@ function cam_eventObjectTransfer(obj, from)
 			playSound(snd);
 		}
 		queue("camNexusLaugh", camSecondsToMilliseconds(1.5));
+	}
+	else if (obj.player === CAM_INFESTED)
+	{
+		// Swap to infested structure/droid variant
+		__camInfestObj(obj);
+
+		if (from === CAM_HUMAN_PLAYER)
+		{
+			// Play a sound alerting the player that their stuff's getting stealed
+			if (obj.type === STRUCTURE)
+			{
+				playSound(cam_sounds.infested.structureInfected); // "Structure Infected"
+			}
+			else if (obj.type === DROID)
+			{
+				playSound(cam_sounds.infested.unitInfected); // "Unit Infected"
+			}
+		}
 	}
 }
 

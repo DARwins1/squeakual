@@ -195,7 +195,7 @@ function sendCollectiveTransporter()
 			cTempl.colmrat, // MRA
 			cTempl.colflamt, // Flamer
 			];
-			droids.push(templates[camRand(templates.length)]);
+			droids.push(camRandFrom(templates));
 		}
 	}
 
@@ -450,7 +450,7 @@ function addCollectiveAntiAir()
 function eventStructureBuilt(struct, droid) 
 {
 	if (!chaingunArtifactPlaced && struct.player === CAM_THE_COLLECTIVE && 
-		(struct.name === _("Heavy Machinegun Guard Tower") || struct.name === _("Heavy Machinegun Tower")))
+		(struct.name === "Heavy Machinegun Guard Tower" || struct.name === "Heavy Machinegun Tower"))
 	{
 		addLabel(struct, "colHMGTower");
 		camAddArtifact({"colHMGTower": { tech: "R-Wpn-MG-ROF01" }}); // Chaingun Upgrade
@@ -777,6 +777,7 @@ function eventStartLevel()
 	}
 
 	camAutoReplaceObjectLabel(["heliTower1", "heliTower2"]);
+	camDisableInfAutoManagement(); // MIS_ORANGE_SCAVS uses the same player number as CAM_INFESTED
 
 	// NOTE: The scavenger factories activate pretty quickly on this mission
 	queue("groupPatrol", camSecondsToMilliseconds(5));

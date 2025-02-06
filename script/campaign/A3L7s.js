@@ -4,12 +4,10 @@ include("script/campaign/templates.js");
 const mis_infestedResearch = [
 	"R-Wpn-MG-Damage04", "R-Wpn-Rocket-Damage03", "R-Wpn-Mortar-Damage04", 
 	"R-Wpn-Flamer-Damage03", "R-Wpn-Cannon-Damage03", "R-Wpn-MG-ROF02",
-	"R-Wpn-Rocket-ROF02", "R-Wpn-Mortar-ROF02", "R-Wpn-Flamer-ROF02",
-	"R-Wpn-Cannon-ROF02", "R-Vehicle-Metals03", "R-Struc-Materials03", 
-	"R-Defense-WallUpgrade03", "R-Sys-Engineering02", "R-Cyborg-Metals03",
-	"R-Wpn-Cannon-Accuracy01", "R-Wpn-Rocket-Accuracy02", "R-Wpn-AAGun-ROF01",
-	"R-Wpn-AAGun-Damage01", "R-Vehicle-Engine03", "R-Wpn-AAGun-Accuracy01",
-	"R-Struc-RprFac-Upgrade01",
+	"R-Wpn-Rocket-ROF02", "R-Wpn-Mortar-ROF03", "R-Wpn-Flamer-ROF02",
+	"R-Wpn-Cannon-ROF03", "R-Vehicle-Metals03", "R-Struc-Materials05", 
+	"R-Defense-WallUpgrade05", "R-Cyborg-Metals03", "R-Wpn-AAGun-ROF01", 
+	"R-Wpn-AAGun-Damage01", "R-Vehicle-Engine04",
 ];
 const infEntry1 = {x: 106, y: 1, x2: 111, y2: 2};
 const infEntry2 = {x: 128, y: 1, x2: 133, y2: 2};
@@ -22,54 +20,95 @@ const infEntry8 = {x: 134, y: 133, x2: 137, y2: 134};
 const infEntry9 = {x: 108, y: 133, x2: 116, y2: 134};
 const infEntry10 = {x: 83, y: 133, x2: 87, y2: 134};
 
+function heliAttack()
+{
+	const templates = [cTempl.infhelcan, cTempl.infhelhmg, cTempl.infhelpod];
+	const ext = {
+		limit: 1,
+		alternate: true,
+	};
+	camSetVtolData(CAM_INFESTED, undefined, {x: 193, y: 73}, templates, camChangeOnDiff(camMinutesToMilliseconds(0.75)), undefined, ext);
+}
+
 function sendInfestedReinforcements()
 {	
-	const CORE_SIZE = 4;
-	const FODDER_SIZE = 12;
-
 	const coreDroids = [
-		cTempl.stinger, cTempl.stinger, cTempl.stinger,
-		cTempl.infbloke,  cTempl.infbloke,
-		cTempl.infkevbloke, cTempl.infkevbloke, cTempl.infkevbloke,
-		cTempl.infminitruck, cTempl.infminitruck,
-		cTempl.infbuggy, cTempl.infbuggy, cTempl.infbuggy,
-		cTempl.infrbuggy, cTempl.infrbuggy, cTempl.infrbuggy,
-		cTempl.infcybhg, cTempl.infcybhg,
-		cTempl.infcybca, cTempl.infcybca,
-		cTempl.infcolpodt, cTempl.infcolpodt,
-		cTempl.basher, cTempl.basher,
-		cTempl.inflance,
-		cTempl.boomtick,
+		[ // Scavs & crawlers
+			cTempl.vilestinger, // Vile Stingers
+			cTempl.stinger, cTempl.stinger, cTempl.stinger, // Stingers
+			cTempl.basher, cTempl.basher, // Bashers
+			cTempl.boomtick, // Boom Ticks
+			cTempl.infmoncan, cTempl.infmoncan, // Bus Tanks
+			cTempl.infmonhmg,
+			cTempl.infmonmrl,
+			cTempl.infflatmrl, // Flatbeds
+			cTempl.infflatat,
+			cTempl.infminitruck, // MRP Trucks
+			cTempl.infsartruck, // Sarissa Trucks
+			cTempl.infbuscan, cTempl.infbuscan, // School Buses
+			cTempl.firetruck, // Fire Trucks
+			cTempl.infbjeep, cTempl.infbjeep, cTempl.infbjeep, // Jeeps
+			cTempl.infrbjeep, cTempl.infrbjeep, // Rocket Jeeps
+			cTempl.infrbjeep, cTempl.infrbjeep, // Grenade Jeeps
+			cTempl.infbuggy, // Buggies
+			cTempl.infrbuggy, // Rocket Buggies
+			cTempl.infbloke,  cTempl.infbloke, cTempl.infbloke, // Blokes
+			cTempl.infkevbloke, cTempl.infkevbloke,
+			cTempl.inflance, // Lances
+			cTempl.infkevlance, cTempl.infkevlance,
+		],
+		[ // Light tanks & cyborgs + some scav stuff
+			cTempl.stinger, cTempl.stinger, cTempl.stinger, // Stingers
+			cTempl.infcybca, cTempl.infcybca, cTempl.infcybca, // Heavy Gunners
+			cTempl.infcybhg, cTempl.infcybhg, // Heavy Machinegunners
+			cTempl.infcolpodt, cTempl.infcolpodt, // MRPs
+			cTempl.infcolhmght, cTempl.infcolhmght, // HMGs
+			cTempl.infcommcant, // Medium Cannons
+			cTempl.infcomatt, // Lancers
+			cTempl.infbuggy, cTempl.infbuggy, cTempl.infbuggy, // Buggies
+			cTempl.infrbuggy, cTempl.infrbuggy, // Rocket Buggies
+			cTempl.inftrike, cTempl.inftrike, // Trikes
+			cTempl.infbloke,  cTempl.infbloke, cTempl.infbloke, cTempl.infbloke, cTempl.infbloke, // Blokes
+			cTempl.infkevbloke, cTempl.infkevbloke, cTempl.infkevbloke,
+			cTempl.inflance, cTempl.inflance, cTempl.inflance, // Lances
+			cTempl.infkevlance, cTempl.infkevlance,
+		],
+		[ // Bashers, Stingers, and Infantry
+			cTempl.vilestinger, // Vile Stingers
+			cTempl.stinger, cTempl.stinger, cTempl.stinger, cTempl.stinger, // Stingers
+			cTempl.basher, cTempl.basher, cTempl.basher, cTempl.basher, cTempl.basher, cTempl.basher, // Bashers
+			cTempl.boomtick, // Boom Ticks
+			cTempl.infbloke,  cTempl.infbloke, cTempl.infbloke, // Blokes
+			cTempl.infkevbloke, cTempl.infkevbloke,
+			cTempl.inflance, // Lances
+		],
 	];
+	const CORE_SIZE = 2;
+	const FODDER_SIZE = 8;
 
 	// North trench entrances
 	// Choose one to spawn from...
 	const northEntrances = [infEntry1, infEntry2];
-	const northTrenchEntrance = northEntrances[camRand(northEntrances.length)];
-	camSendReinforcement(CAM_INFESTED, northTrenchEntrance, camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+	camSendReinforcement(CAM_INFESTED, camRandFrom(northEntrances), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 
 	// North east entrances
 	// Choose one to spawn from...
 	const neEntrances = [infEntry3, infEntry4];
-	const northeastEntrance = neEntrances[camRand(neEntrances.length)];
-	camSendReinforcement(CAM_INFESTED, northeastEntrance, camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+	camSendReinforcement(CAM_INFESTED, camRandFrom(neEntrances), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 
 	// South east entrances
 	// Choose one to spawn from...
 	const seEntrances = [infEntry5, infEntry6];
-	const southeastEntrance = seEntrances[camRand(seEntrances.length)];
-	camSendReinforcement(CAM_INFESTED, southeastEntrance, camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+	camSendReinforcement(CAM_INFESTED, camRandFrom(seEntrances), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 
 	// South canal entrances
 	const canalEntrances = [infEntry7, infEntry8];
-	const canalEntrance = canalEntrances[camRand(canalEntrances.length)];
-	camSendReinforcement(CAM_INFESTED, canalEntrance, camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+	camSendReinforcement(CAM_INFESTED, camRandFrom(canalEntrances), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 
 	// South west trench entrances
 	// Choose one to spawn from...
 	const swEntrances = [infEntry9, infEntry10];
-	const southwestEntrance = swEntrances[camRand(swEntrances.length)];
-	camSendReinforcement(CAM_INFESTED, southwestEntrance, camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+	camSendReinforcement(CAM_INFESTED, camRandFrom(swEntrances), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 }
 
 function eventStartLevel()
@@ -109,6 +148,7 @@ function eventStartLevel()
 
 	camCompleteRequiredResearch(mis_infestedResearch, CAM_INFESTED);
 	setTimer("sendInfestedReinforcements", camChangeOnDiff(camSecondsToMilliseconds(115)));
+	heliAttack();
 
 	// Most Infested units start out pre-damaged
 	camSetPreDamageModifier(CAM_INFESTED, [50, 80], [60, 90], CAM_INFESTED_PREDAMAGE_EXCLUSIONS);

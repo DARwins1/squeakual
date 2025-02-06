@@ -43,6 +43,22 @@ function camRand(max)
 	camDebug("Max should be positive");
 }
 
+//;; ## camRandFrom(array)
+//;;
+//;; Returns a random element from the given array.
+//;;
+//;; @param {number} max
+//;; @returns {number}
+//;;
+function camRandFrom(array)
+{
+	if (array.length > 0)
+	{
+		return array[camRand(array.length)];
+	}
+	camDebug("Array has no elements!");
+}
+
 //;; ## camCallOnce(functionName)
 //;;
 //;; Call a function by name, but only if it has not been called yet.
@@ -1173,7 +1189,7 @@ function camFactoryCanProduceTemplate(template, factory)
 	if (factory.modules < bodySize) return false;
 
 	// Next, do a check to make sure scavenger factories can't produce non-scavenger units
-	if (factory.name === _("Scavenger Factory") || factory.name === _("Infested Scavenger Factory"))
+	if (factory.name === "Scavenger Factory" || factory.name === "Infested Scavenger Factory")
 	{
 		// NOTE: We only need to check light bodies here, since larger bodies will automatically fail the previous check!
 		if (template.body === "Body4ABT" || template.body === "Body1REC" || template.body === "Body2SUP" || template.body === "Body3MBT")
@@ -1296,14 +1312,14 @@ function camRandInfTemplates(coreTemplates, coreSize, fodderSize)
 	// Add core templates
 	for (let i = 0; i < coreSize; ++i)
 	{
-		droids.push(coreTemplates[camRand(coreTemplates.length)]);
+		droids.push(camRandFrom(coreTemplates));
 	}
 
 	// Add Infested Civilians.
 	const infCiv = [cTempl.infciv, cTempl.infciv2]
 	for (let i = 0; i < fodderSize; ++i)
 	{
-		droids.push(infCiv[camRand(2)]);
+		droids.push(camRandFrom(infCiv));
 	}
 
 	return droids;
@@ -1466,7 +1482,7 @@ function camSetDroidExperience(droid)
 	}
 
 	const expRange = __camGetExpRangeLevel();
-	let exp = expRange[camRand(expRange.length)];
+	let exp = camRandFrom(expRange);
 
 	if (droid.droidType === DROID_COMMAND || droid.droidType === DROID_SENSOR)
 	{
@@ -1538,4 +1554,87 @@ function __camWeatherCycle()
 			setWeather(WEATHER_SNOW);
 			return;
     }
+}
+
+// Replaces structures and components with "Infested" ones.
+// Called when something is absorbed by the Infested.
+function __camInfestObj(obj)
+{
+	if (obj.type === DROID)
+	{
+		// Droid absorbed; check if it is an illegal type:
+		// Constructors (Trucks & Engineers)
+		// Repair Turrets
+		// Sensors
+		// VTOLs
+		// Weapons with more range than a Mortar (18 tiles)
+
+		// All other units are acceptable...
+		if (obj.droidType === DROID_CONSTRUCT 
+			|| obj.droidType === DROID_REPAIR 
+			|| obj.droidType === DROID_SENSOR 
+			|| obj.isVTOL
+			|| (obj.droidType === DROID_WEAPON && camGetCompStats(obj.weapons[0].fullname, "Weapon").MaxRange > (18 * 128)) // NOTE: "MaxRange" is correct here!
+			)
+		{
+			// Illegal Infested unit; blow it up!
+			camSafeRemoveObject(obj, true);
+		}
+		else
+		{
+			// Let the research handle its components
+			completeResearch("Script-Infest", CAM_INFESTED, true);
+
+			// Add the unit to the Infested global attack group
+			if (!camDef(__camInfestedGlobalAttackGroup))
+			{
+				__camInfestedGlobalAttackGroup = camMakeGroup(obj);
+				camManageGroup(__camInfestedGlobalAttackGroup, CAM_ORDER_ATTACK, {removable: false, targetPlayer: CAM_HUMAN_PLAYER})
+			}
+			else
+			{
+				groupAdd(__camInfestedGlobalAttackGroup, obj);
+			}
+		}
+	}
+	else if (obj.type === STRUCTURE)
+	{
+		// Structure absorbed; replace it with an infested variant if applicable
+		const structId = camGetCompStats(obj.name, "Building").Id;
+
+		let infStructId;
+		if (structId === "A0PowerGenerator")
+		{
+			// Special case for Power Generators
+			infStructId = "InfA0PowerGenerator";
+		}
+		else if (structId === "LookOutTower")
+		{
+			// Special case for Lookout Towers
+			infStructId = "InfestedLookOutTower";
+		}
+		else
+		{
+			infStructId = "Inf" + structId.replace(/A0BaBa|A0/, ""); // Fancy-pants regular expression
+		}
+
+		if (camDef(camGetCompNameFromId(infStructId, "Building")))
+		{
+			// Infested variant exists; remove this object and replace it with a new structure
+			const structInfo = {
+				x: obj.x * 128,
+				y: obj.y * 128,
+				direction: obj.direction
+			};
+
+			camSafeRemoveObject(obj, false);
+			__camPreDamageStruct(addStructure(infStructId, CAM_INFESTED, structInfo.x, structInfo.y, structInfo.direction));
+		}
+		else
+		{
+			// No Infested variant exists; blow up this structure!
+			camSafeRemoveObject(obj, true);
+			return; // Nothing else to do...
+		}
+	}
 }

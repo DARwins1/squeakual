@@ -758,19 +758,19 @@ function sendInfestedReinforcements()
 
 		if (RAND_NUM <= 7)
 		{
-			droids.push(fodderTemplates[camRand(fodderTemplates.length)]);
+			droids.push(camRandFrom(fodderTemplates));
 		}
 		else if (RAND_NUM >= 8 && RAND_NUM <= 14)
 		{
-			droids.push(mildTemplates[camRand(mildTemplates.length)]);
+			droids.push(camRandFrom(mildTemplates));
 		}
 		else if (RAND_NUM >= 15 && RAND_NUM <= 24)
 		{
-			droids.push(spicyTemplates[camRand(spicyTemplates.length)]);
+			droids.push(camRandFrom(spicyTemplates));
 		}
 		else
 		{
-			droids.push(hotTemplates[camRand(hotTemplates.length)]);
+			droids.push(camRandFrom(hotTemplates));
 		}
 	}
 

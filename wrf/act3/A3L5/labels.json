@@ -13,7 +13,7 @@
 
 	"position_2": {
 		"label": "patrolPos1",
-		"pos": [5348, 1945]
+		"pos": [3912, 2180]
 	},
 
 
@@ -94,65 +94,65 @@
 
 
 	"area_4": {
-		"label": "colArtiGroup",
-		"pos1": [640, 1664],
-		"pos2": [1280, 1920]
-	},
-
-
-	"area_5": {
 		"label": "infEntry1",
 		"pos1": [768, 7808],
 		"pos2": [1280, 8064]
 	},
 
 
-	"area_6": {
+	"area_5": {
 		"label": "infEntry2",
 		"pos1": [128, 5120],
 		"pos2": [384, 5632]
 	},
 
 
-	"area_7": {
+	"area_6": {
 		"label": "infEntry3",
 		"pos1": [5760, 128],
 		"pos2": [6272, 384]
 	},
 
 
-	"area_8": {
+	"area_7": {
 		"label": "blockadeStructs",
 		"pos1": [5760, 384],
 		"pos2": [6272, 768]
 	},
 
 
-	"area_9": {
+	"area_8": {
 		"label": "infBase1",
 		"pos1": [384, 6784],
 		"pos2": [1536, 7808]
 	},
 
 
-	"area_10": {
+	"area_9": {
 		"label": "infBase2",
 		"pos1": [384, 5120],
 		"pos2": [1280, 6144]
 	},
 
 
-	"area_11": {
+	"area_10": {
 		"label": "infBase3",
 		"pos1": [3840, 3328],
 		"pos2": [6784, 5888]
 	},
 
 
-	"area_12": {
+	"area_11": {
 		"label": "compromiseZone",
 		"pos1": [6400, 6528],
 		"pos2": [7936, 7936]
+	},
+
+
+	"area_12": {
+		"label": "colArtiGroup",
+		"pos1": [640, 1536],
+		"pos2": [1280, 1920]
 	},
 
 
