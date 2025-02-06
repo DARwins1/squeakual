@@ -208,7 +208,7 @@
         "propulsion": "BaBaProp",
         "type": "DROID",
         "weapons": [
-            "BabaRocket"
+            "InfBabaRocket"
         ]
     },
     "InfTrike": {
@@ -238,7 +238,7 @@
         "propulsion": "BaBaProp",
         "type": "DROID",
         "weapons": [
-            "RustCannon1Mk1"
+            "InfRustCannon1Mk1"
         ]
     },
     "InfFireCan": {
@@ -248,7 +248,7 @@
         "propulsion": "BaBaProp",
         "type": "DROID",
         "weapons": [
-            "RustCannon1Mk1"
+            "InfRustCannon1Mk1"
         ]
     },
     "InfFireTruck": {
@@ -258,7 +258,7 @@
         "propulsion": "BaBaProp",
         "type": "DROID",
         "weapons": [
-            "RustFlame1Mk1"
+            "InfRustFlame1Mk1"
         ]
     },
     "BabaBusCan": {
@@ -355,7 +355,7 @@
         "propulsion": "BaBaProp",
         "type": "DROID",
         "weapons": [
-            "BabaMiniMortar"
+            "InfBabaMiniMortar"
         ]
     },
     "BarbarianBuggy": {
@@ -600,7 +600,7 @@
         "propulsion": "tracked01",
         "type": "DROID",
         "weapons": [
-            "Cannon375mmMk1"
+            "InfCannon375mmMk1"
         ]
     },
     "INF-H-HvyCan-Tracks-Broken": {
@@ -610,7 +610,7 @@
         "propulsion": "tracked01",
         "type": "DROID",
         "weapons": [
-            "Cannon375mmMk1"
+            "InfCannon375mmMk1"
         ]
     },
     "CO-H-QuadBofAA-T": {
@@ -882,7 +882,7 @@
         "propulsion": "tracked01",
         "type": "DROID",
         "weapons": [
-            "Rocket-LtA-T"
+            "InfRocket-LtA-T"
         ]
     },
     "INF-M-LTAT-T-Broken": {
@@ -892,7 +892,7 @@
         "propulsion": "tracked01",
         "type": "DROID",
         "weapons": [
-            "Rocket-LtA-T"
+            "InfRocket-LtA-T"
         ]
     },
     "CO-M-LTAT-Hover": {
@@ -932,7 +932,7 @@
         "propulsion": "tracked01",
         "type": "DROID",
         "weapons": [
-            "Cannon2A-TMk1"
+            "InfCannon2A-TMk1"
         ]
     },
     "INF-M-MedCan-Tracks-Broken": {
@@ -942,7 +942,7 @@
         "propulsion": "tracked01",
         "type": "DROID",
         "weapons": [
-            "Cannon2A-TMk1"
+            "InfCannon2A-TMk1"
         ]
     },
     "CO-M-ROTMG-T": {

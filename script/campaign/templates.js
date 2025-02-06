@@ -34,21 +34,21 @@ infbloke: { body: "InfestedScavBody", prop: "BaBaLegs", weap: "BabaMG" }, // Inf
 infkevbloke: { body: "InfestedScavBody-Kev", prop: "BaBaLegs", weap: "BabaMG" }, // Infested Armored bloke
 inflance: { body: "InfestedLanceBody", prop: "BaBaLegs", weap: "BabaLance" }, // Infested rocket scav
 infkevlance: { body: "InfestedLanceBody-Kev", prop: "BaBaLegs", weap: "BabaLance" }, // Infested Armored rocket scav
-infhelcan: { body: "InfestedScavengerChopper", prop: "Helicopter", weap: "RustCannon1-VTOL" }, // Infested Light Cannon Helicopter
-infhelhmg: { body: "InfestedScavengerChopper", prop: "Helicopter", weap: "RustMG3-VTOL" }, // Infested HMG Helicopter
-infmoncan: { body: "InfestedMonsterBus", prop: "tracked01", weap: "RustCannon1Mk1" }, // Infested Light Cannon Monster Bus Tank
-infmonhmg: { body: "InfestedMonsterBus", prop: "tracked01", weap: "RustMG3Mk1" }, // Infested HMG Monster Bus Tank
-infmonmrl: { body: "InfestedMonsterBus", prop: "tracked01", weap: "RustRocket-MRL" }, // Infested MRL Monster Bus Tank
-infmonsar: { body: "InfestedMonsterBus", prop: "tracked01", weap: "RustRocket-LtA-TMk1" }, // Infested Sarissa Monster Bus Tank
-infbuscan: { body: "InfestedBusBody", prop: "BaBaProp", weap: "RustCannon1Mk1" }, // Infested Light Cannon school bus
-inffiretruck: { body: "InfestedFireBody", prop: "BaBaProp", weap: "RustFlame1Mk1" }, // Infested Flamer firetruck
-infminitruck: { body: "InfestedFireBody", prop: "BaBaProp", weap: "RustRocket-Pod" }, // Infested Mini-Rocket Pod firetruck
-infsartruck: { body: "InfestedFireBody", prop: "BaBaProp", weap: "RustRocket-LtA-TMk1" }, // Infested Sarissa firetruck
+infhelcan: { body: "InfestedScavengerChopper", prop: "Helicopter", weap: "InfRustCannon1-VTOL" }, // Infested Light Cannon Helicopter
+infhelhmg: { body: "InfestedScavengerChopper", prop: "Helicopter", weap: "InfRustMG3-VTOL" }, // Infested HMG Helicopter
+infmoncan: { body: "InfestedMonsterBus", prop: "tracked01", weap: "InfRustCannon1Mk1" }, // Infested Light Cannon Monster Bus Tank
+infmonhmg: { body: "InfestedMonsterBus", prop: "tracked01", weap: "InfRustMG3Mk1" }, // Infested HMG Monster Bus Tank
+infmonmrl: { body: "InfestedMonsterBus", prop: "tracked01", weap: "InfRustRocket-MRL" }, // Infested MRL Monster Bus Tank
+infmonsar: { body: "InfestedMonsterBus", prop: "tracked01", weap: "InfRustRocket-LtA-TMk1" }, // Infested Sarissa Monster Bus Tank
+infbuscan: { body: "InfestedBusBody", prop: "BaBaProp", weap: "InfRustCannon1Mk1" }, // Infested Light Cannon school bus
+inffiretruck: { body: "InfestedFireBody", prop: "BaBaProp", weap: "InfRustFlame1Mk1" }, // Infested Flamer firetruck
+infminitruck: { body: "InfestedFireBody", prop: "BaBaProp", weap: "InfRustRocket-Pod" }, // Infested Mini-Rocket Pod firetruck
+infsartruck: { body: "InfestedFireBody", prop: "BaBaProp", weap: "InfRustRocket-LtA-TMk1" }, // Infested Sarissa firetruck
 inftrike: { body: "Infestedtrike01", prop: "BaBaProp", weap: "BabaTrikeMG" }, // Infested Trike
 infbuggy: { body: "Infestedsml-buggy01", prop: "BaBaProp", weap: "BabaBuggyMG" }, // Infested Buggy
-infrbuggy: { body: "InfestedRKbuggy01", prop: "BaBaProp", weap: "BabaRocket" }, // Infested Rocket Buggy
+infrbuggy: { body: "InfestedRKbuggy01", prop: "BaBaProp", weap: "InfBabaRocket" }, // Infested Rocket Buggy
 infbjeep: { body: "InfestedJeepBody", prop: "BaBaProp", weap: "InfJeepMG" }, // Infested Jeep
-infrbjeep: { body: "InfestedRKJeepBody", prop: "BaBaProp", weap: "BabaRocket" }, // Infested Rocket Jeep
+infrbjeep: { body: "InfestedRKJeepBody", prop: "BaBaProp", weap: "InfBabaRocket" }, // Infested Rocket Jeep
 stinger: { body: "CrawlerBody", prop: "CyborgLegs", weap: "StingerTail" }, // Stinger Crawler
 vilestinger: { body: "CrawlerBody", prop: "CyborgLegs", weap: "VileStingerTail" }, // Vile Stinger Crawler
 boomtick: { body: "BoomTickBody", prop: "BoomTickLegs", weap: "BoomTickSac" }, // Boom Tick Crawler
@@ -197,11 +197,11 @@ monmcan: { body: "MonsterBus", prop: "tracked01", weap: "RustCannon2A-TMk1" }, /
 crane: { body: "ScavCraneBody", prop: "HalfTrack", weap: "ScavCrane" }, // Scavenger Crane (Constructor)
 
 // Infested Units:
-infgbjeep: { body: "InfestedRKJeepBody", prop: "BaBaProp", weap: "BabaMiniMortar" }, // Infested Grenade Jeep
-infmonlan: { body: "InfestedMonsterBus", prop: "tracked01", weap: "RustRocket-LtA-T" }, // Infested Lancer Monster Bus Tank
-infflatmrl: { body: "InfScavTruckBody", prop: "BaBaProp", weap: ["RustRocket-Pod", "RustRocket-MRL"] }, // Infested MRA Flatbed Truck
-infflatat: { body: "InfScavTruckBody", prop: "BaBaProp", weap: ["RustRocket-Pod", "RustRocket-LtA-T"] }, // Infested Lancer Flatbed Truck
-infhelpod: { body: "InfScavengerHvyChopper", prop: "Helicopter", weap: "RustRocket-Pod-VTOL" }, // Infested MRP Helicopter
+infgbjeep: { body: "InfestedRKJeepBody", prop: "BaBaProp", weap: "InfBabaMiniMortar" }, // Infested Grenade Jeep
+infmonlan: { body: "InfestedMonsterBus", prop: "tracked01", weap: "InfRustRocket-LtA-T" }, // Infested Lancer Monster Bus Tank
+infflatmrl: { body: "InfScavTruckBody", prop: "BaBaProp", weap: ["InfRustRocket-Pod", "InfRustRocket-MRL"] }, // Infested MRA Flatbed Truck
+infflatat: { body: "InfScavTruckBody", prop: "BaBaProp", weap: ["InfRustRocket-Pod", "InfRustRocket-LtA-T"] }, // Infested Lancer Flatbed Truck
+infhelpod: { body: "InfScavengerHvyChopper", prop: "Helicopter", weap: "InfRustRocket-Pod-VTOL" }, // Infested MRP Helicopter
 
 infcybmg: { body: "CyborgLightBody", prop: "CyborgLegs", weap: "InfCyborgChaingun" }, // Infested Machinegunner Cyborg
 infcybhg: { body: "CyborgLightBody", prop: "CyborgLegs", weap: "InfCyborgHeavyChaingun" }, // Infested Heavy Machinegunner Cyborg
@@ -217,15 +217,15 @@ infscymc: { body: "CyborgHeavyBody", prop: "CyborgLegs", weap: "InfCyb-Hvywpn-Mc
 infscyhc: { body: "CyborgHeavyBody", prop: "CyborgLegs", weap: "InfCyb-Hvywpn-HPV" }, // Infested Super HPC Cyborg
 infscyac: { body: "CyborgHeavyBody", prop: "CyborgLegs", weap: "InfCyb-Hvywpn-Acannon" }, // Infested Super Auto-Cannon Cyborg
 
-infcolcanht: { body: "InfBody2SUP", prop: "HalfTrack", weap: "Cannon1Mk1" }, // Infested Light Cannon Leopard Half-tracks
-infcolpodt: { body: "InfBody2SUP", prop: "tracked01", weap: "Rocket-Pod" }, // Infested Mini-Rocket Pod Leopard Tracks
-infcolhmght: { body: "InfBody2SUP", prop: "HalfTrack", weap: "MG3Mk1" }, // Infested Heavy Machinegun Leopard Half-tracks
-infcomhmgt: { body: "InfBody6SUPP", prop: "tracked01", weap: "MG3Mk1" }, // Infested Heavy Machinegun Panther Tracks
-infcomatt: { body: "InfBody6SUPP", prop: "tracked01", weap: "Rocket-LtA-T" }, // Infested Lancer Panther Tracks
-infcommcant: { body: "InfBody6SUPP", prop: "tracked01", weap: "Cannon2A-TMk1" }, // Infested Medium Cannon Panther Tracks
+infcolcanht: { body: "InfBody2SUP", prop: "HalfTrack", weap: "InfCannon1Mk1" }, // Infested Light Cannon Leopard Half-tracks
+infcolpodt: { body: "InfBody2SUP", prop: "tracked01", weap: "InfRocket-Pod" }, // Infested Mini-Rocket Pod Leopard Tracks
+infcolhmght: { body: "InfBody2SUP", prop: "HalfTrack", weap: "InfMG3Mk1" }, // Infested Heavy Machinegun Leopard Half-tracks
+infcomhmgt: { body: "InfBody6SUPP", prop: "tracked01", weap: "InfMG3Mk1" }, // Infested Heavy Machinegun Panther Tracks
+infcomatt: { body: "InfBody6SUPP", prop: "tracked01", weap: "InfRocket-LtA-T" }, // Infested Lancer Panther Tracks
+infcommcant: { body: "InfBody6SUPP", prop: "tracked01", weap: "InfCannon2A-TMk1" }, // Infested Medium Cannon Panther Tracks
 infcomtruckht: { body: "InfBody6SUPP", prop: "HalfTrack", weap: "InfestedSpade1Trans" }, // Infested Truck Panther Half-tracks
 infcomtruckt: { body: "InfBody6SUPP", prop: "tracked01", weap: "InfestedSpade1Trans" }, // Infested Truck Panther Tracks
-infcohhcant: { body: "InfBody9REC", prop: "tracked01", weap: "Cannon375mmMk1" }, // Infested Heavy Cannon Tiger Tracks
+infcohhcant: { body: "InfBody9REC", prop: "tracked01", weap: "InfCannon375mmMk1" }, // Infested Heavy Cannon Tiger Tracks
 
 basher: { body: "BasherBody", prop: "BoomTickLegs", weap: "BasherMelee" }, // Basher
 
