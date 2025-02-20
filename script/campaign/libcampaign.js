@@ -197,7 +197,7 @@ const __cam_act3Levels = [
 	"A3L5S", "A3L5", // ARMS RACE
 	"A3L6", // TIGER'S DEN
 	"A3L7S", "A3L7", // X-FACTOR
-	"A3L8", // GATECRASHER
+	"A3L8", // VICTORY HOUR
 	"A3L9", // PRECIPICE
 ]; // 9 missions
 const __cam_act4Levels = [
@@ -325,6 +325,7 @@ const cam_sounds = {
 	powerTransferred: "power-transferred.ogg",
 	laserSatelliteFiring: "pcv650.ogg",
 	artifactRecovered: "pcv352.ogg",
+	tracker: "pcv657.ogg", // Used to place a red dot on the minimap
 	soundIdentifier: ".ogg", //Used by video.js to check for sound before a video.
 };
 

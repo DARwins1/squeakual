@@ -9,7 +9,7 @@ const mis_collectiveResearch = [
 	"R-Wpn-Cannon-ROF02", "R-Vehicle-Metals04", "R-Struc-Materials04", 
 	"R-Defense-WallUpgrade04", "R-Sys-Engineering02", "R-Cyborg-Metals04",
 	"R-Wpn-Cannon-Accuracy02", "R-Wpn-Rocket-Accuracy03", "R-Wpn-AAGun-ROF01",
-	"R-Wpn-AAGun-Damage01", "R-Vehicle-Engine05", "R-Wpn-AAGun-Accuracy01",
+	"R-Wpn-AAGun-Damage02", "R-Vehicle-Engine05", "R-Wpn-AAGun-Accuracy01",
 	"R-Struc-RprFac-Upgrade02",
 ];
 const mis_infestedResearch = [
@@ -528,6 +528,7 @@ function eventStartLevel()
 	camMakeRefillableGroup(undefined, {
 		templates: [
 			cTempl.comhmortht, cTempl.comhmortht, cTempl.comhmortht, cTempl.comhmortht, // 4 Bombards
+			cTempl.cohhowt, cTempl.cohhowt, // 2 Ripple Rockets
 		],
 		factories: ["colFactory2"],
 		obj: "colSensor"

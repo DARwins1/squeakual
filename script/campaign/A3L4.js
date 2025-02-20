@@ -9,7 +9,7 @@ const mis_collectiveResearch = [
 	"R-Wpn-Cannon-ROF02", "R-Vehicle-Metals04", "R-Struc-Materials04", 
 	"R-Defense-WallUpgrade04", "R-Sys-Engineering02", "R-Cyborg-Metals04",
 	"R-Wpn-Cannon-Accuracy02", "R-Wpn-Rocket-Accuracy03", "R-Wpn-AAGun-ROF01",
-	"R-Wpn-AAGun-Damage01", "R-Vehicle-Engine05", "R-Wpn-AAGun-Accuracy01",
+	"R-Wpn-AAGun-Damage02", "R-Vehicle-Engine05", "R-Wpn-AAGun-Accuracy01",
 	"R-Struc-RprFac-Upgrade01",
 ];
 const mis_infestedResearch = [
@@ -318,7 +318,7 @@ function sendCollectiveSupportWave()
 			cTempl.comhmortht, cTempl.comhmortht, cTempl.comhmortht, cTempl.comhmortht, cTempl.comhmortht, cTempl.comhmortht, // 6 Bombards
 			cTempl.comatht, cTempl.comatht, // 2 Lancers
 		];
-		if (supportWaveIdx >= 5 || difficulty >= HARD) sensorEscortDroids = sensorEscortDroids.concat([cTempl.cohhowt, cTempl.cohhowt]); // Add Howitzers
+		if (supportWaveIdx >= 5 || difficulty >= HARD) sensorEscortDroids = sensorEscortDroids.concat([cTempl.cohript, cTempl.cohript]); // Add Ripple Rockets
 		if (supportWaveIdx >= 5) sensorEscortDroids = camArrayReplaceWith(sensorEscortDroids, cTempl.comatht, cTempl.comhatht); // Replace with Tank Killers
 		const colSensorGroup = camSendReinforcement(CAM_THE_COLLECTIVE, chosenEntrance, sensorEscortDroids, CAM_REINFORCE_GROUND);
 		camManageGroup(colSensorGroup, CAM_ORDER_FOLLOW, {leader: sensorLabel, suborder: CAM_ORDER_ATTACK});

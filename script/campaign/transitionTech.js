@@ -198,6 +198,7 @@ const camA3L7AllyResearch = camAct3StartResearch.concat([
 	"R-Defense-RotMor", "R-Wpn-Mortar-ROF03", 
 	"R-Wpn-Rocket02-MRLHvy", // Artifact
 	"R-Defense-MRLHvy",
+	"R-Wpn-Bomb-Damage01", // Artifact
 	// A3L3
 	"R-Wpn-MG4", // Artifact
 	"R-Cyborg-Wpn-RotMG", "R-Defense-RotMG", "R-Defense-Wall-RotMg",
@@ -228,7 +229,7 @@ const camA3L9EnemyResearch = camA3L7AllyResearch.concat([
 	// A3L7
 	"R-Wpn-HowitzerMk1", // Artifact
 	"R-Defense-Howitzer", "R-Wpn-Howitzer-Damage01", "R-Wpn-Howitzer-ROF01",
-	"R-Wpn-Mortar-Damage05", "R-Wpn-Bomb-Damage01",
+	"R-Wpn-Mortar-Damage05", ,
 	"R-Wpn-AAGun-Damage02", // Artifact
 	"R-Wpn-MG-ROF03", // Artifact
 	"R-Wpn-MG-Damage06",

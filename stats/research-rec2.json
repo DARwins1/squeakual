@@ -5614,12 +5614,12 @@
     "R-Wpn-Bomb-Damage01": {
         "iconID": "IMAGE_RES_WEAPONTECH",
         "id": "R-Wpn-Bomb-Damage01",
+        "keyTopic": 1,
         "imdName": "trlvtlhe.PIE",
         "msgName": "RES_W_BAC1",
         "name": "HE Bomb Shells",
         "requiredResearch": [
-            "R-Wpn-Bomb01",
-            "R-Wpn-Howitzer-Damage01"
+            "R-Wpn-Bomb01"
         ],
         "researchPoints": 1800,
         "researchPower": 225,

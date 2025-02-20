@@ -672,7 +672,7 @@ function eventStartLevel()
 			order: CAM_ORDER_ATTACK,
 			groupSize: 2,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(75)),
-			templates: [ cTempl.colatv, cTempl.colatv, cTempl.comhbombv, cTempl.comhbombv ]
+			templates: [ cTempl.colatv, cTempl.colatv, cTempl.comhbombv, cTempl.colphosv ]
 		},
 	});
 

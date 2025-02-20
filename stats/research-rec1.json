@@ -1554,6 +1554,7 @@
             "Flamer-Emplacement"
         ],
         "requiredResearch": [
+            "R-Defense-Flamer",
             "R-Wpn-Flame2"
         ],
         "researchPoints": 1200,

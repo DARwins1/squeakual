@@ -1610,7 +1610,17 @@ function __camInfestObj(obj)
 		if (structId === "A0PowerGenerator")
 		{
 			// Special case for Power Generators
-			infStructId = "InfA0PowerGenerator";
+			if (obj.modules > 0)
+			{
+				// Has modules
+				infStructId = "InfA0PowerGeneratorMod";
+			}
+			else
+			{
+				// No modules
+				infStructId = "InfA0PowerGenerator";
+			}
+			
 		}
 		else if (structId === "LookOutTower")
 		{

@@ -13,7 +13,7 @@ const mis_collectiveResearch = [
 	"R-Wpn-Cannon-ROF02", "R-Vehicle-Metals03", "R-Struc-Materials04", 
 	"R-Defense-WallUpgrade04", "R-Sys-Engineering02", "R-Cyborg-Metals03",
 	"R-Wpn-Cannon-Accuracy02", "R-Wpn-Rocket-Accuracy03", "R-Wpn-AAGun-ROF01",
-	"R-Wpn-AAGun-Damage01", "R-Vehicle-Engine04", "R-Wpn-AAGun-Accuracy01",
+	"R-Wpn-AAGun-Damage02", "R-Vehicle-Engine04", "R-Wpn-AAGun-Accuracy01",
 	"R-Struc-RprFac-Upgrade01",
 ];
 const mis_infestedResearch = [
@@ -171,6 +171,7 @@ function eventStartLevel()
 		"colFactory": { tech: "R-Wpn-Rocket02-MRLHvy" }, // Heavy Rocket Array
 		"colPower": { tech: "R-Struc-Power-Upgrade01" }, // Gas Turbine Generator
 		"convoyCrate": { tech: "R-Wpn-Mortar3" }, // Pepperpot
+		"colResearch": { tech: "R-Wpn-Bomb-Damage01" }, // HE Bomb Shells
 	});
 
 	camCompleteRequiredResearch(camAct3StartResearch, MIS_TEAM_GOLF);
@@ -219,7 +220,7 @@ function eventStartLevel()
 				repair: 35
 			},
 			groupSize: 3,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(135)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(115)),
 			// Medium and heavy tanks
 			templates: [ cTempl.cohhrat, cTempl.commcant, cTempl.cominft, cTempl.comhmgt, cTempl.comatt, cTempl.comhmgt, cTempl.comhpvt, cTempl.cohhcant ]
 		},
@@ -230,7 +231,7 @@ function eventStartLevel()
 				targetPlayer: CAM_HUMAN_PLAYER,
 				repair: 25
 			},
-			groupSize: 4,
+			groupSize: 6,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(45)),
 			// Heavy cyborg support
 			templates: [ cTempl.scymc, cTempl.cybla, cTempl.scygr, cTempl.scymc ]
@@ -242,7 +243,7 @@ function eventStartLevel()
 				targetPlayer: CAM_HUMAN_PLAYER,
 				repair: 25
 			},
-			groupSize: 6,
+			groupSize: 9,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(45)),
 			// Light crowd-killers
 			templates: [ cTempl.cybhg, cTempl.cybth, cTempl.cybhg ]
@@ -312,9 +313,52 @@ function eventStartLevel()
 		setMissionTime(camChangeOnDiff(camMinutesToSeconds(60)));
 	}
 
+	// Rank and assign the Collective commander
+	// Set the commander's rank (ranges from Professional to Elite)
+	const COMMANDER_RANK = (difficulty <= EASY) ? 4 : (difficulty + 2);
+	camSetDroidRank(getObject("colCommander"), COMMANDER_RANK);
+	camManageGroup(camMakeGroup("colCommander"), CAM_ORDER_PATROL, {
+		pos: [
+			camMakePos("patrolPos1"),
+			camMakePos("patrolPos2"),
+			camMakePos("patrolPos3")
+		],
+		interval: camSecondsToMilliseconds(46),
+		repair: 70
+	});
+	camMakeRefillableGroup(camMakeGroup("colCommandGroup"), {
+		templates: [
+			cTempl.cohhcant, cTempl.cohhcant, // 2 Heavy Cannons
+			cTempl.comhpvt, cTempl.comhpvt, // 2 HVCs
+			cTempl.comatt, cTempl.comatt, cTempl.comatt, cTempl.comatt, // 4 Lancers
+			cTempl.comhmgt, cTempl.comhmgt, cTempl.comhmgt, cTempl.comhmgt, // 4 HMGs
+			cTempl.cominft, cTempl.cominft, // 2 Infernos
+			cTempl.comhaat, cTempl.comhaat, // 2 Cyclones
+		],
+		factories: ["colFactory"],
+		obj: "colCommander" // Stop refilling this group when the commander dies
+	}, CAM_ORDER_FOLLOW, {
+		leader: "colCommander",
+		repair: 50,
+		suborder: CAM_ORDER_ATTACK,
+		targetPlayer: CAM_HUMAN_PLAYER
+	});
+
+	camMakeRefillableGroup(camMakeGroup("colRippleGroup"), {
+		templates: [
+			cTempl.cohript, cTempl.cohript, // 2 Ripple Rockets
+		],
+		factories: ["colFactory"],
+		obj: "colSensorTower" // Stop refilling this group if the sensor is destroyed
+	}, CAM_ORDER_FOLLOW, {
+		leader: "colSensorTower",
+		suborder: CAM_ORDER_DEFEND, // If the sensor is destroyed, sit around in their own little spot
+		pos: camMakePos("colRippleGroup")
+	});
+
 	allowExtraWaves = false;
 
-	camAutoReplaceObjectLabel("colCC");
+	camAutoReplaceObjectLabel(["colCC", "colSensorTower"]);
 	// Most factories are enabled immediately on this mission...
 	camEnableFactory("infFactory1");
 	camEnableFactory("infFactory2");

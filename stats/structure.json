@@ -1176,12 +1176,33 @@
         "sensorID": "DefaultSensor1Mk1",
         "strength": "MEDIUM",
         "structureModel": [
-            "blinfpower0.pie",
-            "power_module4.pie",
+            "blinfpower0.pie"
+        ],
+        "thermal": 20,
+        "type": "GENERIC",
+        "width": 2
+    },
+    "InfA0PowerGeneratorMod": {
+        "armour": 20,
+        "baseModel": "blbpower.pie",
+        "breadth": 2,
+        "buildPoints": 500,
+        "buildPower": 50,
+        "ecmID": "ZNULLECM",
+        "height": 2,
+        "hitpoints": 1000,
+        "id": "InfA0PowerGenerator",
+        "name": "Infested Moduled Power Generator",
+        "powerPoints": 55,
+        "modulePowerPoints": 28,
+        "resistance": 600,
+        "sensorID": "DefaultSensor1Mk1",
+        "strength": "MEDIUM",
+        "structureModel": [
             "blinfpower4.pie"
         ],
         "thermal": 20,
-        "type": "POWER GENERATOR",
+        "type": "GENERIC",
         "width": 2
     },
     "A0RepairCentre3": {

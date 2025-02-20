@@ -8,7 +8,7 @@ const mis_collectiveResearch = [
 	"R-Wpn-Cannon-ROF02", "R-Vehicle-Metals03", "R-Struc-Materials04", 
 	"R-Defense-WallUpgrade04", "R-Sys-Engineering02", "R-Cyborg-Metals03",
 	"R-Wpn-Cannon-Accuracy02", "R-Wpn-Rocket-Accuracy03", "R-Wpn-AAGun-ROF01",
-	"R-Wpn-AAGun-Damage01", "R-Vehicle-Engine04", "R-Wpn-AAGun-Accuracy01",
+	"R-Wpn-AAGun-Damage02", "R-Vehicle-Engine04", "R-Wpn-AAGun-Accuracy01",
 	"R-Struc-RprFac-Upgrade01",
 ];
 const mis_infestedResearch = [
@@ -114,7 +114,7 @@ function sendInfestedGroup()
 	}
 
 	const newGroup = camSendReinforcement(CAM_INFESTED, getObject(entrances[entryIdx]), droids, CAM_REINFORCE_GROUND, {
-		order: CAM_ORDER_COMPROMISE, data: {
+		order: CAM_ORDER_DEFEND, data: {
 			pos: camMakePos(entrances[exitIdx]),
 			radius: 4
 		}});
@@ -283,11 +283,11 @@ camAreaEvent("infEntry6", function(droid)
 	resetLabel("infEntry6", CAM_INFESTED);
 });
 
-// If an Infested group is attacked with the CAM_ORDER_COMPROMISE order, replace it with CAM_ORDER_ATTACK
+// If an Infested group is attacked with the CAM_ORDER_DEFEND order, replace it with CAM_ORDER_ATTACK
 function eventAttacked(victim, attacker)
 {
 	if (victim.player === CAM_INFESTED && attacker.player === CAM_HUMAN_PLAYER 
-		&& victim.group !== null && camGetGroupOrder(victim.group) === CAM_ORDER_COMPROMISE)
+		&& victim.group !== null && camGetGroupOrder(victim.group) === CAM_ORDER_DEFEND)
 	{
 		// The player has attacked one of the meandering Infested groups
 		// Re-order the Infested group to attack the player instead

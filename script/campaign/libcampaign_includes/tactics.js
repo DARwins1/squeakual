@@ -633,9 +633,9 @@ function __camTacticsTickForGroup(group)
 			return;
 	}
 
-	if (!__SIMPLIFIED)
+	const __DEFENDING = (gi.order === CAM_ORDER_DEFEND);
+	if (!__SIMPLIFIED || __DEFENDING)
 	{
-		const __DEFENDING = (gi.order === CAM_ORDER_DEFEND);
 		const __TRACK = (gi.order === CAM_ORDER_COMPROMISE);
 
 		for (let i = 0, len = healthyDroids.length; i < len; ++i)

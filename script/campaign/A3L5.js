@@ -8,7 +8,7 @@ const mis_collectiveResearch = [
 	"R-Wpn-Cannon-ROF02", "R-Vehicle-Metals04", "R-Struc-Materials04", 
 	"R-Defense-WallUpgrade04", "R-Sys-Engineering02", "R-Cyborg-Metals04",
 	"R-Wpn-Cannon-Accuracy02", "R-Wpn-Rocket-Accuracy03", "R-Wpn-AAGun-ROF01",
-	"R-Wpn-AAGun-Damage01", "R-Vehicle-Engine05", "R-Wpn-AAGun-Accuracy01",
+	"R-Wpn-AAGun-Damage02", "R-Vehicle-Engine05", "R-Wpn-AAGun-Accuracy01",
 	"R-Struc-RprFac-Upgrade02",
 ];
 const mis_infestedResearch = [
@@ -29,7 +29,7 @@ var enemyStoleArtifact; // True when the Collective have successfully escaped wi
 var colTruckJob; // Maintains the Collective's LZ
 var colArtiGroup; // Tries to escape with the artifact
 var colPatrolGroup; // Defends the Collective LZ
-var colHoverGroup; // Harasses the player's LZ
+// var colHoverGroup; // Harasses the player's LZ
 
 camAreaEvent("heliRemoveZone", function(droid)
 {
@@ -105,19 +105,29 @@ function sendInfestedReinforcements()
 	const FODDER_SIZE = 12;
 
 	// South west entrance
-	camSendReinforcement(CAM_INFESTED, getObject("infEntry1"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND, {
-		order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}
-	});
+	if (getObject("infFactory1") !== null)
+	{
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry1"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+	}
 
-	// West entrance
-	camSendReinforcement(CAM_INFESTED, getObject("infEntry2"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+	// South east entrance
+	if (getObject("infFactory3") !== null)
+	{
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry2"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+	}
+
+	// North east entrance
+	if (getObject("infFactory8") !== null)
+	{
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry3"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+	}
 	
-	// North road entrances
+	// North west entrance
 	// (Only spawns units if the nearby Collective structures are cleared)
 	const BLOCKADE_STRUCTURES = enumArea("blockadeStructs", CAM_THE_COLLECTIVE, false).filter((obj) => (obj.type === STRUCTURE)).length;
 	if (!BLOCKADE_STRUCTURES)
 	{
-		camSendReinforcement(CAM_INFESTED, getObject("infEntry3"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry4"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
 	}
 }
 
@@ -129,18 +139,10 @@ function activateInfested()
 	camEnableFactory("infFactory3");
 	camEnableFactory("infFactory4");
 	camEnableFactory("infFactory5");
+	camEnableFactory("infFactory6");
+	camEnableFactory("infFactory7");
+	camEnableFactory("infFactory8");
 	heliAttack();
-}
-
-// Start moving the Collective towards the artifact and start queuing Collective transports
-// Also enable the west Infested base
-function activateCollective()
-{
-	// collectiveActive = true;
-	
-	
-
-	// setTimer("manageArtifactGroup", camSecondsToMilliseconds(1));
 }
 
 function enemyBaseDetected_colLZBase()
@@ -185,22 +187,27 @@ function removeResearchBeacon()
 function manageArtifactGroup()
 {
 	// The Collective artifact group has different orders depending on the state of the mission...
-	// Before this function is called, the group will defend the northwest side of the map.
 	// If the research facility is still standing (and the artifact hasn't dropped), attack towards it.
 	// If the artifact is dropped on the ground, move towards it.
 	// If the player has the artifact, attack the player.
-	// Otherwise (when the artifact is being carried), move towards the Collective's LZ.
+	// If the difficulty is HARD or above, and the Collective have the artifact, also attack the player (to cover the artifact holder's escape).
+	// If a Collective unit is holding the artifact, break it from the rest of the group and run to the LZ.
 
-	if (playerHasArtifact)
+	if (playerHasArtifact || (difficulty >= HARD && getObject("colArtiHolder") !== null))
 	{
-		// If the player has the artifact, just try to attack them
+		// Attack the player
 		camManageGroup(colArtiGroup, CAM_ORDER_ATTACK, {
 			targetPlayer: CAM_HUMAN_PLAYER,
 			repair: 25,
 			removable: false
 		});
-		removeTimer("manageArtifactGroup");
-		return; // No need to keep checking
+
+		if (playerHasArtifact)
+		{
+			// Player can't drop the artifact; no need to keep checking anymore
+			removeTimer("manageArtifactGroup");
+		}
+		return;
 	}
 
 	const artifacts = enumFeature(ALL_PLAYERS, "Crate");
@@ -258,6 +265,12 @@ function manageArtifactGroup()
 			camAddArtifact({"colArtiHolder": { tech: "R-Wpn-Rocket08-Ballista" }}); // Ballista
 
 			camSafeRemoveObject(realCrate);
+
+			// Remove the artifact holder from the main group
+			// Tell it to return to the LZ instead
+			camManageGroup(camMakeGroup("colArtiHolder"), CAM_ORDER_DEFEND, {pos: camMakePos("landingZoneCollective")});
+
+			// TODO: Dialogue here
 		}
 		else
 		{
@@ -266,11 +279,21 @@ function manageArtifactGroup()
 	}
 	// If we've gotten here, the Collective are holding the artifact
 	// Run for the LZ!
-	camManageGroup(colArtiGroup, CAM_ORDER_DEFEND, {
-		pos: camMakePos("landingZoneCollective"),
-		radius: 0,
-		removable: false
-	});
+	// camManageGroup(colArtiGroup, CAM_ORDER_DEFEND, {
+	// 	pos: camMakePos("landingZoneCollective"),
+	// 	radius: 0,
+	// 	removable: false
+	// });
+}
+
+// Put a red dot on the minimap over the artifact holder's current position is
+function trackArtiHolder()
+{
+	const artiHolder = getObject("colArtiHolder");
+	if (artiHolder !== null && !enemyStoleArtifact)
+	{
+		playSound(cam_sounds.tracker, artiHolder.x, artiHolder.y, artiHolder.z);
+	}
 }
 
 function sendCollectiveTransporter()
@@ -284,12 +307,12 @@ function sendCollectiveTransporter()
 	}
 
 	// Make a list of droids to bring in in order of importance
-	// Truck -> Patrol -> Artifact -> Hover
+	// Truck -> Patrol -> Artifact
 	let droidQueue = [];
 
 	if (!camDef(camGetTruck(colTruckJob))) droidQueue.push(cTempl.comtruckt);
 
-	droidQueue = droidQueue.concat(camGetRefillableGroupTemplates([colPatrolGroup, colArtiGroup, colHoverGroup]));
+	droidQueue = droidQueue.concat(camGetRefillableGroupTemplates([colPatrolGroup, colArtiGroup]));
 
 	// Next, add grab some droids for the transport
 	const TRANSPORT_SIZE = ((difficulty <= MEDIUM) ? 8 : 10);
@@ -331,7 +354,7 @@ function eventTransporterLanded(transport)
 		}
 
 		// Assign other units to their refillable groups
-		camAssignToRefillableGroups(transOther, [colPatrolGroup, colArtiGroup, colHoverGroup]);
+		camAssignToRefillableGroups(transOther, [colPatrolGroup, colArtiGroup]);
 
 		// Check if the artifact holder is nearby
 		const artiHolder = getObject("colArtiHolder");
@@ -381,11 +404,10 @@ function eventStartLevel()
 {
 	const startPos = camMakePos("landingZone");
 	const lz = getObject("landingZone"); //player lz
-	// const transportEntryPos = camMakePos("transportEntryPos");
 
 	camSetStandardWinLossConditions(CAM_VICTORY_OFFWORLD, "A3L6", {
 		message: "RET_LZ",
-		reinforcements: camMinutesToSeconds(1),
+		reinforcements: camMinutesToSeconds(1.5),
 		retlz: true,
 		area: "compromiseZone",
 		callback: "artifactReachable",
@@ -394,8 +416,8 @@ function eventStartLevel()
 
 	centreView(startPos.x, startPos.y);
 	setNoGoArea(lz.x, lz.y, lz.x2, lz.y2, CAM_HUMAN_PLAYER);
-	startTransporterEntry(61, 61, CAM_HUMAN_PLAYER);
-	setTransporterExit(61, 61, CAM_HUMAN_PLAYER);
+	startTransporterEntry(62, 74, CAM_HUMAN_PLAYER);
+	setTransporterExit(62, 74, CAM_HUMAN_PLAYER);
 
 	camCompleteRequiredResearch(mis_collectiveResearch, CAM_THE_COLLECTIVE);
 	camCompleteRequiredResearch(mis_infestedResearch, CAM_INFESTED);
@@ -414,21 +436,33 @@ function eventStartLevel()
 			detectSnd: cam_sounds.baseDetection.enemyLZDetected,
 			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
 		},
-		"infestedRidgeBase": {
+		"infestedSouthBase": {
 			cleanup: "infBase1",
 			detectMsg: "INF_BASE1",
 			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
 			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated
 		},
-		"infestedTrenchBase": {
+		"infestedTrenchRidgeBase": {
 			cleanup: "infBase2",
 			detectMsg: "INF_BASE2",
 			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
 			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated
 		},
-		"infestedResearchBase": {
+		"infestedOverlookBase": {
 			cleanup: "infBase3",
 			detectMsg: "INF_BASE3",
+			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated
+		},
+		"infestedMainBase": {
+			cleanup: "infBase4",
+			detectMsg: "INF_BASE4",
+			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated
+		},
+		"infestedNorthEastBase": {
+			cleanup: "infBase5",
+			detectMsg: "INF_BASE5",
 			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
 			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated
 		},
@@ -480,6 +514,33 @@ function eventStartLevel()
 			// Light Infested vehicles
 			templates: [cTempl.infciv, cTempl.infrbjeep, cTempl.infciv, cTempl.infbloke, cTempl.infciv, cTempl.infbjeep, cTempl.infciv, cTempl.infbjeep]
 		},
+		"infFactory6": {
+			assembly: "infAssembly6",
+			order: CAM_ORDER_ATTACK,
+			groupSize: 3,
+			maxSize: 8,
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(16)),
+			// Light Infested vehicles
+			templates: [cTempl.infciv, cTempl.infrbjeep, cTempl.infciv, cTempl.infbloke, cTempl.infciv, cTempl.infbjeep, cTempl.infciv, cTempl.infbjeep]
+		},
+		"infFactory7": {
+			assembly: "infAssembly7",
+			order: CAM_ORDER_ATTACK,
+			groupSize: 3,
+			maxSize: 8,
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(16)),
+			// Light Infested vehicles
+			templates: [cTempl.infciv, cTempl.infrbjeep, cTempl.infciv, cTempl.infbloke, cTempl.infciv, cTempl.infbjeep, cTempl.infciv, cTempl.infbjeep]
+		},
+		"infFactory8": {
+			assembly: "infAssembly8",
+			order: CAM_ORDER_ATTACK,
+			groupSize: 3,
+			maxSize: 8,
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(16)),
+			// Light Infested vehicles
+			templates: [cTempl.infciv, cTempl.infrbjeep, cTempl.infciv, cTempl.infbloke, cTempl.infciv, cTempl.infbjeep, cTempl.infciv, cTempl.infbjeep]
+		},
 	});
 
 	hackAddMessage("RESEARCH_FACILITY", PROX_MSG, CAM_HUMAN_PLAYER);
@@ -497,7 +558,7 @@ function eventStartLevel()
 			cTempl.cominft, cTempl.cominft, cTempl.cominft, // 3 Infernos
 			cTempl.comhatt, cTempl.comhatt, // 2 Tank Killers
 			cTempl.comhrept, // 1 Heavy Repair Turret
-		]}, CAM_ORDER_DEFEND, {
+		]}, CAM_ORDER_DEFEND, { // Wait for further orders...
 		pos: camMakePos("colArtiGroup")
 	});
 	colPatrolGroup = camMakeRefillableGroup(camMakeGroup("colPatrolGroup"), {
@@ -514,20 +575,20 @@ function eventStartLevel()
 		interval: camSecondsToMilliseconds(42),
 		repair: 75
 	});
-	colHoverGroup = camMakeRefillableGroup(undefined, {
-		templates: [
-			cTempl.comhath, cTempl.comhath, // 2 Tank Killers
-			cTempl.combbh, // 1 Bunker Buster
-			cTempl.comhpvh, cTempl.comhpvh, cTempl.comhpvh, // 4 HVCs
-			cTempl.combbh, // Another Bunker Buster
-		]}, CAM_ORDER_PATROL, {
-			pos: [
-				camMakePos("hoverPatrolPos1"),
-				camMakePos("hoverPatrolPos2"),
-			],
-			interval: camSecondsToMilliseconds(32),
-			repair: 75
-	});
+	// colHoverGroup = camMakeRefillableGroup(undefined, {
+	// 	templates: [
+	// 		cTempl.comhath, cTempl.comhath, // 2 Tank Killers
+	// 		cTempl.combbh, // 1 Bunker Buster
+	// 		cTempl.comhpvh, cTempl.comhpvh, cTempl.comhpvh, // 4 HVCs
+	// 		cTempl.combbh, // Another Bunker Buster
+	// 	]}, CAM_ORDER_PATROL, {
+	// 		pos: [
+	// 			camMakePos("hoverPatrolPos1"),
+	// 			camMakePos("hoverPatrolPos2"),
+	// 		],
+	// 		interval: camSecondsToMilliseconds(32),
+	// 		repair: 75
+	// });
 
 	colTruckJob = camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colLZBase",
@@ -541,11 +602,11 @@ function eventStartLevel()
 	// Pre-damage the facility too...
 	camSetPreDamageModifier(MIS_RESEARCH_FACILITY, [60, 90]);
 
-	// queue("activateCollective", camChangeOnDiff(camSecondsToMilliseconds(15)));
-	setTimer("sendCollectiveTransporter", camMinutesToMilliseconds(2.5));
+	setTimer("sendCollectiveTransporter", camChangeOnDiff(camMinutesToMilliseconds(2.75)));
 	queue("activateInfested", camChangeOnDiff(camSecondsToMilliseconds(30)));
 	setTimer("sendInfestedReinforcements", camChangeOnDiff(camSecondsToMilliseconds(45)));
 	setTimer("manageArtifactGroup", camSecondsToMilliseconds(1));
+	setTimer("trackArtiHolder", camSecondsToMilliseconds(3));
 
 	// Lighten the fog to *more or less* 2x default brightness with a slight pink color
 	camSetFog(48, 32, 96);

@@ -248,8 +248,8 @@
                 "moving": "fxheli5to8.pie"
             },
             "tracked01": {
-                "left": "rustltrk.pie",
-                "right": "rustrtrk.pie"
+                "left": "infrustltrk.pie",
+                "right": "infrustrtrk.pie"
             }
         },
         "size": "LIGHT",

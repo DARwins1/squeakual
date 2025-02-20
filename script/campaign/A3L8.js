@@ -466,7 +466,7 @@ function eventStartLevel()
 			groupSize: 3,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(95)),
 			// Bomber spam
-			templates: [ cTempl.comhbombv ]
+			templates: [ cTempl.comhbombv, cTempl.colphosv ]
 		},
 		"cScavFactory1": {
 			assembly: "cScavAssembly1",
