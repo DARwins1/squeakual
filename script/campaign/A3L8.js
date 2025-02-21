@@ -472,11 +472,12 @@ function eventStartLevel()
 			assembly: "cScavAssembly1",
 			order: CAM_ORDER_ATTACK,
 			data: {
-				targetPlayer: CAM_THE_COLLECTIVE
+				targetPlayer: CAM_HUMAN_PLAYER
 			},
-			groupSize: 3,
+			groupSize: 6,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(22)),
-			templates: [ cTempl.bjeep, cTempl.rbjeep, cTempl.kevbloke, cTempl.buscan]
+			// Basic vehicles + infantry
+			templates: [ cTempl.bjeep, cTempl.rbjeep, cTempl.kevbloke, cTempl.buscan, cTempl.firetruck, cTempl.kevlance ]
 		},
 		"cScavFactory2": {
 			assembly: "cScavAssembly2",
@@ -484,17 +485,18 @@ function eventStartLevel()
 			data: {
 				targetPlayer: CAM_HUMAN_PLAYER
 			},
-			groupSize: 6,
+			groupSize: 4,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(28)),
-			templates: [ cTempl.gbjeep, cTempl.minitruck, cTempl.kevlance, cTempl.sartruck, cTempl.bjeep ]
+			// Cool stuff
+			templates: [ cTempl.monlan, cTempl.gbjeep, cTempl.monhmg, cTempl.flatmrl, cTempl.flatat, cTempl.moncan, cTempl.minitruck ]
 		},
 		"infFactory": {
 			assembly: "infAssembly",
 			order: CAM_ORDER_ATTACK,
 			groupSize: 3,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(12)),
-			// Infested civilians, with some occasional vehicles
-			templates: [cTempl.infciv, cTempl.infbjeep, cTempl.infciv, cTempl.infciv, cTempl.infciv, cTempl.infbjeep, cTempl.infciv, cTempl.infbuscan]
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(16)),
+			// Misc. scav vehicles
+			templates: [cTempl.infgbjeep, cTempl.infmonhmg, cTempl.infkevbloke, cTempl.infflatmrl, cTempl.infmonlan, cTempl.infminitruck, cTempl.infflatat]
 		},
 		"infCybFactory": {
 			assembly: "infCybAssembly",

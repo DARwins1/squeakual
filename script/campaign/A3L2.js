@@ -254,17 +254,17 @@ function eventStartLevel()
 			groupSize: 3,
 			maxSize: 8,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(12)),
-			// Infested civilians, with some occasional vehicles
-			templates: [cTempl.infciv, cTempl.infbjeep, cTempl.infciv, cTempl.infciv, cTempl.infciv, cTempl.infbjeep, cTempl.infciv, cTempl.infbuscan]
+			// Light scav vehicles
+			templates: [cTempl.infbloke, cTempl.inftrike, cTempl.infrbuggy, cTempl.inflance, cTempl.infgbjeep, cTempl.infbjeep, cTempl.buggy, cTempl.infbuscan]
 		},
 		"infFactory2": {
 			assembly: "infAssembly2",
 			order: CAM_ORDER_ATTACK,
 			groupSize: 3,
 			maxSize: 8,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(12)),
-			// Infested civilians, with some occasional vehicles
-			templates: [cTempl.infciv, cTempl.infrbjeep, cTempl.infciv, cTempl.inflance, cTempl.infciv, cTempl.infbjeep, cTempl.infciv]
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(22)),
+			// Heavy scav vehicles
+			templates: [cTempl.infmoncan, cTempl.infkevlance, cTempl.infmonsar, cTempl.infkevbloke, cTempl.infflatmrl, cTempl.buscan, cTempl.infkevbloke]
 		},
 	});
 

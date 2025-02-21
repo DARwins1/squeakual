@@ -131,7 +131,7 @@ function sendInfestedReinforcements()
 	}
 }
 
-// Enable (most of) the Infested factories and start sending helicopters
+// Enable the Infested factories and start sending helicopters
 function activateInfested()
 {
 	camEnableFactory("infFactory1");
@@ -475,26 +475,26 @@ function eventStartLevel()
 			groupSize: 3,
 			maxSize: 8,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(12)),
-			// Infested civilians, with some occasional vehicles
-			templates: [cTempl.infciv, cTempl.infbjeep, cTempl.infciv, cTempl.infciv, cTempl.infciv, cTempl.infbjeep, cTempl.infciv, cTempl.infbuscan]
+			// Light scav vehicles + infantry
+			templates: [cTempl.infkevbloke, cTempl.infbjeep, cTempl.infbloke, cTempl.infciv, cTempl.infciv, cTempl.infbjeep, cTempl.infciv, cTempl.infbuscan]
 		},
 		"infFactory2": {
 			assembly: "infAssembly2",
 			order: CAM_ORDER_ATTACK,
 			groupSize: 3,
 			maxSize: 8,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(12)),
-			// Infested civilians, with some occasional vehicles
-			templates: [cTempl.infciv, cTempl.infrbjeep, cTempl.infciv, cTempl.inflance, cTempl.infciv, cTempl.infbjeep, cTempl.infciv]
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(16)),
+			// Misc. scav vehicles
+			templates: [cTempl.infrbuggy, cTempl.inflance, cTempl.infmoncan, cTempl.infbjeep, cTempl.infminitruck, cTempl.infbloke]
 		},
 		"infFactory3": {
 			assembly: "infAssembly3",
 			order: CAM_ORDER_ATTACK,
 			groupSize: 3,
 			maxSize: 8,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(16)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(14)),
 			// Light Infested vehicles
-			templates: [cTempl.infciv, cTempl.infrbjeep, cTempl.infciv, cTempl.infbloke, cTempl.infciv, cTempl.infbjeep, cTempl.infciv, cTempl.infbjeep]
+			templates: [cTempl.infgbjeep, cTempl.inftrike, cTempl.infbjeep, cTempl.infgbjeep, cTempl.infkevbloke, cTempl.infrbjeep]
 		},
 		"infFactory4": {
 			assembly: "infAssembly4",
@@ -502,44 +502,44 @@ function eventStartLevel()
 			groupSize: 3,
 			maxSize: 8,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(16)),
-			// Light Infested vehicles
-			templates: [cTempl.infciv, cTempl.infrbjeep, cTempl.infciv, cTempl.infbloke, cTempl.infciv, cTempl.infbjeep, cTempl.infciv, cTempl.infbjeep]
+			// Misc. scav vehicles
+			templates: [cTempl.infbuscan, cTempl.infgbjeep, cTempl.infkevbloke, cTempl.infmonsar, cTempl.inffiretruck, cTempl.inftrike]
 		},
 		"infFactory5": {
 			assembly: "infAssembly5",
 			order: CAM_ORDER_ATTACK,
 			groupSize: 3,
 			maxSize: 8,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(16)),
-			// Light Infested vehicles
-			templates: [cTempl.infciv, cTempl.infrbjeep, cTempl.infciv, cTempl.infbloke, cTempl.infciv, cTempl.infbjeep, cTempl.infciv, cTempl.infbjeep]
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(12)),
+			// Jeeps + infantry
+			templates: [cTempl.infkevbloke, cTempl.infrbjeep, cTempl.infkevlance, cTempl.infgbjeep, cTempl.infkevbloke, cTempl.infbjeep]
 		},
 		"infFactory6": {
 			assembly: "infAssembly6",
 			order: CAM_ORDER_ATTACK,
 			groupSize: 3,
 			maxSize: 8,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(16)),
-			// Light Infested vehicles
-			templates: [cTempl.infciv, cTempl.infrbjeep, cTempl.infciv, cTempl.infbloke, cTempl.infciv, cTempl.infbjeep, cTempl.infciv, cTempl.infbjeep]
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(14)),
+			// Misc. scav vehicles
+			templates: [cTempl.inffiretruck, cTempl.infgbjeep, cTempl.infkevbloke, cTempl.infbuscan, cTempl.infminitruck]
 		},
 		"infFactory7": {
 			assembly: "infAssembly7",
 			order: CAM_ORDER_ATTACK,
 			groupSize: 3,
 			maxSize: 8,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(16)),
-			// Light Infested vehicles
-			templates: [cTempl.infciv, cTempl.infrbjeep, cTempl.infciv, cTempl.infbloke, cTempl.infciv, cTempl.infbjeep, cTempl.infciv, cTempl.infbjeep]
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(26)),
+			// Heavy scav vehicles
+			templates: [cTempl.infmoncan, cTempl.infflatmrl, cTempl.infmonhmg, cTempl.infbuscan, cTempl.infmonmrl, cTempl.infminitruck, cTempl.infciv, cTempl.infbjeep]
 		},
 		"infFactory8": {
 			assembly: "infAssembly8",
 			order: CAM_ORDER_ATTACK,
 			groupSize: 3,
 			maxSize: 8,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(16)),
-			// Light Infested vehicles
-			templates: [cTempl.infciv, cTempl.infrbjeep, cTempl.infciv, cTempl.infbloke, cTempl.infciv, cTempl.infbjeep, cTempl.infciv, cTempl.infbjeep]
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(20)),
+			// Evil vehicles
+			templates: [cTempl.inffiretruck, cTempl.infmonlan, cTempl.inftrike, cTempl.infbuscan, cTempl.infflatat, cTempl.infgbjeep, cTempl.infminitruck]
 		},
 	});
 

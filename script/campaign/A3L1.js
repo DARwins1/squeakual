@@ -136,12 +136,12 @@ function activateFirstFactories()
 	allowExtraWaves = true;
 }
 
-// Enable the scavenger factories
-function activateSecondFactories()
-{
-	camEnableFactory("cScavFactory1");
-	camEnableFactory("cScavFactory2");
-}
+// // Enable the scavenger factories
+// function activateSecondFactories()
+// {
+// 	camEnableFactory("cScavFactory1");
+// 	camEnableFactory("cScavFactory2");
+// }
 
 // Enable the Collective's cyborg factory and start bringing in transports
 function startCollectiveTransports()
@@ -471,11 +471,11 @@ function eventStartLevel()
 			assembly: "cScavAssembly1",
 			order: CAM_ORDER_ATTACK,
 			data: {
-				targetPlayer: CAM_THE_COLLECTIVE
+				targetPlayer: CAM_HUMAN_PLAYER
 			},
-			groupSize: 3,
+			groupSize: 5,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(22)),
-			templates: [ cTempl.bjeep, cTempl.rbjeep, cTempl.kevbloke, cTempl.buscan]
+			templates: [ cTempl.bjeep, cTempl.rbjeep, cTempl.kevbloke, cTempl.buscan, cTempl.monhmg]
 		},
 		"cScavFactory2": {
 			assembly: "cScavAssembly2",
@@ -485,7 +485,7 @@ function eventStartLevel()
 			},
 			groupSize: 6,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(28)),
-			templates: [ cTempl.gbjeep, cTempl.minitruck, cTempl.kevlance, cTempl.sartruck, cTempl.bjeep ]
+			templates: [ cTempl.gbjeep, cTempl.minitruck, cTempl.kevlance, cTempl.sartruck, cTempl.bjeep, cTempl.monmrl ]
 		},
 		"infFactory1": {
 			assembly: "infAssembly1",
@@ -724,7 +724,7 @@ function eventStartLevel()
 
 	queue("activateFirstFactories", camChangeOnDiff(camMinutesToMilliseconds(2)));
 	queue("heliAttack", camChangeOnDiff(camMinutesToMilliseconds(5)));
-	queue("activateSecondFactories", camChangeOnDiff(camMinutesToMilliseconds(6)));
+	// queue("activateSecondFactories", camChangeOnDiff(camMinutesToMilliseconds(6)));
 	queue("startCollectiveTransports", camChangeOnDiff(camMinutesToMilliseconds(10)));
 	queue("vtolAttack", camChangeOnDiff(camMinutesToMilliseconds(14)));
 	sendInfestedReinforcements();

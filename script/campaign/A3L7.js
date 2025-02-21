@@ -34,6 +34,14 @@ var colCommanderGroup;
 var deltaGroup1;
 var deltaGroup2;
 
+var beacon1Placed;
+var beacon2Placed;
+var beacon3Placed;
+var beacon4Placed;
+var beacon5Placed;
+var beacon6Placed;
+var beacon7Placed;
+
 camAreaEvent("heliRemoveZone", function(droid)
 {
 	camSafeRemoveObject(droid, false);
@@ -232,7 +240,7 @@ function startInfestedOnslaught()
 	onslaughtIdx++;
 	setTimer("spawnOnslaughtWaves", camSecondsToMilliseconds(15));
 
-	// TODO: Hunker down Collective groups
+	// Hunker down Collective groups
 	camManageGroup(colCommanderGroup, CAM_ORDER_DEFEND, {
 		pos: camMakePos("colCommandPos"),
 		radius: 12,
@@ -244,7 +252,52 @@ function startInfestedOnslaught()
 		repair: 40
 	});
 
-	// TODO: Adjust fog + lighting
+	// South entrance (disabled when the east base falls)
+	if (!camBaseIsEliminated("colEastOutpost"))
+	{
+		beacon1Placed = true;
+		hackAddMessage("INF_ENTRY1", PROX_MSG, CAM_HUMAN_PLAYER);
+	}
+
+	// Southeast entrance (disabled when the east base falls)
+	if (!camBaseIsEliminated("colEastOutpost"))
+	{
+		beacon2Placed = true;
+		hackAddMessage("INF_ENTRY2", PROX_MSG, CAM_HUMAN_PLAYER);
+	}
+
+	// Southwest entrance (disabled when the west base falls)
+	if (!camBaseIsEliminated("colWestOutpost"))
+	{
+		beacon4Placed = true;
+		hackAddMessage("INF_ENTRY4", PROX_MSG, CAM_HUMAN_PLAYER);
+	}
+
+	if (onslaughtIdx >= 2)
+	{
+		// Canal entrance (disabled when the north base falls)
+		if (!camBaseIsEliminated("colNorthBase"))
+		{
+			beacon3Placed = true;
+			hackAddMessage("INF_ENTRY3", PROX_MSG, CAM_HUMAN_PLAYER);
+		}
+
+		// West entrance (disabled when the north base falls)
+		if (!camBaseIsEliminated("colNorthBase"))
+		{
+			beacon5Placed = true;
+			hackAddMessage("INF_ENTRY5", PROX_MSG, CAM_HUMAN_PLAYER);
+		}
+	}
+	if (onslaughtIdx >= 3)
+	{
+		beacon6Placed = true;
+		hackAddMessage("INF_ENTRY6", PROX_MSG, CAM_HUMAN_PLAYER);
+		beacon7Placed = true;
+		hackAddMessage("INF_ENTRY7", PROX_MSG, CAM_HUMAN_PLAYER);
+	}
+
+	// TODO: Adjust fog + lighting?
 }
 
 function endInfestedOnslaught()
@@ -256,6 +309,8 @@ function endInfestedOnslaught()
 
 	infestedOnslaught = false;
 	removeTimer("spawnOnslaughtWaves");
+
+	removeEntryBeacons();
 
 	// Order Collective groups to resume attacking the player
 	if (onslaughtIdx >= 3)
@@ -283,7 +338,46 @@ function endInfestedOnslaught()
 		camEnableFactory("colCybFactory3");
 	}
 
-	// TODO: Adjust fog + lighting
+	// TODO: Adjust fog + lighting?
+}
+
+function removeEntryBeacons()
+{
+	if (beacon1Placed) 
+	{
+		hackRemoveMessage("INF_ENTRY1", PROX_MSG, CAM_HUMAN_PLAYER);
+		beacon1Placed = false;
+	}
+	if (beacon2Placed) 
+	{
+		hackRemoveMessage("INF_ENTRY2", PROX_MSG, CAM_HUMAN_PLAYER);
+		beacon2Placed = false;
+	}
+	if (beacon3Placed) 
+	{
+		hackRemoveMessage("INF_ENTRY3", PROX_MSG, CAM_HUMAN_PLAYER);
+		beacon3Placed = false;
+	}
+	if (beacon4Placed) 
+	{
+		hackRemoveMessage("INF_ENTRY4", PROX_MSG, CAM_HUMAN_PLAYER);
+		beacon4Placed = false;
+	}
+	if (beacon5Placed) 
+	{
+		hackRemoveMessage("INF_ENTRY5", PROX_MSG, CAM_HUMAN_PLAYER);
+		beacon5Placed = false;
+	}
+	if (beacon6Placed) 
+	{
+		hackRemoveMessage("INF_ENTRY6", PROX_MSG, CAM_HUMAN_PLAYER);
+		beacon6Placed = false;
+	}
+	if (beacon7Placed) 
+	{
+		hackRemoveMessage("INF_ENTRY7", PROX_MSG, CAM_HUMAN_PLAYER);
+		beacon7Placed = false;
+	}
 }
 
 // Spawn large waves targeting the Collective's bases
