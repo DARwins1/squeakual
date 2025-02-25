@@ -190,10 +190,10 @@ function manageArtifactGroup()
 	// If the research facility is still standing (and the artifact hasn't dropped), attack towards it.
 	// If the artifact is dropped on the ground, move towards it.
 	// If the player has the artifact, attack the player.
-	// If the difficulty is HARD or above, and the Collective have the artifact, also attack the player (to cover the artifact holder's escape).
+	// If the Collective have the artifact, also attack the player (to cover the artifact holder's escape).
 	// If a Collective unit is holding the artifact, break it from the rest of the group and run to the LZ.
 
-	if (playerHasArtifact || (difficulty >= HARD && getObject("colArtiHolder") !== null))
+	if (playerHasArtifact || getObject("colArtiHolder") !== null)
 	{
 		// Attack the player
 		camManageGroup(colArtiGroup, CAM_ORDER_ATTACK, {

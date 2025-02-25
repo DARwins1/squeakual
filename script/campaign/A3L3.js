@@ -72,7 +72,7 @@ function sendInfestedGroup()
 		exitIdx = 2;
 		droids = camRandInfTemplates(
 			// Cyborgs and Bashers
-			[cTempl.basher, cTempl.basher, cTempl.infcybca, cTempl.infcybhg], 
+			[cTempl.basher, cTempl.basher, cTempl.infcybgr, cTempl.infcybca, cTempl.infcybhg], 
 			4 + camRand(5), // 4 - 8 core units
 			14 + camRand(3) // 14 - 16 fodder
 		);

@@ -192,14 +192,6 @@
 
 
 	"object_1": {
-		"label": "colTruck",
-		"id": 58,
-		"player": 2,
-		"type": 0
-	},
-
-
-	"object_2": {
 		"label": "infFactory1",
 		"id": 196,
 		"player": 4,
@@ -207,17 +199,25 @@
 	},
 
 
+	"object_2": {
+		"label": "infResearch",
+		"id": 61,
+		"player": 1,
+		"type": 1
+	},
+
+
 	"object_3": {
-		"label": "infFactory6",
-		"id": 55,
+		"label": "infFactory4",
+		"id": 273,
 		"player": 4,
 		"type": 1
 	},
 
 
 	"object_4": {
-		"label": "infFactory4",
-		"id": 273,
+		"label": "infFactory7",
+		"id": 81,
 		"player": 4,
 		"type": 1
 	},
@@ -232,22 +232,6 @@
 
 
 	"object_6": {
-		"label": "infResearch",
-		"id": 61,
-		"player": 1,
-		"type": 1
-	},
-
-
-	"object_7": {
-		"label": "infFactory7",
-		"id": 81,
-		"player": 4,
-		"type": 1
-	},
-
-
-	"object_8": {
 		"label": "infFactory2",
 		"id": 119,
 		"player": 4,
@@ -255,9 +239,25 @@
 	},
 
 
-	"object_9": {
+	"object_7": {
 		"label": "infFactory5",
 		"id": 8,
+		"player": 4,
+		"type": 1
+	},
+
+
+	"object_8": {
+		"label": "colTruck",
+		"id": 58,
+		"player": 2,
+		"type": 0
+	},
+
+
+	"object_9": {
+		"label": "infFactory6",
+		"id": 55,
 		"player": 4,
 		"type": 1
 	},
