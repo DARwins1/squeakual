@@ -615,7 +615,7 @@ function eventStartLevel()
 
 	camSetStandardWinLossConditions(CAM_VICTORY_OFFWORLD, "A3L8", {
 		message: "RET_LZ",
-		reinforcements: camMinutesToSeconds(3.5),
+		reinforcements: camMinutesToSeconds(4),
 		area: "compromiseZone",
 		callback: "uplinkSecure",
 		enableLastAttack: false,
@@ -765,7 +765,7 @@ function eventStartLevel()
 			assembly: "colVtolAssembly",
 			order: CAM_ORDER_ATTACK,
 			groupSize: 2,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(75)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(65)),
 			templates: [ cTempl.colatv, cTempl.colatv, cTempl.comhbombv, cTempl.colphosv ]
 		},
 	});
@@ -875,6 +875,7 @@ function eventStartLevel()
 			cTempl.comhrept, // 1 Heavy Repair Turret
 		],
 		globalFill: true,
+		player: CAM_THE_COLLECTIVE,
 		obj: "colCommander" // Stop refilling this group when the commander dies
 		}, CAM_ORDER_FOLLOW, {
 			leader: "colCommander",

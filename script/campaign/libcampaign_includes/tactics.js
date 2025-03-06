@@ -781,6 +781,7 @@ function __camTacticsTickForGroup(group)
 				let closeByObj;
 				const __ARTILLERY_LIKE = (droid.isCB || droid.hasIndirect || droid.isSensor);
 				const __HAS_WEAPON = camDef(droid.weapons[0]);
+				const __ANTI_AIR = droid.canHitAir && droid.canHitGround;
 				const ignorePlayers = gi.data.ignorePlayers;
 				let weapon;
 				if (__HAS_WEAPON)
@@ -797,7 +798,7 @@ function __camTacticsTickForGroup(group)
 					// Only target vehicles if there are any in range
 					const tankList = closeBy.filter(function(obj) {
 						return (obj.type === DROID && obj.droidType !== DROID_CYBORG && obj.droidType !== DROID_PERSON)
-					});;
+					});
 					if (tankList.length > 0)
 					{
 						closeBy = tankList;
@@ -808,7 +809,7 @@ function __camTacticsTickForGroup(group)
 					// Only target cyborgs if there are any in range
 					const cybList = closeBy.filter(function(obj) {
 						return (obj.type === DROID && (obj.droidType === DROID_CYBORG || obj.droidType === DROID_PERSON))
-					});;
+					});
 					if (cybList.length > 0)
 					{
 						closeBy = cybList;
@@ -819,11 +820,18 @@ function __camTacticsTickForGroup(group)
 					// Only target structures if there are any in range
 					const structList = closeBy.filter(function(obj) {
 						return (obj.type === STRUCTURE)
-					});;
+					});
 					if (structList.length > 0)
 					{
 						closeBy = structList;
 					}
+				}
+				else if (__ANTI_AIR)
+				{
+					// If we can only attack VTOLs, then only target VTOLs
+					closeBy = closeBy.filter(function(obj) {
+						return (obj.type === DROID && isVTOL(obj))
+					});
 				}
 
 				while (closeBy.length > 0 && !closeByObj)

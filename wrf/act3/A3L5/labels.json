@@ -184,8 +184,8 @@
 
 
 	"object_0": {
-		"label": "infFactory3",
-		"id": 179,
+		"label": "infFactory6",
+		"id": 55,
 		"player": 4,
 		"type": 1
 	},
@@ -248,18 +248,18 @@
 
 
 	"object_8": {
-		"label": "colTruck",
-		"id": 58,
-		"player": 2,
-		"type": 0
+		"label": "infFactory3",
+		"id": 179,
+		"player": 4,
+		"type": 1
 	},
 
 
 	"object_9": {
-		"label": "infFactory6",
-		"id": 55,
-		"player": 4,
-		"type": 1
+		"label": "colTruck",
+		"id": 58,
+		"player": 2,
+		"type": 0
 	},
 
 

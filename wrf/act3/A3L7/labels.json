@@ -74,155 +74,147 @@
 
 
 	"area_2": {
-		"label": "infEntry1",
-		"pos1": [5120, 16000],
-		"pos2": [6144, 16256]
-	},
-
-
-	"area_3": {
 		"label": "infEntry2",
 		"pos1": [9856, 15360],
 		"pos2": [10112, 16128]
 	},
 
 
-	"area_4": {
+	"area_3": {
 		"label": "infEntry3",
 		"pos1": [9856, 11520],
 		"pos2": [10112, 12032]
 	},
 
 
-	"area_5": {
+	"area_4": {
 		"label": "infEntry4",
 		"pos1": [128, 12672],
 		"pos2": [384, 13312]
 	},
 
 
-	"area_6": {
+	"area_5": {
 		"label": "infEntry5",
 		"pos1": [128, 9856],
 		"pos2": [384, 10880]
 	},
 
 
-	"area_7": {
+	"area_6": {
 		"label": "infEntry6",
 		"pos1": [9856, 7424],
 		"pos2": [10112, 8704]
 	},
 
 
-	"area_8": {
-		"label": "infEntry7",
-		"pos1": [128, 4992],
-		"pos2": [384, 6912]
-	},
-
-
-	"area_9": {
+	"area_7": {
 		"label": "deltaEntry1",
 		"pos1": [1280, 128],
 		"pos2": [2048, 384]
 	},
 
 
-	"area_10": {
+	"area_8": {
 		"label": "deltaEntry2",
 		"pos1": [6528, 128],
 		"pos2": [7424, 384]
 	},
 
 
-	"area_11": {
+	"area_9": {
 		"label": "colCommandGroup",
 		"pos1": [6528, 1408],
 		"pos2": [6912, 1920]
 	},
 
 
-	"area_12": {
+	"area_10": {
 		"label": "colBase1",
 		"pos1": [5760, 10496],
 		"pos2": [8064, 12672]
 	},
 
 
-	"area_13": {
+	"area_11": {
 		"label": "colBase2",
 		"pos1": [512, 8832],
 		"pos2": [3328, 11776]
 	},
 
 
-	"area_14": {
+	"area_12": {
 		"label": "colBase3",
 		"pos1": [3840, 6272],
 		"pos2": [6912, 8832]
 	},
 
 
-	"area_15": {
+	"area_13": {
 		"label": "colBase4",
 		"pos1": [2432, 4352],
 		"pos2": [3456, 5760]
 	},
 
 
-	"area_16": {
+	"area_14": {
 		"label": "colBase5",
 		"pos1": [384, 256],
 		"pos2": [9728, 3968]
 	},
 
 
-	"area_17": {
+	"area_15": {
 		"label": "colLzStructs",
 		"pos1": [7680, 4992],
 		"pos2": [8704, 5760]
 	},
 
 
-	"area_18": {
+	"area_16": {
 		"label": "deltaEntranceStructs1",
 		"pos1": [1024, 384],
 		"pos2": [2560, 1792]
 	},
 
 
-	"area_19": {
+	"area_17": {
 		"label": "deltaEntranceStructs2",
 		"pos1": [5888, 384],
 		"pos2": [7552, 1280]
 	},
 
 
-	"area_20": {
+	"area_18": {
 		"label": "compromiseZone",
-		"pos1": [1536, 14592],
-		"pos2": [3200, 16128]
+		"pos1": [1152, 14208],
+		"pos2": [3584, 16128]
+	},
+
+
+	"area_19": {
+		"label": "infEntry7",
+		"pos1": [128, 5376],
+		"pos2": [384, 6528]
+	},
+
+
+	"area_20": {
+		"label": "infEntry1",
+		"pos1": [5632, 16000],
+		"pos2": [6656, 16256]
 	},
 
 
 	"object_0": {
-		"label": "colTruckLz",
-		"id": 584,
+		"label": "colVtolTower3",
+		"id": 386,
 		"player": 2,
-		"type": 0
+		"type": 1
 	},
 
 
 	"object_1": {
-		"label": "colTruck4",
-		"id": 585,
-		"player": 2,
-		"type": 0
-	},
-
-
-	"object_2": {
 		"label": "colTruck3",
 		"id": 583,
 		"player": 2,
@@ -230,31 +222,15 @@
 	},
 
 
+	"object_2": {
+		"label": "colFactory1",
+		"id": 2,
+		"player": 2,
+		"type": 1
+	},
+
+
 	"object_3": {
-		"label": "colTruck6",
-		"id": 587,
-		"player": 2,
-		"type": 0
-	},
-
-
-	"object_4": {
-		"label": "colTruck2",
-		"id": 581,
-		"player": 2,
-		"type": 0
-	},
-
-
-	"object_5": {
-		"label": "colTruck1",
-		"id": 582,
-		"player": 2,
-		"type": 0
-	},
-
-
-	"object_6": {
 		"label": "colVtolCBTower",
 		"id": 426,
 		"player": 2,
@@ -262,23 +238,39 @@
 	},
 
 
+	"object_4": {
+		"label": "colTruck1",
+		"id": 582,
+		"player": 2,
+		"type": 0
+	},
+
+
+	"object_5": {
+		"label": "colTruck2",
+		"id": 581,
+		"player": 2,
+		"type": 0
+	},
+
+
+	"object_6": {
+		"label": "colTruck4",
+		"id": 585,
+		"player": 2,
+		"type": 0
+	},
+
+
 	"object_7": {
-		"label": "colFactory3",
-		"id": 410,
+		"label": "colVtolFactory",
+		"id": 4,
 		"player": 2,
 		"type": 1
 	},
 
 
 	"object_8": {
-		"label": "colCybFactory2",
-		"id": 1,
-		"player": 2,
-		"type": 1
-	},
-
-
-	"object_9": {
 		"label": "colCybFactory3",
 		"id": 97,
 		"player": 2,
@@ -286,7 +278,23 @@
 	},
 
 
+	"object_9": {
+		"label": "colTruck5",
+		"id": 586,
+		"player": 2,
+		"type": 0
+	},
+
+
 	"object_10": {
+		"label": "colCommander",
+		"id": 366,
+		"player": 2,
+		"type": 0
+	},
+
+
+	"object_11": {
 		"label": "colCybFactory1",
 		"id": 236,
 		"player": 2,
@@ -294,17 +302,9 @@
 	},
 
 
-	"object_11": {
+	"object_12": {
 		"label": "colVtolTower2",
 		"id": 427,
-		"player": 2,
-		"type": 1
-	},
-
-
-	"object_12": {
-		"label": "colFactory1",
-		"id": 2,
 		"player": 2,
 		"type": 1
 	},
@@ -319,30 +319,22 @@
 
 
 	"object_14": {
-		"label": "colVtolTower3",
-		"id": 386,
+		"label": "colFactory3",
+		"id": 410,
 		"player": 2,
 		"type": 1
 	},
 
 
 	"object_15": {
-		"label": "colVtolTower4",
-		"id": 425,
+		"label": "colCybFactory2",
+		"id": 1,
 		"player": 2,
 		"type": 1
 	},
 
 
 	"object_16": {
-		"label": "colVtolTower1",
-		"id": 191,
-		"player": 2,
-		"type": 1
-	},
-
-
-	"object_17": {
 		"label": "colResearch",
 		"id": 534,
 		"player": 2,
@@ -350,33 +342,41 @@
 	},
 
 
+	"object_17": {
+		"label": "colAAEmp",
+		"id": 598,
+		"player": 2,
+		"type": 1
+	},
+
+
 	"object_18": {
-		"label": "colVtolFactory",
-		"id": 4,
+		"label": "colVtolTower4",
+		"id": 425,
 		"player": 2,
 		"type": 1
 	},
 
 
 	"object_19": {
-		"label": "colTruck5",
-		"id": 586,
+		"label": "colTruck6",
+		"id": 587,
 		"player": 2,
 		"type": 0
 	},
 
 
 	"object_20": {
-		"label": "colCommander",
-		"id": 366,
+		"label": "colTruckLz",
+		"id": 584,
 		"player": 2,
 		"type": 0
 	},
 
 
 	"object_21": {
-		"label": "colAAEmp",
-		"id": 598,
+		"label": "colVtolTower1",
+		"id": 191,
 		"player": 2,
 		"type": 1
 	},

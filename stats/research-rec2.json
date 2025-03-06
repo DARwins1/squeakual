@@ -5230,14 +5230,14 @@
                 "filterParameter": "ImpactClass",
                 "filterValue": "A-A GUN",
                 "parameter": "Damage",
-                "value": 15
+                "value": 25
             },
             {
                 "class": "Weapon",
                 "filterParameter": "ImpactClass",
                 "filterValue": "A-A GUN",
                 "parameter": "RadiusDamage",
-                "value": 15
+                "value": 25
             }
         ],
         "statID": "QuadMg1AAGun",
@@ -5259,14 +5259,14 @@
                 "filterParameter": "ImpactClass",
                 "filterValue": "A-A GUN",
                 "parameter": "Damage",
-                "value": 15
+                "value": 25
             },
             {
                 "class": "Weapon",
                 "filterParameter": "ImpactClass",
                 "filterValue": "A-A GUN",
                 "parameter": "RadiusDamage",
-                "value": 15
+                "value": 25
             }
         ],
         "statID": "QuadMg1AAGun",
@@ -5290,14 +5290,14 @@
                 "filterParameter": "ImpactClass",
                 "filterValue": "A-A GUN",
                 "parameter": "Damage",
-                "value": 15
+                "value": 25
             },
             {
                 "class": "Weapon",
                 "filterParameter": "ImpactClass",
                 "filterValue": "A-A GUN",
                 "parameter": "RadiusDamage",
-                "value": 15
+                "value": 25
             }
         ],
         "statID": "QuadMg1AAGun",

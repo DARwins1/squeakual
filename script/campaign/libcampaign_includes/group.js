@@ -128,6 +128,8 @@ function camNeverGroupDroid(what, playerFilter)
 //;;	  as reinforcements.
 //;;	* `globalFill` If true, pull units from all factories if `factories` is empty, undefined, or the set factories 
 //;;	  are destroyed. Useful to avoid needing to list every single factory label in `factories`.
+//;;	* `player` A player ID number, optional. Can be used along with `globalFill` to specify which player's factories to use.
+//;;	Useful in missions where multiple different AI players have factories and/or refillable groups.
 //;;	* `templates` The templates of units that this group is composed of. If units are missing from the 
 //;;	  group, the list missing units can be found with the `camGetRefillableGroupTemplates()` function.
 //;;	* `obj` An object, that when destroyed, disables this group from pulling from factories. If an object with this label 
@@ -173,6 +175,7 @@ function camSetRefillableGroupData(group, groupData)
 	__camRefillableGroupInfo[group] = { // NOTE: if `factories` and `globalFill` are undefined, then the group will not automatically refill!
 		factories: (camDef(groupData.factories)) ? groupData.factories : [],
 		globalFill: (camDef(groupData.globalFill) && groupData.globalFill) ? groupData.globalFill : false,
+		player: (camDef(groupData.player)) ? groupData.player : undefined,
 		templates: (camDef(groupData.templates)) ? groupData.templates : [],
 		obj: groupData.obj, // may be undefined. FIXME: Seems to get set to null instead?
 		enabled: true // set to `false` when a defined `obj` is destroyed
@@ -181,7 +184,7 @@ function camSetRefillableGroupData(group, groupData)
 
 //;; ## camLockRefillableGroup(group)
 //;;
-//;; Shortcut function that (permanently) disables a group from pulling more units automatically.
+//;; Shortcut function that disables a group from pulling more units automatically.
 //;;
 //;; @param {number} group
 //;; @returns {void}
@@ -352,8 +355,6 @@ function __camGetMissingGroupTemplates(group, returnFirst, factory)
 }
 
 // Gets a template to be built by the given factory
-// FIXME: Refillable groups currently do no player affiliation checking
-// Factories from OTHER PLAYERS can refill groups!!!
 function __camGetRefillableTemplateForFactory(factoryLabel, factory)
 {
 	for (const group in __camRefillableGroupInfo)
@@ -370,12 +371,16 @@ function __camGetRefillableTemplateForFactory(factoryLabel, factory)
 		// Check if the given factory can resupply this group
 		if (__VALID_FACTORY || (!__VALID_FACTORY && gi.globalFill))
 		{
-			// If so, see if this group is missing any templates
-			const missingTempl = __camGetMissingGroupTemplates(group, true, factory);
-			if (camDef(missingTempl))
+			// Factory can be used to refill group; check for any player filter
+			if (!camDef(gi.player) || factory.player === gi.player)
 			{
-				// Return the template and the group to send it to
-				return {group: group, template: missingTempl};
+				// Factory belongs to the correct player; check if this group is missing any templates
+				const missingTempl = __camGetMissingGroupTemplates(group, true, factory);
+				if (camDef(missingTempl))
+				{
+					// Return the template and the group to send it to
+					return {group: group, template: missingTempl};
+				}
 			}
 		}
 	}
