@@ -203,7 +203,7 @@
 
 	"object_0": {
 		"label": "scavFactory2",
-		"id": 79,
+		"id": 29,
 		"player": 5,
 		"type": 1
 	},
@@ -211,7 +211,7 @@
 
 	"object_1": {
 		"label": "scavFactory4",
-		"id": 18,
+		"id": 36,
 		"player": 5,
 		"type": 1
 	},
@@ -219,7 +219,7 @@
 
 	"object_2": {
 		"label": "scavFactory3",
-		"id": 17,
+		"id": 40,
 		"player": 5,
 		"type": 1
 	},
@@ -227,7 +227,7 @@
 
 	"object_3": {
 		"label": "scavFactory1",
-		"id": 1,
+		"id": 76,
 		"player": 5,
 		"type": 1
 	},
@@ -235,7 +235,7 @@
 
 	"object_4": {
 		"label": "colResearch",
-		"id": 198,
+		"id": 154,
 		"player": 2,
 		"type": 1
 	},
@@ -243,7 +243,7 @@
 
 	"object_5": {
 		"label": "cScavFactory",
-		"id": 3,
+		"id": 159,
 		"player": 2,
 		"type": 1
 	},
@@ -251,7 +251,7 @@
 
 	"object_6": {
 		"label": "colCC",
-		"id": 4,
+		"id": 176,
 		"player": 2,
 		"type": 1
 	},
@@ -259,7 +259,7 @@
 
 	"object_7": {
 		"label": "colCybFactory",
-		"id": 211,
+		"id": 199,
 		"player": 2,
 		"type": 1
 	},
@@ -267,7 +267,7 @@
 
 	"object_8": {
 		"label": "colTruck",
-		"id": 210,
+		"id": 223,
 		"player": 2,
 		"type": 0
 	},
@@ -275,7 +275,7 @@
 
 	"object_9": {
 		"label": "colFactory",
-		"id": 9,
+		"id": 225,
 		"player": 2,
 		"type": 1
 	},
@@ -283,7 +283,7 @@
 
 	"object_10": {
 		"label": "colCommander",
-		"id": 357,
+		"id": 229,
 		"player": 2,
 		"type": 0
 	},
@@ -291,7 +291,7 @@
 
 	"object_11": {
 		"label": "scavHeliTower",
-		"id": 16,
+		"id": 285,
 		"player": 5,
 		"type": 1
 	},
@@ -299,7 +299,7 @@
 
 	"object_12": {
 		"label": "cScavHeliTower",
-		"id": 15,
+		"id": 289,
 		"player": 2,
 		"type": 1
 	},

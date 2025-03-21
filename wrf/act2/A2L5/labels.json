@@ -304,208 +304,208 @@
 
 
 	"object_0": {
-		"label": "colVtolTower1",
-		"id": 504,
+		"label": "cScavFactory4",
+		"id": 18,
 		"player": 2,
 		"type": 1
 	},
 
 
 	"object_1": {
-		"label": "colFactory1",
-		"id": 1,
+		"label": "cScavFactory2",
+		"id": 33,
 		"player": 2,
 		"type": 1
 	},
 
 
 	"object_2": {
-		"label": "colFactory2",
-		"id": 426,
+		"label": "colVtolTower3",
+		"id": 90,
 		"player": 2,
 		"type": 1
 	},
 
 
 	"object_3": {
-		"label": "colVtolTower2",
-		"id": 556,
+		"label": "heliTower1",
+		"id": 180,
 		"player": 2,
 		"type": 1
 	},
 
 
 	"object_4": {
-		"label": "colVtolCBTower",
-		"id": 318,
+		"label": "cScavFactory1",
+		"id": 188,
 		"player": 2,
 		"type": 1
 	},
 
 
 	"object_5": {
-		"label": "colCybFactory2",
-		"id": 7,
+		"label": "colTruck3",
+		"id": 202,
 		"player": 2,
-		"type": 1
+		"type": 0
 	},
 
 
 	"object_6": {
-		"label": "cScavFactory4",
-		"id": 370,
+		"label": "colVtolCBTower",
+		"id": 229,
 		"player": 2,
 		"type": 1
 	},
 
 
 	"object_7": {
-		"label": "cScavFactory1",
-		"id": 3,
+		"label": "colTruck2",
+		"id": 254,
 		"player": 2,
-		"type": 1
+		"type": 0
 	},
 
 
 	"object_8": {
-		"label": "heliTower2",
-		"id": 258,
+		"label": "colCybFactory1",
+		"id": 257,
 		"player": 2,
 		"type": 1
 	},
 
 
 	"object_9": {
-		"label": "colCybFactory1",
-		"id": 50,
+		"label": "colVtolTower2",
+		"id": 258,
 		"player": 2,
 		"type": 1
 	},
 
 
 	"object_10": {
-		"label": "colResearch",
-		"id": 429,
+		"label": "colBombardPit",
+		"id": 266,
 		"player": 2,
 		"type": 1
 	},
 
 
 	"object_11": {
-		"label": "colTruck2",
-		"id": 532,
+		"label": "colCybFactory3",
+		"id": 280,
 		"player": 2,
-		"type": 0
+		"type": 1
 	},
 
 
 	"object_12": {
-		"label": "colCycloneEmp",
-		"id": 488,
+		"label": "colResearch",
+		"id": 292,
 		"player": 2,
 		"type": 1
 	},
 
 
 	"object_13": {
-		"label": "heliTower1",
-		"id": 108,
+		"label": "colCommander",
+		"id": 369,
 		"player": 2,
-		"type": 1
+		"type": 0
 	},
 
 
 	"object_14": {
-		"label": "cScavFactory2",
-		"id": 4,
+		"label": "colVtolSensor",
+		"id": 373,
 		"player": 2,
-		"type": 1
+		"type": 0
 	},
 
 
 	"object_15": {
-		"label": "colVtolFactory",
-		"id": 5,
+		"label": "colTruck4",
+		"id": 379,
 		"player": 2,
-		"type": 1
+		"type": 0
 	},
 
 
 	"object_16": {
-		"label": "cScavFactory3",
-		"id": 52,
+		"label": "colFactory3",
+		"id": 380,
 		"player": 2,
 		"type": 1
 	},
 
 
 	"object_17": {
-		"label": "colBombardPit",
-		"id": 62,
+		"label": "colFactory2",
+		"id": 387,
 		"player": 2,
 		"type": 1
 	},
 
 
 	"object_18": {
-		"label": "colFactory3",
-		"id": 8,
+		"label": "colCybFactory2",
+		"id": 391,
 		"player": 2,
 		"type": 1
 	},
 
 
 	"object_19": {
-		"label": "colCybFactory3",
-		"id": 441,
+		"label": "colCycloneEmp",
+		"id": 397,
 		"player": 2,
 		"type": 1
 	},
 
 
 	"object_20": {
-		"label": "colVtolTower3",
-		"id": 49,
+		"label": "cScavFactory3",
+		"id": 407,
 		"player": 2,
 		"type": 1
 	},
 
 
 	"object_21": {
-		"label": "colVtolSensor",
-		"id": 510,
+		"label": "heliTower2",
+		"id": 425,
 		"player": 2,
-		"type": 0
+		"type": 1
 	},
 
 
 	"object_22": {
-		"label": "colCommander",
-		"id": 12,
+		"label": "colVtolTower1",
+		"id": 455,
 		"player": 2,
-		"type": 0
+		"type": 1
 	},
 
 
 	"object_23": {
-		"label": "colTruck1",
-		"id": 533,
+		"label": "colVtolFactory",
+		"id": 467,
 		"player": 2,
-		"type": 0
+		"type": 1
 	},
 
 
 	"object_24": {
-		"label": "colTruck4",
-		"id": 535,
+		"label": "colFactory1",
+		"id": 504,
 		"player": 2,
-		"type": 0
+		"type": 1
 	},
 
 
 	"object_25": {
-		"label": "colTruck3",
-		"id": 534,
+		"label": "colTruck1",
+		"id": 505,
 		"player": 2,
 		"type": 0
 	},

@@ -247,6 +247,14 @@
 
 
 	"object_7": {
+		"label": "heliTower2",
+		"id": 98,
+		"player": 2,
+		"type": 1
+	},
+
+
+	"object_8": {
 		"label": "scavFactory4",
 		"id": 53,
 		"player": 2,
@@ -254,7 +262,7 @@
 	},
 
 
-	"object_8": {
+	"object_9": {
 		"label": "scavFactory2",
 		"id": 52,
 		"player": 2,
@@ -262,7 +270,7 @@
 	},
 
 
-	"object_9": {
+	"object_10": {
 		"label": "colResearchFacility",
 		"id": 7,
 		"player": 2,
@@ -270,9 +278,9 @@
 	},
 
 
-	"object_10": {
-		"label": "heliTower2",
-		"id": 98,
+	"object_11": {
+		"label": "colRepairFacility",
+		"id": 333,
 		"player": 2,
 		"type": 1
 	},

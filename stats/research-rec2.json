@@ -2349,11 +2349,11 @@
     "R-Struc-RepairFacility": {
         "iconID": "IMAGE_RES_STRUCTURETECH",
         "id": "R-Struc-RepairFacility",
+        "keyTopic": 1,
         "msgName": "RES_REPAI1",
         "name": "Repair Facility",
         "requiredResearch": [
-            "R-Sys-MobileRepairTurret01",
-            "R-Struc-Factory-Module"
+            "R-Sys-MobileRepairTurret01"
         ],
         "researchPoints": 800,
         "researchPower": 75,

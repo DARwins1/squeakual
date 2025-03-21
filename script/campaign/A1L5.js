@@ -19,7 +19,6 @@ var commanderAggro;
 var colAmbushGroup;
 // Refillable Groups...
 var colCommandGroup;
-var colRepairGroup;
 var colBasePatrolGroup;
 
 camAreaEvent("heliRemoveZone", function(droid)
@@ -91,7 +90,6 @@ function aggroCommander()
 	{
 		camManageGroup(camMakeGroup("colCommander"), CAM_ORDER_ATTACK, {
 			repair: 40,
-			repairPos: camMakePos("colRepairPos"),
 		});
 	}
 }
@@ -142,7 +140,6 @@ function sendCollectiveTransporter()
 				pos: [camMakePos("hoverPatrolPos1"), camMakePos("hoverPatrolPos2")],
 				interval: camSecondsToMilliseconds(22),
 				repair: 75,
-				repairPos: camMakePos("colRepairPos")
 			}
 		}
 	);
@@ -202,7 +199,6 @@ function eventTransporterLanded(transport)
 			leader: "colCommander",
 			suborder: CAM_ORDER_ATTACK,
 			repair: 40,
-			repairPos: camMakePos("colRepairPos"),
 		});
 
 		// Manage the actual commander droid
@@ -211,7 +207,6 @@ function eventTransporterLanded(transport)
 			pos: [camMakePos("patrolPos3"), camMakePos("patrolPos5"), camMakePos("patrolPos6")],
 			interval: camSecondsToMilliseconds(28),
 			repair: 40,
-			repairPos: camMakePos("colRepairPos"),
 		});
 	}
 }
@@ -284,6 +279,7 @@ function eventStartLevel()
 		"colResearchFacility": { tech: "R-Wpn-Rocket01-LtAT" }, // Lancer
 		"colCommandRelay": { tech: "R-Struc-CommandRelay" }, // Command Relay Post
 		"colAASite": { tech: "R-Wpn-AAGun03" }, // Hurricane AA
+		"colRepairFacility": { tech: "R-Struc-RepairFacility" }, // Repair Facility
 	});
 
 	camSetEnemyBases({
@@ -345,14 +341,7 @@ function eventStartLevel()
 		},
 	});
 
-	// Set up refillable groups and trucks
-	// NOTE: A refillable commander group will be created later
-	// Repair group
-	colRepairGroup = camMakeRefillableGroup(undefined, {
-		templates: [cTempl.colrept, cTempl.colrept, cTempl.colrept],
-		factories: ["colFactory"], // Only refill from this factory
-	}, CAM_ORDER_DEFEND, {pos: camMakePos("colRepairPos")});
-	// Collective trucks
+	// Set up Collective trucks
 	const TRUCK_TIME = camChangeOnDiff(camSecondsToMilliseconds(70))
 	const colBaseStructs = camAreaToStructSet("colBase");
 	camManageTrucks(CAM_THE_COLLECTIVE, {

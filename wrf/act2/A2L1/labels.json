@@ -201,62 +201,6 @@
 
 
 	"object_0": {
-		"label": "cScavFactory1",
-		"id": 295,
-		"player": 2,
-		"type": 1
-	},
-
-
-	"object_1": {
-		"label": "cScavHeliTower",
-		"id": 369,
-		"player": 2,
-		"type": 1
-	},
-
-
-	"object_2": {
-		"label": "scavFactory2",
-		"id": 135,
-		"player": 5,
-		"type": 1
-	},
-
-
-	"object_3": {
-		"label": "scavHeliTower",
-		"id": 359,
-		"player": 5,
-		"type": 1
-	},
-
-
-	"object_4": {
-		"label": "cScavFactory3",
-		"id": 78,
-		"player": 2,
-		"type": 1
-	},
-
-
-	"object_5": {
-		"label": "colCC",
-		"id": 73,
-		"player": 2,
-		"type": 1
-	},
-
-
-	"object_6": {
-		"label": "colAAEmp",
-		"id": 242,
-		"player": 2,
-		"type": 1
-	},
-
-
-	"object_7": {
 		"label": "colFactory2",
 		"id": 74,
 		"player": 2,
@@ -264,7 +208,47 @@
 	},
 
 
-	"object_8": {
+	"object_1": {
+		"label": "cScavFactory1",
+		"id": 295,
+		"player": 2,
+		"type": 1
+	},
+
+
+	"object_2": {
+		"label": "scavHeliTower",
+		"id": 359,
+		"player": 5,
+		"type": 1
+	},
+
+
+	"object_3": {
+		"label": "colCC",
+		"id": 73,
+		"player": 2,
+		"type": 1
+	},
+
+
+	"object_4": {
+		"label": "colFactory1",
+		"id": 75,
+		"player": 2,
+		"type": 1
+	},
+
+
+	"object_5": {
+		"label": "cScavHeliTower",
+		"id": 369,
+		"player": 2,
+		"type": 1
+	},
+
+
+	"object_6": {
 		"label": "cScavFactory2",
 		"id": 79,
 		"player": 2,
@@ -272,10 +256,26 @@
 	},
 
 
-	"object_9": {
-		"label": "colFactory1",
-		"id": 75,
+	"object_7": {
+		"label": "colAAEmp",
+		"id": 242,
 		"player": 2,
+		"type": 1
+	},
+
+
+	"object_8": {
+		"label": "cScavFactory3",
+		"id": 78,
+		"player": 2,
+		"type": 1
+	},
+
+
+	"object_9": {
+		"label": "scavFactory2",
+		"id": 135,
+		"player": 5,
 		"type": 1
 	},
 
