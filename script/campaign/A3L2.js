@@ -272,7 +272,6 @@ function eventStartLevel()
 	const TRUCK_TIME = camChangeOnDiff(camSecondsToMilliseconds((tweakOptions.rec_timerlessMode) ? 45 : 90))
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colSouthBase",
-		rebuildTruck: true,
 		respawnDelay: TRUCK_TIME,
 		rebuildBase: tweakOptions.rec_timerlessMode,
 		truckDroid: getObject("colTruck1"),
@@ -280,7 +279,6 @@ function eventStartLevel()
 	});
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colOverlook",
-		rebuildTruck: true,
 		respawnDelay: TRUCK_TIME,
 		rebuildBase: tweakOptions.rec_timerlessMode,
 		truckDroid: getObject("colTruck2"),
@@ -288,7 +286,6 @@ function eventStartLevel()
 	});
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colMainBase",
-		rebuildTruck: true,
 		respawnDelay: TRUCK_TIME,
 		rebuildBase: tweakOptions.rec_timerlessMode,
 		truckDroid: getObject("colTruck3"),
@@ -301,7 +298,6 @@ function eventStartLevel()
 		// Add a second truck to the Collective's main base
 		camManageTrucks(CAM_THE_COLLECTIVE, {
 			label: "colMainBase",
-			rebuildTruck: true,
 			respawnDelay: TRUCK_TIME,
 			rebuildBase: true,
 			template: cTempl.comtruckt,

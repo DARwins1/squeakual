@@ -558,11 +558,11 @@ function eventStartLevel()
 	});
 
 	// Set up Collective trucks...
-	const TRUCK_TIME = camChangeOnDiff(camSecondsToMilliseconds(70))
+	const TRUCK_TIME = camChangeOnDiff(camSecondsToMilliseconds((tweakOptions.rec_timerlessMode) ? 40 : 80));
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colNWBase",
 		rebuildTruck: (tweakOptions.rec_timerlessMode || difficulty >= MEDIUM), // Don't rebuild this truck unless we're on timerless mode (or on Normal+)
-		respawnDelay: ((tweakOptions.rec_timerlessMode) ? (TRUCK_TIME / 2) : TRUCK_TIME),
+		respawnDelay: TRUCK_TIME,
 		rebuildBase: tweakOptions.rec_timerlessMode,
 		template: cTempl.coltruckht,
 		structset: camAreaToStructSet("colBase1")
@@ -570,7 +570,7 @@ function eventStartLevel()
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colNEBase",
 		rebuildTruck: (tweakOptions.rec_timerlessMode || difficulty >= MEDIUM), // Don't rebuild this truck unless we're on timerless mode (or on Normal+)
-		respawnDelay: ((tweakOptions.rec_timerlessMode) ? (TRUCK_TIME / 2) : TRUCK_TIME),
+		respawnDelay: TRUCK_TIME,
 		rebuildBase: tweakOptions.rec_timerlessMode,
 		template: cTempl.coltruckht,
 		structset: camAreaToStructSet("colBase3")
@@ -580,7 +580,7 @@ function eventStartLevel()
 		camManageTrucks(CAM_THE_COLLECTIVE, {
 			label: "colCraterBase",
 			rebuildTruck: (tweakOptions.rec_timerlessMode || difficulty === INSANE), // Don't rebuild this truck unless we're on timerless mode (or on Insane)
-			respawnDelay: ((tweakOptions.rec_timerlessMode) ? (TRUCK_TIME / 2) : TRUCK_TIME),
+			respawnDelay: TRUCK_TIME,
 			rebuildBase: tweakOptions.rec_timerlessMode,
 			template: cTempl.coltruckht,
 			structset: camAreaToStructSet("colBase2")
@@ -589,67 +589,64 @@ function eventStartLevel()
 
 	if (tweakOptions.rec_timerlessMode)
 	{
-		// // If we're in Timerless mode, set up scavenger Cranes instead of adding a timer
-		// switch (difficulty)
-		// {
-		// 	case INSANE:
-		// 		// Cranes for the easternmost orange and pink bases
-		// 		camManageTrucks(MIS_ORANGE_SCAVS, {
-		// 			label: "orangeNorthBase", // Label of base to rebuild/maintain
-		// 			rebuildBase: true,
-		// 			respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
-		// 			template: cTempl.crane, // Scavenger Crane unit exclusive to Timerless mode
-		// 			structset: camAreaToStructSet("orangeScavBase2")
-		// 		});
-		// 		camManageTrucks(MIS_PINK_SCAVS, {
-		// 			label: "pinkEastBase",
-		// 			rebuildBase: true,
-		// 			respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
-		// 			template: cTempl.crane,
-		// 			structset: camAreaToStructSet("pinkScavBase3")
-		// 		});
-		// 	case HARD: // NOTE: Fall-through here! We still add Cranes from lower difficulties!
-		// 		// Cranes for the westernmost scav bases
-		// 		camManageTrucks(MIS_ORANGE_SCAVS, {
-		// 			label: "orangeNWBase",
-		// 			rebuildBase: true,
-		// 			respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
-		// 			template: cTempl.crane,
-		// 			structset: camAreaToStructSet("orangeScavBase1")
-		// 		});
-		// 		camManageTrucks(MIS_PINK_SCAVS, {
-		// 			label: "pinkWestBase",
-		// 			rebuildBase: true,
-		// 			respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
-		// 			template: cTempl.crane,
-		// 			structset: camAreaToStructSet("pinkScavBase1")
-		// 		});
-		// 		camManageTrucks(MIS_RED_SCAVS, {
-		// 			label: "redSWBase",
-		// 			rebuildBase: true,
-		// 			respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
-		// 			template: cTempl.crane,
-		// 			structset: camAreaToStructSet("redScavBase1")
-		// 		});
-		// 	case MEDIUM:
-		// 		// Crane for the central pink base
-		// 		camManageTrucks(MIS_PINK_SCAVS, {
-		// 			label: "pinkCentralBase",
-		// 			rebuildBase: true,
-		// 			respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
-		// 			template: cTempl.crane,
-		// 			structset: camAreaToStructSet("pinkScavBase2")
-		// 		});
-		// 	default:
-		// 		// Crane for the final red base
-		// 		camManageTrucks(MIS_RED_SCAVS, {
-		// 			label: "redSEBase",
-		// 			rebuildBase: true,
-		// 			respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
-		// 			template: cTempl.crane,
-		// 			structset: camAreaToStructSet("redScavBase2")
-		// 		});
-		// }
+		const CRANE_TIME = camChangeOnDiff(camSecondsToMilliseconds(70));
+		// Southwest scav base
+		camManageTrucks(MIS_CYAN_SCAVS, {
+			label: "scavSWBase",
+			rebuildBase: true,
+			respawnDelay: CRANE_TIME,
+			template: cTempl.crane,
+			structset: camAreaToStructSet("scavBase")
+		});
+		// C-scav west base
+		camManageTrucks(CAM_THE_COLLECTIVE, {
+			label: "cScavWestIsland",
+			rebuildBase: true,
+			respawnDelay: CRANE_TIME,
+			template: cTempl.crane,
+			structset: camAreaToStructSet("cScavBase1").filter((struct) => (camIsScavStruct(struct)))
+		});
+		// C-scav northeast base
+		camManageTrucks(CAM_THE_COLLECTIVE, {
+			label: "cScavNEBase",
+			rebuildBase: true,
+			respawnDelay: CRANE_TIME,
+			template: cTempl.crane,
+			structset: camAreaToStructSet("cScavBase4")
+		});
+		if (difficulty >= MEDIUM)
+		{
+			// C-scav east base
+			camManageTrucks(CAM_THE_COLLECTIVE, {
+				label: "cScavEastBase",
+				rebuildBase: true,
+				respawnDelay: CRANE_TIME,
+				template: cTempl.crane,
+				structset: camAreaToStructSet("cScavBase3")
+			});
+		}
+		if (difficulty >= HARD)
+		{
+			// C-scav outpost
+			camManageTrucks(CAM_THE_COLLECTIVE, {
+				label: "cScavIslandOutpost",
+				rebuildBase: true,
+				respawnDelay: CRANE_TIME,
+				template: cTempl.crane,
+				structset: camAreaToStructSet("cScavBase2")
+			});
+		}
+		if (difficulty === INSANE)
+		{
+			// Southwest scav base (again)
+			camManageTrucks(MIS_CYAN_SCAVS, {
+				label: "scavSWBase",
+				rebuildBase: true,
+				respawnDelay: CRANE_TIME,
+				template: cTempl.crane,
+				structset: camAreaToStructSet("scavBase")
+			});
+		}
 	}
 	else
 	{

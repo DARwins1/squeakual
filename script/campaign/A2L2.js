@@ -308,11 +308,11 @@ function expandMap()
 		suborder: CAM_ORDER_ATTACK
 	});
 	// Trucks
-	const TRUCK_TIME = camChangeOnDiff(camSecondsToMilliseconds(120))
+	const TRUCK_TIME = camChangeOnDiff(camSecondsToMilliseconds((tweakOptions.rec_timerlessMode) ? 60 : 120));
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "echoSWBase",
 		rebuildTruck: (tweakOptions.rec_timerlessMode || difficulty >= MEDIUM),
-		respawnDelay: ((tweakOptions.rec_timerlessMode) ? (TRUCK_TIME / 2) : TRUCK_TIME),
+		respawnDelay: TRUCK_TIME,
 		rebuildBase: tweakOptions.rec_timerlessMode,
 		truckDroid: getObject("echoTruck1"),
 		structset: camAreaToStructSet("colBase1")
@@ -320,7 +320,7 @@ function expandMap()
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "echoMainBase",
 		rebuildTruck: (tweakOptions.rec_timerlessMode || difficulty >= EASY),
-		respawnDelay: ((tweakOptions.rec_timerlessMode) ? (TRUCK_TIME / 2) : TRUCK_TIME),
+		respawnDelay: TRUCK_TIME,
 		rebuildBase: tweakOptions.rec_timerlessMode,
 		truckDroid: getObject("echoTruck2"),
 		structset: camAreaToStructSet("colBase2")
@@ -328,46 +328,56 @@ function expandMap()
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colLZBase",
 		rebuildTruck: (tweakOptions.rec_timerlessMode),
-		respawnDelay: ((tweakOptions.rec_timerlessMode) ? (TRUCK_TIME / 2) : TRUCK_TIME),
+		respawnDelay: TRUCK_TIME,
 		rebuildBase: tweakOptions.rec_timerlessMode,
 		truckDroid: getObject("echoTruck3"),
 		structset: camAreaToStructSet("echoLZStructs")
 	});
 
 	// If we're in Timerless mode, set up scavenger Cranes
-	// if (tweakOptions.rec_timerlessMode)
-	// {
-	// 	// Northeast scav base
-	// 	camManageTrucks(CAM_THE_COLLECTIVE, {
-	// 		label: "scavNEBase",
-	// 		rebuildBase: true,
-	// 		respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
-	// 		template: cTempl.crane,
-	// 		structset: camAreaToStructSet("scavOuterBase4")
-	// 	});
-	// 	if (difficulty >= MEDIUM)
-	// 	{
-	// 		// Southwest scav base
-	// 		camManageTrucks(CAM_THE_COLLECTIVE, {
-	// 			label: "scavHillBase",
-	// 			rebuildBase: true,
-	// 			respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
-	// 			template: cTempl.crane,
-	// 			structset: camAreaToStructSet("scavOuterBase1")
-	// 		});
-	// 	}
-	// 	if (difficulty >= HARD)
-	// 	{
-	// 		// Southeast scav base
-	// 		camManageTrucks(CAM_THE_COLLECTIVE, {
-	// 			label: "scavCanalBase",
-	// 			rebuildBase: true,
-	// 			respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
-	// 			template: cTempl.crane,
-	// 			structset: camAreaToStructSet("scavOuterBase3")
-	// 		});
-	// 	}
-	// }
+	if (tweakOptions.rec_timerlessMode)
+	{
+		const CRANE_TIME = camChangeOnDiff(camSecondsToMilliseconds(70));
+		camManageTrucks(CAM_THE_COLLECTIVE, {
+			label: "cScavNEBase",
+			rebuildBase: true,
+			respawnDelay: CRANE_TIME,
+			template: cTempl.crane,
+			structset: camAreaToStructSet("cScavBase1").filter((struct) => (camIsScavStruct(struct)))
+		});
+		camManageTrucks(CAM_THE_COLLECTIVE, {
+			label: "cScavWestBase",
+			rebuildBase: true,
+			respawnDelay: CRANE_TIME,
+			template: cTempl.crane,
+			structset: camAreaToStructSet("cScavBase2")
+		});
+		camManageTrucks(CAM_THE_COLLECTIVE, {
+			label: "cScavNorthCanalBase",
+			rebuildBase: true,
+			respawnDelay: CRANE_TIME,
+			template: cTempl.crane,
+			structset: camAreaToStructSet("cScavBase3").filter((struct) => (camIsScavStruct(struct)))
+		});
+		camManageTrucks(CAM_THE_COLLECTIVE, {
+			label: "cScavSouthCanalBase",
+			rebuildBase: true,
+			respawnDelay: CRANE_TIME,
+			template: cTempl.crane,
+			structset: camAreaToStructSet("cScavBase4").filter((struct) => (camIsScavStruct(struct)))
+		});
+		if (difficulty >= MEDIUM)
+		{
+			// Echo main base (again)
+			camManageTrucks(CAM_THE_COLLECTIVE, {
+				label: "echoMainBase",
+				respawnDelay: TRUCK_TIME / 2,
+				rebuildBase: true,
+				template: cTempl.cyben,
+				structset: camAreaToStructSet("colBase2")
+			});
+		}
+	}
 
 	// Queue up enemy events
 	queue("enableFirstFactories", camChangeOnDiff(camMinutesToMilliseconds(1.75)));

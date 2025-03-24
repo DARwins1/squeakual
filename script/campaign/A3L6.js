@@ -405,7 +405,6 @@ function eventStartLevel()
 	const TRUCK_TIME = camChangeOnDiff(camSecondsToMilliseconds((tweakOptions.rec_timerlessMode) ? 45 : 90));
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colWestRoadblock",
-		rebuildTruck: true,
 		respawnDelay: TRUCK_TIME,
 		rebuildBase: tweakOptions.rec_timerlessMode,
 		truckDroid: getObject("colTruck1"),
@@ -413,7 +412,6 @@ function eventStartLevel()
 	});
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colEastRoadblock",
-		rebuildTruck: true,
 		respawnDelay: TRUCK_TIME,
 		rebuildBase: tweakOptions.rec_timerlessMode,
 		truckDroid: getObject("colTruck2"),
@@ -421,7 +419,6 @@ function eventStartLevel()
 	});
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colSouthEastBase",
-		rebuildTruck: true,
 		respawnDelay: TRUCK_TIME,
 		rebuildBase: tweakOptions.rec_timerlessMode,
 		truckDroid: getObject("colTruck3"),
@@ -429,7 +426,6 @@ function eventStartLevel()
 	});
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colOverlook",
-		rebuildTruck: true,
 		respawnDelay: TRUCK_TIME,
 		rebuildBase: tweakOptions.rec_timerlessMode,
 		truckDroid: getObject("colTruck4"),
@@ -437,18 +433,35 @@ function eventStartLevel()
 	});
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colDepotBase",
-		rebuildTruck: true,
 		respawnDelay: TRUCK_TIME,
 		rebuildBase: tweakOptions.rec_timerlessMode,
 		truckDroid: getObject("colTruck5"),
 		structset: camAreaToStructSet("colBase6")
 	});
 
-	if (tweakOptions.rec_timerlessMode)
+	if (tweakOptions.rec_timerlessMode || difficulty === INSANE)
 	{
-		// TODO: Cranes and more trucks...
+		// Add another truck to the main depot
+		camManageTrucks(CAM_THE_COLLECTIVE, {
+			label: "colDepotBase",
+			respawnDelay: TRUCK_TIME,
+			rebuildBase: tweakOptions.rec_timerlessMode,
+			template: cTempl.comtruckt,
+			structset: camAreaToStructSet("colBase6")
+		});
 	}
-	else
+	if (tweakOptions.rec_timerlessMode && difficulty >= HARD)
+	{
+		// Add another truck to the southeast base
+		camManageTrucks(CAM_THE_COLLECTIVE, {
+			label: "colSouthEastBase",
+			respawnDelay: TRUCK_TIME,
+			rebuildBase: tweakOptions.rec_timerlessMode,
+			template: cTempl.comtruckt,
+			structset: camAreaToStructSet("colBase4")
+		});
+	}
+	if (!tweakOptions.rec_timerlessMode)
 	{
 		setMissionTime(camChangeOnDiff(camMinutesToSeconds(75)));
 	}

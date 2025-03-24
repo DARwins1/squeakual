@@ -516,7 +516,6 @@ function eventStartLevel()
 	const TRUCK_TIME = camChangeOnDiff(camSecondsToMilliseconds((tweakOptions.rec_timerlessMode) ? 45 : 90));
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colEastBase",
-		rebuildTruck: true,
 		respawnDelay: TRUCK_TIME,
 		rebuildBase: tweakOptions.rec_timerlessMode,
 		truckDroid: getObject("colTruck1"),
@@ -524,7 +523,6 @@ function eventStartLevel()
 	});
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colSoutheastBase",
-		rebuildTruck: true,
 		respawnDelay: TRUCK_TIME,
 		rebuildBase: tweakOptions.rec_timerlessMode,
 		truckDroid: getObject("colTruck2"),
@@ -532,7 +530,6 @@ function eventStartLevel()
 	});
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colNorthwestBase",
-		rebuildTruck: true,
 		respawnDelay: TRUCK_TIME,
 		rebuildBase: tweakOptions.rec_timerlessMode,
 		truckDroid: getObject("colTruck3"),
@@ -540,7 +537,6 @@ function eventStartLevel()
 	});
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colVtolBase",
-		rebuildTruck: true,
 		respawnDelay: TRUCK_TIME,
 		rebuildBase: tweakOptions.rec_timerlessMode,
 		truckDroid: getObject("colTruck4"),
@@ -548,7 +544,6 @@ function eventStartLevel()
 	});
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colMainBase",
-		rebuildTruck: true,
 		respawnDelay: TRUCK_TIME,
 		rebuildBase: tweakOptions.rec_timerlessMode,
 		truckDroid: getObject("colTruck5"),
@@ -556,7 +551,6 @@ function eventStartLevel()
 	});
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colLZBase",
-		rebuildTruck: true,
 		respawnDelay: TRUCK_TIME,
 		rebuildBase: tweakOptions.rec_timerlessMode,
 		structset: camAreaToStructSet("colLzStructs"),
@@ -565,7 +559,53 @@ function eventStartLevel()
 
 	if (tweakOptions.rec_timerlessMode)
 	{
-		// TODO: Cranes and more trucks...
+		// Cranes and more trucks...
+		const CRANE_TIME = camChangeOnDiff(camSecondsToMilliseconds(60));
+		camManageTrucks(CAM_THE_COLLECTIVE, {
+			label: "cScavWaterBase",
+			rebuildBase: true,
+			respawnDelay: CRANE_TIME,
+			template: cTempl.crane,
+			structset: camAreaToStructSet("cScavBase").filter((struct) => (camIsScavStruct(struct)))
+		});
+		// Main base (again)
+		camManageTrucks(CAM_THE_COLLECTIVE, {
+			label: "colMainBase",
+			respawnDelay: TRUCK_TIME,
+			rebuildBase: tweakOptions.rec_timerlessMode,
+			template: cTempl.comtruckt,
+			structset: camAreaToStructSet("colBase5")
+		});
+		if (difficulty >= HARD)
+		{
+			// Another Crane for the scav base
+			camManageTrucks(CAM_THE_COLLECTIVE, {
+				label: "cScavWaterBase",
+				rebuildBase: true,
+				respawnDelay: CRANE_TIME,
+				template: cTempl.crane,
+				structset: camAreaToStructSet("cScavBase").filter((struct) => (camIsScavStruct(struct)))
+			});
+			// Another truck for the VTOL base
+			camManageTrucks(CAM_THE_COLLECTIVE, {
+				label: "colVtolBase",
+				respawnDelay: TRUCK_TIME,
+				rebuildBase: tweakOptions.rec_timerlessMode,
+				template: cTempl.comtruckt,
+				structset: camAreaToStructSet("colBase4")
+			});
+		}
+		if (difficulty === INSANE)
+		{
+			// A THIRD truck for the main base!!!
+			camManageTrucks(CAM_THE_COLLECTIVE, {
+				label: "colMainBase",
+				respawnDelay: TRUCK_TIME,
+				rebuildBase: tweakOptions.rec_timerlessMode,
+				template: cTempl.comtruckt,
+				structset: camAreaToStructSet("colBase5")
+			});
+		}
 	}
 	else
 	{

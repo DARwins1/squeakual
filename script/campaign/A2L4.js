@@ -18,6 +18,9 @@ var site2Clear;
 var site3Clear;
 var vtolsCalled;
 var factoriesEnabled;
+var colStructSet1;
+var colStructSet2;
+var colStructSet3;
 
 camAreaEvent("vtolRemoveZone", function(droid)
 {
@@ -114,23 +117,23 @@ function enableAllFactories()
 	camEnableFactory("colFactory1");
 	camEnableFactory("colCybFactory2");
 
-	// Also enable these trucks
-	const TRUCK_TIME = camChangeOnDiff(camSecondsToMilliseconds(120))
+	// Also set up more trucks
+	const TRUCK_TIME = camChangeOnDiff(camSecondsToMilliseconds((tweakOptions.rec_timerlessMode) ? 60 : 120));
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colAABase1",
 		rebuildTruck: (tweakOptions.rec_timerlessMode || difficulty >= HARD),
-		respawnDelay: ((tweakOptions.rec_timerlessMode) ? (TRUCK_TIME / 2) : TRUCK_TIME),
+		respawnDelay: TRUCK_TIME,
 		rebuildBase: tweakOptions.rec_timerlessMode,
 		template: cTempl.coltruckht,
-		structset: camAreaToStructSet("colBase1")
+		structset: colStructSet1
 	});
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colAABase2",
 		rebuildTruck: (tweakOptions.rec_timerlessMode || difficulty >= HARD),
-		respawnDelay: ((tweakOptions.rec_timerlessMode) ? (TRUCK_TIME / 2) : TRUCK_TIME),
+		respawnDelay: TRUCK_TIME,
 		rebuildBase: tweakOptions.rec_timerlessMode,
 		template: ((difficulty >= MEDIUM) ? cTempl.comtruckt : cTempl.coltruckht),
-		structset: camAreaToStructSet("colBase2")
+		structset: colStructSet2
 	});
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colAABase3",
@@ -138,8 +141,20 @@ function enableAllFactories()
 		respawnDelay: ((tweakOptions.rec_timerlessMode) ? (TRUCK_TIME / 2) : TRUCK_TIME),
 		rebuildBase: tweakOptions.rec_timerlessMode,
 		template: cTempl.comtruckt,
-		structset: camAreaToStructSet("colBase3")
+		structset: colStructSet3
 	});
+
+	if (tweakOptions.rec_timerlessMode && difficulty >= HARD)
+	{
+		// Collective main base (again)
+		camManageTrucks(CAM_THE_COLLECTIVE, {
+			label: "colAABase3",
+			respawnDelay: TRUCK_TIME * 2,
+			rebuildBase: true,
+			template: cTempl.comtruckht,
+			structset: camAreaToStructSet("colBase3")
+		});
+	}
 
 	factoriesEnabled = true;
 }
@@ -358,15 +373,26 @@ function eventStartLevel()
 	});
 
 	// Set up trucks
-	const TRUCK_TIME = camChangeOnDiff(camSecondsToMilliseconds(120))
+	const TRUCK_TIME = camChangeOnDiff(camSecondsToMilliseconds((tweakOptions.rec_timerlessMode) ? 60 : 120));
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colHoverBase",
 		rebuildTruck: (tweakOptions.rec_timerlessMode),
-		respawnDelay: ((tweakOptions.rec_timerlessMode) ? (TRUCK_TIME / 2) : TRUCK_TIME),
+		respawnDelay: TRUCK_TIME,
 		rebuildBase: tweakOptions.rec_timerlessMode,
 		template: cTempl.comtruckt,
 		structset: camAreaToStructSet("colBase4")
 	});
+
+	if (tweakOptions.rec_timerlessMode)
+	{
+		const CRANE_TIME = camChangeOnDiff(camSecondsToMilliseconds(70));
+		camManageTrucks(CAM_THE_COLLECTIVE, {
+			label: "cScavSEBase",
+			rebuildBase: true,
+			respawnDelay: CRANE_TIME,
+			template: cTempl.crane,
+			structset: camAreaToStructSet("cScavBase").filter((struct) => (camIsScavStruct(struct)))
+		});	}
 
 	camManageGroup(camMakeGroup("cyborgPatrolGroup"), CAM_ORDER_PATROL, {
 		repair: 60,
@@ -383,6 +409,10 @@ function eventStartLevel()
 	site2Clear = false;
 	site3Clear = false;
 	factoriesEnabled = false;
+	// Store these now in case the player blows up these bases before the trucks are assigned
+	colStructSet1 = camAreaToStructSet("colBase1");
+	colStructSet2 = camAreaToStructSet("colBase2");
+	colStructSet3 = camAreaToStructSet("colBase3");
 
 	hackAddMessage("AA_SITE1", PROX_MSG, CAM_HUMAN_PLAYER);
 	hackAddMessage("AA_SITE2", PROX_MSG, CAM_HUMAN_PLAYER);

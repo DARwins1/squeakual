@@ -359,8 +359,8 @@ function eventStartLevel()
 	const TRUCK_TIME = camChangeOnDiff(camSecondsToMilliseconds(70))
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colHydroBase",
-		rebuildTruck: (tweakOptions.rec_timerlessMode || difficulty >= MEDIUM),
-		respawnDelay: ((tweakOptions.rec_timerlessMode) ? (TRUCK_TIME / 2) : TRUCK_TIME),
+		rebuildTruck: (tweakOptions.rec_timerlessMode || difficulty >= EASY),
+		respawnDelay: TRUCK_TIME,
 		rebuildBase: tweakOptions.rec_timerlessMode,
 		truckDroid: getObject("colTruck"),
 		structset: camAreaToStructSet("colBase")
@@ -368,80 +368,50 @@ function eventStartLevel()
 
 	if (tweakOptions.rec_timerlessMode)
 	{
-		// switch (difficulty)
-		// {
-		// 	case INSANE:
-		// 		// Cranes for the red roadblock base and orange central crater base
-		// 		camManageTrucks(MIS_ORANGE_SCAVS, {
-		// 			label: "orangeSouthCraterBase",
-		// 			rebuildBase: true,
-		// 			respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
-		// 			template: cTempl.crane,
-		// 			structset: camAreaToStructSet("orangeBase3")
-		// 		});
-		// 		camManageTrucks(MIS_RED_SCAVS, {
-		// 			label: "redRoadblockBase",
-		// 			rebuildBase: true,
-		// 			respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
-		// 			template: cTempl.crane,
-		// 			structset: camAreaToStructSet("redBase1")
-		// 		});
-		// 	case HARD: // NOTE: Fall-through here! We still add Cranes from lower difficulties!
-		// 		// Cranes for the red north road base, and orange northeast crater base
-		// 		camManageTrucks(MIS_RED_SCAVS, {
-		// 			label: "redNorthRoadBase",
-		// 			rebuildBase: true,
-		// 			respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
-		// 			template: cTempl.crane,
-		// 			structset: camAreaToStructSet("redBase2")
-		// 		});
-		// 		camManageTrucks(MIS_ORANGE_SCAVS, {
-		// 			label: "orangeNorthCraterBase",
-		// 			rebuildBase: true,
-		// 			respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
-		// 			template: cTempl.crane,
-		// 			structset: camAreaToStructSet("orangeBase4")
-		// 		});
-		// 	case MEDIUM:
-		// 		// Cranes for the south red base and northwest orange base
-		// 		camManageTrucks(MIS_RED_SCAVS, {
-		// 			label: "redSouthRoadBase",
-		// 			rebuildBase: true,
-		// 			respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
-		// 			template: cTempl.crane,
-		// 			structset: camAreaToStructSet("redBase4")
-		// 		});
-		// 		camManageTrucks(MIS_ORANGE_SCAVS, {
-		// 			label: "orangeNorthRoadBase",
-		// 			rebuildBase: true,
-		// 			respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
-		// 			template: cTempl.crane,
-		// 			structset: camAreaToStructSet("orangeBase1")
-		// 		});
-		// 	default:
-		// 		// Cranes for the red uplink base, plateau base, and orange hill base
-		// 		camManageTrucks(MIS_RED_SCAVS, {
-		// 			label: "redUplinkBase",
-		// 			rebuildBase: true,
-		// 			respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
-		// 			template: cTempl.crane,
-		// 			structset: camAreaToStructSet("redBase5")
-		// 		});
-		// 		camManageTrucks(MIS_RED_SCAVS, {
-		// 			label: "redPlateauBase",
-		// 			rebuildBase: true,
-		// 			respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
-		// 			template: cTempl.crane,
-		// 			structset: camAreaToStructSet("redBase3")
-		// 		});
-		// 		camManageTrucks(MIS_ORANGE_SCAVS, {
-		// 			label: "orangePlateauBase",
-		// 			rebuildBase: true,
-		// 			respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
-		// 			template: cTempl.crane,
-		// 			structset: camAreaToStructSet("orangeBase2")
-		// 		});
-		// }
+		const CRANE_TIME = camChangeOnDiff(camSecondsToMilliseconds(70));
+		camManageTrucks(MIS_CYAN_SCAVS, {
+			label: "scavCityBase",
+			rebuildBase: true,
+			respawnDelay: CRANE_TIME,
+			template: cTempl.crane,
+			structset: camAreaToStructSet("scavBase1")
+		});
+		camManageTrucks(MIS_CYAN_SCAVS, {
+			label: "scavBasinBase",
+			rebuildBase: true,
+			respawnDelay: CRANE_TIME,
+			template: cTempl.crane,
+			structset: camAreaToStructSet("scavBase2")
+		});
+		camManageTrucks(CAM_THE_COLLECTIVE, {
+			label: "cScavMarshBase",
+			rebuildBase: true,
+			respawnDelay: CRANE_TIME,
+			template: cTempl.crane,
+			structset: camAreaToStructSet("cScavBase").filter((struct) => (camIsScavStruct(struct)))
+		});
+
+		if (difficulty >= MEDIUM)
+		{
+			// Collective main base (again)
+			camManageTrucks(CAM_THE_COLLECTIVE, {
+				label: "colHydroBase",
+				respawnDelay: TRUCK_TIME,
+				rebuildBase: true,
+				template: cTempl.comtruckt,
+				structset: camAreaToStructSet("colBase")
+			});
+		}
+		if (difficulty >= HARD)
+		{
+			camManageTrucks(CAM_THE_COLLECTIVE, {
+				label: "colLZBase",
+				respawnDelay: TRUCK_TIME,
+				rebuildBase: true,
+				template: cTempl.comtruckt,
+				structset: camAreaToStructSet("colLzStructs")
+			});
+		}
 	}
 	else
 	{

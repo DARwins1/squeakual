@@ -385,11 +385,7 @@ function activateCollective()
 		label: "colBasinOutpost",
 		respawnDelay: TRUCK_TIME,
 		template: cTempl.coltruckht,
-		structset: camAreaToStructSet("colBase1").filter((struct) => (
-			// Filter out scavenger structures
-			struct.stat !== "A0BabaFactory" && struct.stat !== "A0BabaMRAPit" && struct.stat !== "A0BabaFlameTower"
-			&& struct.stat !== "A0BabaGunTowerEND" && struct.stat !== "A0BabaHorizontalWall" && struct.stat !== "A0BabaCornerWall"
-		)) 
+		structset: camAreaToStructSet("colBase1").filter((struct) => (!camIsScavStruct(struct)))
 	});
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colSouthCanalRoadblock",
@@ -435,7 +431,50 @@ function activateCollective()
 	});
 	if (tweakOptions.rec_timerlessMode)
 	{
-		// TODO: Cranes
+		const CRANE_TIME = camChangeOnDiff(camSecondsToMilliseconds(70));
+		camManageTrucks(CAM_THE_COLLECTIVE, {
+			label: "colBasinOutpost",
+			rebuildBase: true,
+			respawnDelay: CRANE_TIME,
+			template: cTempl.crane,
+			structset: camAreaToStructSet("colBase1").filter((struct) => (camIsScavStruct(struct)))
+		});
+		camManageTrucks(CAM_THE_COLLECTIVE, {
+			label: "cScavCanalBase",
+			rebuildBase: true,
+			respawnDelay: CRANE_TIME,
+			template: cTempl.crane,
+			structset: camAreaToStructSet("cScavBase").filter((struct) => (camIsScavStruct(struct)))
+		});
+		if (difficulty >= MEDIUM)
+		{
+			// Add another crane to the central scav base
+			camManageTrucks(CAM_THE_COLLECTIVE, {
+				label: "cScavCanalBase",
+				rebuildBase: true,
+				respawnDelay: CRANE_TIME,
+				template: cTempl.crane,
+				structset: camAreaToStructSet("cScavBase").filter((struct) => (camIsScavStruct(struct)))
+			});
+		}
+		if (difficulty >= HARD)
+		{
+			// Add even more trucks...
+			camManageTrucks(CAM_THE_COLLECTIVE, {
+				label: "colNorthCanalBase",
+				respawnDelay: TRUCK_TIME * 2,
+				rebuildBase: tweakOptions.rec_timerlessMode,
+				template: cTempl.comtruckht,
+				structset: camAreaToStructSet("colBase3")
+			});
+			camManageTrucks(CAM_THE_COLLECTIVE, {
+				label: "colMainBase",
+				respawnDelay: TRUCK_TIME,
+				rebuildBase: tweakOptions.rec_timerlessMode,
+				template: cTempl.comtruckht,
+				structset: camAreaToStructSet("colBase7")
+			});
+		}
 	}
 	// Allied Trucks
 	charlieTruckJob1 = camManageTrucks(MIS_TEAM_CHARLIE, {

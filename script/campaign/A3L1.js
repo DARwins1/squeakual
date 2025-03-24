@@ -525,27 +525,24 @@ function eventStartLevel()
 	});
 
 	// Set up Collective trucks...
-	const TRUCK_TIME = camChangeOnDiff(camSecondsToMilliseconds(90))
+	const TRUCK_TIME = camChangeOnDiff(camSecondsToMilliseconds((tweakOptions.rec_timerlessMode) ? 45 : 90));
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colSouthRoadblock",
-		rebuildTruck: true,
-		respawnDelay: ((tweakOptions.rec_timerlessMode) ? (TRUCK_TIME / 2) : TRUCK_TIME),
+		respawnDelay: TRUCK_TIME,
 		rebuildBase: tweakOptions.rec_timerlessMode,
 		truckDroid: getObject("colTruck1"),
 		structset: camAreaToStructSet("colRoadblock1").filter((struct) => (!camIsScavStruct(struct.stat)))
 	});
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colEastRoadblock",
-		rebuildTruck: true,
-		respawnDelay: ((tweakOptions.rec_timerlessMode) ? (TRUCK_TIME / 2) : TRUCK_TIME),
+		respawnDelay: TRUCK_TIME,
 		rebuildBase: tweakOptions.rec_timerlessMode,
 		truckDroid: getObject("colTruck2"),
 		structset: camAreaToStructSet("colRoadblock2").filter((struct) => (!camIsScavStruct(struct.stat)))
 	});
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colMainBase",
-		rebuildTruck: true,
-		respawnDelay: ((tweakOptions.rec_timerlessMode) ? (TRUCK_TIME / 2) : TRUCK_TIME),
+		respawnDelay: TRUCK_TIME,
 		rebuildBase: tweakOptions.rec_timerlessMode,
 		truckDroid: getObject("colTruck3"),
 		structset: camAreaToStructSet("colBase")
@@ -554,8 +551,7 @@ function eventStartLevel()
 	{
 		camManageTrucks(CAM_THE_COLLECTIVE, {
 			label: "colLZBase",
-			rebuildTruck: true,
-			respawnDelay: ((tweakOptions.rec_timerlessMode) ? (TRUCK_TIME / 2) : TRUCK_TIME),
+			respawnDelay: TRUCK_TIME,
 			rebuildBase: true,
 			template: cTempl.coltruckht,
 			structset: camAreaToStructSet("colLZ")
@@ -564,67 +560,22 @@ function eventStartLevel()
 
 	if (tweakOptions.rec_timerlessMode)
 	{
-		// // If we're in Timerless mode, set up scavenger Cranes instead of adding a timer
-		// switch (difficulty)
-		// {
-		// 	case INSANE:
-		// 		// Cranes for the easternmost orange and pink bases
-		// 		camManageTrucks(MIS_ORANGE_SCAVS, {
-		// 			label: "orangeNorthBase", // Label of base to rebuild/maintain
-		// 			rebuildBase: true,
-		// 			respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
-		// 			template: cTempl.crane, // Scavenger Crane unit exclusive to Timerless mode
-		// 			structset: camAreaToStructSet("orangeScavBase2")
-		// 		});
-		// 		camManageTrucks(MIS_PINK_SCAVS, {
-		// 			label: "pinkEastBase",
-		// 			rebuildBase: true,
-		// 			respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
-		// 			template: cTempl.crane,
-		// 			structset: camAreaToStructSet("pinkScavBase3")
-		// 		});
-		// 	case HARD: // NOTE: Fall-through here! We still add Cranes from lower difficulties!
-		// 		// Cranes for the westernmost scav bases
-		// 		camManageTrucks(MIS_ORANGE_SCAVS, {
-		// 			label: "orangeNWBase",
-		// 			rebuildBase: true,
-		// 			respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
-		// 			template: cTempl.crane,
-		// 			structset: camAreaToStructSet("orangeScavBase1")
-		// 		});
-		// 		camManageTrucks(MIS_PINK_SCAVS, {
-		// 			label: "pinkWestBase",
-		// 			rebuildBase: true,
-		// 			respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
-		// 			template: cTempl.crane,
-		// 			structset: camAreaToStructSet("pinkScavBase1")
-		// 		});
-		// 		camManageTrucks(MIS_RED_SCAVS, {
-		// 			label: "redSWBase",
-		// 			rebuildBase: true,
-		// 			respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
-		// 			template: cTempl.crane,
-		// 			structset: camAreaToStructSet("redScavBase1")
-		// 		});
-		// 	case MEDIUM:
-		// 		// Crane for the central pink base
-		// 		camManageTrucks(MIS_PINK_SCAVS, {
-		// 			label: "pinkCentralBase",
-		// 			rebuildBase: true,
-		// 			respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
-		// 			template: cTempl.crane,
-		// 			structset: camAreaToStructSet("pinkScavBase2")
-		// 		});
-		// 	default:
-		// 		// Crane for the final red base
-		// 		camManageTrucks(MIS_RED_SCAVS, {
-		// 			label: "redSEBase",
-		// 			rebuildBase: true,
-		// 			respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
-		// 			template: cTempl.crane,
-		// 			structset: camAreaToStructSet("redScavBase2")
-		// 		});
-		// }
+		// If we're in Timerless mode, set up scavenger Cranes instead of adding a timer
+		const CRANE_TIME = camChangeOnDiff(camSecondsToMilliseconds(70));
+		camManageTrucks(CAM_THE_COLLECTIVE, {
+			label: "colSouthRoadblock",
+			rebuildBase: true,
+			respawnDelay: CRANE_TIME,
+			template: cTempl.crane,
+			structset: camAreaToStructSet("colRoadblock1").filter((struct) => (camIsScavStruct(struct)))
+		});
+		camManageTrucks(CAM_THE_COLLECTIVE, {
+			label: "colEastRoadblock",
+			rebuildBase: true,
+			respawnDelay: CRANE_TIME,
+			template: cTempl.crane,
+			structset: camAreaToStructSet("colRoadblock2").filter((struct) => (camIsScavStruct(struct)))
+		});
 	}
 	else
 	{

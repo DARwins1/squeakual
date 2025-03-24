@@ -926,7 +926,6 @@ function eventStartLevel()
 	const TRUCK_TIME = camChangeOnDiff(camSecondsToMilliseconds((tweakOptions.rec_timerlessMode) ? 45 : 90));
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colLZBase",
-		rebuildTruck: true,
 		respawnDelay: TRUCK_TIME,
 		rebuildBase: (tweakOptions.rec_timerlessMode || difficulty >= MEDIUM),
 		structset: camAreaToStructSet("colLzStructs"),
@@ -934,7 +933,6 @@ function eventStartLevel()
 	});
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colEastOutpost",
-		rebuildTruck: true,
 		respawnDelay: TRUCK_TIME,
 		rebuildBase: tweakOptions.rec_timerlessMode,
 		structset: camAreaToStructSet("colBase1"),
@@ -942,7 +940,6 @@ function eventStartLevel()
 	});
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colWestOutpost",
-		rebuildTruck: true,
 		respawnDelay: TRUCK_TIME,
 		rebuildBase: tweakOptions.rec_timerlessMode,
 		structset: camAreaToStructSet("colBase2"),
@@ -950,7 +947,6 @@ function eventStartLevel()
 	});
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colNorthBase",
-		rebuildTruck: true,
 		respawnDelay: TRUCK_TIME,
 		rebuildBase: tweakOptions.rec_timerlessMode,
 		structset: camAreaToStructSet("colBase3"),
@@ -958,7 +954,6 @@ function eventStartLevel()
 	});
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colTrenchOutpost",
-		rebuildTruck: true,
 		respawnDelay: TRUCK_TIME,
 		rebuildBase: tweakOptions.rec_timerlessMode,
 		structset: camAreaToStructSet("colBase4"),
@@ -966,18 +961,39 @@ function eventStartLevel()
 	});
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colUplinkBase",
-		rebuildTruck: true,
 		respawnDelay: TRUCK_TIME,
 		structset: camAreaToStructSet("colBase5"),
 		truckDroid: getObject("colTruck5")
 	});
 	camManageTrucks(CAM_THE_COLLECTIVE, {
 		label: "colUplinkBase",
-		rebuildTruck: true,
 		respawnDelay: TRUCK_TIME,
 		structset: camAreaToStructSet("colBase5"),
 		truckDroid: getObject("colTruck6")
 	});
+
+	if (tweakOptions.rec_timerlessMode && difficulty >= HARD)
+	{
+		// Add another uplink base truck
+		camManageTrucks(CAM_THE_COLLECTIVE, {
+			label: "colUplinkBase",
+			respawnDelay: TRUCK_TIME * 2,
+			structset: camAreaToStructSet("colBase5"),
+			template: cTempl.comtruckt
+		});
+
+		if (difficulty === INSANE)
+		{
+			// Add another north base truck
+			camManageTrucks(CAM_THE_COLLECTIVE, {
+				label: "colNorthBase",
+				respawnDelay: TRUCK_TIME,
+				rebuildBase: tweakOptions.rec_timerlessMode,
+				structset: camAreaToStructSet("colBase3"),
+				template: cTempl.comtruckt
+			});
+		}
+	}
 
 	// Most Infested units start out pre-damaged
 	camSetPreDamageModifier(CAM_INFESTED, [50, 80], [60, 90], CAM_INFESTED_PREDAMAGE_EXCLUSIONS);
