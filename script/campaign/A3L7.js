@@ -432,9 +432,9 @@ function spawnOnslaughtWaves()
 		[ // Collective tanks + Stingers + Boom Ticks
 			cTempl.boomtick, // Boom Ticks
 			cTempl.infcohhcant, // Heavy Cannons
-			cTempl.infcommcant, cTempl.infcommcant, // Medium Cannons
-			cTempl.infcomatt, // Lancers
-			cTempl.infcolpodt, cTempl.infcolpodt, // MRPs
+			cTempl.infcommcant, cTempl.infcommcant, cTempl.infcommcant, // Medium Cannons
+			cTempl.infcomatt, cTempl.infcomatt, // Lancers
+			cTempl.infcolpodt, cTempl.infcolpodt, cTempl.infcolpodt, // MRPs
 			cTempl.infbloke, cTempl.infbloke, cTempl.infbloke, cTempl.infbloke, // Blokes
 			cTempl.infkevbloke, cTempl.infkevbloke, cTempl.infkevbloke, cTempl.infkevbloke,
 			cTempl.infbloke, cTempl.infbloke, // Lances
@@ -636,9 +636,8 @@ function eventStartLevel()
 
 	camSetArtifacts({
 		"colResearch": { tech: "R-Wpn-MG-ROF03" }, // Hyper Fire Chaingun Upgrade
-		"colFactory1": { tech: "R-Wpn-Flamer-Damage05" }, // Superhot Flamer Gel Mk2
-		"colFactory3": { tech: "R-Wpn-HowitzerMk1" }, // Howitzer
-		// "colAAEmp": { tech: "R-Wpn-AAGun-Damage02" }, // AA HE Flak Mk2
+		"colFactory1": { tech: "R-Wpn-Rocket07-Tank-Killer" }, // Tank Killer
+		"colFactory3": { tech: "R-Struc-Factory-Upgrade02" }, // Robotic Manufacturing
 	});
 
 	camSetEnemyBases({

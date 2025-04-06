@@ -48,6 +48,8 @@ function heliAttack()
 
 function vtolAttack()
 {
+	playSound(cam_sounds.enemyVtolsDetected);
+
 	// MGs and Phosphor Bombs
 	const templates = [cTempl.colphosv];
 	if (difficulty < INSANE)
@@ -579,7 +581,7 @@ function eventStartLevel()
 	}
 	else
 	{
-		setMissionTime(camChangeOnDiff(camMinutesToSeconds(60)));
+		setMissionTime(camChangeOnDiff(camMinutesToSeconds(70)));
 	}
 
 	startedFromMenu = false;

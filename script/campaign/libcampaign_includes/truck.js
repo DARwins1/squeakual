@@ -259,7 +259,7 @@ function camRebuildTruck(index, force)
 	}
 	__camTruckAssignList.push(index); // Start expecting the truck
 	// If we have a base label, mark the base's position
-	camQueueDroidProduction(ti.player, ti.template, camDef(__camEnemyBases[ti.label]) ? camMakePos(ti.label) : undefined);
+	camQueueDroidProduction(ti.player, ti.template, camDef(__camEnemyBases[ti.label]) ? __camEnemyBases[ti.label].cleanup : undefined);
 	return true;
 }
 

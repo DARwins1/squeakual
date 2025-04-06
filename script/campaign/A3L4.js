@@ -39,6 +39,8 @@ camAreaEvent("vtolRemoveZone", function(droid)
 
 function vtolAttack()
 {
+	playSound(cam_sounds.enemyVtolsDetected);
+
 	// Cluster Bombs, Assault Guns, and Lancers
 	const templates = [cTempl.colbombv, cTempl.colagv, cTempl.colatv];
 	const ext = {

@@ -406,7 +406,7 @@ function eventStartLevel()
 	// Most Infested units start out pre-damaged
 	camSetPreDamageModifier(CAM_INFESTED, [50, 80], [60, 90], CAM_INFESTED_PREDAMAGE_EXCLUSIONS);
 
-	setTimer("sendInfestedGroup", camChangeOnDiff(camSecondsToMilliseconds(30)));
+	setTimer("sendInfestedGroup", camChangeOnDiff(camSecondsToMilliseconds(50)));
 
 	camSetWeather(CAM_WEATHER_RAINSTORM);
 	camSetSkyType(CAM_SKY_NIGHT);

@@ -19,14 +19,14 @@ const mis_scavResearch = [
 	"R-Wpn-Flamer-Damage02", "R-Wpn-Cannon-Damage02", "R-Wpn-MG-ROF01",
 	"R-Wpn-Rocket-ROF01", "R-Wpn-Mortar-ROF01", "R-Wpn-Flamer-ROF01",
 	"R-Wpn-Cannon-ROF01", "R-Vehicle-Metals02", "R-Struc-Materials02", 
-	"R-Defense-WallUpgrade02", "R-Sys-Engineering01",
+	"R-Defense-WallUpgrade01", "R-Sys-Engineering01",
 ];
 const mis_collectiveResearch = [
 	"R-Wpn-MG-Damage03", "R-Wpn-Rocket-Damage02", "R-Wpn-Mortar-Damage03", 
 	"R-Wpn-Flamer-Damage02", "R-Wpn-Cannon-Damage02", "R-Wpn-MG-ROF01",
 	"R-Wpn-Rocket-ROF02", "R-Wpn-Mortar-ROF01", "R-Wpn-Flamer-ROF01",
 	"R-Wpn-Cannon-ROF02", "R-Vehicle-Metals02", "R-Struc-Materials02", 
-	"R-Defense-WallUpgrade02", "R-Sys-Engineering01", "R-Vehicle-Engine01",
+	"R-Defense-WallUpgrade01", "R-Sys-Engineering01", "R-Vehicle-Engine01",
 	"R-Cyborg-Metals02",
 ];
 
@@ -58,6 +58,8 @@ function heliAttack2()
 
 function vtolAttack()
 {
+	playSound(cam_sounds.enemyVtolsDetected);
+
 	// Focus towards the player's LZ
 	const templates = [cTempl.colatv, cTempl.colhmgv]; // Lancers and HMGs
 	const ext = {
@@ -181,7 +183,7 @@ function activateFinalFactories()
 function startCollectiveTransports()
 {
 	sendCollectiveTransporter();
-	setTimer("sendCollectiveTransporter", camChangeOnDiff(camMinutesToMilliseconds(6)));
+	setTimer("sendCollectiveTransporter", camChangeOnDiff(camMinutesToMilliseconds(8)));
 }
 
 function sendCollectiveTransporter() 
@@ -496,7 +498,7 @@ function eventStartLevel()
 				repair: 35
 			},
 			groupSize: 4,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(60)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(80)),
 			templates: [ cTempl.colpodt, cTempl.colhmght, cTempl.colmrat, cTempl.colflamt, cTempl.colcanht, cTempl.colmcant ]
 		},
 		"colFactory2": {
@@ -507,7 +509,7 @@ function eventStartLevel()
 				repair: 25
 			},
 			groupSize: 5,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(130)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(180)),
 			// Collective medium tanks (mostly)
 			templates: [ cTempl.commcant, cTempl.colaaht, cTempl.comatt, cTempl.commcant ]
 		},

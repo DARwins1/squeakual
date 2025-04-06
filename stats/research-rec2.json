@@ -600,7 +600,6 @@
     "R-Cyborg-Metals05": {
         "iconID": "IMAGE_RES_CYBORGTECH",
         "id": "R-Cyborg-Metals05",
-        "keyTopic": 1,
         "imdName": "icmolql.pie",
         "name": "Cyborg Dense Composite Alloys Mk2",
         "requiredResearch": [
@@ -683,11 +682,10 @@
     "R-Cyborg-Armor-Heat02": {
         "iconID": "IMAGE_RES_CYBORGTECH",
         "id": "R-Cyborg-Armor-Heat02",
-        "keyTopic": 1,
         "imdName": "icamrhot.pie",
         "name": "Cyborg Thermal Armor Mk2",
         "requiredResearch": [
-            "R-Cyborg-Metals06",
+            "R-Cyborg-Metals05",
             "R-Cyborg-Armor-Heat01"
         ],
         "researchPoints": 2000,
@@ -710,6 +708,7 @@
         "imdName": "icamrhot.pie",
         "name": "Cyborg Thermal Armor Mk3",
         "requiredResearch": [
+            "R-Vehicle-Armor-Heat03",
             "R-Cyborg-Armor-Heat02"
         ],
         "researchPoints": 2400,
@@ -1150,11 +1149,10 @@
     "R-Vehicle-Metals05": {
         "iconID": "IMAGE_RES_DROIDTECH",
         "id": "R-Vehicle-Metals05",
-        "keyTopic": 1,
         "imdName": "icmolql.pie",
         "name": "Dense Composite Alloys Mk2",
         "requiredResearch": [
-            "R-Vehicle-Body02",
+            "R-Vehicle-Body09",
             "R-Vehicle-Metals04"
         ],
         "researchPoints": 2400,
@@ -1181,10 +1179,10 @@
     "R-Vehicle-Metals06": {
         "iconID": "IMAGE_RES_DROIDTECH",
         "id": "R-Vehicle-Metals06",
+        "keyTopic": 1,
         "imdName": "icmolql.pie",
         "name": "Dense Composite Alloys Mk3",
         "requiredResearch": [
-            "R-Vehicle-Body09",
             "R-Vehicle-Metals05"
         ],
         "researchPoints": 2800,
@@ -1233,11 +1231,10 @@
     "R-Vehicle-Armor-Heat02": {
         "iconID": "IMAGE_RES_DROIDTECH",
         "id": "R-Vehicle-Armor-Heat02",
-        "keyTopic": 1,
         "imdName": "icamrhot.pie",
         "name": "Thermal Armor Mk2",
         "requiredResearch": [
-            "R-Vehicle-Metals06",
+            "R-Vehicle-Metals05",
             "R-Vehicle-Armor-Heat01"
         ],
         "researchPoints": 2100,
@@ -1257,6 +1254,7 @@
     "R-Vehicle-Armor-Heat03": {
         "iconID": "IMAGE_RES_DROIDTECH",
         "id": "R-Vehicle-Armor-Heat03",
+        "keyTopic": 1,
         "imdName": "icamrhot.pie",
         "name": "Thermal Armor Mk3",
         "requiredResearch": [
@@ -2210,7 +2208,7 @@
         "imdName": "BLFACT1.PIE",
         "keyTopic": 1,
         "msgName": "RES_ST_FU1",
-        "name": "Automated Factory Production",
+        "name": "Automated Manufacturing",
         "researchPoints": 2400,
         "researchPower": 75,
         "results": [
@@ -4898,7 +4896,7 @@
         "name": "HEAT Rocket Warhead Mk3",
         "requiredResearch": [
             "R-Wpn-Rocket-Damage05",
-            "R-Wpn-Rocket07-Tank-Killer"
+            "R-Wpn-Rocket06-IDF"
         ],
         "researchPoints": 2100,
         "researchPower": 250,
@@ -5134,10 +5132,10 @@
     "R-Wpn-Rocket-ROF03": {
         "iconID": "IMAGE_RES_WEAPONTECH",
         "id": "R-Wpn-Rocket-ROF03",
+        "keyTopic": 1,
         "name": "Rocket Autoloader Mk3",
         "requiredResearch": [
             "R-Wpn-Rocket-ROF02",
-            "R-Wpn-Rocket06-IDF"
         ],
         "researchPoints": 2400,
         "researchPower": 225,

@@ -623,6 +623,16 @@
             "AAGun2Mk1"
         ]
     },
+    "INF-H-QuadBofAA-T-Broken": {
+        "body": "Body6SUPPBroken",
+        "id": "INF-H-QuadBofAA-T-Broken",
+        "name": "Infested Derelict Cyclone Panther Tracks",
+        "propulsion": "tracked01",
+        "type": "DROID",
+        "weapons": [
+            "InfAAGun2Mk1"
+        ]
+    },
     "CO-H-QuadRotAA-T": {
         "body": "Body9REC",
         "id": "CO-H-QuadRotAA-T",
@@ -853,6 +863,16 @@
         "type": "DROID",
         "weapons": [
             "Flame2"
+        ]
+    },
+    "INF-M-HvFlame-Track-Broken": {
+        "body": "Body6SUPPBroken",
+        "id": "INF-M-HvFlame-Track-Broken",
+        "name": "Infested Derelict Inferno Panther Tracks",
+        "propulsion": "tracked01",
+        "type": "DROID",
+        "weapons": [
+            "InfFlame2"
         ]
     },
     "CO-M-HvMortar-T": {

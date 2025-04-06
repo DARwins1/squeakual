@@ -47,6 +47,8 @@ function heliAttack2()
 
 function vtolAttack()
 {
+	playSound(cam_sounds.enemyVtolsDetected);
+
 	// Focus towards the player's LZ
 	const templates = [cTempl.colatv, cTempl.colhmgv]; // Lancers and HMGs
 	const ext = {

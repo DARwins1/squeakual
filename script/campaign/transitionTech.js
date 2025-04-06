@@ -215,36 +215,36 @@ const camA3L7AllyResearch = camAct3StartResearch.concat([
 	"R-Vehicle-Metals04", // Artifact
 	"R-Vehicle-Body11", "R-Cyborg-Metals04", "R-Vehicle-Armor-Heat01",
 	"R-Cyborg-Armor-Heat01", "R-Vehicle-Engine05",
-	"R-Wpn-Rocket07-Tank-Killer", // Artifact
-	"R-Cyborg-Hvywpn-TK", "R-Defense-WallTower-HvyA-Trocket", "R-Defense-HvyA-Trocket",
-	"R-Wpn-Rocket-Damage06",
-	"R-Struc-Factory-Upgrade02", // Artifact
-	"R-Struc-RprFac-Upgrade02", "R-Struc-VTOLPad-Upgrade02",
 	"R-Defense-WallUpgrade05", // Artifact
 	"R-Struc-Materials05",
 	"R-Wpn-AAGun-Damage02", // Artifact
+	"R-Wpn-Rocket-ROF03", // Artifact
+	"R-Wpn-Flamer-Damage05", // Artifact
+	"R-Wpn-HowitzerMk1", // Artifact
+	"R-Defense-Howitzer", "R-Wpn-Howitzer-Damage01", "R-Wpn-Howitzer-ROF01",
+	"R-Wpn-Mortar-Damage05",
 ]);
 
 // Used to grant research to teams Foxtrot and Golf on A3L9
 // Note that the tech gained on A3L8 is not included here
 const camA3L9EnemyResearch = camA3L7AllyResearch.concat([
 	// A3L7
-	"R-Wpn-HowitzerMk1", // Artifact
-	"R-Defense-Howitzer", "R-Wpn-Howitzer-Damage01", "R-Wpn-Howitzer-ROF01",
-	"R-Wpn-Mortar-Damage05",
+	"R-Struc-Factory-Upgrade02", // Artifact
+	"R-Struc-RprFac-Upgrade02", "R-Struc-VTOLPad-Upgrade02",
 	"R-Wpn-MG-ROF03", // Artifact
 	"R-Wpn-MG-Damage06",
-	"R-Wpn-Flamer-Damage05", // Artifact
+	"R-Wpn-Rocket07-Tank-Killer", // Artifact
+	"R-Cyborg-Hvywpn-TK", "R-Defense-WallTower-HvyA-Trocket", "R-Defense-HvyA-Trocket",
 ]);
 
 const camAct4StartResearch = camA3L9EnemyResearch.concat([
 	// A3L8
-	"R-Wpn-Cannon3Mk1", // Artifact
-	"R-Wpn-Cannon-Damage06", "R-Wpn-Cannon-ROF03", "R-Wpn-AAGun-ROF02",
-	"R-Defense-WallTower04", 
+	"R-Vehicle-Body09", // Artifact
+	"R-Vehicle-Metals05", "R-Vehicle-Armor-Heat02", "R-Cyborg-Metals05",
+	"R-Cyborg-Armor-Heat02", "R-Vehicle-Engine06",
 	"R-Wpn-Bomb02", // Artifact
 	"R-Wpn-Rocket06-IDF", // Artifact
-	"R-Defense-IDFRocket", "R-Wpn-Rocket-ROF03",
+	"R-Defense-IDFRocket", "R-Wpn-Rocket-Damage06",
 	"R-Sys-Sensor-Upgrade01", // Artifact
 	"R-Wpn-Howitzer-Accuracy01", // Artifact
 	"R-Wpn-Mortar-Acc03", "R-Wpn-AAGun-Accuracy03", "R-Wpn-Howitzer-Damage02"
@@ -255,9 +255,9 @@ const camAct4StartResearch = camA3L9EnemyResearch.concat([
 // For documentation purposes only
 const camAct4RemainingResearch = [
 	// A4L1
-	"R-Vehicle-Body09", // Tiger
-	"R-Vehicle-Metals05", "R-Vehicle-Armor-Heat02", "R-Cyborg-Metals05",
-	"R-Cyborg-Armor-Heat02", "R-Vehicle-Engine06",
+	"R-Wpn-Cannon3Mk1", // Heavy Cannon
+	"R-Wpn-Cannon-Damage06", "R-Wpn-Cannon-ROF03", "R-Wpn-AAGun-ROF02",
+	"R-Defense-WallTower04", 
 	// A4L2
 	"R-Wpn-AAGun04", // Whirlwind
 	"R-Wpn-AAGun-Damage03", // AA HE Flak Mk3

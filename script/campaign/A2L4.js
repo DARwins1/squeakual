@@ -44,6 +44,7 @@ function vtolAttack()
 	{
 		return;
 	}
+	playSound(cam_sounds.enemyVtolsDetected);
 
 	const templates = [cTempl.colatv, cTempl.colhmgv, cTempl.colbombv]; // Lancers, HMGs, and Cluster Bombs
 	const ext = {
@@ -320,7 +321,7 @@ function eventStartLevel()
 				repair: 40
 			},
 			groupSize: 3,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(55)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(65)),
 			templates: [ cTempl.comhmgt, cTempl.colpodt, cTempl.commcant, cTempl.colmrat, cTempl.comatt ]
 		},
 		"colFactory2": {
@@ -340,7 +341,7 @@ function eventStartLevel()
 				interval: camSecondsToMilliseconds(28)
 			},
 			groupSize: 5,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(65)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(75)),
 			templates: hoverTemplates
 		},
 		"colCybFactory1": {

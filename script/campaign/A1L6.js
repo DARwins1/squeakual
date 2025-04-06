@@ -5,6 +5,7 @@ include("script/campaign/structSets.js");
 var allowWin;
 var savedPower;
 var waveIndex;
+var vtolsDetected;
 var colTruckJob1;
 var colTruckJob2;
 var colTruckJob3;
@@ -14,7 +15,7 @@ const mis_collectiveResearch = [
 	"R-Wpn-Flamer-Damage02", "R-Wpn-Cannon-Damage02", "R-Wpn-MG-ROF01",
 	"R-Wpn-Rocket-ROF02", "R-Wpn-Mortar-ROF01", "R-Wpn-Flamer-ROF01",
 	"R-Wpn-Cannon-ROF02", "R-Vehicle-Metals02", "R-Struc-Materials02", 
-	"R-Defense-WallUpgrade02", "R-Sys-Engineering01", "R-Vehicle-Engine01",
+	"R-Defense-WallUpgrade01", "R-Sys-Engineering01", "R-Vehicle-Engine01",
 ];
 const MIS_GROUND_WAVE_DELAY = camSecondsToMilliseconds(60);
 const mis_vtolRemovePos = {x: 16, y: 2};
@@ -47,6 +48,12 @@ function heliAttack()
 // Hit-and-run VTOLs
 function vtolAttack()
 {
+	if (!vtolsDetected)
+	{
+		playSound(cam_sounds.enemyVtolsDetected);
+		vtolsDetected = true;
+	}
+
 	let vtolPositions = [
 		"vtolAttackPos1",
 		"vtolAttackPos2",
@@ -310,7 +317,7 @@ function checkIfLaunched()
 function eventStartLevel()
 {
 	camSetStandardWinLossConditions(CAM_VICTORY_EVACUATION, "A2L1", {
-		reinforcements: camMinutesToSeconds(4), // Duration the transport "leaves" map.
+		reinforcements: camMinutesToSeconds(3.5), // Duration the transport "leaves" map.
 		gameOverOnDeath: false, // Don't fail when the player runs out of stuff
 		callback: "checkIfLaunched"
 	});
@@ -380,6 +387,7 @@ function eventStartLevel()
 	allowWin = false;
 	savedPower = 0;
 	waveIndex = 0;
+	vtolsDetected = false;
 	// camPlayVideos([{video: "MB2_DII_MSG", type: CAMP_MSG}, {video: "MB2_DII_MSG2", type: MISS_MSG}]);
 
 	queue("heliAttack", camChangeOnDiff(camMinutesToMilliseconds(2)));

@@ -325,6 +325,7 @@ const cam_sounds = {
 	powerTransferred: "power-transferred.ogg",
 	laserSatelliteFiring: "pcv650.ogg",
 	artifactRecovered: "pcv352.ogg",
+	enemyVtolsDetected: "pcv388.ogg",
 	tracker: "pcv657.ogg", // Used to place a red dot on the minimap
 	soundIdentifier: ".ogg", //Used by video.js to check for sound before a video.
 };

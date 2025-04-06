@@ -61,6 +61,8 @@ function heliAttack()
 // Real VTOLs !!! (scary)
 function vtolAttack()
 {
+	playSound(cam_sounds.enemyVtolsDetected);
+
 	// Send a one-time bomber squadron from the northeast
 	camSetVtolData(CAM_THE_COLLECTIVE, "vtolAttackPos1", "vtolRemoveZone", [cTempl.colbombv], undefined, // These VTOLs don't come back
 		undefined, {limit: 2}

@@ -7,7 +7,7 @@ function eventStartLevel()
 	setNoGoArea(100, 115, 102, 117, CAM_HUMAN_PLAYER);
 	if (!tweakOptions.rec_timerlessMode)
 	{
-		setMissionTime(camChangeOnDiff(camHoursToSeconds(1.25)));
+		setMissionTime(camChangeOnDiff(camHoursToSeconds(1.5)));
 	}
 	else
 	{

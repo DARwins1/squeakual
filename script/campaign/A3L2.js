@@ -33,6 +33,8 @@ camAreaEvent("vtolRemoveZone", function(droid)
 
 function vtolAttack()
 {
+	playSound(cam_sounds.enemyVtolsDetected);
+	
 	// Phosphor Bombs, Assault Guns, and Lancers
 	const templates = [cTempl.colphosv, cTempl.colagv, cTempl.colatv];
 	const ext = {
@@ -306,7 +308,7 @@ function eventStartLevel()
 	}
 	else
 	{
-		setMissionTime(camChangeOnDiff(camMinutesToSeconds(60)));
+		setMissionTime(camChangeOnDiff(camMinutesToSeconds(70)));
 	}
 
 	// Rank and assign the Collective commander

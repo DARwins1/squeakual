@@ -60,6 +60,8 @@ function heliAttack()
 // Called shortly after the player breaks stealth
 function vtolAttack1()
 {
+	playSound(cam_sounds.enemyVtolsDetected);
+
 	const templates = [cTempl.colatv, cTempl.colhmgv]; // Lancers and HMGs
 	const ext = {
 		limit: [2, 3],
@@ -72,7 +74,9 @@ function vtolAttack1()
 // Called after a long delay or when the player advances far enough
 function vtolAttack2()
 {
-	const templates = [cTempl.colatv, ((difficulty >= HARD) ? comhbombv : cTempl.combombv)]; // Lancers and Cluster Bombs (or HEAP Bombs on Hard+)
+	playSound(cam_sounds.enemyVtolsDetected);
+
+	const templates = [cTempl.colatv, ((difficulty >= HARD) ? cTempl.comhbombv : cTempl.combombv)]; // Lancers and Cluster Bombs (or HEAP Bombs on Hard+)
 	const ext = {
 		limit: [((difficulty >= HARD) ? 3 : 2), 2],
 		targetPlayer: CAM_HUMAN_PLAYER,
@@ -163,7 +167,7 @@ function camEnemyBaseEliminated_scavLZBase()
 		{text: "LIEUTENANT: We need to wait until the other teams are ready and in place.", delay: 3, sound: CAM_RCLICK},
 		// Long delay...
 		{text: "CHARLIE: Team Charlie here; our LZ is secure.", delay: 16, sound: CAM_RCLICK},
-		{text: "CHARLIE: We'll standing by for your signal, Lieutenant.", delay: 3, sound: CAM_RCLICK},
+		{text: "CHARLIE: We're standing by for your signal, Lieutenant.", delay: 3, sound: CAM_RCLICK},
 		// Long delay...
 		{text: "GOLF: Team Golf here, we're ready to go.", delay: 12, sound: CAM_RCLICK},
 		{text: "GOLF: Let's break that prison and get everyone home in one piece.", delay: 3, sound: CAM_RCLICK},
@@ -753,7 +757,7 @@ function stealthBreakDialogue()
 {
 	if (!playerHidden) return; // Don't play if the player has already been revealed
 	camQueueDialogue([
-		{text: "LIEUTENANT: Commander Bravo, I'll leave the first strike to you.", delay: 0, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Commander Bravo, I'll leave the first strike to you.", delay: 3, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: Once you open fire, Commanders Charlie and Golf will support you.", delay: 3, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: Remember; even though Clayde's diversion should prevent enemy reinforcements, the Collective are sure to have a large force stationed here.", delay: 3, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: Make sure you're ready when you attack, because there's no going back now...", delay: 4, sound: CAM_RCLICK},
@@ -770,7 +774,8 @@ function diversionDialogue()
 		{text: "LIEUTENANT: The Collective is scrambling their forces all over the map...", delay: 3, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: ...But where did Clayde get the manpower to attack all of these places at once?", delay: 5, sound: CAM_RCLICK},
 		{text: "GOLF: Who cares?", delay: 3, sound: CAM_RCLICK},
-		{text: "GOLF: Now we can put the hurt on these Collective dummies!", delay: 1, sound: CAM_RCLICK},
+		{text: "GOLF: Now we can put the hurt on these Collective dummies.", delay: 1, sound: CAM_RCLICK},
+		{text: "GOLF: And I've just been ITCHING for some payback!", delay: 3, sound: CAM_RCLICK},
 	]);
 }
 
@@ -798,7 +803,7 @@ function playerInfestedDialogue()
 		{text: "CHARLIE: The same things we fought in the mountains...?", delay: 2, sound: CAM_RCLICK},
 		{text: "CHARLIE: The things that team Alpha...", delay: 3, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: This can't be happening..!", delay: 2, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: Oh... Clayde...", delay: 3},
+		{text: "LIEUTENANT: Oh, Clayde...", delay: 3},
 		{text: "LIEUTENANT: ...What have you done..?", delay: 2, sound: CAM_RCLICK},
 		{text: "CHARLIE: Lieutenant!", delay: 2, sound: CAM_RCLICK},
 		{text: "CHARLIE: We still need to bust that Collective prison!", delay: 2, sound: CAM_RCLICK},
@@ -809,12 +814,12 @@ function playerInfestedDialogue()
 }
 
 // Dialogue when the main camp is secure
-function playerInfestedDialogue()
+function campClearDialogue()
 {
 	camQueueDialogue([
 		{text: "CHARLIE: Bravo!", delay: 4},
 		{text: "CHARLIE: You've gotta get back to base, man.", delay: 2, sound: CAM_RCLICK},
-		{text: "CHARLIE: The Collective is gonna any minute now!", delay: 3, sound: CAM_RCLICK},
+		{text: "CHARLIE: The Collective is gonna assault you any minute now!", delay: 3, sound: CAM_RCLICK},
 		{text: "GOLF: Don't worry about us, Bravo.", delay: 3, sound: CAM_RCLICK},
 		{text: "GOLF: We'll get these guys back safe and sound.", delay: 3},
 		{text: "GOLF: You just worry about saving your own hide!", delay: 3},

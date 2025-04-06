@@ -567,7 +567,7 @@ function echoEradicatedDialogue()
 		{text: "LIEUTENANT: Team Echo has been eradicated.", delay: 2, sound: CAM_RCLICK},
 		{text: "CLAYDE: Good.", delay: 3, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: ...General?", delay: 6, sound: CAM_RCLICK},
-		{text: "CLAYDE: If we're to survive this ordeal, we'll all need to work together.", delay: 2, sound: CAM_RCLICK},
+		{text: "CLAYDE: ...If we're to survive this ordeal, we'll all need to work together.", delay: 2, sound: CAM_RCLICK},
 		{text: "CLAYDE: To trust each other.", delay: 3, sound: CAM_RCLICK},
 		{text: "CLAYDE: To be loyal to each other.", delay: 1, sound: CAM_RCLICK},
 		{text: "CLAYDE: There's no room for traitors and turncoats among us.", delay: 3, sound: CAM_RCLICK},

@@ -4,6 +4,7 @@ include("script/campaign/structSets.js");
 
 var allowWin;
 var waveIndex;
+var vtolsDetected;
 var specialIndex;
 var colTruckJob1;
 var colTruckJob2;
@@ -50,6 +51,12 @@ function checkEnemyVtolArea()
 // Hit-and-run VTOLs
 function vtolAttack()
 {
+	if (!vtolsDetected)
+	{
+		playSound(cam_sounds.enemyVtolsDetected);
+		vtolsDetected = true;
+	}
+
 	let vtolPositions = [
 		"vtolAttackPos1",
 		"vtolAttackPos2",
@@ -503,7 +510,7 @@ function dumpStructSets()
 function eventStartLevel()
 {
 	camSetStandardWinLossConditions(CAM_VICTORY_EVACUATION, "A3L1", {
-		reinforcements: camMinutesToSeconds(5), // Duration the transport "leaves" map.
+		reinforcements: camMinutesToSeconds(4.5), // Duration the transport "leaves" map.
 		gameOverOnDeath: false, // Don't fail when the player runs out of stuff
 		callback: "checkIfLaunched"
 	});
@@ -596,6 +603,7 @@ function eventStartLevel()
 	waveIndex = 0;
 	specialIndex = 0;
 	hoverIndex = 0;
+	vtolsDetected = false;
 
 	queue("vtolAttack", camChangeOnDiff(camMinutesToMilliseconds(2)));
 	queue("startInfestedAttacks", camChangeOnDiff(camMinutesToMilliseconds(12)));

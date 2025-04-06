@@ -597,42 +597,19 @@ function __camContinueProduction(structure)
 			const template = __camFactoryQueue[__PLAYER][i].template
 			const destPos = __camFactoryQueue[__PLAYER][i].position;
 
+			// Only build if destination is reachable or undefined
 			if (camDef(destPos))
 			{
 				// If a position is defined, only build this droid if we are the closest viable factory
-				let closestLabel = null;
-				let closestDist = -1;
-				// Loop through each factory label
-				for (const compareLabel in __camFactoryInfo)
+				const bestLabel = __camClosestViableFactory(template, destPos);
+				// Check if our factory is the closest viable one we've found
+				if (camDef(bestLabel) && flabel === bestLabel)
 				{
-					// If the factory exists and is enabled...
-					if (getObject(compareLabel) !== null && __camFactoryInfo[compareLabel].enabled === true)
+					// If so, then attempt to build
+					if (__camBuildDroid(template, struct))
 					{
-						const factoryStruct = getObject(compareLabel);
-						const structPos = camMakePos(struct);
-						// Check if the factory can produce this template and the template can reach the position...
-						if (propulsionCanReach(template.prop, structPos.x, structPos.y, destPos.x, destPos.y)
-							&& camFactoryCanProduceTemplate(template, factoryStruct))
-						{
-							const FACTORY_DIST = camDist(structPos.x, structPos.y, destPos.x, destPos.y);
-							// ...Then check if this factory is the closest one we've found...
-							if (FACTORY_DIST < closestDist || closestDist < 0)
-							{
-								closestDist = FACTORY_DIST;
-								closestLabel = compareLabel;
-							}
-						}
-					}
-
-					// Check if our factory is the closest viable one we've found
-					if (closestDist > 0 && flabel === closestLabel)
-					{
-						// If so, then attempt to build
-						if (__camBuildDroid(template, struct))
-						{
-							__camFactoryQueue[__PLAYER].shift();
-							return; // Don't update the last production time
-						}
+						__camFactoryQueue[__PLAYER].shift();
+						return; // Don't update the last production time
 					}
 				}
 			}
@@ -647,8 +624,6 @@ function __camContinueProduction(structure)
 				}
 			}
 		}
-		// TODO: Check past the first item in the queue?
-		// Only build if destination is reachable or undefined
 	}
 
 	const fi = __camFactoryInfo[flabel];
@@ -703,6 +678,42 @@ function __camContinueProduction(structure)
 		}
 	}
 	fi.lastprod = gameTime;
+}
+
+// Returns the label of the closest viable factory to the given position
+// A viable factory:
+// Is not destroyed
+// Is enabled
+// Can build the given template
+// Is in a place where the given template can reach the given position from the factory
+// Returns undefined if no viable factory exists
+function __camClosestViableFactory(template, position)
+{
+	let closestLabel = undefined;
+	let closestDist = -1;
+	// Loop through each factory label
+	for (const compareLabel in __camFactoryInfo)
+	{
+		// If the factory exists and is enabled...
+		if (getObject(compareLabel) !== null && __camFactoryInfo[compareLabel].enabled === true)
+		{
+			const factoryStruct = getObject(compareLabel);
+			const structPos = camMakePos(factoryStruct);
+			// Check if the factory can produce this template and the template can reach the position...
+			if (propulsionCanReach(template.prop, structPos.x, structPos.y, position.x, position.y)
+				&& camFactoryCanProduceTemplate(template, factoryStruct))
+			{
+				const FACTORY_DIST = camDist(structPos.x, structPos.y, position.x, position.y);
+				// ...Then check if this factory is the closest one we've found...
+				if (FACTORY_DIST < closestDist || closestDist < 0)
+				{
+					closestDist = FACTORY_DIST;
+					closestLabel = compareLabel;
+				}
+			}
+		}
+	}
+	return closestLabel;
 }
 
 // Pre-damage a newly spawned droid

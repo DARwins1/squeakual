@@ -286,7 +286,7 @@ function eventStartLevel()
 	camSetArtifacts({
 		"colCC": { tech: "R-Sys-Sensor-Upgrade01" }, // Sensor Upgrade
 		"colResearch": { tech: "R-Wpn-Howitzer-Accuracy01" }, // Target Acquisition Artillery Shells
-		"colFactory3": { tech: "R-Wpn-Cannon3Mk1" }, // Heavy Cannon
+		"colFactory3": { tech: "R-Vehicle-Body09" }, // Tiger
 		"colVtolFactory2": { tech: "R-Wpn-Bomb02" }, // HEAP Bomb Bay
 		"rippleEmp": { tech: "R-Wpn-Rocket06-IDF" }, // Ripple Rockets
 	});
@@ -453,7 +453,7 @@ function eventStartLevel()
 				targetPlayer: CAM_HUMAN_PLAYER
 			},
 			groupSize: 4,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(55)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(85)),
 			// Lancers + Assault Cannons
 			templates: [ cTempl.colatv, cTempl.comacanv ]
 		},
@@ -464,7 +464,7 @@ function eventStartLevel()
 				targetPlayer: CAM_HUMAN_PLAYER
 			},
 			groupSize: 3,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(95)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(125)),
 			// Bomber spam
 			templates: [ cTempl.comhbombv, cTempl.colphosv ]
 		},

@@ -15,6 +15,7 @@ const mis_infestedResearch = [
 var allowWin;
 var savedPower;
 var phase;
+var vtolsDetected;
 var foxtrotCommanderDeathTime;
 var golfSensorIdx;
 var foxtrotIdx;
@@ -63,6 +64,12 @@ function heliAttack()
 // TODO: implement CAM_ORDER_STRIKE here
 function vtolAttack()
 {
+	if (!vtolsDetected)
+	{
+		playSound(cam_sounds.enemyVtolsDetected);
+		vtolsDetected = true;
+	}
+
 	let vtolPositions = [
 		"vtolAttackPos1",
 		"vtolAttackPos2",
@@ -615,7 +622,7 @@ function dumpStructSets()
 function eventStartLevel()
 {
 	camSetStandardWinLossConditions(CAM_VICTORY_EVACUATION, "A4L1", {
-		reinforcements: camMinutesToSeconds(6), // Duration the transport "leaves" map.
+		reinforcements: camMinutesToSeconds(5.5), // Duration the transport "leaves" map.
 		gameOverOnDeath: false, // Don't fail when the player runs out of stuff
 		callback: "checkIfLaunched"
 	});
@@ -874,6 +881,7 @@ function eventStartLevel()
 	golfSensorIdx = 1;
 	foxtrotIdx = 0;
 	golfIdx = 0;
+	vtolsDetected = false;
 
 	// Most Infested units start out pre-damaged
 	camSetPreDamageModifier(CAM_INFESTED, [50, 80], [60, 90], CAM_INFESTED_PREDAMAGE_EXCLUSIONS);
