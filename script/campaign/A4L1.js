@@ -88,7 +88,7 @@ function eventTransporterLanded(transport)
 // Called on a delay to avoid failing the player if Charlie's units aren't transferred fast enough
 function setVictory()
 {
-	camSetStandardWinLossConditions(CAM_VICTORY_STANDARD, "A4L2", {
+	camSetStandardWinLossConditions(CAM_VICTORY_STANDARD, "A4L2S", {
 		ignoreInfestedUnits: true // The Infested never stop spawning; their units don't need to be wiped out to win
 	});
 }
@@ -948,11 +948,11 @@ function eventStartLevel()
 	}
 	else
 	{
-		// Grant 100 power for every droid the player saved from the last campaign
+		// Grant 400 power for every droid the player saved from the last campaign
 		let numDroids = enumDroid(CAM_HUMAN_PLAYER).length - 1; // Don't count the transporter itself
 		// Also include the cargo of the first transport
 		numDroids += enumDroid(CAM_HUMAN_PLAYER, DROID_SUPERTRANSPORTER)[0].cargoCount - 1; // Cargo count seems to always have at least 1?
-		setPower(numDroids * 100, CAM_HUMAN_PLAYER);
+		setPower(numDroids * 400, CAM_HUMAN_PLAYER);
 	}
 	setReinforcementTime(camMinutesToSeconds(1)); // 1 minute
 

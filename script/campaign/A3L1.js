@@ -668,11 +668,11 @@ function eventStartLevel()
 	}
 	else
 	{
-		// Grant 100 power for every droid the player saved from the last campaign
+		// Grant 300 power for every droid the player saved from the last campaign
 		let numDroids = enumDroid(CAM_HUMAN_PLAYER).length - 1; // Don't count the transporter itself
 		// Also include the cargo of the first transport
 		numDroids += enumDroid(CAM_HUMAN_PLAYER, DROID_SUPERTRANSPORTER)[0].cargoCount - 1; // Cargo count seems to always have at least 1?
-		setPower(numDroids * 100, CAM_HUMAN_PLAYER);
+		setPower(numDroids * 300, CAM_HUMAN_PLAYER);
 	}
 	setReinforcementTime(camMinutesToSeconds(1)); // 1 minute
 
