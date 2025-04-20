@@ -10,7 +10,8 @@ const mis_collectiveResearch = [
 	"R-Defense-WallUpgrade05", "R-Sys-Engineering02", "R-Cyborg-Metals04",
 	"R-Wpn-Cannon-Accuracy02", "R-Wpn-Rocket-Accuracy03", "R-Wpn-AAGun-ROF02",
 	"R-Wpn-AAGun-Damage02", "R-Vehicle-Engine05", "R-Wpn-AAGun-Accuracy01",
-	"R-Struc-RprFac-Upgrade02", "R-Struc-VTOLPad-Upgrade01",
+	"R-Struc-RprFac-Upgrade02", "R-Struc-VTOLPad-Upgrade01", "R-Wpn-Howitzer-Damage01",
+	"R-Wpn-Howitzer-ROF01",
 ];
 const mis_infestedResearch = [
 	"R-Wpn-MG-Damage04", "R-Wpn-Rocket-Damage03", "R-Wpn-Mortar-Damage04", 
@@ -200,9 +201,6 @@ function eventDestroyed(obj)
 			camEnableFactory("colFactory3");
 			camEnableFactory("colCybFactory2");
 			camEnableFactory("colCybFactory3");
-
-			// Stop rebuilding the Collective sensor
-			camLockRefillableGroup(colSensorGroup);
 		}
 	}
 }
@@ -582,6 +580,11 @@ function removeUplinkBlip()
 	hackRemoveMessage("UPLINK_BEACON", PROX_MSG, CAM_HUMAN_PLAYER);
 }
 
+function allowSensorRebuilding()
+{
+	return luresActive;
+}
+
 // Returns true if the final Collective base is destroyed
 // Returns false if the Uplink itself is destroyed
 function uplinkSecure()
@@ -637,7 +640,7 @@ function eventStartLevel()
 	camSetArtifacts({
 		"colResearch": { tech: "R-Wpn-MG-ROF03" }, // Hyper Fire Chaingun Upgrade
 		"colFactory1": { tech: "R-Wpn-Rocket07-Tank-Killer" }, // Tank Killer
-		"colFactory3": { tech: "R-Struc-Factory-Upgrade02" }, // Robotic Manufacturing
+		"colFactory3": { tech: "R-Wpn-Flamer-Damage05" }, // Superhot Flamer Gel Mk2
 	});
 
 	camSetEnemyBases({
@@ -875,6 +878,7 @@ function eventStartLevel()
 		templates: [
 			cTempl.comsensht, // 1 Sensor
 		],
+		callback: "allowSensorRebuilding",
 		factories: ["colFactory3"]
 		}, CAM_ORDER_ATTACK, {
 			repair: 40,

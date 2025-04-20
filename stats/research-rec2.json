@@ -383,9 +383,6 @@
         "id": "R-Cyborg-Hvywpn-Acannon",
         "msgName": "RES_CYW_H_AC",
         "name": "Super Auto-Cannon Cyborg",
-        "redComponents": [
-            "CyborgCannon"
-        ],
         "requiredResearch": [
             "R-Wpn-Cannon5",
             "R-Cyborg-Hvywpn-Mcannon"
@@ -422,6 +419,9 @@
         "keyTopic": 1,
         "msgName": "RES_CYW_H_MC",
         "name": "Super Heavy-Gunner",
+        "redComponents": [
+            "CyborgCannon"
+        ],
         "requiredResearch": [
             "R-Wpn-Cannon2Mk1"
         ],
@@ -438,6 +438,9 @@
         "keyTopic": 1,
         "msgName": "RES_CYW_HVYMOR",
         "name": "Super Heavy Grenadier Cyborg",
+        "redComponents": [
+            "Cyb-Wpn-Grenade"
+        ],
         "requiredResearch": [
             "R-Wpn-Mortar02Hvy",
             "R-Cyb-Wpn-Grenade"
@@ -5198,7 +5201,7 @@
         "msgName": "RES_W_AA4",
         "name": "Whirlwind AA Turret",
         "redComponents": [
-            "QuadMg1AAGun"
+            "AAGun2Mk1"
         ],
         "requiredResearch": [
             "R-Wpn-MG4",
@@ -5599,7 +5602,7 @@
         "msgName": "RES_W_BMB4",
         "name": "Thermite Bomb Bay",
         "requiredResearch": [
-            "R-Wpn-Flamer-Damage06",
+            "R-Wpn-Flamer-Damage05",
             "R-Wpn-Bomb03",
             "R-Wpn-Bomb02"
         ],
@@ -5893,10 +5896,9 @@
     "R-Wpn-Howitzer-ROF02": {
         "iconID": "IMAGE_RES_WEAPONTECH",
         "id": "R-Wpn-Howitzer-ROF02",
-        "keyTopic": 1,
         "name": "Howitzer Autoloader Mk2",
         "requiredResearch": [
-            "R-Wpn-Mortar-ROF02",
+            "R-Wpn-Cannon-ROF03",
             "R-Wpn-Howitzer-ROF01"
         ],
         "researchPoints": 2200,
@@ -5926,7 +5928,7 @@
         "id": "R-Wpn-Howitzer-ROF03",
         "name": "Howitzer Autoloader Mk3",
         "requiredResearch": [
-            "R-Wpn-Mortar-ROF03",
+            "R-Wpn-Mortar-ROF04",
             "R-Wpn-Howitzer-ROF02"
         ],
         "researchPoints": 2600,
@@ -5954,6 +5956,7 @@
     "R-Wpn-Howitzer-ROF04": {
         "iconID": "IMAGE_RES_WEAPONTECH",
         "id": "R-Wpn-Howitzer-ROF04",
+        "keyTopic": 1,
         "msgName": "RES_W_HOWRF4",
         "name": "Howitzer Fast Loader",
         "requiredResearch": [

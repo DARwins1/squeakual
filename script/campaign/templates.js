@@ -65,7 +65,7 @@ plmacant: { body: "Body5REC", prop: "tracked01", weap: "Cannon5VulcanMk1" }, // 
 plhhpvt: { body: "Body11ABT", prop: "tracked01", weap: "Cannon4AUTOMk1" }, // Hyper Velocity Cannon Python Tracks
 plhacant: { body: "Body11ABT", prop: "tracked01", weap: "Cannon5VulcanMk1" }, // Assault Cannon Python Tracks
 plhacanht: { body: "Body11ABT", prop: "HalfTrack", weap: "Cannon5VulcanMk1" }, // Assault Cannon Python Half-tracks
-plhhct: { body: "Body11ABT", prop: "tracked01", weap: "Cannon375mmMk1" }, // Heavy Cannon Python Tracks
+plhhcant: { body: "Body11ABT", prop: "tracked01", weap: "Cannon375mmMk1" }, // Heavy Cannon Python Tracks
 
 pllmortw: { body: "Body1REC", prop: "wheeled01", weap: "Mortar1Mk1" }, // Mortar Viper Wheels
 pllmortt: { body: "Body1REC", prop: "tracked01", weap: "Mortar1Mk1" }, // Mortar Viper Tracks

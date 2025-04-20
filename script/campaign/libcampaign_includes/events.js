@@ -159,7 +159,6 @@ function cam_eventStartLevel()
 	setTimer("__camSpawnVtols", camSecondsToMilliseconds(0.5));
 	setTimer("__camRetreatVtols", camSecondsToMilliseconds(0.9));
 	setTimer("__checkVtolSpawnObject", camSecondsToMilliseconds(5));
-	setTimer("__checkRefillableGroupObject", camSecondsToMilliseconds(5));
 	setTimer("__checkEnemyFactoryProductionTick", camSecondsToMilliseconds(0.8));
 	setTimer("__camTick", camSecondsToMilliseconds(1)); // campaign pollers
 	setTimer("__camTruckTick", camSecondsToMilliseconds(5));

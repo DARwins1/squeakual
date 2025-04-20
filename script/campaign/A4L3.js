@@ -1,0 +1,1115 @@
+include("script/campaign/transitionTech.js");
+include("script/campaign/libcampaign.js");
+include("script/campaign/templates.js");
+include("script/campaign/structSets.js");
+
+const MIS_TEAM_FOXTROT = 5;
+const MIS_TEAM_GOLF = 6;
+
+const MIS_FACTORY_TIME = camChangeOnDiff(camSecondsToMilliseconds(90));
+const MIS_CYBORG_FACTORY_TIME = camChangeOnDiff(camSecondsToMilliseconds(50));
+const MIS_VTOL_FACTORY_TIME = camChangeOnDiff(camSecondsToMilliseconds(110));
+const MIS_FOXTROT_RANK = (difficulty <= MEDIUM) ? 6 : difficulty + 4; // Elite to Hero
+const MIS_FOXTROT_COMMANDER_DELAY = camChangeOnDiff(camMinutesToMilliseconds(6));
+
+var foxtrotCommanderDeathTime;
+
+var golfSensorsGroup;
+var golfVtolAttackGroup;
+var golfVtolStrikeGroup;
+
+const mis_infestedResearch = [
+	"R-Wpn-MG-Damage05", "R-Wpn-Rocket-Damage05", "R-Wpn-Mortar-Damage05", 
+	"R-Wpn-Flamer-Damage05", "R-Wpn-Cannon-Damage05", "R-Wpn-MG-ROF03",
+	"R-Wpn-Rocket-ROF03", "R-Wpn-Mortar-ROF03", "R-Wpn-Flamer-ROF02",
+	"R-Wpn-Cannon-ROF03", "R-Vehicle-Metals04", "R-Struc-Materials05", 
+	"R-Defense-WallUpgrade05", "R-Cyborg-Metals04", "R-Wpn-AAGun-ROF02", 
+	"R-Wpn-AAGun-Damage02", "R-Vehicle-Engine04",
+];
+const mis_teamExtraResearch = [ // Added on top of everything the player starts Act 4 with
+	"R-Wpn-Cannon-Damage06", "R-Wpn-Cannon-ROF03", "R-Wpn-AAGun-ROF02",
+	"R-Wpn-Mortar-Damage06", "R-Wpn-Howitzer-ROF02", "R-Struc-RprFac-Upgrade03",
+	"R-Struc-VTOLPad-Upgrade03", "R-Wpn-Flamer-ROF03", "R-Wpn-Flamer-Damage06",
+	"R-Struc-RprFac-Upgrade03", "R-Struc-VTOLPad-Upgrade03",
+	"R-Wpn-Bomb-Damage02", "R-Defense-WallUpgrade06", "R-Struc-Materials06",
+];
+
+camAreaEvent("heliRemoveZone", function(droid)
+{
+	camSafeRemoveObject(droid, false);
+	resetLabel("heliRemoveZone", CAM_INFESTED);
+});
+
+function heliAttack()
+{
+	const templates = [cTempl.infhelcan, cTempl.infhelhmg, cTempl.infhelpod];
+	const ext = {
+		limit: 1,
+		alternate: true,
+	};
+	camSetVtolData(CAM_INFESTED, undefined, "heliRemoveZone", templates, camChangeOnDiff(camSecondsToMilliseconds(45)), undefined, ext);
+}
+
+// Activate Infested stuff
+function activateInfested()
+{
+	sendInfestedReinforcements();
+	heliAttack();
+	setTimer("sendInfestedReinforcements", camChangeOnDiff(camSecondsToMilliseconds(60)));
+	camEnableFactory("infFactory1");
+	camEnableFactory("infFactory2");
+	camEnableFactory("infFactory3");
+	camEnableFactory("infFactory4");
+	camEnableFactory("infFactory5");
+	camEnableFactory("infHvyFactory");
+	camEnableFactory("infCybFactory1");
+	camEnableFactory("infCybFactory2");
+}
+
+function activateFactories()
+{
+	camEnableFactory("foxtrotFactory2");
+	camEnableFactory("foxtrotFactory3");
+	camEnableFactory("foxtrotFactory4");
+	camEnableFactory("foxtrotCybFactory2");
+	camEnableFactory("foxtrotCybFactory3");
+	camEnableFactory("foxtrotCybFactory4");
+	camEnableFactory("golfFactory1");
+	camEnableFactory("golfFactory2");
+	camEnableFactory("golfFactory3");
+	camEnableFactory("golfVtolFactory1");
+	camEnableFactory("golfVtolFactory2");
+	camEnableFactory("golfVtolFactory3");
+}
+
+// Boost the strength of teams Foxtrot and Golf
+// Called after a very long delay, or when one of the teams is defeated
+function boostTeams()
+{
+	const FOXTROT_FACTORY_TIME = MIS_FACTORY_TIME * 2/3;
+	const FOXTROT_CYBORG_FACTORY_TIME = MIS_CYBORG_FACTORY_TIME * 2/3;
+	const GOLF_FACTORY_TIME = MIS_FACTORY_TIME * 3/4;
+
+	camSetFactories({
+		"foxtrotFactory1": {
+			throttle: FOXTROT_FACTORY_TIME,
+			templates: []
+		},
+		"foxtrotFactory2": {
+			throttle: FOXTROT_FACTORY_TIME,
+			templates: []
+		},
+		"foxtrotFactory3": {
+			throttle: FOXTROT_FACTORY_TIME,
+			templates: []
+		},
+		"foxtrotFactory4": {
+			throttle: FOXTROT_FACTORY_TIME,
+			templates: []
+		},
+		"foxtrotCybFactory1": {
+			throttle: FOXTROT_CYBORG_FACTORY_TIME,
+			templates: []
+		},
+		"foxtrotCybFactory2": {
+			throttle: FOXTROT_CYBORG_FACTORY_TIME,
+			templates: []
+		},
+		"foxtrotCybFactory3": {
+			throttle: FOXTROT_CYBORG_FACTORY_TIME,
+			templates: []
+		},
+		"foxtrotCybFactory4": {
+			throttle: FOXTROT_CYBORG_FACTORY_TIME,
+			templates: []
+		},
+		"golfFactory1": {
+			throttle: GOLF_FACTORY_TIME,
+			templates: []
+		},
+		"golfFactory2": {
+			throttle: GOLF_FACTORY_TIME,
+			templates: []
+		},
+		"golfFactory3": {
+			throttle: GOLF_FACTORY_TIME,
+			templates: []
+		},
+		// NOTE: Golf's VTOL factories stay the same
+	});
+
+	// Re-enable the factories
+	camEnableFactory("foxtrotFactory1");
+	camEnableFactory("foxtrotFactory2");
+	camEnableFactory("foxtrotFactory3");
+	camEnableFactory("foxtrotFactory4");
+	camEnableFactory("foxtrotCybFactory1");
+	camEnableFactory("foxtrotCybFactory2");
+	camEnableFactory("foxtrotCybFactory3");
+	camEnableFactory("foxtrotCybFactory4");
+	camEnableFactory("golfFactory1");
+	camEnableFactory("golfFactory2");
+	camEnableFactory("golfFactory3");
+
+	// Increase the size of Golf's VTOL attack/strike groups
+	camSetRefillableGroupData(golfVtolAttackGroup, {
+		templates: [ // 6 HEAP Bombs, 6 Thermite Bombs
+			cTempl.plmhbombv, cTempl.plmhbombv,
+			cTempl.plmtbombv, cTempl.plmtbombv,
+			cTempl.plmhbombv, cTempl.plmhbombv,
+			cTempl.plmtbombv, cTempl.plmtbombv,
+			cTempl.plmhbombv, cTempl.plmhbombv,
+			cTempl.plmtbombv, cTempl.plmtbombv,
+	]});
+	camSetRefillableGroupData(golfVtolStrikeGroup, {
+		templates: [ // 12 HEAP Bombs
+			cTempl.plmhbombv, cTempl.plmhbombv, cTempl.plmhbombv,
+			cTempl.plmhbombv, cTempl.plmhbombv, cTempl.plmhbombv,
+			cTempl.plmhbombv, cTempl.plmhbombv, cTempl.plmhbombv,
+			cTempl.plmhbombv, cTempl.plmhbombv, cTempl.plmhbombv,
+	]});
+	// TODO: Make more groups bigger/change group behavior?
+}
+
+function surrenderTeams()
+{
+	// TODO: Dialogue
+
+	// Grab all of the teams' droids and structures
+	const objs = enumDroid(MIS_TEAM_FOXTROT).concat(enumStruct(MIS_TEAM_FOXTROT)).concat(enumDroid(MIS_TEAM_GOLF)).concat(enumStruct(MIS_TEAM_GOLF));
+
+	// Donate them all to the player
+	for (const obj of objs)
+	{
+		// TODO: Give droids some EXP?
+		donateObject(obj, CAM_HUMAN_PLAYER);
+	}
+}
+
+function camEnemyBaseEliminated_foxtrotMainBase()
+{
+	checkTeamBases();
+}
+
+function camEnemyBaseEliminated_foxtrotAltBase()
+{
+	checkTeamBases();
+}
+
+function camEnemyBaseEliminated_golfMainBase()
+{
+	checkTeamBases();
+}
+
+function camEnemyBaseEliminated_golfBridgeBase()
+{
+	checkTeamBases();
+}
+
+function camEnemyBaseEliminated_golfVtolBase()
+{
+	checkTeamBases();
+}
+
+// Check the status of the team bases.
+// If either Foxtrot's or Golf's main bases are destroyed, boost team production.
+// If all main bases are destroyed, surrender.
+function checkTeamBases()
+{
+	if (camBaseIsEliminated("foxtrotMainBase") && camBaseIsEliminated("foxtrotAltBase")
+		|| camBaseIsEliminated("golfMainBase") && camBaseIsEliminated("golfBridgeBase") && camBaseIsEliminated("golfVtolBase"))
+	{
+		camCallOnce("boostTeams");
+	}
+
+	if (camBaseIsEliminated("foxtrotMainBase") && camBaseIsEliminated("foxtrotAltBase")
+		&& camBaseIsEliminated("golfMainBase") && camBaseIsEliminated("golfBridgeBase") && camBaseIsEliminated("golfVtolBase"))
+	{
+		camCallOnce("surrenderTeams");
+	}
+}
+
+function eventDestroyed(obj)
+{
+	if (obj.player === MIS_TEAM_FOXTROT && obj.type === DROID && obj.droidType === DROID_COMMAND)
+	{
+		// Mark the time that the commander died
+		foxtrotCommanderDeathTime = gameTime;
+	}
+}
+
+function eventDroidBuilt(droid, structure)
+{
+	if (droid.player === MIS_TEAM_FOXTROT && camDroidMatchesTemplate(droid, cTempl.plhcomw))
+	{
+		// Foxtrot commander rebuilt
+		addLabel(droid, "foxtrotCommander");
+		camSetDroidRank(droid, MIS_FOXTROT_RANK);
+	}
+	else if (droid.player === MIS_TEAM_GOLF && camDroidMatchesTemplate(droid, cTempl.plhsenst) && droid.group === golfSensorsGroup)
+	{
+		// Golf (lone) sensor rebuilt
+		addLabel(droid, "golfSensor");
+	}
+}
+
+function sendInfestedReinforcements()
+{	
+	const coreDroids = [
+		[ // Scavs & crawlers
+			cTempl.vilestinger, // Vile Stingers
+			cTempl.stinger, cTempl.stinger, cTempl.stinger, // Stingers
+			cTempl.basher, cTempl.basher, // Bashers
+			cTempl.boomtick, // Boom Ticks
+			cTempl.infmoncan, cTempl.infmoncan, // Bus Tanks
+			cTempl.infmonhmg,
+			cTempl.infmonmrl,
+			cTempl.infmonlan,
+			cTempl.infflatmrl, cTempl.infflatmrl, // Flatbeds
+			cTempl.infflatat,
+			cTempl.infminitruck, // MRP Trucks
+			cTempl.infsartruck, // Sarissa Trucks
+			cTempl.infbuscan, cTempl.infbuscan, // School Buses
+			cTempl.inffiretruck, // Fire Trucks
+			cTempl.infbjeep, cTempl.infbjeep, cTempl.infbjeep, // Jeeps
+			cTempl.infrbjeep, cTempl.infrbjeep, // Rocket Jeeps
+			cTempl.infgbjeep, cTempl.infgbjeep, // Grenade Jeeps
+			cTempl.infbloke,  cTempl.infbloke, cTempl.infbloke, // Blokes
+			cTempl.infkevbloke, cTempl.infkevbloke,
+			cTempl.inflance, // Lances
+			cTempl.infkevlance, cTempl.infkevlance,
+		],
+		[ // Light tanks & cyborgs + some scav stuff
+			cTempl.stinger, cTempl.stinger, cTempl.stinger, // Stingers
+			cTempl.infcybca, cTempl.infcybca, cTempl.infcybca, cTempl.infcybca, // Heavy Gunners
+			cTempl.infcybhg, cTempl.infcybhg, cTempl.infcybhg, // Heavy Machinegunners
+			cTempl.infcybla, cTempl.infcybla, // Lancers
+			cTempl.infscymc, // Super Heavy Gunners
+			cTempl.infcybfl, // Flamers
+			cTempl.infcolpodt, cTempl.infcolpodt, cTempl.infcolpodt, // MRPs
+			cTempl.infcolaaht, // Hurricanes
+			cTempl.infcommcant, cTempl.infcommcant, // Medium Cannons
+			cTempl.infcomatt, // Lancers
+			cTempl.infcohhcant, // Heavy Cannon
+			cTempl.infcohhrat, // HRA
+			cTempl.infbuggy, cTempl.infbuggy, // Buggies
+			cTempl.infrbuggy, // Rocket Buggies
+			cTempl.inftrike, // Trikes
+			cTempl.infbloke,  cTempl.infbloke, cTempl.infbloke, cTempl.infbloke, cTempl.infbloke, // Blokes
+			cTempl.infkevbloke, cTempl.infkevbloke, cTempl.infkevbloke,
+			cTempl.inflance, cTempl.inflance, cTempl.inflance, // Lances
+			cTempl.infkevlance, cTempl.infkevlance,
+		],
+		[ // Bashers, Stingers, and Infantry
+			cTempl.vilestinger, // Vile Stingers
+			cTempl.infcomtruckt, // Infested Truck
+			cTempl.stinger, cTempl.stinger, cTempl.stinger, cTempl.stinger, // Stingers
+			cTempl.basher, cTempl.basher, cTempl.basher, cTempl.basher, cTempl.basher, cTempl.basher, // Bashers
+			cTempl.boomtick, cTempl.boomtick, // Boom Ticks
+			cTempl.infbloke,  cTempl.infbloke, cTempl.infbloke, // Blokes
+			cTempl.infkevbloke, cTempl.infkevbloke,
+			cTempl.inflance, // Lances
+		].concat((difficulty >= EASY) ? cTempl.infcomhaat : undefined), // Add a Cyclone tank
+	];
+	const CORE_SIZE = 4;
+	const FODDER_SIZE = 12;
+
+	const entrances = [
+		"infEntry1", "infEntry2", "infEntry3",
+		"infEntry4", "infEntry5", "infEntry6",
+		"infEntry7", "infEntry8", "infEntry9",
+		"infEntry10", "infEntry12", "infEntry13",
+		"infEntry15",
+	];
+
+	if (getObject("infFactory2") !== null) entrances.push("infEntry11");
+	if (getObject("infCybFactory2") !== null) entrances.push("infEntry14");
+
+	const NUM_GROUPS = difficulty + 2;
+	for (let i = 0; i < NUM_GROUPS; i++)
+	{
+		// Spawn units at a random entrance
+		const INDEX = camRand(entrances.length);
+		camSendReinforcement(CAM_INFESTED, getObject(entrances[INDEX]), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+		entrances.splice(INDEX, 1);
+	}
+}
+
+// Delay when Foxtrot can rebuild their commander
+function allowFoxtrotCommanderRebuild()
+{
+	return (gameTime >= foxtrotCommanderDeathTime + MIS_FOXTROT_COMMANDER_DELAY);
+}
+
+// Returns a list of targets that should be focused by team Golf's bomber squadron
+// TODO: Should we target AA structures?
+function golfStrikeTargets()
+{
+	// First, target any player Factories or Power Generators
+	let targets = enumStruct(CAM_HUMAN_PLAYER).filter((struct) => (
+		struct.stattype === FACTORY || struct.stattype === CYBORG_FACTORY
+		|| struct.stattype === VTOL_FACTORY || struct.stattype === POWER_GEN
+	));
+
+	if (targets.length === 0)
+	{
+		// Second, target any Command Centers and Repair Facilities, 
+		targets = enumStruct(CAM_HUMAN_PLAYER).filter((struct) => (
+			struct.stattype === HQ || struct.stattype === REPAIR_FACILITY
+			|| struct.stattype === VTOL_FACTORY || struct.stattype === POWER_GEN
+		));
+	}
+
+	if (targets.length === 0)
+	{
+		// Lastly, target any non-wall structure
+		targets = enumStruct(CAM_HUMAN_PLAYER).filter((struct) => (struct.stattype !== WALL));
+	}
+
+	return targets;
+}
+
+function eventStartLevel()
+{
+	const startPos = camMakePos("landingZone");
+	const lz = getObject("landingZone"); //player lz
+
+	centreView(startPos.x, startPos.y);
+	setNoGoArea(lz.x, lz.y, lz.x2, lz.y2, CAM_HUMAN_PLAYER);
+	
+	camSetStandardWinLossConditions(CAM_VICTORY_STANDARD, "A4L4S", {
+		ignoreInfestedUnits: true
+	});
+
+	setAlliance(MIS_TEAM_GOLF, MIS_TEAM_FOXTROT, true);
+
+	changePlayerColour(MIS_TEAM_FOXTROT, (playerData[0].colour !== 13) ? 13 : 4); // Foxtrot to infrared or red
+	changePlayerColour(MIS_TEAM_GOLF, (playerData[0].colour !== 7) ? 7 : 0); // Golf to cyan or green
+
+	camDumpStructSet("golfBase4", "camA4L3GolfForwardBaseStructs");
+	camDumpStructSet("foxtrotBase3", "camA4L3FoxtrotForwardStructs1");
+	camDumpStructSet("foxtrotBase4", "camA4L3FoxtrotForwardStructs2");
+	camDumpStructSet("foxtrotBase5", "camA4L3FoxtrotForwardStructs3");
+	camDumpStructSet("foxtrotBase6", "camA4L3FoxtrotForwardStructs4");
+	camDumpStructSet("foxtrotBase7", "camA4L3FoxtrotForwardStructs5");
+
+	camSetArtifacts({
+		"foxtrotResearch1": { tech: "R-Wpn-Flamer-ROF03" }, // Flamer Autoloader Mk3
+		"foxtrotResearch2": { tech: "R-Wpn-Rocket-Damage07" }, // HESH Rocket Warhead
+		"foxtrotFactory1": { tech: "R-Struc-Factory-Upgrade03" }, // Advanced Manufacturing
+		"golfResearch1": { tech: "R-Wpn-Bomb-Damage02" }, // Improved Bomb Warhead
+		"golfResearch2": { tech: "R-Defense-WallUpgrade06" }, // Supercrete Mk3
+	});
+
+	camCompleteRequiredResearch(camAct4StartResearch, MIS_TEAM_FOXTROT);
+	camCompleteRequiredResearch(mis_teamExtraResearch, MIS_TEAM_FOXTROT);
+	camCompleteRequiredResearch(camAct4StartResearch, MIS_TEAM_GOLF);
+	camCompleteRequiredResearch(mis_teamExtraResearch, MIS_TEAM_GOLF);
+	camCompleteRequiredResearch(mis_infestedResearch, CAM_INFESTED);
+
+	camSetEnemyBases({
+		"infWestBase": {
+			cleanup: "infBase1",
+			detectMsg: "INF_BASE1",
+			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
+		},
+		"infWestCanyonBase": {
+			cleanup: "infBase2",
+			detectMsg: "INF_BASE2",
+			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
+		},
+		"infSouthWestHillBase": {
+			cleanup: "infBase3",
+			detectMsg: "INF_BASE3",
+			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
+		},
+		"infSouthCanyonBase": {
+			cleanup: "infBase4",
+			detectMsg: "INF_BASE4",
+			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
+		},
+		"infCraterBase": {
+			cleanup: "infBase5",
+			detectMsg: "INF_BASE5",
+			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
+		},
+		"infEastHillBase": {
+			cleanup: "infBase6",
+			detectMsg: "INF_BASE6",
+			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
+		},
+		"infEastCanyonBase": {
+			cleanup: "infBase7",
+			detectMsg: "INF_BASE7",
+			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
+		},
+		"foxtrotMainBase": {
+			cleanup: "foxtrotBase1",
+			detectMsg: "FOXTROT_BASE1",
+			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
+		},
+		"foxtrotAltBase": {
+			cleanup: "foxtrotBase2",
+			detectMsg: "FOXTROT_BASE2",
+			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
+		},
+		"foxtrotEastRidgeBase": {
+			cleanup: "foxtrotBase3",
+			detectMsg: "FOXTROT_BASE3",
+			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
+		},
+		"foxtrotNorthHillBase": {
+			cleanup: "foxtrotBase4",
+			detectMsg: "FOXTROT_BASE4",
+			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
+		},
+		"foxtrotCraterHillBase": {
+			cleanup: "foxtrotBase5",
+			detectMsg: "FOXTROT_BASE5",
+			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
+		},
+		"foxtrotWestRidgeBase": {
+			cleanup: "foxtrotBase6",
+			detectMsg: "FOXTROT_BASE6",
+			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
+		},
+		"foxtrotWaterRidgeBase": {
+			cleanup: "foxtrotBase7",
+			detectMsg: "FOXTROT_BASE7",
+			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
+		},
+		"golfMainBase": {
+			cleanup: "golfBase1",
+			detectMsg: "GOLF_BASE1",
+			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
+		},
+		"golfBridgeBase": {
+			cleanup: "golfBase2",
+			detectMsg: "GOLF_BASE2",
+			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
+		},
+		"golfVtolBase": {
+			cleanup: "golfBase3",
+			detectMsg: "GOLF_BASE3",
+			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
+		},
+		"golfForwardBase": {
+			cleanup: "golfBase4",
+			detectMsg: "GOLF_BASE4",
+			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
+		},
+	});
+
+	camSetFactories({
+		"foxtrotFactory1": {
+			throttle: MIS_FACTORY_TIME,
+			// The team factories hold no templates; they just restock refillable groups
+			templates: []
+		},
+		"foxtrotFactory2": {
+			throttle: MIS_FACTORY_TIME,
+			templates: []
+		},
+		"foxtrotFactory3": {
+			throttle: MIS_FACTORY_TIME,
+			templates: []
+		},
+		"foxtrotFactory4": {
+			throttle: MIS_FACTORY_TIME,
+			templates: []
+		},
+		"foxtrotCybFactory1": {
+			throttle: MIS_CYBORG_FACTORY_TIME,
+			templates: []
+		},
+		"foxtrotCybFactory2": {
+			throttle: MIS_CYBORG_FACTORY_TIME,
+			templates: []
+		},
+		"foxtrotCybFactory3": {
+			throttle: MIS_CYBORG_FACTORY_TIME,
+			templates: []
+		},
+		"foxtrotCybFactory4": {
+			throttle: MIS_CYBORG_FACTORY_TIME,
+			templates: []
+		},
+		"golfFactory1": {
+			throttle: MIS_FACTORY_TIME,
+			templates: []
+		},
+		"golfFactory2": {
+			throttle: MIS_FACTORY_TIME,
+			templates: []
+		},
+		"golfFactory3": {
+			throttle: MIS_FACTORY_TIME,
+			templates: []
+		},
+		"golfVtolFactory1": {
+			assembly: "golfVtolAssembly1",
+			throttle: MIS_VTOL_FACTORY_TIME,
+			templates: []
+		},
+		"golfVtolFactory2": {
+			assembly: "golfVtolAssembly2",
+			throttle: MIS_VTOL_FACTORY_TIME,
+			templates: []
+		},
+		"golfVtolFactory3": {
+			assembly: "golfVtolAssembly3",
+			throttle: MIS_VTOL_FACTORY_TIME,
+			templates: []
+		},
+		"infFactory1": {
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(22)),
+			templates: [ cTempl.infbuscan, cTempl.infrbuggy, cTempl.infgbjeep, cTempl.infsartruck ]
+		},
+		"infFactory2": {
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(22)),
+			templates: [ cTempl.infmonlan, cTempl.inftrike, cTempl.infflatmrl, cTempl.infbjeep, cTempl.infrbjeep ]
+		},
+		"infFactory3": {
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(22)),
+			templates: [ cTempl.infkevbloke, cTempl.infmonhmg, cTempl.infkevlance, cTempl.infmoncan ]
+		},
+		"infFactory4": {
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(22)),
+			templates: [ cTempl.infmonmrl, cTempl.infgbjeep, cTempl.infminitruck, cTempl.infbuscan ]
+		},
+		"infFactory5": {
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(22)),
+			templates: [ cTempl.inffiretruck, cTempl.infrbjeep, cTempl.infflatat, cTempl.infbuggy ]
+		},
+		"infHvyFactory": {
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(35)),
+			templates: [ cTempl.infcolaaht, cTempl.infcolpodt, cTempl.infcommcant, cTempl.infcomatt, cTempl.infcomhmgt ]
+		},
+		"infCybFactory1": {
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(28)),
+			templates: [ cTempl.infcybhg, cTempl.infcybfl, cTempl.infcybgr, cTempl.infcybla ]
+		},
+		"infCybFactory1": {
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(28)),
+			templates: [ cTempl.infscymc, cTempl.infcybca, cTempl.infcybhg ]
+		},
+	});
+
+	// Set up trucks...
+	const TRUCK_TIME = camChangeOnDiff(camSecondsToMilliseconds((tweakOptions.rec_timerlessMode) ? 55 : 110));
+	const ENGINEER_TIME = camChangeOnDiff(camSecondsToMilliseconds((tweakOptions.rec_timerlessMode) ? 30 : 60));
+	// Foxtrot...
+	camManageTrucks(MIS_TEAM_FOXTROT, {
+		label: "foxtrotMainBase",
+		respawnDelay: TRUCK_TIME,
+		rebuildBase: (tweakOptions.rec_timerlessMode || difficulty > EASY),
+		truckDroid: getObject("foxtrotTruck1"),
+		structset: camAreaToStructSet("foxtrotBase1")
+	});
+	camManageTrucks(MIS_TEAM_FOXTROT, {
+		label: "foxtrotMainBase",
+		respawnDelay: TRUCK_TIME,
+		rebuildBase: (tweakOptions.rec_timerlessMode || difficulty > EASY),
+		truckDroid: getObject("foxtrotTruck2"),
+		structset: camAreaToStructSet("foxtrotBase1")
+	});
+	camManageTrucks(MIS_TEAM_FOXTROT, {
+		label: "foxtrotMainBase",
+		respawnDelay: ENGINEER_TIME,
+		rebuildBase: (tweakOptions.rec_timerlessMode || difficulty > EASY),
+		truckDroid: getObject("foxtrotEngineer1"),
+		structset: camAreaToStructSet("foxtrotBase1")
+	});
+	camManageTrucks(MIS_TEAM_FOXTROT, {
+		label: "foxtrotMainBase",
+		respawnDelay: ENGINEER_TIME,
+		rebuildBase: (tweakOptions.rec_timerlessMode || difficulty > EASY),
+		truckDroid: getObject("foxtrotEngineer2"),
+		structset: camAreaToStructSet("foxtrotBase1")
+	});
+	camManageTrucks(MIS_TEAM_FOXTROT, {
+		label: "foxtrotAltBase",
+		respawnDelay: TRUCK_TIME,
+		rebuildBase: (tweakOptions.rec_timerlessMode || difficulty > EASY),
+		truckDroid: getObject("foxtrotTruck3"),
+		structset: camAreaToStructSet("foxtrotBase2")
+	});
+	camManageTrucks(MIS_TEAM_FOXTROT, {
+		label: "foxtrotAltBase",
+		respawnDelay: TRUCK_TIME,
+		rebuildBase: (tweakOptions.rec_timerlessMode || difficulty > EASY),
+		truckDroid: getObject("foxtrotTruck4"),
+		structset: camAreaToStructSet("foxtrotBase2")
+	});
+	camManageTrucks(MIS_TEAM_FOXTROT, {
+		label: "foxtrotEastRidgeBase",
+		respawnDelay: ENGINEER_TIME,
+		rebuildBase: true,
+		template: cTempl.cyben,
+		structset: camA4L3FoxtrotForwardStructs1
+	});
+	camManageTrucks(MIS_TEAM_FOXTROT, {
+		label: "foxtrotNorthHillBase",
+		respawnDelay: ENGINEER_TIME,
+		rebuildBase: true,
+		template: cTempl.cyben,
+		structset: camA4L3FoxtrotForwardStructs2
+	});
+	camManageTrucks(MIS_TEAM_FOXTROT, {
+		label: "foxtrotCraterHillBase",
+		respawnDelay: ENGINEER_TIME,
+		rebuildBase: true,
+		template: cTempl.cyben,
+		structset: camA4L3FoxtrotForwardStructs3
+	});
+	camManageTrucks(MIS_TEAM_FOXTROT, {
+		label: "foxtrotWestRidgeBase",
+		respawnDelay: ENGINEER_TIME,
+		rebuildBase: true,
+		template: cTempl.cyben,
+		structset: camA4L3FoxtrotForwardStructs4
+	});
+	camManageTrucks(MIS_TEAM_FOXTROT, {
+		label: "foxtrotWaterRidgeBase",
+		respawnDelay: ENGINEER_TIME,
+		rebuildBase: true,
+		template: cTempl.cyben,
+		structset: camA4L3FoxtrotForwardStructs5
+	});
+
+	// Golf...
+	camManageTrucks(MIS_TEAM_GOLF, {
+		label: "golfMainBase",
+		respawnDelay: TRUCK_TIME,
+		rebuildBase: (tweakOptions.rec_timerlessMode || difficulty > EASY),
+		truckDroid: getObject("golfTruck1"),
+		structset: camAreaToStructSet("golfBase1")
+	});
+	camManageTrucks(MIS_TEAM_GOLF, {
+		label: "golfMainBase",
+		respawnDelay: TRUCK_TIME,
+		rebuildBase: (tweakOptions.rec_timerlessMode || difficulty > EASY),
+		truckDroid: getObject("golfTruck2"),
+		structset: camAreaToStructSet("golfBase1")
+	});
+	camManageTrucks(MIS_TEAM_GOLF, {
+		label: "golfMainBase",
+		respawnDelay: TRUCK_TIME,
+		rebuildBase: (tweakOptions.rec_timerlessMode || difficulty > EASY),
+		truckDroid: getObject("golfTruck3"),
+		structset: camAreaToStructSet("golfBase1")
+	});
+	camManageTrucks(MIS_TEAM_GOLF, {
+		label: "golfBridgeBase",
+		respawnDelay: TRUCK_TIME,
+		rebuildBase: (tweakOptions.rec_timerlessMode || difficulty > EASY),
+		truckDroid: getObject("golfTruck4"),
+		structset: camAreaToStructSet("golfBase2")
+	});
+	camManageTrucks(MIS_TEAM_GOLF, {
+		label: "golfVtolBase",
+		respawnDelay: TRUCK_TIME,
+		rebuildBase: (tweakOptions.rec_timerlessMode || difficulty > EASY),
+		truckDroid: getObject("golfTruck5"),
+		structset: camAreaToStructSet("golfBase3")
+	});
+	camManageTrucks(MIS_TEAM_GOLF, {
+		label: "golfVtolBase",
+		respawnDelay: TRUCK_TIME,
+		rebuildBase: (tweakOptions.rec_timerlessMode || difficulty > EASY),
+		truckDroid: getObject("golfTruck6"),
+		structset: camAreaToStructSet("golfBase3")
+	});
+	camManageTrucks(MIS_TEAM_GOLF, {
+		label: "golfVtolBase",
+		respawnDelay: TRUCK_TIME,
+		rebuildBase: (tweakOptions.rec_timerlessMode || difficulty > EASY),
+		truckDroid: getObject("golfTruck7"),
+		structset: camAreaToStructSet("golfBase3")
+	});
+	camManageTrucks(MIS_TEAM_GOLF, {
+		label: "golfVtolBase",
+		respawnDelay: TRUCK_TIME,
+		rebuildBase: (tweakOptions.rec_timerlessMode || difficulty > EASY),
+		truckDroid: getObject("golfTruck8"),
+		structset: camAreaToStructSet("golfBase3")
+	});
+	camManageTrucks(MIS_TEAM_GOLF, {
+		label: "golfForwardBase",
+		respawnDelay: TRUCK_TIME,
+		rebuildBase: true,
+		template: cTempl.plhtruckt,
+		structset: camA4L3GolfForwardBaseStructs
+	});
+	camManageTrucks(MIS_TEAM_GOLF, {
+		label: "golfForwardBase",
+		respawnDelay: TRUCK_TIME,
+		rebuildBase: true,
+		template: cTempl.plhtruckt,
+		structset: camA4L3GolfForwardBaseStructs
+	});
+
+	if (tweakOptions.rec_timerlessMode)
+	{
+		// TODO: Add more trucks???
+	}
+	else
+	{
+		setMissionTime(camChangeOnDiff(camHoursToSeconds(2)));
+	}
+
+	// Manage refillable groups
+	// Foxtrot groups...
+	camSetDroidRank(getObject("foxtrotCommander"), MIS_FOXTROT_RANK);
+	camMakeRefillableGroup(camMakeGroup("foxtrotCommander"), {
+		templates: [cTempl.plhcomw],
+		factories: ["foxtrotFactory1", "foxtrotFactory2"]
+		callback: "allowFoxtrotCommanderRebuild"
+		}, CAM_ORDER_ATTACK, {
+		repair: 75,
+		targetPlayer: CAM_HUMAN_PLAYER
+	});
+	camMakeRefillableGroup(camMakeGroup("foxtrotCommandGroup"), {
+		templates: [ // 8 Tank Killers, 6 Infernos, 4 Bunker Busters
+			cTempl.plhhatw, cTempl.plhhatw,
+			cTempl.plhinfw, cTempl.plhinfw,
+			cTempl.plhbbw, cTempl.plhbbw,
+			cTempl.plhhatw, cTempl.plhhatw,
+			cTempl.plhinfw, cTempl.plhinfw,
+			cTempl.plhbbw, cTempl.plhbbw,
+			cTempl.plhhatw, cTempl.plhhatw,
+			cTempl.plhinfw, cTempl.plhinfw,
+		],
+		factories: ["foxtrotFactory1", "foxtrotFactory2"]
+		}, CAM_ORDER_FOLLOW, {
+		leader: "foxtrotCommander",
+		repair: 75,
+		suborder: CAM_ORDER_ATTACK,
+		data: {
+			targetPlayer: CAM_HUMAN_PLAYER,
+			repair: 75
+		}
+	});
+	camMakeRefillableGroup(camMakeGroup("foxtrotHoverGroup"), {
+		templates: [ // 6 Tank Killers, 6 Bunker Busters, 4 Infernos
+			cTempl.plhhath, cTempl.plhhath,
+			cTempl.plhbbh, cTempl.plhbbh,
+			cTempl.plhinfh, cTempl.plhinfh,
+			cTempl.plhhath, cTempl.plhhath,
+			cTempl.plhbbh, cTempl.plhbbh,
+			cTempl.plhinfh, cTempl.plhinfh,
+			cTempl.plhhath, cTempl.plhhath,
+			cTempl.plhbbh, cTempl.plhbbh,
+		],
+		factories: ["foxtrotFactory3", "foxtrotFactory4"]
+		}, CAM_ORDER_PATROL, {
+		pos: [
+			camMakePos("hoverPatrolPos1"),
+			camMakePos("hoverPatrolPos2"),
+			camMakePos("hoverPatrolPos3"),
+			camMakePos("hoverPatrolPos4"),
+			camMakePos("hoverPatrolPos5"),
+		],
+		interval: camSecondsToMilliseconds(24),
+		radius: 20,
+		count: 16,
+		morale: 60,
+		repair: 75,
+		fallback: camMakePos("hoverFallbackPos")
+	});
+	camMakeRefillableGroup(camMakeGroup("foxtrotSupportGroup1"), {
+		templates: [
+			cTempl.plhbbht, cTempl.plhbbht, // 2 Bunker Busters
+			cTempl.plhinfht, cTempl.plhinfht, // 2 Infernos
+			cTempl.plhhaaht, cTempl.plhhaaht, // 2 Cyclones
+			cTempl.cybth, cTempl.cybth, // 6 Thermite Flamers
+			cTempl.scytk, cTempl.scytk, // 6 Super Tank Killers
+			cTempl.cybth, cTempl.cybth,
+			cTempl.scytk, cTempl.scytk,
+			cTempl.cybth, cTempl.cybth,
+			cTempl.scytk, cTempl.scytk,
+		],
+		globalFill: true,
+		player: MIS_TEAM_FOXTROT,
+		}, CAM_ORDER_ATTACK, {
+		targetPlayer: CAM_HUMAN_PLAYER,
+		count: -1,
+		regroup: true,
+		repair: 75
+	});
+	camMakeRefillableGroup(camMakeGroup("foxtrotSupportGroup2"), {
+		templates: [
+			cTempl.plhhatht, cTempl.plhhatht, // 2 Tank Killers
+			cTempl.plhinfht, cTempl.plhinfht, // 2 Infernos
+			cTempl.plhhaaht, cTempl.plhhaaht, cTempl.plhhaaht, cTempl.plhhaaht, // 4 Cyclones
+			cTempl.cybth, cTempl.cybth, // 4 Thermite Flamers
+			cTempl.scytk, cTempl.scytk, // 6 Super Tank Killers
+			cTempl.cybth, cTempl.cybth,
+			cTempl.scytk, cTempl.scytk, cTempl.scytk, cTempl.scytk,
+		],
+		globalFill: true,
+		player: MIS_TEAM_FOXTROT,
+		}, CAM_ORDER_PATROL, {
+		pos: [
+			camMakePos("foxtrotPatrolPos1"),
+			camMakePos("foxtrotPatrolPos2"),
+			camMakePos("foxtrotPatrolPos3"),
+			camMakePos("foxtrotPatrolPos4"),
+		],
+		radius: 20,
+		count: -1,
+		regroup: true,
+		repair: 75
+	});
+
+	// Golf groups...
+	camMakeRefillableGroup(camMakeGroup("golfAttackGroup"), {
+		templates: [ // 6 HRAs, 4 Heavy Cannons, 4 Cyclones, 1 Sensor 
+			cTempl.plhhcant, cTempl.plhhcant,
+			cTempl.plhhrat, cTempl.plhhrat,
+			cTempl.plhhaat, cTempl.plhhaat,
+			cTempl.plhsenst,
+			cTempl.plhhcant, cTempl.plhhcant,
+			cTempl.plhhrat, cTempl.plhhrat,
+			cTempl.plhhaat, cTempl.plhhaat,
+			cTempl.plhhrat, cTempl.plhhrat,
+		],
+		factories: ["golfFactory1", "golfFactory3"]
+		}, CAM_ORDER_ATTACK, {
+		targetPlayer: CAM_HUMAN_PLAYER,
+		count: -1,
+		regroup: true,
+		repair: 50
+	});
+	golfSensorsGroup = camMakeRefillableGroup(camMakeGroup("golfSensor"), {
+		templates: [cTempl.plhsenst],
+		factories: ["golfFactory2"]
+		}, CAM_ORDER_ATTACK, {
+		repair: 50,
+		targetPlayer: CAM_HUMAN_PLAYER
+	});
+	camMakeRefillableGroup(camMakeGroup("golfSensorGroup"), {
+		templates: [ // 6 Howitzers, 2 Cyclones
+			cTempl.plhhowt, cTempl.plhhowt, cTempl.plhhowt,
+			cTempl.plhhaat, cTempl.plhhaat,
+			cTempl.plhhowt, cTempl.plhhowt, cTempl.plhhowt,
+		],
+		factories: ["golfFactory2"]
+		}, CAM_ORDER_FOLLOW, {
+		leader: "golfSensor",
+		repair: 50,
+		suborder: CAM_ORDER_DEFEND,
+		data: {
+			pos: camMakePos("golfBase2"),
+			repair: 50
+		}
+	});
+	camMakeRefillableGroup(camMakeGroup("golfCBGroup1"), {
+		templates: [ // 4 Ripple Rockets
+			cTempl.plhript, cTempl.plhript, cTempl.plhript, cTempl.plhript,
+		],
+		obj: "golfCBTower1",
+		factories: ["golfFactory3"]
+		}, CAM_ORDER_FOLLOW, {
+		leader: "golfCBTower1",
+		repair: 50,
+		suborder: CAM_ORDER_DEFEND,
+		data: {
+			pos: camMakePos("golfCBGroup1"),
+			repair: 50
+		}
+	});
+	camMakeRefillableGroup(camMakeGroup("golfCBGroup2"), {
+		templates: [ // 4 Ripple Rockets
+			cTempl.plhript, cTempl.plhript, cTempl.plhript, cTempl.plhript,
+		],
+		obj: "golfCBTower2",
+		factories: ["golfFactory1"]
+		}, CAM_ORDER_FOLLOW, {
+		leader: "golfCBTower2",
+		repair: 50,
+		suborder: CAM_ORDER_DEFEND,
+		data: {
+			pos: camMakePos("golfCBGroup2"),
+			repair: 50
+		}
+	});
+	golfVtolAttackGroup = camMakeRefillableGroup(camMakeGroup("golfVtolAttackGroup"), {
+		templates: [ // 4 HEAP Bombs, 4 Thermite Bombs
+			cTempl.plmhbombv, cTempl.plmhbombv,
+			cTempl.plmtbombv, cTempl.plmtbombv,
+			cTempl.plmhbombv, cTempl.plmhbombv,
+			cTempl.plmtbombv, cTempl.plmtbombv,
+		],
+		factories: ["golfVtolFactory1"]
+		}, CAM_ORDER_ATTACK, {
+		repair: 50,
+		targetPlayer: CAM_HUMAN_PLAYER,
+	});
+	camMakeRefillableGroup(camMakeGroup("golfVtolTowerGroup1"), {
+		templates: [ // 2 HEAP Bombs, 2 Thermite Bombs
+			cTempl.plmhbombv, cTempl.plmtbombv,
+			cTempl.plmhbombv, cTempl.plmtbombv,
+		],
+		globalFill: true,
+		player: MIS_TEAM_GOLF,
+		obj: "golfVtolTower1",
+		}, CAM_ORDER_FOLLOW, {
+		leader: "golfVtolTower1",
+		repair: 50,
+		suborder: CAM_ORDER_DEFEND,
+		data: {
+			pos: camMakePos("golfVtolAssembly2"),
+			radius: 20,
+			repair: 50,
+		}
+	});
+	camMakeRefillableGroup(camMakeGroup("golfVtolTowerGroup2"), {
+		templates: [ // 2 HEAP Bombs, 2 Thermite Bombs
+			cTempl.plmhbombv, cTempl.plmtbombv,
+			cTempl.plmhbombv, cTempl.plmtbombv,
+		],
+		globalFill: true,
+		player: MIS_TEAM_GOLF,
+		obj: "golfVtolTower2",
+		}, CAM_ORDER_FOLLOW, {
+		leader: "golfVtolTower2",
+		repair: 50,
+		suborder: CAM_ORDER_DEFEND,
+		data: {
+			pos: camMakePos("golfVtolAssembly2"),
+			radius: 20,
+			repair: 50,
+		}
+	});
+	camMakeRefillableGroup(camMakeGroup("golfVtolCBGroup1"), {
+		templates: [ // 2 HEAP Bombs, 2 Thermite Bombs
+			cTempl.plmhbombv, cTempl.plmtbombv,
+			cTempl.plmhbombv, cTempl.plmtbombv,
+		],
+		globalFill: true,
+		player: MIS_TEAM_GOLF,
+		obj: "golfVtolCBTower1",
+		}, CAM_ORDER_FOLLOW, {
+		leader: "golfVtolCBTower1",
+		repair: 50,
+		suborder: CAM_ORDER_DEFEND,
+		data: {
+			pos: camMakePos("golfVtolAssembly2"),
+			radius: 20,
+			repair: 50,
+		}
+	});
+	camMakeRefillableGroup(camMakeGroup("golfVtolCBGroup2"), {
+		templates: [ // 2 HEAP Bombs, 2 Thermite Bombs
+			cTempl.plmhbombv, cTempl.plmtbombv,
+			cTempl.plmhbombv, cTempl.plmtbombv,
+		],
+		globalFill: true,
+		player: MIS_TEAM_GOLF,
+		obj: "golfVtolCBTower2",
+		}, CAM_ORDER_FOLLOW, {
+		leader: "golfVtolCBTower2",
+		repair: 50,
+		suborder: CAM_ORDER_DEFEND,
+		data: {
+			pos: camMakePos("golfVtolAssembly2"),
+			radius: 20,
+			repair: 50,
+		}
+	});
+	golfVtolStrikeGroup = camMakeRefillableGroup(camMakeGroup("golfVtolStrikeGroup"), {
+		templates: [ // 9 HEAP Bombs
+			cTempl.plmhbombv, cTempl.plmhbombv, cTempl.plmhbombv,
+			cTempl.plmhbombv, cTempl.plmhbombv, cTempl.plmhbombv,
+			cTempl.plmhbombv, cTempl.plmhbombv, cTempl.plmhbombv,
+		],
+		factories: ["golfVtolFactory2", "golfVtolFactory3"]
+		}, CAM_ORDER_STRIKE, {
+		repair: 50,
+		callback: "golfStrikeTargets",
+		minCount: 9,
+		altOrder: CAM_ORDER_DEFEND,
+		radius: 20,
+		pos: camMakePos("golfVtolAssembly2"),
+	});
+
+	// Remove some of the teams starting groups based on difficulty
+	let deleteDroids = [];
+	if (difficulty < HARD)
+	{
+		deleteDroids = deleteDroids.concat(enumArea("foxtrotSupportGroup1", MIS_TEAM_FOXTROT, false));
+		deleteDroids = deleteDroids.concat(enumArea("golfVtolAttackGroup", MIS_TEAM_GOLF, false));
+	}
+	if (difficulty < MEDIUM)
+	{
+		deleteDroids = deleteDroids.concat(enumArea("foxtrotHoverGroup", MIS_TEAM_FOXTROT, false));
+		deleteDroids = deleteDroids.concat(enumArea("golfVtolStrikeGroup", MIS_TEAM_GOLF, false));
+	}
+
+	for (const droid of deleteDroids)
+	{
+		camSafeRemoveObject(droid);
+	}
+
+	foxtrotCommanderDeathTime = 0;
+
+	camAutoReplaceObjectLabel(["golfVtolTower1", "golfVtolTower2", "golfVtolCBTower1", "golfVtolCBTower2", "golfCBTower1", "golfCBTower2"]);
+
+	// These factories start active immediately
+	camEnableFactory("foxtrotFactory1");
+	camEnableFactory("foxtrotCybFactory1");
+
+	queue("activateInfested", camChangeOnDiff(camMinutesToMilliseconds(2)));
+	queue("activateFactories", camChangeOnDiff(camMinutesToMilliseconds(3)));
+	queue("boostTeams", camChangeOnDiff(camMinutesToMilliseconds(40)));
+
+	// // Placeholder for the actual briefing sequence
+	// // camQueueDialogue([
+	// // 	{text: "---- BRIEFING PLACEHOLDER ----", delay: 0},
+	// // 	{text: "LIEUTENANT: Sir, Team Bravo has evacuated with all that they could. They're awaiting further orders.", delay: 2, sound: CAM_RCLICK},
+	// // 	{text: "CLAYDE: Well done, Commander Bravo.", delay: 3, sound: CAM_RCLICK},
+	// // 	{text: "CLAYDE: If we're to salvage this operation, we'll need as many able-bodied men as possible.", delay: 2, sound: CAM_RCLICK},
+	// // 	{text: "CLAYDE: Commander Charlie, report your situation.", delay: 3, sound: CAM_RCLICK},
+	// // 	{text: "CHARLIE: We're holed up alright sir.", delay: 3, sound: CAM_RCLICK},
+	// // 	{text: "CHARLIE: But we've spotted Collective forces to the north of our position.", delay: 2, sound: CAM_RCLICK},
+	// // 	{text: "CHARLIE: They've been busy setting up some defenses.", delay: 3, sound: CAM_RCLICK},
+	// // 	{text: "CHARLIE: There's also been lot of fighting between the local scavengers.", delay: 3, sound: CAM_RCLICK},
+	// // 	{text: "CHARLIE: It looks like some of the scavengers are working with the Collective.", delay: 3, sound: CAM_RCLICK},
+	// // 	{text: "CLAYDE: I don't have a hard time believing that.", delay: 4, sound: CAM_RCLICK},
+	// // 	{text: "CLAYDE: Lieutenant, keep parsing through the Collective's transmissions.", delay: 3, sound: CAM_RCLICK},
+	// // 	{text: "CLAYDE: Find out why these scavengers are working along with the Collective.", delay: 3, sound: CAM_RCLICK},
+	// // 	{text: "LIEUTENANT: On it, sir.", delay: 3, sound: CAM_RCLICK},
+	// // 	{text: "CLAYDE: Commander Bravo, take your forces and assume command of Charlie's base.", delay: 2, sound: CAM_RCLICK},
+	// // 	{text: "CLAYDE: Team Charlie will reposition to a new location.", delay: 3, sound: CAM_RCLICK},
+	// // 	{text: "CLAYDE: Secure the area, and hold for further instructions once the base site is secure.", delay: 3, sound: CAM_RCLICK},
+	// // ]);
+
+	// Most Infested units start out pre-damaged
+	camSetPreDamageModifier(CAM_INFESTED, [50, 80], [60, 90], CAM_INFESTED_PREDAMAGE_EXCLUSIONS);
+
+	// Give the fog a pink hue
+	camSetFog(24, 16, 64);
+	// Shift the sun towards the west
+	camSetSunPos(450.0, -400.0, 225.0);
+	// Add a purple-blue tint
+	camSetSunIntensity(.45, .4, .5);
+}

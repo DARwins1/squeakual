@@ -352,7 +352,9 @@ function __camVictoryStandard()
 	// check if game is won
 	if (camAllArtifactsPickedUp() && camAllEnemyBasesEliminated() && __EXTRA_OBJ)
 	{
-		let enemiesRemaining = enumArea(0, 0, mapWidth, mapHeight, ENEMIES, false).length;
+		let enemiesRemaining = enumArea(0, 0, mapWidth, mapHeight, ENEMIES, false).filter((obj) => (
+			!(obj.type === STRUCTURE && obj.stattype === WALL)
+		)).length;
 		if (__camVictoryData.ignoreInfestedUnits)
 		{
 			// If we're to ignore Infested units, subtract them from the number of enemies remaining

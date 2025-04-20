@@ -321,6 +321,7 @@ const cam_sounds = {
 	},
 	reinforcementsAreAvailable: "pcv440.ogg",
 	objectiveCaptured: "pcv621.ogg",
+	primObjectiveCompleted: "pcv626.ogg",
 	enemyEscaping: "pcv632.ogg",
 	powerTransferred: "power-transferred.ogg",
 	laserSatelliteFiring: "pcv650.ogg",
@@ -457,6 +458,7 @@ const CAM_ORDER_DEFEND = 1;
 const CAM_ORDER_PATROL = 2;
 const CAM_ORDER_COMPROMISE = 3;
 const CAM_ORDER_FOLLOW = 4;
+const CAM_ORDER_STRIKE = 5;
 var __camGroupInfo;
 const __CAM_TARGET_TRACKING_RADIUS = 7;
 const __CAM_PLAYER_BASE_RADIUS = 20;

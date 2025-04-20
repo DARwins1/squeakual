@@ -568,15 +568,6 @@ function evacuateAllies()
 	camDisableTruck("deltaLZ");
 	camDisableTruck("nasdaCentral");
 
-	// Lock refillable groups (don't assign any more units)
-	camLockRefillableGroup(deltaPatrolGroup);
-	camLockRefillableGroup(deltaMortarGroup);
-	camLockRefillableGroup(deltaVtolGroup);
-	camLockRefillableGroup(zuluPatrolGroup);
-	camLockRefillableGroup(zuluVtolGroupNW);
-	camLockRefillableGroup(zuluVtolGroupNE);
-	camLockRefillableGroup(zuluVtolGroupSouth);
-
 	// Place all allied units into two groups
 	const deltaDroids = enumDroid(MIS_TEAM_DELTA);
 	// We don't actually care about the group, we just don't want the campaign library to order these units around anymore.
@@ -636,6 +627,12 @@ function eventDestroyed(obj)
 		powerDestroyed = true;
 		hackRemoveMessage("NASDA_POWER", PROX_MSG, CAM_HUMAN_PLAYER);
 	}
+}
+
+// Used to prevent Zulu's groups from refilling during the evacuation phase
+function allowZuluRefilling()
+{
+	return !phaseTwo;
 }
 
 // Returns true if the player should be allowed to escape (and end the level)
@@ -733,35 +730,35 @@ function eventStartLevel()
 			assembly: "zuluAssembly",
 			order: CAM_ORDER_ATTACK, // The order and group size should go unused
 			groupSize: 4,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(30), true), // NOTE: These get SLOWER on higher difficulties!
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(40), true), // NOTE: These get SLOWER on higher difficulties!
 			templates: [ ]
 		},
 		"zuluFactory2": {
 			assembly: "zuluAssembly",
 			order: CAM_ORDER_ATTACK,
 			groupSize: 4,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(30), true),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(40), true),
 			templates: [ ]
 		},
 		"zuluCyborgFactory1": {
 			assembly: "zuluAssembly",
 			order: CAM_ORDER_ATTACK,
 			groupSize: 4,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(30), true),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(40), true),
 			templates: [ ]
 		},
 		"zuluCyborgFactory2": {
 			assembly: "zuluAssembly",
 			order: CAM_ORDER_ATTACK,
 			groupSize: 4,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(30), true),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(40), true),
 			templates: [ ]
 		},
 		"zuluVtolFactory": {
 			assembly: "zuluVtolAssembly",
 			order: CAM_ORDER_ATTACK,
 			groupSize: 4,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(40), true),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(50), true),
 			templates: [ ]
 		},
 	});
@@ -819,6 +816,7 @@ function eventStartLevel()
 		cTempl.cybfl, cTempl.cybfl,
 		],
 		globalFill: true, // Use all available factories to replenish this group
+		callback: "allowZuluRefilling" // Stop refilling during the evac phase
 		}, CAM_ORDER_PATROL, {
 		pos: [
 			camMakePos("patrolPos3"), camMakePos("patrolPos4"), camMakePos("patrolPos5")
@@ -831,6 +829,7 @@ function eventStartLevel()
 		cTempl.pllpodv, cTempl.pllpodv, cTempl.pllhmgv, cTempl.pllhmgv,
 		],
 		globalFill: true,
+		callback: "allowZuluRefilling"
 		}, CAM_ORDER_FOLLOW, {
 		leader: "zuluVtolTower1",
 		suborder: CAM_ORDER_DEFEND,
@@ -841,6 +840,7 @@ function eventStartLevel()
 		cTempl.pllpodv, cTempl.pllpodv, cTempl.pllhmgv, cTempl.pllhmgv,
 		],
 		globalFill: true,
+		callback: "allowZuluRefilling"
 		}, CAM_ORDER_FOLLOW, {
 		leader: "zuluVtolTower2",
 		suborder: CAM_ORDER_DEFEND,
@@ -851,6 +851,7 @@ function eventStartLevel()
 		cTempl.pllpodv, cTempl.pllpodv,
 		],
 		globalFill: true,
+		callback: "allowZuluRefilling"
 		}, CAM_ORDER_FOLLOW, {
 		leader: "zuluVtolTower3",
 		suborder: CAM_ORDER_DEFEND,

@@ -4,7 +4,7 @@ include("script/campaign/transitionTech.js");
 include("script/campaign/structSets.js");
 
 const mis_collectiveResearch = [
-	"R-Wpn-MG-Damage06", "R-Wpn-Rocket-Damage06", "R-Wpn-Mortar-Damage05", 
+	"R-Wpn-MG-Damage06", "R-Wpn-Rocket-Damage06", "R-Wpn-Mortar-Damage06", 
 	"R-Wpn-Flamer-Damage05", "R-Wpn-Cannon-Damage06", "R-Wpn-MG-ROF03",
 	"R-Wpn-Rocket-ROF03", "R-Wpn-Mortar-ROF03", "R-Wpn-Flamer-ROF02",
 	"R-Wpn-Cannon-ROF03", "R-Vehicle-Metals05", "R-Struc-Materials05", 
@@ -12,7 +12,8 @@ const mis_collectiveResearch = [
 	"R-Wpn-Cannon-Accuracy02", "R-Wpn-Rocket-Accuracy03", "R-Wpn-AAGun-ROF02",
 	"R-Wpn-AAGun-Damage02", "R-Vehicle-Engine06", "R-Wpn-AAGun-Accuracy01",
 	"R-Struc-RprFac-Upgrade02", "R-Struc-VTOLPad-Upgrade01", "R-Sys-Sensor-Upgrade01",
-	"R-Vehicle-Armor-Heat02", "R-Cyborg-Armor-Heat02",
+	"R-Vehicle-Armor-Heat02", "R-Cyborg-Armor-Heat02", "R-Wpn-Howitzer-Damage02",
+	"R-Wpn-Howitzer-ROF02", "R-Wpn-Howitzer-Accuracy01",
 ];
 const mis_infestedResearch = [
 	"R-Wpn-MG-Damage05", "R-Wpn-Rocket-Damage05", "R-Wpn-Mortar-Damage05", 
@@ -24,11 +25,14 @@ const mis_infestedResearch = [
 ];
 const mis_deltaExtraResearch = [ // Added on top of everything the player starts Act 4 with
 	"R-Wpn-Cannon-Damage06", "R-Wpn-Cannon-ROF03", "R-Wpn-AAGun-ROF02",
+	"R-Wpn-Mortar-Damage06", "R-Wpn-Howitzer-ROF02", "R-Struc-RprFac-Upgrade03",
+	"R-Struc-VTOLPad-Upgrade03",
 ];
 
 const MIS_UPLINK = 1;
 const MIS_TEAM_DELTA = 5;
 const MIS_DELTA_RANK = (difficulty <= MEDIUM) ? 6 : difficulty + 4; // Elite to Hero
+const MIS_DELTA_COMMANDER_DELAY = camChangeOnDiff(camMinutesToMilliseconds(6));
 
 var colCommanderGroup;
 var colKillGroup;
@@ -43,11 +47,13 @@ var deltaTruckJob5;
 var deltaTruckJob6;
 var deltaTruckJob7;
 var deltaTruckJob8;
+var deltaTruckJob9;
 
 var allowExtraWaves;
 var deltaCommanderDeathTime;
 var deltaDetected;
 var deltaActive;
+var deltaAggro;
 var uplinkTimeRemaining;
 var uplinkSecure;
 var lastUplinkCheckTime;
@@ -71,7 +77,7 @@ function vtolAttack()
 		targetPlayer: CAM_HUMAN_PLAYER,
 		dynamic: true
 	};
-	camSetVtolData(CAM_THE_COLLECTIVE, "vtolAttackPos", "vtolRemoveZone", templates, camChangeOnDiff(camMinutesToMilliseconds(2)), "colCC", ext);
+	camSetVtolData(CAM_THE_COLLECTIVE, "vtolAttackPos", "vtolRemoveZone", templates, camChangeOnDiff(camMinutesToMilliseconds(1.5)), "colCC", ext);
 }
 
 function heliAttack()
@@ -132,6 +138,9 @@ function sendInfestedReinforcements()
 			cTempl.stinger, cTempl.stinger, cTempl.stinger, // Stingers
 			cTempl.infcybca, cTempl.infcybca, cTempl.infcybca, cTempl.infcybca, // Heavy Gunners
 			cTempl.infcybhg, cTempl.infcybhg, cTempl.infcybhg, // Heavy Machinegunners
+			cTempl.infcybla, cTempl.infcybla, // Lancers
+			cTempl.infscymc, // Super Heavy Gunners
+			cTempl.infcybfl, // Flamers
 			cTempl.infcolpodt, cTempl.infcolpodt, cTempl.infcolpodt, // MRPs
 			cTempl.infcolaaht, // Hurricanes
 			cTempl.infcommcant, cTempl.infcommcant, // Medium Cannons
@@ -214,7 +223,7 @@ function sendDeltaTransporter()
 	{
 		if (!camDef(camGetTruck(deltaTruckJob6))) droidQueue.push(tTemplate);
 	}
-	if (deltaActive && (camAreaSecure("uplinkStructArea", MIS_TEAM_DELTA) || !camBaseIsEliminated("deltaUplinkBase"))) 
+	if (deltaActive && (camAreaSecure("outpostStructArea", MIS_TEAM_DELTA) || !camBaseIsEliminated("deltaOutpost"))) 
 	{
 		if (!camDef(camGetTruck(deltaTruckJob7))) droidQueue.push(tTemplate);
 	}
@@ -222,11 +231,13 @@ function sendDeltaTransporter()
 	{
 		if (!camDef(camGetTruck(deltaTruckJob8))) droidQueue.push(tTemplate);
 	}
-
-	const COMMANDER_DELAY = camChangeOnDiff(camMinutesToMilliseconds(6));
+	if (deltaActive && (camAreaSecure("uplinkStructArea", MIS_TEAM_DELTA) || !camBaseIsEliminated("deltaUplinkBase"))) 
+	{
+		if (!camDef(camGetTruck(deltaTruckJob9))) droidQueue.push(tTemplate);
+	}
 
 	// Delay when Delta's commander can be rebuilt
-	if (gameTime >= deltaCommanderDeathTime + COMMANDER_DELAY)
+	if (gameTime >= deltaCommanderDeathTime + MIS_DELTA_COMMANDER_DELAY)
 	{
 		// Bring in a new commander if needed
 		droidQueue = droidQueue.concat(camGetRefillableGroupTemplates(deltaCommander));
@@ -272,7 +283,7 @@ function eventTransporterLanded(transport)
 	}
 
 	const transDroids = camGetTransporterDroids(transport.player);
-	const truckJobs = [deltaTruckJob1, deltaTruckJob2, deltaTruckJob3, deltaTruckJob4, deltaTruckJob5, deltaTruckJob6, deltaTruckJob7, deltaTruckJob8];
+	const truckJobs = [deltaTruckJob1, deltaTruckJob2, deltaTruckJob3, deltaTruckJob4, deltaTruckJob5, deltaTruckJob6, deltaTruckJob7, deltaTruckJob8, deltaTruckJob9];
 	const otherGroups = [deltaCommander, deltaCommandGroup, deltaVtolSensGroup, deltaVtolCbGroup, deltaVtolTowerGroup1];
 
 	const transTrucks = transDroids.filter((droid) => (droid.droidType == DROID_CONSTRUCT));
@@ -322,12 +333,17 @@ function eventAttacked(victim, attacker)
 
 	if (victim.player === MIS_TEAM_DELTA && attacker.player === CAM_HUMAN_PLAYER)
 	{
-		camCallOnce("detectDelta");
+		detectDelta();
 	}
 }
 
 function detectDelta()
 {
+	if (deltaDetected)
+	{
+		return;
+	}
+
 	// TODO: Dialogue...
 
 	deltaDetected = true;
@@ -386,10 +402,15 @@ function activateMoreFactories()
 // Allow team Delta to start expanding and moving towards the Uplink
 function activateTeamDelta()
 {
+	if (deltaActive)
+	{
+		return;
+	}
+
 	deltaActive = true;
 
 	// Move to capture the uplink
-	camManageGroup(deltaCommander, CAM_ORDER_COMPROMISE, {
+	camManageGroup(deltaCommander, CAM_ORDER_ATTACK, {
 		repair: 50,
 		removable: false,
 		pos: [
@@ -405,7 +426,6 @@ function activateTeamDelta()
 		removable: false,
 		data: {
 			pos: [
-				camMakePos("outpostStructArea"),
 				camMakePos("uplinkStructArea")
 			],
 			radius: 20
@@ -416,12 +436,17 @@ function activateTeamDelta()
 // Make team Delta's commander more aggressive against the player 
 function aggroTeamDelta()
 {
-	camCallOnce("detectDelta");
-	deltaActive = true;
+	if (deltaAggro)
+	{
+		return;
+	}
+
+	detectDelta();
+	deltaAggro = true;
 
 	// TODO: Dialogue...
 
-	// Move to capture the uplink
+	// Attack the player directly
 	camManageGroup(deltaCommander, CAM_ORDER_ATTACK, {
 		repair: 50,
 		removable: false,
@@ -441,6 +466,7 @@ function dataDownloaded()
 		}
 		if (uplinkSecure)
 		{
+			playSound(cam_sounds.primObjectiveCompleted);
 			updateExtraObjectiveMessage();
 			uplinkSecure = false;
 		}
@@ -476,15 +502,16 @@ function dataDownloaded()
 				missionTimeRemaining = getMissionTime();
 				setMissionTime(-1); // Pause the mission timer
 			}
+			playSound(cam_sounds.objectiveCaptured);
 		}
 
 		lastUplinkCheckTime = gameTime;
 		uplinkSecure = true;
 
-		if (lastUplinkCheckTime < camMinutesToMilliseconds(5))
+		if (lastUplinkCheckTime < camMinutesToMilliseconds(7))
 		{
 			// Make Delta more aggresive if the player is winning
-			camCallOnce("aggroTeamDelta");
+			aggroTeamDelta();
 		}
 	}
 	else // Uplink not secure
@@ -561,7 +588,7 @@ function eventStartLevel()
 
 	camSetArtifacts({
 		"colAAEmp": { tech: "R-Wpn-AAGun04" }, // Whirlwind AA
-		"colResearch": { tech: "R-Wpn-MG-Damage07" }, // Tungsten-Tipped MG Bullets Mk3
+		"colResearch": { tech: "R-Wpn-Bomb04" }, // Thermite Bomb Bay
 	});
 
 	camSetEnemyBases({
@@ -695,7 +722,7 @@ function eventStartLevel()
 				]
 			},
 			groupSize: 4,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(110)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(100)),
 			// Hovers
 			templates: [ cTempl.cohhrah, cTempl.cohhcant, cTempl.comhpvh, cTempl.comhath, cTempl.combbh ]
 		},
@@ -809,12 +836,12 @@ function eventStartLevel()
 	});
 	deltaCommandGroup = camMakeRefillableGroup(camMakeGroup("deltaCommandGroup"), {
 		templates: [ 
-			cTempl.plhacant, cTempl.plhacant, cTempl.plhacant, cTempl.plhacant, // 4 Assault Cannons
-			cTempl.plhasgnt, cTempl.plhasgnt, cTempl.plhasgnt, cTempl.plhasgnt, // 4 Assault Guns
-			cTempl.plhstriket, // 1 VTOL Strike Turret
+			cTempl.plhacant, cTempl.plhacant, cTempl.plhacant, cTempl.plhacant, cTempl.plhacant, cTempl.plhacant, // 6 Assault Cannons
+			cTempl.plhasgnt, cTempl.plhasgnt, // 2 Assault Guns
 			cTempl.plhhrepht, cTempl.plhhrepht, cTempl.plhhrepht, // 3 Heavy Repair Turrets
 			cTempl.plhhaat, cTempl.plhhaat, // 2 Cyclones
 			cTempl.scygr, cTempl.scygr, cTempl.scygr, cTempl.scygr, // 4 Super Grenadiers
+			cTempl.plhstriket, // 1 VTOL Strike Turret
 		],
 		}, CAM_ORDER_FOLLOW, {
 		leader: "deltaCommander",
@@ -1032,22 +1059,27 @@ function eventStartLevel()
 	deltaTruckJob5 = camManageTrucks(MIS_TEAM_DELTA, {
 		label: "deltaOverlookBase",
 		rebuildBase: true,
-		structset: camA4L2DeltaUplinkStructs
+		structset: camA4L2DeltaOverlookStructs
 	});
 	deltaTruckJob6 = camManageTrucks(MIS_TEAM_DELTA, {
 		label: "deltaOutpost",
 		rebuildBase: true,
-		structset: camA4L2DeltaUplinkStructs
+		structset: camA4L2DeltaOutpostStructs
 	});
 	deltaTruckJob7 = camManageTrucks(MIS_TEAM_DELTA, {
-		label: "deltaUplinkBase",
+		label: "deltaOutpost",
 		rebuildBase: true,
 		structset: camA4L2DeltaOutpostStructs
 	});
 	deltaTruckJob8 = camManageTrucks(MIS_TEAM_DELTA, {
 		label: "deltaUplinkBase",
 		rebuildBase: true,
-		structset: camA4L2DeltaOverlookStructs
+		structset: camA4L2DeltaUplinkStructs
+	});
+	deltaTruckJob9 = camManageTrucks(MIS_TEAM_DELTA, {
+		label: "deltaUplinkBase",
+		rebuildBase: true,
+		structset: camA4L2DeltaUplinkStructs
 	});
 
 	if (tweakOptions.rec_timerlessMode && difficulty >= HARD)
@@ -1065,6 +1097,7 @@ function eventStartLevel()
 	deltaCommanderDeathTime = 0;
 	deltaDetected = false;
 	deltaActive = false;
+	deltaAggro = false;
 	uplinkTimeRemaining = camMinutesToMilliseconds(10);
 	missionTimeRemaining = -1;
 
@@ -1086,7 +1119,7 @@ function eventStartLevel()
 	queue("activateTeamDelta", camChangeOnDiff(camMinutesToMilliseconds(10)));
 	queue("aggroTeamDelta", camChangeOnDiff(camMinutesToMilliseconds(24)));
 	setTimer("sendInfestedReinforcements", camChangeOnDiff(camSecondsToMilliseconds(90)));
-	setTimer("sendDeltaTransporter", camChangeOnDiff(camMinutesToMilliseconds(2)));
+	setTimer("sendDeltaTransporter", camChangeOnDiff(camMinutesToMilliseconds(1.5)));
 
 	// Lighten the fog to *more or less* 2x default brightness with a slight pink color
 	camSetFog(48, 32, 96);

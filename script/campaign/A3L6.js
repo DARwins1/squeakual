@@ -254,7 +254,7 @@ function eventStartLevel()
 		"colResearch": { tech: "R-Wpn-Rocket-ROF03" }, // Rocket Autoloader Mk3
 		"colFactory1": { tech: "R-Vehicle-Metals04" }, // Dense Composite Alloys
 		"colFactory2": { tech: "R-Wpn-HowitzerMk1" }, // Howitzer
-		"colFactory3": { tech: "R-Wpn-Flamer-Damage05" }, // Superhot Flamer Gel Mk2
+		"colFactory3": { tech: "R-Struc-Factory-Upgrade02" }, // Robotic Manufacturing
 		"colCC": { tech: "R-Defense-WallUpgrade05" }, // Supercrete Mk2
 		"colAAEmp": { tech: "R-Wpn-AAGun-Damage02" }, // AA HE Flak Mk2
 	});

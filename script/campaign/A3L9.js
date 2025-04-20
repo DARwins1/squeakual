@@ -121,6 +121,8 @@ function sendInfestedReinforcements()
 			cTempl.stinger, cTempl.stinger, cTempl.stinger, // Stingers
 			cTempl.infcybca, cTempl.infcybca, cTempl.infcybca, cTempl.infcybca, // Heavy Gunners
 			cTempl.infcybhg, cTempl.infcybhg, cTempl.infcybhg, // Heavy Machinegunners
+			cTempl.infcybla, // Lancers
+			cTempl.infscymc, // Super Heavy Gunners
 			cTempl.infcolpodt, cTempl.infcolpodt, cTempl.infcolpodt, // MRPs
 			cTempl.infcolhmght, cTempl.infcolhmght, cTempl.infcolhmght, // HMGs
 			cTempl.infcolcanht, cTempl.infcolcanht, cTempl.infcolcanht, // Light Cannons

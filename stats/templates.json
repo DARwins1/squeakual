@@ -1313,12 +1313,36 @@
         "sensor": "SensorTurret1Mk1",
         "type": "DROID"
     },
+    "PythonSensorTracks": {
+        "body": "Body11ABT",
+        "id": "PythonSensorTracks",
+        "name": "Sensor Python Tracks",
+        "propulsion": "tracked01",
+        "sensor": "SensorTurret1Mk1",
+        "type": "DROID"
+    },
     "CobraSpadeTracks": {
         "body": "Body5REC",
         "construct": "Spade1Mk1",
         "id": "CobraSpadeTracks",
         "name": "Truck Cobra Tracks",
         "propulsion": "tracked01",
+        "type": "CONSTRUCT"
+    },
+    "PythonSpadeTracks": {
+        "body": "Body11ABT",
+        "construct": "Spade1Mk1",
+        "id": "PythonSpadeTracks",
+        "name": "Truck Python Tracks",
+        "propulsion": "tracked01",
+        "type": "CONSTRUCT"
+    },
+    "PythonSpadeHalfTracks": {
+        "body": "Body11ABT",
+        "construct": "Spade1Mk1",
+        "id": "PythonSpadeHalfTracks",
+        "name": "Truck Python Half-tracks",
+        "propulsion": "HalfTrack",
         "type": "CONSTRUCT"
     },
     "CobraSpadeHalfTracks": {
@@ -2473,6 +2497,96 @@
             "Cannon375mmMk1"
         ]
     },
+    "P0PythonHRATrks": {
+        "body": "Body11ABT",
+        "id": "P0PythonHRATrks",
+        "name": "Heavy Rocket Array Python Tracks",
+        "propulsion": "tracked01",
+        "type": "DROID",
+        "weapons": [
+            "Rocket-MRL-Hvy"
+        ]
+    },
+    "P0PythonIDFTrks": {
+        "body": "Body11ABT",
+        "id": "P0PythonIDFTrks",
+        "name": "Ripple Rocket Python Tracks",
+        "propulsion": "tracked01",
+        "type": "DROID",
+        "weapons": [
+            "Rocket-IDF"
+        ]
+    },
+    "P0PythonHwtTrks": {
+        "body": "Body11ABT",
+        "id": "P0PythonHwtTrks",
+        "name": "Howitzer Python Tracks",
+        "propulsion": "tracked01",
+        "type": "DROID",
+        "weapons": [
+            "Howitzer105Mk1"
+        ]
+    },
+    "P0PythonBBHT": {
+        "body": "Body11ABT",
+        "id": "P0PythonBBHT",
+        "name": "Bunker Buster Python Half-tracks",
+        "propulsion": "HalfTrack",
+        "type": "DROID",
+        "weapons": [
+            "Rocket-BB"
+        ]
+    },
+    "P0PythonBBWhl": {
+        "body": "Body11ABT",
+        "id": "P0PythonBBWhl",
+        "name": "Bunker Buster Python Wheels",
+        "propulsion": "wheeled01",
+        "type": "DROID",
+        "weapons": [
+            "Rocket-BB"
+        ]
+    },
+    "P0PythonBBHov": {
+        "body": "Body11ABT",
+        "id": "P0PythonBBHov",
+        "name": "Bunker Buster Python Hover",
+        "propulsion": "hover01",
+        "type": "DROID",
+        "weapons": [
+            "Rocket-BB"
+        ]
+    },
+    "P0PythonInfHT": {
+        "body": "Body11ABT",
+        "id": "P0PythonInfHT",
+        "name": "Inferno Python Half-tracks",
+        "propulsion": "HalfTrack",
+        "type": "DROID",
+        "weapons": [
+            "Flame2"
+        ]
+    },
+    "P0PythonInfWhl": {
+        "body": "Body11ABT",
+        "id": "P0PythonInfWhl",
+        "name": "Inferno Python Wheels",
+        "propulsion": "wheeled01",
+        "type": "DROID",
+        "weapons": [
+            "Flame2"
+        ]
+    },
+    "P0PythonInfHov": {
+        "body": "Body11ABT",
+        "id": "P0PythonInfHov",
+        "name": "Inferno Python Hover",
+        "propulsion": "hover01",
+        "type": "DROID",
+        "weapons": [
+            "Flame2"
+        ]
+    },
     "P0cam3CobCONTrk": {
         "body": "Body5REC",
         "construct": "Spade1Mk1",
@@ -2579,6 +2693,26 @@
             "Rocket-HvyA-T"
         ]
     },
+    "P0PyHvyATWh": {
+        "body": "Body11ABT",
+        "id": "P0PyHvyATWh",
+        "name": "Tank Killer Python Wheels",
+        "propulsion": "wheeled01",
+        "type": "DROID",
+        "weapons": [
+            "Rocket-HvyA-T"
+        ]
+    },
+    "P0PyHvyATHov": {
+        "body": "Body11ABT",
+        "id": "P0PyHvyATHov",
+        "name": "Tank Killer Python Hover",
+        "propulsion": "hover01",
+        "type": "DROID",
+        "weapons": [
+            "Rocket-HvyA-T"
+        ]
+    },
     "PythonHvyRepairHalftrack": {
         "body": "Body11ABT",
         "id": "PythonHvyRepairHalftrack",
@@ -2595,6 +2729,16 @@
         "type": "DROID",
         "weapons": [
             "Bomb3-VTOL-LtINC"
+        ]
+    },
+    "P0-M-TBomb-V": {
+        "body": "Body5REC",
+        "id": "P0-M-TBomb-V",
+        "name": "Thermite Bomb Bay Cobra VTOL",
+        "propulsion": "V-Tol",
+        "type": "DROID",
+        "weapons": [
+            "Bomb4-VTOL-HvyINC"
         ]
     },
     "P0-M-HBomb-V": {
@@ -2683,6 +2827,28 @@
         "id": "PythonComTracks",
         "name": "Command Turret Python Tracks",
         "propulsion": "tracked01",
+        "type": "DROID_COMMAND",
+        "weapons": [
+            "CommandTurret1"
+        ]
+    },
+    "PythonComHalfTracks": {
+        "body": "Body11ABT",
+        "brain": "CommandBrain01",
+        "id": "PythonComHalfTracks",
+        "name": "Command Turret Python Half-tracks",
+        "propulsion": "HalfTrack",
+        "type": "DROID_COMMAND",
+        "weapons": [
+            "CommandTurret1"
+        ]
+    },
+    "PythonComWheels": {
+        "body": "Body11ABT",
+        "brain": "CommandBrain01",
+        "id": "PythonComWheels",
+        "name": "Command Turret Python Wheels",
+        "propulsion": "wheeled01",
         "type": "DROID_COMMAND",
         "weapons": [
             "CommandTurret1"

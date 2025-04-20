@@ -20,10 +20,6 @@ var allowColourChange;
 // This variable is to make sure the transport correctly matches the player's colour on this level.
 var playerColour;
 
-// Scavenger groups that fight in the center before the player is detected
-var yScavCentralPatrol;
-var cScavCentralPatrol;
-
 // Damage NASDA structures
 function preDamageNasdaStructs()
 {
@@ -242,9 +238,6 @@ function yScavPlayerDetected()
 		]);
 	}
 
-	// Stop refilling the central patrol group
-	camLockRefillableGroup(yScavCentralPatrol);
-
 	// Set the first yellow factory to attack the player (if it still exists)
 	camSetFactories({
 		"yScavFactory1": {
@@ -286,9 +279,6 @@ function cScavPlayerDetected()
 			{text: "CLAYDE: Do not allow them to compromise the mission!", delay: 2, sound: CAM_RCLICK},
 		]);
 	}
-
-	// Stop refilling the central patrol group
-	camLockRefillableGroup(cScavCentralPatrol);
 
 	// Set the cyan factory to attack the player (if it still exists)
 	const templates = [cTempl.bjeep, cTempl.bloke, cTempl.rbjeep];
@@ -374,6 +364,12 @@ function checkMissileSilos()
 	}
 	else
 		return true;
+}
+
+// Stop refilling the central groups once the player is detected
+function allowCentralRefilling()
+{
+	return (!playerCyanDetected && !playerYellowDetected);
 }
 
 // Allow the player to change to colors that are hard-coded to be unselectable
@@ -609,11 +605,12 @@ function eventStartLevel()
 		},
 	});
 
-	yScavCentralPatrol = camMakeRefillableGroup(undefined, {templates: [
+	camMakeRefillableGroup(undefined, {templates: [
 		cTempl.trike, cTempl.bloke,
 		cTempl.bloke, cTempl.trike,
 		],
-		factories: ["yScavFactory1"]
+		factories: ["yScavFactory1"],
+		callback: "allowCentralRefilling" // Stop refilling the central groups once the player is detected
 		}, CAM_ORDER_PATROL, {
 		pos: [
 			camMakePos("scavPatrol1"),
@@ -621,11 +618,12 @@ function eventStartLevel()
 		]
 	});
 
-	cScavCentralPatrol = camMakeRefillableGroup(undefined, {templates: [
+	camMakeRefillableGroup(undefined, {templates: [
 		cTempl.bjeep, cTempl.bloke, cTempl.bloke,
 		cTempl.bjeep, cTempl.bloke, cTempl.bloke,
 		],
-		factories: ["cScavFactory"]
+		factories: ["cScavFactory"],
+		callback: "allowCentralRefilling"
 		}, CAM_ORDER_PATROL, {
 		pos: [
 			camMakePos("scavPatrol1"),

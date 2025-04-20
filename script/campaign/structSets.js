@@ -378,5 +378,85 @@ const camA4L2DeltaOverlookStructs = [
 	{stat: "Pillbox-RotMG", x: 93, y: 5}, {stat: "Emplacement-RotMor", x: 94, y: 7}, {stat: "PillBoxHPC", x: 90, y: 8},
 	{stat: "Pillbox-RotMG", x: 91, y: 11}, {stat: "Emplacement-RotMor", x: 92, y: 8}, {stat: "Emplacement-RotMor", x: 93, y: 10},
 	{stat: "Emplacement-RotMor", x: 95, y: 9}, {stat: "GuardTower-RotMg", x: 96, y: 7}, {stat: "AASite-QuadBof", x: 96, y: 11},
-	{stat: "PillBoxHPC", x: 97, y: 10},
+	{stat: "PillBoxHPC", x: 97, y: 10}, {stat: "Sys-CB-Tower01", x: 94, y: 8},
+];
+
+// A4L3
+// Foxtrot and Golf forward base structures
+const camA4L3GolfForwardBaseStructs = [
+	{stat: "PillBoxHPC", x: 91, y: 111}, {stat: "WallTower04", x: 94, y: 108}, {stat: "A0HardcreteMk1Gate", x: 94, y: 109, rot: 1},
+	{stat: "A0HardcreteMk1Wall", x: 95, y: 108}, {stat: "A0HardcreteMk1Gate", x: 94, y: 110, rot: 1}, {stat: "A0HardcreteMk1Gate", x: 94, y: 111, rot: 1},
+	{stat: "WallTower04", x: 87, y: 115}, {stat: "PillBoxHPC", x: 85, y: 119}, {stat: "A0HardcreteMk1Gate", x: 87, y: 116, rot: 1},
+	{stat: "A0HardcreteMk1Gate", x: 87, y: 117, rot: 1}, {stat: "A0HardcreteMk1Gate", x: 87, y: 118, rot: 1}, {stat: "WallTower04", x: 87, y: 119},
+	{stat: "WallTower04", x: 84, y: 121}, {stat: "A0HardcreteMk1Wall", x: 85, y: 121}, {stat: "A0HardcreteMk1Wall", x: 86, y: 121, rot: 2},
+	{stat: "A0HardcreteMk1Wall", x: 87, y: 120, rot: 1}, {stat: "WallTower-HvATrocket", x: 87, y: 121}, {stat: "Sys-SensoTower02", x: 88, y: 113},
+	{stat: "WallTower04", x: 89, y: 112}, {stat: "A0HardcreteMk1Wall", x: 90, y: 112}, {stat: "WallTower-HvATrocket", x: 91, y: 112},
+	{stat: "Emplacement-Rocket06-IDF", x: 90, y: 114}, {stat: "Emplacement-Rocket06-IDF", x: 91, y: 116}, {stat: "A0HardcreteMk1Wall", x: 92, y: 112},
+	{stat: "A0HardcreteMk1Wall", x: 93, y: 112}, {stat: "Emplacement-Rocket06-IDF", x: 92, y: 114}, {stat: "Sys-CB-Tower01", x: 92, y: 115},
+	{stat: "WallTower04", x: 94, y: 112}, {stat: "Emplacement-Rocket06-IDF", x: 94, y: 114}, {stat: "Emplacement-Rocket06-IDF", x: 93, y: 116},
+	{stat: "A0HardcreteMk1Wall", x: 88, y: 121, rot: 2}, {stat: "AASite-QuadBof", x: 89, y: 120, rot: 2}, {stat: "A0HardcreteMk1Wall", x: 89, y: 121, rot: 2},
+	{stat: "WallTower04", x: 90, y: 121}, {stat: "AASite-QuadBof", x: 91, y: 120, rot: 2}, {stat: "A0HardcreteMk1Wall", x: 91, y: 121},
+	{stat: "A0HardcreteMk1Wall", x: 92, y: 121}, {stat: "WallTower04", x: 93, y: 121}, {stat: "A0HardcreteMk1Gate", x: 94, y: 121},
+	{stat: "A0HardcreteMk1Gate", x: 95, y: 121}, {stat: "A0HardcreteMk1Wall", x: 96, y: 108}, {stat: "AASite-QuadBof", x: 96, y: 109},
+	{stat: "WallTower-HvATrocket", x: 97, y: 108}, {stat: "A0HardcreteMk1Wall", x: 98, y: 108}, {stat: "AASite-QuadBof", x: 98, y: 109},
+	{stat: "A0HardcreteMk1Wall", x: 99, y: 108}, {stat: "WallTower04", x: 100, y: 108}, {stat: "A0HardcreteMk1Wall", x: 100, y: 109, rot: 1},
+	{stat: "A0HardcreteMk1Wall", x: 100, y: 110, rot: 1}, {stat: "WallTower04", x: 100, y: 111}, {stat: "A0HardcreteMk1Wall", x: 101, y: 111},
+	{stat: "A0HardcreteMk1Wall", x: 102, y: 111}, {stat: "A0HardcreteMk1Wall", x: 103, y: 111}, {stat: "WallTower04", x: 104, y: 111},
+	{stat: "Emplacement-RotMor", x: 99, y: 113}, {stat: "Emplacement-Ballista", x: 98, y: 115}, {stat: "WallTower04", x: 97, y: 119},
+	{stat: "Emplacement-RotMor", x: 99, y: 117}, {stat: "A0HardcreteMk1Wall", x: 98, y: 119}, {stat: "A0HardcreteMk1Wall", x: 99, y: 119},
+	{stat: "A0RepairCentre3", x: 101, y: 113}, {stat: "AASite-QuadBof", x: 103, y: 114, rot: 3}, {stat: "A0RepairCentre3", x: 101, y: 117},
+	{stat: "WallTower-HvATrocket", x: 100, y: 119}, {stat: "A0HardcreteMk1Wall", x: 101, y: 119}, {stat: "AASite-QuadBof", x: 103, y: 116, rot: 3},
+	{stat: "A0HardcreteMk1Wall", x: 102, y: 119}, {stat: "A0HardcreteMk1Wall", x: 103, y: 119}, {stat: "A0HardcreteMk1Gate", x: 96, y: 121},
+	{stat: "A0HardcreteMk1Wall", x: 97, y: 120, rot: 1}, {stat: "WallTower04", x: 97, y: 121}, {stat: "A0HardcreteMk1Wall", x: 104, y: 112, rot: 1},
+	{stat: "A0HardcreteMk1Wall", x: 104, y: 113, rot: 1}, {stat: "A0HardcreteMk1Wall", x: 104, y: 114, rot: 1}, {stat: "WallTower-HvATrocket", x: 104, y: 115},
+	{stat: "A0HardcreteMk1Wall", x: 104, y: 116, rot: 1}, {stat: "A0HardcreteMk1Wall", x: 104, y: 117, rot: 1}, {stat: "A0HardcreteMk1Wall", x: 104, y: 118, rot: 1},
+	{stat: "WallTower04", x: 104, y: 119},
+];
+const camA4L3FoxtrotForwardStructs1 = [
+	{stat: "PillBoxTK", x: 116, y: 27}, {stat: "AASite-QuadBof", x: 117, y: 26}, {stat: "GuardTower6H", x: 118, y: 25},
+	{stat: "Emplacement-Ballista", x: 119, y: 26}, {stat: "TankTrapC", x: 116, y: 28}, {stat: "TankTrapC", x: 116, y: 29},
+	{stat: "GuardTower-RotMg", x: 117, y: 29}, {stat: "Tower-Projector", x: 116, y: 30}, {stat: "GuardTower6H", x: 122, y: 23},
+	{stat: "Emplacement-MRLHvy-pit", x: 123, y: 23}, {stat: "GuardTower6H", x: 124, y: 23}, {stat: "Sys-SensoTower02", x: 121, y: 24},
+	{stat: "Emplacement-Ballista", x: 121, y: 26}, {stat: "Emplacement-Ballista", x: 123, y: 26}, {stat: "Emplacement-Ballista", x: 120, y: 28},
+	{stat: "Emplacement-Ballista", x: 122, y: 28}, {stat: "AASite-QuadBof", x: 125, y: 24, rot: 1}, {stat: "Emplacement-MRLHvy-pit", x: 125, y: 26},
+	{stat: "Tower-Projector", x: 119, y: 32}, {stat: "TankTrapC", x: 119, y: 33}, {stat: "TankTrapC", x: 119, y: 34}, {stat: "PillBoxTK", x: 119, y: 35},
+	{stat: "GuardTower-RotMg", x: 120, y: 33}, {stat: "Emplacement-MRLHvy-pit", x: 122, y: 32}, {stat: "AASite-QuadBof", x: 123, y: 34},
+	{stat: "GuardTower6H", x: 125, y: 35}, {stat: "AASite-QuadBof", x: 126, y: 36},
+];
+const camA4L3FoxtrotForwardStructs2 = [
+	{stat: "AASite-QuadBof", x: 98, y: 3}, {stat: "AASite-QuadBof", x: 96, y: 4}, {stat: "GuardTower6H", x: 96, y: 6},
+	{stat: "Emplacement-MRLHvy-pit", x: 96, y: 7}, {stat: "A0ResourceExtractor", x: 99, y: 7}, {stat: "AASite-QuadBof", x: 100, y: 4},
+	{stat: "PillBoxTK", x: 97, y: 9}, {stat: "GuardTower-RotMg", x: 98, y: 10}, {stat: "TankTrapC", x: 99, y: 11},
+	{stat: "Emplacement-MRLHvy-pit", x: 100, y: 10}, {stat: "TankTrapC", x: 100, y: 11}, {stat: "Tower-Projector", x: 101, y: 11},
+];
+const camA4L3FoxtrotForwardStructs3 = [
+	{stat: "Tower-Projector", x: 91, y: 17}, {stat: "Tower-Projector", x: 88, y: 21}, {stat: "TankTrapC", x: 88, y: 22},
+	{stat: "TankTrapC", x: 88, y: 23}, {stat: "GuardTower-RotMg", x: 89, y: 23}, {stat: "PillBoxTK", x: 91, y: 20},
+	{stat: "TankTrapC", x: 92, y: 17}, {stat: "TankTrapC", x: 93, y: 17}, {stat: "GuardTower-RotMg", x: 92, y: 18},
+	{stat: "TankTrapC", x: 94, y: 17}, {stat: "Emplacement-Ballista", x: 92, y: 22}, {stat: "Emplacement-Ballista", x: 94, y: 21},
+	{stat: "Emplacement-Ballista", x: 95, y: 23}, {stat: "TankTrapC", x: 88, y: 24}, {stat: "Emplacement-Ballista", x: 93, y: 24},
+	{stat: "GuardTower-RotMg", x: 92, y: 26}, {stat: "PillBoxTK", x: 95, y: 26}, {stat: "PillBoxTK", x: 97, y: 23},
+	{stat: "Sys-SensoTower02", x: 96, y: 25},
+];
+const camA4L3FoxtrotForwardStructs4 = [
+	{stat: "Sys-SensoTower02", x: 75, y: 29}, {stat: "GuardTower6H", x: 78, y: 28}, {stat: "AASite-QuadBof", x: 78, y: 31},
+	{stat: "GuardTower6H", x: 80, y: 28}, {stat: "GuardTower-RotMg", x: 81, y: 29}, {stat: "GuardTower-RotMg", x: 82, y: 30},
+	{stat: "GuardTower6H", x: 83, y: 31}, {stat: "Emplacement-Ballista", x: 75, y: 35}, {stat: "AASite-QuadBof", x: 73, y: 36, rot: 3},
+	{stat: "TankTrapC", x: 73, y: 37}, {stat: "TankTrapC", x: 73, y: 38}, {stat: "Pillbox-RotMG", x: 73, y: 39},
+	{stat: "GuardTower6H", x: 74, y: 37}, {stat: "TankTrapC", x: 74, y: 39}, {stat: "PillBoxTK", x: 75, y: 39},
+	{stat: "Emplacement-Ballista", x: 76, y: 33}, {stat: "A0ResourceExtractor", x: 77, y: 35}, {stat: "AASite-QuadBof", x: 79, y: 32},
+	{stat: "Emplacement-Ballista", x: 78, y: 34}, {stat: "Emplacement-MRLHvy-pit", x: 76, y: 37}, {stat: "TankTrapC", x: 76, y: 39},
+	{stat: "Tower-Projector", x: 77, y: 39}, {stat: "AASite-QuadBof", x: 83, y: 33}, {stat: "GuardTower-RotMg", x: 82, y: 35},
+	{stat: "Pillbox-RotMG", x: 83, y: 35}, {stat: "Emplacement-MRLHvy-pit", x: 80, y: 36}, {stat: "Tower-Projector", x: 81, y: 38},
+	{stat: "GuardTower6H", x: 82, y: 37}, {stat: "TankTrapC", x: 83, y: 36}, {stat: "TankTrapC", x: 83, y: 37},
+	{stat: "TankTrapC", x: 82, y: 38}, {stat: "PillBoxTK", x: 83, y: 38},
+];
+const camA4L3FoxtrotForwardStructs5 = [
+	{stat: "TankTrapC", x: 94, y: 57}, {stat: "TankTrapC", x: 95, y: 57}, {stat: "PillBoxTK", x: 94, y: 58, rot: 3},
+	{stat: "TankTrapC", x: 94, y: 59}, {stat: "GuardTower6H", x: 95, y: 59}, {stat: "Tower-Projector", x: 94, y: 60, rot: 3},
+	{stat: "AASite-QuadBof", x: 96, y: 57, rot: 2}, {stat: "Emplacement-MRLHvy-pit", x: 97, y: 58}, {stat: "AASite-QuadBof", x: 99, y: 59, rot: 2},
+	{stat: "A0ResourceExtractor", x: 97, y: 60}, {stat: "Tower-Projector", x: 96, y: 63, rot: 3}, {stat: "Emplacement-MRLHvy-pit", x: 100, y: 60},
+	{stat: "AASite-QuadBof", x: 101, y: 61, rot: 1}, {stat: "AASite-QuadBof", x: 101, y: 63}, {stat: "TankTrapC", x: 96, y: 64},
+	{stat: "Pillbox-RotMG", x: 96, y: 65}, {stat: "GuardTower6H", x: 97, y: 64}, {stat: "Sys-SensoTower02", x: 99, y: 65},
+	{stat: "AASite-QuadBof", x: 98, y: 66},
 ];

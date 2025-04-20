@@ -219,7 +219,8 @@ const camA3L7AllyResearch = camAct3StartResearch.concat([
 	"R-Struc-Materials05",
 	"R-Wpn-AAGun-Damage02", // Artifact
 	"R-Wpn-Rocket-ROF03", // Artifact
-	"R-Wpn-Flamer-Damage05", // Artifact
+	"R-Struc-Factory-Upgrade02", // Artifact
+	"R-Struc-RprFac-Upgrade02", "R-Struc-VTOLPad-Upgrade02",
 	"R-Wpn-HowitzerMk1", // Artifact
 	"R-Defense-Howitzer", "R-Wpn-Howitzer-Damage01", "R-Wpn-Howitzer-ROF01",
 	"R-Wpn-Mortar-Damage05",
@@ -229,8 +230,7 @@ const camA3L7AllyResearch = camAct3StartResearch.concat([
 // Note that the tech gained on A3L8 is not included here
 const camA3L9EnemyResearch = camA3L7AllyResearch.concat([
 	// A3L7
-	"R-Struc-Factory-Upgrade02", // Artifact
-	"R-Struc-RprFac-Upgrade02", "R-Struc-VTOLPad-Upgrade02",
+	"R-Wpn-Flamer-Damage05", // Artifact
 	"R-Wpn-MG-ROF03", // Artifact
 	"R-Wpn-MG-Damage06",
 	"R-Wpn-Rocket07-Tank-Killer", // Artifact
@@ -257,40 +257,41 @@ const camAct4RemainingResearch = [
 	// A4L1
 	"R-Wpn-Cannon3Mk1", // Artifact
 	"R-Wpn-Cannon-Damage06", "R-Wpn-Cannon-ROF03", "R-Wpn-AAGun-ROF02",
-	"R-Defense-WallTower04", 
+	"R-Wpn-Mortar-Damage06", "R-Wpn-Howitzer-ROF02", "R-Defense-WallTower04", 
 	// A4L2
 	"R-Wpn-AAGun04", // Artifact
 	"R-Wpn-AAGun-Damage03", "R-Wpn-AAGun-ROF03",
-	"R-Wpn-MG-Damage07", // Artifact
+	"R-Wpn-Bomb04", // Artifact
 	// A4L3
-	"R-Wpn-Flamer-ROF03", // Flamer Autoloader Mk3
-	"R-Wpn-Flamer-Damage06", // Superhot Flamer Gel Mk3
-	"R-Wpn-Mortar-Damage06", // HEAP Mortar Shells Mk3
-	"R-Wpn-Howitzer-ROF02", // Howitzer Autoloader Mk2
-	"R-Wpn-Bomb-Damage02", // Improved Bomb Warhead
-	"R-Struc-Factory-Upgrade03", // Advanced Manufacturing
-	"R-Struc-RprFac-Upgrade03", // Advanced Repairing
-	"R-Struc-VTOLPad-Upgrade03", // Advanced VTOL Rearming
-	"R-Wpn-Bomb04", // Thermite Bomb Bay
+	"R-Wpn-Flamer-ROF03", // Artifact
+	"R-Wpn-Flamer-Damage06",
+	"R-Struc-Factory-Upgrade03", // Artifact
+	"R-Struc-RprFac-Upgrade03", "R-Struc-VTOLPad-Upgrade03",
+	"R-Wpn-Rocket-Damage07", // Artifact
+	"R-Wpn-Bomb-Damage02", // Artifact
+	"R-Defense-WallUpgrade06", // Artifact
+	"R-Struc-Materials06",
 	// A4L4
 	"R-Vehicle-Metals06", // Dense Composite Alloys Mk3
 	"R-Cyborg-Metals06", // Dense Cyborg Composite Alloys Mk3
 	"R-Vehicle-Armor-Heat03", // Thermal Armor Mk3
 	"R-Cyborg-Armor-Heat03", // Cyborg Thermal Armor Mk3
-	"R-Defense-WallUpgrade06", // Supercrete Mk3
-	"R-Struc-Materials06", // Hardened Base Structure Materials Mk3
-	"R-Wpn-Rocket-Damage07", // HESH Rocket Warhead
+
 	"R-Wpn-Cannon-Damage07", // HVAPFSDS Cannon Rounds
+	"R-Wpn-Howitzer-Damage03", // HE Howitzer Shells Mk3
+	"R-Wpn-MG-Damage07", // Tungsten-Tipped MG Bullets Mk3
+
 	"R-Wpn-Cannon-ROF04", // Cannon Rapid Loader
 	"R-Wpn-AAGun-ROF04", // AA Chainfeed Loader
 	"R-Wpn-Mortar-ROF04", // Mortar Fast Loader
+	"R-Wpn-Howitzer-ROF03", // Howitzer Autoloader Mk3
 	// A4L5
+	// Nothing here...
+	// A4L6
 	"R-Wpn-HvyHowitzer", // Ground Shaker
 	"R-Defense-HvyHowitzer", // Ground Shaker Emplacement
-	"R-Wpn-Howitzer-Damage03", // HE Howitzer Shells Mk3
-	"R-Wpn-Howitzer-ROF03", // Howitzer Autoloader Mk3
+
 	// ???
-	
 	"R-Wpn-Howitzer-Damage04", // HEAP Howitzer Shells
 	"R-Wpn-Howitzer-ROF04", // Howitzer Fast Loader	
 	"R-Wpn-Howitzer-Accuracy02", // Target Prediction Artillery Shells

@@ -62,6 +62,16 @@
 //;;   * `leaderOrder` The order to give to the leader (if any).
 //;;   * `data` Data of the leader's order (if a droid).
 //;;   * `repair` Health percentage to fall back to repair facility, if any.
+//;; * `CAM_ORDER_STRIKE` Focused attack on a list of targets defined by a given callback function.
+//;;   The following data object fields are REQUIRED:
+//;;   * `callback` The name of a script function that returns a list of objects for the group to target. 
+//;;	The objects in the list will be targeted in order of proximity, with the closest objects targetted first.
+//;;   * `altOrder` A different order to execute if the target list is empty or undefined, or if the group size is 
+//;;	below the value defined in `minCount`. Will resume executing strikes once the callback function returns defined, non-empty lists.
+//;;	The following data fields are optional:
+//;;   * `minCount` The minimum size of the group before executing a strike.
+//;;	If the group size is below this size, the altOrder will be executed instead.
+//;;   * `repair` Health percentage to fall back to repair facility, if any.
 //;;
 //;; @param {string} group
 //;; @param {number} order
@@ -189,6 +199,9 @@ function camOrderToString(order)
 		case CAM_ORDER_FOLLOW:
 			orderString = "FOLLOW";
 			break;
+		case CAM_ORDER_STRIKE:
+			orderString = "STRIKE";
+			break;
 		default:
 			orderString = "UNKNOWN";
 	}
@@ -243,14 +256,14 @@ function __camDistToGroupAverage(obj1, obj2)
 	return (__DIST1 - __DIST2);
 }
 
-function __camPickTarget(group)
+function __camPickTarget(group, groupOrder)
 {
 	let targets = [];
 	const gi = __camGroupInfo[group];
 	const droids = enumGroup(group);
 	__camFindGroupAvgCoordinate(group);
 	const ignorePlayers = gi.data.ignorePlayers;
-	switch (gi.order)
+	switch (groupOrder)
 	{
 		case CAM_ORDER_ATTACK:
 		{
@@ -285,7 +298,7 @@ function __camPickTarget(group)
 					));
 				}
 			}
-			if (gi.order === CAM_ORDER_COMPROMISE && targets.length === 0)
+			if (groupOrder === CAM_ORDER_COMPROMISE && targets.length === 0)
 			{
 				if (!camDef(gi.data.pos))
 				{
@@ -371,7 +384,7 @@ function __camPickTarget(group)
 		}
 		default:
 		{
-			camDebug("Unsupported group order", gi.order, camOrderToString(gi.order));
+			camDebug("Unsupported group order", groupOrder, camOrderToString(groupOrder));
 			break;
 		}
 	}
@@ -490,6 +503,8 @@ function __camTacticsTickForGroup(group)
 		return;
 	}
 
+	let groupOrder = gi.order;
+
 	const __SIMPLIFIED = (camDef(gi.data.simplified) && gi.data.simplified);
 	let healthyDroids = rawDroids;
 	const __CLOSE_Z = 1;
@@ -514,18 +529,17 @@ function __camTacticsTickForGroup(group)
 			percent: camDef(gi.data.repair) ? gi.data.repair : 66,
 		};
 
-		//repair
-		if (repair.hasFacility || camDef(repair.pos))
+		// repair & rearm
+		healthyDroids = [];
+		for (let i = 0, len = rawDroids.length; i < len; ++i)
 		{
-			healthyDroids = [];
-			for (let i = 0, len = rawDroids.length; i < len; ++i)
+			const droid = rawDroids[i];
+			
+			if (!isVTOL(droid)) // Repair non-VTOLs
 			{
-				const droid = rawDroids[i];
-				let repairLikeAction = false;
-
 				if (droid.order === DORDER_RTR)
 				{
-					continue;
+					continue; // Retreating already...
 				}
 
 				//has a repair facility so use it
@@ -534,7 +548,7 @@ function __camTacticsTickForGroup(group)
 					if (droid.health < repair.percent)
 					{
 						orderDroid(droid, DORDER_RTR);
-						repairLikeAction = true;
+						continue; // Retreating to repair facility
 					}
 				}
 				//Or they have auto-repair and run to some position for a while
@@ -544,15 +558,29 @@ function __camTacticsTickForGroup(group)
 					{
 						const loc = camMakePos(repair.pos);
 						orderDroidLoc(droid, DORDER_MOVE, loc.x, loc.y);
-						repairLikeAction = true;
+						continue; // Move to repair position
 					}
 				}
+			}
+			else // Rearm VTOLs
+			{
+				const __ARM = droid.weapons[0].armed;
+				const __IS_REARMING = (droid.order === DORDER_REARM || droid.action === 35); // DACTION_WAITDURINGREARM
 
-				if (!repairLikeAction)
+				if ((__ARM < 1) // Out of ammo
+					|| (__IS_REARMING && (__ARM < 100 || droid.health < 100)) // Rearming
+					|| (camDef(gi.data.repair) && (droid.health < repair.percent))) // Damaged past retreat threshold
 				{
-					healthyDroids.push(droid);
+					const __HAVE_PADS = enumStruct(droid.player, REARM_PAD).length > 0;
+					if (__HAVE_PADS && !__IS_REARMING)
+					{
+						orderDroid(droid, DORDER_REARM);
+					}
+					continue; //Rearming. Try not to attack stuff.
 				}
 			}
+			// If we've made it here, that means this droid is healthy enough
+			healthyDroids.push(droid);
 		}
 
 		if (camDef(gi.data.regroup) && gi.data.regroup && healthyDroids.length > 0)
@@ -606,16 +634,71 @@ function __camTacticsTickForGroup(group)
 		}
 	}
 
+	// If this group has the STRIKE order, make sure this group has targets and sufficient members before proceeding
+	let alternateGroupOrder = false;
+	if (groupOrder === CAM_ORDER_STRIKE)
+	{
+		let goodForStrike = true;
+
+		// Check if it has enough members
+		if (camDef(gi.data.minCount) && healthyDroids.length < gi.data.minCount)
+		{
+			// Not enough healthy droids for the strike
+			goodForStrike = false;
+		}
+
+		// Get a list of targets for the STRIKE order
+		if (!camDef(gi.data.callback))
+		{
+			camDebug("'callback' is required for STRIKE order");
+			return;
+		}
+		const strikeTargetList = __camGlobalContext()[gi.data.callback]();
+		
+		if (!camDef(strikeTargetList) || strikeTargetList.length === 0)
+		{
+			// No targets returned
+			goodForStrike = false;
+		}
+
+		if (!goodForStrike)
+		{
+			// Requirements not met; execute the alternate order instead!
+			if (!camDef(gi.data.altOrder))
+			{
+				camDebug("'altOrder' is required for STRIKE order");
+				return;
+			}
+			groupOrder = gi.data.altOrder; // Continue with this order instead.
+			alternateGroupOrder = true;
+		}
+		else
+		{
+			// We have enough healthy droids and we have targets; attack!
+			for (let i = 0; i < healthyDroids.length; i++)
+			{
+				const droid = healthyDroids[i];
+				strikeTargetList.sort(function(a, b) { // Sort targets by distance from unit
+					return distBetweenTwoPoints(droid.x, droid.y, a.x, a.y) - distBetweenTwoPoints(droid.x, droid.y, b.x, b.y);
+				});
+
+				// Attack the closest target from the list
+				orderDroidObj(droid, DORDER_ATTACK, strikeTargetList[0]);
+			}
+			return; // No need to continue further
+		}
+	}
+
 	//Target choosing
 	let target;
 	let patrolPos;
 
-	switch (gi.order)
+	switch (groupOrder)
 	{
 		case CAM_ORDER_ATTACK:
 		case CAM_ORDER_DEFEND:
 		case CAM_ORDER_COMPROMISE:
-			target = __camPickTarget(group);
+			target = __camPickTarget(group, groupOrder);
 			if (!camDef(target))
 			{
 				return;
@@ -623,47 +706,38 @@ function __camTacticsTickForGroup(group)
 			break;
 		case CAM_ORDER_PATROL:
 		case CAM_ORDER_FOLLOW:
+		case CAM_ORDER_STRIKE: // NOTE: This CAM_ORDER_STRIKE shouldn't reach this part anyway
 			//do nothing here
 			break;
 		default:
-			camDebug("Unknown group order given: " + gi.order);
+			camDebug("Unknown group order given: " + groupOrder);
 			return;
 	}
 
-	const __DEFENDING = (gi.order === CAM_ORDER_DEFEND);
+	const __DEFENDING = (groupOrder === CAM_ORDER_DEFEND);
 	if (!__SIMPLIFIED || __DEFENDING)
 	{
-		const __TRACK = (gi.order === CAM_ORDER_COMPROMISE);
+		const __TRACK = (groupOrder === CAM_ORDER_COMPROMISE);
 
 		for (let i = 0, len = healthyDroids.length; i < len; ++i)
 		{
 			const droid = healthyDroids[i];
-			const __VTOL_UNIT = (droid.type === DROID && isVTOL(droid));
-			const __REPAIR_UNIT = (droid.type === DROID && (droid.droidType === DROID_REPAIR));
+			const __VTOL_UNIT = isVTOL(droid);
+			const __REPAIR_UNIT = (droid.droidType === DROID_REPAIR);
 
 			if (droid.player === CAM_HUMAN_PLAYER)
 			{
 				camDebug("Controlling a human player's droid");
 			}
 
-			//Rearm vtols.
-			if (__VTOL_UNIT)
+			// NOTE: If this unit is a VTOL executing a STRIKE order, let it finish its attack before 
+			// executing its alternate order.
+			if (__VTOL_UNIT && alternateGroupOrder && droid.order === DORDER_ATTACK)
 			{
-				const __ARM = droid.weapons[0].armed;
-				const __IS_REARMING = (droid.order === DORDER_REARM || droid.action === 35); // DACTION_WAITDURINGREARM
-
-				if ((__ARM < 1) || (__IS_REARMING && (__ARM < 100 || droid.health < 100)))
-				{
-					const __HAVE_PADS = enumStruct(droid.player, REARM_PAD).length > 0;
-					if (__HAVE_PADS && !__IS_REARMING)
-					{
-						orderDroid(droid, DORDER_REARM);
-					}
-					continue; //Rearming. Try not to attack stuff.
-				}
+				continue;
 			}
 
-			if (gi.order === CAM_ORDER_FOLLOW)
+			if (groupOrder === CAM_ORDER_FOLLOW)
 			{
 				const leaderObj = getObject(gi.data.leader);
 				if (leaderObj === null)
@@ -691,7 +765,7 @@ function __camTacticsTickForGroup(group)
 				}
 			}
 
-			if (gi.order === CAM_ORDER_DEFEND)
+			if (groupOrder === CAM_ORDER_DEFEND)
 			{
 				// fall back to defense position
 				const dPos = gi.data.pos[0];
@@ -708,7 +782,7 @@ function __camTacticsTickForGroup(group)
 				}
 			}
 
-			if (gi.order === CAM_ORDER_PATROL)
+			if (groupOrder === CAM_ORDER_PATROL)
 			{
 				if (!camDef(gi.data.interval))
 				{
@@ -746,7 +820,7 @@ function __camTacticsTickForGroup(group)
 			}
 
 			// Order repair droids to repair nearby friendlies
-			if (__REPAIR_UNIT && gi.order !== CAM_ORDER_FOLLOW)
+			if (__REPAIR_UNIT && groupOrder !== CAM_ORDER_FOLLOW)
 			{
 				const repairTargetList = enumRange(droid.x, droid.y, __CAM_TARGET_TRACKING_RADIUS, ALL_PLAYERS, false).filter(function(obj) {
 					return (obj.type === DROID && allianceExistsBetween(droid.player, obj.player));
@@ -788,7 +862,7 @@ function __camTacticsTickForGroup(group)
 				{
 					weapon = camGetCompStats(droid.weapons[0].fullname, "Weapon");
 				}
-				let closeBy = enumRange(droid.x, droid.y, __camScanRange(gi.order, droid), ALL_PLAYERS, __TRACK).filter((obj) => (
+				let closeBy = enumRange(droid.x, droid.y, __camScanRange(groupOrder, droid), ALL_PLAYERS, __TRACK).filter((obj) => (
 					obj.type !== FEATURE && !allianceExistsBetween(droid.player, obj.player) && !ignorePlayers.includes(obj.player)
 				));
 

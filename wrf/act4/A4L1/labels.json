@@ -134,7 +134,7 @@
 
 	"area_19": {
 		"label": "infEntry19",
-		"pos1": [640, 14976],
+		"pos1": [768, 14976],
 		"pos2": [1664, 15232]
 	},
 
@@ -572,14 +572,6 @@
 
 
 	"object_19": {
-		"label": "infCybFactory5",
-		"id": 115,
-		"player": 4,
-		"type": 1
-	},
-
-
-	"object_20": {
 		"label": "infFactory3",
 		"id": 36,
 		"player": 4,
@@ -587,7 +579,7 @@
 	},
 
 
-	"object_21": {
+	"object_20": {
 		"label": "infFactory4",
 		"id": 101,
 		"player": 4,
@@ -595,7 +587,7 @@
 	},
 
 
-	"object_22": {
+	"object_21": {
 		"label": "infFactory6",
 		"id": 608,
 		"player": 4,
@@ -603,7 +595,7 @@
 	},
 
 
-	"object_23": {
+	"object_22": {
 		"label": "infFactory9",
 		"id": 112,
 		"player": 4,
@@ -611,7 +603,7 @@
 	},
 
 
-	"object_24": {
+	"object_23": {
 		"label": "infFactory8",
 		"id": 609,
 		"player": 4,
@@ -619,7 +611,7 @@
 	},
 
 
-	"object_25": {
+	"object_24": {
 		"label": "infFactory10",
 		"id": 768,
 		"player": 4,
@@ -627,7 +619,7 @@
 	},
 
 
-	"object_26": {
+	"object_25": {
 		"label": "infFactory11",
 		"id": 113,
 		"player": 4,
@@ -635,7 +627,7 @@
 	},
 
 
-	"object_27": {
+	"object_26": {
 		"label": "infFactory15",
 		"id": 44,
 		"player": 4,
@@ -643,7 +635,7 @@
 	},
 
 
-	"object_28": {
+	"object_27": {
 		"label": "infFactory18",
 		"id": 43,
 		"player": 4,
@@ -651,7 +643,7 @@
 	},
 
 
-	"object_29": {
+	"object_28": {
 		"label": "infFactory21",
 		"id": 607,
 		"player": 4,
@@ -659,7 +651,7 @@
 	},
 
 
-	"object_30": {
+	"object_29": {
 		"label": "infFactory23",
 		"id": 105,
 		"player": 4,
@@ -667,7 +659,7 @@
 	},
 
 
-	"object_31": {
+	"object_30": {
 		"label": "infFactory22",
 		"id": 47,
 		"player": 4,
@@ -675,7 +667,7 @@
 	},
 
 
-	"object_32": {
+	"object_31": {
 		"label": "infFactory19",
 		"id": 46,
 		"player": 4,
@@ -683,7 +675,7 @@
 	},
 
 
-	"object_33": {
+	"object_32": {
 		"label": "infCybFactory3",
 		"id": 40,
 		"player": 4,
@@ -691,7 +683,7 @@
 	},
 
 
-	"object_34": {
+	"object_33": {
 		"label": "infFactory17",
 		"id": 110,
 		"player": 4,
@@ -699,9 +691,17 @@
 	},
 
 
-	"object_35": {
+	"object_34": {
 		"label": "infFactory25",
 		"id": 106,
+		"player": 4,
+		"type": 1
+	},
+
+
+	"object_35": {
+		"label": "infCybFactory5",
+		"id": 115,
 		"player": 4,
 		"type": 1
 	},

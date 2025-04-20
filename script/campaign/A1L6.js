@@ -13,8 +13,8 @@ var colTruckJob4;
 const mis_collectiveResearch = [
 	"R-Wpn-MG-Damage02", "R-Wpn-Rocket-Damage02", "R-Wpn-Mortar-Damage01", 
 	"R-Wpn-Flamer-Damage02", "R-Wpn-Cannon-Damage02", "R-Wpn-MG-ROF01",
-	"R-Wpn-Rocket-ROF02", "R-Wpn-Mortar-ROF01", "R-Wpn-Flamer-ROF01",
-	"R-Wpn-Cannon-ROF02", "R-Vehicle-Metals02", "R-Struc-Materials02", 
+	"R-Wpn-Rocket-ROF01", "R-Wpn-Mortar-ROF01", "R-Wpn-Flamer-ROF01",
+	"R-Wpn-Cannon-ROF01", "R-Vehicle-Metals02", "R-Struc-Materials02", 
 	"R-Defense-WallUpgrade01", "R-Sys-Engineering01", "R-Vehicle-Engine01",
 ];
 const MIS_GROUND_WAVE_DELAY = camSecondsToMilliseconds(60);

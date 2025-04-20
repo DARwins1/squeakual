@@ -133,7 +133,10 @@ function camNeverGroupDroid(what, playerFilter)
 //;;	* `templates` The templates of units that this group is composed of. If units are missing from the 
 //;;	  group, the list missing units can be found with the `camGetRefillableGroupTemplates()` function.
 //;;	* `obj` An object, that when destroyed, disables this group from pulling from factories. If an object with this label 
-//;;	is later found, resume automatic refilling. Useful for commander squads that should stop refilling when the commander is dead.
+//;;		is later found, resume automatic refilling. Useful for commander squads that should stop refilling when the commander is dead.
+//;;	* `callback` A script-defined function that dictates whether this group may refill. If this function returns `True`, then
+//;;		allow this group to refill, otherwise disallow. If both `obj` and `callback` are defined, then `obj` must exist and
+//;;		`callback` must return `True` to allow this group to refill automatically.
 //;; * `order` The group order. (see tactics.js)
 //;; * `orderData` The data associated with the group's order. (see tactics.js)
 //;;
@@ -172,16 +175,32 @@ function camSetRefillableGroupData(group, groupData)
 		groupData = {}; // empty object
 	}
 
+	// Set default values
+	let factories = []; 
+	let globalFill = false;
+	let player = undefined;
+	let templates = [];
+
+	// Check if we're updating an existing group's data
+	if (camDef(__camRefillableGroupInfo[group]))
+	{
+		factories = __camRefillableGroupInfo[group].factories; 
+		globalFill = __camRefillableGroupInfo[group].globalFill;
+		player = __camRefillableGroupInfo[group].player;
+		templates = __camRefillableGroupInfo[group].templates;
+	}
+
 	__camRefillableGroupInfo[group] = { // NOTE: if `factories` and `globalFill` are undefined, then the group will not automatically refill!
-		factories: (camDef(groupData.factories)) ? groupData.factories : [],
-		globalFill: (camDef(groupData.globalFill) && groupData.globalFill) ? groupData.globalFill : false,
-		player: (camDef(groupData.player)) ? groupData.player : undefined,
-		templates: (camDef(groupData.templates)) ? groupData.templates : [],
+		factories: (camDef(groupData.factories)) ? groupData.factories : factories,
+		globalFill: (camDef(groupData.globalFill) && groupData.globalFill) ? groupData.globalFill : globalFill,
+		player: (camDef(groupData.player)) ? groupData.player : player,
+		templates: (camDef(groupData.templates)) ? groupData.templates : templates,
 		obj: groupData.obj, // may be undefined. FIXME: Seems to get set to null instead?
-		enabled: true // set to `false` when a defined `obj` is destroyed
+		callback: groupData.callback // may be undefined.
 	};
 }
 
+// TODO: Remove?
 //;; ## camLockRefillableGroup(group)
 //;;
 //;; Shortcut function that disables a group from pulling more units automatically.
@@ -194,7 +213,7 @@ function camLockRefillableGroup(group)
 	camSetRefillableGroupData(group, {
 		templates: __camRefillableGroupInfo[group].templates,
 		obj: __camRefillableGroupInfo[group].obj,
-		enabled: true
+		callback: __camRefillableGroupInfo[group].callback
 		// `factories` and `globalFill` are left blank
 	});
 }
@@ -358,14 +377,13 @@ function __camGetMissingGroupTemplates(group, returnFirst, factory)
 function __camGetRefillableTemplateForFactory(factoryLabel, factory)
 {
 	for (const group in __camRefillableGroupInfo)
-	{
-		const gi = __camRefillableGroupInfo[group];
-		
-		if (!gi.enabled)
+	{		
+		if (!__camAllowGroupAutoRefilling(group))
 		{
 			continue; // Auto-refilling disabled
 		}
 
+		const gi = __camRefillableGroupInfo[group];
 		const __VALID_FACTORY = gi.factories.includes(factoryLabel);
 		
 		// Check if the given factory can resupply this group
@@ -386,22 +404,23 @@ function __camGetRefillableTemplateForFactory(factoryLabel, factory)
 	}
 }
 
-function __checkRefillableGroupObject()
+function __camAllowGroupAutoRefilling(group)
 {
-	for (const group in __camRefillableGroupInfo)
+	const gi = __camRefillableGroupInfo[group];
+
+	// Check object (if defined)
+	if (camDef(gi.obj) && getObject(gi.obj) === null)
 	{
-		if (camDef(__camRefillableGroupInfo[group].obj))
-		{
-			if (getObject(__camRefillableGroupInfo[group].obj) === null)
-			{
-				// `obj` destroyed, disable auto refilling
-				__camRefillableGroupInfo[group].enabled = false;
-			}
-			else
-			{
-				// `obj` rebuilt, re-enable auto refilling
-				__camRefillableGroupInfo[group].enabled = true;
-			}
-		}
+		// Defined object destroyed
+		return false;
 	}
+
+	// Check callback (if defined)
+	if (camDef(gi.callback) && !__camGlobalContext()[gi.callback]())
+	{
+		// Defined callback didn't return true
+		return false;
+	}
+
+	return true;
 }
