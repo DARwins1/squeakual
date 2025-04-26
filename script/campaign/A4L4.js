@@ -100,16 +100,19 @@ function eventDroidBuilt(droid, structure)
 		{
 			// Tracked commander rebuilt
 			addLabel(droid, "zuluCommander1");
+			camSetDroidRank(droid, MIS_ZULU_RANK);
 		}
 		else if (camDroidMatchesTemplate(droid, mis_zuluComHTTempl))
 		{
 			// Halftracked commander rebuilt
 			addLabel(droid, "zuluCommander2");
+			camSetDroidRank(droid, MIS_ZULU_RANK);
 		}
 		else if (camDroidMatchesTemplate(droid, mis_zuluComHovTempl))
 		{
 			// Hover commander rebuilt
 			addLabel(droid, "zuluCommander3");
+			camSetDroidRank(droid, MIS_ZULU_RANK);
 		}
 		else if (camDroidMatchesTemplate(droid, cTempl.plhstriket))
 		{
@@ -1272,7 +1275,7 @@ function camEnemyBaseEliminated_zuluPlateauBase()
 	camCallOnce("setWorldAblaze");
 }
 
-// Check if the Clayde should activate his Lure trap
+// Check if Clayde should activate his Lure trap
 function checkEnableLure()
 {
 	let basesDestroyed = 0;
@@ -1432,7 +1435,7 @@ function zuluSurrender()
 		{text: "LIEUTENANT: ...", delay: 2},
 		{text: "LIEUTENANT: Attention all remaining NARS personnel.", delay: 3, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: ...This is the Lieutenant speaking.", delay: 3, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: I don't know what the Clayde has said about me, or about Commanders Bravo and Charlie.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: I don't know what Clayde has said about me, or about Commanders Bravo and Charlie.", delay: 3, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: But look around yourselves.", delay: 3, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: The world is burning around us.", delay: 2, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: General Clayde is dead.", delay: 2, sound: CAM_RCLICK},
