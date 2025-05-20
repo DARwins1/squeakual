@@ -95,7 +95,7 @@ function sendInfestedReinforcements()
 			cTempl.infbloke,  cTempl.infbloke, cTempl.infbloke, // Blokes
 			cTempl.infkevbloke, cTempl.infkevbloke,
 			cTempl.inflance, // Lances
-		].concat((difficulty >= EASY) ? cTempl.infcomhaat : undefined), // Add a Cyclone tank
+		].concat((difficulty >= EASY) ? cTempl.infcomhaat : []), // Add a Cyclone tank
 	];
 	const CORE_SIZE = 4;
 	const FODDER_SIZE = 12;

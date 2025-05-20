@@ -20,7 +20,8 @@ const mis_zuluExtraResearch = [ // Added on top of everything the player has at 
 
 const MIS_TEAM_CHARLIE = 1;
 const MIS_TEAM_ZULU = 5;
-const MIS_CHARLIE_RANK = 8; // Hero
+const MIS_CHARLIE_COMMANDER_RANK = "Hero";
+const MIS_CHARLIE_RANK = "Regular";
 const MIS_ZULU_RANK = (difficulty <= MEDIUM) ? 6 : difficulty + 4; // Elite to Hero
 const MIS_ZULU_COMMANDER_DELAY = camChangeOnDiff(camMinutesToMilliseconds(12));
 
@@ -218,7 +219,7 @@ function sendInfestedReinforcements()
 			cTempl.infkevbloke, cTempl.infkevbloke,
 			cTempl.inflance, // Lances
 			cTempl.infkevlance, cTempl.infkevlance,
-		].concat((difficulty >= HARD) ? cTempl.vilestinger : undefined), // Add a Vile Stinger,
+		].concat((difficulty >= HARD) ? cTempl.vilestinger : []), // Add a Vile Stinger,
 		[ // Light tanks & cyborgs + some scav stuff
 			cTempl.stinger, cTempl.stinger, cTempl.stinger, // Stingers
 			cTempl.infcybca, cTempl.infcybca, cTempl.infcybca, cTempl.infcybca, // Heavy Gunners
@@ -239,7 +240,7 @@ function sendInfestedReinforcements()
 			cTempl.infkevbloke, cTempl.infkevbloke, cTempl.infkevbloke,
 			cTempl.inflance, cTempl.inflance, cTempl.inflance, // Lances
 			cTempl.infkevlance, cTempl.infkevlance,
-		].concat((difficulty >= HARD) ? cTempl.infcomhatt : undefined), // Add a Tank Killer,
+		].concat((difficulty >= HARD) ? cTempl.infcomhatt : []), // Add a Tank Killer,
 		[ // Bashers, Stingers, and Infantry
 			cTempl.vilestinger, // Vile Stingers
 			cTempl.infcomtruckt, // Infested Truck
@@ -250,7 +251,7 @@ function sendInfestedReinforcements()
 			cTempl.infkevbloke, cTempl.infkevbloke,
 			cTempl.inflance, // Lances
 			cTempl.infcomhaat, // Cyclones
-		].concat((difficulty >= HARD) ? cTempl.vilestinger : undefined), // Add another Vile Stinger
+		].concat((difficulty >= HARD) ? cTempl.vilestinger : []), // Add another Vile Stinger
 	];
 	const CORE_SIZE = 8;
 	const FODDER_SIZE = 14;
@@ -347,7 +348,12 @@ function eventTransporterLanded(transport)
 			// New Charlie command tank
 			addLabel(droid, "charlieCommander");
 			// Also rank the commander to the appropriate level
-			camSetDroidRank(getObject("charlieCommander"), MIS_CHARLIE_RANK);
+			camSetDroidRank(droid, MIS_CHARLIE_COMMANDER_RANK);
+		}
+		else
+		{
+			// Give the non-commander droid some rank
+			camSetDroidRank(droid, MIS_CHARLIE_RANK);
 		}
 	}
 
@@ -851,11 +857,12 @@ function expandMap()
 	});
 
 	// Charlie groups...
-	charlieCommander = camMakeRefillableGroup(undefined, {
-		templates: [cTempl.plhcomht]
+	charlieCommander = camMakeRefillableGroup(
+		undefined, {
+			templates: [cTempl.plhcomht]
 		}, CAM_ORDER_ATTACK, {
-		targetPlayer: MIS_TEAM_ZULU,
-		repair: 50
+			targetPlayer: MIS_TEAM_ZULU,
+			repair: 75
 	});
 	charlieCommandGroup = camMakeRefillableGroup(
 		undefined, {
@@ -873,24 +880,25 @@ function expandMap()
 			],
 		}, CAM_ORDER_FOLLOW, {
 			leader: "charlieCommander",
-			repair: 50,
+			repair: 75,
 			suborder: CAM_ORDER_DEFEND, // Retreat back to LZ if the commander dies
 			data: {
 				pos: camMakePos("landingZoneCharlie"),
 				radius: 20,
-				repair: 50
+				repair: 75
 			}
 	});
-	charlieVtolGroup = camMakeRefillableGroup(undefined, {
-		templates: [ // 3 Tank Killers, 3 Assault Guns, 3 HEAP Bombs, 3 Thermite Bombs
-			cTempl.plmhatv, cTempl.plmhatv, cTempl.plmhatv,
-			cTempl.plmagv, cTempl.plmagv, cTempl.plmagv,
-			cTempl.plmhbombv, cTempl.plmhbombv, cTempl.plmhbombv,
-			cTempl.plmtbombv, cTempl.plmtbombv, cTempl.plmtbombv,
-		],
+	charlieVtolGroup = camMakeRefillableGroup(
+		undefined, {
+			templates: [ // 3 Tank Killers, 3 Assault Guns, 3 HEAP Bombs, 3 Thermite Bombs
+				cTempl.plmhatv, cTempl.plmhatv, cTempl.plmhatv,
+				cTempl.plmagv, cTempl.plmagv, cTempl.plmagv,
+				cTempl.plmhbombv, cTempl.plmhbombv, cTempl.plmhbombv,
+				cTempl.plmtbombv, cTempl.plmtbombv, cTempl.plmtbombv,
+			],
 		}, CAM_ORDER_ATTACK, {
-		targetPlayer: MIS_TEAM_ZULU,
-		repair: 75
+			targetPlayer: MIS_TEAM_ZULU,
+			repair: 75
 	});
 
 	// Manage trucks...
@@ -1086,7 +1094,7 @@ function expandMap()
 
 	// Start calling Charlie transports
 	sendCharlieTransporter();
-	setTimer("sendCharlieTransporter", camMinutesToMilliseconds(1.5));
+	setTimer("sendCharlieTransporter", camChangeOnDiff(camMinutesToMilliseconds(2), true));
 
 	// Queue up other events...
 	queue("aggroCommander1", camChangeOnDiff(camMinutesToMilliseconds(2.5)));
@@ -1464,7 +1472,8 @@ function absorbZulu()
 		playSound(cam_sounds.unitsTransferred);
 		for (const droid of donateDroids)
 		{
-			// TODO: Give droids some EXP?
+			// Also give droids some EXP
+			if (droid.droidType !== DROID_COMMAND) camSetDroidRank(droid, "Veteran");
 			donateObject(droid, CAM_HUMAN_PLAYER);
 		}
 	}

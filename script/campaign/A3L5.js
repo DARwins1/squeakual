@@ -90,7 +90,7 @@ function sendInfestedReinforcements()
 			cTempl.infkevbloke, cTempl.infkevbloke, cTempl.infkevbloke,
 			cTempl.inflance, cTempl.inflance, cTempl.inflance, // Lances
 			cTempl.infkevlance, cTempl.infkevlance,
-		].concat((difficulty >= MEDIUM) ? cTempl.infcomatt : undefined), // Add a Lancer tank
+		].concat((difficulty >= MEDIUM) ? cTempl.infcomatt : []), // Add a Lancer tank
 		[ // Bashers, Stingers, and Infantry
 			cTempl.vilestinger, // Vile Stingers
 			cTempl.stinger, cTempl.stinger, cTempl.stinger, cTempl.stinger, // Stingers

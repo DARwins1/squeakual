@@ -182,6 +182,11 @@ function surrenderTeams()
 	for (const obj of objs)
 	{
 		// TODO: Give droids some EXP?
+		if (obj.type === DROID && obj.droidType !== DROID_COMMAND)
+		{
+			camSetDroidRank(obj, "Regular");
+		}
+
 		donateObject(obj, CAM_HUMAN_PLAYER);
 	}
 }
@@ -309,7 +314,7 @@ function sendInfestedReinforcements()
 			cTempl.infbloke,  cTempl.infbloke, cTempl.infbloke, // Blokes
 			cTempl.infkevbloke, cTempl.infkevbloke,
 			cTempl.inflance, // Lances
-		].concat((difficulty >= EASY) ? cTempl.infcomhaat : undefined), // Add a Cyclone tank
+		].concat((difficulty >= EASY) ? cTempl.infcomhaat : []), // Add a Cyclone tank
 	];
 	const CORE_SIZE = 4;
 	const FODDER_SIZE = 12;

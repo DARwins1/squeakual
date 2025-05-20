@@ -103,7 +103,7 @@ function sendInfestedReinforcements()
 			cTempl.infkevbloke, cTempl.infkevbloke, cTempl.infkevbloke,
 			cTempl.inflance, cTempl.inflance, cTempl.inflance, // Lances
 			cTempl.infkevlance, cTempl.infkevlance,
-		].concat((difficulty >= MEDIUM) ? cTempl.infcohhcant : undefined), // Add a Heavy Cannon tank 
+		].concat((difficulty >= MEDIUM) ? cTempl.infcohhcant : []), // Add a Heavy Cannon tank 
 		[ // Bashers, Stingers, and Infantry
 			cTempl.vilestinger, // Vile Stingers
 			cTempl.stinger, cTempl.stinger, cTempl.stinger, cTempl.stinger, // Stingers
@@ -112,7 +112,7 @@ function sendInfestedReinforcements()
 			cTempl.infbloke,  cTempl.infbloke, cTempl.infbloke, // Blokes
 			cTempl.infkevbloke, cTempl.infkevbloke,
 			cTempl.inflance, // Lances
-		].concat((difficulty >= MEDIUM) ? cTempl.infcomtruckt : undefined), // Add an Infested Truck
+		].concat((difficulty >= MEDIUM) ? cTempl.infcomtruckt : []), // Add an Infested Truck
 	];
 	const CORE_SIZE = 4;
 	const FODDER_SIZE = 12;

@@ -42,7 +42,7 @@ function sendInfestedReinforcements()
 			cTempl.infkevbloke,
 			cTempl.inflance, cTempl.inflance, // Lances
 			cTempl.infkevlance,
-		].concat((difficulty >= MEDIUM) ? cTempl.vilestinger : undefined), // Add a Vile Stinger
+		].concat((difficulty >= MEDIUM) ? cTempl.vilestinger : []), // Add a Vile Stinger
 		[ // Light tanks & cyborgs + some scav stuff
 			cTempl.stinger, cTempl.stinger, cTempl.stinger, // Stingers
 			cTempl.infcybca, cTempl.infcybca, // Heavy Gunners
@@ -57,7 +57,7 @@ function sendInfestedReinforcements()
 			cTempl.infkevbloke, cTempl.infkevbloke, cTempl.infkevbloke,
 			cTempl.inflance, cTempl.inflance, cTempl.inflance, // Lances
 			cTempl.infkevlance, cTempl.infkevlance,
-		].concat((difficulty >= MEDIUM) ? cTempl.infcommcant : undefined), // Add a Medium Cannon tank
+		].concat((difficulty >= MEDIUM) ? cTempl.infcommcant : []), // Add a Medium Cannon tank
 	];
 	const CORE_SIZE = 2;
 	const FODDER_SIZE = 8;

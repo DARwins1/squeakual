@@ -197,7 +197,7 @@ function sendReinforcements()
 				cTempl.infkevbloke, cTempl.infkevbloke,
 				cTempl.inflance, // Lances
 				cTempl.infkevlance, cTempl.infkevlance,
-			].concat((difficulty >= MEDIUM) ? cTempl.vilestinger : undefined), // Add a Vile Stinger,
+			].concat((difficulty >= MEDIUM) ? cTempl.vilestinger : []), // Add a Vile Stinger,
 			[ // Light tanks & cyborgs + some scav stuff
 				cTempl.stinger, cTempl.stinger, cTempl.stinger, // Stingers
 				cTempl.infcybca, cTempl.infcybca, cTempl.infcybca, cTempl.infcybca, // Heavy Gunners
@@ -218,7 +218,7 @@ function sendReinforcements()
 				cTempl.infkevbloke, cTempl.infkevbloke, cTempl.infkevbloke,
 				cTempl.inflance, cTempl.inflance, cTempl.inflance, // Lances
 				cTempl.infkevlance, cTempl.infkevlance,
-			].concat((difficulty >= MEDIUM) ? cTempl.infcomhatt : undefined), // Add a Tank Killer,
+			].concat((difficulty >= MEDIUM) ? cTempl.infcomhatt : []), // Add a Tank Killer,
 			[ // Bashers, Stingers, and Infantry
 				cTempl.vilestinger, // Vile Stingers
 				cTempl.infcomtruckt, // Infested Truck
@@ -229,7 +229,7 @@ function sendReinforcements()
 				cTempl.infkevbloke, cTempl.infkevbloke,
 				cTempl.inflance, // Lances
 				cTempl.infcomhaat, // Cyclones
-			].concat((difficulty >= MEDIUM) ? cTempl.vilestinger : undefined), // Add another Vile Stinger
+			].concat((difficulty >= MEDIUM) ? cTempl.vilestinger : []), // Add another Vile Stinger
 		];
 		const CORE_SIZE = 6;
 		const FODDER_SIZE = 12;

@@ -138,7 +138,7 @@ function camDeleteArtifact(artiLabel, warnIfNotFound)
 function camAllArtifactsPickedUp()
 {
 	// FIXME: O(n) lookup here
-	return __camNumArtifacts === Object.keys(__camArtifacts).length;
+	return __camNumArtifacts >= Object.keys(__camArtifacts).length;
 }
 
 //;; ## camGetArtifacts()
@@ -310,7 +310,7 @@ function __camCheckArtifactObject(aLabel)
 	if (obj === null)
 	{
 		// Nothing on in the artifact position, simply replace the artifact object
-		const acrate = addFeature("Crate", obj.x, obj.y);
+		const acrate = addFeature("Crate", ai.pos.x, ai.pos.y);
 		addLabel(acrate, __camGetArtifactLabel(aLabel));
 		ai.placed = true;
 		return;

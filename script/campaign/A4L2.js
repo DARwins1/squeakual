@@ -158,7 +158,7 @@ function sendInfestedReinforcements()
 			cTempl.infkevbloke, cTempl.infkevbloke, cTempl.infkevbloke,
 			cTempl.inflance, cTempl.inflance, cTempl.inflance, // Lances
 			cTempl.infkevlance, cTempl.infkevlance,
-		].concat((difficulty >= EASY) ? cTempl.infcohhrat : undefined), // Add a HRA tank
+		].concat((difficulty >= EASY) ? cTempl.infcohhrat : []), // Add a HRA tank
 		[ // Bashers, Stingers, and Infantry
 			cTempl.vilestinger, // Vile Stingers
 			cTempl.infcomtruckt, // Infested Truck
@@ -168,7 +168,7 @@ function sendInfestedReinforcements()
 			cTempl.infbloke,  cTempl.infbloke, cTempl.infbloke, // Blokes
 			cTempl.infkevbloke, cTempl.infkevbloke,
 			cTempl.inflance, // Lances
-		].concat((difficulty >= MEDIUM) ? cTempl.infcomhaat : undefined), // Add a Cyclone tank
+		].concat((difficulty >= MEDIUM) ? cTempl.infcomhaat : []), // Add a Cyclone tank
 	];
 	const CORE_SIZE = 4;
 	const FODDER_SIZE = 12;
