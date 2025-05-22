@@ -1086,7 +1086,7 @@ function collectiveDialogue()
 {
 	camQueueDialogue([
 		{text: "DELTA: Lieutenant!", delay: 0, sound: CAM_RCLICK},
-		{text: "DELTA: We've spotted the Collective forces approaching from the west!", delay: 2, sound: CAM_RCLICK},
+		{text: "DELTA: We've spotted the Collective forces approaching from the east!", delay: 2, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: ...Why can't anything ever be simple?", delay: 3, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: Commander Bravo, focus on escorting those refugees.", delay: 4, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: Charlie, Delta, cover Bravo's flanks and help them keep the Collective at bay.", delay: 3, sound: CAM_RCLICK},
@@ -1742,7 +1742,11 @@ function setStageTwo()
 	camEnableFactory("colFactory2");
 	camEnableFactory("colFactory3");
 	camEnableFactory("colCybFactory1");
-	camEnableFactory("colCybFactory2");	
+	camEnableFactory("colCybFactory2");
+
+	// Slow down Collective reinforcement waves
+	removeTimer("sendCollectiveReinforcements");
+	setTimer("sendCollectiveReinforcements", camChangeOnDiff(camMinutesToMilliseconds(5)));
 
 	// Manage Collective base trucks
 	colBaseTruckJob1 = camManageTrucks(
@@ -1999,7 +2003,7 @@ function setStageTwo()
 		{text: "LIEUTENANT: We're not going to be able to flee using transports until we come up with a backup plan.", delay: 3, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: Commanders, make sure to fortify our position.", delay: 4, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: Set up as many defenses as you can!", delay: 3, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: The Collective won't let us leave without fight!", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: The Collective won't let us leave without a fight!", delay: 3, sound: CAM_RCLICK},
 	]);
 }
 
@@ -3387,8 +3391,8 @@ function eventStartLevel()
 			},
 			groupSize: 4,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(45)),
-			// Super Cyborgs
-			templates: [ cTempl.scytk, cTempl.scyac ]
+			// Thermite Flamers + Super Grenadiers
+			templates: [ cTempl.cybth, cTempl.scygr ]
 		},
 		"colCybFactory2": {
 			assembly: "colCybAssembly2",
@@ -3399,8 +3403,8 @@ function eventStartLevel()
 			},
 			groupSize: 5,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(45)),
-			// Thermite Flamers + Super Grenadiers
-			templates: [ cTempl.cybth, cTempl.scygr ]
+			// Super Cyborgs
+			templates: [ cTempl.scytk, cTempl.scyac ]
 		},
 
 		"charlieFactory1": {
