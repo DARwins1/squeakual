@@ -42,3 +42,5 @@ INCOM_INT			_("Incoming intelligence report.")
 /* Additional Messages */
 ADD_MSG42			_("Nuclear Reactor")
 AASITE_MSG			_("Anti Aircraft Site")
+GASS_MSG			_("Incoming Ground Assault")
+AASS_MSG			_("Incoming Air Assault")

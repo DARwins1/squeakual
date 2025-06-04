@@ -617,23 +617,16 @@
 
 
 	"area_59": {
-		"label": "charlieCommandGroup",
-		"pos1": [3200, 10624],
-		"pos2": [3712, 11136]
+		"label": "depositZone",
+		"pos1": [896, 11136],
+		"pos2": [2432, 11904]
 	},
 
 
 	"area_60": {
 		"label": "deltaReturnZone",
-		"pos1": [512, 1152],
-		"pos2": [3072, 4224]
-	},
-
-
-	"area_61": {
-		"label": "depositZone",
-		"pos1": [1280, 11136],
-		"pos2": [2304, 11904]
+		"pos1": [1408, 2560],
+		"pos2": [2816, 3968]
 	},
 
 
@@ -678,14 +671,6 @@
 
 
 	"object_5": {
-		"label": "deltaVtolFactory1",
-		"id": 85,
-		"player": 5,
-		"type": 1
-	},
-
-
-	"object_6": {
 		"label": "deltaFactory2",
 		"id": 88,
 		"player": 5,
@@ -693,7 +678,7 @@
 	},
 
 
-	"object_7": {
+	"object_6": {
 		"label": "colFactory1",
 		"id": 111,
 		"player": 2,
@@ -701,7 +686,7 @@
 	},
 
 
-	"object_8": {
+	"object_7": {
 		"label": "colFactory2",
 		"id": 104,
 		"player": 2,
@@ -709,7 +694,7 @@
 	},
 
 
-	"object_9": {
+	"object_8": {
 		"label": "deltaFactory1",
 		"id": 96,
 		"player": 5,
@@ -717,15 +702,15 @@
 	},
 
 
-	"object_10": {
-		"label": "deltaVtolFactory2",
-		"id": 101,
+	"object_9": {
+		"label": "deltaVtolFactory1",
+		"id": 85,
 		"player": 5,
 		"type": 1
 	},
 
 
-	"object_11": {
+	"object_10": {
 		"label": "charlieVtolFactory",
 		"id": 153,
 		"player": 1,
@@ -733,23 +718,7 @@
 	},
 
 
-	"object_12": {
-		"label": "colCybFactory2",
-		"id": 63,
-		"player": 2,
-		"type": 1
-	},
-
-
-	"object_13": {
-		"label": "colTruck7",
-		"id": 1575,
-		"player": 2,
-		"type": 0
-	},
-
-
-	"object_14": {
+	"object_11": {
 		"label": "deltaCybFactory1",
 		"id": 87,
 		"player": 5,
@@ -757,7 +726,7 @@
 	},
 
 
-	"object_15": {
+	"object_12": {
 		"label": "charlieFactory2",
 		"id": 70,
 		"player": 1,
@@ -765,23 +734,7 @@
 	},
 
 
-	"object_16": {
-		"label": "colTruck13",
-		"id": 1580,
-		"player": 2,
-		"type": 0
-	},
-
-
-	"object_17": {
-		"label": "colLZTruck4",
-		"id": 1588,
-		"player": 2,
-		"type": 0
-	},
-
-
-	"object_18": {
+	"object_13": {
 		"label": "deltaFactory3",
 		"id": 73,
 		"player": 5,
@@ -789,79 +742,7 @@
 	},
 
 
-	"object_19": {
-		"label": "deltaCrashTruck2",
-		"id": 1535,
-		"player": 5,
-		"type": 0
-	},
-
-
-	"object_20": {
-		"label": "charlieCybFactory3",
-		"id": 89,
-		"player": 1,
-		"type": 1
-	},
-
-
-	"object_21": {
-		"label": "colFactory3",
-		"id": 106,
-		"player": 2,
-		"type": 1
-	},
-
-
-	"object_22": {
-		"label": "colCC",
-		"id": 1432,
-		"player": 2,
-		"type": 1
-	},
-
-
-	"object_23": {
-		"label": "colCybFactory1",
-		"id": 109,
-		"player": 2,
-		"type": 1
-	},
-
-
-	"object_24": {
-		"label": "deltaCrashTruck1",
-		"id": 1534,
-		"player": 5,
-		"type": 0
-	},
-
-
-	"object_25": {
-		"label": "charlieTruck2",
-		"id": 1546,
-		"player": 1,
-		"type": 0
-	},
-
-
-	"object_26": {
-		"label": "charlieTruck1",
-		"id": 1545,
-		"player": 1,
-		"type": 0
-	},
-
-
-	"object_27": {
-		"label": "charlieTruck3",
-		"id": 1544,
-		"player": 1,
-		"type": 0
-	},
-
-
-	"object_28": {
+	"object_14": {
 		"label": "charlieEngineer",
 		"id": 1547,
 		"player": 1,
@@ -869,23 +750,7 @@
 	},
 
 
-	"object_29": {
-		"label": "deltaVtolTower1",
-		"id": 369,
-		"player": 5,
-		"type": 1
-	},
-
-
-	"object_30": {
-		"label": "colLZTruck2",
-		"id": 1586,
-		"player": 2,
-		"type": 0
-	},
-
-
-	"object_31": {
+	"object_15": {
 		"label": "colLZTruck1",
 		"id": 1585,
 		"player": 2,
@@ -893,7 +758,95 @@
 	},
 
 
-	"object_32": {
+	"object_16": {
+		"label": "charlieCybFactory3",
+		"id": 89,
+		"player": 1,
+		"type": 1
+	},
+
+
+	"object_17": {
+		"label": "colFactory3",
+		"id": 106,
+		"player": 2,
+		"type": 1
+	},
+
+
+	"object_18": {
+		"label": "colCC",
+		"id": 1432,
+		"player": 2,
+		"type": 1
+	},
+
+
+	"object_19": {
+		"label": "colCybFactory1",
+		"id": 109,
+		"player": 2,
+		"type": 1
+	},
+
+
+	"object_20": {
+		"label": "deltaCrashTruck1",
+		"id": 1534,
+		"player": 5,
+		"type": 0
+	},
+
+
+	"object_21": {
+		"label": "charlieTruck2",
+		"id": 1546,
+		"player": 1,
+		"type": 0
+	},
+
+
+	"object_22": {
+		"label": "charlieTruck1",
+		"id": 1545,
+		"player": 1,
+		"type": 0
+	},
+
+
+	"object_23": {
+		"label": "charlieTruck3",
+		"id": 1544,
+		"player": 1,
+		"type": 0
+	},
+
+
+	"object_24": {
+		"label": "colLZTruck2",
+		"id": 1586,
+		"player": 2,
+		"type": 0
+	},
+
+
+	"object_25": {
+		"label": "deltaVtolTower1",
+		"id": 369,
+		"player": 5,
+		"type": 1
+	},
+
+
+	"object_26": {
+		"label": "deltaVtolFactory2",
+		"id": 101,
+		"player": 5,
+		"type": 1
+	},
+
+
+	"object_27": {
 		"label": "colLZTruck3",
 		"id": 1587,
 		"player": 2,
@@ -901,90 +854,26 @@
 	},
 
 
-	"object_33": {
-		"label": "colTruck11",
-		"id": 1582,
+	"object_28": {
+		"label": "colLZTruck4",
+		"id": 1588,
 		"player": 2,
 		"type": 0
 	},
 
 
-	"object_34": {
-		"label": "colTruck12",
-		"id": 1581,
+	"object_29": {
+		"label": "colCybFactory2",
+		"id": 63,
 		"player": 2,
-		"type": 0
+		"type": 1
 	},
 
 
-	"object_35": {
-		"label": "colTruck4",
-		"id": 1569,
-		"player": 2,
-		"type": 0
-	},
-
-
-	"object_36": {
-		"label": "colTruck9",
-		"id": 1579,
-		"player": 2,
-		"type": 0
-	},
-
-
-	"object_37": {
-		"label": "colTruck8",
-		"id": 1576,
-		"player": 2,
-		"type": 0
-	},
-
-
-	"object_38": {
-		"label": "colTruck5",
-		"id": 1573,
-		"player": 2,
-		"type": 0
-	},
-
-
-	"object_39": {
-		"label": "colTruck10",
-		"id": 1578,
-		"player": 2,
-		"type": 0
-	},
-
-
-	"object_40": {
-		"label": "colTruck3",
-		"id": 1572,
-		"player": 2,
-		"type": 0
-	},
-
-
-	"object_41": {
-		"label": "colTruck2",
-		"id": 1570,
-		"player": 2,
-		"type": 0
-	},
-
-
-	"object_42": {
-		"label": "colTruck1",
-		"id": 1571,
-		"player": 2,
-		"type": 0
-	},
-
-
-	"object_43": {
-		"label": "colTruck6",
-		"id": 1574,
-		"player": 2,
+	"object_30": {
+		"label": "deltaCrashTruck2",
+		"id": 1535,
+		"player": 5,
 		"type": 0
 	},
 

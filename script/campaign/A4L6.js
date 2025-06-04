@@ -64,34 +64,14 @@ var colBase4Structs;
 var colBase5Structs;
 
 // Track which assault blips are active
-var groundBlip1;
-var groundBlip2;
-var groundBlip3;
-var groundBlip4;
-var groundBlip5;
-var groundBlip6;
-var groundBlip7;
-var groundBlip8;
-var groundBlip9;
-var groundBlip10;
-var groundBlip11;
-var groundBlip12;
-var groundBlip13;
-var groundBlip14;
-var groundBlip15;
-var groundBlip16;
-var airBlip2;
-var airBlip3;
-var airBlip4;
-var airBlip5;
+var groundBlips;
+var airBlips;
 
 // Various groups
 var charlieCommander;
 var charlieCommandGroup;
-var charlieVtolGroup;
 var deltaCommander;
 var deltaCommandGroup;
-var deltaVtolGroup;
 var deltaCrashGroup;
 
 // Truck jobs (wow there's a lot of these)
@@ -353,6 +333,10 @@ function sendCollectiveTransporter()
 		CAM_REINFORCE_TRANSPORT, {
 			entry: entryPos,
 			exit: entryPos,
+			order: CAM_ORDER_ATTACK,
+			data: {
+				targetPlayer: CAM_HUMAN_PLAYER
+			}
 		}
 	);
 }
@@ -402,15 +386,8 @@ function eventTransporterLanded(transport)
 			camSafeRemoveObject(transTrucks[i]);
 		}
 
-		// Drop off a bunch of civilians
-		const NUM_CIVS = camRand(5) + 6; // 6 to 10 civilians
-		const civDroids = Array(NUM_CIVS).fill(cTempl.civ);
-		camSendReinforcement(MIS_CIVS, getObject("landingZoneCharlie"), civDroids, CAM_REINFORCE_GROUND, {
-			order: CAM_ORDER_DEFEND,
-			data: {
-				pos: camMakePos("depositZone")
-			}
-		});
+		// Drop off civilians
+		civilianDropOff("landingZoneCharlie");
 	}
 	else if (transport.player === MIS_TEAM_DELTA)
 	{
@@ -459,17 +436,24 @@ function eventTransporterLanded(transport)
 			firstDeltaTransport = false;
 		}
 
-		// Drop off a bunch of civilians
-		const NUM_CIVS = camRand(5) + 6; // 6 to 10 civilians
-		const civDroids = Array(NUM_CIVS).fill(cTempl.civ);
-		camSendReinforcement(MIS_CIVS, getObject("landingZoneDelta"), civDroids, CAM_REINFORCE_GROUND, {
-			order: CAM_ORDER_DEFEND,
-			data: {
-				pos: camMakePos("depositZone")
-			}
-		});
+		// Drop off civilians
+		civilianDropOff("landingZoneDelta");
 	}
 	// Don't care about Collective transports here...
+}
+
+// Drop off a bunch of civilians from the given LZ
+function civilianDropOff(spawnArea)
+{
+	const NUM_CIVS = camRand(5) + 6; // 6 to 10 civilians
+	const civDroids = [];
+	for (let i = 0; i < NUM_CIVS; i++)
+	{
+		// Spawn civilians
+		civDroids.push(camAddDroid(MIS_CIVS, spawnArea, cTempl.civ, _("Civilian")));
+	}
+	// ...and then move them towards the deposit zone
+	camManageGroup(camMakeGroup(civDroids), CAM_ORDER_DEFEND, {pos: camMakePos("depositZone")});
 }
 
 // Send various Collective ground forces from entrances around the map
@@ -584,11 +568,11 @@ function sendCollectiveReinforcements()
 	else // stage 3
 	{
 		// More entrances are enabled as the timer ticks down
-		groundEntrances = [
-			"groundEntry3", "groundEntry6", "groundEntry7",
-			"groundEntry8", "groundEntry9", "groundEntry11", 
-			"groundEntry13", "groundEntry15", "groundEntry16",
-		];		
+		// groundEntrances = [
+		// 	"groundEntry3", "groundEntry6", "groundEntry7",
+		// 	"groundEntry8", "groundEntry9", "groundEntry11", 
+		// 	"groundEntry13", "groundEntry15", "groundEntry16",
+		// ];
 		hoverEntrances = [
 			"hoverEntry3", "hoverEntry4", "hoverEntry6",
 		];
@@ -603,32 +587,32 @@ function sendCollectiveReinforcements()
 			}
 		}
 
-		groundCompositions = [
-			[
-				cTempl.cybag, cTempl.cybag, cTempl.cybag, cTempl.cybag, // 4 Assault Gunners
-				cTempl.comatt, cTempl.comatt, cTempl.comatt, cTempl.comatt, // 4 Lancers
-				cTempl.cominft, cTempl.cominft, // 2 Infernos
-			],
-			[
-				cTempl.scymc, cTempl.scymc, cTempl.scymc, // 3 Super Heavy Gunners
-				cTempl.scyac, cTempl.scyac, // 2 Super Auto Gunners
-				cTempl.commcant, cTempl.commcant, cTempl.commcant, // 3 Medium Cannons
-				cTempl.comacant, cTempl.comacant, // 2 Assault Cannons
-				cTempl.cohhcant, // 1 Heavy Cannon
-			],
-			[
-				cTempl.comagt, cTempl.comagt, cTempl.comagt, cTempl.comagt, // 4 Assault Guns
-				cTempl.scygr, cTempl.scygr, cTempl.scygr, cTempl.scygr, // 4 Super Grenadiers
-				cTempl.cohbbt, // 1 Bunker Buster
-			],
-			[
-				cTempl.cybth, cTempl.cybth, cTempl.cybth, cTempl.cybth, // 4 Thermite Flamer Cyborgs
-				cTempl.cybla, cTempl.cybla, cTempl.cybla, // 3 Lancer Cyborgs
-				cTempl.scytk, // 1 Super TK Cyborg
-				cTempl.comhatt, cTempl.comhatt, // 2 Tank Killers
-				cTempl.cohhrat, cTempl.cohhrat, // 2 HRAs
-			],
-		];
+		// groundCompositions = [
+		// 	[
+		// 		cTempl.cybag, cTempl.cybag, cTempl.cybag, cTempl.cybag, // 4 Assault Gunners
+		// 		cTempl.comatt, cTempl.comatt, cTempl.comatt, cTempl.comatt, // 4 Lancers
+		// 		cTempl.cominft, cTempl.cominft, // 2 Infernos
+		// 	],
+		// 	[
+		// 		cTempl.scymc, cTempl.scymc, cTempl.scymc, // 3 Super Heavy Gunners
+		// 		cTempl.scyac, cTempl.scyac, // 2 Super Auto Gunners
+		// 		cTempl.commcant, cTempl.commcant, cTempl.commcant, // 3 Medium Cannons
+		// 		cTempl.comacant, cTempl.comacant, // 2 Assault Cannons
+		// 		cTempl.cohhcant, // 1 Heavy Cannon
+		// 	],
+		// 	[
+		// 		cTempl.comagt, cTempl.comagt, cTempl.comagt, cTempl.comagt, // 4 Assault Guns
+		// 		cTempl.scygr, cTempl.scygr, cTempl.scygr, cTempl.scygr, // 4 Super Grenadiers
+		// 		cTempl.cohbbt, // 1 Bunker Buster
+		// 	],
+		// 	[
+		// 		cTempl.cybth, cTempl.cybth, cTempl.cybth, cTempl.cybth, // 4 Thermite Flamer Cyborgs
+		// 		cTempl.cybla, cTempl.cybla, cTempl.cybla, // 3 Lancer Cyborgs
+		// 		cTempl.scytk, // 1 Super TK Cyborg
+		// 		cTempl.comhatt, cTempl.comhatt, // 2 Tank Killers
+		// 		cTempl.cohhrat, cTempl.cohhrat, // 2 HRAs
+		// 	],
+		// ];
 
 		hoverTemplates = [
 			cTempl.comhpvh, cTempl.comhpvh,
@@ -906,22 +890,27 @@ function eventDestroyed(obj)
 				{
 					// Transport Truck destroyed before reaching the deposit zone
 					trucksLost++;
+					playSound(cam_sounds.objectiveDestroyed);
 				}
 				if (label === "civTruck2" && !truck2Safe)
 				{
 					trucksLost++;
+					playSound(cam_sounds.objectiveDestroyed);
 				}
 				if (label === "civTruck3" && !truck3Safe)
 				{
 					trucksLost++;
+					playSound(cam_sounds.objectiveDestroyed);
 				}
 				if (label === "civTruck4" && !truck4Safe)
 				{
 					trucksLost++;
+					playSound(cam_sounds.objectiveDestroyed);
 				}
 				if (label === "civTruck5" && !truck5Safe)
 				{
 					trucksLost++;
+					playSound(cam_sounds.objectiveDestroyed);
 				}
 
 				if (!transportTrucksActive())
@@ -1754,7 +1743,7 @@ function setStageTwo()
 			label: "colShakerBase",
 			rebuildBase: true,
 			rebuildTruck: false, // Collective trucks are brought in as reinforcements
-			truckDroid: getObject("colTruck1"),
+			template: cTempl.comtruckt,
 			structset: colBase1Structs
 	});
 	colBaseTruckJob2 = camManageTrucks(
@@ -1762,7 +1751,7 @@ function setStageTwo()
 			label: "colShakerBase",
 			rebuildBase: true,
 			rebuildTruck: false,
-			truckDroid: getObject("colTruck2"),
+			template: cTempl.comtruckt,
 			structset: colBase1Structs
 	});
 	colBaseTruckJob3 = camManageTrucks(
@@ -1770,7 +1759,7 @@ function setStageTwo()
 			label: "colShakerBase",
 			rebuildBase: true,
 			rebuildTruck: false,
-			truckDroid: getObject("colTruck3"),
+			template: cTempl.comtruckht,
 			structset: colBase1Structs
 	});
 	colBaseTruckJob4 = camManageTrucks(
@@ -1778,7 +1767,7 @@ function setStageTwo()
 			label: "colShakerBase",
 			rebuildBase: true,
 			rebuildTruck: false,
-			truckDroid: getObject("colTruck4"),
+			template: cTempl.comtruckht,
 			structset: colBase1Structs
 	});
 	colBaseTruckJob5 = camManageTrucks(
@@ -1786,7 +1775,7 @@ function setStageTwo()
 			label: "colOverlookBase",
 			rebuildBase: true,
 			rebuildTruck: false,
-			truckDroid: getObject("colTruck5"),
+			template: cTempl.comtruckt,
 			structset: colBase2Structs
 	});
 	colBaseTruckJob6 = camManageTrucks(
@@ -1794,7 +1783,7 @@ function setStageTwo()
 			label: "colOverlookBase",
 			rebuildBase: true,
 			rebuildTruck: false,
-			truckDroid: getObject("colTruck6"),
+			template: cTempl.comtruckt,
 			structset: colBase2Structs
 	});
 	colBaseTruckJob7 = camManageTrucks(
@@ -1802,7 +1791,7 @@ function setStageTwo()
 			label: "colRippleBase",
 			rebuildBase: true,
 			rebuildTruck: false,
-			truckDroid: getObject("colTruck7"),
+			template: cTempl.comtruckt,
 			structset: colBase3Structs
 	});
 	colBaseTruckJob8 = camManageTrucks(
@@ -1810,21 +1799,21 @@ function setStageTwo()
 			label: "colRippleBase",
 			rebuildBase: true,
 			rebuildTruck: false,
-			truckDroid: getObject("colTruck8"),
+			template: cTempl.comtruckt,
 			structset: colBase3Structs
 	});
 	colBaseTruckJob9 = camManageTrucks(
 		CAM_THE_COLLECTIVE, {
 			label: "colTrenchOutpost", // NOTE: Don't rebuild this base if destroyed
 			rebuildTruck: false,
-			truckDroid: getObject("colTruck9"),
+			template: cTempl.comtruckht,
 			structset: colBase4Structs
 	});
 	colBaseTruckJob10 = camManageTrucks(
 		CAM_THE_COLLECTIVE, {
 			label: "colTrenchOutpost",
 			rebuildTruck: false,
-			truckDroid: getObject("colTruck10"),
+			template: cTempl.comtruckht,
 			structset: colBase4Structs
 	});
 	colBaseTruckJob11 = camManageTrucks(
@@ -1832,7 +1821,7 @@ function setStageTwo()
 			label: "colFactoryBase",
 			rebuildBase: true,
 			rebuildTruck: false,
-			truckDroid: getObject("colTruck11"),
+			template: cTempl.comtruckt,
 			structset: colBase5Structs
 	});
 	colBaseTruckJob12 = camManageTrucks(
@@ -1840,7 +1829,7 @@ function setStageTwo()
 			label: "colFactoryBase",
 			rebuildBase: true,
 			rebuildTruck: false,
-			truckDroid: getObject("colTruck12"),
+			template: cTempl.comtruckt,
 			structset: colBase5Structs
 	});
 	colBaseTruckJob13 = camManageTrucks(
@@ -1848,7 +1837,7 @@ function setStageTwo()
 			label: "colFactoryBase",
 			rebuildBase: true,
 			rebuildTruck: false,
-			truckDroid: getObject("colTruck13"),
+			template: cTempl.comtruckht,
 			structset: colBase5Structs
 	});
 	// This base starts unbuilt
@@ -1983,6 +1972,9 @@ function setStageTwo()
 	camGradualSunIntensity(camMinutesToMilliseconds(2), .45,.45,.45);
 	camSetWeather(CAM_WEATHER_RAIN);
 
+	// Hack to prevent the east half of the map from being dark after the expansion
+	camSetSunPos(-450.0, -401.0, 225.0); // Move the sun just a wee bit 
+
 	// Dialogue...
 	camCallOnce("collectiveDialogue");
 	camQueueDialogue([
@@ -2023,6 +2015,8 @@ camAreaEvent("deltaBase4", function(droid)
 		{
 			donateObject(obj, CAM_HUMAN_PLAYER);
 		}
+
+		playSound(cam_sounds.unitsTransferred);
 	}
 	else
 	{
@@ -2200,14 +2194,10 @@ function setStageThree()
 function groundAssault1()
 {
 	// Mark the entry points that are about to be blitzed
-	groundBlip13 = true;
-	hackAddMessage("COL_ENTRY13", PROX_MSG, CAM_HUMAN_PLAYER);
-	groundBlip14 = true;
-	hackAddMessage("COL_ENTRY14", PROX_MSG, CAM_HUMAN_PLAYER);
-	groundBlip15 = true;
-	hackAddMessage("COL_ENTRY15", PROX_MSG, CAM_HUMAN_PLAYER);
-	groundBlip16 = true;
-	hackAddMessage("COL_ENTRY16", PROX_MSG, CAM_HUMAN_PLAYER);
+	activateGroundBlip(13);
+	activateGroundBlip(14);
+	activateGroundBlip(15);
+	activateGroundBlip(16);
 
 	// Play a sound
 	playSound(cam_sounds.enemyUnitDetected);
@@ -2218,14 +2208,10 @@ function groundAssault1()
 
 function groundAssault2()
 {
-	groundBlip11 = true;
-	hackAddMessage("COL_ENTRY11", PROX_MSG, CAM_HUMAN_PLAYER);
-	groundBlip12 = true;
-	hackAddMessage("COL_ENTRY12", PROX_MSG, CAM_HUMAN_PLAYER);
-	groundBlip15 = true;
-	hackAddMessage("COL_ENTRY15", PROX_MSG, CAM_HUMAN_PLAYER);
-	groundBlip16 = true;
-	hackAddMessage("COL_ENTRY16", PROX_MSG, CAM_HUMAN_PLAYER);
+	activateGroundBlip(11);
+	activateGroundBlip(12);
+	activateGroundBlip(15);
+	activateGroundBlip(16);
 	
 	playSound(cam_sounds.enemyUnitDetected);
 
@@ -2234,14 +2220,10 @@ function groundAssault2()
 
 function groundAssault3()
 {
-	groundBlip8 = true;
-	hackAddMessage("COL_ENTRY8", PROX_MSG, CAM_HUMAN_PLAYER);
-	groundBlip9 = true;
-	hackAddMessage("COL_ENTRY9", PROX_MSG, CAM_HUMAN_PLAYER);
-	groundBlip14 = true;
-	hackAddMessage("COL_ENTRY14", PROX_MSG, CAM_HUMAN_PLAYER);
-	groundBlip16 = true;
-	hackAddMessage("COL_ENTRY16", PROX_MSG, CAM_HUMAN_PLAYER);
+	activateGroundBlip(8);
+	activateGroundBlip(9);
+	activateGroundBlip(14);
+	activateGroundBlip(16);
 	
 	playSound(cam_sounds.enemyUnitDetected);
 
@@ -2250,16 +2232,11 @@ function groundAssault3()
 
 function groundAssault4()
 {
-	groundBlip8 = true;
-	hackAddMessage("COL_ENTRY8", PROX_MSG, CAM_HUMAN_PLAYER);
-	groundBlip12 = true;
-	hackAddMessage("COL_ENTRY12", PROX_MSG, CAM_HUMAN_PLAYER);
-	groundBlip14 = true;
-	hackAddMessage("COL_ENTRY14", PROX_MSG, CAM_HUMAN_PLAYER);
-	groundBlip15 = true;
-	hackAddMessage("COL_ENTRY15", PROX_MSG, CAM_HUMAN_PLAYER);
-	groundBlip16 = true;
-	hackAddMessage("COL_ENTRY16", PROX_MSG, CAM_HUMAN_PLAYER);
+	activateGroundBlip(8);
+	activateGroundBlip(12);
+	activateGroundBlip(14);
+	activateGroundBlip(15);
+	activateGroundBlip(16);
 	
 	playSound(cam_sounds.enemyUnitDetected);
 
@@ -2268,18 +2245,12 @@ function groundAssault4()
 
 function groundAssault5()
 {
-	groundBlip7 = true;
-	hackAddMessage("COL_ENTRY7", PROX_MSG, CAM_HUMAN_PLAYER);
-	groundBlip8 = true;
-	hackAddMessage("COL_ENTRY8", PROX_MSG, CAM_HUMAN_PLAYER);
-	groundBlip9 = true;
-	hackAddMessage("COL_ENTRY9", PROX_MSG, CAM_HUMAN_PLAYER);
-	groundBlip11 = true;
-	hackAddMessage("COL_ENTRY11", PROX_MSG, CAM_HUMAN_PLAYER);
-	groundBlip12 = true;
-	hackAddMessage("COL_ENTRY12", PROX_MSG, CAM_HUMAN_PLAYER);
-	groundBlip15 = true;
-	hackAddMessage("COL_ENTRY15", PROX_MSG, CAM_HUMAN_PLAYER);
+	activateGroundBlip(7);
+	activateGroundBlip(8);
+	activateGroundBlip(9);
+	activateGroundBlip(11);
+	activateGroundBlip(12);
+	activateGroundBlip(15);
 	
 	playSound(cam_sounds.enemyUnitDetected);
 
@@ -2288,22 +2259,14 @@ function groundAssault5()
 
 function groundAssault6()
 {
-	groundBlip1 = true;
-	hackAddMessage("COL_ENTRY1", PROX_MSG, CAM_HUMAN_PLAYER);
-	groundBlip3 = true;
-	hackAddMessage("COL_ENTRY3", PROX_MSG, CAM_HUMAN_PLAYER);
-	groundBlip4 = true;
-	hackAddMessage("COL_ENTRY4", PROX_MSG, CAM_HUMAN_PLAYER);
-	groundBlip6 = true;
-	hackAddMessage("COL_ENTRY6", PROX_MSG, CAM_HUMAN_PLAYER);
-	groundBlip7 = true;
-	hackAddMessage("COL_ENTRY7", PROX_MSG, CAM_HUMAN_PLAYER);
-	groundBlip8 = true;
-	hackAddMessage("COL_ENTRY8", PROX_MSG, CAM_HUMAN_PLAYER);
-	groundBlip9 = true;
-	hackAddMessage("COL_ENTRY9", PROX_MSG, CAM_HUMAN_PLAYER);
-	groundBlip14 = true;
-	hackAddMessage("COL_ENTRY14", PROX_MSG, CAM_HUMAN_PLAYER);
+	activateGroundBlip(1);
+	activateGroundBlip(3);
+	activateGroundBlip(4);
+	activateGroundBlip(6);
+	activateGroundBlip(7);
+	activateGroundBlip(8);
+	activateGroundBlip(9);
+	activateGroundBlip(14);
 	
 	playSound(cam_sounds.enemyUnitDetected);
 
@@ -2318,20 +2281,23 @@ function groundAssault6()
 
 function groundAssault7()
 {
-	groundBlip2 = true;
-	hackAddMessage("COL_ENTRY2", PROX_MSG, CAM_HUMAN_PLAYER);
-	groundBlip4 = true;
-	hackAddMessage("COL_ENTRY4", PROX_MSG, CAM_HUMAN_PLAYER);
-	groundBlip5 = true;
-	hackAddMessage("COL_ENTRY5", PROX_MSG, CAM_HUMAN_PLAYER);
-	groundBlip7 = true;
-	hackAddMessage("COL_ENTRY7", PROX_MSG, CAM_HUMAN_PLAYER);
-	groundBlip8 = true;
-	hackAddMessage("COL_ENTRY8", PROX_MSG, CAM_HUMAN_PLAYER);
+	activateGroundBlip(2);
+	activateGroundBlip(4);
+	activateGroundBlip(5);
+	activateGroundBlip(7);
+	activateGroundBlip(8);
 	
 	playSound(cam_sounds.enemyUnitDetected);
 
 	queue("groundAssaultWave", MIS_GROUND_ASSAULT_DELAY, "7");
+}
+
+function activateGroundBlip(index)
+{
+	const msgName = "COL_ENTRY" + index;
+
+	groundBlips[index] = true;
+	hackAddMessage(msgName, PROX_MSG, CAM_HUMAN_PLAYER);
 }
 
 function groundAssaultWave(index)
@@ -2632,8 +2598,7 @@ function groundAssaultWave(index)
 
 function airAssault1()
 {
-	airBlip2 = true;
-	hackAddMessage("AIR_ENTRY2", PROX_MSG, CAM_HUMAN_PLAYER);
+	activateAirBlip(2);
 
 	playSound(cam_sounds.incomingAirStrike);
 
@@ -2642,8 +2607,7 @@ function airAssault1()
 
 function airAssault2()
 {
-	airBlip4 = true;
-	hackAddMessage("AIR_ENTRY4", PROX_MSG, CAM_HUMAN_PLAYER);
+	activateAirBlip(4);
 
 	playSound(cam_sounds.incomingAirStrike);
 
@@ -2652,8 +2616,7 @@ function airAssault2()
 
 function airAssault3()
 {
-	airBlip3 = true;
-	hackAddMessage("AIR_ENTRY3", PROX_MSG, CAM_HUMAN_PLAYER);
+	activateAirBlip(3);
 
 	playSound(cam_sounds.incomingAirStrike);
 
@@ -2662,10 +2625,8 @@ function airAssault3()
 
 function airAssault4()
 {
-	airBlip2 = true;
-	hackAddMessage("AIR_ENTRY2", PROX_MSG, CAM_HUMAN_PLAYER);
-	airBlip4 = true;
-	hackAddMessage("AIR_ENTRY4", PROX_MSG, CAM_HUMAN_PLAYER);
+	activateAirBlip(2);
+	activateAirBlip(4);
 
 	playSound(cam_sounds.incomingAirStrike);
 
@@ -2674,8 +2635,7 @@ function airAssault4()
 
 function airAssault5()
 {
-	airBlip5 = true;
-	hackAddMessage("AIR_ENTRY5", PROX_MSG, CAM_HUMAN_PLAYER);
+	activateAirBlip(5);
 
 	playSound(cam_sounds.incomingAirStrike);
 
@@ -2684,10 +2644,8 @@ function airAssault5()
 
 function airAssault6()
 {
-	airBlip3 = true;
-	hackAddMessage("AIR_ENTRY3", PROX_MSG, CAM_HUMAN_PLAYER);
-	airBlip5 = true;
-	hackAddMessage("AIR_ENTRY5", PROX_MSG, CAM_HUMAN_PLAYER);
+	activateAirBlip(3);
+	activateAirBlip(5);
 
 	playSound(cam_sounds.incomingAirStrike);
 
@@ -2696,10 +2654,8 @@ function airAssault6()
 
 function airAssault7()
 {
-	airBlip2 = true;
-	hackAddMessage("AIR_ENTRY2", PROX_MSG, CAM_HUMAN_PLAYER);
-	airBlip4 = true;
-	hackAddMessage("AIR_ENTRY4", PROX_MSG, CAM_HUMAN_PLAYER);
+	activateAirBlip(2);
+	activateAirBlip(4);
 
 	playSound(cam_sounds.incomingAirStrike);
 
@@ -2708,8 +2664,7 @@ function airAssault7()
 
 function airAssault8()
 {
-	airBlip4 = true;
-	hackAddMessage("AIR_ENTRY4", PROX_MSG, CAM_HUMAN_PLAYER);
+	activateAirBlip(4);
 
 	playSound(cam_sounds.incomingAirStrike);
 
@@ -2718,12 +2673,9 @@ function airAssault8()
 
 function airAssault9()
 {
-	airBlip3 = true;
-	hackAddMessage("AIR_ENTRY3", PROX_MSG, CAM_HUMAN_PLAYER);
-	airBlip4 = true;
-	hackAddMessage("AIR_ENTRY4", PROX_MSG, CAM_HUMAN_PLAYER);
-	airBlip5 = true;
-	hackAddMessage("AIR_ENTRY5", PROX_MSG, CAM_HUMAN_PLAYER);
+	activateAirBlip(3);
+	activateAirBlip(4);
+	activateAirBlip(5);
 
 	playSound(cam_sounds.incomingAirStrike);
 
@@ -2732,10 +2684,8 @@ function airAssault9()
 
 function airAssault10()
 {
-	airBlip2 = true;
-	hackAddMessage("AIR_ENTRY2", PROX_MSG, CAM_HUMAN_PLAYER);
-	airBlip5 = true;
-	hackAddMessage("AIR_ENTRY5", PROX_MSG, CAM_HUMAN_PLAYER);
+	activateAirBlip(2);
+	activateAirBlip(5);
 
 	playSound(cam_sounds.incomingAirStrike);
 
@@ -2744,12 +2694,19 @@ function airAssault10()
 
 function airAssault11()
 {
-	airBlip4 = true;
-	hackAddMessage("AIR_ENTRY4", PROX_MSG, CAM_HUMAN_PLAYER);
+	activateAirBlip(4);
 
 	playSound(cam_sounds.incomingAirStrike);
 
 	queue("airAssaultWave", MIS_AIR_ASSAULT_DELAY, "11");
+}
+
+function activateAirBlip(index)
+{
+	const msgName = "AIR_ENTRY" + index;
+
+	airBlipss[index] = true;
+	hackAddMessage(msgName, PROX_MSG, CAM_HUMAN_PLAYER);
 }
 
 function airAssaultWave(index)
@@ -3010,52 +2967,52 @@ function sendCollectiveGroundWave(entry, templates, commTemplate)
 
 function clearGroundBlips()
 {
-	if (groundBlip1) hackRemoveMessage("COL_ENTRY1", PROX_MSG, CAM_HUMAN_PLAYER);
-	if (groundBlip2) hackRemoveMessage("COL_ENTRY2", PROX_MSG, CAM_HUMAN_PLAYER);
-	if (groundBlip3) hackRemoveMessage("COL_ENTRY3", PROX_MSG, CAM_HUMAN_PLAYER);
-	if (groundBlip4) hackRemoveMessage("COL_ENTRY4", PROX_MSG, CAM_HUMAN_PLAYER);
-	if (groundBlip5) hackRemoveMessage("COL_ENTRY5", PROX_MSG, CAM_HUMAN_PLAYER);
-	if (groundBlip6) hackRemoveMessage("COL_ENTRY6", PROX_MSG, CAM_HUMAN_PLAYER);
-	if (groundBlip7) hackRemoveMessage("COL_ENTRY7", PROX_MSG, CAM_HUMAN_PLAYER);
-	if (groundBlip8) hackRemoveMessage("COL_ENTRY8", PROX_MSG, CAM_HUMAN_PLAYER);
-	if (groundBlip9) hackRemoveMessage("COL_ENTRY9", PROX_MSG, CAM_HUMAN_PLAYER);
-	if (groundBlip10) hackRemoveMessage("COL_ENTRY10", PROX_MSG, CAM_HUMAN_PLAYER);
-	if (groundBlip11) hackRemoveMessage("COL_ENTRY11", PROX_MSG, CAM_HUMAN_PLAYER);
-	if (groundBlip12) hackRemoveMessage("COL_ENTRY12", PROX_MSG, CAM_HUMAN_PLAYER);
-	if (groundBlip13) hackRemoveMessage("COL_ENTRY13", PROX_MSG, CAM_HUMAN_PLAYER);
-	if (groundBlip14) hackRemoveMessage("COL_ENTRY14", PROX_MSG, CAM_HUMAN_PLAYER);
-	if (groundBlip15) hackRemoveMessage("COL_ENTRY15", PROX_MSG, CAM_HUMAN_PLAYER);
-	if (groundBlip16) hackRemoveMessage("COL_ENTRY16", PROX_MSG, CAM_HUMAN_PLAYER);
+	if (groundBlips[1]) hackRemoveMessage("COL_ENTRY1", PROX_MSG, CAM_HUMAN_PLAYER);
+	if (groundBlips[2]) hackRemoveMessage("COL_ENTRY2", PROX_MSG, CAM_HUMAN_PLAYER);
+	if (groundBlips[3]) hackRemoveMessage("COL_ENTRY3", PROX_MSG, CAM_HUMAN_PLAYER);
+	if (groundBlips[4]) hackRemoveMessage("COL_ENTRY4", PROX_MSG, CAM_HUMAN_PLAYER);
+	if (groundBlips[5]) hackRemoveMessage("COL_ENTRY5", PROX_MSG, CAM_HUMAN_PLAYER);
+	if (groundBlips[6]) hackRemoveMessage("COL_ENTRY6", PROX_MSG, CAM_HUMAN_PLAYER);
+	if (groundBlips[7]) hackRemoveMessage("COL_ENTRY7", PROX_MSG, CAM_HUMAN_PLAYER);
+	if (groundBlips[8]) hackRemoveMessage("COL_ENTRY8", PROX_MSG, CAM_HUMAN_PLAYER);
+	if (groundBlips[9]) hackRemoveMessage("COL_ENTRY9", PROX_MSG, CAM_HUMAN_PLAYER);
+	if (groundBlips[10]) hackRemoveMessage("COL_ENTRY10", PROX_MSG, CAM_HUMAN_PLAYER);
+	if (groundBlips[11]) hackRemoveMessage("COL_ENTRY11", PROX_MSG, CAM_HUMAN_PLAYER);
+	if (groundBlips[12]) hackRemoveMessage("COL_ENTRY12", PROX_MSG, CAM_HUMAN_PLAYER);
+	if (groundBlips[13]) hackRemoveMessage("COL_ENTRY13", PROX_MSG, CAM_HUMAN_PLAYER);
+	if (groundBlips[14]) hackRemoveMessage("COL_ENTRY14", PROX_MSG, CAM_HUMAN_PLAYER);
+	if (groundBlips[15]) hackRemoveMessage("COL_ENTRY15", PROX_MSG, CAM_HUMAN_PLAYER);
+	if (groundBlips[16]) hackRemoveMessage("COL_ENTRY16", PROX_MSG, CAM_HUMAN_PLAYER);
 
-	groundBlip1 = false;
-	groundBlip2 = false;
-	groundBlip3 = false;
-	groundBlip4 = false;
-	groundBlip5 = false;
-	groundBlip6 = false;
-	groundBlip7 = false;
-	groundBlip8 = false;
-	groundBlip9 = false;
-	groundBlip10 = false;
-	groundBlip11 = false;
-	groundBlip12 = false;
-	groundBlip13 = false;
-	groundBlip14 = false;
-	groundBlip15 = false;
-	groundBlip16 = false;
+	groundBlips[1] = false;
+	groundBlips[2] = false;
+	groundBlips[3] = false;
+	groundBlips[4] = false;
+	groundBlips[5] = false;
+	groundBlips[6] = false;
+	groundBlips[7] = false;
+	groundBlips[8] = false;
+	groundBlips[9] = false;
+	groundBlips[10] = false;
+	groundBlips[11] = false;
+	groundBlips[12] = false;
+	groundBlips[13] = false;
+	groundBlips[14] = false;
+	groundBlips[15] = false;
+	groundBlips[16] = false;
 }
 
 function clearAirBlips()
 {
-	if (airBlip2) hackRemoveMessage("AIR_ENTRY2", PROX_MSG, CAM_HUMAN_PLAYER);
-	if (airBlip3) hackRemoveMessage("AIR_ENTRY3", PROX_MSG, CAM_HUMAN_PLAYER);
-	if (airBlip4) hackRemoveMessage("AIR_ENTRY4", PROX_MSG, CAM_HUMAN_PLAYER);
-	if (airBlip5) hackRemoveMessage("AIR_ENTRY5", PROX_MSG, CAM_HUMAN_PLAYER);
+	if (airBlips[2]) hackRemoveMessage("AIR_ENTRY2", PROX_MSG, CAM_HUMAN_PLAYER);
+	if (airBlips[3]) hackRemoveMessage("AIR_ENTRY3", PROX_MSG, CAM_HUMAN_PLAYER);
+	if (airBlips[4]) hackRemoveMessage("AIR_ENTRY4", PROX_MSG, CAM_HUMAN_PLAYER);
+	if (airBlips[5]) hackRemoveMessage("AIR_ENTRY5", PROX_MSG, CAM_HUMAN_PLAYER);
 
-	airBlip2 = false;
-	airBlip3 = false;
-	airBlip4 = false;
-	airBlip5 = false;
+	airBlips[2] = false;
+	airBlips[3] = false;
+	airBlips[4] = false;
+	airBlips[5] = false;
 }
 
 function startLighteningEffects()
@@ -3086,7 +3043,7 @@ function lighteningEffects()
 {
 	// Momentarily brighten the skies
 	camSetFog(198, 219, 225);
-	camSetSunIntensity(.6,.6,.6);
+	camSetSunIntensity(.55,.55,.55);
 
 	// ...Then gradually re-darken them
 	camGradualFog(camSecondsToMilliseconds(1.6), 107, 107, 107);
@@ -3499,26 +3456,33 @@ function eventStartLevel()
 	collectiveRetreat = false;
 	colCommanderIndex = 1;
 
-	groundBlip1 = false;
-	groundBlip2 = false;
-	groundBlip3 = false;
-	groundBlip4 = false;
-	groundBlip5 = false;
-	groundBlip6 = false;
-	groundBlip7 = false;
-	groundBlip8 = false;
-	groundBlip9 = false;
-	groundBlip10 = false;
-	groundBlip11 = false;
-	groundBlip12 = false;
-	groundBlip13 = false;
-	groundBlip14 = false;
-	groundBlip15 = false;
-	groundBlip16 = false;
-	airBlip2 = false;
-	airBlip3 = false;
-	airBlip4 = false;
-	airBlip5 = false;
+	groundBlips = [
+		null,
+		false, // Blip #1
+		false, // Blip #2
+		false, // Blip #3
+		false, // Blip #4
+		false, // Blip #5
+		false, // Blip #6
+		false, // Blip #7
+		false, // Blip #8
+		false, // Blip #9
+		false, // Blip #10
+		false, // Blip #11
+		false, // Blip #12
+		false, // Blip #13
+		false, // Blip #14
+		false, // Blip #15
+		false, // Blip #16
+	];
+	airBlips = [
+		null,
+		null,
+		false, // Blip #2
+		false, // Blip #3
+		false, // Blip #4
+		false, // Blip #5
+	];
 
 	deltaCrashGroup = camMakeGroup("deltaCrashGroup");
 

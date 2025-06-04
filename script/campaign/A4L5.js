@@ -876,14 +876,10 @@ function airAssault11()
 
 function activateAirBlip(index)
 {
-	const names = [
-		null,
-		"AIR_ENTRY1", "AIR_ENTRY2", "AIR_ENTRY3",
-		"AIR_ENTRY4", "AIR_ENTRY5", "AIR_ENTRY6",
-	];
+	const msgName = "AIR_ENTRY" + index;
 
 	airBlips[index] = true;
-	hackAddMessage(names[index], PROX_MSG, CAM_HUMAN_PLAYER);
+	hackAddMessage(msgName, PROX_MSG, CAM_HUMAN_PLAYER);
 }
 
 function airAssaultWave(index)

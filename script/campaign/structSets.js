@@ -686,7 +686,7 @@ const camA4L6ColBase6Structs = [
 	{stat: "Emplacement-MRLHvy-pit", x: 149, y: 44}, {stat: "Emplacement-MortarPit02", x: 148, y: 46}, {stat: "Emplacement-MortarPit02", x: 151, y: 45},
 	{stat: "Emplacement-MortarPit02", x: 150, y: 47}, {stat: "AASite-QuadBof", x: 152, y: 43, rot: 1}, {stat: "Pillbox-RotMG", x: 154, y: 43},
 	{stat: "GuardTower-RotMg", x: 153, y: 45}, {stat: "Emplacement-MortarPit02", x: 152, y: 47}, {stat: "AASite-QuadBof", x: 154, y: 47, rot: 2},
-	{stat: "Pillbox-RotMG", x: 158, y: 42}, {stat: "A0ResourceExtractor", x: 157, y: 44}, {stat: "A0HardcreteMk1Wall", x: 144, y: 48, rot: 1},
+	{stat: "Pillbox-RotMG", x: 158, y: 42}, {stat: "A0ResourceExtractor", x: 157, y: 43}, {stat: "A0HardcreteMk1Wall", x: 144, y: 48, rot: 1},
 	{stat: "A0HardcreteMk1Wall", x: 144, y: 49, rot: 1}, {stat: "Emplacement-MRLHvy-pit", x: 145, y: 48}, {stat: "WallTower04", x: 144, y: 50, rot: 3},
 	{stat: "PillBoxHPC", x: 147, y: 49}, {stat: "Tower-Projector", x: 145, y: 53, rot: 3}, {stat: "Emplacement-MortarPit02", x: 148, y: 48},
 	{stat: "WallTower-HvATrocket", x: 149, y: 51}, {stat: "Emplacement-MortarPit02", x: 151, y: 49}, {stat: "Emplacement-Howitzer105", x: 145, y: 58},
@@ -740,6 +740,7 @@ const camA4L6ColLZ4Structs = [
 	{stat: "Sys-SensoTower02", x: 83, y: 8}, {stat: "Pillbox-RotMG", x: 86, y: 10}, {stat: "WallTower04", x: 90, y: 3},
 	{stat: "WallTower04", x: 90, y: 7}, {stat: "Pillbox-RotMG", x: 90, y: 10}, {stat: "WallTower04", x: 92, y: 10},
 	{stat: "A0HardcreteMk1Wall", x: 93, y: 10}, {stat: "Tower-Projector", x: 93, y: 11}, {stat: "WallTower04", x: 94, y: 10},
+	{stat: "AASite-QuadBof", x: 77, y: 6}, {stat: "AASite-QuadBof", x: 92, y: 6},
 ];
 const camA4L6ColLZ5Structs = [
 	{stat: "WallTower04", x: 103, y: 73}, {stat: "A0HardcreteMk1Wall", x: 103, y: 74, rot: 1}, {stat: "WallTower04", x: 103, y: 75},

@@ -306,6 +306,7 @@ const cam_sounds = {
 	reinforcementsAreAvailable: "pcv440.ogg",
 	objectiveCaptured: "pcv621.ogg",
 	primObjectiveCompleted: "pcv626.ogg",
+	objectiveDestroyed: "pcv622.ogg",
 	enemyEscaping: "pcv632.ogg",
 	powerTransferred: "power-transferred.ogg",
 	technologyTransferred: "pcv485.ogg",
