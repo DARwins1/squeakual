@@ -728,6 +728,27 @@
         "type": "COMMAND RELAY",
         "width": 2
     },
+    "InfComDroidControl": {
+        "armour": 10,
+        "baseModel": "BLBDRDCM.pie",
+        "breadth": 2,
+        "buildPoints": 500,
+        "buildPower": 100,
+        "ecmID": "ZNULLECM",
+        "height": 2,
+        "hitpoints": 1000,
+        "id": "InfComDroidControl",
+        "name": "Infested Command Relay Center",
+        "resistance": 600,
+        "sensorID": "DefaultSensor1Mk1",
+        "strength": "HARD",
+        "structureModel": [
+            "blinfdrdcm0.pie"
+        ],
+        "thermal": 10,
+        "type": "COMMAND RELAY",
+        "width": 2
+    },
     "A0CommandCentre": {
         "armour": 10,
         "baseModel": "blbhq.pie",

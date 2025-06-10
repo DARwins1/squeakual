@@ -558,7 +558,8 @@ function eventStartLevel()
 	adaptColors();
 
 	camSetArtifacts({
-		"infResearch": { tech: "R-Wpn-Cannon3Mk1" }, // Heavy Cannon
+		"infHvyFactory1": { tech: "R-Wpn-Cannon3Mk1" }, // Heavy Cannon
+		"infResearch": { tech: "R-Wpn-AAGun04" }, // Whirlwind AA
 	});
 
 	grantPlayerTech();

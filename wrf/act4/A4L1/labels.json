@@ -492,8 +492,8 @@
 
 
 	"object_9": {
-		"label": "infResearch",
-		"id": 294,
+		"label": "infCybFactory5",
+		"id": 115,
 		"player": 4,
 		"type": 1
 	},
@@ -700,8 +700,8 @@
 
 
 	"object_35": {
-		"label": "infCybFactory5",
-		"id": 115,
+		"label": "infResearch",
+		"id": 294,
 		"player": 4,
 		"type": 1
 	},

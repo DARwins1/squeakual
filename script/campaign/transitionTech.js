@@ -257,9 +257,9 @@ const camA4L4AllyResearch = camAct4StartResearch.concat([
 	"R-Wpn-Cannon3Mk1", // Artifact
 	"R-Wpn-Cannon-Damage06", "R-Wpn-Cannon-ROF03", "R-Wpn-AAGun-ROF02",
 	"R-Wpn-Mortar-Damage06", "R-Wpn-Howitzer-ROF02", "R-Defense-WallTower04", 
-	// A4L2
 	"R-Wpn-AAGun04", // Artifact
 	"R-Wpn-AAGun-Damage03", "R-Wpn-AAGun-ROF03",
+	// A4L2
 	"R-Wpn-Bomb04", // Artifact
 	// A4L3
 	"R-Wpn-Flamer-ROF03", // Artifact

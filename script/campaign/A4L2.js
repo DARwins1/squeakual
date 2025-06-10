@@ -592,7 +592,6 @@ function eventStartLevel()
 	changePlayerColour(MIS_TEAM_DELTA, (playerData[0].colour !== 1) ? 1 : 8); // Delta to orange or yellow
 
 	camSetArtifacts({
-		"colAAEmp": { tech: "R-Wpn-AAGun04" }, // Whirlwind AA
 		"colResearch": { tech: "R-Wpn-Bomb04" }, // Thermite Bomb Bay
 	});
 
