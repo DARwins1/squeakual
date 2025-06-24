@@ -236,6 +236,7 @@ const camA3L9EnemyResearch = camA3L7AllyResearch.concat([
 	"R-Wpn-Rocket07-Tank-Killer", // Artifact
 	"R-Cyborg-Hvywpn-TK", "R-Defense-WallTower-HvyA-Trocket", "R-Defense-HvyA-Trocket",
 	"R-Defense-HvyAT-Tower",
+	"R-Wpn-AAGun-ROF02", // Artifact
 ]);
 
 const camAct4StartResearch = camA3L9EnemyResearch.concat([
@@ -255,8 +256,8 @@ const camAct4StartResearch = camA3L9EnemyResearch.concat([
 const camA4L4AllyResearch = camAct4StartResearch.concat([
 	// A4L1
 	"R-Wpn-Cannon3Mk1", // Artifact
-	"R-Wpn-Cannon-Damage06", "R-Wpn-Cannon-ROF03", "R-Wpn-AAGun-ROF02",
-	"R-Wpn-Mortar-Damage06", "R-Wpn-Howitzer-ROF02", "R-Defense-WallTower04", 
+	"R-Wpn-Cannon-Damage06", "R-Wpn-Cannon-ROF03", "R-Wpn-Mortar-Damage06",
+	"R-Wpn-Howitzer-ROF02", "R-Defense-WallTower04", 
 	"R-Wpn-AAGun04", // Artifact
 	"R-Wpn-AAGun-Damage03", "R-Wpn-AAGun-ROF03",
 	// A4L2

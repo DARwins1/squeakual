@@ -1153,12 +1153,14 @@ function eventStartLevel()
 			detectMsg: "COL_LZ1",
 			detectSnd: cam_sounds.baseDetection.enemyLZDetected,
 			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
+			player: CAM_THE_COLLECTIVE
 		},
 		"colSouthLZ": {
 			cleanup: "colLZ2",
 			detectMsg: "COL_LZ2",
 			detectSnd: cam_sounds.baseDetection.enemyLZDetected,
 			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
+			player: CAM_THE_COLLECTIVE
 		},
 		"colSWLZ": {
 			cleanup: "colLZ3",
@@ -1166,6 +1168,7 @@ function eventStartLevel()
 			player: CAM_THE_COLLECTIVE,
 			detectSnd: cam_sounds.baseDetection.enemyLZDetected,
 			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
+			player: CAM_THE_COLLECTIVE
 		},
 		"colEastLZ": {
 			cleanup: "colLZ4",
@@ -1173,6 +1176,7 @@ function eventStartLevel()
 			player: CAM_THE_COLLECTIVE,
 			detectSnd: cam_sounds.baseDetection.enemyLZDetected,
 			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
+			player: CAM_THE_COLLECTIVE
 		},
 		"colSELZ": {
 			cleanup: "colLZ5",
@@ -1180,36 +1184,42 @@ function eventStartLevel()
 			player: CAM_THE_COLLECTIVE,
 			detectSnd: cam_sounds.baseDetection.enemyLZDetected,
 			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
+			player: CAM_THE_COLLECTIVE
 		},
 		"colCentralLZ": {
 			cleanup: "colLZ6",
 			detectMsg: "COL_LZ6",
 			detectSnd: cam_sounds.baseDetection.enemyLZDetected,
 			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
+			player: CAM_THE_COLLECTIVE
 		},
 		"colWaterLZ": {
 			cleanup: "colLZ7",
 			detectMsg: "COL_LZ7",
 			detectSnd: cam_sounds.baseDetection.enemyLZDetected,
 			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
+			player: CAM_THE_COLLECTIVE
 		},
 		"colNorthOverlookLZ": {
 			cleanup: "colLZ8",
 			detectMsg: "COL_LZ8",
 			detectSnd: cam_sounds.baseDetection.enemyLZDetected,
 			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
+			player: CAM_THE_COLLECTIVE
 		},
 		"colNWLZ": {
 			cleanup: "colLZ9",
 			detectMsg: "COL_LZ9",
 			detectSnd: cam_sounds.baseDetection.enemyLZDetected,
 			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
+			player: CAM_THE_COLLECTIVE
 		},
 		"colWestLZ": {
 			cleanup: "colLZ10",
 			detectMsg: "COL_LZ10",
 			detectSnd: cam_sounds.baseDetection.enemyLZDetected,
 			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
+			player: CAM_THE_COLLECTIVE
 		},
 	});
 

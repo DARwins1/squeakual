@@ -421,7 +421,7 @@
 
 	"object_0": {
 		"label": "infFactory1",
-		"id": 49,
+		"id": 1,
 		"player": 4,
 		"type": 1
 	},
@@ -429,7 +429,7 @@
 
 	"object_1": {
 		"label": "infFactory13",
-		"id": 841,
+		"id": 7,
 		"player": 4,
 		"type": 1
 	},
@@ -437,7 +437,7 @@
 
 	"object_2": {
 		"label": "infHvyFactory1",
-		"id": 37,
+		"id": 19,
 		"player": 4,
 		"type": 1
 	},
@@ -445,7 +445,7 @@
 
 	"object_3": {
 		"label": "infFactory24",
-		"id": 50,
+		"id": 34,
 		"player": 4,
 		"type": 1
 	},
@@ -453,7 +453,7 @@
 
 	"object_4": {
 		"label": "infFactory12",
-		"id": 104,
+		"id": 48,
 		"player": 4,
 		"type": 1
 	},
@@ -461,7 +461,7 @@
 
 	"object_5": {
 		"label": "infFactory20",
-		"id": 108,
+		"id": 53,
 		"player": 4,
 		"type": 1
 	},
@@ -469,7 +469,7 @@
 
 	"object_6": {
 		"label": "infFactory14",
-		"id": 109,
+		"id": 56,
 		"player": 4,
 		"type": 1
 	},
@@ -477,7 +477,7 @@
 
 	"object_7": {
 		"label": "infFactory7",
-		"id": 114,
+		"id": 74,
 		"player": 4,
 		"type": 1
 	},
@@ -485,7 +485,7 @@
 
 	"object_8": {
 		"label": "infFactory5",
-		"id": 606,
+		"id": 78,
 		"player": 4,
 		"type": 1
 	},
@@ -493,7 +493,7 @@
 
 	"object_9": {
 		"label": "infCybFactory5",
-		"id": 115,
+		"id": 87,
 		"player": 4,
 		"type": 1
 	},
@@ -501,7 +501,7 @@
 
 	"object_10": {
 		"label": "infFactory2",
-		"id": 48,
+		"id": 100,
 		"player": 4,
 		"type": 1
 	},
@@ -509,7 +509,7 @@
 
 	"object_11": {
 		"label": "infCybFactory1",
-		"id": 52,
+		"id": 108,
 		"player": 4,
 		"type": 1
 	},
@@ -517,7 +517,7 @@
 
 	"object_12": {
 		"label": "infFactory16",
-		"id": 116,
+		"id": 142,
 		"player": 4,
 		"type": 1
 	},
@@ -525,7 +525,7 @@
 
 	"object_13": {
 		"label": "infHvyFactory2",
-		"id": 38,
+		"id": 228,
 		"player": 4,
 		"type": 1
 	},
@@ -533,7 +533,7 @@
 
 	"object_14": {
 		"label": "infHvyFactory5",
-		"id": 42,
+		"id": 232,
 		"player": 4,
 		"type": 1
 	},
@@ -541,7 +541,7 @@
 
 	"object_15": {
 		"label": "infCybFactory2",
-		"id": 119,
+		"id": 321,
 		"player": 4,
 		"type": 1
 	},
@@ -549,7 +549,7 @@
 
 	"object_16": {
 		"label": "infHvyFactory3",
-		"id": 39,
+		"id": 339,
 		"player": 4,
 		"type": 1
 	},
@@ -557,7 +557,7 @@
 
 	"object_17": {
 		"label": "infCybFactory4",
-		"id": 118,
+		"id": 369,
 		"player": 4,
 		"type": 1
 	},
@@ -565,7 +565,7 @@
 
 	"object_18": {
 		"label": "infHvyFactory4",
-		"id": 117,
+		"id": 378,
 		"player": 4,
 		"type": 1
 	},
@@ -573,7 +573,7 @@
 
 	"object_19": {
 		"label": "infFactory3",
-		"id": 36,
+		"id": 472,
 		"player": 4,
 		"type": 1
 	},
@@ -581,7 +581,7 @@
 
 	"object_20": {
 		"label": "infFactory4",
-		"id": 101,
+		"id": 539,
 		"player": 4,
 		"type": 1
 	},
@@ -589,7 +589,7 @@
 
 	"object_21": {
 		"label": "infFactory6",
-		"id": 608,
+		"id": 571,
 		"player": 4,
 		"type": 1
 	},
@@ -597,7 +597,7 @@
 
 	"object_22": {
 		"label": "infFactory9",
-		"id": 112,
+		"id": 646,
 		"player": 4,
 		"type": 1
 	},
@@ -605,7 +605,7 @@
 
 	"object_23": {
 		"label": "infFactory8",
-		"id": 609,
+		"id": 654,
 		"player": 4,
 		"type": 1
 	},
@@ -613,7 +613,7 @@
 
 	"object_24": {
 		"label": "infFactory10",
-		"id": 768,
+		"id": 679,
 		"player": 4,
 		"type": 1
 	},
@@ -621,7 +621,7 @@
 
 	"object_25": {
 		"label": "infFactory11",
-		"id": 113,
+		"id": 695,
 		"player": 4,
 		"type": 1
 	},
@@ -629,7 +629,7 @@
 
 	"object_26": {
 		"label": "infFactory15",
-		"id": 44,
+		"id": 788,
 		"player": 4,
 		"type": 1
 	},
@@ -637,7 +637,7 @@
 
 	"object_27": {
 		"label": "infFactory18",
-		"id": 43,
+		"id": 831,
 		"player": 4,
 		"type": 1
 	},
@@ -645,7 +645,7 @@
 
 	"object_28": {
 		"label": "infFactory21",
-		"id": 607,
+		"id": 887,
 		"player": 4,
 		"type": 1
 	},
@@ -653,7 +653,7 @@
 
 	"object_29": {
 		"label": "infFactory23",
-		"id": 105,
+		"id": 902,
 		"player": 4,
 		"type": 1
 	},
@@ -661,7 +661,7 @@
 
 	"object_30": {
 		"label": "infFactory22",
-		"id": 47,
+		"id": 906,
 		"player": 4,
 		"type": 1
 	},
@@ -669,7 +669,7 @@
 
 	"object_31": {
 		"label": "infFactory19",
-		"id": 46,
+		"id": 923,
 		"player": 4,
 		"type": 1
 	},
@@ -677,7 +677,7 @@
 
 	"object_32": {
 		"label": "infCybFactory3",
-		"id": 40,
+		"id": 939,
 		"player": 4,
 		"type": 1
 	},
@@ -685,7 +685,7 @@
 
 	"object_33": {
 		"label": "infFactory17",
-		"id": 110,
+		"id": 948,
 		"player": 4,
 		"type": 1
 	},
@@ -693,7 +693,7 @@
 
 	"object_34": {
 		"label": "infFactory25",
-		"id": 106,
+		"id": 978,
 		"player": 4,
 		"type": 1
 	},
@@ -701,7 +701,7 @@
 
 	"object_35": {
 		"label": "infResearch",
-		"id": 294,
+		"id": 1113,
 		"player": 4,
 		"type": 1
 	},

@@ -1289,7 +1289,7 @@
     "RustyAAGun2Mk1": {
         "buildPoints": 425,
         "buildPower": 125,
-        "damage": 90,
+        "damage": 70,
         "designable": 1,
         "effectSize": 100,
         "explosionWav": "lrgexpl.ogg",
@@ -1333,7 +1333,7 @@
     "AAGun2Mk1": {
         "buildPoints": 425,
         "buildPower": 125,
-        "damage": 90,
+        "damage": 70,
         "designable": 1,
         "effectSize": 100,
         "explosionWav": "lrgexpl.ogg",
@@ -1377,7 +1377,7 @@
     "InfAAGun2Mk1": {
         "buildPoints": 425,
         "buildPower": 125,
-        "damage": 90,
+        "damage": 70,
         "designable": 1,
         "effectSize": 100,
         "explosionWav": "lrgexpl.ogg",
@@ -6094,7 +6094,7 @@
     "QuadMg1AAGun": {
         "buildPoints": 400,
         "buildPower": 100,
-        "damage": 70,
+        "damage": 50,
         "designable": 1,
         "effectSize": 75,
         "explosionWav": "smlexpl.ogg",
@@ -6136,7 +6136,7 @@
     "InfQuadMg1AAGun": {
         "buildPoints": 400,
         "buildPower": 100,
-        "damage": 70,
+        "damage": 50,
         "designable": 1,
         "effectSize": 75,
         "explosionWav": "smlexpl.ogg",
@@ -6178,7 +6178,7 @@
     "QuadRotAAGun": {
         "buildPoints": 800,
         "buildPower": 150,
-        "damage": 90,
+        "damage": 70,
         "designable": 1,
         "effectSize": 75,
         "explosionWav": "lrgexpl.ogg",
@@ -6220,7 +6220,7 @@
     "InfQuadRotAAGun": {
         "buildPoints": 800,
         "buildPower": 150,
-        "damage": 90,
+        "damage": 70,
         "designable": 1,
         "effectSize": 75,
         "explosionWav": "lrgexpl.ogg",

@@ -465,30 +465,35 @@ function eventStartLevel()
 			detectMsg: "FOXTROT_BASE3",
 			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
 			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
+			player: MIS_TEAM_FOXTROT
 		},
 		"foxtrotNorthHillBase": {
 			cleanup: "foxtrotBase4",
 			detectMsg: "FOXTROT_BASE4",
 			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
 			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
+			player: MIS_TEAM_FOXTROT
 		},
 		"foxtrotCraterHillBase": {
 			cleanup: "foxtrotBase5",
 			detectMsg: "FOXTROT_BASE5",
 			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
 			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
+			player: MIS_TEAM_FOXTROT
 		},
 		"foxtrotWestRidgeBase": {
 			cleanup: "foxtrotBase6",
 			detectMsg: "FOXTROT_BASE6",
 			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
 			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
+			player: MIS_TEAM_FOXTROT
 		},
 		"foxtrotWaterRidgeBase": {
 			cleanup: "foxtrotBase7",
 			detectMsg: "FOXTROT_BASE7",
 			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
 			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
+			player: MIS_TEAM_FOXTROT
 		},
 		"golfMainBase": {
 			cleanup: "golfBase1",
@@ -513,6 +518,7 @@ function eventStartLevel()
 			detectMsg: "GOLF_BASE4",
 			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
 			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
+			player: MIS_TEAM_GOLF
 		},
 	});
 

@@ -641,6 +641,7 @@ function eventStartLevel()
 		"colResearch": { tech: "R-Wpn-MG-ROF03" }, // Hyper Fire Chaingun Upgrade
 		"colFactory1": { tech: "R-Wpn-Rocket07-Tank-Killer" }, // Tank Killer
 		"colFactory3": { tech: "R-Wpn-Flamer-Damage05" }, // Superhot Flamer Gel Mk2
+		"colAAEmp": { tech: "R-Wpn-AAGun-ROF02" }, // AA Ammunition Hopper Mk2
 	});
 
 	camSetEnemyBases({

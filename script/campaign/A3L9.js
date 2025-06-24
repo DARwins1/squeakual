@@ -659,24 +659,28 @@ function eventStartLevel()
 			detectMsg: "FOXTROT_LZBASE1",
 			detectSnd: cam_sounds.baseDetection.enemyLZDetected,
 			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
+			player: CAM_THE_COLLECTIVE
 		},
 		"foxtrotLz2": {
 			cleanup: "foxtrotLzStructs2",
 			detectMsg: "FOXTROT_LZBASE2",
 			detectSnd: cam_sounds.baseDetection.enemyLZDetected,
 			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
+			player: CAM_THE_COLLECTIVE
 		},
 		"golfLz1": {
 			cleanup: "golfLzStructs1",
 			detectMsg: "GOLF_LZBASE1",
 			detectSnd: cam_sounds.baseDetection.enemyLZDetected,
 			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
+			player: CAM_THE_COLLECTIVE
 		},
 		"golfLz2": {
 			cleanup: "golfLzStructs2",
 			detectMsg: "GOLF_LZBASE2",
 			detectSnd: cam_sounds.baseDetection.enemyLZDetected,
 			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
+			player: CAM_THE_COLLECTIVE
 		},
 	});
 
