@@ -7,7 +7,6 @@ const MIS_NASDA = 1;
 const MIS_NASDA_POWER = 3;
 const MIS_CLAYDE = 5;
 const MIS_TEAM_DELTA = 7;
-const SPOTTER_RANGE = 16;
 
 const mis_collectiveResearch = [
 	"R-Wpn-MG-Damage02", "R-Wpn-Rocket-Damage02", "R-Wpn-Mortar-Damage01", 
@@ -37,6 +36,7 @@ var deltaPatrolGroup;
 var deltaMortarGroup;
 var deltaVtolGroup;
 var zuluPatrolGroup;
+var zuluNorthPatrolGroup;
 var zuluVtolGroupNW;
 var zuluVtolGroupNE;
 var zuluVtolGroupSouth;
@@ -229,9 +229,6 @@ function eventTransporterLanded(transport)
 			structset: nasdaCentralStructSet
 		});
 
-		// Also create a spotter that grants vision, centered on NASDA Central
-		addSpotter(18, 56, CAM_HUMAN_PLAYER, SPOTTER_RANGE * 128, false, 0);
-
 		structsDonated = true;
 	}
 
@@ -278,12 +275,6 @@ function eventTransporterLanded(transport)
 		}
 		// Yes, I KNOW that transports are only supposed to hold up to ten units.
 	}
-}
-
-// Replace the spotter when the player re-loads the game
-function eventGameLoaded()
-{
-	addSpotter(18, 56, CAM_HUMAN_PLAYER, SPOTTER_RANGE * 128, false, 0);
 }
 
 // Bring in Collective and Collective-affiliated scavengers
@@ -381,10 +372,10 @@ function collectiveAttackWaves()
 	}
 
 	// Determine the number of separate groups to spawn at once
-	let numGroups = 2;
-	if (difficulty >= MEDIUM) numGroups++; // 3 on Normal
-	if (difficulty >= HARD) numGroups++; // 4 on Hard
-	if (difficulty >= INSANE) numGroups++; // 5 on Insane
+	let numGroups = 3;
+	if (difficulty >= MEDIUM) numGroups++; // 4 on Normal
+	if (difficulty >= HARD) numGroups++; // 5 on Hard
+	if (difficulty >= INSANE) numGroups++; // 6 on Insane
 
 	// Determine how many groups should be replaced with stronger Collective templates
 	let numColOverrides = 0;
@@ -498,13 +489,17 @@ function collectiveDialogue()
 	camQueueDialogue([
 		{text: "FOXTROT: General, sir!", delay: 0, sound: CAM_RCLICK},
 		{text: "FOXTROT: We're spotting groups of enemy tanks rolling over the hills.", delay: 2, sound: CAM_RCLICK},
-		{text: "FOXTROT: They look a lot tougher than scavengers, sir.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: The Collective.", delay: 4, sound: CAM_RCLICK},
-		{text: "CLAYDE: Why are they here?", delay: 3, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: The Collective may be organizing this assault, sir.", delay: 4, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: But how are they leading these scavengers?", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: However they're doing it, I'm sure it has to do with this site.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: Which means they're not going to get it.", delay: 3, sound: CAM_RCLICK},
+		{text: "FOXTROT: They look...", delay: 3, sound: CAM_RCLICK},
+		{text: "FOXTROT: ...A lot tougher than scavengers, sir.", delay: 2, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: General!", delay: 8, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Sir, those are Collective vehicles!", delay: 2, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: It looks like they're leading these scavenger attacks!", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: ...But how?", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: It doesn't matter.", delay: 4, sound: CAM_RCLICK},
+		{text: "CLAYDE: If they're here for NASDA Central, then they're not going to get it.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Commanders, your previous orders still stand.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: These \"Collective\" units are to be considered hostile, and attacked on sight.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: NASDA Central is to be defended at all costs.", delay: 4, sound: CAM_RCLICK},
 	]);
 }
 
@@ -690,6 +685,12 @@ function eventStartLevel()
 	setAlliance(MIS_CLAYDE, MIS_TEAM_DELTA, true);
 	setAlliance(CAM_HUMAN_PLAYER, MIS_TEAM_DELTA, true);
 
+	// Grant vision of allied objects
+	camSetObjectVision(MIS_TEAM_DELTA, true);
+	camSetObjectVision(MIS_CLAYDE, true);
+	camSetObjectVision(MIS_NASDA, true);
+	camSetObjectVision(MIS_NASDA_POWER, true);
+
 	camSetEnemyBases({
 		// These are mostly here to simplify truck logic
 		"nasdaCentral": {
@@ -730,35 +731,35 @@ function eventStartLevel()
 			assembly: "zuluAssembly",
 			order: CAM_ORDER_ATTACK, // The order and group size should go unused
 			groupSize: 4,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(40), true), // NOTE: These get SLOWER on higher difficulties!
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(80), true), // NOTE: These get SLOWER on higher difficulties!
 			templates: [ ]
 		},
 		"zuluFactory2": {
 			assembly: "zuluAssembly",
 			order: CAM_ORDER_ATTACK,
 			groupSize: 4,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(40), true),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(80), true),
 			templates: [ ]
 		},
 		"zuluCyborgFactory1": {
 			assembly: "zuluAssembly",
 			order: CAM_ORDER_ATTACK,
 			groupSize: 4,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(40), true),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(80), true),
 			templates: [ ]
 		},
 		"zuluCyborgFactory2": {
 			assembly: "zuluAssembly",
 			order: CAM_ORDER_ATTACK,
 			groupSize: 4,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(40), true),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(80), true),
 			templates: [ ]
 		},
 		"zuluVtolFactory": {
 			assembly: "zuluVtolAssembly",
 			order: CAM_ORDER_ATTACK,
 			groupSize: 4,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(50), true),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(90), true),
 			templates: [ ]
 		},
 	});
@@ -767,128 +768,177 @@ function eventStartLevel()
 	// Also set up allied and Collective trucks
 
 	// Delta patrol group (4 Light Cannons, 2 Heavy Machinegunners, 3 Mechanics, 3 Grenadiers)
-	deltaPatrolGroup = camMakeRefillableGroup(camMakeGroup("deltaPatrolGroup"), {templates: [
-		cTempl.pllcant, cTempl.pllcant, cTempl.pllcant, cTempl.pllcant,
-		cTempl.cybhg, cTempl.cybhg,
-		cTempl.cybrp, cTempl.cybrp, cTempl.cybrp,
-		cTempl.cybgr, cTempl.cybgr, cTempl.cybgr,
+	deltaPatrolGroup = camMakeRefillableGroup(
+		camMakeGroup("deltaPatrolGroup"), {
+			templates: [
+				cTempl.pllcant, cTempl.pllcant, cTempl.pllcant, cTempl.pllcant,
+				cTempl.cybhg, cTempl.cybhg,
+				cTempl.cybrp, cTempl.cybrp, cTempl.cybrp,
+				cTempl.cybgr, cTempl.cybgr, cTempl.cybgr,
 		]}, CAM_ORDER_PATROL, {
-		pos: [
-			camMakePos("patrolPos1"), camMakePos("patrolPos2"), camMakePos("patrolPos5")
-		],
-		interval: camSecondsToMilliseconds(28),
-		count: 10,
-		morale: 80,
-		repair: 50
+			pos: [
+				camMakePos("patrolPos1"),
+				camMakePos("patrolPos2"),
+				camMakePos("patrolPos5")
+			],
+			interval: camSecondsToMilliseconds(28),
+			count: 10,
+			morale: 80,
+			repair: 50
 	});
 	// Delta Mortar group
-	deltaMortarGroup = camMakeRefillableGroup(camMakeGroup("deltaMortarGroup"), {templates: [
-		cTempl.pllmortw, cTempl.pllmortw, cTempl.pllmortw, cTempl.pllmortw,
-		]}, CAM_ORDER_FOLLOW, {
-		leader: "deltaSensorTower",
-		suborder: CAM_ORDER_DEFEND,
-		pos: camMakePos("deltaMortarGroup") // Defend this position if the tower is destroyed.
+	deltaMortarGroup = camMakeRefillableGroup(
+		camMakeGroup("deltaMortarGroup"), {
+			templates: [
+				cTempl.pllmortw, cTempl.pllmortw, cTempl.pllmortw, cTempl.pllmortw,
+			]
+		}, CAM_ORDER_FOLLOW, {
+			leader: "deltaSensorTower",
+			suborder: CAM_ORDER_DEFEND,
+			pos: camMakePos("deltaMortarGroup") // Defend this position if the tower is destroyed.
 	});
 	// Delta VTOL group (3 Light Cannons, 2 HMGs)
-	deltaVtolGroup = camMakeRefillableGroup(camMakeGroup("deltaVtolGroup"), {templates: [
-		cTempl.pllcanv, cTempl.pllcanv, cTempl.pllcanv,
-		cTempl.pllhmgv, cTempl.pllhmgv,
-		]}, CAM_ORDER_FOLLOW, {
-		leader: "deltaVtolTower",
-		suborder: CAM_ORDER_DEFEND,
-		pos: camMakePos("zuluVtolAssembly")
+	deltaVtolGroup = camMakeRefillableGroup(
+		camMakeGroup("deltaVtolGroup"), {
+			templates: [
+				cTempl.pllcanv, cTempl.pllcanv, cTempl.pllcanv,
+				cTempl.pllhmgv, cTempl.pllhmgv,
+			]
+		}, CAM_ORDER_FOLLOW, {
+			leader: "deltaVtolTower",
+			suborder: CAM_ORDER_DEFEND,
+			pos: camMakePos("zuluVtolAssembly")
 	});
 	// Delta truck
-	deltaTruckJob = camManageTrucks(MIS_TEAM_DELTA, {
-		label: "deltaLZ",
-		structset: camAreaToStructSet("deltaStructSetArea", MIS_TEAM_DELTA),
-		truckDroid: getObject("deltaTruck")
+	deltaTruckJob = camManageTrucks(
+		MIS_TEAM_DELTA, {
+			label: "deltaLZ",
+			structset: camAreaToStructSet("deltaStructSetArea", MIS_TEAM_DELTA),
+			truckDroid: getObject("deltaTruck")
 	});
 
-	// Zulu patrol group (6 Heavy Machineguns, 4 Light Cannons, 4 Mechanic Cyborgs, 4 Flamer Cyborgs)
-	zuluPatrolGroup = camMakeRefillableGroup(camMakeGroup("zuluPatrolGroup"), {templates: [
-		cTempl.pllhmght, cTempl.pllhmght, cTempl.pllhmght,
-		cTempl.pllcanht, cTempl.pllcanht,
-		cTempl.cybfl, cTempl.cybfl,
-		cTempl.cybrp, cTempl.cybrp, cTempl.cybrp, cTempl.cybrp,
-		cTempl.pllhmght, cTempl.pllhmght, cTempl.pllhmght,
-		cTempl.pllcanht, cTempl.pllcanht,
-		cTempl.cybfl, cTempl.cybfl,
-		],
-		globalFill: true, // Use all available factories to replenish this group
-		callback: "allowZuluRefilling" // Stop refilling during the evac phase
+	// Zulu central patrol group (4 Heavy Machineguns, 2 Light Cannons, 2 Mechanic Cyborgs, 2 Flamer Cyborgs)
+	zuluPatrolGroup = camMakeRefillableGroup(
+		camMakeGroup("zuluPatrolGroup"), {
+			templates: [
+				cTempl.pllhmght, cTempl.pllhmght,
+				cTempl.pllcanht,
+				cTempl.cybfl,
+				cTempl.cybrp, cTempl.cybrp,
+				cTempl.pllhmght, cTempl.pllhmght,
+				cTempl.pllcanht,
+				cTempl.cybfl,
+			],
+			globalFill: true, // Use all available factories to replenish this group
+			callback: "allowZuluRefilling" // Stop refilling during the evac phase
 		}, CAM_ORDER_PATROL, {
-		pos: [
-			camMakePos("patrolPos3"), camMakePos("patrolPos4"), camMakePos("patrolPos5")
-		],
-		interval: camSecondsToMilliseconds(20),
-		repair: 50
+			pos: [
+				camMakePos("patrolPos3"),
+				camMakePos("patrolPos4"),
+				camMakePos("patrolPos5")
+			],
+			interval: camSecondsToMilliseconds(32),
+			repair: 50,
+	});
+	// Zulu northern patrol group (4 Heavy Machineguns, 2 Light Cannons, 2 Mechanic Cyborgs, 2 Flamer Cyborgs)
+	zuluNorthPatrolGroup = camMakeRefillableGroup(
+		undefined, {
+			templates: [
+				cTempl.pllhmght, cTempl.pllhmght,
+				cTempl.pllcanht,
+				cTempl.cybfl,
+				cTempl.cybrp, cTempl.cybrp,
+				cTempl.pllhmght, cTempl.pllhmght,
+				cTempl.pllcanht,
+				cTempl.cybfl,
+			],
+			globalFill: true,
+			callback: "allowZuluRefilling"
+		}, CAM_ORDER_PATROL, {
+			pos: [
+				camMakePos("patrolPos6"),
+				camMakePos("patrolPos7"),
+				camMakePos("patrolPos8")
+			],
+			interval: camSecondsToMilliseconds(32),
+			repair: 50,
 	});
 	// Zulu northwest VTOL group (2 Mini-Rockets, 2 Heavy Machineguns)
-	zuluVtolGroupNW = camMakeRefillableGroup(camMakeGroup("zuluVtolGroup1"), {templates: [
-		cTempl.pllpodv, cTempl.pllpodv, cTempl.pllhmgv, cTempl.pllhmgv,
-		],
-		globalFill: true,
-		callback: "allowZuluRefilling"
+	zuluVtolGroupNW = camMakeRefillableGroup(
+		camMakeGroup("zuluVtolGroup1"), {
+			templates: [
+				cTempl.pllpodv, cTempl.pllpodv, cTempl.pllhmgv, cTempl.pllhmgv,
+			],
+			globalFill: true,
+			callback: "allowZuluRefilling"
 		}, CAM_ORDER_FOLLOW, {
-		leader: "zuluVtolTower1",
-		suborder: CAM_ORDER_DEFEND,
-		pos: camMakePos("zuluVtolAssembly")
+			leader: "zuluVtolTower1",
+			suborder: CAM_ORDER_DEFEND,
+			pos: camMakePos("zuluVtolAssembly")
 	});
 	// Zulu northeast VTOL group (2 Mini-Rockets, 2 Heavy Machineguns)
-	zuluVtolGroupNE = camMakeRefillableGroup(camMakeGroup("zuluVtolGroup2"), {templates: [
-		cTempl.pllpodv, cTempl.pllpodv, cTempl.pllhmgv, cTempl.pllhmgv,
-		],
-		globalFill: true,
-		callback: "allowZuluRefilling"
+	zuluVtolGroupNE = camMakeRefillableGroup(
+		camMakeGroup("zuluVtolGroup2"), {
+			templates: [
+				cTempl.pllpodv, cTempl.pllpodv, cTempl.pllhmgv, cTempl.pllhmgv,
+			],
+			globalFill: true,
+			callback: "allowZuluRefilling"
 		}, CAM_ORDER_FOLLOW, {
-		leader: "zuluVtolTower2",
-		suborder: CAM_ORDER_DEFEND,
-		pos: camMakePos("zuluVtolAssembly")
+			leader: "zuluVtolTower2",
+			suborder: CAM_ORDER_DEFEND,
+			pos: camMakePos("zuluVtolAssembly")
 	});
 	// Zulu south VTOL group (2 Mini-Rockets)
-	zuluVtolGroupSouth = camMakeRefillableGroup(camMakeGroup("zuluVtolGroup3"), {templates: [
-		cTempl.pllpodv, cTempl.pllpodv,
-		],
-		globalFill: true,
-		callback: "allowZuluRefilling"
+	zuluVtolGroupSouth = camMakeRefillableGroup(
+		camMakeGroup("zuluVtolGroup3"), {
+			templates: [
+				cTempl.pllpodv, cTempl.pllpodv,
+			],
+			globalFill: true,
+			callback: "allowZuluRefilling"
 		}, CAM_ORDER_FOLLOW, {
-		leader: "zuluVtolTower3",
-		suborder: CAM_ORDER_DEFEND,
-		pos: camMakePos("zuluVtolAssembly")
+			leader: "zuluVtolTower3",
+			suborder: CAM_ORDER_DEFEND,
+			pos: camMakePos("zuluVtolAssembly")
 	});
 	// Trucks
 	nasdaCentralStructSet = camAreaToStructSet("claydeStructSetArea", MIS_CLAYDE);
-	camManageTrucks(MIS_CLAYDE, {
-		label: "nasdaCentral",
-		rebuildBase: true,
-		respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70), true),
-		truckDroid: getObject("zuluTruck1"),
-		structset: nasdaCentralStructSet
+	camManageTrucks(
+		MIS_CLAYDE, {
+			label: "nasdaCentral",
+			rebuildBase: true,
+			respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70), true),
+			truckDroid: getObject("zuluTruck1"),
+			structset: nasdaCentralStructSet
 	});
-	camManageTrucks(MIS_CLAYDE, {
-		label: "nasdaCentral",
-		rebuildBase: true,
-		respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70), true),
-		truckDroid: getObject("zuluTruck2"),
-		structset: nasdaCentralStructSet
+	camManageTrucks(
+		MIS_CLAYDE, {
+			label: "nasdaCentral",
+			rebuildBase: true,
+			respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70), true),
+			truckDroid: getObject("zuluTruck2"),
+			structset: nasdaCentralStructSet
 	});
 
 	// Collective trucks
-	colTruckJob1 = camManageTrucks(CAM_THE_COLLECTIVE, {
-		label: "colLZ1",
-		rebuildBase: true,
-		structset: camA1L4ColLZ1Structs
+	colTruckJob1 = camManageTrucks(
+		CAM_THE_COLLECTIVE, {
+			label: "colLZ1",
+			rebuildBase: true,
+			structset: camA1L4ColLZ1Structs
 	});
-	colTruckJob2 = camManageTrucks(CAM_THE_COLLECTIVE, {
-		label: "colLZ2",
-		rebuildBase: true,
-		structset: camA1L4ColLZ2Structs
+	colTruckJob2 = camManageTrucks(
+		CAM_THE_COLLECTIVE, {
+			label: "colLZ2",
+			rebuildBase: true,
+			structset: camA1L4ColLZ2Structs
 	});
-	colTruckJob3 = camManageTrucks(CAM_THE_COLLECTIVE, {
-		label: "colLZ3",
-		rebuildBase: true,
-		structset: camA1L4ColLZ3Structs
+	colTruckJob3 = camManageTrucks(
+		CAM_THE_COLLECTIVE, {
+			label: "colLZ3",
+			rebuildBase: true,
+			structset: camA1L4ColLZ3Structs
 	});
 
 	phaseTwo = false;
@@ -913,7 +963,7 @@ function eventStartLevel()
 	queue("vtolAttack", camMinutesToMilliseconds(20));
 	queue("setPhaseTwo", camMinutesToMilliseconds(22));
 
-	setTimer("collectiveAttackWaves", camChangeOnDiff(camSecondsToMilliseconds(50)));
+	setTimer("collectiveAttackWaves", camChangeOnDiff(camSecondsToMilliseconds(40)));
 	setTimer("sendDeltaTransporter", camChangeOnDiff(camMinutesToMilliseconds(1.5), true));
 	setTimer("sendCollectiveTransporter", camChangeOnDiff(camMinutesToMilliseconds(2.25)));
 
