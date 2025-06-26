@@ -3147,7 +3147,7 @@
         "name": "Avenger SAM Site",
         "resistance": 300,
         "sensorID": "NavGunSensor",
-        "strength": "HARD",
+        "strength": "MEDIUM",
         "structureModel": [
             "Blaamnt1.PIE"
         ],
@@ -3170,7 +3170,7 @@
         "name": "Vindicator SAM Site",
         "resistance": 300,
         "sensorID": "NavGunSensor",
-        "strength": "HARD",
+        "strength": "MEDIUM",
         "structureModel": [
             "Blaamnt2.PIE"
         ],

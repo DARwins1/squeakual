@@ -48,6 +48,7 @@
         "imdName": "MICAPSUL.pie",
         "sequenceName": "res_weapons.ogg",
         "text": [
+            "New Weapon Turret Available",
             ".50-calibre heavy machinegun",
             "Effective against: Infantry and wheeled vehicles",
             "Ineffective against: Structures and tracked vehicles",
@@ -82,7 +83,7 @@
         "sequenceName": "res_struttech.ogg",
         "text": [
             "New Defensive Structure Available",
-            "Armored hardpoint with Lancer AT missile",
+            "Armored hardpoint with Lancer AT rocket",
             "Automatically targets enemies within sensor range",
             "Defensive Strength: Hard"
         ]
@@ -136,10 +137,15 @@
         "imdName": "MICAPSUL.PIE",
         "sequenceName": "res_weapons.ogg",
         "text": [
-            "New Indirect Fire Weapon Available",
-            "May be assigned to a sensor",
-            "Best Targets: Base structures, infantry, wheeled vehicles",
-            "Body Points: Very Low"
+            "New Weapon Turret Available",
+            "Heavy artillery weapon firing high-explosive mortar shells",
+            "Effective against: Infantry, Hover vehicles and structures",
+            "Ineffective against: Tracked vehicles and bunkers",
+            "Indirect weapon; does not require line of sight to a target and can be assigned to a sensor",
+            "Greater accuracy at longer ranges",
+            "Has a long weapon range",
+            "Must be stationary to fire",
+            "Obsoletes standard Mortar"
         ]
     },
     "RES_W_MG_ROF1": {
@@ -180,10 +186,12 @@
         "imdName": "MICAPSUL.PIE",
         "sequenceName": "res_weapons.ogg",
         "text": [
-            "New Rocket Available",
-            "Heavy anti-tank rocket",
-            "Best Targets: Vehicles",
-            "Body Points: Very Low"
+            "New Weapon Turret Available",
+            "Heavy rocket launcher firing powerful anti-tank rockets",
+            "Effective against: Vehicles",
+            "Ineffective against: Infantry and structures",
+            "Greater accuracy at longer ranges",
+            "Obsoletes Lancer and Mini-Rocket Pod"
         ]
     },
     "RES_W_RK_IDF": {
@@ -191,10 +199,16 @@
         "imdName": "MICAPSUL.PIE",
         "sequenceName": "res_weapons.ogg",
         "text": [
-            "New Rocket Available",
-            "Rocket artillery; can be assigned to a sensor",
-            "Best Targets: Vehicles and Emplacements",
-            "Body Points: Very Low"
+            "New Weapon Turret Available",
+            "Rocket artillery weapon firing salvos of explosive rockets",
+            "Effective against: Infantry, Hover vehicles and structures",
+            "Ineffective against: Tracked vehicles and bunkers",
+            "Indirect weapon; does not require line of sight to a target and can be assigned to a sensor",
+            "Has a very long delay between bursts",
+            "Greater accuracy at longer ranges",
+            "Extremely long weapon range",
+            "Must be stationary to fire",
+            "Unable to fire at enemies that are within close proximity"
         ]
     },
     "RES_W_RK_MRL1": {
@@ -202,11 +216,11 @@
         "imdName": "MICAPSUL.PIE",
         "sequenceName": "res_weapons.ogg",
         "text": [
-            "Short-ranged artillery that fires salvoes of explosive mini-rockets",
-            "Effective against: Infantry, wheeled vehicles and structures",
+            "New Weapon Turret Available",
+            "Short-ranged artillery firing salvos of explosive mini-rockets",
+            "Effective against: Cyborgs, Hover vehicles and structures",
             "Ineffective against: Tracked vehicles and bunkers",
-            "Does not require line of sight to a target and can be assigned to a sensor",
-            "Fires a burst of 8 mini-rockets, then must take time to reload",
+            "Indirect weapon; does not require line of sight to a target and can be assigned to a sensor",
             "Greater accuracy at longer ranges"
         ]
     },

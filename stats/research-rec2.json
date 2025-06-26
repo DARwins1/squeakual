@@ -383,6 +383,9 @@
         "id": "R-Cyborg-Hvywpn-Acannon",
         "msgName": "RES_CYW_H_AC",
         "name": "Super Auto-Cannon Cyborg",
+        "redComponents": [
+            "Cyb-Hvywpn-Mcannon"
+        ],
         "requiredResearch": [
             "R-Wpn-Cannon5",
             "R-Cyborg-Hvywpn-Mcannon"
@@ -399,9 +402,6 @@
         "id": "R-Cyborg-Hvywpn-HPV",
         "msgName": "RES_CYW_H_HPV",
         "name": "Super HPC Cyborg",
-        "redComponents": [
-            "Cyb-Hvywpn-Mcannon"
-        ],
         "requiredResearch": [
             "R-Cyborg-Hvywpn-Mcannon",
             "R-Wpn-Cannon4AMk1"
@@ -4164,6 +4164,9 @@
         "keyTopic": 1,
         "msgName": "RES_W_M2",
         "name": "Heavy Mortar - Bombard",
+        "redComponents": [
+          "Mortar1Mk1"  
+        ],
         "requiredResearch": [
             "R-Wpn-Mortar01Lt",
             "R-Wpn-Mortar-Damage02",
@@ -5606,6 +5609,9 @@
         "keyTopic": 1,
         "msgName": "RES_W_BMB2",
         "name": "HEAP Bomb Bay",
+        "resultComponents": [
+            "Bomb1-VTOL-LtHE"
+        ],
         "requiredResearch": [
             "R-Wpn-Bomb01"
         ],
@@ -5639,6 +5645,9 @@
         "imdName": "trmvtlin.PIE",
         "msgName": "RES_W_BMB4",
         "name": "Thermite Bomb Bay",
+        "redComponents": [
+            "Bomb3-VTOL-LtINC"
+        ],
         "requiredResearch": [
             "R-Wpn-Flamer-Damage05",
             "R-Wpn-Bomb03",
