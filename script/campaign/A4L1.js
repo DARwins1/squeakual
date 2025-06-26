@@ -264,8 +264,9 @@ function infestedGroupDroids(onslaught)
 	];
 	const CORE_SIZE = (camDef(onslaught) && onslaught) ? 10 : 4; // Onslaught waves are much larger!
 	const FODDER_SIZE = (camDef(onslaught) && onslaught) ? 18 : 14;
+	const B_CHANCE = (difficulty * 5) + 5; // Ranges from 5% to 25%
 
-	return camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE);
+	return camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, B_CHANCE);
 }
 
 function sendInfestedReinforcements()

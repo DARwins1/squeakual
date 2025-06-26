@@ -186,23 +186,23 @@
 
 
 	"area_18": {
-		"label": "compromiseZone",
-		"pos1": [1152, 14208],
-		"pos2": [3584, 16128]
-	},
-
-
-	"area_19": {
 		"label": "infEntry7",
 		"pos1": [128, 5376],
 		"pos2": [384, 6528]
 	},
 
 
-	"area_20": {
+	"area_19": {
 		"label": "infEntry1",
 		"pos1": [5632, 16000],
 		"pos2": [6656, 16256]
+	},
+
+
+	"area_20": {
+		"label": "compromiseZone",
+		"pos1": [1152, 14208],
+		"pos2": [3584, 16128]
 	},
 
 

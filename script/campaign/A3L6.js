@@ -201,31 +201,35 @@ function sendInfestedReinforcements()
 	];
 	const CORE_SIZE = 4;
 	const FODDER_SIZE = 14;
+	let bChance = 5;
+	if (difficulty >= EASY) bChance += 5;
+	if (difficulty >= HARD) bChance += 5;
+	if (difficulty === INSANE) bChance += 5;
 
 	// North trench entrances
 	// Choose one to spawn from...
 	const northEntrances = ["infEntry1", "infEntry2"];
-	camSendReinforcement(CAM_INFESTED, getObject(camRandFrom(northEntrances)), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+	camSendReinforcement(CAM_INFESTED, getObject(camRandFrom(northEntrances)), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND);
 
 	// North east entrances
-	camSendReinforcement(CAM_INFESTED, getObject("infEntry4"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+	camSendReinforcement(CAM_INFESTED, getObject("infEntry4"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND);
 
 	// South east entrances
 	// Choose one to spawn from...
 	const seEntrances = ["infEntry5", "infEntry6"];
 	const SEFACT_DESTROYED = (getObject("infFactory1") === null);
 	const seOrderData = {order: CAM_ORDER_ATTACK, data: {targetPlayer: (SEFACT_DESTROYED) ? undefined : CAM_HUMAN_PLAYER}}; // Focus on the player until the factory is destroyed
-	camSendReinforcement(CAM_INFESTED, getObject(camRandFrom(seEntrances)), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND, seOrderData);
+	camSendReinforcement(CAM_INFESTED, getObject(camRandFrom(seEntrances)), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND, seOrderData);
 
 	// South canal entrances
 	const canalEntrances = ["infEntry7", "infEntry9"];
-	camSendReinforcement(CAM_INFESTED, getObject(camRandFrom(canalEntrances)), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+	camSendReinforcement(CAM_INFESTED, getObject(camRandFrom(canalEntrances)), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND);
 
 	// South canal high ground entrance
 	// (Stops when factory is destroyed)
 	if (getObject("infFactory2") !== null)
 	{
-		camSendReinforcement(CAM_INFESTED, getObject("infEntry8"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry8"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND);
 	}
 
 	// South west trench entrances
@@ -234,7 +238,7 @@ function sendInfestedReinforcements()
 	{
 		// Choose one to spawn from...
 		const swEntrances = ["infEntry10", "infEntry11"];
-		camSendReinforcement(CAM_INFESTED, getObject(camRandFrom(swEntrances)), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+		camSendReinforcement(CAM_INFESTED, getObject(camRandFrom(swEntrances)), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND);
 	}
 }
 

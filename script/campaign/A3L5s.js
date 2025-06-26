@@ -9,15 +9,15 @@ const mis_infestedResearch = [
 	"R-Defense-WallUpgrade04", "R-Cyborg-Metals03", "R-Wpn-AAGun-ROF01", 
 	"R-Wpn-AAGun-Damage01", "R-Vehicle-Engine03",
 ];
-// const infEntry1 = {x: 196, y: 7, x2: 197, y2: 10};
-const infEntry2 = {x: 196, y: 22, x2: 197, y2: 25};
-const infEntry3 = {x: 157, y: 76, x2: 160, y2: 77};
-// const infEntry4 = {x: 134, y: 76, x2: 138, y2: 77};
-// const infEntry5 = {x: 102, y: 76, x2: 104, y2: 77};
+// const infEntry1 = {x: 197, y: 7, x2: 198, y2: 10};
+const infEntry2 = {x: 197, y: 22, x2: 198, y2: 25};
+const infEntry3 = {x: 157, y: 77, x2: 160, y2: 78};
+// const infEntry4 = {x: 134, y: 77, x2: 138, y2: 78};
+// const infEntry5 = {x: 102, y: 77, x2: 104, y2: 78};
 // const infEntry6 = {x: 82, y: 49, x2: 83, y2: 53};
-const infEntry7 = {x: 129, y: 2, x2: 133, y2: 3};
-const infEntry8 = {x: 107, y: 2, x2: 111, y2: 3};
-// const infEntry9 = {x: 82, y: 7, x2: 83, y2: 10};
+const infEntry7 = {x: 129, y: 1, x2: 133, y2: 2};
+const infEntry8 = {x: 107, y: 1, x2: 111, y2: 2};
+// const infEntry9 = {x: 81, y: 7, x2: 82, y2: 10};
 
 function heliAttack()
 {
@@ -80,17 +80,21 @@ function sendInfestedReinforcements()
 	];
 	const CORE_SIZE = 2;
 	const FODDER_SIZE = 8;
+	let bChance = 0;
+	if (difficulty >= EASY) bChance += 5;
+	if (difficulty >= HARD) bChance += 5;
+	if (difficulty === INSANE) bChance += 5;
 
 	// North east entrances
-	camSendReinforcement(CAM_INFESTED, infEntry2, camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+	camSendReinforcement(CAM_INFESTED, infEntry2, camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND);
 
 	// South canal entrance
-	camSendReinforcement(CAM_INFESTED, infEntry3, camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+	camSendReinforcement(CAM_INFESTED, infEntry3, camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND);
 
 	// North trench entrances
 	// Choose one to spawn from...
 	let northTrenchEntrances = [infEntry7, infEntry8];
-	camSendReinforcement(CAM_INFESTED, camRandFrom(northTrenchEntrances), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+	camSendReinforcement(CAM_INFESTED, camRandFrom(northTrenchEntrances), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND);
 }
 
 function eventStartLevel()

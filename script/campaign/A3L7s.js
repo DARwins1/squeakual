@@ -86,30 +86,34 @@ function sendInfestedReinforcements()
 	];
 	const CORE_SIZE = 2;
 	const FODDER_SIZE = 8;
+	let bChance = 5;
+	if (difficulty >= EASY) bChance += 5;
+	if (difficulty >= HARD) bChance += 5;
+	if (difficulty === INSANE) bChance += 5;
 
 	// North trench entrances
 	// Choose one to spawn from...
 	const northEntrances = [infEntry1, infEntry2];
-	camSendReinforcement(CAM_INFESTED, camRandFrom(northEntrances), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+	camSendReinforcement(CAM_INFESTED, camRandFrom(northEntrances), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND);
 
 	// North east entrances
 	// Choose one to spawn from...
 	const neEntrances = [infEntry3, infEntry4];
-	camSendReinforcement(CAM_INFESTED, camRandFrom(neEntrances), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+	camSendReinforcement(CAM_INFESTED, camRandFrom(neEntrances), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND);
 
 	// South east entrances
 	// Choose one to spawn from...
 	const seEntrances = [infEntry5, infEntry6];
-	camSendReinforcement(CAM_INFESTED, camRandFrom(seEntrances), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+	camSendReinforcement(CAM_INFESTED, camRandFrom(seEntrances), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND);
 
 	// South canal entrances
 	const canalEntrances = [infEntry7, infEntry8];
-	camSendReinforcement(CAM_INFESTED, camRandFrom(canalEntrances), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+	camSendReinforcement(CAM_INFESTED, camRandFrom(canalEntrances), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND);
 
 	// South west trench entrances
 	// Choose one to spawn from...
 	const swEntrances = [infEntry9, infEntry10];
-	camSendReinforcement(CAM_INFESTED, camRandFrom(swEntrances), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+	camSendReinforcement(CAM_INFESTED, camRandFrom(swEntrances), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND);
 }
 
 function eventStartLevel()

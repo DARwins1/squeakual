@@ -113,6 +113,8 @@ function queueCollectiveHeavyWave()
 	}
 	// Bring in the actual units 20 seconds later
 	queue("sendCollectiveHeavyWave", camChangeOnDiff(camSecondsToMilliseconds(20)));
+
+	playSound(cam_sounds.enemyUnitDetected);
 }
 
 // Spawns large Collective attack waves and removes the beacons that precede them
@@ -450,21 +452,25 @@ function sendInfestedReinforcements()
 	];
 	const CORE_SIZE = 4;
 	const FODDER_SIZE = 14;
+	let bChance = 0;
+	if (difficulty >= EASY) bChance += 5;
+	if (difficulty >= HARD) bChance += 5;
+	if (difficulty === INSANE) bChance += 5;
 
 	// NOTE: The entrances are numbered differently from A2L2...
 
 	// North trench entrances
 	// Choose one to spawn from...
 	const northEntrances = ["infEntry1", "infEntry2"];
-	camSendReinforcement(CAM_INFESTED, getObject(camRandFrom(northEntrances)), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+	camSendReinforcement(CAM_INFESTED, getObject(camRandFrom(northEntrances)), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND);
 
 	// North east entrances
 	// Choose one to spawn from...
 	const nwEntrances = ["infEntry3", "infEntry4"];
-	camSendReinforcement(CAM_INFESTED, getObject(camRandFrom(nwEntrances)), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+	camSendReinforcement(CAM_INFESTED, getObject(camRandFrom(nwEntrances)), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND);
 
 	// South canal entrance
-	camSendReinforcement(CAM_INFESTED, getObject("infEntry5"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+	camSendReinforcement(CAM_INFESTED, getObject("infEntry5"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND);
 }
 
 // Finish spawning Collective waves, and start a time limit for the player to clean up the map

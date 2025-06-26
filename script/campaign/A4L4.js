@@ -255,6 +255,7 @@ function sendInfestedReinforcements()
 	];
 	const CORE_SIZE = 8;
 	const FODDER_SIZE = 14;
+	const B_CHANCE = (difficulty * 5) + 5;
 
 	const entrances = [
 		"infEntry1", "infEntry2", "infEntry3",
@@ -267,7 +268,7 @@ function sendInfestedReinforcements()
 	// Spawn from every entrance
 	for (const entrance of entrances)
 	{
-		camSendReinforcement(CAM_INFESTED, getObject(entrance), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+		camSendReinforcement(CAM_INFESTED, getObject(entrance), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, B_CHANCE), CAM_REINFORCE_GROUND);
 	}
 }
 

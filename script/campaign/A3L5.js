@@ -102,23 +102,27 @@ function sendInfestedReinforcements()
 	];
 	const CORE_SIZE = 4;
 	const FODDER_SIZE = 12;
+	let bChance = 0;
+	if (difficulty >= EASY) bChance += 5;
+	if (difficulty >= HARD) bChance += 5;
+	if (difficulty === INSANE) bChance += 5;
 
 	// South west entrance
 	if (getObject("infFactory1") !== null)
 	{
-		camSendReinforcement(CAM_INFESTED, getObject("infEntry1"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry1"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND);
 	}
 
 	// South east entrance
 	if (getObject("infFactory3") !== null)
 	{
-		camSendReinforcement(CAM_INFESTED, getObject("infEntry2"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry2"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND);
 	}
 
 	// North east entrance
 	if (getObject("infFactory8") !== null)
 	{
-		camSendReinforcement(CAM_INFESTED, getObject("infEntry3"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry3"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND);
 	}
 	
 	// North west entrance
@@ -126,7 +130,7 @@ function sendInfestedReinforcements()
 	const BLOCKADE_STRUCTURES = enumArea("blockadeStructs", CAM_THE_COLLECTIVE, false).filter((obj) => (obj.type === STRUCTURE)).length;
 	if (!BLOCKADE_STRUCTURES)
 	{
-		camSendReinforcement(CAM_INFESTED, getObject("infEntry4"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry4"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND);
 	}
 }
 

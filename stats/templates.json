@@ -1295,6 +1295,16 @@
             "Cannon2A-TMk1"
         ]
     },
+    "CobraHVCTrks": {
+        "body": "Body5REC",
+        "id": "CobraHVCTrks",
+        "name": "Hyper Velocity Cannon Cobra Tracks",
+        "propulsion": "tracked01",
+        "type": "DROID",
+        "weapons": [
+            "Cannon4AUTOMk1"
+        ]
+    },
     "CobraMortarHalfTrack": {
         "body": "Body5REC",
         "id": "CobraMortarHalfTrack",

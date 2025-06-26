@@ -233,6 +233,7 @@ function sendReinforcements()
 		];
 		const CORE_SIZE = 6;
 		const FODDER_SIZE = 12;
+		const B_CHANCE = (difficulty * 5) + 5;
 
 		// Spawn Infested groups
 		const NUM_INF_GROUPS = difficulty + 6;
@@ -240,7 +241,7 @@ function sendReinforcements()
 		{
 			// Spawn units at a random entrance
 			const INDEX = camRand(entrances.length);
-			camSendReinforcement(CAM_INFESTED, getObject(entrances[INDEX]), camRandInfTemplates(camRandFrom(coreInfDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+			camSendReinforcement(CAM_INFESTED, getObject(entrances[INDEX]), camRandInfTemplates(camRandFrom(coreInfDroids), CORE_SIZE, FODDER_SIZE, B_CHANCE), CAM_REINFORCE_GROUND);
 			entrances.splice(INDEX, 1);
 		}
 	}

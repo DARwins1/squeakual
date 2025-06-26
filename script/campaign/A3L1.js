@@ -224,15 +224,18 @@ function sendInfestedReinforcements()
 		cTempl.inflance, cTempl.inflance, // Lances
 		cTempl.infkevlance,
 	];
-	const CORE_SIZE = 4;
-	const FODDER_SIZE = 14;
+	const CORE_SIZE = 4; // Number of "core" units listed above to include
+	const FODDER_SIZE = 14; // Number of "fodder" units to include (Infested Civilians)
+	let bChance = 0; // Chance to replace Infested Civilians with Bashers (default 0% chance)
+	if (difficulty >= HARD) bChance += 5; // +5% chance
+	if (difficulty === INSANE) bChance += 5; // +5% chance
 
 	// South road entrance
 	// (Stops entirely when factory is destroyed)
 	if (getObject("infFactory1") !== null)
 	{
 		const TARGET = (camBaseIsEliminated("colSouthRoadblock")) ? undefined : CAM_THE_COLLECTIVE;
-		camSendReinforcement(CAM_INFESTED, getObject("infEntry1"), camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND,
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry1"), camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND,
 			{order: CAM_ORDER_ATTACK, data: {targetPlayer: TARGET}}
 		);
 	}
@@ -242,7 +245,7 @@ function sendInfestedReinforcements()
 	if (allowExtraWaves)
 	{
 		const TARGET = (camBaseIsEliminated("colSouthRoadblock")) ? undefined : CAM_THE_COLLECTIVE;
-		camSendReinforcement(CAM_INFESTED, getObject("infEntry2"), camRandInfTemplates(coreDroids, CORE_SIZE / 2, 2 * FODDER_SIZE / 3), CAM_REINFORCE_GROUND, 
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry2"), camRandInfTemplates(coreDroids, CORE_SIZE / 2, 2 * FODDER_SIZE / 3, bChance), CAM_REINFORCE_GROUND, 
 			{order: CAM_ORDER_ATTACK, data: {targetPlayer: TARGET}}
 		);
 	}
@@ -250,14 +253,14 @@ function sendInfestedReinforcements()
 	// East base entrance
 	if (getObject("infFactory2") !== null && allowExtraWaves)
 	{
-		camSendReinforcement(CAM_INFESTED, getObject("infEntry3"), camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry3"), camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND);
 	}
 
 	// East trench entrance
 	if (allowExtraWaves)
 	{
 		const TARGET = (camBaseIsEliminated("colEastRoadblock")) ? undefined : CAM_THE_COLLECTIVE;
-		camSendReinforcement(CAM_INFESTED, getObject("infEntry4"), camRandInfTemplates(coreDroids, CORE_SIZE / 2, 2 * FODDER_SIZE / 3), CAM_REINFORCE_GROUND,
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry4"), camRandInfTemplates(coreDroids, CORE_SIZE / 2, 2 * FODDER_SIZE / 3, bChance), CAM_REINFORCE_GROUND,
 			{order: CAM_ORDER_ATTACK, data: {targetPlayer: TARGET}}
 		);
 	}
@@ -267,7 +270,7 @@ function sendInfestedReinforcements()
 	if (getObject("infFactory3") !== null)
 	{
 		const TARGET = (camBaseIsEliminated("colEastRoadblock")) ? CAM_HUMAN_PLAYER : CAM_THE_COLLECTIVE;
-		camSendReinforcement(CAM_INFESTED, getObject("infEntry5"), camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND,
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry5"), camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND,
 			{order: CAM_ORDER_ATTACK, data: {targetPlayer: TARGET}}
 		);
 	}

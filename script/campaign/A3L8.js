@@ -116,34 +116,38 @@ function sendInfestedReinforcements()
 	];
 	const CORE_SIZE = 4;
 	const FODDER_SIZE = 12;
+	let bChance = 5;
+	if (difficulty >= EASY) bChance += 5;
+	if (difficulty >= HARD) bChance += 5;
+	if (difficulty === INSANE) bChance += 5;
 
 	// North trench entrances
 	// Choose one to spawn from...
 	const northEntrances = ["infEntry1", "infEntry2"];
-	camSendReinforcement(CAM_INFESTED, getObject(camRandFrom(northEntrances)), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+	camSendReinforcement(CAM_INFESTED, getObject(camRandFrom(northEntrances)), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND);
 
 	// North east entrance
-	camSendReinforcement(CAM_INFESTED, getObject("infEntry3"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+	camSendReinforcement(CAM_INFESTED, getObject("infEntry3"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND);
 
 	// South east entrances
 	// Choose one to spawn from...
 	const seEntrances = ["infEntry4", "infEntry5"];
-	camSendReinforcement(CAM_INFESTED, getObject(camRandFrom(seEntrances)), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+	camSendReinforcement(CAM_INFESTED, getObject(camRandFrom(seEntrances)), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND);
 
 	// South canal entrances
 	// Choose one to spawn from...
 	const canalEntrances = ["infEntry6", "infEntry7"];
-	camSendReinforcement(CAM_INFESTED, getObject(camRandFrom(canalEntrances)), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+	camSendReinforcement(CAM_INFESTED, getObject(camRandFrom(canalEntrances)), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND);
 
 	// South small trench entrances
 	// Choose one to spawn from...
 	const southEntrances = ["infEntry8", "infEntry9"];
-	camSendReinforcement(CAM_INFESTED, getObject(camRandFrom(southEntrances)), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+	camSendReinforcement(CAM_INFESTED, getObject(camRandFrom(southEntrances)), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND);
 
 	// South large trench entrance
 	const STRENCH_FACTORY_DESTROYED = getObject("infFactory") === null;
 	const southTrenchData = {order: CAM_ORDER_ATTACK, data: {targetPlayer: (STRENCH_FACTORY_DESTROYED) ? undefined : CAM_HUMAN_PLAYER}};
-	camSendReinforcement(CAM_INFESTED, getObject("infEntry10"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND, southTrenchData);
+	camSendReinforcement(CAM_INFESTED, getObject("infEntry10"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND, southTrenchData);
 
 	// Southwest corner entrances
 	// Only if southwest base is destroyed
@@ -151,33 +155,33 @@ function sendInfestedReinforcements()
 	{
 		// Choose one to spawn from...
 		const swEntrances = ["infEntry11", "infEntry12", "infEntry13"];
-		camSendReinforcement(CAM_INFESTED, getObject(camRandFrom(swEntrances)), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+		camSendReinforcement(CAM_INFESTED, getObject(camRandFrom(swEntrances)), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND);
 	}
 	
 	// West small trench entrance
 	// Only if the VTOL base is destroyed
 	if (camBaseIsEliminated("colVtolBase"))
 	{
-		camSendReinforcement(CAM_INFESTED, getObject("infEntry14"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry14"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND);
 	}
 
 	// Northwest trench entrances
 	// Choose one to spawn from...
 	const northwestEntrances = ["infEntry15", "infEntry17"];
-	camSendReinforcement(CAM_INFESTED, getObject(camRandFrom(northwestEntrances)), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+	camSendReinforcement(CAM_INFESTED, getObject(camRandFrom(northwestEntrances)), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND);
 
 	// Northwest small trench entrance
 	// Only if the northwest base is destroyed
 	if (camBaseIsEliminated("colNorthwestBase"))
 	{
-		camSendReinforcement(CAM_INFESTED, getObject("infEntry16"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry16"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND);
 	}
 
 	// North small trench entrance
 	// Only if the Infested heavy factory is alive
 	if (getObject("infHvyFactory") !== null)
 	{
-		camSendReinforcement(CAM_INFESTED, getObject("infEntry18"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND);
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry18"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND);
 	}
 }
 

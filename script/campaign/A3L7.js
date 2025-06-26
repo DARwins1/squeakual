@@ -125,6 +125,10 @@ function sendInfestedReinforcements()
 	];
 	const CORE_SIZE = 4;
 	const FODDER_SIZE = 12;
+	let bChance = 5;
+	if (difficulty >= EASY) bChance += 5;
+	if (difficulty >= HARD) bChance += 5;
+	if (difficulty === INSANE) bChance += 5;
 
 	// If there's an onslaught occurring, target the player instead of the Collective
 	const data = {order: CAM_ORDER_ATTACK, data: {targetPlayer: (infestedOnslaught) ? CAM_HUMAN_PLAYER : CAM_THE_COLLECTIVE}};
@@ -132,35 +136,35 @@ function sendInfestedReinforcements()
 	if (!camBaseIsEliminated("colEastOutpost"))
 	{
 		// South entrance
-		camSendReinforcement(CAM_INFESTED, getObject("infEntry1"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND, data);
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry1"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND, data);
 
 		// Southeast entrance
-		camSendReinforcement(CAM_INFESTED, getObject("infEntry2"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND, data);
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry2"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND, data);
 	}
 
 	if (!camBaseIsEliminated("colNorthBase"))
 	{
 		// Canal entrance
-		camSendReinforcement(CAM_INFESTED, getObject("infEntry3"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND, data);
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry3"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND, data);
 	}
 
 	if (!camBaseIsEliminated("colWestOutpost"))
 	{
 		// Southwest entrance
-		camSendReinforcement(CAM_INFESTED, getObject("infEntry4"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND, data);
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry4"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND, data);
 	}
 
 	// West entrance (only if west base is destroyed)
 	if (camBaseIsEliminated("colWestOutpost") && !camBaseIsEliminated("colTrenchOutpost"))
 	{
-		camSendReinforcement(CAM_INFESTED, getObject("infEntry5"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND, data);
+		camSendReinforcement(CAM_INFESTED, getObject("infEntry5"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND, data);
 	}
 
 	// East entrance
-	camSendReinforcement(CAM_INFESTED, getObject("infEntry6"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND, data);
+	camSendReinforcement(CAM_INFESTED, getObject("infEntry6"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND, data);
 
 	// West Trench entrance
-	camSendReinforcement(CAM_INFESTED, getObject("infEntry7"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND, data);
+	camSendReinforcement(CAM_INFESTED, getObject("infEntry7"), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND, data);
 }
 
 // Count the number of (non-wall) structures remaining in the final base
@@ -577,6 +581,8 @@ function sendCollectiveTransporter()
 
 function removeUplinkBlip()
 {
+	playSound(cam_sounds.objective.primObjectiveCompleted);
+
 	hackRemoveMessage("UPLINK_BEACON", PROX_MSG, CAM_HUMAN_PLAYER);
 }
 
@@ -633,6 +639,8 @@ function eventStartLevel()
 	setAlliance(MIS_UPLINK, CAM_INFESTED, true);
 	setAlliance(MIS_UPLINK, MIS_TEAM_DELTA, true);
 	setAlliance(MIS_TEAM_DELTA, CAM_HUMAN_PLAYER, true);
+
+	camSetObjectVision(MIS_TEAM_DELTA, true);
 
 	changePlayerColour(MIS_UPLINK, 10); // Change the Uplink to white
 	changePlayerColour(MIS_TEAM_DELTA, (playerData[0].colour !== 1) ? 1 : 8); // Delta to orange or yellow

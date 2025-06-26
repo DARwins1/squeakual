@@ -1443,15 +1443,18 @@ function camAreaSecure(area, player)
 	).length === 0;
 }
 
-//;; ## camRandInfTemplates(coreTemplates, coreSize, fodderSize)
+//;; ## camRandInfTemplates(coreTemplates, coreSize, fodderSize[, overrideChance])
 //;; Returns a list of templates created by randomly choosing a number of core templates and adding Infested Civilians.
+//;; If provided, `overrideChance` (a number between 0 and 99) determines of replacing the fodder units with Bashers.
+//;; If this chance succeeds, 1 Basher is added for every 2 Civilians that would be added.
 //;;
 //;; @param {Object[]} coreTemplates
 //;; @param {number} coreSize
 //;; @param {number} fodderSize
+//;; @param {number} overrideChance
 //;; @returns {Object[]}
 //;;
-function camRandInfTemplates(coreTemplates, coreSize, fodderSize)
+function camRandInfTemplates(coreTemplates, coreSize, fodderSize, overrideChance)
 {
 	const droids = [];
 
@@ -1461,11 +1464,22 @@ function camRandInfTemplates(coreTemplates, coreSize, fodderSize)
 		droids.push(camRandFrom(coreTemplates));
 	}
 
-	// Add Infested Civilians.
-	const infCiv = [cTempl.infciv, cTempl.infciv2]
-	for (let i = 0; i < fodderSize; ++i)
+	// Add fodder
+	if (!camDef(overrideChance) || camRand(100) > overrideChance)
 	{
-		droids.push(camRandFrom(infCiv));
+		const infCiv = [cTempl.infciv, cTempl.infciv2] // These templates have slightly different animations
+		for (let i = 0; i < fodderSize; ++i)
+		{
+			droids.push(camRandFrom(infCiv));
+		}
+	}
+	else
+	{
+		// Override fodder with Bashers
+		for (let i = 0; i < fodderSize; i += 2) // Increment by 2
+		{
+			droids.push(cTempl.basher);
+		}
 	}
 
 	return droids;
@@ -1680,6 +1694,7 @@ function __camInfestObj(obj, fromPlayer)
 	else if (obj.type === STRUCTURE)
 	{
 		// Structure absorbed; replace it with an infested variant if applicable
+
 		const structId = camGetCompStats(obj.name, "Building").Id;
 		const __IS_FACTORY = obj.stattype === FACTORY || obj.stattype === CYBORG_FACTORY; // Ignore VTOL Factories...
 
@@ -1709,7 +1724,10 @@ function __camInfestObj(obj, fromPlayer)
 			infStructId = "Inf" + structId.replace(/A0BaBa|A0/, ""); // Fancy-pants regular expression
 		}
 
-		if (camDef(camGetCompNameFromId(infStructId, "Building")))
+		// Check if there's an Infested variant of this structure to swap to
+		// NOTE: Don't swap structures that aren't fully built
+		// NOTE: Also don't swap Oil Derricks, since WZ doesn't seem to like that
+		if (obj.status === BUILT && structId !== "A0ResourceExtractor" && camDef(camGetCompNameFromId(infStructId, "Building")))
 		{
 			// Infested variant exists; remove this object and replace it with a new structure
 			const structInfo = {

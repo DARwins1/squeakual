@@ -173,8 +173,8 @@
 
 
 	"object_0": {
-		"label": "colFactory",
-		"id": 2,
+		"label": "colCC",
+		"id": 9,
 		"player": 2,
 		"type": 1
 	},
@@ -213,54 +213,22 @@
 
 
 	"object_5": {
-		"label": "colCybFactory1",
-		"id": 10,
+		"label": "colFactory",
+		"id": 2,
 		"player": 2,
 		"type": 1
 	},
 
 
 	"object_6": {
-		"label": "colTruck1",
-		"id": 273,
+		"label": "colTruck3",
+		"id": 274,
 		"player": 2,
 		"type": 0
 	},
 
 
 	"object_7": {
-		"label": "colCC",
-		"id": 9,
-		"player": 2,
-		"type": 1
-	},
-
-
-	"object_8": {
-		"label": "colCommander",
-		"id": 319,
-		"player": 2,
-		"type": 0
-	},
-
-
-	"object_9": {
-		"label": "colSensorTower",
-		"id": 278,
-		"player": 2,
-		"type": 1
-	},
-
-
-	"object_10": {
-		"label": "convoyCrate",
-		"id": 8,
-		"player": 7,
-		"type": 2
-	},
-
-
-	"object_11": {
 		"label": "colCybFactory2",
 		"id": 11,
 		"player": 2,
@@ -268,7 +236,23 @@
 	},
 
 
-	"object_12": {
+	"object_8": {
+		"label": "colCybFactory1",
+		"id": 10,
+		"player": 2,
+		"type": 1
+	},
+
+
+	"object_9": {
+		"label": "colTruck1",
+		"id": 273,
+		"player": 2,
+		"type": 0
+	},
+
+
+	"object_10": {
 		"label": "colTruck2",
 		"id": 275,
 		"player": 2,
@@ -276,11 +260,27 @@
 	},
 
 
-	"object_13": {
-		"label": "colTruck3",
-		"id": 274,
+	"object_11": {
+		"label": "colCommander",
+		"id": 319,
 		"player": 2,
 		"type": 0
+	},
+
+
+	"object_12": {
+		"label": "colSensorTower",
+		"id": 278,
+		"player": 2,
+		"type": 1
+	},
+
+
+	"object_13": {
+		"label": "convoyCrate",
+		"id": 8,
+		"player": 7,
+		"type": 2
 	},
 
 	"radius_0": {

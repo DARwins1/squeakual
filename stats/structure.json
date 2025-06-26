@@ -1405,6 +1405,25 @@
         "type": "WALL",
         "width": 1
     },
+    "InfTankTrap": {
+        "armour": 10,
+        "breadth": 1,
+        "buildPoints": 40,
+        "buildPower": 15,
+        "ecmID": "ZNULLECM",
+        "height": 1,
+        "hitpoints": 200,
+        "id": "InfTankTrap",
+        "name": "Infested Tank Traps",
+        "sensorID": "ZNULLSENSOR",
+        "strength": "HARD",
+        "structureModel": [
+            "INFTRAP2.PIE"
+        ],
+        "thermal": 10,
+        "type": "WALL",
+        "width": 1
+    },
     "A0VTolFactory1": {
         "armour": 10,
         "baseModel": "blbfact.pie",
