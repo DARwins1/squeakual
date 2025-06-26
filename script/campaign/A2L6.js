@@ -563,8 +563,8 @@ function activateCollective()
 	]);
 
 	// Grant vision of allied objects to the player
-	camSetObjectVision(MIS_TEAM_CHARLIE, true);
-	camSetObjectVision(MIS_TEAM_GOLF, true);
+	camSetObjectVision(MIS_TEAM_CHARLIE);
+	camSetObjectVision(MIS_TEAM_GOLF);
 
 	// Ensure the player can't attack the prisoner safehouses
 	setAlliance(MIS_LZ_SCAVS, CAM_HUMAN_PLAYER, true);

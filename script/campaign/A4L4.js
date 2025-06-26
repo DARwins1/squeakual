@@ -1536,6 +1536,8 @@ function eventStartLevel()
 	setAlliance(MIS_TEAM_CHARLIE, CAM_HUMAN_PLAYER, true);
 	setAlliance(MIS_TEAM_ZULU, CAM_HUMAN_PLAYER, true); // Temporary; for Clayde's spiel
 
+	camSetObjectVision(MIS_TEAM_CHARLIE);
+
 	changePlayerColour(MIS_TEAM_CHARLIE, (playerData[0].colour !== 11) ? 11 : 5); // Charlie to bright blue or blue
 	changePlayerColour(MIS_TEAM_ZULU, (playerData[0].colour !== 15) ? 15 : 0); // Zulu to brown or green
 

@@ -79,7 +79,7 @@
 
 	"position_13": {
 		"label": "foxtrotPatrolPos3",
-		"pos": [19563, 4079]
+		"pos": [19263, 4179]
 	},
 
 
@@ -307,7 +307,7 @@
 
 	"area_30": {
 		"label": "foxtrotBase4",
-		"pos1": [12288, 384],
+		"pos1": [12160, 384],
 		"pos2": [13056, 1536]
 	},
 
@@ -342,15 +342,15 @@
 
 	"area_35": {
 		"label": "foxtrotSupportGroup1",
-		"pos1": [17152, 1792],
-		"pos2": [17920, 2176]
+		"pos1": [16896, 1792],
+		"pos2": [17664, 2176]
 	},
 
 
 	"area_36": {
 		"label": "foxtrotSupportGroup2",
-		"pos1": [17152, 2560],
-		"pos2": [17920, 2944]
+		"pos1": [16896, 2560],
+		"pos2": [17664, 2944]
 	},
 
 

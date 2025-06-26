@@ -668,9 +668,9 @@ function eventStartLevel()
 	setAlliance(MIS_TEAM_FOXTROT, MIS_TEAM_GOLF, true);
 
 	// Allow the player to view allied objects
-	camSetObjectVision(MIS_TEAM_CHARLIE, true);
-	camSetObjectVision(MIS_TEAM_FOXTROT, true);
-	camSetObjectVision(MIS_TEAM_GOLF, true);
+	camSetObjectVision(MIS_TEAM_CHARLIE);
+	camSetObjectVision(MIS_TEAM_FOXTROT);
+	camSetObjectVision(MIS_TEAM_GOLF);
 
 	camSetArtifacts({
 		"scavInnerFactory1": { tech: "R-Wpn-MG3Mk1" }, // Heavy Machinegun

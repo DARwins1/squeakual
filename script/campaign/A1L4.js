@@ -681,10 +681,10 @@ function eventStartLevel()
 	setAlliance(CAM_HUMAN_PLAYER, MIS_TEAM_DELTA, true);
 
 	// Grant vision of allied objects
-	camSetObjectVision(MIS_TEAM_DELTA, true);
-	camSetObjectVision(MIS_CLAYDE, true);
-	camSetObjectVision(MIS_NASDA, true);
-	camSetObjectVision(MIS_NASDA_POWER, true);
+	camSetObjectVision(MIS_TEAM_DELTA);
+	camSetObjectVision(MIS_CLAYDE);
+	camSetObjectVision(MIS_NASDA);
+	camSetObjectVision(MIS_NASDA_POWER);
 
 	camSetEnemyBases({
 		// These are mostly here to simplify truck logic

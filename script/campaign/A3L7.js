@@ -640,7 +640,7 @@ function eventStartLevel()
 	setAlliance(MIS_UPLINK, MIS_TEAM_DELTA, true);
 	setAlliance(MIS_TEAM_DELTA, CAM_HUMAN_PLAYER, true);
 
-	camSetObjectVision(MIS_TEAM_DELTA, true);
+	camSetObjectVision(MIS_TEAM_DELTA);
 
 	changePlayerColour(MIS_UPLINK, 10); // Change the Uplink to white
 	changePlayerColour(MIS_TEAM_DELTA, (playerData[0].colour !== 1) ? 1 : 8); // Delta to orange or yellow

@@ -613,7 +613,7 @@ function __camContinueProduction(structure)
 					// If so, then attempt to build
 					if (__camBuildDroid(template, struct))
 					{
-						__camFactoryQueue[__PLAYER].shift();
+						__camFactoryQueue[__PLAYER].splice(i, 1);
 						return; // Don't update the last production time
 					}
 				}
@@ -624,7 +624,7 @@ function __camContinueProduction(structure)
 				if (camFactoryCanProduceTemplate(template, struct)
 					&& __camBuildDroid(template, struct))
 				{
-					__camFactoryQueue[__PLAYER].shift();
+					__camFactoryQueue[__PLAYER].splice(i, 1);
 					return; // Don't update the last production time
 				}
 			}

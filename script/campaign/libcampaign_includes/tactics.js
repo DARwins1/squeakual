@@ -527,7 +527,7 @@ function __camTacticsTickForGroup(group)
 		}
 
 		const repair = {
-			hasFacility: enumStruct(rawDroids[0].player, REPAIR_FACILITY).length > 0,
+			hasFacility: enumStruct(rawDroids[0].player, REPAIR_FACILITY).filter((struct) => (struct.status === BUILT)).length > 0,
 			pos: camDef(gi.data.repairPos) ? gi.data.repairPos : undefined,
 			percent: camDef(gi.data.repair) ? gi.data.repair : 66,
 		};
@@ -758,6 +758,14 @@ function __camTacticsTickForGroup(group)
 				let followOrder = DORDER_FIRESUPPORT;
 				if (leaderObj.type === DROID && leaderObj.droidType === DROID_COMMAND) // is the leader a commander?
 				{
+					if (leaderObj.order === DORDER_RTR && droid.health < 99)
+					{
+						// Special case; if the leader is a commander retreating for repairs, also retreat for repairs if not at full HP
+						// Do this to avoid jams where commander droids bodyblock the commander from retreating
+						orderDroid(droid, DORDER_RTR);
+						continue;
+					}
+
 					followOrder = DORDER_COMMANDERSUPPORT;
 				}
 

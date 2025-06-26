@@ -946,6 +946,26 @@ function eventStartLevel()
 			targetPlayer: CAM_HUMAN_PLAYER
 	});
 	camMakeRefillableGroup(
+		camMakeGroup("golfDefenseGroup"), {
+			templates: [ // 2 HRAs, 2 Heavy Cannons, 4 Cyclones
+				cTempl.plhhrat,
+				cTempl.plhhcant,
+				cTempl.plhhaat, cTempl.plhhaat,
+				cTempl.plhhrat,
+				cTempl.plhhcant,
+				cTempl.plhhaat, cTempl.plhhaat,
+			],
+			factories: ["golfFactory1", "golfFactory2"]
+		}, CAM_ORDER_PATROL, {
+			pos: [
+				camMakePos("golfPatrolPos1"),
+				camMakePos("golfPatrolPos2"),
+				camMakePos("golfPatrolPos3"),
+			],
+			interval: camSecondsToMilliseconds(38),
+			repair: 50
+	});
+	camMakeRefillableGroup(
 		camMakeGroup("golfSensorGroup"), {
 			templates: [ // 6 Howitzers, 2 Cyclones
 				cTempl.plhhowt, cTempl.plhhowt, cTempl.plhhowt,
