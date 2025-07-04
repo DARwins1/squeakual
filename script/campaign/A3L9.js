@@ -16,6 +16,7 @@ var allowWin;
 var savedPower;
 var phase;
 var vtolsDetected;
+var lastTransportAlert;
 var foxtrotCommanderDeathTime;
 var golfSensorIdx;
 var foxtrotIdx;
@@ -598,6 +599,24 @@ function eventTransporterLaunch(transporter)
 	}
 }
 
+function eventTransporterArrived(transport)
+{
+	if (transport.player === CAM_HUMAN_PLAYER)
+	{
+		transportReturnAlert();
+	}
+}
+
+// This function is needed to ensure that the return alert is only played ONCE per trip
+function transportReturnAlert()
+{
+	if (lastTransportAlert + camSecondsToMilliseconds(30) < gameTime)
+	{
+		lastTransportAlert = gameTime;
+		playSound(cam_sounds.transport.transportReturningToBase);
+	}
+}
+
 function checkIfLaunched()
 {
 	// Set the player's power to whatever they've managed to stash
@@ -912,6 +931,7 @@ function eventStartLevel()
 	foxtrotIdx = 0;
 	golfIdx = 0;
 	vtolsDetected = false;
+	lastTransportAlert = 0;
 
 	// Most Infested units start out pre-damaged
 	camSetPreDamageModifier(CAM_INFESTED, [50, 80], [60, 90], CAM_INFESTED_PREDAMAGE_EXCLUSIONS);

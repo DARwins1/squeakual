@@ -188,6 +188,7 @@ const cam_sounds = {
 	},
 	transport: {
 		transportUnderAttack: "pcv443.ogg",
+		transportReturningToBase: "pcv446.ogg",
 		enemyTransportDetected: "pcv381.ogg",
 		incomingEnemyTransport: "pcv395.ogg",
 	},

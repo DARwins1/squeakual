@@ -5,6 +5,7 @@ include("script/campaign/structSets.js");
 var allowWin;
 var waveIndex;
 var vtolsDetected;
+var lastTransportAlert;
 var specialIndex;
 var colTruckJob1;
 var colTruckJob2;
@@ -477,6 +478,24 @@ function eventTransporterLaunch(transporter)
 	}
 }
 
+function eventTransporterArrived(transport)
+{
+	if (transport.player === CAM_HUMAN_PLAYER)
+	{
+		transportReturnAlert();
+	}
+}
+
+// This function is needed to ensure that the return alert is only played ONCE per trip
+function transportReturnAlert()
+{
+	if (lastTransportAlert + camSecondsToMilliseconds(30) < gameTime)
+	{
+		lastTransportAlert = gameTime;
+		playSound(cam_sounds.transport.transportReturningToBase);
+	}
+}
+
 function checkIfLaunched()
 {
 	if (allowWin)
@@ -601,6 +620,7 @@ function eventStartLevel()
 	specialIndex = 0;
 	hoverIndex = 0;
 	vtolsDetected = false;
+	lastTransportAlert = 0;
 
 	queue("vtolAttack", camChangeOnDiff(camMinutesToMilliseconds(2)));
 	queue("startInfestedAttacks", camChangeOnDiff(camMinutesToMilliseconds(12)));

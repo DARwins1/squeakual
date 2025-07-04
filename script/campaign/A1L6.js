@@ -6,6 +6,7 @@ var allowWin;
 var savedPower;
 var waveIndex;
 var vtolsDetected;
+var lastTransportAlert;
 var colTruckJob1;
 var colTruckJob2;
 var colTruckJob3;
@@ -292,6 +293,24 @@ function eventTransporterLaunch(transporter)
 	}
 }
 
+function eventTransporterArrived(transport)
+{
+	if (transport.player === CAM_HUMAN_PLAYER)
+	{
+		transportReturnAlert();
+	}
+}
+
+// This function is needed to ensure that the return alert is only played ONCE per trip
+function transportReturnAlert()
+{
+	if (lastTransportAlert + camSecondsToMilliseconds(30) < gameTime)
+	{
+		lastTransportAlert = gameTime;
+		playSound(cam_sounds.transport.transportReturningToBase);
+	}
+}
+
 function checkIfLaunched()
 {
 	// Set the player's power to whatever they've managed to stash
@@ -388,6 +407,7 @@ function eventStartLevel()
 	savedPower = 0;
 	waveIndex = 0;
 	vtolsDetected = false;
+	lastTransportAlert = 0;
 	// camPlayVideos([{video: "MB2_DII_MSG", type: CAMP_MSG}, {video: "MB2_DII_MSG2", type: MISS_MSG}]);
 
 	queue("heliAttack", camChangeOnDiff(camMinutesToMilliseconds(2)));
