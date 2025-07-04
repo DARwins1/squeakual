@@ -1,19 +1,4 @@
 {
-    "ADVANCEDRESEARCH": {
-        "iconID": "IMAGE_RES_COMPUTERTECH",
-        "id": "ADVANCEDRESEARCH",
-        "imdName": "MICAPSUL.PIE",
-        "keyTopic": 1,
-        "name": "ADVANCED RESEARCH",
-        "techCode": 1
-    },
-    "CAM3RESEARCH": {
-        "iconID": "IMAGE_RES_COMPUTERTECH",
-        "id": "CAM3RESEARCH",
-        "imdName": "MICAPSUL.PIE",
-        "name": "CAM3 RESEARCH",
-        "techCode": 1
-    },
     "Script-Infest": {
         "excludeFromCheats": 1,
         "iconID": "IMAGE_RES_COMPUTERTECH",
@@ -113,18 +98,6 @@
         "name": "Synaptic Link",
         "researchPoints": 1200,
         "researchPower": 37
-    },
-    "R-Cyborg-Legs01": {
-        "iconID": "IMAGE_RES_CYBORGTECH",
-        "id": "R-Cyborg-Legs01",
-        "name": "Cyborg Propulsion",
-        "researchPoints": 7200,
-        "researchPower": 225,
-        "resultComponents": [
-            "CyborgLegs"
-        ],
-        "statID": "CyborgLegs",
-        "techCode": 1
     },
     "R-Cyborg-Wpn-Cannon": {
         "iconID": "IMAGE_RES_CYBORGTECH",

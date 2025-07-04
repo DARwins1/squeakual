@@ -230,7 +230,7 @@ const camA3L7AllyResearch = camAct3StartResearch.concat([
 // Note that the tech gained on A3L8 is not included here
 const camA3L9EnemyResearch = camA3L7AllyResearch.concat([
 	// A3L7
-	"R-Wpn-Flamer-Damage05", // Artifact
+	"R-Wpn-Flamer-ROF02", // Artifact
 	"R-Wpn-MG-ROF03", // Artifact
 	"R-Wpn-MG-Damage06",
 	"R-Wpn-Rocket07-Tank-Killer", // Artifact

@@ -1,19 +1,4 @@
 {
-    "ADVANCEDRESEARCH": {
-        "iconID": "IMAGE_RES_COMPUTERTECH",
-        "id": "ADVANCEDRESEARCH",
-        "imdName": "MICAPSUL.PIE",
-        "keyTopic": 1,
-        "name": "ADVANCED RESEARCH",
-        "techCode": 1
-    },
-    "CAM3RESEARCH": {
-        "iconID": "IMAGE_RES_COMPUTERTECH",
-        "id": "CAM3RESEARCH",
-        "imdName": "MICAPSUL.PIE",
-        "name": "CAM3 RESEARCH",
-        "techCode": 1
-    },
     "R-Script-ProloguePlayed": {
         "excludeFromCheats": 1,
         "iconID": "IMAGE_RES_SYSTEMTECH",
@@ -470,18 +455,6 @@
             "Cyb-Hvywpn-TK"
         ],
         "statID": "Cyb-Hvywpn-TK"
-    },
-    "R-Cyborg-Legs01": {
-        "iconID": "IMAGE_RES_CYBORGTECH",
-        "id": "R-Cyborg-Legs01",
-        "name": "Cyborg Propulsion",
-        "researchPoints": 7200,
-        "researchPower": 225,
-        "resultComponents": [
-            "CyborgLegs"
-        ],
-        "statID": "CyborgLegs",
-        "techCode": 1
     },
     "R-Cyborg-Metals01": {
         "iconID": "IMAGE_RES_CYBORGTECH",
@@ -3646,7 +3619,6 @@
     "R-Wpn-Flamer-Damage05": {
         "iconID": "IMAGE_RES_WEAPONTECH",
         "id": "R-Wpn-Flamer-Damage05",
-        "keyTopic": 1,
         "name": "Superhot Flamer Gel Mk2",
         "requiredResearch": [
             "R-Wpn-Flamer-Damage04",
@@ -5318,11 +5290,10 @@
     "R-Wpn-AAGun-Damage03": {
         "iconID": "IMAGE_RES_WEAPONTECH",
         "id": "R-Wpn-AAGun-Damage03",
-        "keyTopic": 1,
         "name": "AA HE Flak Mk3",
         "requiredResearch": [
             "R-Wpn-AAGun-Damage02",
-            "R-Wpn-AAGun03"
+            "R-Wpn-AAGun04"
         ],
         "researchPoints": 1800,
         "researchPower": 262,
