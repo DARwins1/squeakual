@@ -210,7 +210,7 @@ function __camChooseNexusTarget(player)
 		//As the player researches more resistance upgrades their higher exp units will become more safe
 		//Trucks get a little more safe with each upgrade also.
 		objects = objects.filter((d) => {
-			if (__camNextLevel === CAM_GAMMA_OUT)
+			if (__camNextLevel === CAM_A4_OUT)
 			{
 				return true; //Final mission has a static fail chance to hack everything.
 			}

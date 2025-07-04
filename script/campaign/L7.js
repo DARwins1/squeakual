@@ -112,7 +112,7 @@ function startPhaseThree()
 	setMissionTime(-1);
 
 	// Change the win conditions, this basically makes it so the player can't die normally
-	camSetStandardWinLossConditions(CAM_VICTORY_SCRIPTED, "THE_END", {
+	camSetStandardWinLossConditions(CAM_VICTORY_SCRIPTED, CAM_A0_OUT, {
 		defeatOnDeath: false
 	});
 
@@ -554,7 +554,7 @@ function eventStartLevel()
 	// 	{sound: cam_sounds.missile.countdown, time: 10},
 	// ];
 
-   	camSetStandardWinLossConditions(CAM_VICTORY_SCRIPTED, "THE_END", {
+   	camSetStandardWinLossConditions(CAM_VICTORY_SCRIPTED, CAM_A0_OUT, {
 		callback: "checkMissileSilos"
 	});
 	camSetExtraObjectiveMessage([_("Survive until evacuation"), _("Defend the missile silos")]);

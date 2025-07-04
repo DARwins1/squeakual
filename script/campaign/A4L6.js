@@ -858,7 +858,7 @@ function sendCollectiveTrucks()
 // Called on a delay to avoid failing the player if Charlie's units aren't transferred fast enough
 function setVictory()
 {
-	camSetStandardWinLossConditions(CAM_VICTORY_SCRIPTED, "THE_END", {
+	camSetStandardWinLossConditions(CAM_VICTORY_SCRIPTED, CAM_A4_OUT, {
 		showArtifacts: false
 	});
 }
@@ -3050,8 +3050,8 @@ function lighteningEffects()
 	camSetSunIntensity(.55,.55,.55);
 
 	// ...Then gradually re-darken them
-	camGradualFog(camSecondsToMilliseconds(1.6), 107, 107, 107);
-	camGradualSunIntensity(camSecondsToMilliseconds(1.6), .35,.35,.35);
+	camGradualFog(camSecondsToMilliseconds(1.8), 107, 107, 107);
+	camGradualSunIntensity(camSecondsToMilliseconds(1.8), .35,.35,.35);
 }
 
 function eventMissionTimeout()

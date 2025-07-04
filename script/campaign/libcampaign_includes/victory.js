@@ -151,6 +151,8 @@ function camSetStandardWinLossConditions(kind, nextLevel, data)
 	__camVictoryData.ignoreInfestedUnits = (camDef(__camVictoryData.ignoreInfestedUnits)) ? __camVictoryData.ignoreInfestedUnits : false;
 
 	__camNextLevel = nextLevel;
+
+	__camResetPower();
 }
 
 //;; ## camCheckExtraObjective()
@@ -230,7 +232,7 @@ function __camGameWon()
 	if (camDef(__camNextLevel))
 	{
 		camTrace(__camNextLevel);
-		if (__camNextLevel === "THE_END")
+		if (__camNextLevel === CAM_A0_OUT || __camNextLevel === CAM_A4_OUT)
 		{
 			gameOverMessage(true, false, false);
 			return;
@@ -713,7 +715,7 @@ function __camGrantBonusPower()
 		else
 		{
 			// In Timerless mode, just set the player to max power at the end of the level
-			setPower(__camTimerlessPowerLimits[difficulty], CAM_HUMAN_PLAYER);
+			setPower(__camGetPowerLimit(), CAM_HUMAN_PLAYER);
 		}
 	setPowerModifier(0, CAM_HUMAN_PLAYER);
 	setMissionTime(-1);

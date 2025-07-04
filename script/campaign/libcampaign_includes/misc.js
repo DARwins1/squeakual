@@ -581,26 +581,29 @@ function camGenerateRandomMapCoordinate(reachPosition, distFromReach, scanObject
 //;;
 function camDiscoverCampaign()
 {
-	for (let i = 0, len = __cam_alphaLevels.length; i < len; ++i)
+	if (__cam_reclamationLevels.includes(__camNextLevel) || __camNextLevel === CAM_A0_OUT)
 	{
-		if (__camNextLevel === __cam_alphaLevels[i] || __camNextLevel === __cam_betaLevels[0])
-		{
-			return __CAM_ALPHA_CAMPAIGN_NUMBER;
-		}
+		return __CAM_RECLAMATION_CAMPAIGN_NUMBER;
 	}
-	for (let i = 0, len = __cam_betaLevels.length; i < len; ++i)
+	else if (__cam_prologueLevels.includes(__camNextLevel) || __camNextLevel === __cam_act1Levels[0])
 	{
-		if (__camNextLevel === __cam_betaLevels[i] || __camNextLevel === __cam_gammaLevels[0])
-		{
-			return __CAM_BETA_CAMPAIGN_NUMBER;
-		}
+		return __CAM_PROLOGUE_CAMPAIGN_NUMBER;
 	}
-	for (let i = 0, len = __cam_gammaLevels.length; i < len; ++i)
+	else if (__cam_act1Levels.includes(__camNextLevel) || __camNextLevel === __cam_act2Levels[0])
 	{
-		if (__camNextLevel === __cam_gammaLevels[i] || __camNextLevel === CAM_GAMMA_OUT)
-		{
-			return __CAM_GAMMA_CAMPAIGN_NUMBER;
-		}
+		return __CAM_ACT1_CAMPAIGN_NUMBER;
+	}
+	else if (__cam_act2Levels.includes(__camNextLevel) || __camNextLevel === __cam_act3Levels[0])
+	{
+		return __CAM_ACT2_CAMPAIGN_NUMBER;
+	}
+	else if (__cam_act3Levels.includes(__camNextLevel) || __camNextLevel === __cam_act4Levels[0])
+	{
+		return __CAM_ACT3_CAMPAIGN_NUMBER;
+	}
+	else if (__cam_act4Levels.includes(__camNextLevel) || __camNextLevel === CAM_A4_OUT)
+	{
+		return __CAM_ACT4_CAMPAIGN_NUMBER;
 	}
 
 	return __CAM_UNKNOWN_CAMPAIGN_NUMBER;
@@ -1600,8 +1603,20 @@ function __camResetPower()
 	// Rate changes by 15% per difficulty level, with Normal at 100%
 	let powerProductionRate = 100 + (15 * (difficulty - 2));
 	
+	const __POWER_LIMIT = __camGetPowerLimit();
+
+	setPowerModifier(powerProductionRate, CAM_HUMAN_PLAYER);
+	setPowerStorageMaximum(__POWER_LIMIT, CAM_HUMAN_PLAYER);
+	if (playerPower(CAM_HUMAN_PLAYER) >= __POWER_LIMIT)
+	{
+		setPower(__POWER_LIMIT - 1, CAM_HUMAN_PLAYER);
+	}
+}
+
+function __camGetPowerLimit()
+{
 	let powerLimit;
-	if (!tweakOptions.rec_timerlessMode || (camDef(__camNextLevel) && __camNextLevel === "THE_END"))
+	if (!tweakOptions.rec_timerlessMode || (camDef(__camNextLevel) && (__camNextLevel === CAM_A0_OUT || __camNextLevel === CAM_A0_OUT)))
 	{
 		powerLimit = __camPowerLimits[difficulty];
 	}
@@ -1611,14 +1626,15 @@ function __camResetPower()
 		powerLimit = __camTimerlessPowerLimits[difficulty];
 	}
 
-	// TODO: Increase the power limits as the player progresses through the acts?
-
-	setPowerModifier(powerProductionRate, CAM_HUMAN_PLAYER);
-	setPowerStorageMaximum(powerLimit, CAM_HUMAN_PLAYER);
-	if (playerPower(CAM_HUMAN_PLAYER) >= powerLimit)
+	// Increase the power limits as the player progresses through the acts
+	const __CAM_NUM = camDiscoverCampaign();
+	if (difficulty >= MEDIUM && __CAM_NUM > 1)
 	{
-		setPower(powerLimit - 1, CAM_HUMAN_PLAYER);
+		// Increase by 20% per Act after the Prologue.
+		powerLimit += (powerLimit * 0.2) * (__CAM_NUM - 1);
 	}
+
+	return powerLimit;
 }
 
 function __camWeatherCycle()
