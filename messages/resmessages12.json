@@ -218,7 +218,7 @@
         "text": [
             "New Weapon Turret Available",
             "Short-ranged artillery firing salvos of explosive mini-rockets",
-            "Effective against: Cyborgs, Hover vehicles and structures",
+            "Effective against: Infantry, wheeled vehicles and structures",
             "Ineffective against: Tracked vehicles and bunkers",
             "Indirect weapon; does not require line of sight to a target and can be assigned to a sensor",
             "Greater accuracy at longer ranges"

@@ -1177,7 +1177,7 @@
     "BoomTickBlast": {
         "buildPoints": 320,
         "buildPower": 80,
-        "damage": 100000,
+        "damage": 450,
         "effectSize": 200,
         "explosionWav": "lrgexpl.ogg",
         "facePlayer": 1,
@@ -3876,12 +3876,12 @@
     "InfCyborgRocket": {
         "buildPoints": 500,
         "buildPower": 125,
-        "damage": 160,
+        "damage": 105,
         "effectSize": 50,
         "explosionWav": "smlexpl.ogg",
         "faceInFlight": 1,
         "facePlayer": 1,
-        "firePause": 160,
+        "firePause": 80,
         "flags": "ShootAir",
         "flightGfx": "FXMPLME.PIE",
         "flightSpeed": 1800,
@@ -5779,8 +5779,8 @@
         "weight": 4000
     },
     "Mortar3ROTARYMk1": {
-        "buildPoints": 900,
-        "buildPower": 200,
+        "buildPoints": 925,
+        "buildPower": 225,
         "damage": 60,
         "designable": 1,
         "effectSize": 100,
@@ -5820,8 +5820,8 @@
         "weight": 4000
     },
     "InfMortar3ROTARYMk1": {
-        "buildPoints": 900,
-        "buildPower": 200,
+        "buildPoints": 925,
+        "buildPower": 225,
         "damage": 60,
         "designable": 1,
         "effectSize": 100,

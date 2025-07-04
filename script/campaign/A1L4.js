@@ -444,7 +444,7 @@ function collectiveAttackWaves()
 			droids.push(camRandFrom(scavSpecialDroids));
 		}
 		// Chance of inserting a Hurricane
-		if (difficulty >= MEDIUM && COLLECTIVE_ACTIVE && camRand(10 - difficulty) === 0)
+		if (difficulty >= MEDIUM && COLLECTIVE_ACTIVE && camRand(7 - difficulty) === 0)
 		{
 			droids.push(cTempl.colaaht);
 		}

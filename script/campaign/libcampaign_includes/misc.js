@@ -1583,7 +1583,7 @@ function __camDetonateBoomtick(boomBaitId)
 	{
 		fireWeaponAtObj("BoomTickBlast", bait, CAM_INFESTED);
 		// Failsafe in case the bait doesn't actually die
-		queue("__camRemoveBoomBait", __CAM_TICKS_PER_FRAME * 10, boomBaitId + "");
+		queue("__camRemoveBoomBait", __CAM_TICKS_PER_FRAME, boomBaitId + "");
 	}
 }
 

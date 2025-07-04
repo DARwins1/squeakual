@@ -111,7 +111,7 @@
         "buildPower": 25,
         "class": "Babas",
         "designable": 1,
-        "hitpoints": 140,
+        "hitpoints": 110,
         "id": "ScavCraneBody",
         "model": "cranebody1.pie",
         "name": "Crane Body",

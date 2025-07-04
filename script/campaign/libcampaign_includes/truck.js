@@ -325,6 +325,12 @@ function camGetTrucksFromLabel(label)
 //;; Useful for level scripts to handle non-automatic truck replacement.
 function camAssignTruck(droid, index)
 {
+	if (droid === null)
+	{
+		camDebug("Assigned truck is null!");
+		return;
+	}
+
 	if (!camDef(droid) || !camDef(index))
 	{
 		camDebug("Not enough arguments for truck assignment!");

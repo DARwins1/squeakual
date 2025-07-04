@@ -10,7 +10,7 @@ const mis_collectiveResearch = [
 	"R-Wpn-Cannon-ROF03", "R-Vehicle-Metals05", "R-Struc-Materials05", 
 	"R-Defense-WallUpgrade05", "R-Sys-Engineering02", "R-Cyborg-Metals05",
 	"R-Wpn-Cannon-Accuracy02", "R-Wpn-Rocket-Accuracy03", "R-Wpn-AAGun-ROF02",
-	"R-Wpn-AAGun-Damage02", "R-Vehicle-Engine06", "R-Wpn-AAGun-Accuracy01",
+	"R-Wpn-AAGun-Damage03", "R-Vehicle-Engine06", "R-Wpn-AAGun-Accuracy01",
 	"R-Struc-RprFac-Upgrade02", "R-Struc-VTOLPad-Upgrade01", "R-Sys-Sensor-Upgrade01",
 	"R-Vehicle-Armor-Heat02", "R-Cyborg-Armor-Heat02", "R-Wpn-Howitzer-Damage02",
 	"R-Wpn-Howitzer-ROF02", "R-Wpn-Howitzer-Accuracy01", "R-Wpn-Mortar-Acc01",

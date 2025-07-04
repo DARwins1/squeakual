@@ -171,7 +171,7 @@ function expandMap()
 // This is used to start make scavengers "detect" the player once they're attacked
 function eventDestroyed(obj)
 {
-	if (ob.type !== STRUCTURE)
+	if (obj.type !== STRUCTURE)
 	{
 		return; // Only care about structures
 	}

@@ -294,6 +294,7 @@ function eventStartLevel()
 			detectMsg: "CSCAV_BASE2",
 			detectSnd: cam_sounds.baseDetection.scavengerBaseDetected,
 			eliminateSnd: cam_sounds.baseElimination.scavengerBaseEradicated,
+			player: CAM_THE_COLLECTIVE
 		},
 		"colMainBase": {
 			cleanup: "colBase",

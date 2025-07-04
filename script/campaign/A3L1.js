@@ -563,7 +563,7 @@ function eventStartLevel()
 				rebuildBase: true,
 				respawnDelay: CRANE_TIME,
 				template: cTempl.crane,
-				structset: camAreaToStructSet("colRoadblock1").filter((struct) => (camIsScavStruct(struct)))
+				structset: camAreaToStructSet("colRoadblock1").filter((struct) => (camIsScavStruct(struct.stat)))
 		});
 		camManageTrucks(
 			CAM_THE_COLLECTIVE, {
@@ -571,7 +571,7 @@ function eventStartLevel()
 				rebuildBase: true,
 				respawnDelay: CRANE_TIME,
 				template: cTempl.crane,
-				structset: camAreaToStructSet("colRoadblock2").filter((struct) => (camIsScavStruct(struct)))
+				structset: camAreaToStructSet("colRoadblock2").filter((struct) => (camIsScavStruct(struct.stat)))
 		});
 	}
 	else

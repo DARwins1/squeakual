@@ -157,8 +157,7 @@ const __CAM_PROLOGUE_CAMPAIGN_NUMBER = 1;
 const __CAM_ACT1_CAMPAIGN_NUMBER = 2;
 const __CAM_ACT2_CAMPAIGN_NUMBER = 3;
 const __CAM_ACT3_CAMPAIGN_NUMBER = 4;
-const __CAM_ACT4A_CAMPAIGN_NUMBER = 5;
-const __CAM_ACT4B_CAMPAIGN_NUMBER = 6;
+const __CAM_ACT4_CAMPAIGN_NUMBER = 5;
 const __cam_reclamationLevels = [
 	"L1", // RECLAMATION
 	"L2S", "L2", // LIBERATOR
@@ -177,7 +176,7 @@ const __cam_act1Levels = [
 	"A1L2S", "A1L2", // ALLIED ASSAULT
 	"A1L3", // RISING
 	"A1L4S", "A1L4", // THE COLLECTIVE
-	"A1L5S", "A1L5", // IN CHECK
+	"A1L5S", "A1L5", // DECAPITATION
 	"A1L6", // ONSLAUGHT
 ]; // 6 missions
 const __cam_act2Levels = [

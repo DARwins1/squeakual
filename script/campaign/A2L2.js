@@ -11,6 +11,7 @@ const mis_collectiveResearch = [
 	"R-Wpn-Cannon-ROF02", "R-Vehicle-Metals02", "R-Struc-Materials02", 
 	"R-Defense-WallUpgrade02", "R-Sys-Engineering01", "R-Cyborg-Metals02",
 	"R-Wpn-Cannon-Accuracy01", "R-Wpn-Rocket-Accuracy01", "R-Vehicle-Engine02",
+	"R-Wpn-AAGun-Damage01",
 ];
 
 var mapExpanded;
@@ -354,7 +355,7 @@ function expandMap()
 				rebuildBase: true,
 				respawnDelay: CRANE_TIME,
 				template: cTempl.crane,
-				structset: camAreaToStructSet("cScavBase1").filter((struct) => (camIsScavStruct(struct)))
+				structset: camAreaToStructSet("cScavBase1").filter((struct) => (camIsScavStruct(struct.stat)))
 		});
 		camManageTrucks(
 			CAM_THE_COLLECTIVE, {
@@ -370,7 +371,7 @@ function expandMap()
 				rebuildBase: true,
 				respawnDelay: CRANE_TIME,
 				template: cTempl.crane,
-				structset: camAreaToStructSet("cScavBase3").filter((struct) => (camIsScavStruct(struct)))
+				structset: camAreaToStructSet("cScavBase3").filter((struct) => (camIsScavStruct(struct.stat)))
 		});
 		camManageTrucks(
 			CAM_THE_COLLECTIVE, {
@@ -378,7 +379,7 @@ function expandMap()
 				rebuildBase: true,
 				respawnDelay: CRANE_TIME,
 				template: cTempl.crane,
-				structset: camAreaToStructSet("cScavBase4").filter((struct) => (camIsScavStruct(struct)))
+				structset: camAreaToStructSet("cScavBase4").filter((struct) => (camIsScavStruct(struct.stat)))
 		});
 		if (difficulty >= MEDIUM)
 		{

@@ -172,7 +172,7 @@ function expandMap()
 	camEnableFactory("cScavFactory3");
 
 	// HACK: Move the sun's position to remove the lingering shadow effect from the map border
-	camSetSunPos(-450.0, -400.0, 225.1);
+	camSetSunPos(450.0, -400.0, 225.1);
 }
 
 // Send scavenger attack waves

@@ -8,7 +8,7 @@ const mis_collectiveResearch = [
 	"R-Wpn-Cannon-ROF02", "R-Vehicle-Metals03", "R-Struc-Materials03", 
 	"R-Defense-WallUpgrade03", "R-Sys-Engineering01", "R-Cyborg-Metals03",
 	"R-Wpn-Cannon-Accuracy01", "R-Wpn-Rocket-Accuracy02", "R-Wpn-AAGun-ROF01",
-	"R-Vehicle-Engine03", "R-Struc-RprFac-Upgrade01",
+	"R-Vehicle-Engine03", "R-Struc-RprFac-Upgrade01", "R-Wpn-AAGun-Damage01",
 ];
 
 camAreaEvent("heliRemoveZone", function(droid)
@@ -518,7 +518,7 @@ function eventStartLevel()
 				rebuildBase: true,
 				respawnDelay: CRANE_TIME,
 				template: cTempl.crane,
-				structset: camAreaToStructSet("cScavBase1").filter((struct) => (camIsScavStruct(struct)))
+				structset: camAreaToStructSet("cScavBase1").filter((struct) => (camIsScavStruct(struct.stat)))
 		});
 		camManageTrucks(
 			CAM_THE_COLLECTIVE, {
@@ -526,7 +526,7 @@ function eventStartLevel()
 				rebuildBase: true,
 				respawnDelay: CRANE_TIME,
 				template: cTempl.crane,
-				structset: camAreaToStructSet("cScavBase2").filter((struct) => (camIsScavStruct(struct)))
+				structset: camAreaToStructSet("cScavBase2").filter((struct) => (camIsScavStruct(struct.stat)))
 		});
 		camManageTrucks(
 			CAM_THE_COLLECTIVE, {
@@ -534,7 +534,7 @@ function eventStartLevel()
 				rebuildBase: true,
 				respawnDelay: CRANE_TIME,
 				template: cTempl.crane,
-				structset: camAreaToStructSet("cScavBase4").filter((struct) => (camIsScavStruct(struct)))
+				structset: camAreaToStructSet("cScavBase4").filter((struct) => (camIsScavStruct(struct.stat)))
 		});
 		camManageTrucks(
 			CAM_THE_COLLECTIVE, {
@@ -542,7 +542,7 @@ function eventStartLevel()
 				rebuildBase: true,
 				respawnDelay: CRANE_TIME,
 				template: cTempl.crane,
-				structset: camAreaToStructSet("cScavBase5").filter((struct) => (camIsScavStruct(struct)))
+				structset: camAreaToStructSet("cScavBase5").filter((struct) => (camIsScavStruct(struct.stat)))
 		});
 		camManageTrucks(
 			CAM_THE_COLLECTIVE, {

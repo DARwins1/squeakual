@@ -68,7 +68,7 @@
             "Effective against: Infantry, vehicles and bunkers",
             "Ineffective against: Non-bunker structures",
             "Thermal weapon; Damage bypasses kinetic armor of target",
-            "Can ignite enemy units causing damage over time",
+            "Can ignite enemy units, causing damage over time",
             "Flames can hit multiple units",
             "Has a very short weapon range",
             "Requires Cyborg factory to produce"
@@ -165,7 +165,7 @@
             "Effective against: Infantry, vehicles and bunkers",
             "Ineffective against: Non-bunker structures",
             "Thermal weapon; Damage bypasses kinetic armor of target",
-            "Can ignite enemy units causing damage over time",
+            "Can ignite enemy units, causing damage over time",
             "Flames can hit multiple units",
             "Has a very short weapon range"
         ]

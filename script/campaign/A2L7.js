@@ -20,7 +20,7 @@ const mis_collectiveResearch = [
 	"R-Wpn-Cannon-ROF02", "R-Vehicle-Metals03", "R-Struc-Materials03", 
 	"R-Defense-WallUpgrade03", "R-Sys-Engineering02", "R-Cyborg-Metals03",
 	"R-Wpn-Cannon-Accuracy01", "R-Wpn-Rocket-Accuracy02", "R-Wpn-AAGun-ROF01",
-	"R-Wpn-AAGun-Damage01", "R-Vehicle-Engine03", "R-Wpn-AAGun-Accuracy01",
+	"R-Wpn-AAGun-Damage02", "R-Vehicle-Engine03", "R-Wpn-AAGun-Accuracy01",
 	"R-Struc-RprFac-Upgrade01", "R-Wpn-Mortar-Acc01",
 ];
 const mis_infestedResearch = [
@@ -498,7 +498,7 @@ function dumpStructSets()
 function eventStartLevel()
 {
 	camSetStandardWinLossConditions(CAM_VICTORY_EVACUATION, "A3L1", {
-		reinforcements: camMinutesToSeconds(4.5), // Duration the transport "leaves" map.
+		reinforcements: camMinutesToSeconds(3.5), // Duration the transport "leaves" map.
 		gameOverOnDeath: false, // Don't fail when the player runs out of stuff
 		callback: "checkIfLaunched"
 	});

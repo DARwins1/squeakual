@@ -452,7 +452,7 @@ function sendTransport3()
 
 	camQueueDialogue([
 		{text: "CHARLIE: Transport on the way.", delay: 2, sound: CAM_RCLICK},
-		{text: "CHARLIE: These Mortars should be able to wallop those uglies from a safe distance.", delay: 3, sound: CAM_RCLICK},
+		{text: "CHARLIE: These Mortars should be able to take down those uglies from a safe distance.", delay: 3, sound: CAM_RCLICK},
 		{text: "CHARLIE: Just make sure you keep them protected.", delay: 4, sound: CAM_RCLICK},
 		{text: "CHARLIE: ...They're definitely not the sturdiest vehicles we've got.", delay: 3, sound: CAM_RCLICK},
 	]);

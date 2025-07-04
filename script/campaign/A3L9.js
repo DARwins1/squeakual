@@ -391,7 +391,7 @@ function sendGolfGroundReinforcements()
 		// Bring in the trucks!
 		const tPos = camMakePos(camRandFrom(entrances));
 		const tTemp = (phase > 3 || difficulty >= HARD) ? cTempl.plhtruckt : cTempl.plmtruckt;
-		const newTruck = camAddDroid(MIS_TEAM_GOLF, tPos.x, tTemp);
+		const newTruck = camAddDroid(MIS_TEAM_GOLF, tPos, tTemp);
 		camAssignTruck(newTruck, job);
 	}
 
@@ -624,7 +624,7 @@ function dumpStructSets()
 function eventStartLevel()
 {
 	camSetStandardWinLossConditions(CAM_VICTORY_EVACUATION, "A4L1", {
-		reinforcements: camMinutesToSeconds(5.5), // Duration the transport "leaves" map.
+		reinforcements: camMinutesToSeconds(3.5), // Duration the transport "leaves" map.
 		gameOverOnDeath: false, // Don't fail when the player runs out of stuff
 		callback: "checkIfLaunched"
 	});

@@ -150,7 +150,7 @@ function infestedAmbush1()
 	// queue("messageAlert", camSecondsToMilliseconds(0.2));
 	camQueueDialogue([
 		{text: "CLAYDE: Commander!", delay: 0, sound: CAM_RCLICK},
-		{text: "CLAYDE: We've detecting a huge amount of movement approaching your position!", delay: 2, sound: CAM_RCLICK},
+		{text: "CLAYDE: We're detecting a huge amount of movement approaching your position!", delay: 2, sound: CAM_RCLICK},
 		{text: "CLAYDE: Be ready for any-...", delay: 4, sound: CAM_RCLICK},
 	]);
 
@@ -188,7 +188,7 @@ function infestedAmbush2()
 	camQueueDialogue([
 		{text: "CLAYDE: What is going on down there?!", delay: 2, sound: CAM_RCLICK},
 		{text: "CLAYDE: I'm looking through my feed data, and...", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: I have a hard time believing what I'm seeing.", delay: 3, sound: CAM_RCLICK},
+		// {text: "CLAYDE: I have a hard time believing what I'm seeing.", delay: 3, sound: CAM_RCLICK},
 		{text: "CLAYDE: ...", delay: 2},
 		{text: "CLAYDE: Commander, I'm changing your objective.", delay: 3, sound: CAM_RCLICK},
 		{text: "CLAYDE: Destroy that research facility and eradicate anyone or anything that stands in your way.", delay: 2, sound: CAM_RCLICK},

@@ -17,7 +17,7 @@ const mis_collectiveResearch = [
 	"R-Wpn-Cannon-ROF02", "R-Vehicle-Metals02", "R-Struc-Materials03", 
 	"R-Defense-WallUpgrade03", "R-Sys-Engineering01", "R-Cyborg-Metals02",
 	"R-Wpn-Cannon-Accuracy01", "R-Wpn-Rocket-Accuracy01", "R-Vehicle-Engine02",
-	"R-Struc-RprFac-Upgrade01",
+	"R-Struc-RprFac-Upgrade01", "R-Wpn-AAGun-Damage01",
 ];
 
 camAreaEvent("vtolRemoveZone", function(droid)
@@ -396,7 +396,7 @@ function eventStartLevel()
 				rebuildBase: true,
 				respawnDelay: CRANE_TIME,
 				template: cTempl.crane,
-				structset: camAreaToStructSet("cScavBase").filter((struct) => (camIsScavStruct(struct)))
+				structset: camAreaToStructSet("cScavBase").filter((struct) => (camIsScavStruct(struct.stat)))
 		});
 
 		if (difficulty >= MEDIUM)

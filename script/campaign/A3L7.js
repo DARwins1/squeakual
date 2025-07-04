@@ -168,7 +168,7 @@ function sendInfestedReinforcements()
 }
 
 // Count the number of (non-wall) structures remaining in the final base
-// If the number of structures falls below 2/3 of the original amount, disable the large Infested attacks
+// If the number of structures falls below 3/4 of the original amount, disable the large Infested attacks
 function eventDestroyed(obj)
 {
 	if (luresActive && obj.player === CAM_THE_COLLECTIVE)
@@ -176,7 +176,7 @@ function eventDestroyed(obj)
 		// Count the remaining wall-type structures in the uplink base
 		const STRUCTS_REMAINING = countUplinkStructs();
 
-		if (STRUCTS_REMAINING < (numUplinkStructs * 2/3))
+		if (STRUCTS_REMAINING < (numUplinkStructs * 3/4))
 		{
 			// Disable the Infested lures, preventing any further large Infested waves
 			// If any Collective trucks are trying to rebuild destroyed outposts, order them to give up
@@ -429,6 +429,7 @@ function spawnOnslaughtWaves()
 	// BIG and SCARY waves!!!
 	const CORE_SIZE = 16;
 	const FODDER_SIZE = 24;
+	const B_CHANCE = 10;
 
 	const coreTemplates = [ // Waves can choose from a selection of templates
 		[ // Collective tanks + Stingers + Boom Ticks
@@ -488,7 +489,7 @@ function spawnOnslaughtWaves()
 
 		// Send them in!
 		camSendReinforcement(CAM_INFESTED, getObject(entrance), 
-			camRandInfTemplates(camRandFrom(coreTemplates), CORE_SIZE, FODDER_SIZE), CAM_REINFORCE_GROUND, data);
+			camRandInfTemplates(camRandFrom(coreTemplates), CORE_SIZE, FODDER_SIZE, B_CHANCE), CAM_REINFORCE_GROUND, data);
 	}
 }
 
@@ -688,6 +689,7 @@ function eventStartLevel()
 			detectMsg: "COL_BASE5",
 			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
 			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
+			player: CAM_THE_COLLECTIVE
 		},
 	});
 

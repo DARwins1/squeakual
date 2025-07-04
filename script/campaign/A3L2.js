@@ -49,7 +49,7 @@ function vtolAttack()
 
 function eventPickup(feature, droid)
 {
-	if (feature.stattype === ARTIFACT && droid.player === CAM_HUMAN_PLAYER && camMakePos(feature).y > 20)
+	if (feature.stattype === ARTIFACT && droid.player === CAM_HUMAN_PLAYER && getLabel(feature) === "convoyCrate")
 	{
 		// Donate Golf's convoy to the player once they collect the artifact
 		const droids = enumDroid(MIS_TEAM_GOLF);

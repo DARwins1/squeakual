@@ -274,359 +274,359 @@
 
 
 	"area_10": {
-		"label": "deltaBase4",
-		"pos1": [24704, 896],
-		"pos2": [25984, 2176]
-	},
-
-
-	"area_11": {
 		"label": "colBase1",
 		"pos1": [23424, 9216],
 		"pos2": [27264, 11904]
 	},
 
 
-	"area_12": {
+	"area_11": {
 		"label": "colBase2",
 		"pos1": [22016, 8192],
 		"pos2": [24064, 10240]
 	},
 
 
-	"area_13": {
+	"area_12": {
 		"label": "colBase3",
 		"pos1": [24832, 6656],
 		"pos2": [27136, 8320]
 	},
 
 
-	"area_14": {
+	"area_13": {
 		"label": "colBase4",
 		"pos1": [23936, 4096],
 		"pos2": [25984, 6016]
 	},
 
 
-	"area_15": {
+	"area_14": {
 		"label": "colBase5",
 		"pos1": [20480, 512],
 		"pos2": [23936, 4224]
 	},
 
 
-	"area_16": {
+	"area_15": {
 		"label": "landingZoneCollective1",
 		"pos1": [22656, 11136],
 		"pos2": [23040, 11520]
 	},
 
 
-	"area_17": {
+	"area_16": {
 		"label": "landingZoneCollective2",
 		"pos1": [19968, 1664],
 		"pos2": [20352, 2048]
 	},
 
 
-	"area_18": {
+	"area_17": {
 		"label": "landingZoneCollective3",
 		"pos1": [15616, 5504],
 		"pos2": [16000, 5888]
 	},
 
 
-	"area_19": {
+	"area_18": {
 		"label": "landingZoneCollective4",
 		"pos1": [11136, 512],
 		"pos2": [11520, 896]
 	},
 
 
-	"area_20": {
+	"area_19": {
 		"label": "landingZoneCollective5",
 		"pos1": [13952, 9600],
 		"pos2": [14336, 9984]
 	},
 
 
-	"area_21": {
+	"area_20": {
 		"label": "landingZoneCollective6",
 		"pos1": [9216, 5504],
 		"pos2": [9600, 5888]
 	},
 
 
-	"area_22": {
+	"area_21": {
 		"label": "colLZ1",
 		"pos1": [22144, 10624],
 		"pos2": [23168, 11648]
 	},
 
 
-	"area_23": {
+	"area_22": {
 		"label": "colLZ2",
 		"pos1": [19200, 1536],
 		"pos2": [20480, 3072]
 	},
 
 
-	"area_24": {
+	"area_23": {
 		"label": "colLZ3",
 		"pos1": [14720, 4864],
 		"pos2": [16512, 7296]
 	},
 
 
-	"area_25": {
+	"area_24": {
 		"label": "colLZ4",
 		"pos1": [9344, 384],
 		"pos2": [12160, 1536]
 	},
 
 
-	"area_26": {
+	"area_25": {
 		"label": "colLZ6",
 		"pos1": [8960, 4736],
 		"pos2": [10880, 6656]
 	},
 
 
-	"area_27": {
+	"area_26": {
 		"label": "colStructRemoveArea",
 		"pos1": [20480, 512],
 		"pos2": [22016, 4224]
 	},
 
 
-	"area_28": {
+	"area_27": {
 		"label": "civZone1",
 		"pos1": [19712, 1536],
 		"pos2": [20480, 2176]
 	},
 
 
-	"area_29": {
+	"area_28": {
 		"label": "civZone2",
 		"pos1": [18560, 9984],
 		"pos2": [19200, 10496]
 	},
 
 
-	"area_30": {
+	"area_29": {
 		"label": "civZone3",
 		"pos1": [13440, 6272],
 		"pos2": [13952, 6656]
 	},
 
 
-	"area_31": {
+	"area_30": {
 		"label": "civZone4",
 		"pos1": [12544, 3968],
 		"pos2": [13184, 4480]
 	},
 
 
-	"area_32": {
+	"area_31": {
 		"label": "civZone5",
 		"pos1": [9344, 4992],
 		"pos2": [9984, 5504]
 	},
 
 
-	"area_33": {
+	"area_32": {
 		"label": "charlieDonateArea",
 		"pos1": [640, 4736],
 		"pos2": [4480, 7936]
 	},
 
 
-	"area_34": {
+	"area_33": {
 		"label": "colLZ5",
 		"pos1": [13056, 8576],
 		"pos2": [14720, 10880]
 	},
 
 
-	"area_35": {
+	"area_34": {
 		"label": "deltaCrashGroup",
 		"pos1": [26496, 512],
 		"pos2": [27264, 1408]
 	},
 
 
-	"area_36": {
+	"area_35": {
 		"label": "colBase6",
 		"pos1": [18048, 5376],
 		"pos2": [20992, 8576]
 	},
 
 
-	"area_37": {
+	"area_36": {
 		"label": "groundEntry1",
 		"pos1": [6784, 128],
 		"pos2": [7552, 384]
 	},
 
 
-	"area_38": {
+	"area_37": {
 		"label": "groundEntry2",
 		"pos1": [8320, 128],
 		"pos2": [9088, 384]
 	},
 
 
-	"area_39": {
+	"area_38": {
 		"label": "groundEntry3",
 		"pos1": [11776, 128],
 		"pos2": [12544, 384]
 	},
 
 
-	"area_40": {
+	"area_39": {
 		"label": "groundEntry4",
 		"pos1": [7552, 11904],
 		"pos2": [8960, 12160]
 	},
 
 
-	"area_41": {
+	"area_40": {
 		"label": "groundEntry5",
 		"pos1": [12800, 11904],
 		"pos2": [13696, 12160]
 	},
 
 
-	"area_42": {
+	"area_41": {
 		"label": "groundEntry6",
 		"pos1": [14464, 11904],
 		"pos2": [15488, 12160]
 	},
 
 
-	"area_43": {
+	"area_42": {
 		"label": "groundEntry7",
 		"pos1": [16640, 11904],
 		"pos2": [17664, 12160]
 	},
 
 
-	"area_44": {
+	"area_43": {
 		"label": "groundEntry9",
 		"pos1": [20736, 11904],
 		"pos2": [21632, 12160]
 	},
 
 
-	"area_45": {
+	"area_44": {
 		"label": "groundEntry8",
 		"pos1": [17280, 128],
 		"pos2": [18432, 384]
 	},
 
 
-	"area_46": {
+	"area_45": {
 		"label": "groundEntry10",
 		"pos1": [22272, 11904],
 		"pos2": [22912, 12160]
 	},
 
 
-	"area_47": {
+	"area_46": {
 		"label": "groundEntry11",
 		"pos1": [22528, 128],
 		"pos2": [23424, 384]
 	},
 
 
-	"area_48": {
+	"area_47": {
 		"label": "groundEntry12",
 		"pos1": [24576, 11904],
 		"pos2": [25216, 12160]
 	},
 
 
-	"area_49": {
+	"area_48": {
 		"label": "groundEntry13",
 		"pos1": [27264, 9600],
 		"pos2": [27520, 10368]
 	},
 
 
-	"area_50": {
+	"area_49": {
 		"label": "groundEntry14",
 		"pos1": [27264, 8192],
 		"pos2": [27520, 8960]
 	},
 
 
-	"area_51": {
+	"area_50": {
 		"label": "groundEntry15",
 		"pos1": [27264, 5632],
 		"pos2": [27520, 6912]
 	},
 
 
-	"area_52": {
+	"area_51": {
 		"label": "groundEntry16",
 		"pos1": [27264, 1536],
 		"pos2": [27520, 2432]
 	},
 
 
-	"area_53": {
+	"area_52": {
 		"label": "hoverEntry1",
 		"pos1": [4864, 128],
 		"pos2": [5760, 384]
 	},
 
 
-	"area_54": {
+	"area_53": {
 		"label": "hoverEntry2",
 		"pos1": [10240, 11904],
 		"pos2": [11264, 12160]
 	},
 
 
-	"area_55": {
+	"area_54": {
 		"label": "hoverEntry3",
 		"pos1": [14976, 128],
 		"pos2": [15744, 384]
 	},
 
 
-	"area_56": {
+	"area_55": {
 		"label": "hoverEntry4",
 		"pos1": [18944, 11904],
 		"pos2": [19712, 12160]
 	},
 
 
-	"area_57": {
+	"area_56": {
 		"label": "hoverEntry5",
 		"pos1": [20736, 128],
 		"pos2": [21632, 384]
 	},
 
 
-	"area_58": {
+	"area_57": {
 		"label": "hoverEntry6",
 		"pos1": [25984, 11904],
 		"pos2": [26752, 12160]
 	},
 
 
-	"area_59": {
+	"area_58": {
 		"label": "depositZone",
 		"pos1": [896, 11136],
 		"pos2": [2432, 11904]
 	},
 
 
-	"area_60": {
+	"area_59": {
 		"label": "deltaReturnZone",
 		"pos1": [1408, 2560],
 		"pos2": [2816, 3968]
+	},
+
+
+	"area_60": {
+		"label": "deltaBase4",
+		"pos1": [24704, 768],
+		"pos2": [25984, 2176]
 	},
 
 

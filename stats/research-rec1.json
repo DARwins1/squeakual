@@ -1282,7 +1282,7 @@
         "iconID": "IMAGE_RES_WEAPONTECH",
         "id": "R-Wpn-Rocket-Damage04",
         "keyTopic": 1,
-        "msgName": "RES_W_RK_D4",
+        "msgName": "RES_W_SRK_D1",
         "name": "HEAT Rocket Warhead",
         "requiredResearch": [
             "R-Wpn-Rocket-Damage03"

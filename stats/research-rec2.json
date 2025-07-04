@@ -5609,7 +5609,7 @@
         "keyTopic": 1,
         "msgName": "RES_W_BMB2",
         "name": "HEAP Bomb Bay",
-        "resultComponents": [
+        "redComponents": [
             "Bomb1-VTOL-LtHE"
         ],
         "requiredResearch": [

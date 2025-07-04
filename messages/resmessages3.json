@@ -812,7 +812,7 @@
             "Effective against: Infantry, vehicles and bunkers",
             "Ineffective against: Non-bunker structures",
             "Thermal weapon; Damage bypasses kinetic armor of target",
-            "Can ignite enemy units causing damage over time",
+            "Can ignite enemy units and structures, causing damage over time",
             "Provides substantial bonus HP",
             "Can only be equipped onto VTOLs",
             "Obsoletes Phosphor Bomb Bay"

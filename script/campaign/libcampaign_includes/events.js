@@ -458,7 +458,7 @@ function cam_eventAttacked(victim, attacker)
 			}
 
 			if (victim.droidType === DROID_WEAPON && camDef(victim.weapons[0]) 
-				&& victim.weapons[0].name === "InfestedSpade1Trans")
+				&& victim.weapons[0].name === "InfestedSpade1Trans" && victim.id === attacker.id)
 			{
 				// Release a group of Infested from the Infested Truck...
 				camSendReinforcement(victim.player, camMakePos(victim), 

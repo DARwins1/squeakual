@@ -183,7 +183,7 @@
             "Effective against: Infantry, vehicles and bunkers",
             "Ineffective against: Non-bunker structures",
             "Thermal weapon; Damage bypasses kinetic armor of target",
-            "Can ignite enemy units causing damage over time",
+            "Can ignite enemy units and structures, causing damage over time",
             "Flames can hit multiple units",
             "Has a very short weapon range",
             "Obsoletes Flamer Cyborg",
@@ -300,7 +300,6 @@
             "Only causes damage on direct hit; no splash damage",
             "Accuracy is unaffected by range",
             "Can attack aerial targets",
-            "Obsoletes Super Heavy-Gunner Cyborg",
             "Requires Cyborg factory to produce"
         ]
     },
@@ -424,7 +423,7 @@
             "New Weapon Turret Available",
             "Single-shot anti-tank rocket launcher",
             "Effective against: Vehicles",
-            "Ineffective against: Cyborgs and structures",
+            "Ineffective against: Infantry and structures",
             "Greater accuracy at longer ranges"
         ]
     },
@@ -440,7 +439,7 @@
             "Indirect weapon; does not require line of sight to a target and can be assigned to a sensor",
             "Thermal weapon; Damage bypasses kinetic armor of target",
             "Greater accuracy at longer ranges",
-            "Can ignite enemy units and structures causing damage over time",
+            "Can ignite enemy units and structures, causing damage over time",
             "Has a long weapon range",
             "Must be stationary to fire",
             "Obsoletes standard Mortar"
@@ -562,7 +561,7 @@
         "sequenceName": "res_weapons.ogg",
         "text": [
             "New Weapon Turret Available",
-            "Heavy rocket launcher firing heavy, long range anti-tank rockets",
+            "Heavy rocket launcher firing powerful, long range anti-tank rockets",
             "Effective against: Vehicles",
             "Ineffective against: Cyborgs and structures",
             "Indirect weapon; does not require line of sight to a target and can be assigned to a sensor",

@@ -8,7 +8,7 @@ const mis_collectiveResearch = [
 	"R-Wpn-Cannon-ROF02", "R-Vehicle-Metals02", "R-Struc-Materials03", 
 	"R-Defense-WallUpgrade03", "R-Sys-Engineering01", "R-Cyborg-Metals02",
 	"R-Wpn-Cannon-Accuracy01", "R-Wpn-Rocket-Accuracy02", "R-Wpn-AAGun-ROF01",
-	"R-Vehicle-Engine02", "R-Struc-RprFac-Upgrade01",
+	"R-Vehicle-Engine02", "R-Struc-RprFac-Upgrade01", "R-Wpn-AAGun-Damage01",
 ];
 
 var lzCyborgGroup;
@@ -327,7 +327,7 @@ function eventStartLevel()
 				repair: 40
 			},
 			groupSize: 3,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(65)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(75)),
 			templates: [ cTempl.comhmgt, cTempl.colpodt, cTempl.commcant, cTempl.colmrat, cTempl.comatt ]
 		},
 		"colFactory2": {
@@ -347,7 +347,7 @@ function eventStartLevel()
 				interval: camSecondsToMilliseconds(28)
 			},
 			groupSize: 5,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(75)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(85)),
 			templates: hoverTemplates
 		},
 		"colCybFactory1": {
@@ -357,7 +357,7 @@ function eventStartLevel()
 				repair: 40
 			},
 			groupSize: 5,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(40)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(50)),
 			templates: [ cTempl.cybfl, cTempl.cybhg, cTempl.cybgr, cTempl.cybhg ]
 		},
 		"colCybFactory2": {
@@ -367,7 +367,7 @@ function eventStartLevel()
 				repair: 40
 			},
 			groupSize: 3,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(50)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(60)),
 			templates: [ cTempl.cybla, cTempl.scymc, cTempl.cybla ]
 		},
 		"cScavFactory": {
@@ -400,7 +400,7 @@ function eventStartLevel()
 				rebuildBase: true,
 				respawnDelay: CRANE_TIME,
 				template: cTempl.crane,
-				structset: camAreaToStructSet("cScavBase").filter((struct) => (camIsScavStruct(struct)))
+				structset: camAreaToStructSet("cScavBase").filter((struct) => (camIsScavStruct(struct.stat)))
 		});
 	}
 

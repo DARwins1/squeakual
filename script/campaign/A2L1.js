@@ -27,7 +27,7 @@ const mis_collectiveResearch = [
 	"R-Wpn-Rocket-ROF01", "R-Wpn-Mortar-ROF01", "R-Wpn-Flamer-ROF01",
 	"R-Wpn-Cannon-ROF02", "R-Vehicle-Metals02", "R-Struc-Materials02", 
 	"R-Defense-WallUpgrade01", "R-Sys-Engineering01", "R-Vehicle-Engine01",
-	"R-Cyborg-Metals02",
+	"R-Cyborg-Metals02", "R-Wpn-AAGun-Damage01",
 ];
 
 camAreaEvent("vtolRemoveZone", function(droid)
@@ -282,7 +282,7 @@ function cyborgDialogue()
 		{text: "LIEUTENANT: Those must belong to the Collective.", delay: 3, sound: CAM_RCLICK},
 		{text: "CLAYDE: Damn, another problem to add to the list.", delay: 3, sound: CAM_RCLICK},
 		{text: "CLAYDE: Commander Bravo, expect the Collective to have more of those cyborgs deployed.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: Make sure you arm your forces appropriately.", delay: 3, sound: CAM_RCLICK}
+		{text: "CLAYDE: Make sure to arm your forces appropriately.", delay: 3, sound: CAM_RCLICK}
 	]);
 }
 
@@ -604,7 +604,7 @@ function eventStartLevel()
 				rebuildBase: true,
 				respawnDelay: CRANE_TIME,
 				template: cTempl.crane,
-				structset: camAreaToStructSet("cScavBase1").filter((struct) => (camIsScavStruct(struct)))
+				structset: camAreaToStructSet("cScavBase1").filter((struct) => (camIsScavStruct(struct.stat)))
 		});
 		// C-scav northeast base
 		camManageTrucks(

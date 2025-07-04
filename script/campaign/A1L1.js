@@ -137,7 +137,7 @@ function eventTransporterLanded(transport)
 		if (!firstTransportLanded)
 		{
 			setUnitRank(transport);
-			camCallOnce("ambushLZ");
+			queue("ambushLZ", camSecondsToMilliseconds(4));
 			firstTransportLanded = true;
 		}
 		else if (startedFromMenu)

@@ -621,7 +621,7 @@ function convertToTransport(truck, transportLabel)
 	}
 
 	// Create the new truck
-	const newTruck = camAddDroid(CAM_HUMAN_PLAYER, tPos, {body: tBody, prop: tProp: weap: "Spade1Trans"} newName);
+	const newTruck = camAddDroid(CAM_HUMAN_PLAYER, tPos, {body: tBody, prop: tProp, weap: "Spade1Trans"}, newName);
 	addLabel(newTruck, transportLabel);
 
 	// Quietly remove the old truck...
@@ -702,7 +702,7 @@ function convertToTruck(transTruck)
 	}
 
 	// Create the new truck
-	const newTruck = camAddDroid(CAM_HUMAN_PLAYER, tPos, {body: tBody, prop: tProp: weap: "Spade1Mk1"} newName);
+	const newTruck = camAddDroid(CAM_HUMAN_PLAYER, tPos, {body: tBody, prop: tProp, weap: "Spade1Mk1"}, newName);
 
 	// Quietly remove the transport truck...
 	camSafeRemoveObject(transTruck);

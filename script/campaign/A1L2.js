@@ -577,7 +577,7 @@ function isNasdaStructure(struct)
 		struct.name == "Old Hardcrete Wall" ||
 		struct.name == "Old Hardcrete Corner Wall" ||
 		struct.name == "Old Heavy Machinegun Bunker" ||
-		truct.name == "Repair Facility" ||
+		struct.name == "Repair Facility" ||
 		struct.name == "VTOL Rearming Pad");
 }
 
@@ -800,8 +800,8 @@ function eventStartLevel()
 			assembly: "scavInnerAssembly1",
 			order: CAM_ORDER_ATTACK,
 			data: {
-				repair: 15 // This is the only mission in the game where scavenger can repair
-			}
+				repair: 15 // This is the only mission in the game where scavengers can repair
+			},
 			groupSize: 6,
 			maxSize: 3,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(16)),
@@ -812,7 +812,7 @@ function eventStartLevel()
 			order: CAM_ORDER_ATTACK,
 			data: {
 				repair: 15
-			}
+			},
 			groupSize: 3,
 			maxSize: 3,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(30)),

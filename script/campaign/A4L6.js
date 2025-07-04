@@ -625,30 +625,34 @@ function sendCollectiveReinforcements()
 	}
 
 	// Spawn units from every active ground entrance
-	for (const entrance of groundEntrances)
+	if (groundCompositions.length > 0)
 	{
-		// Use the "spread" operator (...) here to make a shallow copy of the template list
-		// Since we don't want to modify the source templates when we add AA support
-		const droids = [...camRandFrom(groundCompositions)];
-
-		// Add AA support
-		if ((difficulty <= EASY && camRand(2) === 0) || difficulty >= MEDIUM)
+		for (const entrance of groundEntrances)
 		{
-			droids.push(aaSupport);
-			if (difficulty === INSANE && camRand(2) === 0)
-			{
-				// 1/2 chance of adding an extra AA unit on Insane
-				droids.push(aaSupport);
-			}
-		}
+			// Use the "spread" operator (...) here to make a shallow copy of the template list
+			// Since we don't want to modify the source templates when we add AA support
+			const droids = [...camRandFrom(groundCompositions)];
 
-		camSendReinforcement(CAM_THE_COLLECTIVE, getObject(entrance), droids, CAM_REINFORCE_GROUND, {
-			order: CAM_ORDER_ATTACK,
-			data: {
-				targetPlayer: CAM_HUMAN_PLAYER
+			// Add AA support
+			if ((difficulty <= EASY && camRand(2) === 0) || difficulty >= MEDIUM)
+			{
+				droids.push(aaSupport);
+				if (difficulty === INSANE && camRand(2) === 0)
+				{
+					// 1/2 chance of adding an extra AA unit on Insane
+					droids.push(aaSupport);
+				}
 			}
-		});
+
+			camSendReinforcement(CAM_THE_COLLECTIVE, getObject(entrance), droids, CAM_REINFORCE_GROUND, {
+				order: CAM_ORDER_ATTACK,
+				data: {
+					targetPlayer: CAM_HUMAN_PLAYER
+				}
+			});
+		}
 	}
+	
 
 	// Spawn a few groups from the active hover entrances
 	if (hoverEntrances.length > 0)
@@ -1473,7 +1477,7 @@ function convertToTransport(truck, transportLabel)
 	}
 
 	// Create the new truck
-	const newTruck = addDroid(CAM_HUMAN_PLAYER, tPos.x, tPos.y, newName, tBody, tProp, "", "", "Spade1Trans");
+	const newTruck = camAddDroid(CAM_HUMAN_PLAYER, tPos, {body: tBody, prop: tProp, weap: "Spade1Trans"}, newName);
 	addLabel(newTruck, transportLabel);
 
 	// Quietly remove the old truck...
@@ -1552,7 +1556,7 @@ function convertToTruck(transTruck)
 	}
 
 	// Create the new truck
-	const newTruck = addDroid(CAM_HUMAN_PLAYER, tPos.x, tPos.y, newName, tBody, tProp, "", "", "Spade1Mk1");
+	const newTruck = camAddDroid(CAM_HUMAN_PLAYER, tPos, {body: tBody, prop: tProp, weap: "Spade1Mk1"}, newName);
 
 	// Quietly remove the transport truck...
 	camSafeRemoveObject(transTruck);
@@ -2705,7 +2709,7 @@ function activateAirBlip(index)
 {
 	const msgName = "AIR_ENTRY" + index;
 
-	airBlipss[index] = true;
+	airBlips[index] = true;
 	hackAddMessage(msgName, PROX_MSG, CAM_HUMAN_PLAYER);
 }
 

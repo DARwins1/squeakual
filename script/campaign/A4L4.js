@@ -1266,19 +1266,16 @@ function camEnemyBaseEliminated_zuluEastOutpost()
 function camEnemyBaseEliminated_zuluMainBase()
 {
 	camCallOnce("setWorldAblaze");
-	startZuluEvac();
 }
 
 function camEnemyBaseEliminated_zuluFactoryBase()
 {
 	camCallOnce("setWorldAblaze");
-	startZuluEvac();
 }
 
 function camEnemyBaseEliminated_zuluCanalBase()
 {
 	camCallOnce("setWorldAblaze");
-	startZuluEvac();
 }
 
 function camEnemyBaseEliminated_zuluPlateauBase()

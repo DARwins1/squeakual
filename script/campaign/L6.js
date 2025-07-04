@@ -616,11 +616,11 @@ function eventStartLevel()
 			// Scav mountain base
 			camManageTrucks(
 				MIS_CYAN_SCAVS, {
-					label: "scavAllianceBase",
+					label: "westScavBase",
 					rebuildBase: (difficulty >= MEDIUM),
 					respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
 					template: cTempl.crane,
-					structset: camAreaToStructSet("scavBase")
+					structset: camAreaToStructSet("wScavMountainBase")
 			});
 		}
 		if (difficulty >= MEDIUM)

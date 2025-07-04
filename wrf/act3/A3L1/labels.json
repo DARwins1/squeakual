@@ -75,86 +75,86 @@
 
 
 	"area_3": {
-		"label": "colRoadblock1",
-		"pos1": [18304, 3584],
-		"pos2": [19712, 4992]
-	},
-
-
-	"area_4": {
 		"label": "colRoadblock2",
 		"pos1": [20736, 512],
 		"pos2": [22272, 2432]
 	},
 
 
-	"area_5": {
+	"area_4": {
 		"label": "colBase",
 		"pos1": [18048, 1024],
 		"pos2": [19968, 3200]
 	},
 
 
-	"area_6": {
+	"area_5": {
 		"label": "colLZ",
 		"pos1": [18688, 384],
 		"pos2": [19328, 1024]
 	},
 
 
-	"area_7": {
+	"area_6": {
 		"label": "infEntry1",
 		"pos1": [18688, 9856],
 		"pos2": [19200, 10112]
 	},
 
 
-	"area_8": {
+	"area_7": {
 		"label": "infEntry2",
 		"pos1": [20096, 9856],
 		"pos2": [20608, 10112]
 	},
 
 
-	"area_9": {
+	"area_8": {
 		"label": "infEntry3",
 		"pos1": [25216, 4864],
 		"pos2": [25472, 5504]
 	},
 
 
-	"area_10": {
+	"area_9": {
 		"label": "infEntry4",
 		"pos1": [25216, 2688],
 		"pos2": [25472, 3328]
 	},
 
 
-	"area_11": {
+	"area_10": {
 		"label": "infEntry5",
 		"pos1": [25216, 768],
 		"pos2": [25472, 1280]
 	},
 
 
-	"area_12": {
+	"area_11": {
 		"label": "infBase2",
 		"pos1": [24704, 4224],
 		"pos2": [25216, 4864]
 	},
 
 
-	"area_13": {
+	"area_12": {
 		"label": "infBase3",
 		"pos1": [24192, 512],
 		"pos2": [25216, 1792]
 	},
 
 
-	"area_14": {
+	"area_13": {
 		"label": "infIntroGroup",
 		"pos1": [23680, 768],
 		"pos2": [24576, 1536]
+	},
+
+
+	"area_14": {
+		"label": "colRoadblock1",
+		"pos1": [18304, 3456],
+		"pos2": [19968, 4992]
 	},
 
 
