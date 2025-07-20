@@ -6,6 +6,7 @@
 		{ "stat": "A0ResourceExtractor" },
 		{ "stat": "OilResource" }
 	],
+	"sort": "d",
 	"contents": [
 		"An Oil Derrick can be built by selecting a Truck and targeting an available Oil Resource.",
 		"",

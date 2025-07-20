@@ -2,6 +2,7 @@
 	"type": "wz2100.guidetopic.v1",
 	"id": "wz2100::structures::rallypoint",
 	"title": "Rally Point",
+	"sort": "j",
 	"contents": [
 		"When a Factory has finished building a unit, the unit will spawn next to the Factory, and then proceed to the Factory's designated Rally Point.",
 		"",

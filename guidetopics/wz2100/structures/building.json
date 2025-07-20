@@ -5,6 +5,7 @@
 	"visual": {
 		"retButId": "BUILD"
 	},
+	"sort": "a",
 	"contents": [
 		"Click the \"Build\" button on the Command Panel.",
 		"This will open the Structures menu on the left side of screen, with a button for each structure you can build.",

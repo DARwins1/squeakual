@@ -7,6 +7,7 @@
 			"id": "A0CyborgFactory"
 		}
 	},
+	"sort": "h",
 	"contents": [
 		"A Cyborg Factory operates similarly to a standard Factory, but exclusively builds Cyborgs.",
 		"",

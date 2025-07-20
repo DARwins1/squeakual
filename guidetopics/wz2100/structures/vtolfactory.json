@@ -7,6 +7,7 @@
 			"id": "A0VTolFactory1"
 		}
 	},
+	"sort": "h",
 	"contents": [
 		"A VTOL Factory is used to build units with VTOL propulsion (i.e. flying units).",
 		"",

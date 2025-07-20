@@ -402,6 +402,9 @@ function eventStartLevel()
 	// Most Infested units start out pre-damaged
 	camSetPreDamageModifier(CAM_INFESTED, [50, 80], [60, 90], CAM_INFESTED_PREDAMAGE_EXCLUSIONS);
 
+	// Also pre-damage the Collective convoy
+	camSetPreDamageModifier(CAM_THE_COLLECTIVE, [60, 70]);
+
 	setTimer("sendInfestedGroup", camChangeOnDiff(camSecondsToMilliseconds(50)));
 
 	camSetWeather(CAM_WEATHER_RAINSTORM);

@@ -7,6 +7,7 @@
 			"id": "A0CommandCentre"
 		}
 	},
+	"sort": "c",
 	"contents": [
 		"The Command Center is the headquarters of your base.",
 		"It provides access to the mini-map / radar, and the ability to design units.",

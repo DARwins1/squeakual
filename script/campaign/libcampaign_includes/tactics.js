@@ -280,7 +280,7 @@ function __camPickTarget(group, groupOrder)
 						radius = __CAM_PLAYER_BASE_RADIUS;
 					}
 					targets = enumRange(compromisePos.x, compromisePos.y, radius, ALL_PLAYERS, false).filter((obj) => (
-						(obj.type !== FEATURE && !allianceExistsBetween(droids[0].player, obj.player)
+						obj.type !== FEATURE && !allianceExistsBetween(droids[0].player, obj.player)
 					));
 				}
 			}

@@ -3,14 +3,14 @@
 	"id": "wz2100::units::designing",
 	"title": "Designing Units",
 	"sort": "01",
-	"visual": [
-		{
-			"retButId": "DESIGN"
-		},
-		{
-			"stat": "ZNULLBODY"
+	"visual": {
+		"droidTemplate": {
+			"body": "ZNULLBODY",
+			"name": "Designable Unit",
+			"propulsion": "ZNULLPROP",
+			"type": "DROID"
 		}
-	],
+	},
 	"contents": [
 		"You will need to design new units if you want to overpower your enemies and get that sweet taste of victory. This is a key aspect of Warzone 2100's gameplay.",
 		"",
