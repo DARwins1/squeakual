@@ -309,11 +309,11 @@ function setLimits()
 function eventStartLevel()
 {
 	setLimits();
-	if (tilesetType === "URBAN" || tilesetType === "ROCKIES")
-	{
+	// if (tilesetType === "URBAN" || tilesetType === "ROCKIES")
+	// {
 		// weatherCycle();
 		// setTimer("weatherCycle", 45000);
-	}
+	// }
 }
 
 function eventDroidBuilt(droid, structure)

@@ -49,10 +49,10 @@ function vtolAttack()
 {
 	playSound(cam_sounds.enemyVtolsDetected);
 	
-	// Phosphor Bombs, Assault Guns, Cluster Bombs, and Lancers
-	const templates = [cTempl.colphosv, cTempl.colagv, cTempl.colbombv, cTempl.colatv];
+	// Phosphor Bombs, Assault Guns, HEAP Bombs, and Lancers
+	const templates = [cTempl.colphosv, cTempl.colagv, cTempl.comhbombv, cTempl.colatv];
 	const ext = {
-		limit: [2, 4, 3, 2],
+		limit: [3, 4, 2, 3],
 		alternate: true,
 		targetPlayer: CAM_HUMAN_PLAYER,
 		dynamic: true

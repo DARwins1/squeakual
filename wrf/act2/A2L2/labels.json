@@ -422,6 +422,14 @@
 
 
 	"object_15": {
+		"label": "echoVtolTower3",
+		"id": 99,
+		"player": 2,
+		"type": 1
+	},
+
+
+	"object_16": {
 		"label": "echoVtolSensor",
 		"id": 256,
 		"player": 2,
@@ -429,7 +437,7 @@
 	},
 
 
-	"object_16": {
+	"object_17": {
 		"label": "colCybFactory2",
 		"id": 21,
 		"player": 2,
@@ -437,7 +445,7 @@
 	},
 
 
-	"object_17": {
+	"object_18": {
 		"label": "heliTower2",
 		"id": 155,
 		"player": 2,
@@ -445,7 +453,7 @@
 	},
 
 
-	"object_18": {
+	"object_19": {
 		"label": "echoTruck3",
 		"id": 125,
 		"player": 2,
@@ -453,7 +461,7 @@
 	},
 
 
-	"object_19": {
+	"object_20": {
 		"label": "echoCommander",
 		"id": 251,
 		"player": 2,
@@ -461,20 +469,13 @@
 	},
 
 
-	"object_20": {
+	"object_21": {
 		"label": "echoVtolTower2",
 		"id": 51,
 		"player": 2,
 		"type": 1
 	},
 
-
-	"object_21": {
-		"label": "echoVtolTower3",
-		"id": 99,
-		"player": 2,
-		"type": 1
-	},
 
 	"radius_0": {
 		"label": "heliRemoveZone",

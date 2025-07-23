@@ -49,7 +49,7 @@ function vtolAttack()
 
 function eventPickup(feature, droid)
 {
-	if (feature.stattype === ARTIFACT && droid.player === CAM_HUMAN_PLAYER && getLabel(feature) === "convoyCrate")
+	if (feature.stattype === ARTIFACT && droid.player === CAM_HUMAN_PLAYER && feature.x === 83 && feature.y === 35)
 	{
 		// Donate Golf's convoy to the player once they collect the artifact
 		const droids = enumDroid(MIS_TEAM_GOLF);
@@ -402,5 +402,5 @@ function eventStartLevel()
 	// Shift the sun towards the west
 	camSetSunPos(450.0, -400.0, 225.0);
 	// Add a purple-blue tint
-	camSetSunIntensity(.45, .4, .5);
+	camSetSunIntensity(.5, .45, .5);
 }

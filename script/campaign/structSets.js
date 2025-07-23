@@ -22,7 +22,7 @@ const camFoxtrotA1L2Structs = [
 // Golf LZ
 const camGolfA1L2Structs = [
 	{stat: "Cannon-Emplacement", x: 59, y: 25}, {stat: "A0TankTrap", x: 60, y: 25}, {stat: "Cannon-Emplacement", x: 56, y: 26},
-	{stat: "A0TankTrap", x: 56, y: 27}, {stat: "GuardTower6", x: 60, y: 26}, {stat: "GuardTower6", x: 57, y: 28},
+	{stat: "A0TankTrap", x: 56, y: 27}, {stat: "GuardTower2", x: 60, y: 26}, {stat: "GuardTower2", x: 57, y: 28},
 	{stat: "GuardTower6", x: 57, y: 34}, {stat: "GuardTower6", x: 60, y: 34},
 ];
 

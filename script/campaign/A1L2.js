@@ -917,13 +917,13 @@ function eventStartLevel()
 			structset: camCharlieA1L2Structs
 	});
 
-	// Foxtrot attack group (8 Flamer Cyborgs, 6 Mini-Rockets, 6 Sarissas)
+	// Foxtrot attack group (8 Flamer Cyborgs, 6 Mini-Rockets, 6 Sarissa Cyborgs)
 	foxtrotAttackGroup = camMakeRefillableGroup(
 		undefined, {
 			templates: [
 				cTempl.cybfl, cTempl.cybfl, cTempl.cybfl, cTempl.cybfl, cTempl.cybfl, cTempl.cybfl, cTempl.cybfl, cTempl.cybfl,
 				cTempl.pllpodw, cTempl.pllpodw, cTempl.pllpodw, cTempl.pllpodw, cTempl.pllpodw, cTempl.pllpodw,
-				cTempl.pllsart, cTempl.pllsart, cTempl.pllsart, cTempl.pllsart, cTempl.pllsart, cTempl.pllsart,
+				cTempl.cybsa, cTempl.cybsa, cTempl.cybsa, cTempl.cybsa, cTempl.cybsa, cTempl.cybsa,
 			]
 		}, CAM_ORDER_ATTACK, {
 			count: 20,
