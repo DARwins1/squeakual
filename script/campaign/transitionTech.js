@@ -72,7 +72,7 @@ const camRec2StartResearch = [
 const camRec2PrologueResearch = [
 	//P2
 	"R-Wpn-Rocket-LtA-TMk1", // Artifact
-	"R-Defense-Sarissa", "R-Cyborg-Wpn-LtRocket",
+	"R-Defense-Sarissa", "R-Cyborg-Wpn-LtRocket", "R-Wpn-Rocket-Damage02",
 ];
 
 // Used to grant research at the start of Act 1
@@ -93,8 +93,7 @@ const camA1L4AllyResearch = camA1L2AllyResearch.concat([
 	// A1L2
 	"R-Wpn-Cannon-Accuracy01", // Artifact
 	"R-Wpn-Cannon-Damage02",
-	"R-Wpn-Rocket-Accuracy01", // Artifact
-	"R-Wpn-Rocket-Damage02",
+	"R-Vehicle-Prop-Halftracks", // Artifact
 	"R-Struc-PowerModuleMk1", // Found by capturing NASDA power systems
 	"R-Vehicle-Engine01",
 	"R-Vehicle-Prop-VTOL", // Found by capturing NASDA VTOL Factory
@@ -104,7 +103,8 @@ const camA1L4AllyResearch = camA1L2AllyResearch.concat([
 	"R-Wpn-MG-Damage03", "R-Cyborg-Wpn-HvyMG", "R-Defense-Tower01",
 	"R-Struc-RepairFacility", // Artifact
 	// A1L3
-	"R-Vehicle-Prop-Halftracks", // Artifact
+	"R-Wpn-Rocket-Accuracy01", // Artifact
+	"R-Wpn-Rocket-Damage03",
 	"R-Wpn-Flamer-Damage03", // Artifact
 	"R-Wpn-Mortar-Damage03", // Artifact
 	"R-Wpn-MG-ROF01", // Artifact
@@ -120,8 +120,7 @@ const camAct2StartResearch = camA1L4AllyResearch.concat([
 	"R-Comp-CommandTurret01", 
 	"R-Wpn-Rocket01-LtAT", // Artifact
 	"R-Cyborg-Wpn-Rocket", "R-Defense-Pillbox06", "R-Defense-LancerTower", 
-	"R-Wpn-Rocket-Damage03",
-	"R-Defense-WallTower06",
+	"R-Defense-WallTower06", "R-Wpn-Rocket-Damage04",
 	"R-Defense-HardcreteWall", // Artifact
 	"R-Defense-HardcreteGate", "R-Defense-MortarPit", "R-Defense-Pillbox01", 
 	"R-Defense-Pillbox04", "R-Defense-Pillbox05", "R-Defense-WallTower01", 
@@ -147,8 +146,7 @@ const camA2L6AllyResearch = camA2L2AllyResearch.concat([
 	"R-Wpn-Bomb01", // Artifact
 	"R-Wpn-Rocket-Accuracy02", // Artifact
 	"R-Wpn-MG-ROF02", // Artifact
-	"R-Wpn-Rocket-Damage04", // Artifact
-	"R-Wpn-Rocket-ROF02",
+	"R-Wpn-Rocket-ROF02", // Artifact
 	"R-Struc-Factory-Upgrade01", // Artifact
 	"R-Struc-RprFac-Upgrade01",
 	// A2L3

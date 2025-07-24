@@ -65,7 +65,7 @@ var zuluCommander2DeathTime;
 var zuluCommander3DeathTime;
 var lureActive;
 var worldAblaze;
-var skyBrightness;
+var heartbeatDarkness;
 var remainingMissionTime;
 var claydeMonologue;
 var claydeListening;
@@ -1344,17 +1344,17 @@ function setWorldAblaze()
 	// Make the world look like it's on fire
 	// Add a dark orange-red fog
 	camSetFog(110, 71, 47);
-	skyBrightness = 0.4;
-	setTimer("darkenSkies", camSecondsToMilliseconds(0.1));
 	// Darken and give a red-orange hue to the lighting
-	camSetSunIntensity(.55, .4, .35);
+	setTimer("skyHeartbeat", camSecondsToMilliseconds(6));
+	camGradualFog(camSecondsToMilliseconds(2), 44, 28, 19);
+	camGradualSunIntensity(camSecondsToMilliseconds(2), .22, .16, .14);
 	// It's supposed to be ash...
 	camSetWeather(CAM_WEATHER_SNOW);
 
 	queue("startZuluEvac", camMinutesToMilliseconds(3));
 
 	camQueueDialogue([
-		{text: "CHARLIE: What the-?!", delay: 3, sound: CAM_RCLICK},
+		{text: "CHARLIE: What the-?!", delay: 4, sound: CAM_RCLICK},
 		{text: "CHARLIE: Lieutenant, what's going on...?", delay: 2, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: It's the Collective...", delay: 3, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: They're bombing out whole areas of the sector!", delay: 3, sound: CAM_RCLICK},
@@ -1366,18 +1366,20 @@ function setWorldAblaze()
 	]);
 }
 
-// Progressively darken the skies
-function darkenSkies()
+// Fluctuate the sky's color over time
+function skyHeartbeat()
 {
-	if (skyBrightness <= 0)
+	if (heartbeatDarkness) // Gradually make the sky darker
 	{
-		removeTimer("darkenSkies");
+		camGradualFog(camSecondsToMilliseconds(6), 88, 57, 38);
+		camGradualSunIntensity(camSecondsToMilliseconds(6), .44, .32, .28);
 	}
-	else
+	else // Gradually make the sky lighter
 	{
-		camSetSunIntensity(.45 + skyBrightness, .3 + skyBrightness, .25 + skyBrightness);
-		skyBrightness -= 0.02;
+		camGradualFog(camSecondsToMilliseconds(6), 110, 71, 47);
+		camGradualSunIntensity(camSecondsToMilliseconds(6), .55, .4, .35);
 	}
+	heartbeatDarkness = !heartbeatDarkness;
 }
 
 // Place a transport at Zulu's LZ, tell the player to go blow it up
@@ -1463,6 +1465,7 @@ function zuluSurrender()
 	]);
 
 	camSetWeather(CAM_WEATHER_SNOWSTORM);
+	camSetSkyType(CAM_SKY_ARIZONA);
 }
 
 // Donate all remaining Zulu units to the player, and grant any artifacts not yet picked up
@@ -1699,6 +1702,7 @@ function eventStartLevel()
 	allowVtolStrikes = false;
 	zuluSurrendered = false;
 	mapExpanded = false;
+	heartbeatDarkness = false;
 
 	// Most Infested units start out pre-damaged
 	camSetPreDamageModifier(CAM_INFESTED, [50, 80], [60, 90], CAM_INFESTED_PREDAMAGE_EXCLUSIONS);

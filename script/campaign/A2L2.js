@@ -674,7 +674,7 @@ function eventStartLevel()
 		"colVtolFactory": { tech: "R-Wpn-Bomb01" }, // Cluster Bomb Bay
 		"colResearch1": { tech: "R-Wpn-Rocket-Accuracy02" }, // Improved Rocket Wire Guidance
 		"colResearch2": { tech: "R-Wpn-MG-ROF02" }, // Rapid Fire Chaingun Upgrade
-		"colFactory1": { tech: "R-Wpn-Rocket-Damage04" }, // HEAT Rocket Warhead
+		"colFactory1": { tech: "R-Wpn-Rocket-ROF02" }, // Rocket Autoloader Mk2
 		"colFactory2": { tech: "R-Struc-Factory-Upgrade01" }, // Automated Manufacturing
 	});
 

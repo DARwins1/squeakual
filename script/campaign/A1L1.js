@@ -404,7 +404,7 @@ function adaptScavColors()
 
 function eventStartLevel()
 {
-	const PLAYER_POWER = 2000;
+	const PLAYER_POWER = 3000;
 	const startPos = camMakePos("landingZone");
 	const lz = getObject("landingZone"); //player lz
 
@@ -423,7 +423,7 @@ function eventStartLevel()
 		"redFactory2": { tech: "R-Wpn-Flamer-Damage02" }, // High Temperature Flamer Gel Mk2
 	});
 
-	setPower(PLAYER_POWER, CAM_HUMAN_PLAYER);
+	setPower(camChangeOnDiff(PLAYER_POWER), CAM_HUMAN_PLAYER);
 	grantPlayerTech();
 	camCompleteRequiredResearch(mis_orangeScavResearch, MIS_ORANGE_SCAVS);
 	camCompleteRequiredResearch(mis_pinkScavResearch, MIS_PINK_SCAVS);
@@ -714,7 +714,7 @@ function eventStartLevel()
 	}
 
 	sendPlayerTransporter();
-	setReinforcementTime(camMinutesToSeconds(2)); // 2 min.
+	setReinforcementTime(camMinutesToSeconds(1.5)); // 1.5 minutes
 
 	camAutoReplaceObjectLabel("heliTower");
 	camDisableInfAutoManagement(); // MIS_ORANGE_SCAVS uses the same player number as CAM_INFESTED

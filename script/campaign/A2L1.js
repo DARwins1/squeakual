@@ -2,10 +2,10 @@ include("script/campaign/transitionTech.js");
 include("script/campaign/libcampaign.js");
 include("script/campaign/templates.js");
 
-// 4 Transports on INSANE
-// 5 Transports on HARD
-// 6 Transports on all other difficulties
-const MIS_NUM_TRANSPORTS = Math.min(8 - difficulty, 6);
+// 2 Transports on INSANE
+// 3 Transports on HARD
+// 4 Transports on all other difficulties
+const MIS_NUM_TRANSPORTS = Math.min(6 - difficulty, 4);
 const MIS_TEAM_CHARLIE = 1;
 const MIS_CYAN_SCAVS = 5;
 const transportEntryPos = { x: 96, y: 122 };

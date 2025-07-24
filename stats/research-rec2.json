@@ -4853,7 +4853,7 @@
         "name": "HE Rockets Mk2",
         "requiredResearch": [
             "R-Wpn-Rocket-Damage01",
-            "R-Wpn-Rocket-Accuracy01"
+            "R-Wpn-Rocket-LtA-TMk1"
         ],
         "researchPoints": 900,
         "researchPower": 75,
@@ -4883,7 +4883,7 @@
         "name": "HE Rockets Mk3",
         "requiredResearch": [
             "R-Wpn-Rocket-Damage02",
-            "R-Wpn-Rocket01-LtAT"
+            "R-Wpn-Rocket-Accuracy01"
         ],
         "researchPoints": 1200,
         "researchPower": 112,
@@ -4910,11 +4910,10 @@
     "R-Wpn-Rocket-Damage04": {
         "iconID": "IMAGE_RES_WEAPONTECH",
         "id": "R-Wpn-Rocket-Damage04",
-        "keyTopic": 1,
         "msgName": "RES_W_SRK_D1",
         "name": "HEAT Rocket Warhead",
         "requiredResearch": [
-            "R-Wpn-Cannon-Damage04",
+            "R-Wpn-Rocket01-LtAT",
             "R-Wpn-Rocket-Damage03"
         ],
         "researchPoints": 1500,
@@ -5180,6 +5179,7 @@
     "R-Wpn-Rocket-ROF02": {
         "iconID": "IMAGE_RES_WEAPONTECH",
         "id": "R-Wpn-Rocket-ROF02",
+        "keyTopic": 1,
         "name": "Rocket Autoloader Mk2",
         "requiredResearch": [
             "R-Wpn-Rocket-ROF01",

@@ -675,7 +675,7 @@ function eventStartLevel()
 	camSetArtifacts({
 		"scavInnerFactory1": { tech: "R-Wpn-MG3Mk1" }, // Heavy Machinegun
 		"scavInnerFactory2": { tech: "R-Wpn-Cannon-Accuracy01" }, // Cannon Laser Rangefinder
-		"scavInnerFactory3": { tech: "R-Wpn-Rocket-Accuracy01" }, // Stabilized Rockets
+		"scavInnerFactory3": { tech: "R-Vehicle-Prop-Halftracks" }, // Half-Tracks
 		"repairFacility": { tech: "R-Struc-RepairFacility" }, // Repair Facility
 	});
 
