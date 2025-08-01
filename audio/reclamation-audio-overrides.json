@@ -24,6 +24,7 @@
         "_name": "Extra sounds",
         "data": [
             { "fileName": "pcv635.ogg", "loop": false, "range": 1800, "volume": 135, "z_comment": "We can't add new weapon SFX, so this is the Super Heavy Grenadier SFX" },
+            { "fileName": "pcv636.ogg", "loop": false, "range": 1800, "volume": 135, "z_comment": "We can't add new weapon SFX, so this is the Pod Explosion SFX" },
             { "fileName": "pcv657.ogg", "loop": false, "range": 1800, "volume": 100, "z_comment": "Used to place a red blip over the artifact carrier on A3L5" },
             { "fileName": "pcv665.ogg", "loop": false, "range": 1800, "volume": 100, "z_comment": "Enemy Landing Zone Eradicated" }
         ]

@@ -121,7 +121,7 @@ function enableAllFactories()
 	camEnableFactory("colCybFactory2");
 
 	// Also set up more trucks
-	const TRUCK_TIME = camChangeOnDiff(camSecondsToMilliseconds((tweakOptions.rec_timerlessMode) ? 60 : 120));
+	const TRUCK_TIME = camChangeOnDiff(camSecondsToMilliseconds((tweakOptions.rec_timerlessMode) ? 70 : 140));
 	camManageTrucks(
 		CAM_THE_COLLECTIVE, {
 			label: "colAABase1",

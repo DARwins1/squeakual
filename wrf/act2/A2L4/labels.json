@@ -180,14 +180,6 @@
 
 
 	"object_0": {
-		"label": "colCBTower",
-		"id": 37,
-		"player": 2,
-		"type": 1
-	},
-
-
-	"object_1": {
 		"label": "colAAEmp",
 		"id": 348,
 		"player": 2,
@@ -195,7 +187,7 @@
 	},
 
 
-	"object_2": {
+	"object_1": {
 		"label": "colCybFactory2",
 		"id": 299,
 		"player": 2,
@@ -203,9 +195,17 @@
 	},
 
 
-	"object_3": {
+	"object_2": {
 		"label": "colFactory2",
 		"id": 8,
+		"player": 2,
+		"type": 1
+	},
+
+
+	"object_3": {
+		"label": "colBombardPit",
+		"id": 280,
 		"player": 2,
 		"type": 1
 	},
@@ -220,14 +220,6 @@
 
 
 	"object_5": {
-		"label": "colBombardPit",
-		"id": 280,
-		"player": 2,
-		"type": 1
-	},
-
-
-	"object_6": {
 		"label": "colCybFactory1",
 		"id": 10,
 		"player": 2,
@@ -235,7 +227,7 @@
 	},
 
 
-	"object_7": {
+	"object_6": {
 		"label": "colFactory1",
 		"id": 14,
 		"player": 2,
@@ -243,7 +235,7 @@
 	},
 
 
-	"object_8": {
+	"object_7": {
 		"label": "heliTower",
 		"id": 149,
 		"player": 2,
@@ -251,9 +243,17 @@
 	},
 
 
-	"object_9": {
+	"object_8": {
 		"label": "cScavFactory",
 		"id": 72,
+		"player": 2,
+		"type": 1
+	},
+
+
+	"object_9": {
+		"label": "colCBTower",
+		"id": 37,
 		"player": 2,
 		"type": 1
 	},
