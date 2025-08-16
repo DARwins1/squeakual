@@ -287,30 +287,20 @@ function collectiveAttackWaves()
 					// Swap HMGs for Assault Guns
 					commanderDroids = camArrayReplaceWith(commanderDroids, cTempl.comhmgt, cTempl.comagt);
 				}
-				const commanderGroup = camSendReinforcement(CAM_THE_COLLECTIVE, getObject(specialEntrance), commanderDroids, CAM_REINFORCE_GROUND);
-				// Follow the commander droid
-				camManageGroup(commanderGroup, CAM_ORDER_FOLLOW, {leader: specialName, suborder: CAM_ORDER_ATTACK});
+
+				camSendReinforcement(CAM_THE_COLLECTIVE, getObject(specialEntrance), commanderDroids, CAM_REINFORCE_GROUND, {
+					order: CAM_ORDER_FOLLOW, data: {leader: specialName, suborder: CAM_ORDER_ATTACK}
+				});
 			}
 			else // Otherwise, spawn a sensor + artillery
 			{
-				// Spawn the sensor
-				const sensorPos = camMakePos(specialEntrance);
-				const sensorTemp = cTempl.comsenst;
-				const sensDroid = camAddDroid(CAM_THE_COLLECTIVE, sensorPos, sensorTemp);
-				addLabel(sensDroid, specialName);
-
-				// Order the sensor to attack
-				camManageGroup(camMakeGroup(sensDroid), CAM_ORDER_ATTACK);
-
-				// Spawn some artillery
 				let sensorArtillery = [
+					cTempl.comsenst,
 					cTempl.comhmortht, cTempl.comhmortht, cTempl.comhmortht, cTempl.comhmortht, cTempl.comhmortht, cTempl.comhmortht, // 6 Bombards
 				];
 				if (difficulty >= HARD || waveIndex >= 18) sensorArtillery = sensorArtillery.concat([cTempl.cohript, cTempl.cohript]); // Add 2 Ripple Rockets
 
-				const artilleryGroup = camSendReinforcement(CAM_THE_COLLECTIVE, getObject(specialEntrance), sensorArtillery, CAM_REINFORCE_GROUND);
-				// Follow the sensor droid
-				camManageGroup(artilleryGroup, CAM_ORDER_FOLLOW, {leader: specialName, suborder: CAM_ORDER_ATTACK});
+				camSendReinforcement(CAM_THE_COLLECTIVE, getObject(specialEntrance), sensorArtillery, CAM_REINFORCE_GROUND);
 			}
 		}
 

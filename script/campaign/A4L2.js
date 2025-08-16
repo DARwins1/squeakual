@@ -983,7 +983,9 @@ function eventStartLevel()
 			leader: "colSensor",
 			repair: 60,
 			suborder: CAM_ORDER_DEFEND,
-			pos: camMakePos("colAssembly2")
+			data: {
+				pos: camMakePos("colAssembly2")
+			}
 	});
 	colKillGroup = camMakeGroup("colKillGroup");
 	camManageGroup(colKillGroup, CAM_ORDER_DEFEND, {

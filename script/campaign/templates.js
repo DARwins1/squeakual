@@ -111,6 +111,7 @@ plhhatt: { body: "Body11ABT", prop: "tracked01", weap: "Rocket-HvyA-T" }, // Tan
 plhhath: { body: "Body11ABT", prop: "hover01", weap: "Rocket-HvyA-T" }, // Tank Killer Python Hover
 
 pllaaw: { body: "Body1REC", prop: "wheeled01", weap: "QuadMg1AAGun" }, // Hurricane Viper Wheels
+plmhaaht: { body: "Body5REC", prop: "HalfTrack", weap: "AAGun2Mk1" }, // Cyclone Cobra Half-tracks
 plmhaat: { body: "Body5REC", prop: "tracked01", weap: "AAGun2Mk1" }, // Cyclone Cobra Tracks
 plhhaaht: { body: "Body11ABT", prop: "HalfTrack", weap: "AAGun2Mk1" }, // Cyclone Python Half-tracks
 plhhaat: { body: "Body11ABT", prop: "tracked01", weap: "AAGun2Mk1" }, // Cyclone Python Tracks

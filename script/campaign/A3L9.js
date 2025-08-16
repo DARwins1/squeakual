@@ -512,32 +512,8 @@ function eventTransporterLanded(transport)
 	{
 		// Assign Golf reinforcements
 		const transDroids = camGetTransporterDroids(transport.player);
-		// const transSensor = transDroids.filter((droid) => (droid.droidType == DROID_SENSOR))[0];
-		let transOther = transDroids.filter((droid) => (droid.droidType != DROID_SENSOR));
-
-		// Assign other units to their refillable groups
-		transOther = camAssignToRefillableGroups(transOther, golfPatrolGroup); // Hold onto any leftovers
-
-		// if (camDef(transSensor))
-		// {
-		// 	// Add a label to this sensor
-		// 	const sensorLabel = "golfSensor" + golfSensorIdx++;
-		// 	addLabel(transSensor, sensorLabel);
-
-		// 	// Take any remaining leftovers and assign them to follow the sensor
-		// 	camManageGroup(transOther, CAM_ORDER_FOLLOW, {
-		// 		leader: sensorLabel,
-		// 		leaderOrder: CAM_ORDER_ATTACK,
-		// 		data: {
-		// 			targetPlayer: CAM_HUMAN_PLAYER,
-		// 			repair: 50
-		// 		},
-		// 		suborder: CAM_ORDER_ATTACK,
-		// 		targetPlayer: CAM_HUMAN_PLAYER
-		// 	})
-		// }
+		transOther = camAssignToRefillableGroups(transDroids, golfPatrolGroup); // Any leftovers will attack the player
 	}
-
 }
 
 function eventDestroyed(obj)

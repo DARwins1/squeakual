@@ -790,7 +790,9 @@ function eventStartLevel()
 		}, CAM_ORDER_FOLLOW, {
 			leader: "deltaSensorTower",
 			suborder: CAM_ORDER_DEFEND,
-			pos: camMakePos("deltaMortarGroup") // Defend this position if the tower is destroyed.
+			data: {
+				pos: camMakePos("deltaMortarGroup") // Defend this position if the tower is destroyed.
+			}
 	});
 	// Delta VTOL group (3 Light Cannons, 2 HMGs)
 	deltaVtolGroup = camMakeRefillableGroup(
@@ -802,7 +804,9 @@ function eventStartLevel()
 		}, CAM_ORDER_FOLLOW, {
 			leader: "deltaVtolTower",
 			suborder: CAM_ORDER_DEFEND,
-			pos: camMakePos("zuluVtolAssembly")
+			data: {
+				pos: camMakePos("zuluVtolAssembly")
+			}
 	});
 	// Delta truck
 	deltaTruckJob = camManageTrucks(
@@ -869,7 +873,9 @@ function eventStartLevel()
 		}, CAM_ORDER_FOLLOW, {
 			leader: "zuluVtolTower1",
 			suborder: CAM_ORDER_DEFEND,
-			pos: camMakePos("zuluVtolAssembly")
+			data: {
+				pos: camMakePos("zuluVtolAssembly")	
+			}
 	});
 	// Zulu northeast VTOL group (2 Mini-Rockets, 2 Heavy Machineguns)
 	zuluVtolGroupNE = camMakeRefillableGroup(
@@ -882,7 +888,9 @@ function eventStartLevel()
 		}, CAM_ORDER_FOLLOW, {
 			leader: "zuluVtolTower2",
 			suborder: CAM_ORDER_DEFEND,
-			pos: camMakePos("zuluVtolAssembly")
+			data: {
+				pos: camMakePos("zuluVtolAssembly")	
+			}
 	});
 	// Zulu south VTOL group (2 Mini-Rockets)
 	zuluVtolGroupSouth = camMakeRefillableGroup(
@@ -895,7 +903,9 @@ function eventStartLevel()
 		}, CAM_ORDER_FOLLOW, {
 			leader: "zuluVtolTower3",
 			suborder: CAM_ORDER_DEFEND,
-			pos: camMakePos("zuluVtolAssembly")
+			data: {
+				pos: camMakePos("zuluVtolAssembly")	
+			}
 	});
 	// Trucks
 	nasdaCentralStructSet = camAreaToStructSet("claydeStructSetArea", MIS_CLAYDE);

@@ -338,7 +338,10 @@ function eventStartLevel()
 			leader: "colCommander",
 			repair: 50,
 			suborder: CAM_ORDER_ATTACK,
-			targetPlayer: CAM_HUMAN_PLAYER
+			data:
+			{
+				targetPlayer: CAM_HUMAN_PLAYER				
+			}
 	});
 
 	camMakeRefillableGroup(
@@ -351,7 +354,10 @@ function eventStartLevel()
 		}, CAM_ORDER_FOLLOW, {
 			leader: "colSensorTower",
 			suborder: CAM_ORDER_DEFEND, // If the sensor is destroyed, sit around in their own little spot
-			pos: camMakePos("colRippleGroup")
+			data:
+			{
+				pos: camMakePos("colRippleGroup")				
+			}
 	});
 
 	allowExtraWaves = false;

@@ -309,7 +309,7 @@ function __camCheckArtifactObject(aLabel)
 	const obj = getObject(ai.pos.x, ai.pos.y);
 	if (obj === null)
 	{
-		// Nothing on in the artifact position, simply replace the artifact object
+		// Nothing on the artifact position, simply replace the artifact object
 		const acrate = addFeature("Crate", ai.pos.x, ai.pos.y);
 		addLabel(acrate, __camGetArtifactLabel(aLabel));
 		ai.placed = true;
@@ -328,18 +328,17 @@ function __camCheckArtifactObject(aLabel)
 			addLabel(obj, aLabel);
 			return; // All done, the structure will re-drop the artifact when destroyed
 		}
-		else
+		else // Object already has a label
 		{
-			// Object already has a label
 			if (!camDef(__camArtifacts[objLabel]))
 			{
 				// Object has no artifact assigned
 				// Transfer the artifact data to this label
 				camAddArtifact({objLabel: ai.tech}); // TODO: Make sure this works!
 			}
-			else
+			else if (aLabel !== objLabel)
 			{
-				// Object already has an artifact assigned
+				// Object already has a different artifact assigned
 				// Merge the technologies of these two artifacts into one
 				if (!(__camArtifacts[objLabel].tech instanceof Array))
 				{
@@ -350,15 +349,18 @@ function __camCheckArtifactObject(aLabel)
 					ai.tech = [ai.tech];
 				}
 				__camArtifacts[objLabel].tech = __camArtifacts[objLabel].tech.concat(ai.tech);
+
+				// Remove the old artifact
+				delete __camArtifacts[aLabel];
 			}
 
-			// Remove this artifact permanently
-			delete __camArtifacts[aLabel];
+			// If this structure already has the same label as the artifact (objLabel === aLabal), then we don't need to do anything
+
 			return; // All done
 		}
 	}
 
-	// Wait a bit longer, then check again
+	// Wait a bit longer, then check again (partially built structure?)
 	queue("__camCheckArtifactObject", camSecondsToMilliseconds(2), aLabel);
 }
 

@@ -56,9 +56,9 @@
 //;; 	the group continues to execute the sub-order. The following data object
 //;; 	fields are available:
 //;;   * `leader` the leader droid or structure to follow.
-//;;   * `suborder` The order for the group if the leader dies.
+//;;   * `suborder` The order for the group if the leader dies. A nested `data` field should be used to define suborder data.
 //;;   * `leaderOrder` The order to give to the leader (if any).
-//;;   * `data` Data of the leader's order (if a droid), also used as the data for the group's suborder.
+//;;   * `data` Data of the leader's order (if a droid).
 //;;   * `repair` Health percentage to fall back to repair facility, if any.
 //;; * `CAM_ORDER_STRIKE` Focused attack on a list of targets defined by a given callback function.
 //;;   The following data object fields are REQUIRED:

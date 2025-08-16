@@ -145,7 +145,7 @@ function sendInfestedReinforcements()
 	// Spawn from every entrance
 	for (const entrance of entrances)
 	{
-		camSendReinforcement(CAM_INFESTED, getObject(entrance), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND);
+		camSendReinforcement(CAM_INFESTED, getObject(entrance), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance), CAM_REINFORCE_GROUND, data);
 	}
 }
 
@@ -184,7 +184,7 @@ function eventDestroyed(obj)
 
 			// Make sure all Collective factories are enabled
 			camEnableFactory("colFactory2");
-			camEnableFactory("colFactory3");
+			// camEnableFactory("colFactory3");
 			camEnableFactory("colCybFactory2");
 			camEnableFactory("colCybFactory3");
 		}
@@ -313,7 +313,7 @@ function endInfestedOnslaught()
 	// Enable more factories
 	if (onslaughtIdx === 1)
 	{
-		camEnableFactory("colFactory3");
+		// camEnableFactory("colFactory3");
 		camEnableFactory("colCybFactory2");
 	}
 	else if (onslaughtIdx === 2)
@@ -599,7 +599,7 @@ function eventStartLevel()
 
 	camSetStandardWinLossConditions(CAM_VICTORY_OFFWORLD, "A3L8", {
 		message: "RET_LZ",
-		reinforcements: camMinutesToSeconds(4),
+		reinforcements: camMinutesToSeconds(3),
 		area: "compromiseZone",
 		callback: "uplinkSecure",
 		enableLastAttack: false,
@@ -631,7 +631,7 @@ function eventStartLevel()
 	camSetArtifacts({
 		"colResearch": { tech: "R-Wpn-MG-ROF03" }, // Hyper Fire Chaingun Upgrade
 		"colFactory1": { tech: "R-Wpn-Rocket07-Tank-Killer" }, // Tank Killer
-		"colFactory3": { tech: "R-Wpn-Flamer-ROF02" }, // Flamer Autoloader Mk2
+		"colFactory2": { tech: "R-Wpn-Flamer-ROF02" }, // Flamer Autoloader Mk2
 		"colAAEmp": { tech: "R-Wpn-AAGun-ROF02" }, // AA Ammunition Hopper Mk2
 	});
 
@@ -684,7 +684,7 @@ function eventStartLevel()
 				repair: 35
 			},
 			groupSize: 5,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(80)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(90)),
 			// Medium tanks
 			templates: [ cTempl.comatt, cTempl.cominft, cTempl.comagt, cTempl.commrat, cTempl.cominft ]
 		},
@@ -696,22 +696,22 @@ function eventStartLevel()
 				repair: 35
 			},
 			groupSize: 3,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(135)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(145)),
 			// Heavy tanks
 			templates: [ cTempl.cohhcant, cTempl.cohacant, cTempl.cohhrat, cTempl.cohhcant, cTempl.cohbbt ]
 		},
-		"colFactory3": {
-			assembly: "colAssembly3",
-			order: CAM_ORDER_ATTACK,
-			data: {
-				targetPlayer: CAM_HUMAN_PLAYER,
-				repair: 35
-			},
-			groupSize: 4,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(85)),
-			// Medium and heavy tanks
-			templates: [ cTempl.cohacant, cTempl.comhaat, cTempl.comacant, cTempl.comhatt, cTempl.comacant, cTempl.comhatt ]
-		},
+		// "colFactory3": {
+		// 	assembly: "colAssembly3",
+		// 	order: CAM_ORDER_ATTACK,
+		// 	data: {
+		// 		targetPlayer: CAM_HUMAN_PLAYER,
+		// 		repair: 35
+		// 	},
+		// 	groupSize: 4,
+		// 	throttle: camChangeOnDiff(camSecondsToMilliseconds(95)),
+		// 	// Medium and heavy tanks
+		// 	templates: [ cTempl.cohacant, cTempl.comhaat, cTempl.comacant, cTempl.comhatt, cTempl.comacant, cTempl.comhatt ]
+		// },
 		"colCybFactory1": {
 			assembly: "colCybAssembly1",
 			order: CAM_ORDER_ATTACK,
@@ -720,7 +720,7 @@ function eventStartLevel()
 				repair: 25
 			},
 			groupSize: 4,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(45)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(55)),
 			// Assault Gunners + Thermite Flamers
 			templates: [ cTempl.cybag, cTempl.cybth ]
 		},
@@ -732,7 +732,7 @@ function eventStartLevel()
 				repair: 25
 			},
 			groupSize: 5,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(85)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(95)),
 			// Super Cannons and Grenadiers
 			templates: [ cTempl.scyac, cTempl.scygr ]
 		},
@@ -744,7 +744,7 @@ function eventStartLevel()
 				repair: 25
 			},
 			groupSize: 4,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(75)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(85)),
 			// Assault Gunners + Rocket Cyborgs
 			templates: [ cTempl.cybag, cTempl.cybla, cTempl.cybag, cTempl.scytk ]
 		},
@@ -752,7 +752,7 @@ function eventStartLevel()
 			assembly: "colVtolAssembly",
 			order: CAM_ORDER_ATTACK,
 			groupSize: 2,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(65)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(85)),
 			templates: [ cTempl.colatv, cTempl.colatv, cTempl.comhbombv, cTempl.colphosv ]
 		},
 	});
@@ -869,7 +869,9 @@ function eventStartLevel()
 			leader: "colCommander",
 			repair: 50,
 			suborder: CAM_ORDER_ATTACK,
-			targetPlayer: CAM_HUMAN_PLAYER
+			data: {
+				targetPlayer: CAM_HUMAN_PLAYER
+			}
 	});
 
 	// Also make refillable mortar/sensor groups
@@ -878,8 +880,8 @@ function eventStartLevel()
 			templates: [
 				cTempl.comsensht, // 1 Sensor
 			],
-			callback: "allowSensorRebuilding",
-			factories: ["colFactory3"]
+			callback: "allowSensorRebuilding", // Stop rebuilding once the lures are disabled
+			factories: ["colFactory2"]
 		}, CAM_ORDER_ATTACK, {
 			repair: 40,
 			targetPlayer: CAM_HUMAN_PLAYER
@@ -890,13 +892,15 @@ function eventStartLevel()
 				cTempl.comhmortht, cTempl.comhmortht, cTempl.comhmortht, cTempl.comhmortht, // 4 Bombards
 				cTempl.cohhowt, cTempl.cohhowt, // 2 Howitzers
 			],
-			factories: ["colFactory3"],
+			factories: ["colFactory2"],
 			obj: "colSensor"
 		}, CAM_ORDER_FOLLOW, {
 			leader: "colSensor",
 			repair: 60,
 			suborder: CAM_ORDER_DEFEND,
-			pos: camMakePos("colArtilleryPos")
+			data: {
+				pos: camMakePos("colArtilleryPos")
+			}
 	});
 
 	// Set up Delta's uplink attack groups as well
@@ -931,7 +935,7 @@ function eventStartLevel()
 		CAM_THE_COLLECTIVE, {
 			label: "colLZBase",
 			respawnDelay: TRUCK_TIME,
-			rebuildBase: (tweakOptions.rec_timerlessMode || difficulty >= MEDIUM),
+			rebuildBase: tweakOptions.rec_timerlessMode,
 			structset: camAreaToStructSet("colLzStructs"),
 			truckDroid: getObject("colTruckLz")
 	});
@@ -1026,5 +1030,5 @@ function eventStartLevel()
 	// Give the fog a dark purple hue
 	camSetFog(32, 12, 64);
 	// Add a purple-blue tint
-	camSetSunIntensity(.45, .35, .45);
+	camSetSunIntensity(.45, .4, .45);
 }

@@ -3794,7 +3794,7 @@
                 "value": -20
             }
         ],
-        "statID": "Flame1Mk1",
+        "statID": "Flame2",
         "subgroupIconID": "IMAGE_RES_GRPROF",
         "techCode": 1
     },
@@ -5322,10 +5322,10 @@
     "R-Wpn-AAGun-Damage02": {
         "iconID": "IMAGE_RES_WEAPONTECH",
         "id": "R-Wpn-AAGun-Damage02",
-        "keyTopic": 1,
         "name": "AA HE Flak Mk2",
         "requiredResearch": [
-            "R-Wpn-AAGun-Damage01"
+            "R-Wpn-AAGun-Damage01",
+            "R-Wpn-AAGun02"
         ],
         "researchPoints": 1400,
         "researchPower": 225,
@@ -5352,10 +5352,10 @@
     "R-Wpn-AAGun-Damage03": {
         "iconID": "IMAGE_RES_WEAPONTECH",
         "id": "R-Wpn-AAGun-Damage03",
+        "keyTopic": 1,
         "name": "AA HE Flak Mk3",
         "requiredResearch": [
-            "R-Wpn-AAGun-Damage02",
-            "R-Wpn-AAGun04"
+            "R-Wpn-AAGun-Damage02"
         ],
         "researchPoints": 1800,
         "researchPower": 262,

@@ -23,13 +23,15 @@ const mis_infestedResearch = [
 
 var heavyWaveIdx;
 var supportWaveIdx;
-var sensorIdx;
-var wavesDone;
+var reinforcementsArrived;
 
 var colTruckJob1;
 var colTruckJob2;
 var colTruckJob3;
 var colTruckJob4;
+
+const MIS_TEAM_CHARLIE = 1;
+const MIS_ALLY_COMMANDER_RANK = "Elite";
 
 camAreaEvent("vtolRemoveZone", function(droid)
 {
@@ -69,9 +71,9 @@ function startCollectiveAttacks()
 	// TODO: Dialogue here...
 
 	queueCollectiveHeavyWave();
-	// Send a heavy wave roughly every 4 minutes...
-	setTimer("queueCollectiveHeavyWave", camChangeOnDiff(camMinutesToMilliseconds(4)));
-	// And a support wave every 2 minutes...
+	// Send a heavy wave every 4 minutes...
+	setTimer("queueCollectiveHeavyWave", camMinutesToMilliseconds(4));
+	// And a support wave roughly every 2 minutes...
 	setTimer("sendCollectiveSupportWave", camChangeOnDiff(camMinutesToMilliseconds(2)));
 }
 
@@ -188,8 +190,9 @@ function sendCollectiveHeavyWave()
 			cTempl.comhaat, // 1 Cyclone
 			cTempl.comhrept, // 1 Heavy Repair Turret
 		];
-		const colCommanderGroup1 = camSendReinforcement(CAM_THE_COLLECTIVE, getObject("colEntry6"), commanderDroids1, CAM_REINFORCE_GROUND);
-		camManageGroup(colCommanderGroup1, CAM_ORDER_FOLLOW, {leader: "colCommander1", suborder: CAM_ORDER_ATTACK});
+		camSendReinforcement(CAM_THE_COLLECTIVE, getObject("colEntry6"), commanderDroids1, CAM_REINFORCE_GROUND, {
+			order: CAM_ORDER_FOLLOW, data: {leader: "colCommander1", suborder: CAM_ORDER_ATTACK}
+		});
 		break;
 	case 4:
 		// Un-mark entrances 1 & 3
@@ -257,10 +260,9 @@ function sendCollectiveHeavyWave()
 			cTempl.cohraat, // 1 Whirlwind
 			cTempl.comhrept, // 1 Heavy Repair Turret
 		];
-		const colCommanderGroup2 = camSendReinforcement(CAM_THE_COLLECTIVE, getObject("colEntry6"), commanderDroids2, CAM_REINFORCE_GROUND);
-		camManageGroup(colCommanderGroup2, CAM_ORDER_FOLLOW, {leader: "colCommander2", suborder: CAM_ORDER_ATTACK});
-
-		camCallOnce("finishWaves");
+		camSendReinforcement(CAM_THE_COLLECTIVE, getObject("colEntry6"), commanderDroids2, CAM_REINFORCE_GROUND, {
+			order: CAM_ORDER_FOLLOW, data: {leader: "colCommander2", suborder: CAM_ORDER_ATTACK}
+		});
 		break;
 	default:
 		break;
@@ -300,24 +302,18 @@ function sendCollectiveSupportWave()
 		break;
 	case 1: // Sensor + Bombards
 		spawnTruck = true;
-		// Spawn a sensor
-		const sensorPos = camMakePos(chosenEntrance);
-		const sensorTemp = cTempl.comsensht;
-		const sensorDroid = camAddDroid(CAM_THE_COLLECTIVE, sensorPos, sensorTemp);
-		const sensorLabel = ("colSensor" + sensorIdx++);
-		addLabel(sensorDroid, sensorLabel);
-		// Order the sensor to attack
-		camManageGroup(camMakeGroup(sensorDroid), CAM_ORDER_ATTACK, {targetPlayer: CAM_HUMAN_PLAYER});
 
-		// Spawn the sensor's escorts
-		let sensorEscortDroids = [
+		// Spawn the sensor and its escorts
+		let sensorGroupDroids = [
+			cTempl.comsensht, // 1 Sensor
 			cTempl.comhmortht, cTempl.comhmortht, cTempl.comhmortht, cTempl.comhmortht, cTempl.comhmortht, cTempl.comhmortht, // 6 Bombards
 			cTempl.comatht, cTempl.comatht, // 2 Lancers
 		];
-		if (supportWaveIdx >= 5 || difficulty >= HARD) sensorEscortDroids = sensorEscortDroids.concat([cTempl.cohript, cTempl.cohript]); // Add Ripple Rockets
-		if (supportWaveIdx >= 5) sensorEscortDroids = camArrayReplaceWith(sensorEscortDroids, cTempl.comatht, cTempl.comhatht); // Replace with Tank Killers
-		const colSensorGroup = camSendReinforcement(CAM_THE_COLLECTIVE, chosenEntrance, sensorEscortDroids, CAM_REINFORCE_GROUND);
-		camManageGroup(colSensorGroup, CAM_ORDER_FOLLOW, {leader: sensorLabel, suborder: CAM_ORDER_ATTACK});
+		if (supportWaveIdx >= 5 || difficulty >= HARD) sensorGroupDroids = sensorGroupDroids.concat([cTempl.cohript, cTempl.cohript]); // Add Ripple Rockets
+		if (supportWaveIdx >= 5) sensorGroupDroids = camArrayReplaceWith(sensorGroupDroids, cTempl.comatht, cTempl.comhatht); // Replace with Tank Killers
+		camSendReinforcement(CAM_THE_COLLECTIVE, chosenEntrance, sensorGroupDroids, CAM_REINFORCE_GROUND, {
+			order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}
+		});
 		break;
 	case 2: // Annoying Hover Bastards
 		let hoverDroids = [
@@ -473,12 +469,15 @@ function sendInfestedReinforcements()
 	}
 }
 
-// Finish spawning Collective waves, and start a time limit for the player to clean up the map
-function finishWaves()
+// Start spawning Charlie reinforcements to help clear the map
+function eventMissionTimeout()
 {
 	// TODO: Dialogue here...
 
-	wavesDone = true;
+	sendCharlieReinforcements();
+	setTimer("sendCharlieReinforcements", camSecondsToMilliseconds(30));
+
+	reinforcementsArrived = true;
 	if (!tweakOptions.rec_timerlessMode)
 	{
 		setMissionTime(camChangeOnDiff(camMinutesToSeconds(15)));
@@ -487,18 +486,32 @@ function finishWaves()
 	{
 		setMissionTime(-1);
 	}
+
+	camSetStandardWinLossConditions(CAM_VICTORY_STANDARD, "A3L5S", {
+		ignoreInfestedUnits: true
+	});
+	camSetExtraObjectiveMessage();
 }
 
-// Returns true if the Collective waves have finished, undefined otherwise
-function wavesOver()
+function sendCharlieReinforcements()
 {
-	if (wavesDone)
+	const commTemplates = camGetRefillableGroupTemplates(charlieCommander);
+	const groupTemplates = camGetRefillableGroupTemplates(charlieCommandGroup);
+
+	if (commTemplates.length > 0)
 	{
-		return true; // Waves have finished spawning
+		// Spawn Charlie's commander
+		const commDroid = camAddDroid(MIS_TEAM_CHARLIE, "infEntry3", commTemplates[0]);
+		addLabel(commDroid, "charlieCommander");
+		camSetDroidRank(commDroid, MIS_ALLY_COMMANDER_RANK);
+		camAssignToRefillableGroups([commDroid], charlieCommander);
 	}
-	else
+
+	if (groupTemplates.length > 0)
 	{
-		return undefined; // More waves to go...
+		// Spawn Charlie's command units
+		const newDroids = camSendReinforcement(MIS_TEAM_CHARLIE, getObject("infEntry3"), groupTemplates, CAM_REINFORCE_GROUND);
+		camAssignToRefillableGroups(enumGroup(newDroids), charlieCommandGroup);
 	}
 }
 
@@ -510,11 +523,16 @@ function eventStartLevel()
 	centreView(startPos.x, startPos.y);
 	setNoGoArea(lz.x, lz.y, lz.x2, lz.y2, CAM_HUMAN_PLAYER);
 	
-	camSetStandardWinLossConditions(CAM_VICTORY_STANDARD, "A3L5S", {
-		ignoreInfestedUnits: true,
-		callback: "wavesOver"
+	camSetStandardWinLossConditions(CAM_VICTORY_SCRIPTED, "A3L5S", {
+		ignoreInfestedUnits: true
 	});
-	camSetExtraObjectiveMessage(_("Survive the Collective assault"))
+	camSetExtraObjectiveMessage(_("Survive until reinforcements arrive"));
+
+	setAlliance(MIS_TEAM_CHARLIE, CAM_HUMAN_PLAYER, true);
+	camSetObjectVision(MIS_TEAM_CHARLIE);
+	changePlayerColour(MIS_TEAM_CHARLIE, (PLAYER_COLOR !== 11) ? 11 : 5); // Charlie to bright blue or blue
+
+	setMissionTime(camMinutesToSeconds(22));
 
 	camCompleteRequiredResearch(mis_collectiveResearch, CAM_THE_COLLECTIVE);
 	camCompleteRequiredResearch(mis_infestedResearch, CAM_INFESTED);
@@ -577,10 +595,28 @@ function eventStartLevel()
 			structset: camA3L4ColLZ4Structs
 	});
 
+	// (allied) Refillable groups
+	charlieCommander = camMakeRefillableGroup(
+		undefined, {
+			templates: [cTempl.plmcomht],
+		}, CAM_ORDER_ATTACK, {
+	});
+	charlieCommandGroup = camMakeRefillableGroup(
+		undefined, {
+			templates: [ // 6 Lancers, 6 Assault Gunners, 4 HVCs, 2 Cyclones
+				cTempl.plmatht, cTempl.plmatht, cTempl.plmatht, cTempl.plmatht, cTempl.plmatht, cTempl.plmatht,
+				cTempl.cybag, cTempl.cybag, cTempl.cybag, cTempl.cybag, cTempl.cybag, cTempl.cybag,
+				cTempl.plmhpvht, cTempl.plmhpvht, cTempl.plmhpvht, cTempl.plmhpvht,
+				cTempl.plmhaaht, cTempl.plmhaaht,
+			],
+		}, CAM_ORDER_FOLLOW, {
+			leader: "charlieCommander",
+			suborder: CAM_ORDER_ATTACK
+	});
+
 	heavyWaveIdx = 1;
 	supportWaveIdx = 1;
-	sensorIdx = 1;
-	wavesDone = false;
+	reinforcementsArrived = false;
 
 	queue("startCollectiveAttacks", camChangeOnDiff(camSecondsToMilliseconds(20)));
 	queue("vtolAttack", camChangeOnDiff(camMinutesToMilliseconds(6)));

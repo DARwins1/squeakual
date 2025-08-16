@@ -104,7 +104,7 @@ function sendInfestedReinforcements()
 		// Spawn units at a random entrance
 		const INDEX = camRand(entrances.length);
 
-		camSendReinforcement(CAM_INFESTED, getObject(entrances[INDEX]), camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance),
+		camSendReinforcement(CAM_INFESTED, entrances[INDEX], camRandInfTemplates(camRandFrom(coreDroids), CORE_SIZE, FODDER_SIZE, bChance),
 			CAM_REINFORCE_GROUND);
 
 		entrances.splice(INDEX, 1);
@@ -157,5 +157,5 @@ function eventStartLevel()
 	// Give the fog a dark purple hue
 	camSetFog(32, 12, 64);
 	// Add a purple-blue tint
-	camSetSunIntensity(.45, .35, .45);
+	camSetSunIntensity(.45, .4, .45);
 }

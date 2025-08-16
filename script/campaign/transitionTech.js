@@ -170,7 +170,7 @@ const camA2L6AllyResearch = camA2L2AllyResearch.concat([
 	"R-Wpn-Rocket03-HvAT", // Artifact
 	"R-Wpn-Rocket-Damage05",
 	"R-Wpn-AAGun02", // Artifact
-	"R-Defense-AASite-QuadBof",
+	"R-Defense-AASite-QuadBof", "R-Wpn-AAGun-Damage02",
 	"R-Struc-Research-Module", // Artifact
 ]);
 
@@ -218,7 +218,7 @@ const camA3L7AllyResearch = camAct3StartResearch.concat([
 	"R-Cyborg-Armor-Heat01", "R-Vehicle-Engine05",
 	"R-Defense-WallUpgrade05", // Artifact
 	"R-Struc-Materials05",
-	"R-Wpn-AAGun-Damage02", // Artifact
+	"R-Wpn-AAGun-Damage03", // Artifact
 	"R-Wpn-Rocket-ROF03", // Artifact
 	"R-Struc-Factory-Upgrade02", // Artifact
 	"R-Struc-RprFac-Upgrade02", "R-Struc-VTOLPad-Upgrade02",
@@ -261,7 +261,7 @@ const camA4L4AllyResearch = camAct4StartResearch.concat([
 	"R-Wpn-Cannon-Damage06", "R-Wpn-Cannon-ROF03",
 	"R-Wpn-Howitzer-ROF02", "R-Defense-WallTower04",
 	"R-Wpn-AAGun04", // Artifact
-	"R-Wpn-AAGun-Damage03", "R-Wpn-AAGun-ROF03",
+	"R-Wpn-AAGun-ROF03",
 	// A4L2
 	"R-Wpn-Bomb04", // Artifact
 	// A4L3

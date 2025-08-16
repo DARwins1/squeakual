@@ -25,6 +25,7 @@ const MIS_RESEARCH_FACILITY = 1;
 // var collectiveActive; // True when the Collective start calling transports and moving towards the artifact
 var playerHasArtifact; // True when the player has collected the artifact (and can escape)
 var enemyStoleArtifact; // True when the Collective have successfully escaped with the artifact
+var artiGroupActive; // True when the Collective artifact group can start moving
 
 var colTruckJob; // Maintains the Collective's LZ
 var colArtiGroup; // Tries to escape with the artifact
@@ -153,9 +154,15 @@ function enemyBaseDetected_colLZBase()
 	camCallOnce("detectCollective");
 }
 
+function enemyBaseDetected_colLZBase()
+{
+	camCallOnce("detectCollective");
+}
+
 function detectCollective()
 {
 	camDetectEnemyBase("colLZBase");
+	artiGroupActive = true;
 	if (!playerHasArtifact)
 	{
 		camSetExtraObjectiveMessage(_("Do not allow the Collective to escape with the artifact"));
@@ -190,11 +197,17 @@ function removeResearchBeacon()
 function manageArtifactGroup()
 {
 	// The Collective artifact group has different orders depending on the state of the mission...
+	// If the player hasn't detected the Collective or the research base yet, defend the start position.
 	// If the research facility is still standing (and the artifact hasn't dropped), attack towards it.
 	// If the artifact is dropped on the ground, move towards it.
 	// If the player has the artifact, attack the player.
 	// If the Collective have the artifact, also attack the player (to cover the artifact holder's escape).
 	// If a Collective unit is holding the artifact, break it from the rest of the group and run to the LZ.
+
+	if (!artiGroupActive)
+	{
+		return; // Group is defending by default
+	}
 
 	if (playerHasArtifact || getObject("colArtiHolder") !== null)
 	{
@@ -280,13 +293,6 @@ function manageArtifactGroup()
 			return;
 		}
 	}
-	// If we've gotten here, the Collective are holding the artifact
-	// Run for the LZ!
-	// camManageGroup(colArtiGroup, CAM_ORDER_DEFEND, {
-	// 	pos: camMakePos("landingZoneCollective"),
-	// 	radius: 0,
-	// 	removable: false
-	// });
 }
 
 // Put a red dot on the minimap over the artifact holder's current position is
@@ -516,9 +522,9 @@ function eventStartLevel()
 
 	hackAddMessage("RESEARCH_FACILITY", PROX_MSG, CAM_HUMAN_PLAYER);
 
-	// collectiveActive = false;
 	playerHasArtifact = false;
 	enemyStoleArtifact = false;
+	artiGroupActive = false;
 
 	// Manage Collective groups...
 	colArtiGroup = camMakeRefillableGroup(
@@ -564,7 +570,7 @@ function eventStartLevel()
 	// Pre-damage the facility too...
 	camSetPreDamageModifier(MIS_RESEARCH_FACILITY, [60, 90]);
 
-	setTimer("sendCollectiveTransporter", camChangeOnDiff(camMinutesToMilliseconds(2.75)));
+	setTimer("sendCollectiveTransporter", camChangeOnDiff(camMinutesToMilliseconds(3.25)));
 	queue("activateInfested", camChangeOnDiff(camSecondsToMilliseconds(30)));
 	setTimer("sendInfestedReinforcements", camChangeOnDiff(camSecondsToMilliseconds(45)));
 	setTimer("manageArtifactGroup", camSecondsToMilliseconds(1));

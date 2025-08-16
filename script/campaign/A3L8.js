@@ -134,11 +134,11 @@ function sendInfestedReinforcements()
 	// Only if the VTOL base is destroyed
 	if (camBaseIsEliminated("colVtolBase")) entrances.push("infEntry14");
 	// Northwest small trench entrance
-	// Only if the northwest base is destroyed
-	if (camBaseIsEliminated("colNorthwestBase")) entrances.push("infEntry16");
+	// Only if the northwest Infested heavy factory is alive
+	if (getObject("infHvyFactory2") !== null) entrances.push("infEntry16");
 	// North small trench entrance
-	// Only if the Infested heavy factory is alive
-	if (getObject("infHvyFactory") !== null) entrances.push("infEntry18");
+	// Only if the north Infested heavy factory is alive
+	if (getObject("infHvyFactory1") !== null) entrances.push("infEntry18");
 
 	const NUM_GROUPS = difficulty + 2;
 	const NUM_ENTRANCES = entrances.length;
@@ -165,9 +165,10 @@ function sendInfestedReinforcements()
 // Activate more factories...
 function activateFirstFactories()
 {
-	camEnableFactory("infHvyFactory"); // Infested vehicle factory
-	camEnableFactory("colCybFactory3"); // West cyborg factory
-	camEnableFactory("colFactory2"); // Hover factory
+	camEnableFactory("infHvyFactory1"); // North Infested vehicle factory
+	camEnableFactory("infHvyFactory2"); // Northwest Infested vehicle factory
+	camEnableFactory("colCybFactory2"); // West cyborg factory
+	camEnableFactory("colFactory1"); // Hover factory
 	camEnableFactory("cScavFactory1");
 
 	heliAttack();
@@ -175,8 +176,8 @@ function activateFirstFactories()
 
 function activateSecondFactories()
 {
-	camEnableFactory("colFactory3"); // Heavy factory
-	camEnableFactory("colCybFactory4"); // Southwest cyborg factory
+	camEnableFactory("colFactory2"); // Heavy factory
+	camEnableFactory("colCybFactory3"); // Southwest cyborg factory
 	camEnableFactory("cScavFactory2");
 
 	// Also order the the eastern commander to attack
@@ -189,8 +190,6 @@ function activateSecondFactories()
 function activateFinalFactories()
 {
 	camEnableFactory("colVtolFactory2");
-	camCallOnce("activateNorthwestBases");
-	
 
 	// Also order the the west commander to attack
 	camManageGroup(colCommanderGroup2, CAM_ORDER_ATTACK, {
@@ -199,59 +198,23 @@ function activateFinalFactories()
 	})
 }
 
-function camEnemyBaseEliminated_infNorthBase()
+function camEnemyBaseEliminated_colVtolBase()
 {
-	camCallOnce("activateNorthwestBases");
+	camCallOnce("swCommanderAttack");
 }
 
-// Activates the northwest factories and LZ
-function activateNorthwestBases()
+function camEnemyBaseEliminated_colMainBase()
 {
-	camEnableFactory("colCybFactory2");
-	camEnableFactory("colFactory1");
-
-	sendCollectiveTransporter();
-	setTimer("sendCollectiveTransporter", camChangeOnDiff(camMinutesToMilliseconds(8)));
+	camCallOnce("swCommanderAttack");
 }
 
-function sendCollectiveTransporter()
+function swCommanderAttack()
 {
-	// First, check if the LZ is still alive
-	if (camBaseIsEliminated("colLZBase"))
-	{
-		// Try again next time...
-		return;
-	}
-
-	// Next, add grab some droids for the transport
-	const TRANSPORT_SIZE = (difficulty <= MEDIUM) ? 8 : 10;
-	const droidPool = [
-		cTempl.cominft, // Inferno
-		cTempl.comagt, // Assault Gun
-		cTempl.comacant, // Assault Cannon
-		cTempl.cybth, // Thermite Flamer
-		cTempl.cybag, // Assault Gunner
-		cTempl.scygr, // Super Grenadier
-		cTempl.scyac, // Super Auto Cannon
-	];
-	const droids = [];
-	for (let i = 0; i < TRANSPORT_SIZE; i++)
-	{
-		droids.push(camRandFrom(droidPool));
-	}
-
-	// Send the transport!
-	camSendReinforcement(CAM_THE_COLLECTIVE, camMakePos("landingZoneCollective"), droids,
-		CAM_REINFORCE_TRANSPORT, {
-			entry: camMakePos("colTransportEntry"),
-			exit: camMakePos("colTransportEntry"),
-			order: CAM_ORDER_ATTACK,
-			data: {
-				targetPlayer: CAM_HUMAN_PLAYER,
-				repair: 20
-			}
-		}
-	);
+	// Order the the southwest commander to attack
+	camManageGroup(colCommanderGroup3, CAM_ORDER_ATTACK, {
+		targetPlayer: CAM_HUMAN_PLAYER,
+		repair: 75
+	})
 }
 
 function eventStartLevel()
@@ -269,7 +232,7 @@ function eventStartLevel()
 	camSetArtifacts({
 		"colCC": { tech: "R-Sys-Sensor-Upgrade01" }, // Sensor Upgrade
 		"colResearch": { tech: "R-Wpn-Howitzer-Accuracy01" }, // Target Acquisition Artillery Shells
-		"colFactory3": { tech: "R-Vehicle-Body09" }, // Tiger
+		"colFactory2": { tech: "R-Vehicle-Body09" }, // Tiger
 		"colVtolFactory2": { tech: "R-Wpn-Bomb02" }, // HEAP Bomb Bay
 		"rippleEmp": { tech: "R-Wpn-Rocket06-IDF" }, // Ripple Rockets
 	});
@@ -290,12 +253,7 @@ function eventStartLevel()
 			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
 			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
 		},
-		"colNorthwestBase": {
-			cleanup: "colBase3",
-			detectMsg: "COL_BASE3",
-			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
-			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
-		},
+		// Base 3 was taken out back and shot for being too annoying
 		"colVtolBase": {
 			cleanup: "colBase4",
 			detectMsg: "COL_BASE4",
@@ -326,30 +284,17 @@ function eventStartLevel()
 			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
 			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
 		},
-		"colLZBase": {
-			cleanup: "colLzStructs",
-			detectMsg: "COL_LZBASE",
-			detectSnd: cam_sounds.baseDetection.enemyLZDetected,
-			eliminateSnd: cam_sounds.baseElimination.enemyLZEradicated,
+		"infNorthwestBase": {
+			cleanup: "infBase3",
+			detectMsg: "INF_BASE3",
+			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
+			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
 		},
 	});
 
 	camSetFactories({
 		"colFactory1": {
 			assembly: "colAssembly1",
-			order: CAM_ORDER_ATTACK,
-			data: {
-				targetPlayer: CAM_HUMAN_PLAYER,
-				repair: 65,
-				regroup: true
-			},
-			groupSize: 4,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(85)),
-			// Half-tracks
-			templates: [ cTempl.comhatht, cTempl.comaght, cTempl.comaght, cTempl.comhrepht, cTempl.comhaaht, cTempl.comhpvht ]
-		},
-		"colFactory2": {
-			assembly: "colAssembly2",
 			order: CAM_ORDER_PATROL,
 			data: {
 				targetPlayer: CAM_HUMAN_PLAYER,
@@ -365,12 +310,12 @@ function eventStartLevel()
 				interval: camSecondsToMilliseconds(32)
 			},
 			groupSize: 5,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(125)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(135)),
 			// Hovers
 			templates: [ cTempl.cohbbh, cTempl.comhpvh, cTempl.comhath, cTempl.comhath, cTempl.comhpvh, cTempl.cohhrah ]
 		},
-		"colFactory3": {
-			assembly: "colAssembly3",
+		"colFactory2": {
+			assembly: "colAssembly2",
 			order: CAM_ORDER_ATTACK,
 			data: {
 				targetPlayer: CAM_HUMAN_PLAYER,
@@ -389,7 +334,7 @@ function eventStartLevel()
 				repair: 25
 			},
 			groupSize: 5,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(45)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(55)),
 			// Super Cyborgs + Assault Gunners
 			templates: [ cTempl.scyac, cTempl.cybag, cTempl.cybag ]
 		},
@@ -400,10 +345,10 @@ function eventStartLevel()
 				targetPlayer: CAM_HUMAN_PLAYER,
 				repair: 25
 			},
-			groupSize: 5,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(45)),
-			// Super Grenadiers + Thermite Flamers
-			templates: [ cTempl.scygr, cTempl.cybth ]
+			groupSize: 4,
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(55)),
+			// Rocket cyborgs
+			templates: [ cTempl.cybla, cTempl.scytk, cTempl.cybla ]
 		},
 		"colCybFactory3": {
 			assembly: "colCybAssembly3",
@@ -412,20 +357,8 @@ function eventStartLevel()
 				targetPlayer: CAM_HUMAN_PLAYER,
 				repair: 25
 			},
-			groupSize: 4,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(45)),
-			// Rocket cyborgs
-			templates: [ cTempl.cybla, cTempl.scytk, cTempl.cybla ]
-		},
-		"colCybFactory4": {
-			assembly: "colCybAssembly4",
-			order: CAM_ORDER_ATTACK,
-			data: {
-				targetPlayer: CAM_HUMAN_PLAYER,
-				repair: 25
-			},
 			groupSize: 6,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(55)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(65)),
 			// Super cannons/grenadiers
 			templates: [ cTempl.scyac, cTempl.scygr ]
 		},
@@ -458,7 +391,7 @@ function eventStartLevel()
 				targetPlayer: CAM_HUMAN_PLAYER
 			},
 			groupSize: 6,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(22)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(27)),
 			// Basic vehicles + infantry
 			templates: [ cTempl.bjeep, cTempl.rbjeep, cTempl.kevbloke, cTempl.buscan, cTempl.firetruck, cTempl.kevlance ]
 		},
@@ -469,7 +402,7 @@ function eventStartLevel()
 				targetPlayer: CAM_HUMAN_PLAYER
 			},
 			groupSize: 4,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(28)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(33)),
 			// Cool stuff
 			templates: [ cTempl.monlan, cTempl.gbjeep, cTempl.monhmg, cTempl.flatmrl, cTempl.flatat, cTempl.moncan, cTempl.minitruck ]
 		},
@@ -482,9 +415,13 @@ function eventStartLevel()
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(25)),
 			templates: [ cTempl.infcybca, cTempl.infcybgr, cTempl.infcybhg, cTempl.infscymc, cTempl.infcybla ]
 		},
-		"infHvyFactory": {
+		"infHvyFactory1": {
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(40)),
 			templates: [ cTempl.infcommcant, cTempl.infcomatt, cTempl.infcolpodt, cTempl.infcomhmgt, cTempl.infcommcant ]
+		},
+		"infHvyFactory2": {
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(60)),
+			templates: [ cTempl.infcommcant, cTempl.infcomatt, cTempl.infcomhmgt, cTempl.infcohhcant ]
 		},
 	});
 
@@ -508,14 +445,6 @@ function eventStartLevel()
 	});
 	camManageTrucks(
 		CAM_THE_COLLECTIVE, {
-			label: "colNorthwestBase",
-			respawnDelay: TRUCK_TIME,
-			rebuildBase: tweakOptions.rec_timerlessMode,
-			truckDroid: getObject("colTruck3"),
-			structset: camAreaToStructSet("colBase3")
-	});
-	camManageTrucks(
-		CAM_THE_COLLECTIVE, {
 			label: "colVtolBase",
 			respawnDelay: TRUCK_TIME,
 			rebuildBase: tweakOptions.rec_timerlessMode,
@@ -529,14 +458,6 @@ function eventStartLevel()
 			rebuildBase: tweakOptions.rec_timerlessMode,
 			truckDroid: getObject("colTruck5"),
 			structset: camAreaToStructSet("colBase5")
-	});
-	camManageTrucks(
-		CAM_THE_COLLECTIVE, {
-			label: "colLZBase",
-			respawnDelay: TRUCK_TIME,
-			rebuildBase: tweakOptions.rec_timerlessMode,
-			structset: camAreaToStructSet("colLzStructs"),
-			truckDroid: getObject("colTruckLz")
 	});
 
 	if (tweakOptions.rec_timerlessMode)
@@ -596,7 +517,7 @@ function eventStartLevel()
 	}
 	else
 	{
-		setMissionTime(camChangeOnDiff(camHoursToSeconds(1.75)));
+		setMissionTime(camChangeOnDiff(camHoursToSeconds(2)));
 	}
 
 	// Rank and assign the Collective commanders
@@ -631,13 +552,15 @@ function eventStartLevel()
 				cTempl.comhaat, // 1 Cyclone
 				cTempl.comhrept, // 1 Heavy Repair Turret
 			],
-			factories: ["colFactory2", "colFactory3", "colCybFactory3", "colCybFactory1"],
+			factories: ["colFactory1", "colFactory2", "colCybFactory2", "colCybFactory1"],
 			obj: "colCommander1" // Stop refilling this group when the commander dies
 		}, CAM_ORDER_FOLLOW, {
 			leader: "colCommander1",
 			repair: 50,
 			suborder: CAM_ORDER_ATTACK,
-			targetPlayer: CAM_HUMAN_PLAYER
+			data: {
+				targetPlayer: CAM_HUMAN_PLAYER				
+			}
 	});
 
 	// VTOL base commander:
@@ -657,16 +580,18 @@ function eventStartLevel()
 				cTempl.cohhcant, cTempl.cohhcant, // 2 Heavy Cannons
 				cTempl.comagt, cTempl.comagt, cTempl.comagt, cTempl.comagt, // 4 Assault Guns
 				cTempl.cohraat, // 1 Whirlwind
-				cTempl.comhrept, // 2 Heavy Repair Turrets
-				cTempl.comstriket, // 1 Sensor Turret
+				cTempl.comhrept, cTempl.comhrept, // 2 Heavy Repair Turrets
+				cTempl.comstriket, // 1 VTOL Strike Turret
 			],
-			factories: ["colFactory2", "colFactory3", "colCybFactory3"],
+			factories: ["colFactory1", "colFactory2", "colCybFactory2"],
 			obj: "colCommander2"
 		}, CAM_ORDER_FOLLOW, {
 			leader: "colCommander2",
 			repair: 50,
 			suborder: CAM_ORDER_ATTACK,
-			targetPlayer: CAM_HUMAN_PLAYER
+			data: {
+				targetPlayer: CAM_HUMAN_PLAYER				
+			}
 	});
 
 	// Southwest base commander:
@@ -689,15 +614,17 @@ function eventStartLevel()
 				cTempl.cominft, cTempl.cominft, // 2 Infernos
 				cTempl.cohraat, cTempl.cohraat, // 2 Whirlwinds
 				cTempl.comhrept, // 1 Heavy Repair Turret
-				cTempl.comstriket, // 1 VTOL Strike Turret
+				cTempl.comsenst, // 1 Sensor Turret
 			],
-			factories: ["colFactory2", "colFactory3"],
+			factories: ["colFactory1", "colFactory2"],
 			obj: "colCommander3"
 		}, CAM_ORDER_FOLLOW, {
 			leader: "colCommander3",
 			repair: 50,
 			suborder: CAM_ORDER_ATTACK,
-			targetPlayer: CAM_HUMAN_PLAYER
+			data: {
+				targetPlayer: CAM_HUMAN_PLAYER				
+			}
 	});
 
 	// Also assign a refillable hover group
@@ -707,7 +634,7 @@ function eventStartLevel()
 				cTempl.cohhrah, cTempl.cohhrah, cTempl.cohhrah, cTempl.cohhrah, // 4 HRAs
 				cTempl.comhath, cTempl.comhath, cTempl.comhath, cTempl.comhath, // 4 Tank Killers
 			],
-			factories: ["colFactory2"]
+			factories: ["colFactory1"]
 		}, CAM_ORDER_PATROL, {
 			repair: 75,
 			pos: [
@@ -732,13 +659,13 @@ function eventStartLevel()
 			suborder: CAM_ORDER_ATTACK,
 			data: {
 				targetPlayer: CAM_HUMAN_PLAYER
-		}
+			}
 	});
 	camMakeRefillableGroup(
 		undefined, {
-			templates: [ // 4 Assault Guns, 2 Assault Cannons
-				cTempl.colagv, cTempl.colagv, cTempl.comacanv,
-				cTempl.colagv, cTempl.colagv, cTempl.comacanv,
+			templates: [ // 2 Assault Guns, 2 Assault Cannons
+				cTempl.colagv, cTempl.comacanv,
+				cTempl.colagv, cTempl.comacanv,
 			],
 			globalFill: true,
 			obj: "colVtolTower2", // Southeast outpost tower
@@ -751,9 +678,9 @@ function eventStartLevel()
 	});
 	camMakeRefillableGroup(
 		undefined, {
-			templates: [ // 4 Tank Killers, 2 Phosphor Bombs
-				cTempl.comhatv, cTempl.comhatv, cTempl.colphosv,
-				cTempl.comhatv, cTempl.comhatv, cTempl.colphosv,
+			templates: [ // 2 Tank Killers, 2 Phosphor Bombs
+				cTempl.comhatv, cTempl.colphosv,
+				cTempl.comhatv, cTempl.colphosv,
 			],
 			globalFill: true,
 			obj: "colVtolTower3", // VTOL base tower
@@ -786,24 +713,9 @@ function eventStartLevel()
 				cTempl.comhatv, cTempl.comacanv,
 			],
 			globalFill: true,
-			obj: "colVtolCBTower1", // Northwest base CB tower
+			obj: "colVtolCBTower1", // VTOL base CB tower
 		}, CAM_ORDER_FOLLOW, {
 			leader: "colVtolCBTower1",
-			suborder: CAM_ORDER_ATTACK,
-			data: {
-				targetPlayer: CAM_HUMAN_PLAYER
-			}
-	});
-	camMakeRefillableGroup(
-		undefined, {
-			templates: [ // 2 Tank Killers, 2 Assault Cannons
-				cTempl.comhatv, cTempl.comacanv,
-				cTempl.comhatv, cTempl.comacanv,
-			],
-			globalFill: true,
-			obj: "colVtolCBTower2", // VTOL base CB tower
-		}, CAM_ORDER_FOLLOW, {
-			leader: "colVtolCBTower2",
 			suborder: CAM_ORDER_ATTACK,
 			data: {
 				targetPlayer: CAM_HUMAN_PLAYER
@@ -816,9 +728,9 @@ function eventStartLevel()
 				cTempl.comhatv, cTempl.comacanv, cTempl.comacanv,
 			],
 			globalFill: true,
-			obj: "colVtolCBTower3", // Southwest base CB tower
+			obj: "colVtolCBTower2", // Southwest base CB tower
 		}, CAM_ORDER_FOLLOW, {
-			leader: "colVtolCBTower3",
+			leader: "colVtolCBTower2",
 			suborder: CAM_ORDER_ATTACK,
 			data: {
 				targetPlayer: CAM_HUMAN_PLAYER

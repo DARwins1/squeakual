@@ -977,7 +977,9 @@ function eventStartLevel()
 			leader: "golfSensor",
 			repair: 50,
 			suborder: CAM_ORDER_DEFEND,
-			pos: camMakePos("scavLZBase3"), // Defend here if sensor dies
+			data: {
+				pos: camMakePos("scavLZBase3"), // Defend here if sensor dies
+			}
 			repairPos: camMakePos("scavLZBase3") // Wait here for repairs
 	});
 	// Golf sensor "group" (Just a single Sensor)

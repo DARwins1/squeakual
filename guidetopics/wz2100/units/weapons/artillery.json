@@ -36,6 +36,12 @@
 		},
 		{
 			"stat": {
+				"id": "Rocket-MRL-Hvy",
+				"onlyIfKnown": "campaign"
+			}
+		},
+		{
+			"stat": {
 				"id": "Rocket-IDF",
 				"onlyIfKnown": "campaign"
 			}

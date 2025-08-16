@@ -18,44 +18,38 @@
 
 
 	"position_3": {
-		"label": "colAssembly3",
-		"pos": [5893, 1393]
-	},
-
-
-	"position_4": {
 		"label": "colCybAssembly1",
 		"pos": [7122, 11088]
 	},
 
 
-	"position_5": {
-		"label": "colCybAssembly2",
-		"pos": [7241, 1976]
-	},
-
-
-	"position_6": {
-		"label": "colCybAssembly3",
-		"pos": [7224, 1443]
-	},
-
-
-	"position_7": {
+	"position_4": {
 		"label": "colVtolAssembly",
 		"pos": [9470, 1145]
 	},
 
 
-	"position_8": {
+	"position_5": {
 		"label": "colArtilleryPos",
 		"pos": [2412, 2352]
 	},
 
 
-	"position_9": {
+	"position_6": {
 		"label": "colCommandPos",
 		"pos": [6857, 2154]
+	},
+
+
+	"position_7": {
+		"label": "colCybAssembly2",
+		"pos": [5190, 7936]
+	},
+
+
+	"position_8": {
+		"label": "colCybAssembly3",
+		"pos": [6083, 1255]
 	},
 
 
@@ -287,46 +281,6 @@
 
 
 	"object_10": {
-		"label": "colCommander",
-		"id": 366,
-		"player": 2,
-		"type": 0
-	},
-
-
-	"object_11": {
-		"label": "colCybFactory1",
-		"id": 236,
-		"player": 2,
-		"type": 1
-	},
-
-
-	"object_12": {
-		"label": "colVtolTower2",
-		"id": 427,
-		"player": 2,
-		"type": 1
-	},
-
-
-	"object_13": {
-		"label": "colFactory2",
-		"id": 3,
-		"player": 2,
-		"type": 1
-	},
-
-
-	"object_14": {
-		"label": "colFactory3",
-		"id": 410,
-		"player": 2,
-		"type": 1
-	},
-
-
-	"object_15": {
 		"label": "colCybFactory2",
 		"id": 1,
 		"player": 2,
@@ -334,9 +288,49 @@
 	},
 
 
-	"object_16": {
+	"object_11": {
+		"label": "colCommander",
+		"id": 366,
+		"player": 2,
+		"type": 0
+	},
+
+
+	"object_12": {
+		"label": "colCybFactory1",
+		"id": 236,
+		"player": 2,
+		"type": 1
+	},
+
+
+	"object_13": {
+		"label": "colVtolTower2",
+		"id": 427,
+		"player": 2,
+		"type": 1
+	},
+
+
+	"object_14": {
+		"label": "colFactory2",
+		"id": 3,
+		"player": 2,
+		"type": 1
+	},
+
+
+	"object_15": {
 		"label": "colResearch",
 		"id": 534,
+		"player": 2,
+		"type": 1
+	},
+
+
+	"object_16": {
+		"label": "colVtolTower1",
+		"id": 191,
 		"player": 2,
 		"type": 1
 	},
@@ -373,13 +367,6 @@
 		"type": 0
 	},
 
-
-	"object_21": {
-		"label": "colVtolTower1",
-		"id": 191,
-		"player": 2,
-		"type": 1
-	},
 
 	"radius_0": {
 		"label": "heliRemoveZone",

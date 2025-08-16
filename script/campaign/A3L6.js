@@ -255,10 +255,10 @@ function eventStartLevel()
 	camSetArtifacts({
 		"colResearch": { tech: "R-Wpn-Rocket-ROF03" }, // Rocket Autoloader Mk3
 		"colFactory1": { tech: "R-Vehicle-Metals04" }, // Dense Composite Alloys
-		"colFactory2": { tech: "R-Wpn-HowitzerMk1" }, // Howitzer
+		"colHowitzerEmp": { tech: "R-Wpn-HowitzerMk1" }, // Howitzer
 		"colFactory3": { tech: "R-Struc-Factory-Upgrade02" }, // Robotic Manufacturing
 		"colCC": { tech: "R-Defense-WallUpgrade05" }, // Supercrete Mk2
-		"colAAEmp": { tech: "R-Wpn-AAGun-Damage02" }, // AA HE Flak Mk2
+		"colAAEmp": { tech: "R-Wpn-AAGun-Damage03" }, // AA HE Flak Mk3
 	});
 
 	camCompleteRequiredResearch(mis_collectiveResearch, CAM_THE_COLLECTIVE);
@@ -362,7 +362,7 @@ function eventStartLevel()
 			groupSize: 4,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(65)),
 			// Super Cyborgs + Thermite Flamers
-			templates: [ cTempl.scyac, cTempl.cybth, cTempl.scytk, cTempl.cybth ]
+			templates: [ cTempl.cybag, cTempl.cybth, cTempl.cybla, cTempl.cybth ]
 		},
 		"colCybFactory2": {
 			assembly: "colCybAssembly2",
@@ -374,7 +374,7 @@ function eventStartLevel()
 			groupSize: 5,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(45)),
 			// Grenadiers...
-			templates: [ cTempl.cybgr, cTempl.scygr, cTempl.scygr ]
+			templates: [ cTempl.cybgr, cTempl.cybgr, cTempl.scygr ]
 		},
 		"colCybFactory3": {
 			assembly: "colCybAssembly3",
@@ -386,7 +386,7 @@ function eventStartLevel()
 			groupSize: 4,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(45)),
 			// Rocket/MG Cyborgs
-			templates: [ cTempl.cybla, cTempl.cybth, cTempl.cybla, cTempl.scytk ]
+			templates: [ cTempl.cybla, cTempl.cybth, cTempl.cybla, cTempl.scyac ]
 		},
 		"infFactory1": {
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(16)),
@@ -469,7 +469,7 @@ function eventStartLevel()
 	}
 	if (!tweakOptions.rec_timerlessMode)
 	{
-		setMissionTime(camChangeOnDiff(camMinutesToSeconds(75)));
+		setMissionTime(camChangeOnDiff(camMinutesToSeconds(105)));
 	}
 
 	colTankGroup1 = camMakeGroup("tankGroup1");
@@ -544,7 +544,6 @@ function eventStartLevel()
 		undefined, {
 			templates: [
 				cTempl.comhmortht, cTempl.comhmortht, cTempl.comhmortht, cTempl.comhmortht, // 4 Bombards
-				cTempl.cohhowt, cTempl.cohhowt, // 2 Ripple Rockets
 			],
 			factories: ["colFactory2"],
 			obj: "colSensor"
@@ -552,7 +551,9 @@ function eventStartLevel()
 			leader: "colSensor",
 			repair: 60,
 			suborder: CAM_ORDER_DEFEND,
-			pos: camMakePos("colAssembly2")
+			data: {
+				pos: camMakePos("colAssembly2")
+			}
 	});
 
 	camAutoReplaceObjectLabel("colCC");
@@ -597,5 +598,5 @@ function eventStartLevel()
 	// Shift the sun towards the west
 	camSetSunPos(450.0, -400.0, 225.0);
 	// Add a purple-blue tint
-	camSetSunIntensity(.45, .4, .5);
+	camSetSunIntensity(.5, .45, .55);
 }

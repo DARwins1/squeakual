@@ -258,6 +258,19 @@ function __camGameLost()
 
 function __camGameWon()
 {
+	if (__camVictoryData.waitForDialogue && !camDialogueDone())
+	{
+		// Don't finish yet if we need to wait for dialogue
+		return;
+	}
+
+
+	if (__camVictoryData.earlyPowerBonus)
+	{
+		// Grant bonus power now if enabled
+		camGrantBonusPower();
+	}
+
 	__camLevelEnded = true;
 	if (camDef(__camVictoryData) && camDef(__camVictoryData.victoryVideo))
 	{
@@ -399,16 +412,7 @@ function __camVictoryStandard()
 		}
 		if (enemiesRemaining === 0)
 		{
-			if (!__camVictoryData.waitForDialogue || camDialogueDone())
-			{
-				// Don't finish if we need to wait for dialogue
-				__camGameWon();
-			}
-			else if (__camVictoryData.earlyPowerBonus)
-			{
-				// Grant bonus power now if enabled
-				camGrantBonusPower();
-			}
+			__camGameWon();
 		}
 		else
 		{
@@ -452,12 +456,13 @@ function __camVictoryOffworld()
 		camDebug("Landing zone area is required for OFFWORLD");
 		return;
 	}
-	const __TOTAL = countDroid(DROID_ANY, CAM_HUMAN_PLAYER); // for future use
-	if (__TOTAL === 0 && __camVictoryData.defeatOnDeath)
+
+	if (countDroid(DROID_ANY, CAM_HUMAN_PLAYER) === 0 && __camVictoryData.defeatOnDeath)
 	{
 		__camGameLost();
 		return;
 	}
+
 	const __FORCE_LZ = camDef(__camVictoryData.retlz) ? __camVictoryData.retlz : false;
 	const __DESTROY_ALL = camDef(__camVictoryData.annihilate) ? __camVictoryData.annihilate : false;
 	const __ELIM_BASES = camDef(__camVictoryData.eliminateBases) ? __camVictoryData.eliminateBases : false;
@@ -466,23 +471,19 @@ function __camVictoryOffworld()
 	{
 		if (__ELIM_BASES && camAllEnemyBasesEliminated())
 		{
-			const enemyDroids = enumArea(0, 0, mapWidth, mapHeight, ENEMIES, false).filter((obj) => (
+			let enemyDroids = enumArea(0, 0, mapWidth, mapHeight, ENEMIES, false).filter((obj) => (
 				obj.type === DROID
 			)).length;
 
-			if (!enemyDroids)
+			if (__camVictoryData.ignoreInfestedUnits)
 			{
-				if (!__camVictoryData.waitForDialogue || camDialogueDone())
-				{
-					// Don't finish if we need to wait for dialogue
-					__camGameWon();
-				}
-				else if (__camVictoryData.earlyPowerBonus)
-				{
-					// Grant bonus power now if enabled
-					camGrantBonusPower();
-				}
-				return;
+				// If we're to ignore Infested units, subtract them from the number of enemies remaining
+				enemyDroids -= countDroid(DROID_ANY, CAM_INFESTED);
+			}
+
+			if (enemyDroids === 0)
+			{
+				__camGameWon();
 			}
 			else
 			{
@@ -491,38 +492,29 @@ function __camVictoryOffworld()
 		}
 		else
 		{
-			const __ENEMY_LEN = enumArea(0, 0, mapWidth, mapHeight, ENEMIES, false).length;
-			if (!__FORCE_LZ && !__ENEMY_LEN)
+			if (!__FORCE_LZ)
 			{
-				//if there are no more enemies, win instantly unless forced to go
-				//back to the LZ.
-				if (!__camVictoryData.waitForDialogue || camDialogueDone())
+				let enemyLen = enumArea(0, 0, mapWidth, mapHeight, ENEMIES, false).length;
+
+				if (__camVictoryData.ignoreInfestedUnits)
 				{
-					// Don't finish if we need to wait for dialogue
+					// If we're to ignore Infested units, subtract them from the number of enemies remaining
+					enemyLen -= countDroid(DROID_ANY, CAM_INFESTED);
+				}
+
+				if (enemyLen === 0)
+				{
+					// No need to return to LZ
 					__camGameWon();
+					return;
 				}
-				else if (__camVictoryData.earlyPowerBonus)
-				{
-					// Grant bonus power now if enabled
-					camGrantBonusPower();
-				}
-				return;
 			}
 
 			//Missions that are not won based on artifact count (see missions 2-1 and 3-2).
 			//If either __FORCE_LZ or __DESTROY_ALL is true then ignore this.
 			if (__camNumArtifacts === 0 && !__FORCE_LZ && !__DESTROY_ALL)
 			{
-				if (!__camVictoryData.waitForDialogue || camDialogueDone())
-				{
-					// Don't finish if we need to wait for dialogue
-					__camGameWon();
-				}
-				else if (__camVictoryData.earlyPowerBonus)
-				{
-					// Grant bonus power now if enabled
-					camGrantBonusPower();
-				}
+				__camGameWon();
 				return;
 			}
 
@@ -532,16 +524,7 @@ function __camVictoryOffworld()
 			)).length;
 			if (((!__FORCE_LZ && !__DESTROY_ALL) || (__FORCE_LZ && __DESTROY_ALL && !__ENEMY_LEN) || (__FORCE_LZ && !__DESTROY_ALL)) && (__TOTAL_AT_LZ === __TOTAL))
 			{
-				if (!__camVictoryData.waitForDialogue || camDialogueDone())
-				{
-					// Don't finish if we need to wait for dialogue
-					__camGameWon();
-				}
-				else if (__camVictoryData.earlyPowerBonus)
-				{
-					// Grant bonus power now if enabled
-					camGrantBonusPower();
-				}
+				__camGameWon();
 				return;
 			}
 			else
