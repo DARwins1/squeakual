@@ -630,6 +630,13 @@
 	},
 
 
+	"area_61": {
+		"label": "colDeaggroZone",
+		"pos1": [24704, 2176],
+		"pos2": [25984, 3072]
+	},
+
+
 	"object_0": {
 		"label": "charlieCybFactory2",
 		"id": 65,

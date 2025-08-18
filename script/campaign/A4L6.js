@@ -52,6 +52,7 @@ var collectiveRetreat;
 var colCommanderIndex;
 var colCommanderRank;
 var truckLostThreshold;
+var holdoutDonated;
 
 // Store structure sets for later
 var charlieMainBaseStructs;
@@ -1959,20 +1960,9 @@ function setStageTwo()
 camAreaEvent("deltaBase4", function(droid)
 {
 	// Only trigger if the player moves a droid in
-	if (droid.player === CAM_HUMAN_PLAYER)
+	if (droid.player === CAM_HUMAN_PLAYER && !isVTOL(droid))
 	{
-		// Remove the holdout beacon
-		hackRemoveMessage("DELTA_HOLDOUT", PROX_MSG, CAM_HUMAN_PLAYER);
-		// Place a beacon at Delta's base
-		hackAddMessage("DELTA_DEPOSIT", PROX_MSG, CAM_HUMAN_PLAYER);
-
-		// Donate all units/structures in the holdout to the player
-		for (const obj of enumArea("deltaBase4", MIS_TEAM_DELTA, false))
-		{
-			donateObject(obj, CAM_HUMAN_PLAYER);
-		}
-
-		playSound(cam_sounds.unitsTransferred);
+		camCallOnce("donateHoldout");
 	}
 	else
 	{
@@ -2000,6 +1990,40 @@ camAreaEvent("deltaReturnZone", function(droid)
 	if (stage < 3) // Don't need this trigger after stage 2
 	{
 		resetLabel("deltaReturnZone", CAM_HUMAN_PLAYER);
+	}
+});
+
+function donateHoldout()
+{
+	holdoutDonated = true;
+
+	// Remove the holdout beacon
+	hackRemoveMessage("DELTA_HOLDOUT", PROX_MSG, CAM_HUMAN_PLAYER);
+	// Place a beacon at Delta's base
+	hackAddMessage("DELTA_DEPOSIT", PROX_MSG, CAM_HUMAN_PLAYER);
+
+	// Donate all units/structures in the holdout to the player
+	for (const obj of enumArea("deltaBase4", MIS_TEAM_DELTA, false))
+	{
+		donateObject(obj, CAM_HUMAN_PLAYER);
+	}
+
+	playSound(cam_sounds.unitsTransferred);
+
+	removeTimer("sendTransportHarassGroup");
+}
+
+// Triggered when the player enters Delta's transport holdout
+camAreaEvent("colDeaggroZone", function(droid)
+{
+	if (!holdoutDonated)
+	{
+		// "De-aggro" the Collective unit from the holdout (by deleting it)
+		if (droid.player === CAM_THE_COLLECTIVE && !isVTOL(droid))
+		{
+			camSafeRemoveObject(droid);
+		}
+		resetLabel("colDeaggroZone", CAM_HUMAN_PLAYER);
 	}
 });
 
@@ -3416,6 +3440,7 @@ function eventStartLevel()
 	colCommanderIndex = 1;
 	colCommanderRank = Math.min(5, difficulty + 4); // Veteran to Hero
 	truckLostThreshold = (difficulty >= MEDIUM) ? 2 : 3;
+	holdoutDonated = false;
 
 	groundBlips = [
 		null,
