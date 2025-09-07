@@ -6,9 +6,10 @@ include("script/campaign/structSets.js");
 const MIS_TEAM_FOXTROT = 5;
 const MIS_TEAM_GOLF = 6;
 
-const MIS_FACTORY_TIME = camChangeOnDiff(camSecondsToMilliseconds(90));
-const MIS_CYBORG_FACTORY_TIME = camChangeOnDiff(camSecondsToMilliseconds(50));
-const MIS_VTOL_FACTORY_TIME = camChangeOnDiff(camSecondsToMilliseconds(110));
+const MIS_FOXTROT_FACTORY_TIME = camChangeOnDiff(camSecondsToMilliseconds(90));
+const MIS_GOLF_FACTORY_TIME = camChangeOnDiff(camSecondsToMilliseconds(120));
+const MIS_CYBORG_FACTORY_TIME = camChangeOnDiff(camSecondsToMilliseconds(60));
+const MIS_VTOL_FACTORY_TIME = camChangeOnDiff(camSecondsToMilliseconds(130));
 const MIS_FOXTROT_COMMANDER_DELAY = camChangeOnDiff(camMinutesToMilliseconds(6));
 
 var foxtrotCommanderDeathTime;
@@ -83,62 +84,77 @@ function activateFactories()
 }
 
 // Boost the strength of teams Foxtrot and Golf
-// Called after a very long delay, or when one of the teams is defeated
+// Called when one of the teams is defeated
 function boostTeams()
 {
-	const FOXTROT_FACTORY_TIME = MIS_FACTORY_TIME * 2/3;
-	const FOXTROT_CYBORG_FACTORY_TIME = MIS_CYBORG_FACTORY_TIME * 2/3;
-	const GOLF_FACTORY_TIME = MIS_FACTORY_TIME * 3/4;
+	const NEW_FOXTROT_FACTORY_TIME = MIS_FOXTROT_FACTORY_TIME * 2/3;
+	const NEW_FOXTROT_CYBORG_FACTORY_TIME = MIS_CYBORG_FACTORY_TIME * 2/3;
+	const NEW_GOLF_FACTORY_TIME = MIS_GOLF_FACTORY_TIME * 3/4;
+	const NEW_VTOL_FACTORY_TIME = MIS_VTOL_FACTORY_TIME * 3/4;
 
 	camSetFactories({
 		"foxtrotFactory1": {
-			throttle: FOXTROT_FACTORY_TIME,
+			throttle: NEW_FOXTROT_FACTORY_TIME,
 			templates: []
 		},
 		"foxtrotFactory2": {
-			throttle: FOXTROT_FACTORY_TIME,
+			throttle: NEW_FOXTROT_FACTORY_TIME,
 			templates: []
 		},
 		"foxtrotFactory3": {
-			throttle: FOXTROT_FACTORY_TIME,
+			throttle: NEW_FOXTROT_FACTORY_TIME,
 			templates: []
 		},
 		"foxtrotFactory4": {
-			throttle: FOXTROT_FACTORY_TIME,
+			throttle: NEW_FOXTROT_FACTORY_TIME,
 			templates: []
 		},
 		"foxtrotCybFactory1": {
-			throttle: FOXTROT_CYBORG_FACTORY_TIME,
+			throttle: NEW_FOXTROT_CYBORG_FACTORY_TIME,
 			templates: []
 		},
 		"foxtrotCybFactory2": {
-			throttle: FOXTROT_CYBORG_FACTORY_TIME,
+			throttle: NEW_FOXTROT_CYBORG_FACTORY_TIME,
 			templates: []
 		},
 		"foxtrotCybFactory3": {
-			throttle: FOXTROT_CYBORG_FACTORY_TIME,
+			throttle: NEW_FOXTROT_CYBORG_FACTORY_TIME,
 			templates: []
 		},
 		"foxtrotCybFactory4": {
-			throttle: FOXTROT_CYBORG_FACTORY_TIME,
+			throttle: NEW_FOXTROT_CYBORG_FACTORY_TIME,
 			templates: []
 		},
 		"golfFactory1": {
-			throttle: GOLF_FACTORY_TIME,
+			throttle: NEW_GOLF_FACTORY_TIME,
 			templates: []
 		},
 		"golfFactory2": {
-			throttle: GOLF_FACTORY_TIME,
+			throttle: NEW_GOLF_FACTORY_TIME,
 			templates: []
 		},
 		"golfFactory3": {
-			throttle: GOLF_FACTORY_TIME,
+			throttle: NEW_GOLF_FACTORY_TIME,
 			templates: []
 		},
-		// NOTE: Golf's VTOL factories stay the same
+		"golfVtolFactory1": {
+			assembly: "golfVtolAssembly1",
+			throttle: NEW_VTOL_FACTORY_TIME,
+			templates: []
+		},
+		"golfVtolFactory2": {
+			assembly: "golfVtolAssembly2",
+			throttle: NEW_VTOL_FACTORY_TIME,
+			templates: []
+		},
+		"golfVtolFactory3": {
+			assembly: "golfVtolAssembly3",
+			throttle: NEW_VTOL_FACTORY_TIME,
+			templates: []
+		},
 	});
 
-	// Re-enable the factories
+	// Re-enable the factories (if they're still alive)
 	camEnableFactory("foxtrotFactory1");
 	camEnableFactory("foxtrotFactory2");
 	camEnableFactory("foxtrotFactory3");
@@ -527,20 +543,20 @@ function eventStartLevel()
 
 	camSetFactories({
 		"foxtrotFactory1": {
-			throttle: MIS_FACTORY_TIME,
+			throttle: MIS_FOXTROT_FACTORY_TIME,
 			// The team factories hold no templates; they just restock refillable groups
 			templates: []
 		},
 		"foxtrotFactory2": {
-			throttle: MIS_FACTORY_TIME,
+			throttle: MIS_FOXTROT_FACTORY_TIME,
 			templates: []
 		},
 		"foxtrotFactory3": {
-			throttle: MIS_FACTORY_TIME,
+			throttle: MIS_FOXTROT_FACTORY_TIME,
 			templates: []
 		},
 		"foxtrotFactory4": {
-			throttle: MIS_FACTORY_TIME,
+			throttle: MIS_FOXTROT_FACTORY_TIME,
 			templates: []
 		},
 		"foxtrotCybFactory1": {
@@ -560,15 +576,15 @@ function eventStartLevel()
 			templates: []
 		},
 		"golfFactory1": {
-			throttle: MIS_FACTORY_TIME,
+			throttle: MIS_GOLF_FACTORY_TIME,
 			templates: []
 		},
 		"golfFactory2": {
-			throttle: MIS_FACTORY_TIME,
+			throttle: MIS_GOLF_FACTORY_TIME,
 			templates: []
 		},
 		"golfFactory3": {
-			throttle: MIS_FACTORY_TIME,
+			throttle: MIS_GOLF_FACTORY_TIME,
 			templates: []
 		},
 		"golfVtolFactory1": {
@@ -621,13 +637,14 @@ function eventStartLevel()
 	});
 
 	// Set up trucks...
-	const TRUCK_TIME = camChangeOnDiff(camSecondsToMilliseconds((tweakOptions.rec_timerlessMode) ? 55 : 110));
+	const FOXTROT_TRUCK_TIME = camChangeOnDiff(camSecondsToMilliseconds((tweakOptions.rec_timerlessMode) ? 90 : 180));
+	const GOLF_TRUCK_TIME = camChangeOnDiff(camSecondsToMilliseconds((tweakOptions.rec_timerlessMode) ? 60 : 120));
 	const ENGINEER_TIME = camChangeOnDiff(camSecondsToMilliseconds((tweakOptions.rec_timerlessMode) ? 30 : 60));
 	// Foxtrot...
 	camManageTrucks(
 		MIS_TEAM_FOXTROT, {
 			label: "foxtrotMainBase",
-			respawnDelay: TRUCK_TIME,
+			respawnDelay: FOXTROT_TRUCK_TIME,
 			rebuildBase: (tweakOptions.rec_timerlessMode || difficulty > MEDIUM),
 			truckDroid: getObject("foxtrotTruck1"),
 			structset: camAreaToStructSet("foxtrotBase1")
@@ -635,7 +652,7 @@ function eventStartLevel()
 	camManageTrucks(
 		MIS_TEAM_FOXTROT, {
 			label: "foxtrotMainBase",
-			respawnDelay: TRUCK_TIME,
+			respawnDelay: FOXTROT_TRUCK_TIME,
 			rebuildBase: (tweakOptions.rec_timerlessMode || difficulty > MEDIUM),
 			truckDroid: getObject("foxtrotTruck2"),
 			structset: camAreaToStructSet("foxtrotBase1")
@@ -643,17 +660,9 @@ function eventStartLevel()
 	camManageTrucks(
 		MIS_TEAM_FOXTROT, {
 			label: "foxtrotAltBase",
-			respawnDelay: TRUCK_TIME,
+			respawnDelay: FOXTROT_TRUCK_TIME,
 			rebuildBase: (tweakOptions.rec_timerlessMode || difficulty > MEDIUM),
 			truckDroid: getObject("foxtrotTruck3"),
-			structset: camAreaToStructSet("foxtrotBase2")
-	});
-	camManageTrucks(
-		MIS_TEAM_FOXTROT, {
-			label: "foxtrotAltBase",
-			respawnDelay: TRUCK_TIME,
-			rebuildBase: (tweakOptions.rec_timerlessMode || difficulty > MEDIUM),
-			truckDroid: getObject("foxtrotTruck4"),
 			structset: camAreaToStructSet("foxtrotBase2")
 	});
 	camManageTrucks(
@@ -723,7 +732,7 @@ function eventStartLevel()
 	camManageTrucks(
 		MIS_TEAM_GOLF, {
 			label: "golfMainBase",
-			respawnDelay: TRUCK_TIME,
+			respawnDelay: GOLF_TRUCK_TIME,
 			rebuildBase: (tweakOptions.rec_timerlessMode || difficulty > MEDIUM),
 			truckDroid: getObject("golfTruck1"),
 			structset: camAreaToStructSet("golfBase1")
@@ -731,7 +740,7 @@ function eventStartLevel()
 	camManageTrucks(
 		MIS_TEAM_GOLF, {
 			label: "golfMainBase",
-			respawnDelay: TRUCK_TIME,
+			respawnDelay: GOLF_TRUCK_TIME,
 			rebuildBase: (tweakOptions.rec_timerlessMode || difficulty > MEDIUM),
 			truckDroid: getObject("golfTruck2"),
 			structset: camAreaToStructSet("golfBase1")
@@ -739,7 +748,7 @@ function eventStartLevel()
 	camManageTrucks(
 		MIS_TEAM_GOLF, {
 			label: "golfBridgeBase",
-			respawnDelay: TRUCK_TIME,
+			respawnDelay: GOLF_TRUCK_TIME,
 			rebuildBase: (tweakOptions.rec_timerlessMode || difficulty > MEDIUM),
 			truckDroid: getObject("golfTruck3"),
 			structset: camAreaToStructSet("golfBase2")
@@ -747,7 +756,7 @@ function eventStartLevel()
 	camManageTrucks(
 		MIS_TEAM_GOLF, {
 			label: "golfVtolBase",
-			respawnDelay: TRUCK_TIME,
+			respawnDelay: GOLF_TRUCK_TIME,
 			rebuildBase: (tweakOptions.rec_timerlessMode || difficulty > MEDIUM),
 			truckDroid: getObject("golfTruck4"),
 			structset: camAreaToStructSet("golfBase3")
@@ -755,7 +764,7 @@ function eventStartLevel()
 	camManageTrucks(
 		MIS_TEAM_GOLF, {
 			label: "golfVtolBase",
-			respawnDelay: TRUCK_TIME,
+			respawnDelay: GOLF_TRUCK_TIME,
 			rebuildBase: (tweakOptions.rec_timerlessMode || difficulty > MEDIUM),
 			truckDroid: getObject("golfTruck5"),
 			structset: camAreaToStructSet("golfBase3")
@@ -763,7 +772,7 @@ function eventStartLevel()
 	camManageTrucks(
 		MIS_TEAM_GOLF, {
 			label: "golfForwardBase",
-			respawnDelay: TRUCK_TIME,
+			respawnDelay: GOLF_TRUCK_TIME,
 			rebuildBase: true,
 			template: cTempl.plhtruckt,
 			structset: camA4L3GolfForwardBaseStructs
@@ -771,7 +780,7 @@ function eventStartLevel()
 	camManageTrucks(
 		MIS_TEAM_GOLF, {
 			label: "golfForwardBase",
-			respawnDelay: TRUCK_TIME,
+			respawnDelay: GOLF_TRUCK_TIME,
 			rebuildBase: true,
 			template: cTempl.plhtruckt,
 			structset: camA4L3GolfForwardBaseStructs
@@ -781,7 +790,7 @@ function eventStartLevel()
 		camManageTrucks(
 			MIS_TEAM_GOLF, {
 				label: "golfMainBase",
-				respawnDelay: TRUCK_TIME,
+				respawnDelay: GOLF_TRUCK_TIME,
 				rebuildBase: true,
 				template: cTempl.plhtruckt,
 				structset: camAreaToStructSet("golfBase1")
@@ -789,7 +798,7 @@ function eventStartLevel()
 		camManageTrucks(
 			MIS_TEAM_GOLF, {
 				label: "golfVtolBase",
-				respawnDelay: TRUCK_TIME,
+				respawnDelay: GOLF_TRUCK_TIME,
 				rebuildBase: true,
 				template: cTempl.plhtruckt,
 				structset: camAreaToStructSet("golfBase3")
@@ -799,7 +808,7 @@ function eventStartLevel()
 			camManageTrucks(
 				MIS_TEAM_GOLF, {
 					label: "golfVtolBase",
-					respawnDelay: TRUCK_TIME,
+					respawnDelay: GOLF_TRUCK_TIME,
 					rebuildBase: true,
 					template: cTempl.plhtruckt,
 					structset: camAreaToStructSet("golfBase3")

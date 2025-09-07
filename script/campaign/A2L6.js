@@ -380,7 +380,7 @@ function activateCollective()
 		camMakeGroup("golfAttackGroup"), {
 			templates: [
 				cTempl.plmmcant, cTempl.plmmcant, cTempl.plmmcant, cTempl.plmmcant,
-				cTempl.plmmrat, cTempl.plmmrat, cTempl.plmmrat, cTempl.plmmrat
+				cTempl.plmmrat, cTempl.plmmrat, cTempl.plmmrat, cTempl.plmmrat,
 				cTempl.plmhaat, cTempl.plmhaat,
 			]
 		}, CAM_ORDER_ATTACK, {
@@ -712,10 +712,10 @@ function enableMoreFactories()
 
 	// Dialogue about Clayde's diversion
 	camQueueDialogue([
-		{text: "CHARLIE: Lieutenant! It looks like the General's plan is working!", delay: 0, sound: CAM_RCLICK},
-		{text: "CHARLIE: Whatever he's doing, Collective aren't bringing in any reinforcements!", delay: 3, sound: CAM_RCLICK},
+		{text: "CHARLIE: Lieutenant! The General's plan is working!", delay: 0, sound: CAM_RCLICK},
+		{text: "CHARLIE: The Collective aren't bringing in any reinforcements!", delay: 3, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: Yes, I haven't detected any Collective transports in the area.", delay: 3, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: But be careful, the Collective are likely to regroup and counter attack soon.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: But be careful, the Collective are likely to regroup their local forces and counter attack soon.", delay: 3, sound: CAM_RCLICK},
 	]);
 }
 
@@ -778,7 +778,7 @@ function stealthBreakDialogue()
 function diversionDialogue()
 {
 	camQueueDialogue([
-		{text: "LIEUTENANT: Whatever the General's been doing, it's surely working...", delay: 0, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Whatever the General's been doing, it surely is working...", delay: 0, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: I'm detecting a huge spike in Collective comms traffic.", delay: 3, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: And Delta is reporting high amounts of activity, especially near the city center.", delay: 3, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: The Collective is suddenly scrambling a lot of their forces across the map...", delay: 3, sound: CAM_RCLICK},
@@ -821,8 +821,7 @@ function campCleared()
 		{text: "CHARLIE: Lieutenant?!", delay: 3, sound: CAM_RCLICK},
 		{text: "GOLF: He-Hey!!", delay: 10, sound: CAM_RCLICK},
 		{text: "GOLF: What the hell is this?!", delay: 3, sound: CAM_RCLICK},
-		{text: "CHARLIE: Are these the same things...", delay: 6, sound: CAM_RCLICK},
-		{text: "CHARLIE: That Team Alpha released?", delay: 3, sound: CAM_RCLICK},
+		{text: "CHARLIE: Lieutenant, are these the same things that Team Alpha...", delay: 6, sound: CAM_RCLICK},
 	]);
 }
 

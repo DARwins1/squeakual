@@ -455,14 +455,6 @@
 
 
 	"object_2": {
-		"label": "foxtrotResearch1",
-		"id": 28,
-		"player": 5,
-		"type": 1
-	},
-
-
-	"object_3": {
 		"label": "infCybFactory2",
 		"id": 46,
 		"player": 4,
@@ -470,7 +462,7 @@
 	},
 
 
-	"object_4": {
+	"object_3": {
 		"label": "infFactory1",
 		"id": 60,
 		"player": 4,
@@ -478,7 +470,7 @@
 	},
 
 
-	"object_5": {
+	"object_4": {
 		"label": "infFactory4",
 		"id": 61,
 		"player": 4,
@@ -486,7 +478,7 @@
 	},
 
 
-	"object_6": {
+	"object_5": {
 		"label": "golfFactory2",
 		"id": 108,
 		"player": 6,
@@ -494,7 +486,7 @@
 	},
 
 
-	"object_7": {
+	"object_6": {
 		"label": "golfSensor",
 		"id": 159,
 		"player": 6,
@@ -502,7 +494,7 @@
 	},
 
 
-	"object_8": {
+	"object_7": {
 		"label": "golfVtolCBTower2",
 		"id": 170,
 		"player": 6,
@@ -510,7 +502,7 @@
 	},
 
 
-	"object_9": {
+	"object_8": {
 		"label": "golfVtolCBTower1",
 		"id": 191,
 		"player": 6,
@@ -518,7 +510,7 @@
 	},
 
 
-	"object_10": {
+	"object_9": {
 		"label": "golfCBTower2",
 		"id": 192,
 		"player": 6,
@@ -526,7 +518,7 @@
 	},
 
 
-	"object_11": {
+	"object_10": {
 		"label": "golfVtolFactory3",
 		"id": 215,
 		"player": 6,
@@ -534,7 +526,7 @@
 	},
 
 
-	"object_12": {
+	"object_11": {
 		"label": "foxtrotTruck2",
 		"id": 219,
 		"player": 5,
@@ -542,15 +534,7 @@
 	},
 
 
-	"object_13": {
-		"label": "golfResearch2",
-		"id": 261,
-		"player": 6,
-		"type": 1
-	},
-
-
-	"object_14": {
+	"object_12": {
 		"label": "foxtrotTruck1",
 		"id": 310,
 		"player": 5,
@@ -558,7 +542,7 @@
 	},
 
 
-	"object_15": {
+	"object_13": {
 		"label": "foxtrotFactory4",
 		"id": 311,
 		"player": 5,
@@ -566,7 +550,7 @@
 	},
 
 
-	"object_16": {
+	"object_14": {
 		"label": "golfResearch1",
 		"id": 323,
 		"player": 6,
@@ -574,7 +558,7 @@
 	},
 
 
-	"object_17": {
+	"object_15": {
 		"label": "golfVtolFactory2",
 		"id": 343,
 		"player": 6,
@@ -582,10 +566,26 @@
 	},
 
 
-	"object_18": {
+	"object_16": {
+		"label": "golfPower",
+		"id": 389,
+		"player": 6,
+		"type": 1
+	},
+
+
+	"object_17": {
 		"label": "infHvyFactory",
 		"id": 452,
 		"player": 4,
+		"type": 1
+	},
+
+
+	"object_18": {
+		"label": "golfResearch2",
+		"id": 261,
+		"player": 6,
 		"type": 1
 	},
 
@@ -647,6 +647,14 @@
 
 
 	"object_26": {
+		"label": "foxtrotResearch1",
+		"id": 28,
+		"player": 5,
+		"type": 1
+	},
+
+
+	"object_27": {
 		"label": "foxtrotCybFactory3",
 		"id": 708,
 		"player": 5,
@@ -654,7 +662,7 @@
 	},
 
 
-	"object_27": {
+	"object_28": {
 		"label": "foxtrotCybFactory4",
 		"id": 711,
 		"player": 5,
@@ -662,7 +670,7 @@
 	},
 
 
-	"object_28": {
+	"object_29": {
 		"label": "foxtrotFactory3",
 		"id": 713,
 		"player": 5,
@@ -670,55 +678,23 @@
 	},
 
 
-	"object_29": {
-		"label": "foxtrotFactory2",
-		"id": 735,
-		"player": 5,
-		"type": 1
-	},
-
-
 	"object_30": {
-		"label": "infFactory5",
-		"id": 851,
-		"player": 4,
-		"type": 1
+		"label": "golfTruck5",
+		"id": 970,
+		"player": 6,
+		"type": 0
 	},
 
 
 	"object_31": {
-		"label": "golfFactory3",
-		"id": 905,
-		"player": 6,
-		"type": 1
+		"label": "foxtrotCommander",
+		"id": 963,
+		"player": 5,
+		"type": 0
 	},
 
 
 	"object_32": {
-		"label": "foxtrotResearch2",
-		"id": 909,
-		"player": 5,
-		"type": 1
-	},
-
-
-	"object_33": {
-		"label": "foxtrotFactory1",
-		"id": 916,
-		"player": 5,
-		"type": 1
-	},
-
-
-	"object_34": {
-		"label": "foxtrotCybFactory1",
-		"id": 927,
-		"player": 5,
-		"type": 1
-	},
-
-
-	"object_35": {
 		"label": "foxtrotTruck3",
 		"id": 961,
 		"player": 5,
@@ -726,10 +702,34 @@
 	},
 
 
-	"object_36": {
-		"label": "foxtrotCommander",
-		"id": 963,
+	"object_33": {
+		"label": "foxtrotTruck4",
+		"id": 972,
 		"player": 5,
+		"type": 0
+	},
+
+
+	"object_34": {
+		"label": "golfTruck3",
+		"id": 971,
+		"player": 6,
+		"type": 0
+	},
+
+
+	"object_35": {
+		"label": "foxtrotFactory1",
+		"id": 916,
+		"player": 5,
+		"type": 1
+	},
+
+
+	"object_36": {
+		"label": "golfTruck1",
+		"id": 966,
+		"player": 6,
 		"type": 0
 	},
 
@@ -743,14 +743,30 @@
 
 
 	"object_38": {
-		"label": "golfTruck1",
-		"id": 966,
-		"player": 6,
-		"type": 0
+		"label": "foxtrotFactory2",
+		"id": 735,
+		"player": 5,
+		"type": 1
 	},
 
 
 	"object_39": {
+		"label": "foxtrotCybFactory1",
+		"id": 927,
+		"player": 5,
+		"type": 1
+	},
+
+
+	"object_40": {
+		"label": "infFactory5",
+		"id": 851,
+		"player": 4,
+		"type": 1
+	},
+
+
+	"object_41": {
 		"label": "golfTruck2",
 		"id": 968,
 		"player": 6,
@@ -758,34 +774,18 @@
 	},
 
 
-	"object_40": {
-		"label": "golfTruck5",
-		"id": 970,
-		"player": 6,
-		"type": 0
-	},
-
-
-	"object_41": {
-		"label": "golfTruck3",
-		"id": 971,
-		"player": 6,
-		"type": 0
-	},
-
-
 	"object_42": {
-		"label": "foxtrotTruck4",
-		"id": 972,
-		"player": 5,
-		"type": 0
+		"label": "golfFactory3",
+		"id": 905,
+		"player": 6,
+		"type": 1
 	},
 
 
 	"object_43": {
-		"label": "golfPower",
-		"id": 389,
-		"player": 6,
+		"label": "foxtrotResearch2",
+		"id": 909,
+		"player": 5,
 		"type": 1
 	},
 

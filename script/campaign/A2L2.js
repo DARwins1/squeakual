@@ -574,7 +574,7 @@ function landingDialogue()
 		{text: "LIEUTENANT: Commander Bravo, teams Delta and Echo were assigned together, and they shared a single base.", delay: 3, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: If Delta's distress signal is anything to go by, then it was likely overrun by the Collective.", delay: 3, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: Move fast, and be prepared for anything.", delay: 3, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: With any luck, we might be able to save Delta before the Collective get them.", delay: 2, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: With any luck, we might be able to save Delta before the Collective get to them.", delay: 2, sound: CAM_RCLICK},
 	]);
 }
 

@@ -721,7 +721,7 @@ function sendCollectiveTrucks()
 	}
 	
 	// Collective bases
-	if (stage === 3)
+	if (stage >= 2)
 	{
 		// Ground Shaker base
 		if (!camDef(camGetTruck(colBaseTruckJob1)))
@@ -1031,8 +1031,8 @@ function startCollectiveReinforcments()
 function collectiveDialogue()
 {
 	camQueueDialogue([
-		{text: "DELTA: Lieutenant!", delay: 0, sound: CAM_RCLICK},
-		{text: "DELTA: We've spotted the Collective forces approaching from the east!", delay: 2, sound: CAM_RCLICK},
+		{text: "CHARLIE: Lieutenant!", delay: 0, sound: CAM_RCLICK},
+		{text: "CHARLIE: We've spotted the Collective forces approaching from the east!", delay: 2, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: ...Why can't anything ever be simple?", delay: 3, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: Commander Bravo, focus on escorting those refugees.", delay: 4, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: Charlie, Delta, cover Bravo's flanks and help them keep the Collective at bay.", delay: 3, sound: CAM_RCLICK},
@@ -2013,7 +2013,7 @@ function donateHoldout()
 	removeTimer("sendTransportHarassGroup");
 }
 
-// Triggered when the player enters Delta's transport holdout
+// Triggered when a Collective unit enters Delta's transport from the south
 camAreaEvent("colDeaggroZone", function(droid)
 {
 	if (!holdoutDonated)
@@ -2023,7 +2023,7 @@ camAreaEvent("colDeaggroZone", function(droid)
 		{
 			camSafeRemoveObject(droid);
 		}
-		resetLabel("colDeaggroZone", CAM_HUMAN_PLAYER);
+		resetLabel("colDeaggroZone", CAM_THE_COLLECTIVE);
 	}
 });
 
@@ -2149,8 +2149,8 @@ function setStageThree()
 	queue("airAssault10", camMinutesToMilliseconds(19)); // at 1 minutes remaining
 	queue("airAssault11", camMinutesToMilliseconds(19.25)); // at 0.75 minutes remaining
 
-	// Queue "lightening" effects
-	queue("startLighteningEffects", camMinutesToMilliseconds(2));
+	// Queue "lightning" effects
+	queue("startLightningEffects", camMinutesToMilliseconds(2));
 
 	// Gradually set the skies to be stormy
 	camGradualFog(camMinutesToMilliseconds(2), 107, 107, 107);
@@ -2727,9 +2727,9 @@ function airAssaultWave(index)
 				{limit: 4},
 			];
 
-			camSetVtolData(CAM_THE_COLLECTIVE, "vtolAttackPos4", "vtolRemoveZone2", wave2Vtols[0], undefined, undefined, wave3Extras[0]);
-			camSetVtolData(CAM_THE_COLLECTIVE, "vtolAttackPos4", "vtolRemoveZone2", wave2Vtols[1], undefined, undefined, wave3Extras[1]);
-			camSetVtolData(CAM_THE_COLLECTIVE, "vtolAttackPos4", "vtolRemoveZone2", wave2Vtols[2], undefined, undefined, wave3Extras[2]);
+			camSetVtolData(CAM_THE_COLLECTIVE, "vtolAttackPos4", "vtolRemoveZone2", wave2Vtols[0], undefined, undefined, wave2Extras[0]);
+			camSetVtolData(CAM_THE_COLLECTIVE, "vtolAttackPos4", "vtolRemoveZone2", wave2Vtols[1], undefined, undefined, wave2Extras[1]);
+			camSetVtolData(CAM_THE_COLLECTIVE, "vtolAttackPos4", "vtolRemoveZone2", wave2Vtols[2], undefined, undefined, wave2Extras[2]);
 			break;
 		case "3":
 			const wave3Vtols = [
@@ -2998,35 +2998,35 @@ function clearAirBlips()
 	airBlips[5] = false;
 }
 
-function startLighteningEffects()
+function startLightningEffects()
 {
 	// Shift the sun slightly the east
 	camSetSunPos(-225.0, -600.0, 450.0);
-	lighteningEffects();
+	lightningEffects();
 
-	// Start calling down lightening
-	setTimer("lighteningChance", camSecondsToMilliseconds(1));
+	// Start calling down lightning
+	setTimer("lightningChance", camSecondsToMilliseconds(1));
 }
 
-function lighteningChance()
+function lightningChance()
 {
 	if (getMissionTime() < 30)
 	{
-		return; // Don't cause any lightening within the final 30 seconds
+		return; // Don't cause any lightning within the final 30 seconds
 	}
-	// Lightening chance increases as the timer ticks down
+	// Lightning chance increases as the timer ticks down
 	// Decreases from 1/60 chance towards 1/30 chance
 	else if (camRand((getMissionTime()  * 30 / camMinutesToSeconds(20)) + 30) === 0)
 	{
-		lighteningEffects();
+		lightningEffects();
 	}
 }
 
-function lighteningEffects()
+function lightningEffects()
 {
 	// Momentarily brighten the skies
 	camSetFog(198, 219, 225);
-	camSetSunIntensity(.55,.55,.55);
+	camSetSunIntensity(.52,.52,.52);
 
 	// ...Then gradually re-darken them
 	camGradualFog(camSecondsToMilliseconds(1.8), 107, 107, 107);
@@ -3086,8 +3086,8 @@ function endSequence()
 
 	// TODO: Queue transport scene & more dialogue
 
-	// Stop the lightening
-	removeTimer("lighteningChance");
+	// Stop the lightning
+	removeTimer("lightningChance");
 
 	// Gradually clear the skies
 	camGradualFog(camSecondsToMilliseconds(30), 198, 219, 225);

@@ -91,7 +91,7 @@ function startPhaseTwo()
 	camQueueDialogue([
 		{text: "ASSOCIATE: Excellent work, Commander Alpha.", delay: 0, sound: CAM_RCLICK},
 		{text: "ASSOCIATE: All civilians and critical personnel are being transported to a safe distance.", delay: 2, sound: CAM_RCLICK},
-		{text: "ASSOCIATE: We'll be sending the transports back around for you soon.", delay: 3, sound: CAM_RCLICK},
+		{text: "ASSOCIATE: We'll be sending the transports back around for you once they're secured.", delay: 3, sound: CAM_RCLICK},
 		{text: "ASSOCIATE: Just hold your position for another few minutes.", delay: 3, sound: CAM_RCLICK},
 		{text: "ASSOCIATE: This will all be over soon...", delay: 4, sound: CAM_RCLICK},
 	]);
@@ -290,9 +290,9 @@ function startAttackWaves()
 		heliAttack();
 
 		// Change the fog colour to a dark purple
-		camSetFog(114, 73, 156);
+		camGradualFog(camSecondsToMilliseconds(30), 114, 73, 156);
 		// Decrease the lighting, and give it a stronger pink/purple hue
-		camSetSunIntensity(.5,.45,.5);
+		camGradualSunIntensity(camSecondsToMilliseconds(30), .5,.45,.5);
 		camSetWeather(CAM_WEATHER_SNOW);
 	}
 	else if (phase == 3)
@@ -301,9 +301,9 @@ function startAttackWaves()
 		setTimer("infestedAttackWaves", camChangeOnDiff(camSecondsToMilliseconds(12)));
 
 		// Change the fog colour to a darker purple
-		camSetFog(95, 60, 130);
+		camGradualFog(camSecondsToMilliseconds(20), 95, 60, 130);
 		// MORE PURPLE !!!
-		camSetSunIntensity(.5,.4,.5);
+		camGradualSunIntensity(camSecondsToMilliseconds(20), .5,.4,.5);
 		camSetWeather(CAM_WEATHER_SNOWSTORM);
 	}
 }

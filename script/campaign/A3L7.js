@@ -633,6 +633,7 @@ function eventStartLevel()
 		"colFactory1": { tech: "R-Wpn-Rocket07-Tank-Killer" }, // Tank Killer
 		"colFactory2": { tech: "R-Wpn-Flamer-ROF02" }, // Flamer Autoloader Mk2
 		"colAAEmp": { tech: "R-Wpn-AAGun-ROF02" }, // AA Ammunition Hopper Mk2
+		"colPower": { tech: "R-Struc-Power-Upgrade02" }, // Gas Turbine Generator Mk2
 	});
 
 	camSetEnemyBases({

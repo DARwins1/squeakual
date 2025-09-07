@@ -526,11 +526,11 @@ function eventStartLevel()
 	camSetStandardWinLossConditions(CAM_VICTORY_SCRIPTED, "A3L5S", {
 		ignoreInfestedUnits: true
 	});
-	camSetExtraObjectiveMessage(_("Survive until reinforcements arrive"));
+	camSetExtraObjectiveMessage(_("Survive until the timer reaches zero"));
 
 	setAlliance(MIS_TEAM_CHARLIE, CAM_HUMAN_PLAYER, true);
 	camSetObjectVision(MIS_TEAM_CHARLIE);
-	changePlayerColour(MIS_TEAM_CHARLIE, (PLAYER_COLOR !== 11) ? 11 : 5); // Charlie to bright blue or blue
+	changePlayerColour(MIS_TEAM_CHARLIE, (playerData[0].colour !== 11) ? 11 : 5); // Charlie to bright blue or blue
 
 	setMissionTime(camMinutesToSeconds(22));
 

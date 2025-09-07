@@ -173,7 +173,7 @@ function eventStartLevel()
 
 	camSetArtifacts({
 		"colFactory": { tech: "R-Wpn-Rocket02-MRLHvy" }, // Heavy Rocket Array
-		"colPower": { tech: "R-Struc-Power-Upgrade02" }, // Gas Turbine Generator Mk2
+		// "colPower": { tech: "R-Struc-Power-Upgrade02" }, // Gas Turbine Generator Mk2
 		"convoyCrate": { tech: "R-Wpn-Mortar3" }, // Pepperpot
 		"colResearch": { tech: "R-Wpn-Bomb-Damage01" }, // HE Bomb Shells
 	});

@@ -392,7 +392,11 @@ function groundAssault4()
 	activateGroundBlip(6);
 	activateGroundBlip(7);
 
-	killTeamsEnabled = false; // Stop spawning Collective kill teams
+
+	if (difficulty < INSANE)
+	{
+		killTeamsEnabled = false; // Stop spawning Collective kill teams
+	}
 	
 	playSound(cam_sounds.enemyUnitDetected);
 

@@ -368,6 +368,14 @@
 	},
 
 
+	"object_21": {
+		"label": "colPower",
+		"id": 498,
+		"player": 2,
+		"type": 1
+	},
+
+
 	"radius_0": {
 		"label": "heliRemoveZone",
 		"pos": [9796, 4103],

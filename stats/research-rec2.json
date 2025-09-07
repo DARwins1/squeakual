@@ -1711,7 +1711,7 @@
             "R-Wpn-HvyHowitzer",
             "R-Defense-Howitzer"
         ],
-        "researchPoints": 6000,
+        "researchPoints": 1400,
         "researchPower": 187,
         "resultStructures": [
             "Emplacement-Howitzer150"
@@ -4903,7 +4903,7 @@
                 "value": 25
             }
         ],
-        "statID": "Rocket-LtA-T",
+        "statID": "Rocket-LtA-TMk1",
         "subgroupIconID": "IMAGE_RES_GRPDAM",
         "techCode": 1
     },
