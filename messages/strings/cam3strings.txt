@@ -16,12 +16,17 @@ ENDREPORT		_("------------------------------ REPORT ENDS -----------------------
 
 /* L1 NASDA Base Startup */
 /* Mission Briefing */
-L1_BMSG1		_("Greetings Commander. I am Edmund Clayde, former General of the North American Armed Forces, and I am the overseer of this operation.")
-L1_BMSG2		_("You have been sent here today to lay the foundation for our reclamation of these blasted lands.")
-L1_BMSG3		_("In order to achieve our goal, we must first establish our base of operations.")
-L1_BMSG4		_("Recovered documents evidence the existence of a Pre-Collapse NASDA site located south of your position.")
-L1_BMSG5		_("This site is believed to house nuclear weapons, making securing it our first priority.")
-L1_BMSG6		_("Find this site, and establish our base there. You may need to use your weapons to clear a path through the trees.")
+L1_BMSG1		_("<CLAYDE>: Greetings Commander.")
+L1_BMSG2		_("<CLAYDE>: I am Edmund Clayde, current head General of the North American Reclamation.")
+L1_BMSG3		_("<CLAYDE>: I'll act as the overseer of this operation.")
+L1_BMSG4		_("<CLAYDE>: You have been assigned to lead team Alpha to accomplish our goals.")
+L1_BMSG5		_("<CLAYDE>: Your first task is to establish a base of operations.")
+L1_BMSG6		_("<CLAYDE>: Recovered documents evidence the existence of a Pre-Collapse NASDA")
+L1_BMSG7		_("site located south of your position.")
+L1_BMSG8		_("<CLAYDE>: We believe this site likely houses nuclear weapons.")
+L1_BMSG9		_("<CLAYDE>: Therefore, securing it is our first priority.")
+L1_BMSG10		_("<CLAYDE>: Take your forces, and travel overland towards this site.")
+L1_BMSG11		_("<CLAYDE>: You may need to use your weapons to clear a path through the trees.")
 /* Wall Message */
 L1_WALLMSG1		_("You're close now Commander, this appears to be the base's eastern wall.")
 L1_WALLMSG2		_("Use your weapons to bring it down, and then get inside.")

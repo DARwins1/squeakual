@@ -1,4 +1,5 @@
 /* General Script Strings */
+BLANK		_(" ")
 
 /* Generic Briefing Stuff */
 TRANS_MSG1			_("Briefing Commences:")
