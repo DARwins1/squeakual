@@ -52,8 +52,6 @@ camAreaEvent("captureZone", function(droid)
 	queue("researchFlash", camSecondsToMilliseconds(1));
 
 	// Tell the player to use the inbound trucks
-	// camPlayVideos([cam_sounds.objective.objectiveCaptured, {video: "L1_BASEMSG", type: MISS_MSG}]);
-	// queue("messageAlert", camSecondsToMilliseconds(3.4));
 	camQueueDialogue([
 		{text: "CLAYDE: Well done, Commander.", delay: 0, sound: CAM_RCLICK},
 		{text: "CLAYDE: I'm sure the Council will be pleased to know of our success.", delay: 2, sound: CAM_RCLICK},
@@ -101,8 +99,6 @@ camAreaEvent("townMsg", function(droid)
 	if (droid.player === CAM_HUMAN_PLAYER)
 	{
 		// Tell the player about the scavengers fighting in the town
-		// camPlayVideos({video: "L1_TOWNMSG", type: MISS_MSG});
-		// queue("messageAlert", camSecondsToMilliseconds(0.2));
 		camQueueDialogue([
 			{text: "CLAYDE: Look how this small town has been torn apart by these warring gangs...", delay: 4, sound: CAM_RCLICK},
 			{text: "CLAYDE: If we succeed in our goal, we can bring an end to all this chaos.", delay: 3, sound: CAM_RCLICK},
@@ -162,7 +158,6 @@ function expandMap()
 	// Tell the player to go and kill all the scavs
 	// (and defend the base)
 	camPlayVideos({video: "L1_SCAVMSG", type: MISS_MSG});
-	queue("messageAlert", camSecondsToMilliseconds(0.2));
 
 	// Hack to prevent the south half of the map from being dark after the expansion
 	setSunPosition(225.0, -601.0, 450.0); // Move the sun just a wee bit (default is 225.0, -600.0, 450.0)
@@ -228,8 +223,6 @@ function yScavPlayerDetected()
 	{
 		// camSetFactories({"cScavFactory": {}}); // Clears factory data (disabling the factory)
 
-		// camPlayVideos({video: "L1_DETMSG", type: MISS_MSG});
-		// queue("messageAlert", camSecondsToMilliseconds(0.2));
 		camQueueDialogue([
 			{text: "CLAYDE: Commander, we've been monitoring scavenger radio chatter from your area.", delay: 0, sound: CAM_RCLICK},
 			{text: "CLAYDE: It would appear that some of the scavengers near you are now aware of your presence.", delay: 3, sound: CAM_RCLICK},
@@ -270,8 +263,6 @@ function cScavPlayerDetected()
 	{
 		// camSetFactories({"yScavFactory1": {}}); // Clears factory data (disabling the factory)
 
-		// camPlayVideos({video: "L1_DETMSG", type: MISS_MSG});
-		// queue("messageAlert", camSecondsToMilliseconds(0.2));
 		camQueueDialogue([
 			{text: "CLAYDE: Commander, we've been monitoring scavenger radio chatter from your area.", delay: 0, sound: CAM_RCLICK},
 			{text: "CLAYDE: It would appear that some of the scavengers near you are now aware of your presence.", delay: 3, sound: CAM_RCLICK},
@@ -320,8 +311,6 @@ function cScavPlayerDetected()
 camAreaEvent("wallMsg", function(droid)
 {
 	// Tell the player to break through the wall
-	// camPlayVideos({video: "L1_WALLMSG", type: MISS_MSG});
-	// queue("messageAlert", camSecondsToMilliseconds(0.2));
 	camQueueDialogue([
 		{text: "CLAYDE: You're almost there now, Commander.", delay: 0, sound: CAM_RCLICK},
 		{text: "CLAYDE: This appears to be the base's eastern wall.", delay: 2, sound: CAM_RCLICK},
@@ -348,12 +337,6 @@ function enableBaseStructures()
 	{
 		enableStructure(camBasicStructs[i], CAM_HUMAN_PLAYER);
 	}
-}
-
-// This function is called after a video is played, a delay is required for the 'alert' sound to play properly in all cases
-function messageAlert()
-{
-	playSound("beep7.ogg"); // Play a little noise to notify the player that they have a new message
 }
 
 // Check to make sure at least 1 silo still exists.
@@ -518,7 +501,6 @@ function eventStartLevel()
 
 	// Give player briefing.
 	camPlayVideos({video: "L1_BRIEF", type: MISS_MSG});
-	queue("messageAlert", camSecondsToMilliseconds(0.2));
 
 	// Set artifact placement
 	camSetArtifacts({

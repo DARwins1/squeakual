@@ -9,12 +9,6 @@ function checkMissileSilos()
 	}
 }
 
-// This function is called after a video is played, a delay is required for the 'alert' sound to play properly in all cases
-function messageAlert()
-{
-	playSound("beep7.ogg"); // Play a little noise to notify the player that they have a new message
-}
-
 function eventStartLevel()
 {
 	camSetupTransporter(31, 20, 39, 26);
@@ -27,7 +21,6 @@ function eventStartLevel()
 
 	// Give player briefing.
 	camPlayVideos({video: "L5_BRIEF", type: MISS_MSG});
-	queue("messageAlert", camSecondsToMilliseconds(0.2));
 
 	if (!tweakOptions.rec_timerlessMode)
 	{

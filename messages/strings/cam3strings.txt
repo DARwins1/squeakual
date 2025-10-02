@@ -26,13 +26,6 @@ L1_BMSG7		_("We believe this site likely houses nuclear weapons.")
 L1_BMSG8		_("Therefore, securing it is our first priority.")
 L1_BMSG9		_("Take your forces, and travel overland towards this site.")
 L1_BMSG10		_("You may need to use your weapons to clear a path through the trees.")
-/* Wall Message */
-L1_WALLMSG1		_("You're close now Commander, this appears to be the base's eastern wall.")
-L1_WALLMSG2		_("Use your weapons to bring it down, and then get inside.")
-/* Base Message */
-L1_BASEMSG1		_("Well done Commander. I'm sure the Council will be pleased to know of our success.")
-L1_BASEMSG2		_("I've sent a transport with trucks to your position. Use them to get this base up and running.")
-L1_BASEMSG3		_("Make sure to construct a generator and investigate that research facility for anything useful.")
 /* Scavenger Message */
 L1_SCAVMSG1		_("<CLAYDE>: I've had my technicians run a quick analysis on the site you have found.")
 L1_SCAVMSG2		_("After a preliminary scan, we can confirm that these silos indeed contain nuclear warheads.")
@@ -42,15 +35,6 @@ L1_SCAVMSG5		_("If their radio chatter is anything to go by, then they're too bu
 L1_SCAVMSG6		_("Commander Alpha, I'm ordering you to clear them out in order to ensure the safety of this site.")
 L1_SCAVMSG7		_("Take some time to establish your forces, then move out and neutralize any nearby outposts.")
 L1_SCAVMSG8		_("Regardless of how you feel about diplomacy, this site is too important to negotiate over with the local gangs.")
-/* Town Message */
-L1_TOWNMSG1		_("See how this small river town's been torn apart by these warring gangs?")
-L1_TOWNMSG2		_("If we succeed in our goal, we can bring an end to all this chaos.")
-L1_TOWNMSG3		_("We will build a new world, a better world.")
-L1_TOWNMSG4		_("But these scavengers only serve to stand in our way...")
-/* Player Detection Message */
-L1_DETMSG1		_("Commander, monitoring of scavenger radio chatter shows that they're aware of your presence, and are preparing to retaliate.")
-L1_DETMSG2		_("Be ready to defend our base.")
-L1_DETMSG3		_("Do not allow them to compromise the mission!")
 
 /* L2S Hostages (Setup)*/
 /* Mission Briefing */
@@ -68,16 +52,6 @@ L2_BMSG11		_("But when we attempted to reach out to them, they were captured by 
 L2_BMSG12		_("They are currently being held as hostages nearby.")
 L2_BMSG13		_("Commander, take a transport and free those contacts using whatever means necessary.")
 L2_BMSG14		_("Reinforcements will be available for this mission.")
-
-/* L2 Hostages */
-/* Scavenger Message 1 */
-L2_SCAVMSG1		_("These scavengers are proving to be more than a nuisance.")
-L2_SCAVMSG2		_("But the more they stand in the way of our goals, the more destruction we shall cause them.")
-L2_SCAVMSG3		_("Go on, Commander.")
-/* Scavenger Message 2 */
-L2_SCAV2MSG1	_("When you've finished your work out there I'll have some extra questions for our contacts.")
-L2_SCAV2MSG2	_("These scavengers seem to have a particular interest in them, which may mean they're after the same goal.")
-L2_SCAV2MSG3	_("You've proven yourself quite capable, Commander. I am confident that you are more than able to handle whatever these hooligans can throw at us.")
 
 /* L3 Surprise Attack */
 /* Mission Briefing */
@@ -116,10 +90,6 @@ L4_BMSG9		_("If this facility truly does contain weapons, it's possible that the
 L4_BMSG10		_("Commander, make sure that doesn't happen.")
 
 /* L4 Biological Research */
-/* Ominous Message */
-L4_WARNMSG1		_("Damnation! Those scavengers are already here.")
-L4_WARNMSG2		_("Clear them out and advance towards the research facility.")
-L4_WARNMSG3		_("With any luck, we may still have enough time to stop them.")
 /* Ambush Message */
 L4_AMBUSHMSG1	_("<CLAYDE>: Commander!")
 L4_AMBUSHMSG2	_("We're detecting a huge amount of movement approaching your position!")
@@ -150,12 +120,6 @@ L5_BMSG13	_("According to scavenger radio chatter, there's a nearby industrial t
 L5_BMSG14	_("Take your forces there and purge the town.")
 L5_BMSG15	_("We must move swiftly and act decisively in order to succeed.")
 
-/* L5 Town Purge */
-/* Scav Base Message */
-L5_SCAVMSG1		_("Commander, continue forward and eradicate that scavenger base.")
-L5_SCAVMSG2		_("Infested or not, they still pose a threat to our cause, and as such must be rooted out.")
-L5_SCAVMSG3		_("If we are to succeed, we cannot allow any loose ends to remain.")
-
 /* L6S AA Hunter (Setup)*/
 /* Mission Briefing */
 L6_BMSG1	_("<ASSOCIATE>: Greetings, Commander Alpha.")
@@ -178,23 +142,10 @@ L6_BMSG17	_("Disable any AA emplacements so that our transports can pass through
 L6_BMSG18	_("Countless lives are now depending on your success.")
 
 /* L6 AA Hunter */
-/* Infested Wave Warning Message */
-L6_INFESMSG1	_("Commander be advised: we have received reports that large numbers of infested are amassing just outside your area of operation.")
-L6_INFESMSG2	_("Judging by the large scavenger presence here, the infested are most likely preparing to overrun whatever is left of them.")
-L6_INFESMSG3	_("Please work quickly; we are unsure of when they will begin to descend upon this position.")
-/* AA Site Reminder Message */
-L6_AAMSG1		_("Commander, a reminder to not allow yourself to be distracted from your goal.")
-L6_AAMSG2		_("Your primary objective is to neutralize the designated anti-aircraft batteries, and then return to base.")
-L6_AAMSG3		_("We cannot afford to have you waste time out there, Commander.")
 /* Infested Wave Imminent Message */
 L6_WAVEMSG1		_("<ASSOCIATE>: Commander Alpha, the infested are converging towards your location en masse.")
 L6_WAVEMSG2		_("Their numbers are far too great to estimate; retreat immediately to the LZ for extraction.")
 L6_WAVEMSG3		_("There's no feasible way for your forces to maintain their position much longer.")
-/* 'You Are Taking Too Long' Message */
-L6_SCOLDMSG1	_("What are you still doing out there?!")
-L6_SCOLDMSG2	_("Are you searching for more glory? More trial by combat?")
-L6_SCOLDMSG3	_("By delaying your orders to retreat, you are only putting yourself and your own troops at risk.")
-L6_SCOLDMSG4	_("Regroup at the LZ for evac, unless you'd rather we call off the transports and leave you behind.")
 
 /* L7 Final Defensive */
 /* Mission Briefing */
@@ -207,11 +158,6 @@ L7_BMSG6		_("We don't have much time left; you must defend the base while we fin
 L7_BMSG7		_("Once all civilians and critical personnel are away, we'll have the transports come back for you and your forces.")
 L7_BMSG8		_("Then, we'll remotely detonate the warheads in those silos and put an end to this once and for all.")
 L7_BMSG9		_("This is it Commander. Good luck.")
-/* Transport Message */
-L7_TMSG1		_("Excellent work. All civilians and critical personnel are being transported to a safe distance.")
-L7_TMSG2		_("We'll be sending the transports back around for you soon, Commander.")
-L7_TMSG3		_("Just hold out for another few minutes.")
-L7_TMSG4		_("This will all be over soon...")
 /* Reveal Message */
 L7_REVMSG1		_("<CLAYDE>: Commander Alpha, this is General Clayde.")
 L7_REVMSG2		_("The evacuation was a success, the final survivors have reached the safe haven...")

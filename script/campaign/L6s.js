@@ -10,12 +10,6 @@ function checkMissileSilos()
 	}
 }
 
-// This function is called after a video is played, a delay is required for the 'alert' sound to play properly in all cases
-function messageAlert()
-{
-	playSound("beep7.ogg"); // Play a little noise to notify the player that they have a new message
-}
-
 function eventStartLevel()
 {
 	camSetupTransporter(31, 20, 39, 46);
@@ -28,7 +22,6 @@ function eventStartLevel()
 
 	// Give player briefing.
 	camPlayVideos({video: "L6_BRIEF", type: MISS_MSG});
-	queue("messageAlert", camSecondsToMilliseconds(0.2));
 
 	if (!tweakOptions.rec_timerlessMode)
 	{
@@ -364,6 +357,7 @@ function eventStartLevel()
 
 
 // ok FINE you can look
+// TODO: REWORK THIS WHOLE SYSTEM
 var currentColour = 3;
 const THEM = 3;
 
@@ -420,24 +414,4 @@ function spawnThem()
 	camSetArtifacts({
 		"theOnly": { tech: "R-Wpn-Flame2" }
 	});
-
-	var messageID = camRand(3);
-	switch(messageID) {
-		case 0:
-			camPlayVideos({video: "MSG1", type: MISS_MSG});
-			queue("messageAlert", camSecondsToMilliseconds(0.2));
-			break;
-		case 1:
-			camPlayVideos({video: "MSG2", type: MISS_MSG});
-			queue("messageAlert", camSecondsToMilliseconds(0.2));
-			break;
-		case 2:
-			camPlayVideos({video: "MSG3", type: MISS_MSG});
-			queue("messageAlert", camSecondsToMilliseconds(0.2));
-			break;
-		default:
-			camPlayVideos({video: "MSG1", type: MISS_MSG});
-			queue("messageAlert", camSecondsToMilliseconds(0.2));
-			break;
-	}
 }

@@ -33,12 +33,6 @@ camAreaEvent("heliRemoveZone", function(droid)
 	resetLabel("heliRemoveZone", CAM_INFESTED);
 });
 
-// This function is called after a video is played, a delay is required for the 'alert' sound to play properly in all cases
-function messageAlert()
-{
-	playSound("beep7.ogg"); // Play a little noise to notify the player that they have a new message
-}
-
 // Transition the level into phase two
 // At this point, both ground and air attack waves will stop spawning to give the player some time to reorganize
 // This function should always be called around when the timer hits 12 minutes remaining
@@ -87,7 +81,6 @@ function startPhaseThree()
 	phase = 3;
 
 	camPlayVideos([cam_sounds.incoming.incomingTransmission, {video: "L7_REVEAL", type: MISS_MSG}]);
-	queue("messageAlert", camSecondsToMilliseconds(3.4));
 	camSetExtraObjectiveMessage();
 	// Remove the mission timer
 	setMissionTime(-1);
@@ -187,7 +180,6 @@ function killSweep()
 		}
 		else
 		{
-			queue("hintMessage", camSecondsToMilliseconds(4));
 			queue("youWin", camSecondsToMilliseconds(12));
 		}
 	}
@@ -208,13 +200,6 @@ function killSweep()
 function youWin()
 {
 	camEndMission();
-}
-
-// Give a hint on how to do something i guess.
-function hintMessage()
-{
-	camPlayVideos({video: "HINTMSG", type: MISS_MSG});
-	queue("messageAlert", camSecondsToMilliseconds(0.2));
 }
 
 // Start sending attack waves
@@ -512,7 +497,6 @@ function eventStartLevel()
 
 	// Give player briefing about the incoming infested waves.
 	camPlayVideos({video: "L7_BRIEF", type: MISS_MSG});
-	queue("messageAlert", camSecondsToMilliseconds(0.2));
 
 	// Set up transport runs to pick up civilians
 	setTimer("transportEvac", camMinutesToMilliseconds(2));

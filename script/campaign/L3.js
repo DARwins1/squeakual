@@ -41,12 +41,6 @@ camAreaEvent("mointainBaseTrigger", function(droid)
 	camEnableFactory("cScavFactory2");
 });
 
-// This function is called after a video is played, a delay is required for the 'alert' sound to play properly in all cases
-function messageAlert()
-{
-	playSound("beep7.ogg"); // Play a little noise to notify the player that they have a new message
-}
-
 //Setup helicopter attacks.
 function heliAttack()
 {
@@ -151,17 +145,6 @@ function expandMap()
 
 	// Tell the player to go kill everything again
 	camPlayVideos([cam_sounds.incoming.incomingTransmission, {video: "L3_KILLMSG", type: MISS_MSG}]);
-	// queue("messageAlert", camSecondsToMilliseconds(3.4));
-	// camQueueDialogue([
-	// 	{text: "CLAYDE: Helicopters?", delay: 2, sound: CAM_RCLICK},
-	// 	{text: "CLAYDE: Perhaps I have truly underestimated these scavengers after all...", delay: 3, sound: CAM_RCLICK},
-	// 	{text: "CLAYDE: But we've come too far to be outplayed now.", delay: 3, sound: CAM_RCLICK},
-	// 	{text: "CLAYDE: Commander, I'm overriding your previous objective.", delay: 3, sound: CAM_RCLICK},
-	// 	{text: "CLAYDE: That research facility can wait.", delay: 2, sound: CAM_RCLICK},
-	// 	{text: "CLAYDE: Make your way south, and eradicate those scavengers.", delay: 3, sound: CAM_RCLICK},
-	// 	{text: "CLAYDE: Wipe out anything that gets in your way.", delay: 3, sound: CAM_RCLICK},
-	// 	{text: "CLAYDE: We must enure that this site is secure at all costs!", delay: 3, sound: CAM_RCLICK},
-	// ]);
 
 	// Setup patrol groups and repeating helicopter attacks
 	activateScavGroups();
@@ -316,12 +299,6 @@ function startScavAttack()
 
 	// Tell the player about incoming scavs
 	camPlayVideos([cam_sounds.incoming.incomingIntelligenceReport, {video: "L3_ATTACKMSG", type: MISS_MSG}]);
-	// queue("messageAlert", camSecondsToMilliseconds(3.4));
-	// camQueueDialogue([
-	// 	{text: "CLAYDE: Commander, we're detecting a scavenger attack coming in from the south!", delay: 0, sound: CAM_RCLICK},
-	// 	{text: "CLAYDE: We cannot afford to lose this site!", delay: 3, sound: CAM_RCLICK},
-	// 	{text: "CLAYDE: Repulse this attack, immediately!", delay: 2, sound: CAM_RCLICK},
-	// ]);
 
 	// Send the first attack wave after a delay, and cue up additional waves
 	queue("sendScavAttackWaves", camSecondsToMilliseconds(5));
@@ -493,7 +470,6 @@ function eventStartLevel()
 
 	// Give player briefing about finding the research facility.
 	camPlayVideos({video: "L3_BRIEF", type: MISS_MSG});
-	queue("messageAlert", camSecondsToMilliseconds(0.2));
 
 	// Set dummy transport colour to match the player, and ally it to the player
 	changePlayerColour(MIS_DUMMY_TRANSPORT, playerData[0].colour);

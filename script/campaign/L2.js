@@ -21,12 +21,6 @@ var civGroup1Free = false;
 var civGroup2Free = false;
 var civGroup3Free = false;
 
-// This function is called after a video is played, a delay is required for the 'alert' sound to play properly in all cases
-function messageAlert()
-{
-	playSound("beep7.ogg"); // Play a little noise to notify the player that they have a new message
-}
-
 //Remove rescued civilians
 camAreaEvent("civilianRemoveZone", function(droid)
 {
@@ -47,8 +41,6 @@ camAreaEvent("yScavAttack", function(droid)
 		camEnableFactory("yScavFactory");
 
 		// Message about scavengers being dug in
-		// camPlayVideos([cam_sounds.incoming.incomingTransmission, {video: "L2_SCAVMSG", type: MISS_MSG}]);
-		// queue("messageAlert", camSecondsToMilliseconds(3.4));
 		camQueueDialogue([
 			{text: "CLAYDE: These scavengers are proving to be more than a nuisance.", delay: 0, sound: CAM_RCLICK},
 			{text: "CLAYDE: But the more they obstruct us...", delay: 3, sound: CAM_RCLICK},
@@ -79,8 +71,6 @@ camAreaEvent("cScavAttack", function(droid)
 		});
 
 		// Message about scavengers being cool
-		// camPlayVideos([cam_sounds.incoming.incomingTransmission, {video: "L2_SCAV2MSG", type: MISS_MSG}]);
-		// queue("messageAlert", camSecondsToMilliseconds(3.4));
 		camQueueDialogue([
 			{text: "CLAYDE: Once you've finished your work out there, I'll have some extra questions for our contacts.", delay: 0, sound: CAM_RCLICK},
 			{text: "CLAYDE: These scavengers seem to have an interest in them.", delay: 3, sound: CAM_RCLICK},

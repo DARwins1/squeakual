@@ -17,7 +17,6 @@ function eventStartLevel()
 
 	// Give player briefing.
 	// camPlayVideos({video: "L2_BRIEF", type: MISS_MSG});
-	// queue("messageAlert", camSecondsToMilliseconds(0.2));
 
 	// Darken the fog to 1/2 default brightness
 	camSetFog(8, 8, 32);

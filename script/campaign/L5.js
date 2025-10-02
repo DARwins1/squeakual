@@ -47,12 +47,6 @@ camAreaEvent("heliRemoveZone", function(droid)
 	resetLabel("heliRemoveZone", MIS_CYAN_SCAVS);
 });
 
-// This function is called after a video is played, a delay is required for the 'alert' sound to play properly in all cases
-function messageAlert()
-{
-	playSound("beep7.ogg"); // Play a little noise to notify the player that they have a new message
-}
-
 function eventDestroyed(obj)
 {
 	if (obj.type === STRUCTURE)
@@ -116,8 +110,6 @@ function camEnemyBaseDetected_scavOutpost()
 	});
 
 	// Tell the player to go destroy the scavengers (again)
-	// camPlayVideos([cam_sounds.incoming.incomingTransmission, {video: "L5_SCAVMSG", type: MISS_MSG}]);
-	// queue("messageAlert", camSecondsToMilliseconds(3.4));
 	camQueueDialogue([
 		{text: "CLAYDE: Commander, continue forward and eradicate that scavenger base.", delay: 3, sound: CAM_RCLICK},
 		{text: "CLAYDE: Infested or not, they still pose a threat to our cause.", delay: 3, sound: CAM_RCLICK},

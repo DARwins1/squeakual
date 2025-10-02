@@ -43,28 +43,6 @@ camAreaEvent("heliRemoveZone", function(droid)
 	resetLabel("heliRemoveZone", MIS_CYAN_SCAVS);
 });
 
-// This function is called after a video is played, a delay is required for the 'alert' sound to play properly in all cases
-function messageAlert()
-{
-	playSound("beep7.ogg"); // Play a little noise to notify the player that they have a new message
-}
-
-// Play alerts if the player's stuff gets infected by a Vile Stinger
-// function eventObjectTransfer(obj, from)
-// {
-// 	if (from === CAM_HUMAN_PLAYER && obj.player === CAM_INFESTED)
-// 	{
-// 		if (obj.type === STRUCTURE)
-// 		{
-// 			playSound("pcv623.ogg"); // "Structure Infected"
-// 		}
-// 		else if (obj.type === DROID)
-// 		{
-// 			playSound("pcv624.ogg"); // "Unit Infected"
-// 		}
-// 	}
-// }
-
 function camEnemyBaseDetected_infestedHighwayCamp()
 {
 	// Activate both infested factories and the western scav factory
@@ -82,8 +60,6 @@ function activateNorthInfested()
 	camEnableFactory("eastScavFactory");
 
 	// Message the player about infested outside of the area
-	// camPlayVideos([cam_sounds.incoming.incomingIntelligenceReport, {video: "L6_INFESMSG", type: MISS_MSG}]);
-	// queue("messageAlert", camSecondsToMilliseconds(3.4));
 	camQueueDialogue([
 		{text: "ASSOCIATE: Commander Alpha be advised: we have detected a massive infested presence just outside your area of operation.", delay: 0, sound: CAM_RCLICK},
 		{text: "ASSOCIATE: It's likely that they will soon descend upon your position.", delay: 3, sound: CAM_RCLICK},
@@ -143,8 +119,6 @@ camAreaEvent("scavAttackTrigger", function(droid)
 		westHeliAttack();
 
 		// Remind the player that the AA sites are the primary target
-		// camPlayVideos([cam_sounds.incoming.incomingTransmission, {video: "L6_AAMSG", type: MISS_MSG}]);
-		// queue("messageAlert", camSecondsToMilliseconds(3.4));
 		camQueueDialogue([
 			{text: "ASSOCIATE: Commander Alpha, a reminder to not allow yourself to be distracted from your goal.", delay: 0, sound: CAM_RCLICK},
 			{text: "ASSOCIATE: Your primary objective is to neutralize the designated anti-aircraft batteries, and then return to base.", delay: 5, sound: CAM_RCLICK},
@@ -301,7 +275,6 @@ function checkForLZReturn()
 
 		// Give a message about the imminent infested waves
 		camPlayVideos([cam_sounds.incoming.incomingIntelligenceReport, {video: "L6_WAVEMSG", type: MISS_MSG}]);
-		queue("messageAlert", camSecondsToMilliseconds(3.4));
 		camSetExtraObjectiveMessage(_("Escape the incoming infested waves"));
 
 		// Change the fog colour to a dark purple
@@ -356,8 +329,6 @@ function infestedEndWaves()
 	if (numWaves === 16)
 	{
 		// Give the player an angry message about how slow they are
-		// camPlayVideos({video: "L6_SCOLDMSG", type: MISS_MSG});
-		// queue("messageAlert", camSecondsToMilliseconds(0.2));
 		camQueueDialogue([
 			{text: "ASSOCIATE: What are you still doing out there?!", delay: 0, sound: CAM_RCLICK},
 			{text: "ASSOCIATE: Are you searching for more glory?", delay: 3, sound: CAM_RCLICK},

@@ -20,7 +20,6 @@ function eventStartLevel()
 
 	// Give player briefing.
 	// camPlayVideos({video: "L2_BRIEF", type: MISS_MSG});
-	// queue("messageAlert", camSecondsToMilliseconds(0.2));
 
 	// Descrease the lighting slightly
 	camSetSunIntensity(.45,.45,.45);
