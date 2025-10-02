@@ -146,13 +146,13 @@ function infestedAmbush1()
 	camManageGroup(camMakeGroup("infestedAmbushGroup2"), CAM_ORDER_ATTACK, {targetPlayer: CAM_HUMAN_PLAYER});
 
 	// Message about incoming units
-	// camPlayVideos({video: "L4_AMBUSHMSG", type: MISS_MSG});
+	camPlayVideos({video: "L4_AMBUSHMSG", type: MISS_MSG});
 	// queue("messageAlert", camSecondsToMilliseconds(0.2));
-	camQueueDialogue([
-		{text: "CLAYDE: Commander!", delay: 0, sound: CAM_RCLICK},
-		{text: "CLAYDE: We're detecting a huge amount of movement approaching your position!", delay: 2, sound: CAM_RCLICK},
-		{text: "CLAYDE: Be ready for any-...", delay: 4, sound: CAM_RCLICK},
-	]);
+	// camQueueDialogue([
+	// 	{text: "CLAYDE: Commander!", delay: 0, sound: CAM_RCLICK},
+	// 	{text: "CLAYDE: We're detecting a huge amount of movement approaching your position!", delay: 2, sound: CAM_RCLICK},
+	// 	{text: "CLAYDE: Be ready for any-...", delay: 4, sound: CAM_RCLICK},
+	// ]);
 
 	// Set up additional waves
 	setTimer("sendInfestedReinforcements", camChangeOnDiff(camSecondsToMilliseconds(45)));
@@ -183,19 +183,19 @@ function infestedAmbush2()
 	camEnableFactory("infestedFactory6");
 
 	// Message about destroying the research facility and containing the outbreak
-	// camPlayVideos([cam_sounds.incoming.incomingTransmission, {video: "L4_KILLMSG", type: MISS_MSG}]);
+	camPlayVideos([cam_sounds.incoming.incomingTransmission, {video: "L4_KILLMSG", type: MISS_MSG}]);
 	// queue("messageAlert", camSecondsToMilliseconds(3.4));
-	camQueueDialogue([
-		{text: "CLAYDE: What is going on down there?!", delay: 2, sound: CAM_RCLICK},
-		{text: "CLAYDE: I'm looking through my feed data, and...", delay: 3, sound: CAM_RCLICK},
-		// {text: "CLAYDE: I have a hard time believing what I'm seeing.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: ...", delay: 2},
-		{text: "CLAYDE: Commander, I'm changing your objective.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: Destroy that research facility and eradicate anyone or anything that stands in your way.", delay: 2, sound: CAM_RCLICK},
-		{text: "CLAYDE: Lock down this entire area.", delay: 4, sound: CAM_RCLICK},
-		{text: "CLAYDE: Don't let anything here survive.", delay: 2, sound: CAM_RCLICK},
-		{text: "CLAYDE: ...Scavenger or otherwise.", delay: 3, sound: CAM_RCLICK},
-	]);
+	// camQueueDialogue([
+	// 	{text: "CLAYDE: What is going on down there?!", delay: 2, sound: CAM_RCLICK},
+	// 	{text: "CLAYDE: I'm looking through my feed data, and...", delay: 3, sound: CAM_RCLICK},
+	// 	// {text: "CLAYDE: I have a hard time believing what I'm seeing.", delay: 3, sound: CAM_RCLICK},
+	// 	{text: "CLAYDE: ...", delay: 2},
+	// 	{text: "CLAYDE: Commander, I'm changing your objective.", delay: 3, sound: CAM_RCLICK},
+	// 	{text: "CLAYDE: Destroy that research facility and eradicate anyone or anything that stands in your way.", delay: 2, sound: CAM_RCLICK},
+	// 	{text: "CLAYDE: Lock down this entire area.", delay: 4, sound: CAM_RCLICK},
+	// 	{text: "CLAYDE: Don't let anything here survive.", delay: 2, sound: CAM_RCLICK},
+	// 	{text: "CLAYDE: ...Scavenger or otherwise.", delay: 3, sound: CAM_RCLICK},
+	// ]);
 	camSetExtraObjectiveMessage(_("Destroy the Research Facility"));
 
 	if (getObject("researchFacility") !== null)
@@ -309,7 +309,7 @@ function warnPlayer()
 		{text: "CLAYDE: Damnation!", delay: 3, sound: CAM_RCLICK},
 		{text: "CLAYDE: Those scavengers are already here.", delay: 2, sound: CAM_RCLICK},
 		{text: "CLAYDE: Clear them out, and advance towards the research facility.", delay: 2, sound: CAM_RCLICK},
-		{text: "CLAYDE: We may still have enough time to stop them.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: We may still have enough time to stop before they take what's inside.", delay: 3, sound: CAM_RCLICK},
 	]);
 	queue("enableReinforcements", camSecondsToMilliseconds(12));
 }

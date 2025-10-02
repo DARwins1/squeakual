@@ -10,7 +10,6 @@ var phase; // Spawning behaviour changes at 10 minutes remaining
 var killSweepY; // The height of the area where everything dies at the end of the level
 var endingBlast;
 
-// var detonateInfo;
 
 const mis_infestedRes = [
 	"R-Wpn-MG-Damage02", "R-Wpn-Rocket-Damage02",
@@ -39,22 +38,6 @@ function messageAlert()
 {
 	playSound("beep7.ogg"); // Play a little noise to notify the player that they have a new message
 }
-
-// Play alerts if the player's stuff gets infected by a Vile Stinger
-// function eventObjectTransfer(obj, from)
-// {
-// 	if (from === CAM_HUMAN_PLAYER && obj.player === CAM_INFESTED)
-// 	{
-// 		if (obj.type === STRUCTURE)
-// 		{
-// 			playSound("pcv623.ogg"); // "Structure Infected"
-// 		}
-// 		else if (obj.type === DROID)
-// 		{
-// 			playSound("pcv624.ogg"); // "Unit Infected"
-// 		}
-// 	}
-// }
 
 // Transition the level into phase two
 // At this point, both ground and air attack waves will stop spawning to give the player some time to reorganize
@@ -86,8 +69,6 @@ function startPhaseTwo()
 	queue("startAttackWaves", camSecondsToMilliseconds(125));
 
 	// Play a message assuring the player that they just need to hold on a little longer
-	// camPlayVideos([cam_sounds.incoming.incomingTransmission, {video: "L7_TRANSMSG", type: MISS_MSG}]);
-	// queue("messageAlert", camSecondsToMilliseconds(3.4));
 	camQueueDialogue([
 		{text: "ASSOCIATE: Excellent work, Commander Alpha.", delay: 0, sound: CAM_RCLICK},
 		{text: "ASSOCIATE: All civilians and critical personnel are being transported to a safe distance.", delay: 2, sound: CAM_RCLICK},
@@ -105,7 +86,7 @@ function startPhaseThree()
 {
 	phase = 3;
 
-	camPlayVideos([cam_sounds.incoming.incomingTransmission, {video: "L7_DETMSG", type: MISS_MSG}]);
+	camPlayVideos([cam_sounds.incoming.incomingTransmission, {video: "L7_REVEAL", type: MISS_MSG}]);
 	queue("messageAlert", camSecondsToMilliseconds(3.4));
 	camSetExtraObjectiveMessage();
 	// Remove the mission timer
@@ -135,45 +116,6 @@ function checkEndingStart()
 		queue("endEffects", camSecondsToMilliseconds(5)); // Kaboom
 	}
 }
-
-// Play countdown sounds as the timer ticks down
-// Also calls the functions that do all the cool stuff at the end
-// function countDown()
-// {
-// 	let skip = false;
-// 	const CURRENT_TIME = getMissionTime();
-
-// 	for (let i = 0, len = detonateInfo.length; i < len; ++i)
-// 	{
-// 		if (CURRENT_TIME <= detonateInfo[0].time)
-// 		{
-// 			if (len > 1 && (CURRENT_TIME <= detonateInfo[1].time))
-// 			{
-// 				skip = true; //Huge time jump?
-// 			}
-// 			if (!skip)
-// 			{
-// 				playSound(detonateInfo[0].sound, CAM_HUMAN_PLAYER);
-// 			}
-
-// 			detonateInfo.shift();
-
-// 			break;
-// 		}
-// 	}
-
-// 	// Get ready for the cool explosions
-// 	if (CURRENT_TIME < 5)
-// 	{
-// 		camCallOnce("prepareEnding");
-// 	}
-
-// 	// Start the cool explosions
-// 	if (CURRENT_TIME < 1)
-// 	{
-// 		camCallOnce("endEffects");
-// 	}
-// }
 
 // Make preparations for all the cool stuff at the end
 // Getting all of this stuff to work is really hacky and I wouldn't be surprised if this code makes someone cry
@@ -540,19 +482,6 @@ function eventStartLevel()
 {
 	const startpos = getObject("startPosition");
 	const lz = getObject("LZ");
-
-	// Sounds to play before detonation (ripped straight from cam3-1 lol)
-	// Lists sound files to play and the time remaining (in seconds) for them to be played
-	// detonateInfo = [
-	// 	{sound: cam_sounds.missile.detonate.detonationIn10Minutes, time: camMinutesToSeconds(10)},
-	// 	{sound: cam_sounds.missile.detonate.detonationIn5Minutes, time: camMinutesToSeconds(5)},
-	// 	{sound: cam_sounds.missile.detonate.detonationIn4Minutes, time: camMinutesToSeconds(4)},
-	// 	{sound: cam_sounds.missile.detonate.detonationIn3Minutes, time: camMinutesToSeconds(3)},
-	// 	{sound: cam_sounds.missile.detonate.detonationIn2Minutes, time: camMinutesToSeconds(2)},
-	// 	{sound: cam_sounds.missile.detonate.detonationIn1Minute, time: camMinutesToSeconds(1)},
-	// 	{sound: cam_sounds.missile.detonate.finalDetonationSequenceInitiated, time: 20},
-	// 	{sound: cam_sounds.missile.countdown, time: 10},
-	// ];
 
    	camSetStandardWinLossConditions(CAM_VICTORY_SCRIPTED, CAM_A0_OUT, {
 		callback: "checkMissileSilos"

@@ -3,20 +3,9 @@
  *
  */
 
-/* Additional audio for the level */
-directory	"audio/countdown"
-file		WAV		"10to1.ogg"
-file		WAV		"det10min.ogg"
-file		WAV		"det5min.ogg"
-file		WAV		"det4min.ogg"
-file		WAV		"det3min.ogg"
-file		WAV		"det2min.ogg"
-file		WAV		"det1min.ogg"
-file		WAV		"fdetseq.ogg"
-
 /* Directory for Proximity messages and mission briefs */
 directory	"messages"
-file		SMSG		"briefL7.txt"
+file		FLIC		"briefL7.json"
 
 directory "script"
 file JAVASCRIPT "rules.js"

@@ -1,0 +1,6 @@
+-100 50		3.0		6.0		_("<CLAYDE>: Commander, I'm having a hard time believing what I'm seeing right now...")
+-100 50		6.0		9.0		_("<CLAYDE>: So I'm giving you a new, clear objective.")
+-100 50		9.0		12.0	_("<CLAYDE>: Commander Alpha, destroy that research facility.")
+-100 50		12.0	15.0	_("<CLAYDE>: Eradicate anyone or anything that stands in your way.")
+-100 50		15.0	18.0	_("<CLAYDE>: Lock down this entire area. Don't let anything here survive...")
+-100 50		18.0	20.0	_("<CLAYDE>: ...Scavenger or otherwise.")
