@@ -61,6 +61,11 @@
                     "ENDBRI"
                 ], "video": "dummy.ogv" }
             ]
+        },
+        "L7_FLIGHT": {
+            "sequences": [
+                { "loop": 0, "subtitles": "BLANK", "video": "act0/L7flight.ogv" }
+            ]
         }
     }
 }

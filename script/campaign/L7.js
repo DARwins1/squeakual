@@ -199,6 +199,7 @@ function killSweep()
 // Show the ending screen.
 function youWin()
 {
+	camPlayVideos({video: "L7_FLIGHT", type: MISS_MSG});
 	camEndMission();
 }
 
