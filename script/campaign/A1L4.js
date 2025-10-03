@@ -638,6 +638,7 @@ function eventStartLevel()
 	const lz = getObject("landingZone");
 
 	camSetStandardWinLossConditions(CAM_VICTORY_OFFWORLD, "A1L5S", {
+		message: "RET_LZ",
 		area: "compromiseZone",
 		retlz: true,
 		reinforcements: camMinutesToSeconds(1.5),

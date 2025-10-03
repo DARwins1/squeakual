@@ -6,8 +6,6 @@
 /* Directory for Proximity messages and mission briefs */
 directory	"messages"
 
-file		SMSG		"briefA2L4.txt"
-file		SMSG		"proxA2L4.txt"
 
 directory "script"
 file JAVASCRIPT "rules.js"

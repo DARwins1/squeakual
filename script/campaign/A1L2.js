@@ -625,6 +625,7 @@ function eventStartLevel()
 	const lz = getObject("landingZone"); //player lz
 
 	camSetStandardWinLossConditions(CAM_VICTORY_OFFWORLD, "A1L3", {
+		message: "RET_LZ",
 		area: "compromiseZone",
 		reinforcements: camMinutesToSeconds(2.5),
 		callback: "nasdaCaptured"

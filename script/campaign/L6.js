@@ -361,6 +361,7 @@ function eventStartLevel()
 
 	// In order to win, the player must destroy all AA sites and collect any artifacts, then return to LZ
 	camSetStandardWinLossConditions(CAM_VICTORY_OFFWORLD, "L7", {
+		message: "RET_LZ",
 		area: "compromiseZone",
 		reinforcements: camMinutesToSeconds(2),
 		callback: "checkAA",

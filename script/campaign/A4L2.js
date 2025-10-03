@@ -557,7 +557,7 @@ function eventStartLevel()
 	const transportEntryPos = camMakePos("transportEntry");
 
 	camSetStandardWinLossConditions(CAM_VICTORY_OFFWORLD, "A4L3", {
-		// message: "RET_LZ",
+		message: "RET_LZ",
 		reinforcements: camMinutesToSeconds(2),
 		area: "compromiseZone",
 		callback: "dataDownloaded",

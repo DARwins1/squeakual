@@ -218,6 +218,7 @@ function endStealthPhase()
 	camCallOnce("stealthBreakDialogue");
 
 	camSetStandardWinLossConditions(CAM_VICTORY_OFFWORLD, "A2L7", {
+		message: "RET_LZ",
 		reinforcements: camMinutesToSeconds(1.75),
 		area: "compromiseZone",
 		retlz: true,

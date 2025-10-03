@@ -102,6 +102,7 @@ function lzAmbush()
 
 	// Also set a proper compromise zone for the player's LZ
 	camSetStandardWinLossConditions(CAM_VICTORY_OFFWORLD, "A2L5", {
+		message: "RET_LZ",
 		reinforcements: camMinutesToSeconds(2),
 		callback: "antiAirSitesClear",
 		area: "compromiseZone"
@@ -261,6 +262,7 @@ function eventStartLevel()
 	const transportEntryPos = {x: 23, y: 85};
 
 	camSetStandardWinLossConditions(CAM_VICTORY_OFFWORLD, "A2L5", {
+		message: "RET_LZ",
 		reinforcements: camMinutesToSeconds(2),
 		callback: "antiAirSitesClear",
 		// will add compromise zone later

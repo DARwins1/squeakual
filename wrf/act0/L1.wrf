@@ -7,7 +7,7 @@
 directory	"messages"
 
 file		FLIC		"briefL1.json"
-file		SMSG		"proxL1.txt"
+file		PROX		"proxL1.json"
 
 directory "script"
 file JAVASCRIPT "rules.js"
