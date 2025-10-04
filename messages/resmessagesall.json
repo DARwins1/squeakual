@@ -603,5 +603,59 @@
             "Automatically targets enemies within sensor range",
             "Defensive Strength: Hard"
         ]
+    },
+    "RES_SPECIAL1": {
+        "id": "RES_SPECIAL1",
+        "imdName": "MICAPSUL.pie",
+        "sequenceName": "res_com.ogg",
+        "text": [
+            "Incomplete schematics",
+            "Purpose unkown"
+        ]
+    },
+    "RES_SPECIAL2": {
+        "id": "RES_SPECIAL2",
+        "imdName": "MICAPSUL.pie",
+        "sequenceName": "res_com.ogg",
+        "text": [
+            "Incomplete schematics",
+            "Purpose unkown"
+        ]
+    },
+    "RES_SPECIAL3": {
+        "id": "RES_SPECIAL3",
+        "imdName": "MICAPSUL.pie",
+        "sequenceName": "res_com.ogg",
+        "text": [
+            "Incomplete schematics",
+            "Purpose unkown"
+        ]
+    },
+    "RES_SPECIAL4": {
+        "id": "RES_SPECIAL4",
+        "imdName": "MICAPSUL.pie",
+        "sequenceName": "res_com.ogg",
+        "text": [
+            "Incomplete schematics",
+            "Purpose unkown"
+        ]
+    },
+    "RES_SPECIAL5": {
+        "id": "RES_SPECIAL5",
+        "imdName": "MICAPSUL.pie",
+        "sequenceName": "res_com.ogg",
+        "text": [
+            "Incomplete schematics",
+            "Purpose unkown"
+        ]
+    },
+    "RES_SPECIAL6": {
+        "id": "RES_SPECIAL6",
+        "imdName": "MICAPSUL.pie",
+        "sequenceName": "res_com.ogg",
+        "text": [
+            "Incomplete schematics",
+            "Purpose unkown"
+        ]
     }
 }

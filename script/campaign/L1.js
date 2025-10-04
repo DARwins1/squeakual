@@ -634,6 +634,9 @@ function eventStartLevel()
 	// Make it snow constantly
 	camSetWeather(CAM_WEATHER_SNOWSTORM);
 
+	// Hack to prevent the south half of the map from being dark before the expansion
+	setSunPosition(225.0, -599.0, 450.0); // Move the sun just a wee bit (default is 225.0, -600.0, 450.0)
+
 	// All NASDA structures start out partially damaged
 	preDamageNasdaStructs();
 

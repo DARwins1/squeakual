@@ -11,7 +11,7 @@ function checkMissileSilos()
 
 function eventStartLevel()
 {
-	camSetupTransporter(31, 20, 39, 26);
+	camSetupTransporter(31, 20, 36, 12);
 	centreView(32, 20);
 	setNoGoArea(30, 19, 33, 22, CAM_HUMAN_PLAYER);
 	camSetStandardWinLossConditions(CAM_VICTORY_PRE_OFFWORLD, "L5");

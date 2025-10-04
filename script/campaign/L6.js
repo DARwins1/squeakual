@@ -268,24 +268,31 @@ function checkForLZReturn()
 	{
 		removeTimer("checkForLZReturn");
 
+		playSound(cam_sounds.objective.primObjectiveCompleted);
+		camGrantBonusPower(); // Grant bonus power here since the timer is about to be overridden
+
 		// Set the mission to timer to 10 minutes and get ready to start sending waves of infested
 		setMissionTime(camChangeOnDiff(camMinutesToSeconds(10)));
-		setTimer("infestedEndWaves", camChangeOnDiff(camSecondsToMilliseconds(20)));
+		queue("startInfestedEndWaves", camSecondsToMilliseconds(12));
 		wavePhase = true;
 
 		// Give a message about the imminent infested waves
 		camPlayVideos([cam_sounds.incoming.incomingIntelligenceReport, {video: "L6_WAVEMSG", type: MISS_MSG}]);
 		camSetExtraObjectiveMessage(_("Escape the incoming infested waves"));
 
-		// Change the fog colour to a dark purple
-		// camSetFog(114, 73, 156);
 		// Change the fog colour to a half-light thick purple
-		camSetFog(57, 36, 78);
+		camGradualFog(camSecondsToMilliseconds(12), 57, 36, 78);
 		// Give the lighting a stronger purple hue
-		camSetSunIntensity(.4,.35,.4);
+		camGradualSunIntensity(camSecondsToMilliseconds(12), .4,.35,.4);
 		// Constant snow
 		camSetWeather(CAM_WEATHER_SNOWSTORM);
 	}
+}
+
+function startInfestedEndWaves()
+{
+	camQueueDialogue({text: "--- ANOMALOUS SIGNAL DETECTED ---", delay: 0, sound: cam_sounds.beacon});
+	setTimer("infestedEndWaves", camChangeOnDiff(camSecondsToMilliseconds(20)));
 }
 
 // Large waves of infested that appear after the main objective is complete

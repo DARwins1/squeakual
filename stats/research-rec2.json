@@ -1957,7 +1957,7 @@
         "requiredResearch": [
             "R-Wpn-Flame2"
         ],
-        "researchPoints": 1200,
+        "researchPoints": 400,
         "researchPower": 125,
         "resultStructures": [
             "WallTower-Projector"
@@ -4186,7 +4186,7 @@
             "R-Wpn-Flame2",
             "R-Wpn-Flamer-Damage03"
         ],
-        "researchPoints": 2400,
+        "researchPoints": 1400,
         "researchPower": 150,
         "resultComponents": [
             "Mortar-Incendiary"

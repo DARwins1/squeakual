@@ -227,6 +227,7 @@ function startAttackWaves()
 		// Decrease the lighting, and give it a stronger pink/purple hue
 		camGradualSunIntensity(camSecondsToMilliseconds(30), .5,.45,.5);
 		camSetWeather(CAM_WEATHER_SNOW);
+		camQueueDialogue({text: "--- ANOMALOUS SIGNAL DETECTED ---", delay: 0, sound: cam_sounds.beacon});
 	}
 	else if (phase == 3)
 	{
@@ -238,6 +239,7 @@ function startAttackWaves()
 		// MORE PURPLE !!!
 		camGradualSunIntensity(camSecondsToMilliseconds(20), .5,.4,.5);
 		camSetWeather(CAM_WEATHER_SNOWSTORM);
+		camQueueDialogue({text: "--- ANOMALOUS SIGNAL DETECTED ---", delay: 0, sound: cam_sounds.beacon});
 	}
 }
 

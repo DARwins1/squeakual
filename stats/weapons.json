@@ -998,7 +998,7 @@
         "weaponClass": "KINETIC",
         "weaponEffect": "ALL ROUNDER",
         "weaponSubClass": "MACHINE GUN",
-        "weaponWav": "nxstower.ogg",
+        "weaponWav": "pcv637.ogg",
         "weight": 1
     },
     "BasherMelee": {
@@ -1030,7 +1030,7 @@
         "weaponClass": "KINETIC",
         "weaponEffect": "ALL ROUNDER",
         "weaponSubClass": "MACHINE GUN",
-        "weaponWav": "nxstower.ogg",
+        "weaponWav": "pcv637.ogg",
         "weight": 1
     },
     "StingerTail": {
@@ -1145,7 +1145,7 @@
         "designable": 1,
         "damage": 1,
         "effectSize": 200,
-        "explosionWav": "nxstower.ogg",
+        "explosionWav": "pcv637.ogg",
         "facePlayer": 1,
         "fireOnMove": 0,
         "firePause": 120,

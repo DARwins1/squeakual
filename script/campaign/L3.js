@@ -110,7 +110,7 @@ function expandMap()
 				camManageTrucks(
 					MIS_CYAN_SCAVS, {
 						label: "factoryZone",
-						rebuildBase: true,
+						rebuildBase: false, // Cranes would have to go around the whole map to get back here
 						respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(70)),
 						template: cTempl.crane,
 						structset: camAreaToStructSet("cScavBase1")

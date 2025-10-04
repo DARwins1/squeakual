@@ -5,9 +5,16 @@
 
 function cam_eventPickup(feature, droid)
 {
-	if (feature.stattype === ARTIFACT && droid.player === CAM_HUMAN_PLAYER)
+	if (droid.player === CAM_HUMAN_PLAYER)
 	{
-		__camPickupArtifact(feature);
+		if (feature.stattype === ARTIFACT)
+		{
+			__camPickupArtifact(feature);
+		}
+		else if (feature.stattype === OIL_DRUM && feature.name === "Black Box")
+		{
+			console("Black Box Collected!");
+		}
 	}
 	else if (feature.stattype === ARTIFACT && droid.droidType === DROID_CONSTRUCT)
 	{

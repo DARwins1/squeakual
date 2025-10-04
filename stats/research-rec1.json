@@ -89,6 +89,66 @@
         ],
         "statID": "InfCyborgChaingun"
     },
+    "R-Special-01": {
+        "iconID": "IMAGE_RES_COMPUTERTECH",
+        "id": "R-Special-01",
+        "imdName": "mibox.PIE",
+        "keyTopic": 1,
+        "msgName": "RES_SPECIAL1",
+        "name": "Thermal Catalyzing Agent",
+        "researchPoints": 1200,
+        "researchPower": 50
+    },
+    "R-Special-02": {
+        "iconID": "IMAGE_RES_COMPUTERTECH",
+        "id": "R-Special-02",
+        "imdName": "mibox.PIE",
+        "keyTopic": 1,
+        "msgName": "RES_SPECIAL2",
+        "name": "High-Capacity Liquid Storage",
+        "researchPoints": 1200,
+        "researchPower": 50
+    },
+    "R-Special-03": {
+        "iconID": "IMAGE_RES_COMPUTERTECH",
+        "id": "R-Special-03",
+        "imdName": "mibox.PIE",
+        "keyTopic": 1,
+        "msgName": "RES_SPECIAL3",
+        "name": "Extreme Temperature Fluid Lining",
+        "researchPoints": 1200,
+        "researchPower": 50
+    },
+    "R-Special-04": {
+        "iconID": "IMAGE_RES_COMPUTERTECH",
+        "id": "R-Special-04",
+        "imdName": "mibox.PIE",
+        "keyTopic": 1,
+        "msgName": "RES_SPECIAL4",
+        "name": "Adhesive Composite Gel",
+        "researchPoints": 1200,
+        "researchPower": 50
+    },
+    "R-Special-05": {
+        "iconID": "IMAGE_RES_COMPUTERTECH",
+        "id": "R-Special-05",
+        "imdName": "mibox.PIE",
+        "keyTopic": 1,
+        "msgName": "RES_SPECIAL5",
+        "name": "Heavy-Duty Re-Pressurization Motor",
+        "researchPoints": 1200,
+        "researchPower": 50
+    },
+    "R-Special-06": {
+        "iconID": "IMAGE_RES_COMPUTERTECH",
+        "id": "R-Special-06",
+        "imdName": "mibox.PIE",
+        "keyTopic": 1,
+        "msgName": "RES_SPECIAL6",
+        "name": "Parallel Nozzle Projection System",
+        "researchPoints": 1200,
+        "researchPower": 50
+    },
     "R-Comp-SynapticLink": {
         "iconID": "IMAGE_RES_COMPUTERTECH",
         "id": "R-Comp-SynapticLink",
@@ -761,7 +821,7 @@
             "R-Wpn-Flame2",
             "R-Wpn-Flamer-Damage03"
         ],
-        "researchPoints": 2400,
+        "researchPoints": 1400,
         "researchPower": 150,
         "resultComponents": [
             "Mortar-Incendiary"
@@ -896,7 +956,13 @@
         "msgName": "RES_FLAME2",
         "name": "Heavy Flamer - Inferno",
         "requiredResearch": [
-			"R-Wpn-Flamer01Mk1"
+			"R-Wpn-Flamer01Mk1",
+            "R-Special-01",
+            "R-Special-02",
+            "R-Special-03",
+            "R-Special-04",
+            "R-Special-05",
+            "R-Special-06"
         ],
         "researchPoints": 1800,
         "researchPower": 225,
@@ -1530,7 +1596,7 @@
             "R-Defense-Flamer",
             "R-Wpn-Flame2"
         ],
-        "researchPoints": 1200,
+        "researchPoints": 400,
         "researchPower": 125,
         "resultStructures": [
             "WallTower-Projector"
