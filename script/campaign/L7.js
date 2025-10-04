@@ -128,6 +128,7 @@ function prepareEnding()
 	// Move the camera towards the player's base
 	const startpos = getObject("startPosition");
 	cameraSlide(startpos.x * 128, startpos.y * 128);
+	cameraZoom(5000, 5000);
 
 	// Force the minimap to be active (since the player no longer has an HQ).
 	setMiniMap(true);
@@ -140,8 +141,6 @@ function endEffects()
 	fireWeaponAtLoc("LargeExplosion", 32, 17, CAM_HUMAN_PLAYER);
 	removeTimer("smallExplosionFX");
 
-	
-
 	// Procedurally blow up everything on the map
 	setTimer("killSweep", camSecondsToMilliseconds(0.3));
 
@@ -149,10 +148,9 @@ function endEffects()
 	endingBlast = true;
 	camSetVtolSpawnStateAll(false);
 
-	// Set the fog to it's default colours
-	camSetFog();
-	// Adjust the lighting
+	// Adjust the lighting and fog
 	camSetSunPos(0, -0.2, -0.3);
+	camSetFog(140, 100, 100);
 	camSetSunIntensity(0.7, 0.5, 0.5, 1.4, 0.6, 0.6);
 	camSetWeather(CAM_WEATHER_CLEAR);
 }
@@ -171,17 +169,17 @@ function killSweep()
 {
 	// First check if we've already hit the end of the map
 	// If we have, stop sweeping and queue up the end screen
-	if (killSweepY === 128)
+	if (killSweepY >= 128)
 	{
 		removeTimer("killSweep");
-		if (difficulty !== INSANE)
-		{
-			queue("youWin", camSecondsToMilliseconds(4));
-		}
-		else
-		{
-			queue("youWin", camSecondsToMilliseconds(12));
-		}
+
+		// Gradually darken the skies
+		camGradualFog(camSecondsToMilliseconds(12), 1, 1, 1);
+		camGradualSunIntensity(camSecondsToMilliseconds(12), 0.01, 0.01, 0.01);
+		camSetSkyType(CAM_SKY_NIGHT);
+
+		// Cue the end screen
+		queue("youWin", camSecondsToMilliseconds(12));
 	}
 
 	const list = enumArea(1, 1, 64, killSweepY, ALL_PLAYERS, false); // Get everything in the kill zone
@@ -191,8 +189,15 @@ function killSweep()
 		camSafeRemoveObject(list[i], true); // ... and then blow them up
 	}
 
+	// Create a visual "shockwave" effect by causing explosions at the edge of the kill zone
+	for (let x = ((killSweepY % 4 === 0) ? 1 : 2); x < 64; x += 2)
+	{
+		fireWeaponAtLoc("ShockwaveExplosion", x, killSweepY, CAM_HUMAN_PLAYER);
+	}
+
 	// Increase the kill zone area by 2 units south
 	killSweepY += 2;
+
 }
 
 // You win.
@@ -200,7 +205,7 @@ function killSweep()
 function youWin()
 {
 	camPlayVideos({video: "L7_FLIGHT", type: MISS_MSG});
-	camEndMission();
+	queue("camEndMission", camSecondsToMilliseconds(0.2));
 }
 
 // Start sending attack waves
@@ -335,38 +340,60 @@ function infestedAttackWaves()
 		}
 	}
 
-	// These ifs handle the spawning of the actual infested units
+	// Check if the player has abandoned the southern half of the map
+	const NUM_SOUTH_OBJECTS enumArea("southZone", CAM_HUMAN_PLAYER, false).length; // Count the number of objects in the south half of the map
+	const NUM_EXCLUDED_OBJECTS enumArea("southExclusionZone", CAM_HUMAN_PLAYER, false).length; // Exclude the objects in the SE "industrial" area
+	const SOUTH_ABANDONED = (NUM_SOUTH_OBJECTS - NUM_EXCLUDED_OBJECTS === 0);
+
+	const entrances = [];
+	const droidPools = [];
+
+	// Spawn Infested from entrances when appropriate
 	if (numWaves > 1)
 	{
-		sendInfestedGroup("southCityEntrance", southCityDroids);
+		entrances.push("southCityEntrance");
+		droidPools.push(southCityDroids);
 	}
-	if (numWaves > 4)
+	if (numWaves > 4 && !SOUTH_ABANDONED)
 	{
-		sendInfestedGroup("southWestCityEntrance", southWestCityDroids);
+		entrances.push("southWestCityEntrance");
+		droidPools.push(southWestCityDroids);
 	}
-	if (numWaves > 7)
+	if (numWaves > 7 && !SOUTH_ABANDONED)
 	{
-		sendInfestedGroup("southEastMountainEntrance", southEastMountainDroids);
+		entrances.push("southEastMountainEntrance");
+		droidPools.push(southEastMountainDroids);
 	}
-	if (numWaves > 12)
+	if (numWaves > 12 && !SOUTH_ABANDONED)
 	{
-		sendInfestedGroup("westMarshEntrance", westMarshDroids);
+		entrances.push("westMarshEntrance");
+		droidPools.push(westMarshDroids);
 	}
 	if (numWaves > 16)
 	{
-		sendInfestedGroup("eastIndustryEntrance", eastIndustryDroids);
+		entrances.push("eastIndustryEntrance");
+		droidPools.push(eastIndustryDroids);
 	}
 	if (numWaves > 21)
 	{
-		sendInfestedGroup("eastRoadEntrance", eastRoadDroids);
+		entrances.push("eastRoadEntrance");
+		droidPools.push(eastRoadDroids);
 	}
 	if (numWaves > 26)
 	{
-		sendInfestedGroup("westRoadEntrance", westRoadDroids);
+		entrances.push("westRoadEntrance");
+		droidPools.push(westRoadDroids);
 	}
 	if (numWaves > 30)
 	{
-		sendInfestedGroup("northMountainEntrance", northMountainDroids);
+		entrances.push("northMountainEntrance");
+		droidPools.push(northMountainDroids);
+	}
+
+	for (const idx in entrances)
+	{
+		// If the south half of the map is abandoned, increase the size of the Infested groups
+		sendInfestedGroup(entrances[idx], droidPools[idx], SOUTH_ABANDONED);
 	}
 }
 
@@ -390,12 +417,19 @@ function sendCivGroup(entrance)
 }
 
 // Spawn a group of infested at a given entrance
-function sendInfestedGroup(entrance, coreDroids)
+function sendInfestedGroup(entrance, coreDroids, extraDroids)
 {
-	const CORE_SIZE = 2 + camRand(3); // Maximum of 4 core units.
-	const FODDER_SIZE = 8 + camRand(5); // 8 - 12 extra Infested Civilians to the swarm.
+	let coreSize = 2 + camRand(3); // Maximum of 4 core units.
+	let fodderSize = 8 + camRand(5); // 8 - 12 extra Infested Civilians to the swarm.
 
-	const droids = camRandInfTemplates(coreDroids, CORE_SIZE, FODDER_SIZE);
+	if (extraDroids)
+	{
+		// Make the groups a bit larger
+		coreSize += 2;
+		fodderSize += 4;
+	}
+
+	const droids = camRandInfTemplates(coreDroids, coreSize, fodderSize);
 
 	// Random chance of adding a Vile Stinger, scales with difficulty
 	if (camRand(101) > camChangeOnDiff(80))

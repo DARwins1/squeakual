@@ -295,9 +295,9 @@ function cam_eventDestroyed(obj)
 		{
 			if (obj.weapons[0].id === "BoomTickSac")
 			{
-				const BOOM_BAIT_ID = addDroid(CAM_INFESTED, obj.x, obj.y, "Boom Bait",
-					"BoomBaitBody", "BaBaLegs", "", "", "InfestedMelee").id; // Spawn an infested civilian where the boom tick died...
-				queue("__camDetonateBoomtick", __CAM_TICKS_PER_FRAME, BOOM_BAIT_ID + ""); // ...then blow them up
+				// Cause an explosion at the location of the Boom Tick
+				fireWeaponAtLoc("BoomTickBlast", obj.x, obj.y, CAM_INFESTED);
+				// fireWeaponAtLoc("SmallExplosion", obj.x, obj.y, CAM_INFESTED);
 			}
 			else if (obj.weapons[0].id === "InfestedSpade1Trans")
 			{
@@ -562,14 +562,6 @@ function cam_eventObjectTransfer(obj, from)
 function cam_eventVideoDone()
 {
 	__camEnqueueVideos(); //Play any remaining videos automatically.
-}
-
-function cam_eventDroidRankGained(droid, rankNum)
-{
-	// if (droid.player === CAM_HUMAN_PLAYER)
-	// {
-	// 	addGuideTopic("wz2100::units::experience", SHOWTOPIC_FIRSTADD);
-	// }
 }
 
 function cam_eventResearched(research, structure, player)

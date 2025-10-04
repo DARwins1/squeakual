@@ -752,9 +752,9 @@ function camSetSunIntensity(ar, ag, ab, dr, dg, db, sr, sg, sb)
 	);
 }
 
-//;; ## camGradualFog(time, r, g, b)
+//;; ## camGradualFog(time[, r, g, b])
 //;; Gradually changes the current color of the fog towards the given values over the given timespan (in milliseconds).
-//;; If no arguments are provided, sets the fog to its default RGB values.
+//;; If no color arguments are provided, sets the fog to its default RGB values.
 //;;
 //;; @param {number} time
 //;; @param {number} r
@@ -795,9 +795,9 @@ function camGradualFog(time, r, g, b)
 	};
 }
 
-//;; ## camGradualSunIntensity(time, ar, ag, ab[, dr, dg, db[, sr, sg, sb]])
+//;; ## camGradualSunIntensity(time[, ar, ag, ab[, dr, dg, db[, sr, sg, sb]]])
 //;; Gradually changes the intensity of the sun towards the given values over the given timespan (in milliseconds).
-//;; If no arguments are provided, sets the sun to its default RGB values.
+//;; If no color arguments are provided, sets the sun to its default RGB values.
 //;;
 //;; @param {number} time
 //;; @param {number} ar
@@ -1574,28 +1574,6 @@ function __camAiPowerReset()
 	}
 }
 
-// Cause an explosion after a boomtick dies
-function __camDetonateBoomtick(boomBaitId)
-{
-	const bait = getObject(DROID, CAM_INFESTED, boomBaitId);
-	if (!camDef(bait))
-	{
-		return;
-	}
-	else
-	{
-		fireWeaponAtObj("BoomTickBlast", bait, CAM_INFESTED);
-		// Remove the bait after the boom
-		queue("__camRemoveBoomBait", __CAM_TICKS_PER_FRAME, boomBaitId + "");
-	}
-}
-
-// Loudly remove the boom bait object
-function __camRemoveBoomBait(boomBaitId)
-{
-	camSafeRemoveObject(getObject(DROID, CAM_INFESTED, boomBaitId), true);
-}
-
 // This used to be in `rules.js``
 function __camResetPower()
 {	
@@ -1940,7 +1918,7 @@ function __camGradualEffectsTick()
 	if (__camSunTargetIntensity.time > gameTime)
 	{
 		// Calculate the remaining number of times the intensity can be incremented before the deadline
-		const INCREMENTS_REMAINING = Math.floor((__camFogTargetRGB.time - gameTime) / __CAM_GRADUAL_TICK_RATE);
+		const INCREMENTS_REMAINING = Math.floor((__camSunTargetIntensity.time - gameTime) / __CAM_GRADUAL_TICK_RATE);
 
 		// Calculate the new fog color by adding the difference between the target color and the current color, divided by the number of increments remaining
 		const DELTA_AR = (__camSunTargetIntensity.ar - __camSunStats.ar) / INCREMENTS_REMAINING;

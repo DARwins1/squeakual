@@ -242,6 +242,14 @@
 
 
 	"object_0": {
+		"label": "researchFacility",
+		"id": 768,
+		"player": 1,
+		"type": 1
+	},
+
+
+	"object_1": {
 		"label": "infestedFactory1",
 		"id": 307,
 		"player": 4,
@@ -249,7 +257,7 @@
 	},
 
 
-	"object_1": {
+	"object_2": {
 		"label": "scavFactory",
 		"id": 43,
 		"player": 2,
@@ -257,7 +265,7 @@
 	},
 
 
-	"object_2": {
+	"object_3": {
 		"label": "infestedFactory4",
 		"id": 356,
 		"player": 4,
@@ -265,7 +273,7 @@
 	},
 
 
-	"object_3": {
+	"object_4": {
 		"label": "infestedFactory5",
 		"id": 395,
 		"player": 4,
@@ -273,7 +281,7 @@
 	},
 
 
-	"object_4": {
+	"object_5": {
 		"label": "infestedFactory7",
 		"id": 404,
 		"player": 4,
@@ -281,7 +289,7 @@
 	},
 
 
-	"object_5": {
+	"object_6": {
 		"label": "infestedFactory6",
 		"id": 407,
 		"player": 4,
@@ -289,7 +297,7 @@
 	},
 
 
-	"object_6": {
+	"object_7": {
 		"label": "infestedFactory3",
 		"id": 292,
 		"player": 4,
@@ -297,7 +305,7 @@
 	},
 
 
-	"object_7": {
+	"object_8": {
 		"label": "infestedFactory2",
 		"id": 4,
 		"player": 4,
@@ -305,19 +313,11 @@
 	},
 
 
-	"object_8": {
+	"object_9": {
 		"label": "mgCrate",
 		"id": 385,
 		"player": 7,
 		"type": 2
-	},
-
-
-	"object_9": {
-		"label": "researchFacility",
-		"id": 768,
-		"player": 1,
-		"type": 1
 	},
 
 	"radius_0": {
