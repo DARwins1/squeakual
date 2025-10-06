@@ -685,28 +685,12 @@ function eventStartLevel()
 	}
 	else // Played through the prologue...
 	{
-		// Check if either the Sarissa or the MRA are sitting in the player's research menu
-		const resList = enumResearch();
-		let sarAvailable = false;
-		let mraAvailable = false;
-		for (let i = 0; i < resList.length; i++)
-		{
-			if (resList[i].id === "R-Wpn-Rocket-LtA-TMk1")
-			{
-				sarAvailable = true;
-			}
-			else if (resList[i].id === "R-Wpn-Rocket02-MRL")
-			{
-				mraAvailable = true;
-			}
-		}
-
-		if (!sarAvailable && !getResearch("R-Wpn-Rocket-LtA-TMk1").done)
+		if (!camResearchIsAvailable("R-Wpn-Rocket-LtA-TMk1") && !getResearch("R-Wpn-Rocket-LtA-TMk1").done)
 		{
 			// The player didn't find the Sarissa in the prologue...
 			camAddArtifact({"redFactory1": { tech: "R-Wpn-Rocket-LtA-TMk1" }}); // Sarissa
 		}
-		if (!mraAvailable && !getResearch("R-Wpn-Rocket02-MRL").done)
+		if (!camResearchIsAvailable("R-Wpn-Rocket02-MRL") && !getResearch("R-Wpn-Rocket02-MRL").done)
 		{
 			// The player didn't find the MRA in the prologue...
 			camAddArtifact({"redMiniPit": { tech: "R-Wpn-Rocket02-MRL" }}); // Mini-Rocket Array

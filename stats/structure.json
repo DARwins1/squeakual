@@ -958,6 +958,7 @@
         "hitpoints": 700,
         "id": "A0HardcreteMk1CWall",
         "name": "Hardcrete Corner Wall",
+        "resistance": 200,
         "sensorID": "ZNULLSENSOR",
         "strength": "HARD",
         "structureModel": [
@@ -977,6 +978,7 @@
         "hitpoints": 700,
         "id": "InfHardcreteMk1CWall",
         "name": "Infested Hardcrete Corner Wall",
+        "resistance": 200,
         "sensorID": "ZNULLSENSOR",
         "strength": "HARD",
         "structureModel": [
@@ -995,6 +997,7 @@
         "hitpoints": 700,
         "id": "A0HardcreteMk1Gate",
         "name": "Hardcrete Gate",
+        "resistance": 200,
         "strength": "HARD",
         "structureModel": [
             "blgateh.pie",
@@ -1016,6 +1019,7 @@
         "hitpoints": 700,
         "id": "A0HardcreteMk1Wall",
         "name": "Hardcrete Wall",
+        "resistance": 200,
         "sensorID": "ZNULLSENSOR",
         "strength": "HARD",
         "structureModel": [
@@ -1038,6 +1042,7 @@
         "hitpoints": 700,
         "id": "InfHardcreteMk1Wall",
         "name": "Infested Hardcrete Wall",
+        "resistance": 200,
         "sensorID": "ZNULLSENSOR",
         "strength": "HARD",
         "structureModel": [
@@ -1060,6 +1065,7 @@
         "hitpoints": 700,
         "id": "OldHardcreteWall",
         "name": "Old Hardcrete Wall",
+        "resistance": 200,
         "sensorID": "ZNULLSENSOR",
         "strength": "HARD",
         "structureModel": [
@@ -1079,6 +1085,7 @@
         "hitpoints": 700,
         "id": "OldHardcreteCWall",
         "name": "Old Hardcrete Corner Wall",
+        "resistance": 200,
         "sensorID": "ZNULLSENSOR",
         "strength": "HARD",
         "structureModel": [
@@ -1395,6 +1402,7 @@
         "hitpoints": 200,
         "id": "A0TankTrap",
         "name": "Tank Traps",
+        "resistance": 200,
         "sensorID": "ZNULLSENSOR",
         "strength": "HARD",
         "structureModel": [
@@ -1414,6 +1422,7 @@
         "hitpoints": 200,
         "id": "InfTankTrap",
         "name": "Infested Tank Traps",
+        "resistance": 200,
         "sensorID": "ZNULLSENSOR",
         "strength": "HARD",
         "structureModel": [
@@ -4050,6 +4059,7 @@
         "hitpoints": 200,
         "id": "TankTrapC",
         "name": "Tank Traps",
+        "resistance": 200,
         "sensorID": "ZNULLSENSOR",
         "strength": "HARD",
         "structureModel": [

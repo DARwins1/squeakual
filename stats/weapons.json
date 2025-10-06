@@ -1195,7 +1195,6 @@
         "minElevation": -60,
         "minimumDamage": 33,
         "missGfx": "FXMNExp.PIE",
-        "mountModel": "ticksacs.pie",
         "movement": "DIRECT",
         "name": "Tick Sacs",
         "numExplosions": 1,

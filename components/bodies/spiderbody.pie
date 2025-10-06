@@ -1,7 +1,7 @@
 PIE 3
 TYPE 200
 INTERPOLATE 0
-TEXTURE 0 spiderbody.png 0 0
+TEXTURE 0 page-125-spiderbody.png 0 0
 EVENT 1 spiderrun.pie
 LEVELS 16
 LEVEL 1

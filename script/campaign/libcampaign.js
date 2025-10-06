@@ -290,6 +290,22 @@ var __camNumArtifacts;
 var __camEnemyBases;
 var __camNumEnemyBases;
 
+// Contains coordinates for collectible Black Box features across all campaigns.
+// These are separate from level scripts since some Black Boxes can be picked up in multiple missions.
+
+const __camRec1BlackBoxes = [
+	{ scripts: ["L1", "L2s", "L3", "L4s", "L5s", "L6s", "L7"], x: 5, y: 6 }, // #1
+	{ scripts: ["L2"], x: 55, y: 22 }, // #2
+	{ scripts: ["L3", "L4s", "L5s", "L6s", "L7"], x: 34, y: 82 }, // #3
+	{ scripts: ["L4"], x: 60, y: 52 }, // #4
+	{ scripts: ["L5"], x: 17, y: 72 }, // #5
+	{ scripts: ["L5"], x: 16, y: 14 }, // #6
+	{ scripts: ["L6"], x: 8, y: 29 }, // #7
+];
+const __camRec2BlackBoxes = [
+
+];
+
 //dialogue
 const CAM_RCLICK = "RADIO_CLICK";
 var __camQueuedDialogue;
@@ -515,4 +531,5 @@ include(__CAM_INCLUDE_PATH + "nexus.js");
 include(__CAM_INCLUDE_PATH + "group.js");
 include(__CAM_INCLUDE_PATH + "video.js");
 include(__CAM_INCLUDE_PATH + "dialogue.js");
+include(__CAM_INCLUDE_PATH + "blackBox.js");
 include(__CAM_INCLUDE_PATH + "guide.js");

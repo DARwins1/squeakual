@@ -491,6 +491,11 @@ function eventStartLevel()
 	// Restrict the map for now.
 	setScrollLimits(0, 0, 64, 30);
 
+	// Temporary conditions...
+	camSetStandardWinLossConditions(CAM_VICTORY_SCRIPTED, "L2S", {
+		defeatOnDeath: false, // The player doesn't start with any trucks
+	});
+
 	const startpos = getObject("startPosition");
 	centreView(startpos.x, startpos.y);
 

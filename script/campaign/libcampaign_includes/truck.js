@@ -30,6 +30,7 @@
 //;;	 If `label` is not a base label, and this is left undefined, the truck will not wander.
 //;; * `pos` When rebuilding a truck, the truck will only be produced from factories where it can reach this position.
 //;;	If undefined, then will default to the center of `area` or the cleanup zone of `label`.
+//;; * `enabled` Whether this truck should start working immediately. Can be changed later with helper functions. Defaults to TRUE.
 //;; NOTE: `label` and `structset` are REQUIRED! `template` is also required if the truck is to be automatically rebuilt!
 //;;
 function camManageTrucks(player, data)
@@ -49,10 +50,10 @@ function camManageTrucks(player, data)
 		rebuildBase: camDef(data.rebuildBase) ? data.rebuildBase : false,
 		area: camDef(data.area) ? data.area : (camDef(__camEnemyBases[data.label]) ? getObject(__camEnemyBases[data.label].cleanup) : undefined), // NOTE: This checks if a base already exists!
 		pos: camDef(data.pos) ? camMakePos(data.pos) : (camDef(data.area) ? camMakePos(data.area) : (camDef(__camEnemyBases[data.label]) ? camMakePos(__camEnemyBases[data.label].cleanup) : undefined)),
-		enabled: true // If set to false, do not rebuild or manage
+		enabled: camDef(data.enabled) ? data.enabled : true, // If set to false, do not rebuild or manage
 	});
 
-	if (!camDef(data.truckDroid) && (data.rebuildTruck !== false))
+	if (__camTruckInfo[__LENGTH - 1].enabled && __camTruckInfo[__LENGTH - 1].rebuildTruck)
 	{
 		// Build the new truck
 		camRebuildTruck(__LENGTH - 1, false);
@@ -86,27 +87,40 @@ function camDisableTruck(what, destroy)
 	}
 }
 
-// Resume managing a given truck.
+// Resume managing a given truck, given a label name or an index.
+// Also accepts arrays of labels/indices.
 function camEnableTruck(what)
 {
-	if (camIsString(what))
+	if (!(what instanceof Array))
 	{
-		what = camGetTruckIndicesFromLabel(what);
-	}
-	else if (Number.isInteger(what))
-	{
+		// If the input wasn't an array, convert it into one
 		what = [what];
 	}
-	else if (!(what instanceof Array))
+
+	// top-tier variable names here...
+	for (const thing of what)
 	{
-		camDebug("Invalid input; must be truck index or base label.");
-		return;
-	}
-	
-	for (const __INDEX of what)
-	{
-		__camTruckInfo[__INDEX].enabled = true;
-		camRebuildTruck(__INDEX, false);
+		let truckIndices;
+		if (camIsString(thing))
+		{
+			// Convert label to array of indices
+			truckIndices = camGetTruckIndicesFromLabel(thing);
+		}
+		else if (Number.isInteger(thing))
+		{
+			truckIndices = [thing];
+		}
+		else
+		{
+			camDebug("Invalid input; must be truck index or base label.");
+			return;
+		}
+
+		for (const __TRUCK_INDEX of truckIndices)
+		{
+			__camTruckInfo[__TRUCK_INDEX].enabled = true;
+			camRebuildTruck(__TRUCK_INDEX, false);
+		}
 	}
 }
 

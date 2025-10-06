@@ -1,7 +1,7 @@
 PIE 3
 TYPE 200
 INTERPOLATE 0
-TEXTURE 0 basherbody.png 0 0
+TEXTURE 0 page-128-basherbody.png 0 0
 EVENT 1 basherrun.pie
 LEVELS 5
 LEVEL 1

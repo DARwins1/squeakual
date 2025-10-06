@@ -209,7 +209,8 @@ function __camEnableGuideTopics()
 	}
 	if (foundDroids_VTOL)
 	{
-		addGuideTopic("wz2100::units::propulsions::vtols::**");
+		addGuideTopic("wz2100::units::propulsions::vtols::defending");
+		addGuideTopic("wz2100::units::propulsions::vtols::attacking");
 	}
 }
 
@@ -224,4 +225,10 @@ function __camEnableGuideTopicsForTransport(transport)
 			addGuideTopic("wz2100::units::commanders::**");
 		}
 	}
+}
+
+function __camAddNewLogTopic(list, index)
+{
+	const topicString = "wz2100::logs::R" + list + "L" + index;
+	addGuideTopic(topicString, SHOWTOPIC_FIRSTADD);
 }

@@ -1,7 +1,7 @@
 PIE 3
 TYPE 200
 INTERPOLATE 0
-TEXTURE 0 spiderbodyboom.png 0 0
+TEXTURE 0 page-126-spiderbodyboom.png 0 0
 EVENT 1 boomtickrun.pie
 LEVELS 17
 LEVEL 1

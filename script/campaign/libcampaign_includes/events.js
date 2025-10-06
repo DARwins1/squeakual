@@ -13,7 +13,7 @@ function cam_eventPickup(feature, droid)
 		}
 		else if (feature.stattype === OIL_DRUM && feature.name === "Black Box")
 		{
-			console("Black Box Collected!");
+			camCollectBlackBox(feature.x, feature.y);
 		}
 	}
 	else if (feature.stattype === ARTIFACT && droid.droidType === DROID_CONSTRUCT)
