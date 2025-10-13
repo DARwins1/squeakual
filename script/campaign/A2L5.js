@@ -155,7 +155,7 @@ function eventStartLevel()
 	setNoGoArea(lz.x, lz.y, lz.x2, lz.y2, CAM_HUMAN_PLAYER);
 
 	camSetArtifacts({
-		// "colBombardPit": { tech: "R-Wpn-Mortar02Hvy" }, // Bombard
+		"colCybFactory2": { tech: "R-Cyb-Hvywpn-Grenade" }, // Super Heavy Grenadier
 		"colFactory1": { tech: "R-Wpn-Rocket03-HvAT" }, // Bunker Buster
 		"colCycloneEmp": { tech: "R-Wpn-AAGun02" }, // Cyclone
 		"colResearch": { tech: "R-Struc-Research-Module" }, // Research Module
@@ -303,8 +303,8 @@ function eventStartLevel()
 				repair: 30
 			},
 			groupSize: 3,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(60)),
-			templates: [ cTempl.cybgr, cTempl.scymc ]
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(70)),
+			templates: [ cTempl.scygr, cTempl.scymc ]
 		},
 		"colCybFactory3": {
 			assembly: "colCybAssembly3",

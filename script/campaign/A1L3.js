@@ -796,13 +796,13 @@ function eventStartLevel()
 
 	// NOTE: The scavenger factories activate pretty quickly on this mission
 	queue("groupPatrol", camSecondsToMilliseconds(5));
-	queue("scavAttack1", camChangeOnDiff(camSecondsToMilliseconds(20)));
-	queue("scavAttack2", camChangeOnDiff(camSecondsToMilliseconds(80)));
-	queue("heliAttack1", camChangeOnDiff(camSecondsToMilliseconds(80)));
-	queue("activateSecondFactories", camChangeOnDiff(camMinutesToMilliseconds(4)));
-	queue("heliAttack2", camChangeOnDiff(camMinutesToMilliseconds(5)));
-	queue("introduceCollective", camChangeOnDiff(camMinutesToMilliseconds(6)));
-	queue("activateFinalFactories", camChangeOnDiff(camMinutesToMilliseconds(8)));
+	queue("scavAttack1", camChangeOnDiff(camSecondsToMilliseconds(80)));
+	queue("scavAttack2", camChangeOnDiff(camMinutesToMilliseconds(3)));
+	queue("heliAttack1", camChangeOnDiff(camMinutesToMilliseconds(3)));
+	queue("activateSecondFactories", camChangeOnDiff(camMinutesToMilliseconds(6)));
+	queue("heliAttack2", camChangeOnDiff(camMinutesToMilliseconds(8)));
+	queue("introduceCollective", camChangeOnDiff(camMinutesToMilliseconds(10)));
+	queue("activateFinalFactories", camChangeOnDiff(camMinutesToMilliseconds(12)));
 
 	// Placeholder for the actual briefing sequence
 	camQueueDialogue([

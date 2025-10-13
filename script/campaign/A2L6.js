@@ -804,8 +804,8 @@ function campCleared()
 		{text: "CHARLIE: Lieutenant, the camp is clear!", delay: 2, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: Well done, Commanders!", delay: 4, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: Clayde will be very relieved that this plan worked out.", delay: 3, sound: CAM_RCLICK},
-		{text: "GOLF: Yeah, this was almost too easy.", delay: 3, sound: CAM_RCLICK},
-		{text: "GOLF: These guys didn't stand a chance against us!", delay: 3, sound: CAM_RCLICK},
+		{text: "GOLF: Yeah, this was almost TOO easy.", delay: 3, sound: CAM_RCLICK},
+		{text: "GOLF: These guys didn't stand a chance!", delay: 3, sound: CAM_RCLICK},
 		{text: "CHARLIE: Uhh, Golf?", delay: 4, sound: CAM_RCLICK},
 		{text: "GOLF: What?", delay: 3, sound: CAM_RCLICK},
 		{text: "CHARLIE: ...Nevermind.", delay: 3, sound: CAM_RCLICK},
@@ -862,9 +862,9 @@ function allowLeave()
 		{text: "LIEUTENANT: Charlie's right, Bravo.", delay: 4},
 		{text: "LIEUTENANT: You should return to base and prepare to evacuate.", delay: 3},
 		{text: "LIEUTENANT: I'll...", delay: 3},
-		{text: "LIEUTENANT: I'll have a conversation with the General when he gets back.", delay: 3},
+		{text: "LIEUTENANT: I'll have a talk with the General when he gets back.", delay: 3},
 		{text: "LIEUTENANT: ...Oh, Clayde.", delay: 10, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: What have you done?!.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: What have you done?!", delay: 3, sound: CAM_RCLICK},
 	]);
 }
 
@@ -968,7 +968,6 @@ function eventStartLevel()
 	camSetArtifacts({
 		"colResearch": { tech: "R-Wpn-Rocket-Accuracy03" }, // Rocket Laser Designator
 		"colFactory3": { tech: "R-Wpn-Cannon4AMk1" }, // Hyper Velocity Cannon
-		"colCybFactory4": { tech: "R-Cyb-Hvywpn-Grenade" }, // Super Heavy Grenadier
 		"colCC2": { tech: "R-Sys-Engineering02" }, // Improved Engineering
 		"colPower": { tech: "R-Struc-Power-Upgrade01" }, // Gas Turbine Generator
 	});

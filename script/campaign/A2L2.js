@@ -109,7 +109,7 @@ function echoDialogue()
 		{text: "LIEUTENANT: ...wiped them out?", delay: 2, sound: CAM_RCLICK},
 		{text: "CLAYDE: We know the Collective have captured team Foxtrot.", delay: 4, sound: CAM_RCLICK},
 		{text: "CLAYDE: They also briefly held me captive as well.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: ...And they seem to be in the recruiting scavengers as well.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: ...And they seem to be in the business of recruiting scavengers as well.", delay: 3, sound: CAM_RCLICK},
 		{text: "CLAYDE: We still don't know what their end-goal is, but for now, we can at least have faith that team Echo is alive.", delay: 3, sound: CAM_RCLICK},
 		{text: "CLAYDE: The first step to finding them is by securing that base.", delay: 3, sound: CAM_RCLICK},
 	]);

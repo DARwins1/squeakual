@@ -1,6 +1,7 @@
 include("script/campaign/libcampaign.js");
 include("script/campaign/templates.js");
 include("script/campaign/structSets.js");
+include("script/campaign/transitionTech.js");
 
 const mis_collectiveResearch = [
 	"R-Wpn-MG-Damage05", "R-Wpn-Rocket-Damage05", "R-Wpn-Mortar-Damage05", 
@@ -536,6 +537,7 @@ function eventStartLevel()
 
 	camCompleteRequiredResearch(mis_collectiveResearch, CAM_THE_COLLECTIVE);
 	camCompleteRequiredResearch(mis_infestedResearch, CAM_INFESTED);
+	camCompleteRequiredResearch(camA3L4AllyResearch, MIS_TEAM_CHARLIE);
 
 	camSetEnemyBases({
 		// These LZs can be built later by enemy trucks:

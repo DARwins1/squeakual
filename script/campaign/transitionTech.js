@@ -173,6 +173,7 @@ const camA2L6AllyResearch = camA2L2AllyResearch.concat([
 	"R-Wpn-AAGun02", // Artifact
 	"R-Defense-AASite-QuadBof", "R-Wpn-AAGun-Damage02",
 	"R-Struc-Research-Module", // Artifact
+	"R-Cyb-Hvywpn-Grenade", // Artifact
 ]);
 
 const camAct3StartResearch = camA2L6AllyResearch.concat([
@@ -181,15 +182,14 @@ const camAct3StartResearch = camA2L6AllyResearch.concat([
 	"R-Defense-Emplacement-HPVcannon", "R-Defense-WallTower-HPVcannon", "R-Cyborg-Hvywpn-HPV", 
 	"R-Wpn-Cannon-Accuracy02", "R-Wpn-Cannon-Damage04", "R-Defense-HVCTower",
 	"R-Wpn-Rocket-Accuracy03", // Artifact
-	"R-Cyb-Hvywpn-Grenade", // Artifact
 	"R-Sys-Engineering02", // Artifact
 	"R-Sys-MobileRepairTurretHvy", "R-Defense-WallUpgrade04", "R-Struc-Materials04",
 	"R-Struc-VTOLPad-Upgrade01",
 	"R-Struc-Power-Upgrade01", // Artifact
 ]);
 
-// Used to grant research to team Delta on A3L7
-const camA3L7AllyResearch = camAct3StartResearch.concat([
+// Used to grant research to team Charlie on A3L4
+const camA3L4AllyResearch = camAct3StartResearch.concat([
 	// A3L1
 	"R-Wpn-Flame2", // Artifact
 	"R-Wpn-Flamer-Damage04", "R-Cyb-Wpn-Thermite", "R-Defense-HvyFlamer",
@@ -205,6 +205,10 @@ const camA3L7AllyResearch = camAct3StartResearch.concat([
 	"R-Wpn-MG4", // Artifact
 	"R-Cyborg-Wpn-RotMG", "R-Defense-RotMG", "R-Defense-Wall-RotMg",
 	"R-Defense-Pillbox-RotMG", "R-Wpn-MG-Damage05",
+]);
+
+// Used to grant research to team Delta on A3L7
+const camA3L7AllyResearch = camA3L4AllyResearch.concat([
 	// A3L4
 	"R-Wpn-Cannon5", // Artifact
 	"R-Defense-Wall-VulcanCan", "R-Cyborg-Hvywpn-Acannon", "R-Wpn-Cannon-Damage05",
