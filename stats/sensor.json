@@ -52,7 +52,7 @@
         "name": "Infested Lure",
         "power": 500,
         "range": 1024,
-        "sensorModel": "RADARSENSOR.PIE",
+        "sensorModel": "LURE.PIE",
         "type": "STANDARD",
         "weight": 100
     },
