@@ -169,7 +169,8 @@ function ambushLZ()
 	camQueueDialogue([
 		{text: "LIEUTENANT: Sir, we have confirmed reports of scavengers in our AO.", delay: 8, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: Multiple encampments within close proximity of several LZs.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: That's to be expected, this city used to hold millions, after all.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: I suppose that's to be expected.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: This city used to hold millions, after all.", delay: 2, sound: CAM_RCLICK},
 		{text: "CLAYDE: All Commanders be advised; the Council has authorized the use of lethal force.", delay: 4, sound: CAM_RCLICK},
 		{text: "CLAYDE: Remember that our primary objective is secure NASDA Central.", delay: 3, sound: CAM_RCLICK},
 		{text: "CLAYDE: Use whatever means necessary to achieve it.", delay: 3, sound: CAM_RCLICK},
@@ -719,11 +720,12 @@ function eventStartLevel()
 	queue("redAggro", camChangeOnDiff(camMinutesToMilliseconds(16)));
 	queue("heliAttack", camChangeOnDiff(camMinutesToMilliseconds(16)));
 
-	// Constant rain
-	// camSetWeather(CAM_WEATHER_RAINSTORM);
 	camSetSkyType(CAM_SKY_NIGHT);
 	// Darken the fog to 1/4 default brightness
 	camSetFog(4, 4, 16);
 	// Darken the lighting and add a slight blue hue
 	camSetSunIntensity(.4, .4, .5);
+
+	// Give player briefing.
+	camPlayVideos({video: "A1L1_BRIEF", type: MISS_MSG});
 }

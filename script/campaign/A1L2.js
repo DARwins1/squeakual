@@ -77,7 +77,6 @@ camAreaEvent("powerCaptureZone", function(droid)
 			{text: "LIEUTENANT: ...It's a bit smaller than the ones usually hooked up to electrical grids.", delay: 3, sound: CAM_RCLICK},
 			{text: "LIEUTENANT: It seems like its sole purpose was to power NASDA's core systems.", delay: 3, sound: CAM_RCLICK},
 			{text: "LIEUTENANT: Thankfully, it appears to be mostly intact.", delay: 3, sound: CAM_RCLICK},
-			// {text: "LIEUTENANT: Seems like these scavengers here didn't want to mess with something with \"nuclear\" in the name.", delay: camSecondsToMilliseconds(3), sound: CAM_RCLICK},
 			{text: "LIEUTENANT: ...And what's this?", delay: 4, sound: CAM_RCLICK},
 			{text: "LIEUTENANT: The auxiliary generators seem to have a special module that we can use as well!", delay: 3, sound: CAM_RCLICK},
 		]);
@@ -104,7 +103,7 @@ camAreaEvent("uplinkCaptureZone", function(droid)
 			{text: "CLAYDE: Well look at that. NASDA Central.", delay: 4, sound: CAM_RCLICK},
 			{text: "LIEUTENANT: From the outside, it seems to be in decent condition.", delay: 3, sound: CAM_RCLICK},
 			{text: "LIEUTENANT: But we won't know if it's operational until we can get a look at its interior.", delay: 3, sound: CAM_RCLICK},
-			{text: "CLAYDE: Don't worry.", delay: 4, sound: CAM_RCLICK},
+			{text: "CLAYDE: Don't worry about that, Lieutenant.", delay: 4, sound: CAM_RCLICK},
 			{text: "CLAYDE: Once these scavengers are cleared out, we'll have all the time in the world.", delay: 3, sound: CAM_RCLICK},
 		]);
 	}
@@ -133,9 +132,7 @@ camAreaEvent("vtolFactoryCaptureZone", function(droid)
 			{text: "LIEUTENANT: That..!", delay: 4, sound: CAM_RCLICK},
 			{text: "LIEUTENANT: THAT is a Pre-Collapse VTOL Factory!", delay: 2, sound: CAM_RCLICK},
 			{text: "LIEUTENANT: I never thought I'd see one of these again!", delay: 3, sound: CAM_RCLICK},
-			{text: "CLAYDE: Slow down, Lieutenant.", delay: 3, sound: CAM_RCLICK},
-			{text: "LIEUTENANT: Sorry, sir.", delay: 3, sound: CAM_RCLICK},
-			{text: "LIEUTENANT: These scavengers were likely using this to assemble and store their helicopters.", delay: 3, sound: CAM_RCLICK},
+			{text: "LIEUTENANT: These scavengers must have been using this to assemble and store their helicopters.", delay: 3, sound: CAM_RCLICK},
 			{text: "LIEUTENANT: ...But with any luck, we should be able to...", delay: 3, sound: CAM_RCLICK},
 			{text: "LIEUTENANT: Yes!", delay: 3, sound: CAM_RCLICK},
 			{text: "LIEUTENANT: There are still Pre-Collapse designs inside this factory!", delay: 3, sound: CAM_RCLICK},
@@ -444,7 +441,7 @@ function camEnemyBaseEliminated_charlieLZBase()
 	hackRemoveMessage("CHARLIE_LZ", PROX_MSG, CAM_HUMAN_PLAYER);
 
 	camQueueDialogue([
-		{text: "CHARLIE: Thanks, Bravo.", delay: 6, sound: CAM_RCLICK},
+		{text: "CHARLIE: Good work clearing our LZ, Bravo.", delay: 6, sound: CAM_RCLICK},
 		{text: "CHARLIE: We'll help keep the scavengers off your back while you clear the other LZs.", delay: 3, sound: CAM_RCLICK},
 	]);
 
@@ -462,8 +459,8 @@ function camEnemyBaseEliminated_foxtrotLZBase()
 	hackRemoveMessage("FOXTROT_LZ", PROX_MSG, CAM_HUMAN_PLAYER);
 
 	camQueueDialogue([
-		{text: "FOXTROT: Good work clearing our LZ, Bravo.", delay: 6, sound: CAM_RCLICK},
-		{text: "FOXTROT: Let's show these scavs what REAL military muscle looks like!", delay: 3, sound: CAM_RCLICK},
+		{text: "FOXTROT: Thanks, Bravo.", delay: 6, sound: CAM_RCLICK},
+		{text: "FOXTROT: We'll begin our assault in a moment.", delay: 3, sound: CAM_RCLICK},
 	]);
 
 	foxtrotLZSecure = true;
@@ -482,8 +479,8 @@ function camEnemyBaseEliminated_golfLZBase()
 	hackRemoveMessage("GOLF_LZ", PROX_MSG, CAM_HUMAN_PLAYER);
 
 	camQueueDialogue([
-		{text: "GOLF: Nice job, Bravo.", delay: 6, sound: CAM_RCLICK},
-		{text: "GOLF: We'll help you bust down those defenses around NASDA Central.", delay: 3, sound: CAM_RCLICK},
+		{text: "GOLF: Good show, Bravo.", delay: 6, sound: CAM_RCLICK},
+		{text: "GOLF: Now, let's show these scavs some REAL military muscle!", delay: 3, sound: CAM_RCLICK},
 	]);
 
 	golfLZSecure = true;

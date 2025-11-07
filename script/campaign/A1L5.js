@@ -148,7 +148,7 @@ function sendCollectiveTransporter()
 	camQueueDialogue([
 		{text: "LIEUTENANT: The Collective must be using this site to process their prisoners.", delay: 4, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: With any luck, Clayde might still be detained inside.", delay: 3, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: Commander Bravo, secure the area!", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Commander Bravo, secure the area!", delay: 5, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: We have to make sure the General is safe!", delay: 3, sound: CAM_RCLICK},
 	]);
 }
@@ -247,7 +247,7 @@ function camEnemyBaseDetected_colMainBase()
 	camQueueDialogue([
 		{text: "LIEUTENANT: How did we not notice the Collective before?", delay: 2, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: Were we so focused on our goal that we..?", delay: 3, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: Hopefully there's still time to fix this.", delay: 8, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: ...Hopefully, there's still time to fix this.", delay: 8, sound: CAM_RCLICK},
 	]);
 }
 

@@ -353,7 +353,7 @@ function cam_eventTransporterExit(transport)
 		//Audio cue to let the player know they can bring in reinforcements. This
 		//assumes the player can bring in reinforcements immediately after the first
 		//transporter leaves the map. Mission scripts can handle special situations.
-		if (__camNumTransporterExits === 1 &&
+		if (//__camNumTransporterExits === 1 &&
 			((__camWinLossCallback === CAM_VICTORY_OFFWORLD &&
 			__camVictoryData.reinforcements > -1) ||
 			__camWinLossCallback === CAM_VICTORY_STANDARD))

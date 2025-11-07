@@ -129,9 +129,9 @@ function activateSecondFactories()
 
 	// Dialogue about Collective sightings
 	camQueueDialogue([
-		{text: "GOLF: Hey, General!", delay: 0, sound: CAM_RCLICK},
-		{text: "GOLF: We've spotted some... strange looking vehicles moving through our AO, sir.", delay: 3, sound: CAM_RCLICK},
-		{text: "GOLF: They, uhh... don't look like scavengers, sir.", delay: 3, sound: CAM_RCLICK},
+		{text: "GOLF: General, sir!", delay: 0, sound: CAM_RCLICK},
+		{text: "GOLF: We've spotted some strange looking vehicles moving through our AO, sir.", delay: 3, sound: CAM_RCLICK},
+		{text: "GOLF: They, uhh... they don't look like scavengers, sir.", delay: 3, sound: CAM_RCLICK},
 		{text: "CLAYDE: ...And what do you expect me to make of this, Commander Golf?", delay: 4, sound: CAM_RCLICK},
 		{text: "GOLF: I dunno, it's just...", delay: 4, sound: CAM_RCLICK},
 		{text: "GOLF: Their vehicles look a bit more like ours than scavengers.", delay: 2, sound: CAM_RCLICK},
@@ -347,9 +347,10 @@ function introduceCollective()
 		{text: "LIEUTENANT: They're originating somewhere to the east of team Bravo's current position.", delay: 3, sound: CAM_RCLICK},
 		{text: "CLAYDE: Have you been able to decipher them?", delay: 4, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: No sir. They appear to have some level of encryption.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: Encrypted scavenger radio broadcasts? What are the odds of them having that kind of tech?", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: ...Encrypted scavenger radio broadcasts?", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: What are the odds of them having that kind of tech?", delay: 3, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: Not likely, sir.", delay: 3, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: Commander Bravo; please proceed with caution.", delay: 4, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Commander Bravo; please proceed with caution.", delay: 6, sound: CAM_RCLICK},
 	]);
 }
 
@@ -369,7 +370,7 @@ function eventAttacked(victim, attacker)
 
 		// Dialogue encountering the Collective
 		camQueueDialogue([
-			{text: "LIEUTENANT: Are you seeing this sir...?", delay: 6, sound: CAM_RCLICK},
+			{text: "LIEUTENANT: General, are you seeing this sir...?", delay: 6, sound: CAM_RCLICK},
 			{text: "CLAYDE: Oh, I'm seeing it alright.", delay: 3, sound: CAM_RCLICK},
 			{text: "CLAYDE: All Commanders be advised; we have confirmed accounts of an advanced, hostile force operating in this sector.", delay: 3, sound: CAM_RCLICK},
 			{text: "CLAYDE: Proceed with extreme caution.", delay: 3, sound: CAM_RCLICK},
@@ -377,7 +378,7 @@ function eventAttacked(victim, attacker)
 			{text: "CLAYDE: Your objective remains the same, capture that uplink and clear the area.", delay: 2, sound: CAM_RCLICK},
 			{text: "CLAYDE: If they are here for that uplink station, then we CANNOT let them have it.", delay: 3, sound: CAM_RCLICK},
 			{text: "CLAYDE: Use whatever means necessary to complete your objective.", delay: 3, sound: CAM_RCLICK},
-			{text: "LIEUTENANT: Tread carefully, Commander.", delay: 5, sound: CAM_RCLICK},
+			{text: "LIEUTENANT: Tread carefully, Commander Bravo.", delay: 6, sound: CAM_RCLICK},
 			{text: "LIEUTENANT: We don't know what we're up against here...", delay: 3, sound: CAM_RCLICK},
 		]);
 	}
@@ -804,25 +805,12 @@ function eventStartLevel()
 	queue("introduceCollective", camChangeOnDiff(camMinutesToMilliseconds(10)));
 	queue("activateFinalFactories", camChangeOnDiff(camMinutesToMilliseconds(12)));
 
-	// Placeholder for the actual briefing sequence
+	// Give player briefing.
+	camPlayVideos({video: "A1L3_BRIEF", type: MISS_MSG});
+
+	// Remind the player to try out their cool new toys
 	camQueueDialogue([
-		{text: "---- BRIEFING PLACEHOLDER ----", delay: 0},
-		{text: "LIEUTENANT: Sir, we've begun inspecting NASDA Central's core systems.", delay: 2, sound: CAM_RCLICK},
-		{text: "CLAYDE: What's the status? How long until the systems are operational?", delay: 4, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: It's hard to give a full analysis at this point.", delay: 4, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: NASDA's computer systems are vast and we've only been able to examine a portion of it.", delay: 3, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: So far, we've found signs of electromagnetic damage, likely as a result of the Collapse.", delay: 3, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: Entire memory banks appear to have been fried, and the core processor is shattered.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: What of the satellite control systems?", delay: 4, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: Well, it seems that some subsystems might have been spared from damage.", delay: 4, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: But the uplink systems are non-functional.", delay: 3, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: However, while scanning NASDA's memory banks, we found what appear to be coordinates to nearby satellite uplink stations.", delay: 3, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: If any of these uplinks are still operational, it's possible that they could be used as relay to connect NASDA's control systems and the satellites.", delay: 4, sound: CAM_RCLICK},
-		{text: "CLAYDE: I see. Then our next objective is clear.", delay: 4, sound: CAM_RCLICK},
-		{text: "CLAYDE: While I help the Council settle into our new base of operations, the Commanders will search for these uplink sites.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: Commander Bravo. One of these uplinks appears to lie east of your current position.", delay: 4, sound: CAM_RCLICK},
-		{text: "CLAYDE: Take your forces there and secure the area.", delay: 3, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: Don't forget to examine the technology recovered from NASDA Central, Commander!", delay: 5, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Don't forget to examine the technology recovered from NASDA Central, Commander!", delay: 8, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: I have a feeling that they'll prove to be very useful.", delay: 3, sound: CAM_RCLICK},
 	]);
 
