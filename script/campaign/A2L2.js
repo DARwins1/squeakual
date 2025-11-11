@@ -77,20 +77,8 @@ function checkLzAmbushGroup()
 		camCallOnce("evacDelta");
 		removeTimer("checkLzAmbushGroup");
 
-		camQueueDialogue([
-			{text: "DELTA: Well you're surely a sight for sore eyes. Thanks, Bravo!", delay: 2, sound: CAM_RCLICK},
-			{text: "CLAYDE: Commander Delta, report your situation. What is going on here?", delay: 3, sound: CAM_RCLICK},
-			{text: "DELTA: We fell back to base when NASDA Central was overrun.", delay: 3, sound: CAM_RCLICK},
-			{text: "DELTA: ...But when we arrived back to base, it was already under assault by the Collective.", delay: 3, sound: CAM_RCLICK},
-			{text: "DELTA: We were forced to abandon the base, and we lost contact with team Echo.", delay: 3, sound: CAM_RCLICK},
-			{text: "DELTA: The Collective have been hounding us relentlessly, sir. We thought we were done for.", delay: 3, sound: CAM_RCLICK},
-			{text: "DELTA: It's a miracle that team Bravo arrived when they did.", delay: 3, sound: CAM_RCLICK},
-			{text: "CLAYDE: Indeed...", delay: 3, sound: CAM_RCLICK},
-			{text: "CLAYDE: Commander Bravo, I'm approving reinforcements.", delay: 3, sound: CAM_RCLICK},
-			{text: "CLAYDE: Establish a fortified position, and investigate Delta and Echo's former base.", delay: 3, sound: CAM_RCLICK},
-			{text: "CLAYDE: If we're to find any clues as to what happened to team Echo, we'll need to start there.", delay: 3, sound: CAM_RCLICK},
-			{text: "CLAYDE: Meanwhile, we'll move team Delta's survivors to a safe position.", delay: 3, sound: CAM_RCLICK},
-		]);
+		// Tell the player to investigate Echo's base (and call reinforcements)
+		camPlayVideos([cam_sounds.incoming.incomingTransmission, {video: "A2L2_DELTA", type: MISS_MSG}]);
 
 		queue("echoDialogue", camMinutesToMilliseconds(4));
 	}
@@ -107,11 +95,11 @@ function echoDialogue()
 		{text: "CLAYDE: If they have been captured, we may find some intel on where they're being held.", delay: 3, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: Do you think the Collective...", delay: 12, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: ...wiped them out?", delay: 2, sound: CAM_RCLICK},
-		{text: "CLAYDE: We know the Collective have captured team Foxtrot.", delay: 4, sound: CAM_RCLICK},
+		{text: "CLAYDE: We know the Collective have captured Team Foxtrot.", delay: 4, sound: CAM_RCLICK},
 		{text: "CLAYDE: They also briefly held me captive as well.", delay: 3, sound: CAM_RCLICK},
 		{text: "CLAYDE: ...And they seem to be in the business of recruiting scavengers as well.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: We still don't know what their end-goal is, but for now, we can at least have faith that team Echo is alive.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: The first step to finding them is by securing that base.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: We still don't know what their end-goal is, but for now, we can at least assume that team Echo is alive.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: The first step to finding them is securing that base.", delay: 3, sound: CAM_RCLICK},
 	]);
 }
 
@@ -553,17 +541,10 @@ function spyFlee()
 function discoverEcho()
 {
 	echoDiscovered = true;
-	camQueueDialogue([
-		{text: "LIEUTENANT: Sir... Those vehicle chassis look identical to our own.", delay: 3, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: ...And, their identification...", delay: 3, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: General, sir, those are team Echo's units.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: ...", delay: 3, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: Has team Echo... betray-", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: Commander Bravo. Your objective has changed.", delay: 1, sound: CAM_RCLICK},
-		{text: "CLAYDE: Rally your forces, and eradicate team Echo's base.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: Destroy those traitors with the utmost discretion.", delay: 2, sound: CAM_RCLICK},
-		{text: "CLAYDE: Treachery of this magnitude cannot be tolerated!", delay: 3, sound: CAM_RCLICK},
-	]);
+
+	// Tell the player to KILL Echo's base
+	camPlayVideos([cam_sounds.incoming.incomingTransmission, {video: "A2L2_ECHO", type: MISS_MSG}]);
+
 	camSetExtraObjectiveMessage("Eradicate team Echo");
 }
 
@@ -572,9 +553,9 @@ function landingDialogue()
 {
 	camQueueDialogue([
 		{text: "LIEUTENANT: Commander Bravo, teams Delta and Echo were assigned together, and they shared a single base.", delay: 3, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: If Delta's distress signal is anything to go by, then it was likely overrun by the Collective.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Delta's distress signal indicated that it was overrun by the Collective.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: We still don't know what happened with Team Echo, but at least we still have a shot at saving Delta.", delay: 3, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: Move fast, and be prepared for anything.", delay: 3, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: With any luck, we might be able to save Delta before the Collective get to them.", delay: 2, sound: CAM_RCLICK},
 	]);
 }
 
@@ -591,7 +572,7 @@ function echoEradicatedDialogue()
 		{text: "CLAYDE: To be loyal to each other.", delay: 1, sound: CAM_RCLICK},
 		{text: "CLAYDE: There's no room for traitors and turncoats among us.", delay: 3, sound: CAM_RCLICK},
 		{text: "CLAYDE: Destroying those defectors was the only option.", delay: 2, sound: CAM_RCLICK},
-		{text: "CLAYDE: ...They're no better than team Alpha.", delay: 8, sound: CAM_RCLICK},
+		{text: "CLAYDE: ...They're no better than Team Alpha.", delay: 8, sound: CAM_RCLICK},
 	]);
 }
 

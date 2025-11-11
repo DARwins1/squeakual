@@ -559,31 +559,8 @@ function eventStartLevel()
 	queue("enableFinalFactories", camChangeOnDiff(camMinutesToMilliseconds(18)));
 	queue("aggroCommander", camChangeOnDiff(camMinutesToMilliseconds(22)));
 
-	// Placeholder for the actual briefing sequence
-	camQueueDialogue([
-		{text: "---- BRIEFING PLACEHOLDER ----", delay: 0},
-		{text: "CHARLIE: General, team Delta has reported back from reconnaissance, sir.", delay: 2, sound: CAM_RCLICK},
-		{text: "CLAYDE: And?", delay: 3, sound: CAM_RCLICK},
-		{text: "CHARLIE: That place is a deathtrap, sir. It's easily the most heavily defended position in this sector.", delay: 3, sound: CAM_RCLICK},
-		{text: "CHARLIE: Or at least... the most heavily defended that we've found so-", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: Enough! Are there any periods when the camp has less defenders?", delay: 2, sound: CAM_RCLICK},
-		{text: "CHARLIE: W-Well, yes. The Collective patrols come and go with their transports.", delay: 3, sound: CAM_RCLICK},
-		{text: "CHARLIE: But we've also detected numerous smaller bases in the area.", delay: 3, sound: CAM_RCLICK},
-		{text: "CHARLIE: If we were to launch a direct assault, these bases would surely send reinforcements.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: ...I'm sure we could expect even more reinforcements after that.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: The Collective don't seem to be fond of letting their prisoners go.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: ...We're going to need a diversion, to draw their forces away from the camp.", delay: 3, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: General, please excuse the interruption, but we have a developing situation.", delay: 4, sound: CAM_RCLICK},
-		{text: "CLAYDE: What is it, Lieutenant?", delay: 3, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: We've picked up enemy movement to the north of team Bravo's position.", delay: 3, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: We believe that the Collective may be gathering their forces for another assault.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: Wonderful. This is going to complicate everything.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: Commanders Charlie and Golf, prepare your forces. We'll need to attack the Collective site sooner than previously planned.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: Commander Bravo, take your forces and secure the area north of your position.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: Destroy any Collective bases that they may have before they can rally their forces.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: If we're lucky, that should disrupt their movements and give us enough of an opening to raid their prisoner camp.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: Good luck, Commander Bravo.", delay: 3, sound: CAM_RCLICK},
-	]);
+	// Give player briefing.
+	camPlayVideos({video: "A2L5_BRIEF", type: MISS_MSG});
 
 	// Shift the sun towards the west
 	camSetSunPos(450.0, -400.0, 225.0);

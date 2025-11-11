@@ -138,7 +138,7 @@ const __cam_act1Levels = [
 	"A1L6", // ONSLAUGHT
 ]; // 6 missions
 const __cam_act2Levels = [
-	"A2L1", // HOT DROP
+	"A2L1", // REASSEMBLY REQUIRED
 	"A2L2S", "A2L2", // DISILLUSIONED
 	"A2L3", // REFOCUS
 	"A2L4S", "A2L4", // SPLIT THE SKY

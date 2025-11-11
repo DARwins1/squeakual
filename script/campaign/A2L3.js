@@ -163,9 +163,9 @@ function enableAllFactories()
 		{text: "LIEUTENANT: Do you think we could form some sort of alliance with them, General?", delay: 6, sound: CAM_RCLICK},
 		{text: "CLAYDE: Hmm...", delay: 5, sound: CAM_RCLICK},
 		{text: "CLAYDE: Perhaps... in a manner of speaking.", delay: 2},
-		{text: "LIEUTENANT: I don't think I see what you mean, sir.", delay: 4, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: I don't see what you mean, sir.", delay: 4, sound: CAM_RCLICK},
 		{text: "CLAYDE: I'll discuss it with you later, Lieutenant.", delay: 4, sound: CAM_RCLICK},
-		{text: "CLAYDE: As for you, Bravo, continue what you're doing.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: As for you, Bravo, continue with your mission.", delay: 3, sound: CAM_RCLICK},
 	]);
 }
 
@@ -446,38 +446,8 @@ function eventStartLevel()
 	queue("vtolAttack", camChangeOnDiff(camMinutesToMilliseconds(10)));
 	queue("aggroCommander", camChangeOnDiff(camMinutesToMilliseconds(12)));
 
-	// Placeholder for the actual briefing sequence
-	camQueueDialogue([
-		{text: "---- BRIEFING PLACEHOLDER ----", delay: 0},
-		{text: "LIEUTENANT: General, sir, we have more intel on how the Collective are recruiting scavengers.", delay: 2, sound: CAM_RCLICK},
-		{text: "CLAYDE: Get on with it, then.", delay: 3, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: Right...", delay: 3, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: We still haven't been able to fully decrypt most of the transmissions we've intercepted.", delay: 2, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: However, from what we have decoded, it seems that the Collective doesn't \"recruit\" their scavengers, but rather assimilates them.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: ...", delay: 2, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: The Collective seem to have a... deep fascination with what they call \"The Machine\"", delay: 2, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: Given everything we know about them, it seems that their entire command structure is devoted to it.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: They're a cult that worships machines?", delay: 3, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: Well... uhh... maybe.", delay: 3, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: It seems that they'll accept anyone into their ranks as long as they share enough devotion.", delay: 3, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: We're... still not sure if this \"Machine\" is a singular entity or not.", delay: 3, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: And if it is, who or what it may be.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: Well, I'm sure you'll find out given some more time.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: Continue your work, Lieutenant.", delay: 3, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: On it, Sir!", delay: 2, sound: CAM_RCLICK},
-		{text: "CLAYDE: ...", delay: 2, sound: CAM_RCLICK},
-		{text: "CLAYDE: As for you, Commander Bravo.", delay: 1, sound: CAM_RCLICK},
-		{text: "CLAYDE: You have my personal gratitude for dealing with that...", delay: 2, sound: CAM_RCLICK},
-		{text: "CLAYDE: ...Situation with team Echo.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: As for your next objective...", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: We're still trying to locate the Collective's main prisoner camp.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: And by extension, the locations of team Foxtrot, most of the Council, and any remaining allied POWs.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: Commander Charlie has informed me that of a Collective base to the west of your position.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: It appears that the Collective is using this base to round up prisoners and potential \"recruits\" before sending them to their main site.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: Your orders are to secure this base, and gather any intel you can find so that we may pinpoint the Collective's main prisoner processing facility.", delay: 4, sound: CAM_RCLICK},
-		{text: "CLAYDE: Expect enemy ground and air reinforcements as you approach their base.", delay: 4, sound: CAM_RCLICK},
-		{text: "CLAYDE: Good luck, Commander.", delay: 3, sound: CAM_RCLICK},
-	]);
+	// Give player briefing.
+	camPlayVideos({video: "A2L3_BRIEF", type: MISS_MSG});
 
 	// Lighten the fog to *more or less* 2x default brightness
 	camSetFog(32, 32, 96);

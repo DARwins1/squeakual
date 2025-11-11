@@ -739,14 +739,6 @@ function eventStartLevel()
 			// Instead, we'll grant XP when the transport drops it off.
 		}
 	}
-	// else
-	// {
-	// 	// Grant 100 power for every droid the player saved from the last campaign
-	// 	let numDroids = enumDroid(CAM_HUMAN_PLAYER).length - 1; // Don't count the transporter itself
-	// 	// Also include the cargo of the first transport
-	// 	numDroids += enumDroid(CAM_HUMAN_PLAYER, DROID_SUPERTRANSPORTER)[0].cargoCount - 1; // Cargo count seems to always have at least 1?
-	// 	setPower(numDroids * 100, CAM_HUMAN_PLAYER);
-	// }
 	
 	setPower(NUM_TRANSPORTS * 1000, CAM_HUMAN_PLAYER);
 	setReinforcementTime(camMinutesToSeconds(1)); // 1 minute
@@ -775,26 +767,8 @@ function eventStartLevel()
 		drainPlayerExp();
 	}
 
-	// Placeholder for the actual briefing sequence
-	camQueueDialogue([
-		{text: "---- BRIEFING PLACEHOLDER ----", delay: 0},
-		{text: "LIEUTENANT: Sir, Team Bravo has evacuated with all that they could. They're awaiting further orders.", delay: 2, sound: CAM_RCLICK},
-		{text: "CLAYDE: Well done, Commander Bravo.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: If we're to salvage this operation, we'll need as many able-bodied men as possible.", delay: 2, sound: CAM_RCLICK},
-		{text: "CLAYDE: Commander Charlie, report your situation.", delay: 3, sound: CAM_RCLICK},
-		{text: "CHARLIE: We're holed up alright sir.", delay: 3, sound: CAM_RCLICK},
-		{text: "CHARLIE: But we've spotted Collective forces to the north of our position.", delay: 2, sound: CAM_RCLICK},
-		{text: "CHARLIE: They've been busy setting up some defenses.", delay: 3, sound: CAM_RCLICK},
-		{text: "CHARLIE: There's also been lot of fighting between the local scavengers.", delay: 3, sound: CAM_RCLICK},
-		{text: "CHARLIE: It looks like some of the scavengers are working with the Collective.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: I don't have a hard time believing that.", delay: 4, sound: CAM_RCLICK},
-		{text: "CLAYDE: Lieutenant, keep parsing through the Collective's transmissions.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: Find out why these scavengers are working along with the Collective.", delay: 3, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: On it, sir.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: Commander Bravo, take your forces and assume command of Charlie's base.", delay: 2, sound: CAM_RCLICK},
-		{text: "CLAYDE: Team Charlie will reposition to a new location.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: Secure the area, and hold for further instructions once the base site is secure.", delay: 3, sound: CAM_RCLICK},
-	]);
+	// Give player briefing.
+	camPlayVideos({video: "A2L1_BRIEF", type: MISS_MSG});
 
 	// Lighten the fog to *more or less* 2x default brightness
 	camSetFog(32, 32, 96);

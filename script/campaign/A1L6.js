@@ -294,19 +294,11 @@ function sendCollectiveTransporter()
 // Allow a win if a transporter was launched.
 // NOTE: The player doesn't have to transport a construction droid, since trucks will be given
 // to the player at the start of Act II.
-// Also, take up to 1 thousand of the player's power and stash it for the next mission.
 function eventTransporterLaunch(transporter)
 {
 	if (transporter.player === CAM_HUMAN_PLAYER)
 	{
 		allowWin = true;
-
-		// Stash away up to 1k power every time the player launches a transport
-		// const POWER_PER_TRANSPORT = 1000;
-		// const CURRENT_POWER = playerPower(CAM_HUMAN_PLAYER);
-
-		// savedPower = Math.min(CURRENT_POWER, POWER_PER_TRANSPORT);
-		// setPower(Math.max(CURRENT_POWER - POWER_PER_TRANSPORT, 0), CAM_HUMAN_PLAYER);
 	}
 }
 

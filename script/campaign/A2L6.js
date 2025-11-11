@@ -148,7 +148,7 @@ function camEnemyBaseEliminated_scavLZBase()
 		setMissionTime(-1);
 	}
 
-	// Dialogue about reinforcements and clear LZs
+	// Dialogue about cleared LZs
 	camQueueDialogue([
 		{text: "LIEUTENANT: Good job, Bravo. Your LZ is secure.", delay: 2, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: Call in the reinforcements you need, but do not engage the Collective base.", delay: 3, sound: CAM_RCLICK},
@@ -159,24 +159,20 @@ function camEnemyBaseEliminated_scavLZBase()
 		// Long delay...
 		{text: "GOLF: Team Golf here, we're ready to go.", delay: 12, sound: CAM_RCLICK},
 		{text: "GOLF: Let's break that prison and get everyone home in one piece.", delay: 3, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: General, all teams are ready to assault the Collective's prisoner camp.", delay: 5, sound: CAM_RCLICK},
-		{text: "CLAYDE: Perfect. I'm deploying my diversion now.", delay: 4, sound: CAM_RCLICK},
-		{text: "CLAYDE: Lieutenant, you're in charge of the assault.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: Destroy that camp, and get our people home safely.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: General Clayde, signing off.", delay: 3, sound: CAM_RCLICK},
+		{delay: 5, callback: "endStealthPhase"},
 	]);
 
+	// Allow the player to call reinforcements
 	camSetStandardWinLossConditions(CAM_VICTORY_OFFWORLD, "A2L7", {
 		reinforcements: camMinutesToSeconds(1.75),
 		area: "compromiseZone",
 		callback: "playerDetected", // Will change once the stealth phase is officially "ended"
 		retlz: true,
 	});
-	setReinforcementTime(30); // The first transport is much faster
+	setReinforcementTime(30); // The first transport extra fast
 	camSetExtraObjectiveMessage("Avoid detection by the Collective");
 
-	queue("endStealthPhase", camSecondsToMilliseconds(60));
-	queue("sendCollectiveScouts", camChangeOnDiff(camMinutesToMilliseconds(4)));
+	// queue("endStealthPhase", camSecondsToMilliseconds(60));
 }
 
 function camEnemyBaseEliminated_colMainBase()
@@ -213,7 +209,11 @@ function sendCollectiveScouts()
 // End the stealth phase expand the map
 function endStealthPhase()
 {
+	// Transmission about Clayde's "diversion"
+	camPlayVideos([cam_sounds.incoming.incomingTransmission, {video: "A2L6_DIVERSION", type: MISS_MSG}]);
+
 	stealthPhase = false;
+	queue("sendCollectiveScouts", camChangeOnDiff(camMinutesToMilliseconds(3.5)));
 
 	camCallOnce("stealthBreakDialogue");
 
@@ -547,12 +547,13 @@ function activateCollective()
 	camEnableFactory("colFactory4");
 	camEnableFactory("colCybFactory5");
 
-	// Dialogue when the cool epic fighting starts
+	// Dialogue when the cool epic awesome fighting starts
+	camSkipDialogue(); // If anyone was already talking; shut up :P
 	camQueueDialogue([
 		{text: "GOLF: Fire at will!", delay: 2, sound: CAM_RCLICK},
 		{text: "CHARLIE: Let's move!", delay: 1, sound: CAM_RCLICK},
 		{text: "GOLF: We can't stop until we breach that camp!", delay: 3, sound: CAM_RCLICK},
-		{text: "CHARLIE: Push up before they can regroup!", delay: 5, sound: CAM_RCLICK},
+		{text: "CHARLIE: Push up; move before they can regroup!", delay: 5, sound: CAM_RCLICK},
 	]);
 
 	// Grant vision of allied objects to the player
@@ -767,7 +768,7 @@ function stealthBreakDialogue()
 {
 	if (!playerHidden) return; // Don't play if the player has already been revealed
 	camQueueDialogue([
-		{text: "LIEUTENANT: Commander Bravo, I'll leave the first strike to you.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Commander Bravo, I'll leave the first strike to you.", delay: 10, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: Once you open fire, Commanders Charlie and Golf will support you.", delay: 3, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: Remember; even though Clayde's diversion should prevent enemy reinforcements, the Collective are sure to have a large force stationed here.", delay: 3, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: Make sure you're ready when you attack, because there's no turning back now...", delay: 4, sound: CAM_RCLICK},
@@ -775,18 +776,27 @@ function stealthBreakDialogue()
 }
 
 // Dialogue on Clayde's mysteriously effective diversion
-// Called when the final factories activate, or when the first Infested group spawns
+// Called when the final factories activate
 function diversionDialogue()
 {
 	camQueueDialogue([
-		{text: "LIEUTENANT: Whatever the General's been doing, it surely is working...", delay: 0, sound: CAM_RCLICK},
+		{text: "GOLF: The General must be putting on one hell of a diversion.", delay: 0, sound: CAM_RCLICK},
+		{text: "GOLF: The Collective aren't reinforcing this place at all!", delay: 3, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: I'm detecting a huge spike in Collective comms traffic.", delay: 3, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: And Delta is reporting high amounts of activity, especially near the city center.", delay: 3, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: The Collective is suddenly scrambling a lot of their forces across the map...", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Whatever the General's been doing, it surely is working...", delay: 3, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: ...But where did Clayde get the manpower to attack all of these places at once?", delay: 5, sound: CAM_RCLICK},
-		{text: "GOLF: Who cares?", delay: 3, sound: CAM_RCLICK},
-		{text: "GOLF: Now we can put the hurt on these Collective dummies.", delay: 1, sound: CAM_RCLICK},
-		{text: "GOLF: And I've just been ITCHING for some payback!", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: ...Unless, he...", delay: 5, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: No, no. He wouldn't.", delay: 2, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: He ASSURED me that he wouldn't!", delay: 3, sound: CAM_RCLICK},
+		{text: "CHARLIE: Uh, Lieutenant?", delay: 4, sound: CAM_RCLICK},
+		{text: "CHARLIE: What's going on?", delay: 2, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: ...Excuse me, Commanders.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: I need to go check on something...", delay: 3, sound: CAM_RCLICK},
+		// Delay...
+		{text: "GOLF: Wasn't he supposed to be leading us?", delay: 10, sound: CAM_RCLICK},
+		{text: "CHARLIE: Beats me.", delay: 3, sound: CAM_RCLICK},
+		{text: "CHARLIE: Whatever it is, it must be important.", delay: 2, sound: CAM_RCLICK},
+		{text: "GOLF: More important than this?!", delay: 3, sound: CAM_RCLICK},
 	]);
 }
 
@@ -801,28 +811,14 @@ function campCleared()
 
 	camQueueDialogue([
 		{text: "CHARLIE: We did it!", delay: 4, sound: CAM_RCLICK},
-		{text: "CHARLIE: Lieutenant, the camp is clear!", delay: 2, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: Well done, Commanders!", delay: 4, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: Clayde will be very relieved that this plan worked out.", delay: 3, sound: CAM_RCLICK},
-		{text: "GOLF: Yeah, this was almost TOO easy.", delay: 3, sound: CAM_RCLICK},
-		{text: "GOLF: These guys didn't stand a chance!", delay: 3, sound: CAM_RCLICK},
-		{text: "CHARLIE: Uhh, Golf?", delay: 4, sound: CAM_RCLICK},
-		{text: "GOLF: What?", delay: 3, sound: CAM_RCLICK},
-		{text: "CHARLIE: ...Nevermind.", delay: 3, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: Alright. Charlie and Golf, stay here and evacuate the prisoners from the camp.", delay: 5, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: Bravo, you should return to base.", delay: 3, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: The Collective have already amassed a large amount of forces near you.", delay: 3, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: It's only a matter of time until...", delay: 3, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: Until...", delay: 2, sound: CAM_RCLICK},
-		{text: "CHARLIE: Lieutenant?!", delay: 3, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: Commanders!", delay: 2, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: I'm detecting movement all around you!", delay: 2, sound: CAM_RCLICK, callback: "startInfestedAttacks"},
-		{text: "GOLF: ...Huh?", delay: 3, sound: CAM_RCLICK},
-		{text: "CHARLIE: Where?", delay: 1, sound: CAM_RCLICK},
-		{text: "CHARLIE: Lieutenant?!", delay: 3, sound: CAM_RCLICK},
-		{text: "GOLF: He-Hey!!", delay: 10, sound: CAM_RCLICK},
-		{text: "GOLF: What the hell is this?!", delay: 3, sound: CAM_RCLICK},
-		{text: "CHARLIE: Lieutenant, are these the same things that Team Alpha...", delay: 6, sound: CAM_RCLICK},
+		{text: "CHARLIE: Hey Lieutenant, the camp is clear!", delay: 2, sound: CAM_RCLICK},
+		{text: "CHARLIE: Lieutenant?", delay: 5, sound: CAM_RCLICK},
+		{text: "CHARLIE: Are you there?", delay: 2, sound: CAM_RCLICK},
+		{text: "GOLF: Hey Charlie, I'm picking up a lot of movement.", delay: 4, sound: CAM_RCLICK},
+		{text: "GOLF: Multiple directions.", delay: 3, sound: CAM_RCLICK},
+		{text: "CHARLIE: Huh? Is the Collective counter-attacking?", delay: 3, sound: CAM_RCLICK, callback: "startInfestedAttacks"},
+		{text: "GOLF: I don't know, but they're almost on top of us!", delay: 3, sound: CAM_RCLICK},
+		{text: "GOLF: Charlie, Bravo, look alive!", delay: 3, sound: CAM_RCLICK},
 	]);
 }
 
@@ -839,7 +835,7 @@ function startInfestedAttacks()
 	queue("sendInfestedReinforcements", camSecondsToMilliseconds(15));
 	queue("sendInfestedReinforcements", camSecondsToMilliseconds(20));
 	queue("sendInfestedReinforcements", camSecondsToMilliseconds(30));
-	queue("allowLeave", camSecondsToMilliseconds(50));
+	queue("allowLeave", camSecondsToMilliseconds(60));
 
 	// Also set up continuous Infested waves
 	setTimer("sendInfestedReinforcements", camChangeOnDiff(camSecondsToMilliseconds(60)));
@@ -851,20 +847,17 @@ function allowLeave()
 	survivedInfested = true;
 
 	camQueueDialogue([
-		{text: "GOLF: Bravo!", delay: 4, sound: CAM_RCLICK},
-		{text: "GOLF: You've gotta get back to base, man.", delay: 2, sound: CAM_RCLICK},
-		{text: "GOLF: The Collective is gonna assault you any minute now!", delay: 3, sound: CAM_RCLICK},
-		{text: "CHARLIE: Don't worry about us, Bravo.", delay: 3, sound: CAM_RCLICK},
-		{text: "CHARLIE: We'll get the prisoners back safe and sound.", delay: 3},
-		{text: "CHARLIE: Just get out of here!", delay: 3},
-		{text: "CHARLIE: Golf and I will handle these uglies.", delay: 2},
-		{text: "LIEUTENANT: ...", delay: 4},
-		{text: "LIEUTENANT: Charlie's right, Bravo.", delay: 4},
-		{text: "LIEUTENANT: You should return to base and prepare to evacuate.", delay: 3},
-		{text: "LIEUTENANT: I'll...", delay: 3},
-		{text: "LIEUTENANT: I'll have a talk with the General when he gets back.", delay: 3},
-		{text: "LIEUTENANT: ...Oh, Clayde.", delay: 10, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: What have you done?!", delay: 3, sound: CAM_RCLICK},
+		{text: "GOLF: That...", delay: 3, sound: CAM_RCLICK},
+		{text: "GOLF: That was NOT the Collective!", delay: 2, sound: CAM_RCLICK},
+		{text: "GOLF: Where the hell is the Lieutenant?!", delay: 3, sound: CAM_RCLICK},
+		{text: "CHARLIE: These things look like...", delay: 3, sound: CAM_RCLICK},
+		{text: "CHARLIE: ...Listen, Bravo.", delay: 5, sound: CAM_RCLICK},
+		{text: "CHARLIE: You've gotta get back to base!", delay: 2, sound: CAM_RCLICK},
+		{text: "CHARLIE: Golf and I will keep hold here and keep the prisoners safe.", delay: 2, sound: CAM_RCLICK},
+		{text: "CHARLIE: Get going!", delay: 3, sound: CAM_RCLICK},
+		// Long delay...
+		{text: "CHARLIE: Oh man, Clayde...", delay: 18, sound: CAM_RCLICK},
+		{text: "CHARLIE: What the hell did you just do?", delay: 4, sound: CAM_RCLICK},
 	]);
 }
 
