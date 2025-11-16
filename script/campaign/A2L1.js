@@ -404,7 +404,7 @@ function adaptColors()
 	// Make sure the scavengers aren't choosing conflicting colors with the player
 	changePlayerColour(CAM_THE_COLLECTIVE, (playerColour !== 2) ? 2 : 10); // Set to gray or white
 	changePlayerColour(MIS_TEAM_CHARLIE, (playerColour !== 11) ? 11 : 5); // Charlie to bright blue or blue
-	changePlayerColour(MIS_CYAN_SCAVS, (playerColour !== 7) ? 7 : 0); // Set to cyan or green
+	changePlayerColour(MIS_CYAN_SCAVS, (playerColour !== 7) ? 7 : 12); // Set to cyan or neon green
 }
 
 function eventStartLevel()

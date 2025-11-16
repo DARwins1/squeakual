@@ -129,16 +129,54 @@ function eventStartLevel()
 	camSetStandardWinLossConditions(CAM_VICTORY_PRE_OFFWORLD, "A4L2");
 
 	// Placeholder for the actual briefing sequence
+	// <LIEUTENANT>: Well... That could have gone better.
+	// <CHARLIE>: It could have been worse, too.
+	// <LIEUTENANT>: I suppose that's also true.
+	// <LIEUTENANT>: But now that we're safe, we need a plan.
+	// <LIEUTENANT>: Clayde has a firm grip on NARS, and the other Commanders.
+	// <LIEUTENANT>: And with his Lures, he could send the Infested crashing down on us again.
+	// <CHARLIE>: We need to act before Clayde can find us, we won't be safe here forever.
+	// <LIEUTENANT>: What if we evacuated? I doubt that we could negotiate with the Collective.
+	// <LIEUTENANT>: But if there's any remaining scavengers or civilians, we could use our transports and help them escape the Infested.
+	// <CHARLIE>: We're just running away?
+	// <CHARLIE>: Can't we stop the Infested?
+	// <LIEUTENANT>: I don't think so. Confronting Clayde directly would be too risky.
+	// <LIEUTENANT>: He'd throw everything he has at us the moment we try anything.
+	// <CHARLIE>: ...Fair.
+	// <CHARLIE>: But how are we going to move people out of the city?
+	// <CHARLIE>: We don't know how safe the outskirts are, and transporting people cross-country would just take too long to be reasonable.
+	// <LIEUTENANT>: Wait! The uplink stations!
+	// <LIEUTENANT>: We can use those to find a safe place outside of the city!
+	// <CHARLIE>: How?
+	// <LIEUTENANT>: Each of the uplinks have records of satellite data.
+	// <LIEUTENANT>: Images, maps, those sorts of things.
+	// <LIEUTENANT>: If we gained access to one of those uplinks, we could find a safe spot to drop off civilians near the city.
+	// <LIEUTENANT>: We wouldn't even need to connect to the satellites, we could just use the old records stored within the uplinks themselves.
+	// <LIEUTENANT>: ...Bravo, you found an uplink station early on, before we had even encountered the Collective.
+	// <CHARLIE>: Team Delta hadn't gotten around to capturing that uplink by the time we ditched Clayde.
+	// <CHARLIE>: ...Which means that the Collective probably still control it.
+	// <LIEUTENANT>: Commander Bravo, send your forces to this uplink station.
+	// <LIEUTENANT>: If you can clear the area around the uplink and hold it, we should be able to get the data we need.
+	// <LIEUTENANT>: The process should be fast, you'll only need to control the uplink for a few minutes.
+	// <LIEUTENANT>: But you'll need to contend with keeping the Collective at bay, and probably the Infested too.
+	// <LIEUTENANT>: Good luck, Bravo.
+
+	// Hint that the player should build defenses to the east and south
+	camQueueDialogue([
+		{text: "LIEUTENANT: Another thing, Bravo.", delay: 6, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: I'm still picking up a lot of movement around your area.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Most of it is probably just wandering groups of Infested.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: But still, try to make sure that your defenses are in good condition before taking off.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Especially in the east and in the south, as I'm detecting extra activity in those directions.", delay: 4, sound: CAM_RCLICK},
+	]);
+
+	// Additional dialogue (Move this to the main mission!!!)
 	// camQueueDialogue([
-	// 	{text: "---- BRIEFING PLACEHOLDER ----", delay: 0},
-	// 	{text: "LIEUTENANT: General, sir, Commander Bravo has secured the area around team Charlie's base.", delay: 2, sound: CAM_RCLICK},
-	// 	{text: "CLAYDE: Right on time, I have a new objective for them.", delay: 3, sound: CAM_RCLICK},
-	// 	{text: "CLAYDE: We've received a distress signal from team Delta.", delay: 2, sound: CAM_RCLICK},
-	// 	{text: "CLAYDE: It seems that that their base may have been overrun by the Collective.", delay: 3, sound: CAM_RCLICK},
-	// 	{text: "CLAYDE: Commander Bravo, send a scout team to the outskirts of their base.", delay: 3, sound: CAM_RCLICK},
-	// 	{text: "CLAYDE: Find and relieve team Delta, and await further instructions.", delay: 3, sound: CAM_RCLICK},
-	// 	{text: "LIEUTENANT: General, sir, has their been any transmission from team Echo?", delay: 3, sound: CAM_RCLICK},
-	// 	{text: "CLAYDE: No... and that's what concerns me the most.", delay: 3, sound: CAM_RCLICK},
+	// 	{text: "LIEUTENANT: In the meantime, Commander Charlie...", delay: 6, sound: CAM_RCLICK},
+	// 	{text: "LIEUTENANT: Start gathering any civilians that you can find.", delay: 3, sound: CAM_RCLICK},
+	// 	{text: "LIEUTENANT: Once Bravo finds a safe spot, we should start moving people immediately.", delay: 3, sound: CAM_RCLICK},
+	// 	{text: "CHARLIE: Roger that, Lieutenant.", delay: 4, sound: CAM_RCLICK},
+	// 	{text: "CHARLIE: I'll get as many people as I can find.", delay: 2, sound: CAM_RCLICK},
 	// ]);
 
 	camCompleteRequiredResearch(mis_infestedResearch, CAM_INFESTED);

@@ -100,13 +100,13 @@ function __camGrantBlackBoxResearch()
 {
 	const partialName = "R-Special";
 	let idxNum = 1;
-	let resIdx = (idxNum < 10) ? ("0" + idxNum) : idxNum;
+	let resIdx = "01";
 	let research = getResearch(partialName + resIdx, CAM_HUMAN_PLAYER);
 	while (research !== null && (camResearchIsAvailable(partialName + resIdx) || research.done))
 	{
 		// If this schematic has already been granted, check the next one
 		idxNum++;
-		resIdx = (idxNum < 10) ? ("0" + idxNum) : idxNum;
+		resIdx = ((idxNum < 10) ? ("0" + idxNum) : idxNum);
 		research = getResearch(partialName + resIdx, CAM_HUMAN_PLAYER);
 	}
 

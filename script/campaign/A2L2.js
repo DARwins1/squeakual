@@ -134,7 +134,7 @@ function evacDelta()
 
 	// Call in an evac transport
 	const transportEntryPos = camMakePos("transportEntryPos");
-	camSendReinforcement(MIS_TEAM_DELTA, camMakePos("landingZone2"), [cTempl.plltruckt],
+	camSendReinforcement(MIS_TEAM_DELTA, camMakePos("landingZone2"), [cTempl.plltruckht],
 		CAM_REINFORCE_TRANSPORT, {
 			entry: transportEntryPos,
 			exit: transportEntryPos

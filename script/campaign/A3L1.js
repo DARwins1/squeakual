@@ -375,11 +375,9 @@ function trackTransporter()
 
 function eventStartLevel()
 {
-	// const startPos = camMakePos("landingZone");
 	const lz = getObject("landingZone"); //player lz
 
-
-	// centreView(startPos.x, startPos.y);
+	centreView(transportEntryPos.x, transportEntryPos.y);
 	setNoGoArea(lz.x, lz.y, lz.x2, lz.y2, CAM_HUMAN_PLAYER);
 	startTransporterEntry(transportEntryPos.x, transportEntryPos.y, CAM_HUMAN_PLAYER);
 	setTransporterExit(transportEntryPos.x, transportEntryPos.y, CAM_HUMAN_PLAYER);
@@ -651,14 +649,6 @@ function eventStartLevel()
 		}
 	
 	}
-	// else
-	// {
-	// 	// Grant 200 power for every droid the player saved from the last campaign
-	// 	let numDroids = enumDroid(CAM_HUMAN_PLAYER).length - 1; // Don't count the transporter itself
-	// 	// Also include the cargo of the first transport
-	// 	numDroids += enumDroid(CAM_HUMAN_PLAYER, DROID_SUPERTRANSPORTER)[0].cargoCount - 1; // Cargo count seems to always have at least 1?
-	// 	setPower(numDroids * 200, CAM_HUMAN_PLAYER);
-	// }
 
 	setPower(NUM_TRANSPORTS * 2000, CAM_HUMAN_PLAYER);
 	setReinforcementTime(camMinutesToSeconds(1)); // 1 minute
@@ -672,7 +662,6 @@ function eventStartLevel()
 
 	queue("activateFirstFactories", camChangeOnDiff(camMinutesToMilliseconds(2)));
 	queue("heliAttack", camChangeOnDiff(camMinutesToMilliseconds(5)));
-	// queue("activateSecondFactories", camChangeOnDiff(camMinutesToMilliseconds(6)));
 	queue("startCollectiveTransports", camChangeOnDiff(camMinutesToMilliseconds(10)));
 	queue("vtolAttack", camChangeOnDiff(camMinutesToMilliseconds(14)));
 	sendInfestedReinforcements();
@@ -683,26 +672,17 @@ function eventStartLevel()
 		drainPlayerExp();
 	}
 
-	// Placeholder for the actual briefing sequence
-	// camQueueDialogue([
-	// 	{text: "---- BRIEFING PLACEHOLDER ----", delay: 0},
-	// 	{text: "LIEUTENANT: Sir, Team Bravo has evacuated with all that they could. They're awaiting further orders.", delay: 2, sound: CAM_RCLICK},
-	// 	{text: "CLAYDE: Well done, Commander Bravo.", delay: 3, sound: CAM_RCLICK},
-	// 	{text: "CLAYDE: If we're to salvage this operation, we'll need as many able-bodied men as possible.", delay: 2, sound: CAM_RCLICK},
-	// 	{text: "CLAYDE: Commander Charlie, report your situation.", delay: 3, sound: CAM_RCLICK},
-	// 	{text: "CHARLIE: We're holed up alright sir.", delay: 3, sound: CAM_RCLICK},
-	// 	{text: "CHARLIE: But we've spotted Collective forces to the north of our position.", delay: 2, sound: CAM_RCLICK},
-	// 	{text: "CHARLIE: They've been busy setting up some defenses.", delay: 3, sound: CAM_RCLICK},
-	// 	{text: "CHARLIE: There's also been lot of fighting between the local scavengers.", delay: 3, sound: CAM_RCLICK},
-	// 	{text: "CHARLIE: It looks like some of the scavengers are working with the Collective.", delay: 3, sound: CAM_RCLICK},
-	// 	{text: "CLAYDE: I don't have a hard time believing that.", delay: 4, sound: CAM_RCLICK},
-	// 	{text: "CLAYDE: Lieutenant, keep parsing through the Collective's transmissions.", delay: 3, sound: CAM_RCLICK},
-	// 	{text: "CLAYDE: Find out why these scavengers are working along with the Collective.", delay: 3, sound: CAM_RCLICK},
-	// 	{text: "LIEUTENANT: On it, sir.", delay: 3, sound: CAM_RCLICK},
-	// 	{text: "CLAYDE: Commander Bravo, take your forces and assume command of Charlie's base.", delay: 2, sound: CAM_RCLICK},
-	// 	{text: "CLAYDE: Team Charlie will reposition to a new location.", delay: 3, sound: CAM_RCLICK},
-	// 	{text: "CLAYDE: Secure the area, and hold for further instructions once the base site is secure.", delay: 3, sound: CAM_RCLICK},
-	// ]);
+	// Give player briefing.
+	camPlayVideos({video: "A3L1_BRIEF", type: MISS_MSG});
+
+	// Additional dialogue
+	camQueueDialogue([
+		{text: "CLAYDE: Commander Bravo.", delay: 30, sound: CAM_RCLICK},
+		{text: "CLAYDE: The Infested have spread explosively, even faster than I originally expected.", delay: 2, sound: CAM_RCLICK},
+		{text: "CLAYDE: I can direct their movements against the Collective using the Lures under my command.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: But you may encounter some... \"runoff\".", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: So be alert, and keep your defenses in check.", delay: 4, sound: CAM_RCLICK},
+	]);
 
 	queue("trackTransporter", camSecondsToMilliseconds(0.25));
 

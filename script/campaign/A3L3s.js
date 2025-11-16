@@ -99,25 +99,10 @@ function eventStartLevel()
 		setMissionTime(-1);
 	}
 	camSetStandardWinLossConditions(CAM_VICTORY_PRE_OFFWORLD, "A3L3");
+	camSetExtraObjectiveMessage(_("Reinforcements will not be available"));
 
 	// Give player briefing.
-	// camPlayVideos({video: "L2_BRIEF", type: MISS_MSG});
-
-	// Set the fog to it's default colours
-	// camSetFog(182, 225, 236);
-
-	// Placeholder for the actual briefing sequence
-	// camQueueDialogue([
-	// 	{text: "---- BRIEFING PLACEHOLDER ----", delay: 0},
-	// 	{text: "LIEUTENANT: General, sir, Commander Bravo has secured the area around team Charlie's base.", delay: 2, sound: CAM_RCLICK},
-	// 	{text: "CLAYDE: Right on time, I have a new objective for them.", delay: 3, sound: CAM_RCLICK},
-	// 	{text: "CLAYDE: We've received a distress signal from team Delta.", delay: 2, sound: CAM_RCLICK},
-	// 	{text: "CLAYDE: It seems that that their base may have been overrun by the Collective.", delay: 3, sound: CAM_RCLICK},
-	// 	{text: "CLAYDE: Commander Bravo, send a scout team to the outskirts of their base.", delay: 3, sound: CAM_RCLICK},
-	// 	{text: "CLAYDE: Find and relieve team Delta, and await further instructions.", delay: 3, sound: CAM_RCLICK},
-	// 	{text: "LIEUTENANT: General, sir, has their been any transmission from team Echo?", delay: 3, sound: CAM_RCLICK},
-	// 	{text: "CLAYDE: No... and that's what concerns me the most.", delay: 3, sound: CAM_RCLICK},
-	// ]);
+	camPlayVideos({video: "A3L3_BRIEF", type: MISS_MSG});
 
 	camCompleteRequiredResearch(mis_infestedResearch, CAM_INFESTED);
 	setTimer("sendInfestedReinforcements", camChangeOnDiff(camSecondsToMilliseconds(105)));

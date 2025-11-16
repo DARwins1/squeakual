@@ -163,7 +163,7 @@ function __camProcessResearchGatedGuideTopics(research = null)
 	{
 		const partialName = "R-Script-Log";
 		let idxNum = 1;
-		let resIdx = (idxNum < 10) ? ("0" + idxNum) : idxNum;
+		let resIdx = "01";
 		let research = getResearch(partialName + resIdx, CAM_HUMAN_PLAYER);
 		while (research !== null)
 		{
@@ -173,7 +173,7 @@ function __camProcessResearchGatedGuideTopics(research = null)
 				__camAddNewLogTopic(idxNum, true)
 			}
 			idxNum++;
-			resIdx = (idxNum < 10) ? ("0" + idxNum) : idxNum;
+			resIdx = ((idxNum < 10) ? ("0" + idxNum) : idxNum);
 			research = getResearch(partialName + resIdx, CAM_HUMAN_PLAYER);
 		}
 	}

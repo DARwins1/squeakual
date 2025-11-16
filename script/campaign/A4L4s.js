@@ -137,17 +137,25 @@ function eventStartLevel()
 	camSetStandardWinLossConditions(CAM_VICTORY_PRE_OFFWORLD, "A4L4");
 
 	// Placeholder for the actual briefing sequence
-	// camQueueDialogue([
-	// 	{text: "---- BRIEFING PLACEHOLDER ----", delay: 0},
-	// 	{text: "LIEUTENANT: General, sir, Commander Bravo has secured the area around team Charlie's base.", delay: 2, sound: CAM_RCLICK},
-	// 	{text: "CLAYDE: Right on time, I have a new objective for them.", delay: 3, sound: CAM_RCLICK},
-	// 	{text: "CLAYDE: We've received a distress signal from team Delta.", delay: 2, sound: CAM_RCLICK},
-	// 	{text: "CLAYDE: It seems that that their base may have been overrun by the Collective.", delay: 3, sound: CAM_RCLICK},
-	// 	{text: "CLAYDE: Commander Bravo, send a scout team to the outskirts of their base.", delay: 3, sound: CAM_RCLICK},
-	// 	{text: "CLAYDE: Find and relieve team Delta, and await further instructions.", delay: 3, sound: CAM_RCLICK},
-	// 	{text: "LIEUTENANT: General, sir, has their been any transmission from team Echo?", delay: 3, sound: CAM_RCLICK},
-	// 	{text: "CLAYDE: No... and that's what concerns me the most.", delay: 3, sound: CAM_RCLICK},
-	// ]);
+	// <CHARLIE>: Bravo, that was incredible!
+	// <CHARLIE>: I can't believe you're still alive!
+	// <CHARLIE>: Both Foxtrot and Golf, at the same time...
+	// <LIEUTENANT>: Yeah...
+	// <CHARLIE>: Listen, Lieutenant. We have to confront General Clayde.
+	// <LIEUTENANT>: Huh?
+	// <CHARLIE>: The General still controls the Lures, which means that the Infested will continue to spread.
+	// <CHARLIE>: But if we stop Clayde, the Infested will lose all coordination.
+	// <CHARLIE>: That's our best chance to save as many lives as possible.
+	// <CHARLIE>: Our evacuation might be fast, but it's not fast enough.
+	// <CHARLIE>: ...Besides, Bravo just took down both Foxtrot and Golf, so the General only has Team Delta left.
+	// <LIEUTENANT>: That's true.
+	// <LIEUTENANT>: And I know Clayde is just going to keep hounding us unless we take him down.
+	// <LIEUTENANT>: ...Alright. Let's do it.
+	// <LIEUTENANT>: Commander Bravo, this was the location of Clayde's HQ before we broke ranks.
+	// <LIEUTENANT>: Since he's been keeping the Collective at bay using the Infested, he's probably still there.
+	// <LIEUTENANT>: Transport your forces and lead the way, since you've proven yourself to be the most capable here.
+	// <LIEUTENANT>: With any luck, we'll end Clayde's control of NARS today.
+	// <LIEUTENANT>: ...Good luck, Commanders.
 
 	camCompleteRequiredResearch(mis_infestedResearch, CAM_INFESTED);
 	setTimer("sendInfestedReinforcements", camChangeOnDiff(camSecondsToMilliseconds(95)));

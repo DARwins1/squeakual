@@ -1393,6 +1393,22 @@ function eventStartLevel()
 			structset: camA4L5ColLZ10Structs
 	});
 
+	// Placeholder for the actual briefing sequence
+	// <LIEUTENANT>: Well, what's done is done.
+	// <LIEUTENANT>: General Clayde is dead, and what remains of NARS leadership has rejoined us.
+	// <LIEUTENANT>: And without him operating the Lures, Clayde's Infested are running amok.
+	// <LIEUTENANT>: The Collective are making short work of them all over the city, incinerating entire city blocks.
+	// <LIEUTENANT>: There's nothing left for us here; it's time to leave this city.
+	// <LIEUTENANT>: Team Charlie is currently using all of our remaining transports to evacuate civilians and NARS staff.
+	// <LIEUTENANT>: Once that's done, they can evacuate the rest of us.
+	// <LIEUTENANT>: But we're not out of this yet.
+	// <LIEUTENANT>: The Infested is getting wiped out, but there's still plenty of them wandering around this burning city.
+	// <LIEUTENANT>: We're also detecting dozens of Collective kill teams hunting them down.
+	// <LIEUTENANT>: And most worryingly, Team Delta is still out there somewhere.
+	// <LIEUTENANT>: Commander Bravo, defend your position against any hostiles until we can evacuate you.
+	// <LIEUTENANT>: I have a feeling this is going to get ugly before it gets better.
+	// <LIEUTENANT>: So be ready for anything, Commander.
+
 	// It's supposed to be ash...
 	camSetWeather(CAM_WEATHER_SNOWSTORM);
 	camSetSkyType(CAM_SKY_ARIZONA);

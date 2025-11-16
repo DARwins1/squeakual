@@ -965,7 +965,7 @@ function strikeTargets()
 function eventStartLevel()
 {
 	const PLAYER_COLOR = playerData[0].colour;
-	changePlayerColour(MIS_CYAN_SCAVS, (PLAYER_COLOR !== 7) ? 7 : 0); // Scavs to cyan or green
+	changePlayerColour(MIS_CYAN_SCAVS, (PLAYER_COLOR !== 7) ? 7 : 12); // Scavs to cyan or neon green
 	// All other factions should retain their color from the previous mission
 
 	// The player only loses if they run out of units

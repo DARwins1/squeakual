@@ -537,7 +537,7 @@ function eventStartLevel()
 	setAlliance(MIS_TEAM_FOXTROT, MIS_TEAM_GOLF, true);
 
 	changePlayerColour(MIS_TEAM_FOXTROT, (playerData[0].colour !== 13) ? 13 : 4); // Foxtrot to infrared or red
-	changePlayerColour(MIS_TEAM_GOLF, (playerData[0].colour !== 7) ? 7 : 0); // Golf to cyan or green
+	changePlayerColour(MIS_TEAM_GOLF, (playerData[0].colour !== 7) ? 7 : 12); // Golf to cyan or neon green
 
 	camSetArtifacts({
 		"foxtrotResearch1": { tech: "R-Wpn-Flamer-ROF03" }, // Flamer Autoloader Mk3
@@ -1294,26 +1294,19 @@ function eventStartLevel()
 	queue("activateInfested", camChangeOnDiff(camMinutesToMilliseconds(2)));
 	queue("activateFactories", camChangeOnDiff(camMinutesToMilliseconds(3)));
 
-	// // Placeholder for the actual briefing sequence
-	// // camQueueDialogue([
-	// // 	{text: "---- BRIEFING PLACEHOLDER ----", delay: 0},
-	// // 	{text: "LIEUTENANT: Sir, Team Bravo has evacuated with all that they could. They're awaiting further orders.", delay: 2, sound: CAM_RCLICK},
-	// // 	{text: "CLAYDE: Well done, Commander Bravo.", delay: 3, sound: CAM_RCLICK},
-	// // 	{text: "CLAYDE: If we're to salvage this operation, we'll need as many able-bodied men as possible.", delay: 2, sound: CAM_RCLICK},
-	// // 	{text: "CLAYDE: Commander Charlie, report your situation.", delay: 3, sound: CAM_RCLICK},
-	// // 	{text: "CHARLIE: We're holed up alright sir.", delay: 3, sound: CAM_RCLICK},
-	// // 	{text: "CHARLIE: But we've spotted Collective forces to the north of our position.", delay: 2, sound: CAM_RCLICK},
-	// // 	{text: "CHARLIE: They've been busy setting up some defenses.", delay: 3, sound: CAM_RCLICK},
-	// // 	{text: "CHARLIE: There's also been lot of fighting between the local scavengers.", delay: 3, sound: CAM_RCLICK},
-	// // 	{text: "CHARLIE: It looks like some of the scavengers are working with the Collective.", delay: 3, sound: CAM_RCLICK},
-	// // 	{text: "CLAYDE: I don't have a hard time believing that.", delay: 4, sound: CAM_RCLICK},
-	// // 	{text: "CLAYDE: Lieutenant, keep parsing through the Collective's transmissions.", delay: 3, sound: CAM_RCLICK},
-	// // 	{text: "CLAYDE: Find out why these scavengers are working along with the Collective.", delay: 3, sound: CAM_RCLICK},
-	// // 	{text: "LIEUTENANT: On it, sir.", delay: 3, sound: CAM_RCLICK},
-	// // 	{text: "CLAYDE: Commander Bravo, take your forces and assume command of Charlie's base.", delay: 2, sound: CAM_RCLICK},
-	// // 	{text: "CLAYDE: Team Charlie will reposition to a new location.", delay: 3, sound: CAM_RCLICK},
-	// // 	{text: "CLAYDE: Secure the area, and hold for further instructions once the base site is secure.", delay: 3, sound: CAM_RCLICK},
-	// // ]);
+	// Placeholder for the actual briefing sequence
+	// <LIEUTENANT>: That... was not ideal.
+	// <LIEUTENANT>: But, at least we have a place to start sending people to.
+	// <LIEUTENANT>: Commander Charlie, have you started the evacuation runs?
+	// <CHARLIE>: Already working on it, Lieutenant.
+	// <LIEUTENANT>: Great. We'll need to move fast.
+	// <LIEUTENANT>: Clayde might not know where we are, but that encounter with Team Delta definitely means that he's on to us now.
+	// <LIEUTENANT>: Commander Bravo, you should help Team Charlie with the evacuation efforts.
+	// <LIEUTENANT>: Once we've...
+	// <CHARLIE>: Lieutenant?
+	// <LIEUTENANT>: Holy Hell, BRAVO!
+	// <LIEUTENANT>: You've got incoming contacts in two directions!
+	// <LIEUTENANT>: Scramble everything! And whatever you do, stay alive!
 
 	// Most Infested units start out pre-damaged
 	camSetPreDamageModifier(CAM_INFESTED, [50, 80], [60, 90], CAM_INFESTED_PREDAMAGE_EXCLUSIONS);

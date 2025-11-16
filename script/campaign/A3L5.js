@@ -168,7 +168,8 @@ function detectCollective()
 		camSetExtraObjectiveMessage(_("Do not allow the Collective to escape with the artifact"));
 	}
 
-	// TODO: Dialogue here...
+	// Transmission about the Collective
+	camPlayVideos([cam_sounds.incoming.incomingTransmission, {video: "A3L5_COLLECTIVE", type: MISS_MSG}]);
 }
 
 function eventAttacked(victim, attacker)

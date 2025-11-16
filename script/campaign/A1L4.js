@@ -124,7 +124,7 @@ function sendDeltaTransporter()
 	// Truck -> Mortar -> VTOL -> Patrol
 	let droidQueue = [];
 
-	if (!camDef(camGetTruck(deltaTruckJob))) droidQueue.push(cTempl.plltruckt);
+	if (!camDef(camGetTruck(deltaTruckJob))) droidQueue.push(cTempl.plltruckht);
 
 	droidQueue = droidQueue.concat(camGetRefillableGroupTemplates([deltaMortarGroup, deltaVtolGroup, deltaPatrolGroup]));
 

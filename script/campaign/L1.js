@@ -435,7 +435,7 @@ function eventChat(from, to, message)
 		// Make sure the scavengers aren't choosing conflicting colours with the player
 		if (colour === 7)
 		{
-			changePlayerColour(MIS_CYAN_SCAVS, 0); // Switch to green
+			changePlayerColour(MIS_CYAN_SCAVS, 12); // Switch to neon green
 		}
 		else
 		{
@@ -470,7 +470,7 @@ function eventStartLevel()
 	}
 	else
 	{
-		changePlayerColour(MIS_CYAN_SCAVS, 0); // Switch to green if player is already cyan
+		changePlayerColour(MIS_CYAN_SCAVS, 12); // Switch to neon green if player is already cyan
 	}
 
 	if (playerColour !== 8)

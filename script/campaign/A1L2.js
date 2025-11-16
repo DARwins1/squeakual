@@ -653,7 +653,7 @@ function eventStartLevel()
 	changePlayerColour(MIS_YELLOW_SCAVS, (PLAYER_COLOR !== 8) ? 8 : 1); // Scavs to yellow or orange
 	changePlayerColour(MIS_TEAM_CHARLIE, (PLAYER_COLOR !== 11) ? 11 : 5); // Charlie to bright blue or blue
 	changePlayerColour(MIS_TEAM_FOXTROT, (PLAYER_COLOR !== 13) ? 13 : 4); // Foxtrot to infrared or red
-	changePlayerColour(MIS_TEAM_GOLF, (PLAYER_COLOR !== 7) ? 7 : 0); // Golf to cyan or green
+	changePlayerColour(MIS_TEAM_GOLF, (PLAYER_COLOR !== 7) ? 7 : 12); // Golf to cyan or neon green
 
 	camCompleteRequiredResearch(mis_scavResearch, MIS_YELLOW_SCAVS);
 	camCompleteRequiredResearch(camA1L2AllyResearch, MIS_TEAM_CHARLIE);

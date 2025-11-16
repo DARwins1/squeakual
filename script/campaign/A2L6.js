@@ -1070,7 +1070,7 @@ function eventStartLevel()
 	changePlayerColour(CAM_INFESTED, (PLAYER_COLOR !== 9) ? 9 : 4); // Infested to purple or red
 	changePlayerColour(MIS_LZ_SCAVS, (PLAYER_COLOR !== 2) ? 2 : 10); // Scavs to gray or white
 	changePlayerColour(MIS_TEAM_CHARLIE, (PLAYER_COLOR !== 11) ? 11 : 5); // Charlie to bright blue or blue
-	changePlayerColour(MIS_TEAM_GOLF, (PLAYER_COLOR !== 7) ? 7 : 0); // Golf to cyan or green
+	changePlayerColour(MIS_TEAM_GOLF, (PLAYER_COLOR !== 7) ? 7 : 12); // Golf to cyan or neon green
 
 	camCompleteRequiredResearch(mis_collectiveResearch, CAM_THE_COLLECTIVE);
 	camCompleteRequiredResearch(mis_collectiveResearch, MIS_LZ_SCAVS);

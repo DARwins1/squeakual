@@ -453,9 +453,9 @@
         "researchPoints": 1200,
         "researchPower": 50
     },
-    "R-Special-10": {
+    "R-Special10": {
         "iconID": "IMAGE_RES_COMPUTERTECH",
-        "id": "R-Special-10",
+        "id": "R-Special10",
         "imdName": "mibox.PIE",
         "keyTopic": 1,
         "msgName": "RES_SPECIAL10",
@@ -463,9 +463,9 @@
         "researchPoints": 1200,
         "researchPower": 50
     },
-    "R-Special-11": {
+    "R-Special11": {
         "iconID": "IMAGE_RES_COMPUTERTECH",
-        "id": "R-Special-11",
+        "id": "R-Special11",
         "imdName": "mibox.PIE",
         "keyTopic": 1,
         "msgName": "RES_SPECIAL11",
@@ -473,9 +473,9 @@
         "researchPoints": 1200,
         "researchPower": 50
     },
-    "R-Special-12": {
+    "R-Special12": {
         "iconID": "IMAGE_RES_COMPUTERTECH",
-        "id": "R-Special-12",
+        "id": "R-Special12",
         "imdName": "mibox.PIE",
         "keyTopic": 1,
         "msgName": "RES_SPECIAL12",
@@ -483,9 +483,9 @@
         "researchPoints": 1200,
         "researchPower": 50
     },
-    "R-Special-13": {
+    "R-Special13": {
         "iconID": "IMAGE_RES_COMPUTERTECH",
-        "id": "R-Special-13",
+        "id": "R-Special13",
         "imdName": "mibox.PIE",
         "keyTopic": 1,
         "msgName": "RES_SPECIAL13",
@@ -493,9 +493,9 @@
         "researchPoints": 1200,
         "researchPower": 50
     },
-    "R-Special-14": {
+    "R-Special14": {
         "iconID": "IMAGE_RES_COMPUTERTECH",
-        "id": "R-Special-14",
+        "id": "R-Special14",
         "imdName": "mibox.PIE",
         "keyTopic": 1,
         "msgName": "RES_SPECIAL14",
@@ -503,9 +503,9 @@
         "researchPoints": 1200,
         "researchPower": 50
     },
-    "R-Special-15": {
+    "R-Special15": {
         "iconID": "IMAGE_RES_COMPUTERTECH",
-        "id": "R-Special-15",
+        "id": "R-Special15",
         "imdName": "mibox.PIE",
         "keyTopic": 1,
         "msgName": "RES_SPECIAL15",
@@ -513,9 +513,9 @@
         "researchPoints": 1200,
         "researchPower": 50
     },
-    "R-Special-16": {
+    "R-Special16": {
         "iconID": "IMAGE_RES_COMPUTERTECH",
-        "id": "R-Special-16",
+        "id": "R-Special16",
         "imdName": "mibox.PIE",
         "keyTopic": 1,
         "msgName": "RES_SPECIAL16",
@@ -523,9 +523,9 @@
         "researchPoints": 1200,
         "researchPower": 50
     },
-    "R-Special-17": {
+    "R-Special17": {
         "iconID": "IMAGE_RES_COMPUTERTECH",
-        "id": "R-Special-17",
+        "id": "R-Special17",
         "imdName": "mibox.PIE",
         "keyTopic": 1,
         "msgName": "RES_SPECIAL17",
@@ -533,9 +533,9 @@
         "researchPoints": 1200,
         "researchPower": 50
     },
-    "R-Special-18": {
+    "R-Special18": {
         "iconID": "IMAGE_RES_COMPUTERTECH",
-        "id": "R-Special-18",
+        "id": "R-Special18",
         "imdName": "mibox.PIE",
         "keyTopic": 1,
         "msgName": "RES_SPECIAL18",
@@ -543,9 +543,9 @@
         "researchPoints": 1200,
         "researchPower": 50
     },
-    "R-Special-19": {
+    "R-Special19": {
         "iconID": "IMAGE_RES_COMPUTERTECH",
-        "id": "R-Special-19",
+        "id": "R-Special19",
         "imdName": "mibox.PIE",
         "keyTopic": 1,
         "msgName": "RES_SPECIAL19",
@@ -553,9 +553,9 @@
         "researchPoints": 1200,
         "researchPower": 50
     },
-    "R-Special-20": {
+    "R-Special20": {
         "iconID": "IMAGE_RES_COMPUTERTECH",
-        "id": "R-Special-20",
+        "id": "R-Special20",
         "imdName": "mibox.PIE",
         "keyTopic": 1,
         "msgName": "RES_SPECIAL20",
@@ -563,9 +563,9 @@
         "researchPoints": 1200,
         "researchPower": 50
     },
-    "R-Special-21": {
+    "R-Special21": {
         "iconID": "IMAGE_RES_COMPUTERTECH",
-        "id": "R-Special-21",
+        "id": "R-Special21",
         "imdName": "mibox.PIE",
         "keyTopic": 1,
         "msgName": "RES_SPECIAL21",
@@ -573,9 +573,9 @@
         "researchPoints": 1200,
         "researchPower": 50
     },
-    "R-Special-22": {
+    "R-Special22": {
         "iconID": "IMAGE_RES_COMPUTERTECH",
-        "id": "R-Special-22",
+        "id": "R-Special22",
         "imdName": "mibox.PIE",
         "keyTopic": 1,
         "msgName": "RES_SPECIAL22",
@@ -6593,19 +6593,19 @@
             "R-Special07",
             "R-Special08",
             "R-Special09",
-            "R-Special-10",
-            "R-Special-11",
-            "R-Special-12",
-            "R-Special-13",
-            "R-Special-14",
-            "R-Special-15",
-            "R-Special-16",
-            "R-Special-17",
-            "R-Special-18",
-            "R-Special-19",
-            "R-Special-20",
-            "R-Special-21",
-            "R-Special-22"
+            "R-Special10",
+            "R-Special11",
+            "R-Special12",
+            "R-Special13",
+            "R-Special14",
+            "R-Special15",
+            "R-Special16",
+            "R-Special17",
+            "R-Special18",
+            "R-Special19",
+            "R-Special20",
+            "R-Special21",
+            "R-Special22"
         ],
         "researchPoints": 2100,
         "researchPower": 450,

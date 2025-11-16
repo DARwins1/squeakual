@@ -153,6 +153,7 @@ plhsensht: { body: "Body11ABT", prop: "HalfTrack", weap: "SensorTurret1Mk1" }, /
 plhsensh: { body: "Body11ABT", prop: "hover01", weap: "SensorTurret1Mk1" }, // Sensor Python Hover
 plhstriket: { body: "Body11ABT", prop: "tracked01", weap: "Sys-VstrikeTurret01" }, // VTOL Strike Turret Python Tracks
 
+plltruckht: { body: "Body1REC", prop: "HalfTrack", weap: "Spade1Mk1" }, // Truck Viper Half-tracks
 plltruckt: { body: "Body1REC", prop: "tracked01", weap: "Spade1Mk1" }, // Truck Viper Tracks
 plmtruckht: { body: "Body5REC", prop: "HalfTrack", weap: "Spade1Mk1" }, // Truck Cobra Half-tracks
 plmtruckt: { body: "Body5REC", prop: "tracked01", weap: "Spade1Mk1" }, // Truck Cobra Tracks

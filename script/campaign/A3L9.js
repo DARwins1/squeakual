@@ -185,6 +185,12 @@ function sendInfestedReinforcements()
 	}
 }
 
+function foxtrotTransmission()
+{
+	// A friendly message from our bestest ally Commander Foxtrot :)
+	camPlayVideos([cam_sounds.incoming.incomingTransmission, {video: "A3L9_FOXTROT", type: MISS_MSG}]);
+}
+
 // Start bringing in Foxtrot units from the southeast
 function setPhaseTwo()
 {
@@ -628,7 +634,7 @@ function eventStartLevel()
 
 	const PLAYER_COLOR = playerData[0].colour;
 	changePlayerColour(MIS_TEAM_FOXTROT, (PLAYER_COLOR !== 13) ? 13 : 4); // Foxtrot to infrared or red
-	changePlayerColour(MIS_TEAM_GOLF, (PLAYER_COLOR !== 7) ? 7 : 0); // Golf to cyan or green
+	changePlayerColour(MIS_TEAM_GOLF, (PLAYER_COLOR !== 7) ? 7 : 12); // Golf to cyan or neon green
 
 	setAlliance(MIS_TEAM_FOXTROT, MIS_TEAM_GOLF, true);
 
@@ -898,12 +904,14 @@ function eventStartLevel()
 	camSetPreDamageModifier(CAM_INFESTED, [50, 80], [60, 90], CAM_INFESTED_PREDAMAGE_EXCLUSIONS);
 
 	heliAttack();
+	queue("foxtrotTransmission", camMinutesToMilliseconds(3)); // Transmission from Team Foxtrot
 	queue("setPhaseTwo", camMinutesToMilliseconds(5)); // Foxtrot units start arriving
 	queue("setPhaseThree", camMinutesToMilliseconds(10)); // Golf units start arriving
 	queue("setPhaseFour", camMinutesToMilliseconds(18)); // Foxtrot/Golf begin flanking the player
 	setTimer("sendInfestedReinforcements", camChangeOnDiff(camSecondsToMilliseconds(40)));
 
-	// TODO: Briefing dialogue
+	// Give player briefing.
+	camPlayVideos({video: "A3L9_BRIEF", type: MISS_MSG});
 
 	// Lighten the fog to *more or less* 2x default brightness with a slight pink color
 	camSetFog(48, 32, 96);
