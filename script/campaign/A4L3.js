@@ -497,18 +497,18 @@ function allowFoxtrotCommanderRebuild()
 // TODO: Should we target AA structures?
 function golfStrikeTargets()
 {
-	// First, target any player Factories or Power Generators
+	// First, target any player Factories, Command Ceners, Repair Facilities and Power Generators
 	let targets = enumStruct(CAM_HUMAN_PLAYER).filter((struct) => (
 		struct.stattype === FACTORY || struct.stattype === CYBORG_FACTORY
-		|| struct.stattype === VTOL_FACTORY || struct.stattype === POWER_GEN
+		|| struct.stattype === VTOL_FACTORY || struct.stattype === HQ
+		|| struct.stattype === REPAIR_FACILITY || struct.stattype === POWER_GEN
 	));
 
 	if (targets.length === 0)
 	{
-		// Second, target any Command Centers and Repair Facilities
+		// Second, target any AA structures
 		targets = enumStruct(CAM_HUMAN_PLAYER).filter((struct) => (
-			struct.stattype === HQ || struct.stattype === REPAIR_FACILITY
-			|| struct.stattype === VTOL_FACTORY || struct.stattype === POWER_GEN
+			struct.stattype === DEFENSE && struct.canHitAir && !struct.canHitGround
 		));
 	}
 
@@ -545,7 +545,7 @@ function eventStartLevel()
 		"foxtrotFactory1": { tech: "R-Struc-Factory-Upgrade03" }, // Advanced Manufacturing
 		"golfResearch1": { tech: "R-Wpn-Bomb-Damage02" }, // Improved Bomb Warhead
 		"golfResearch2": { tech: "R-Defense-WallUpgrade06" }, // Supercrete Mk3
-		"golfPower": { tech: "R-Struc-Power-Upgrade03" }, // Gas Turbine Generator Mk3
+		// "golfPower": { tech: "R-Struc-Power-Upgrade03" }, // Gas Turbine Generator Mk3
 		"golfFactory3": { tech: "R-Vehicle-Metals06" }, // Dense Composite Alloys Mk3
 	});
 

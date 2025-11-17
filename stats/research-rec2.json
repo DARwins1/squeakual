@@ -2810,52 +2810,10 @@
             {
                 "class": "Building",
                 "parameter": "PowerPoints",
-                "value": 20
+                "value": 35
             }
         ],
         "subgroupIconID": "IMAGE_RES_GRPUPG"
-    },
-    "R-Struc-Power-Upgrade02": {
-        "iconID": "IMAGE_RES_POWERTECH",
-        "id": "R-Struc-Power-Upgrade01b",
-        "imdName": "blpower4.pie",
-        "keyTopic": 1,
-        "name": "Gas Turbine Generator Mk2",
-        "requiredResearch": [
-            "R-Struc-Power-Upgrade01"
-        ],
-        "researchPoints": 2300,
-        "researchPower": 227,
-        "results": [
-            {
-                "class": "Building",
-                "parameter": "PowerPoints",
-                "value": 20
-            }
-        ],
-        "subgroupIconID": "IMAGE_RES_GRPUPG",
-        "techCode": 1
-    },
-    "R-Struc-Power-Upgrade03": {
-        "iconID": "IMAGE_RES_POWERTECH",
-        "id": "R-Struc-Power-Upgrade01c",
-        "imdName": "blpower4.pie",
-        "keyTopic": 1,
-        "name": "Gas Turbine Generator Mk3",
-        "requiredResearch": [
-            "R-Struc-Power-Upgrade02"
-        ],
-        "researchPoints": 2800,
-        "researchPower": 267,
-        "results": [
-            {
-                "class": "Building",
-                "parameter": "PowerPoints",
-                "value": 20
-            }
-        ],
-        "subgroupIconID": "IMAGE_RES_GRPUPG",
-        "techCode": 1
     },
     "R-Struc-Research-Module": {
         "iconID": "IMAGE_RES_STRUCTURETECH",

@@ -19,6 +19,7 @@ const mis_collectiveResearch = [
 	"R-Defense-WallUpgrade01", "R-Sys-Engineering01", "R-Vehicle-Engine01",
 ];
 const MIS_GROUND_WAVE_DELAY = camSecondsToMilliseconds(60);
+const MIS_MAX_COLLECTIVE_UNITS = 250;
 const mis_vtolRemovePos = {x: 16, y: 2};
 
 //Remove enemy vtols when in the remove zone area.
@@ -92,7 +93,7 @@ function collectiveAttackWaves()
 	waveIndex++;
 
 	// Don't spawn another wave if there's already too many units on the map
-	if (countCollectiveAttackDroids() < 250)
+	if (countCollectiveAttackDroids() < MIS_MAX_COLLECTIVE_UNITS)
 	{
 		// Each entrance shares a C-Scav and a Collective pool.
 		// Each attack wave can draw from either pool.

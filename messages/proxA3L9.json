@@ -1,9 +1,7 @@
 {
     "type": "wz2100.proxmsgs.v1",
     "msgs": {
-        "FOXTROT_LZBASE1": { "message": "FOXTROTLZ_MSG", "x": 12096, "y": 16448, "z": 0, "audio": "pcv396.ogg", "type": 0 },
-        "FOXTROT_LZBASE2": { "message": "FOXTROTLZ_MSG", "x": 23104, "y": 16320, "z": 0, "audio": "pcv396.ogg", "type": 0 },
-        "GOLF_LZBASE1": { "message": "GOLFLZ_MSG", "x": 1344, "y": 15808, "z": 0, "audio": "pcv396.ogg", "type": 0 },
-        "GOLF_LZBASE2": { "message": "GOLFLZ_MSG", "x": 832, "y": 6720, "z": 0, "audio": "pcv396.ogg", "type": 0 }
+        "FOXTROT_LZBASE": { "message": "FOXTROTLZ_MSG", "x": 2880, "y": 1344, "z": 0, "audio": "pcv396.ogg", "type": 0 },
+        "GOLF_LZBASE": { "message": "GOLFLZ_MSG", "x": 1344, "y": 15808, "z": 0, "audio": "pcv396.ogg", "type": 0 },
     }
 }

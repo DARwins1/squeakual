@@ -319,7 +319,7 @@ const __camRec2BlackBoxes = [
 	{ scripts: ["A2L5", "A2L6s", "A2L7"], x: 124, y: 37 }, // #11
 	{ scripts: ["A2L6"], x: 3, y: 27 }, // #12
 	// Act 3
-	{ scripts: ["A3L1", "A3L2", "A3L3s", "A3L4", "A3L5s", "A3L6", "A3L7s", "A3L8", "A3L9"], x: 141, y: 2 }, // #13
+	{ scripts: ["A3L1", "A3L2", "A3L3s", "A3L4", "A3L5s", "A3L6", "A3L7s", "A3L8", "A3L9"], x: 141, y: 3 }, // #13
 	{ scripts: ["A3L1", "A3L2", "A3L3s", "A3L4", "A3L5s", "A3L6", "A3L7s", "A3L8", "A3L9"], x: 86, y: 75 }, // #14
 	{ scripts: ["A3L3"], x: 50, y: 12 }, // #15
 	{ scripts: ["A3L5"], x: 23, y: 12 }, // #16
@@ -565,3 +565,5 @@ include(__CAM_INCLUDE_PATH + "video.js");
 include(__CAM_INCLUDE_PATH + "dialogue.js");
 include(__CAM_INCLUDE_PATH + "blackBox.js");
 include(__CAM_INCLUDE_PATH + "guide.js");
+include(__CAM_INCLUDE_PATH + "infested.js");
+include(__CAM_INCLUDE_PATH + "sky.js");

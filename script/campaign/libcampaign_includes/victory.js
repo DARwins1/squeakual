@@ -17,7 +17,10 @@ function camEndMission(gameWon)
 	{
 		__camGameLost();
 	}
-	__camGameWon();
+	else
+	{
+		__camGameWon();
+	}
 }
 
 //;; ## camNextLevel(nextLevel)

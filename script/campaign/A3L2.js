@@ -5,6 +5,7 @@ include("script/campaign/templates.js");
 const MIS_TEAM_GOLF = 1;
 
 var allowExtraWaves; // Increases the amount of Infested reinforcements as the level progresses
+var infFactoryOnlyWave; // If true, ONLY spawn Infested units from entrances "bound" to a factory
 
 const mis_collectiveResearch = [
 	"R-Wpn-MG-Damage04", "R-Wpn-Rocket-Damage05", "R-Wpn-Mortar-Damage04", 
@@ -33,7 +34,10 @@ camAreaEvent("vtolRemoveZone", function(droid)
 
 function vtolAttack()
 {
-	playSound(cam_sounds.enemyVtolsDetected);
+	if (getObject("colCC") !== null)
+	{
+		playSound(cam_sounds.enemyVtolsDetected);
+	}
 	
 	// Phosphor Bombs, Assault Guns, and Lancers
 	const templates = [cTempl.colphosv, cTempl.colagv, cTempl.colatv];
@@ -62,6 +66,22 @@ function eventPickup(feature, droid)
 		playSound(cam_sounds.rescue.groupRescued);
 		camSetExtraObjectiveMessage();
 	}
+}
+
+function camEnemyBaseEliminated()
+{
+	// Commander Charlie questions Clayde about using the Infested
+	camQueueDialogue([
+		{text: "<CHARLIE>: General Clayde, if I can ask?", delay: 6, sound: CAM_RCLICK},
+		{text: "<CHARLIE>: How long are we going to keep using the Infested for?", delay: 2, sound: CAM_RCLICK},
+		{text: "<CHARLIE>: We've already freed all of our guys from the Collective and...", delay: 3, sound: CAM_RCLICK},
+		{text: "<CHARLIE>: It feels... wrong.", delay: 3, sound: CAM_RCLICK},
+		{text: "<CHARLIE>: To use something like this against other people.", delay: 2, sound: CAM_RCLICK},
+		{text: "<CLAYDE>: First of all, Commander Charlie, however you may \"feel\" about Project X is irrelevant.", delay: 4, sound: CAM_RCLICK},
+		{text: "<CLAYDE>: We can use the Lures to control the Infested; but the Collective is a grave threat to us all.", delay: 3, sound: CAM_RCLICK},
+		{text: "<CLAYDE>: So we will use Project X for however long we need it.", delay: 3, sound: CAM_RCLICK},
+		{text: "<CLAYDE>: And second, it's \"Supreme General Clayde\" to you, Commander Charlie.", delay: 4, sound: CAM_RCLICK},
+	]);
 }
 
 // Enable the main Collective factory and the south cyborg factory
@@ -120,15 +140,34 @@ function sendInfestedReinforcements()
 	if (difficulty === INSANE) bChance += 5;
 
 	// North east & south canal entrance
-	const entrances = ["infEntry2", "infEntry3"];
-	// North & south trench entrances
-	if (allowExtraWaves) entrances.push("infEntry4", "infEntry7", "infEntry8");
-	// South west trench entrance
-	// Only starts when the south Collective base is destroyed
-	if (camBaseIsEliminated("colSouthBase")) entrances.push("infEntry5");
-	// North west road entrance
-	// Only starts when the main Collective base is destroyed
-	if (camBaseIsEliminated("colMainBase")) entrances.push("infEntry9");
+	const entrances = [];
+	if (infFactoryOnlyWave)
+	{
+		// If it's a factory-only wave, ONLY these entrances may spawn
+		if (allowExtraWaves && getObject("infFactory1") !== null)
+		{	
+			// South trench entrance
+			entrances.push("infEntry4");
+		}
+		if (allowExtraWaves && getObject("infFactory2") !== null)
+		{	
+			// North trench entrances
+			entrances.push("infEntry7", "infEntry8");
+		}
+	}
+	else
+	{
+		// Entrances from A3L1
+		entrances.push("infEntry2", "infEntry3");
+		// North & south trench entrances
+		if (allowExtraWaves) entrances.push("infEntry4", "infEntry7", "infEntry8");
+		// South west trench entrance
+		// Only starts when the south Collective base is destroyed
+		if (camBaseIsEliminated("colSouthBase")) entrances.push("infEntry5");
+		// North west road entrance
+		// Only starts when the main Collective base is destroyed
+		if (camBaseIsEliminated("colMainBase")) entrances.push("infEntry9");
+	}
 
 	const NUM_GROUPS = difficulty + 2;
 	const NUM_ENTRANCES = entrances.length;
@@ -151,6 +190,8 @@ function sendInfestedReinforcements()
 
 		entrances.splice(INDEX, 1);
 	}
+
+	infFactoryOnlyWave = !infFactoryOnlyWave;
 }
 
 function eventStartLevel()
@@ -174,7 +215,7 @@ function eventStartLevel()
 
 	camSetArtifacts({
 		"colFactory": { tech: "R-Wpn-Rocket02-MRLHvy" }, // Heavy Rocket Array
-		// "colPower": { tech: "R-Struc-Power-Upgrade02" }, // Gas Turbine Generator Mk2
+		"colPower": { tech: "R-Struc-Power-Upgrade01" }, // Gas Turbine Generator
 		"convoyCrate": { tech: "R-Wpn-Mortar3" }, // Pepperpot
 		"colResearch": { tech: "R-Wpn-Bomb-Damage01" }, // HE Bomb Shells
 	});
@@ -310,6 +351,24 @@ function eventStartLevel()
 		setMissionTime(camChangeOnDiff(camMinutesToSeconds(70)));
 	}
 
+	// Upgrade Collective structures on higher difficulties
+	if (difficulty == HARD)
+	{
+		// Only replace these when destroyed
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "Emplacement-MRL-pit", "Emplacement-MRLHvy-pit", true); // MRA Emplacements
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "AASite-QuadMg1", "AASite-QuadBof", true); // AA Sites
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "Emplacement-MortarPit01", "Emplacement-MortarPit02", true); // Mortar Pits
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "PillBox5", "Tower-Projector", true); // Flamer Bunkers
+	}
+	else if (difficulty == INSANE)
+	{
+		// Proactively demolish/replace these
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "Emplacement-MRL-pit", "Emplacement-MRLHvy-pit"); // MRA Emplacements
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "AASite-QuadMg1", "AASite-QuadBof"); // AA Sites
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "Emplacement-MortarPit01", "Emplacement-MortarPit02"); // Mortar Pits
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "PillBox5", "Tower-Projector"); // Flamer Bunkers
+	}
+
 	// Rank and assign the Collective commander
 	// Set the commander's rank (ranges from Professional to Elite)
 	const COMMANDER_RANK = (difficulty <= EASY) ? 5 : (difficulty + 3);
@@ -345,23 +404,14 @@ function eventStartLevel()
 			}
 	});
 
-	camMakeRefillableGroup(
-		camMakeGroup("colRippleGroup"), {
-			templates: [
-				cTempl.cohript, cTempl.cohript, // 2 Ripple Rockets
-			],
-			factories: (difficulty >= HARD) ? ["colFactory"] : undefined, // Only refill on Hard+
-			obj: "colSensorTower" // Stop refilling this group if the sensor is destroyed
-		}, CAM_ORDER_FOLLOW, {
-			leader: "colSensorTower",
-			suborder: CAM_ORDER_DEFEND, // If the sensor is destroyed, sit around in their own little spot
-			data:
-			{
-				pos: camMakePos("colRippleGroup")				
-			}
+	camManageGroup("colRippleGroup", CAM_ORDER_FOLLOW, {
+		leader: "colSensorTower",
+		suborder: CAM_ORDER_DEFEND, // If the sensor is destroyed, sit around in their own little spot
+		data: {pos: camMakePos("colRippleGroup")}
 	});
 
 	allowExtraWaves = false;
+	infFactoryOnlyWave = true;
 
 	camAutoReplaceObjectLabel(["colCC", "colSensorTower"]);
 	// Most factories are enabled immediately on this mission...
@@ -376,17 +426,6 @@ function eventStartLevel()
 	// Give player briefing.
 	camPlayVideos({video: "A3L2_BRIEF", type: MISS_MSG});
 
-	// MOVE THIS TO DIALOGUE?
-	// <CHARLIE>: General Clayde, if I can ask?
-	// <CHARLIE>: How long are we going to keep using the Infested for?
-	// <CHARLIE>: We've already freed all of our guys from the Collective and...
-	// <CHARLIE>: It feels... wrong.
-	// <CHARLIE>: To use something like this against other people.
-	// <CLAYDE>: First of all, Commander Charlie, however you may "feel" about Project X is irrelevant.
-	// <CLAYDE>: We can use the Lures to control the Infested; but the Collective is a grave threat to us all.
-	// <CLAYDE>: So we will use Project X for however long we need it.
-	// <CLAYDE>: And second, it's "Supreme General Clayde" to you, Commander Charlie.
-
 	// Additional dialogue
 	camQueueDialogue([
 		{text: "CLAYDE: One more thing, Commander Bravo.", delay: 12, sound: CAM_RCLICK},
@@ -398,8 +437,14 @@ function eventStartLevel()
 	// Most Infested units start out pre-damaged
 	camSetPreDamageModifier(CAM_INFESTED, [50, 80], [60, 90], CAM_INFESTED_PREDAMAGE_EXCLUSIONS);
 
-	// Also pre-damage team Golf's convoy
+	// Also rank and pre-damage team Golf's convoy
 	camSetPreDamageModifier(MIS_TEAM_GOLF, [60, 80]);
+	const golfDroids = enumDroid(MIS_TEAM_GOLF);
+	const GOLF_RANK = "Regular";
+	for (const droid of golfDroids)
+	{
+		camSetDroidRank(droid, GOLF_RANK);
+	}
 
 	// Give the fog a pink hue
 	camSetFog(24, 16, 64);

@@ -106,7 +106,7 @@ function sendInfestedReinforcements()
 
 function eventStartLevel()
 {
-	camSetupTransporter(193, 73, 196, 60);
+	camSetupTransporter(193, 73, 170, 72);
 	centreView(193, 73);
 	setNoGoArea(192, 72, 194, 74, CAM_HUMAN_PLAYER);
 	if (!tweakOptions.rec_timerlessMode)
@@ -126,7 +126,7 @@ function eventStartLevel()
 	enableResearch("R-Wpn-Cannon5", CAM_HUMAN_PLAYER);
 
 	camCompleteRequiredResearch(mis_infestedResearch, CAM_INFESTED);
-	setTimer("sendInfestedReinforcements", camChangeOnDiff(camSecondsToMilliseconds(95)));
+	setTimer("sendInfestedReinforcements", camChangeOnDiff(camSecondsToMilliseconds(100)));
 	heliAttack();
 
 	// Most Infested units start out pre-damaged

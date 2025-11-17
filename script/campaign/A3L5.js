@@ -287,7 +287,7 @@ function manageArtifactGroup()
 			// Tell it to return to the LZ instead
 			camManageGroup(camMakeGroup("colArtiHolder"), CAM_ORDER_DEFEND, {pos: camMakePos("landingZoneCollective")});
 
-			// TODO: Dialogue here
+			camCallOnce("collectiveArtifactDialogue");
 		}
 		else
 		{
@@ -304,6 +304,17 @@ function trackArtiHolder()
 	{
 		playSound(cam_sounds.tracker, artiHolder.x, artiHolder.y, artiHolder.z);
 	}
+}
+
+// Alert the player that the Collective is trying to steal the artifact
+// Called the first time a Collective unit picks up the artifact
+function collectiveArtifactDialogue()
+{
+	camQueueDialogue([
+		{text: "CLAYDE: Commander Bravo, the Collective has taken an artifact from the research facility.", delay: 0, sound: CAM_RCLICK},
+		{text: "CLAYDE: Do not let them bring it to their landing zone.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Destroy that unit before it can escape!", delay: 3, sound: CAM_RCLICK},
+	]);
 }
 
 function sendCollectiveTransporter()

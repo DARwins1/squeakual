@@ -1236,27 +1236,7 @@ function allowCommander3Rebuild()
 	return (gameTime >= zuluCommander3DeathTime + MIS_ZULU_COMMANDER_DELAY) && (enumStruct(MIS_TEAM_ZULU, COMMAND_CONTROL).length > 0);
 }
 
-function camEnemyBaseEliminated_zuluEastBase()
-{
-	checkEnableLure();
-}
-
-function camEnemyBaseEliminated_zuluWestBase()
-{
-	checkEnableLure();
-}
-
-function camEnemyBaseEliminated_zuluWestOutpost()
-{
-	checkEnableLure();
-}
-
-function camEnemyBaseEliminated_zuluCentralOutpost()
-{
-	checkEnableLure();
-}
-
-function camEnemyBaseEliminated_zuluEastOutpost()
+function camEnemyBaseEliminated()
 {
 	checkEnableLure();
 }

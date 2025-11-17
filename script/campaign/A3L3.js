@@ -283,6 +283,51 @@ camAreaEvent("infEntry6", function(droid)
 	resetLabel("infEntry6", CAM_INFESTED);
 });
 
+function eventTransporterLanded(transport)
+{
+	camCallOnce("claydeVtolCheck");
+}
+
+// Check if the player ONLY brought VTOLs (and softlocked themselves)
+function claydeVtolCheck()
+{
+	const playerDroids = enumDroid(CAM_HUMAN_PLAYER);
+
+	let foundNonVtol = false;
+	for (const droid of playerDroids)
+	{
+		if (!camIsTransporter(droid) && !isVTOL(droid))
+		{
+			foundNonVtol = true;
+		}
+	}
+
+	if (foundNonVtol)
+	{
+		// Player has at least one non-VTOL
+		return;
+	}
+
+	// Cancel everything and scold the player
+	removeTimer("sendInfestedGroup");
+
+	// Shrink the map
+	setScrollLimits(0, 0, 16, 12);
+
+	// Lecture the player
+	camQueueDialogue([
+		{text: "CLAYDE: Commander Bravo, did you...", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: ONLY bring VTOLs?", delay: 2, sound: CAM_RCLICK},
+		{text: "CLAYDE: Why?!", delay: 3, sound: CAM_RCLICK},
+		{delay: 3, callback: "antiSoftlock"},
+	]);
+}
+
+function antiSoftlock()
+{
+	camEndMission(false);
+}
+
 // If an Infested group is attacked with the CAM_ORDER_DEFEND order, replace it with CAM_ORDER_ATTACK
 function eventAttacked(victim, attacker)
 {
@@ -318,7 +363,6 @@ function eventStartLevel()
 {
 	const startPos = camMakePos("landingZone");
 	const lz = getObject("landingZone"); //player lz
-	const transportEntryPos = camMakePos("transportEntryPos");
 
 	camSetStandardWinLossConditions(CAM_VICTORY_OFFWORLD, "A3L4", {
 		message: "RET_LZ",

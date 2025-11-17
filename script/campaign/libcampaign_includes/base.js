@@ -408,10 +408,15 @@ function __camCheckBaseEliminated(group)
 		{
 			++__camNumEnemyBases;
 		}
-		const callback = __camGlobalContext()["camEnemyBaseEliminated_" + baseLabel];
-		if (camDef(callback))
+		const callback1 = __camGlobalContext()["camEnemyBaseEliminated_" + baseLabel];
+		if (camDef(callback1))
 		{
-			callback();
+			callback1();
+		}
+		const callback2 = __camGlobalContext()["camEnemyBaseEliminated"];
+		if (camDef(callback2))
+		{
+			callback2();
 		}
 
 		// Check if any trucks should self-destruct

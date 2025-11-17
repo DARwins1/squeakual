@@ -185,7 +185,6 @@ const camAct3StartResearch = camA2L6AllyResearch.concat([
 	"R-Sys-Engineering02", // Artifact
 	"R-Defense-WallUpgrade04", "R-Struc-Materials04",
 	"R-Struc-VTOLPad-Upgrade01",
-	"R-Struc-Power-Upgrade01", // Artifact
 ]);
 
 // Used to grant research to team Charlie on A3L4
@@ -201,6 +200,7 @@ const camA3L4AllyResearch = camAct3StartResearch.concat([
 	"R-Wpn-Rocket02-MRLHvy", // Artifact
 	"R-Defense-MRLHvy",
 	"R-Wpn-Bomb-Damage01", // Artifact
+	"R-Struc-Power-Upgrade01", // Artifact
 	// A3L3
 	"R-Wpn-MG4", // Artifact
 	"R-Cyborg-Wpn-RotMG", "R-Defense-RotMG", "R-Defense-Wall-RotMg",
@@ -242,7 +242,6 @@ const camA3L9EnemyResearch = camA3L7AllyResearch.concat([
 	"R-Cyborg-Hvywpn-TK", "R-Defense-WallTower-HvyA-Trocket", "R-Defense-HvyA-Trocket",
 	"R-Defense-HvyAT-Tower",
 	"R-Wpn-AAGun-ROF02", // Artifact
-	"R-Struc-Power-Upgrade02", // Artifact
 ]);
 
 const camAct4StartResearch = camA3L9EnemyResearch.concat([
@@ -277,7 +276,6 @@ const camA4L4AllyResearch = camAct4StartResearch.concat([
 	"R-Wpn-Bomb-Damage02", // Artifact
 	"R-Defense-WallUpgrade06", // Artifact
 	"R-Struc-Materials06",
-	"R-Struc-Power-Upgrade03", // Artifact
 	"R-Vehicle-Metals06", // Artifact
 	"R-Cyborg-Metals06", "R-Vehicle-Armor-Heat03", "R-Cyborg-Armor-Heat03",
 ]);

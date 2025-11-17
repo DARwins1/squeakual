@@ -266,47 +266,7 @@ function eventTransporterLanded(transport)
 	// NOTE: Remaining reinforcements that aren't assigned here will be handled like normal reinforcement units
 }
 
-function camEnemyBaseEliminated_redRoadblockBase()
-{
-	checkCollectiveIntroduction();
-}
-
-function camEnemyBaseEliminated_redNorthRoadBase()
-{
-	checkCollectiveIntroduction();
-}
-
-function camEnemyBaseEliminated_redPlateauBase()
-{
-	checkCollectiveIntroduction();
-}
-
-function camEnemyBaseEliminated_redSouthRoadBase()
-{
-	checkCollectiveIntroduction();
-}
-
-function camEnemyBaseEliminated_redUplinkBase()
-{
-	checkCollectiveIntroduction();
-}
-
-function camEnemyBaseEliminated_orangeNorthRoadBase()
-{
-	checkCollectiveIntroduction();
-}
-
-function camEnemyBaseEliminated_orangePlateauBase()
-{
-	checkCollectiveIntroduction();
-}
-
-function camEnemyBaseEliminated_orangeSouthCraterBase()
-{
-	checkCollectiveIntroduction();
-}
-
-function camEnemyBaseEliminated_orangeNorthCraterBase()
+function camEnemyBaseEliminated()
 {
 	checkCollectiveIntroduction();
 }

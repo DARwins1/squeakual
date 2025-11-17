@@ -63,6 +63,7 @@ pllcant: { body: "Body1REC", prop: "tracked01", weap: "Cannon1Mk1" }, // Light C
 plmmcant: { body: "Body5REC", prop: "tracked01", weap: "Cannon2A-TMk1" }, // Medium Cannon Cobra Tracks
 plmhpvht: { body: "Body5REC", prop: "HalfTrack", weap: "Cannon4AUTOMk1" }, // Hyper Velocity Cannon Cobra Half-tracks
 plmhpvt: { body: "Body5REC", prop: "tracked01", weap: "Cannon4AUTOMk1" }, // Hyper Velocity Cannon Cobra Tracks
+plmacanht: { body: "Body5REC", prop: "HalfTrack", weap: "Cannon5VulcanMk1" }, // Assault Cannon Cobra Half-Tracks
 plmacant: { body: "Body5REC", prop: "tracked01", weap: "Cannon5VulcanMk1" }, // Assault Cannon Cobra Tracks
 plhhpvt: { body: "Body11ABT", prop: "tracked01", weap: "Cannon4AUTOMk1" }, // Hyper Velocity Cannon Python Tracks
 plhacant: { body: "Body11ABT", prop: "tracked01", weap: "Cannon5VulcanMk1" }, // Assault Cannon Python Tracks
@@ -120,6 +121,7 @@ plhraaht: { body: "Body11ABT", prop: "HalfTrack", weap: "QuadRotAAGun" }, // Whi
 
 pllrepw: { body: "Body1REC", prop: "wheeled01", weap: "LightRepair1" }, // Repair Turret Viper Wheels
 pllrept: { body: "Body1REC", prop: "tracked01", weap: "LightRepair1" }, // Repair Turret Viper Tracks
+plmrepht: { body: "Body5REC", prop: "HalfTrack", weap: "LightRepair1" }, // Repair Turret Cobra HalfTracks
 plmrept: { body: "Body5REC", prop: "tracked01", weap: "LightRepair1" }, // Repair Turret Cobra Tracks
 plhrepht: { body: "Body11ABT", prop: "HalfTrack", weap: "LightRepair1" }, // Repair Turret Python Half-tracks
 plhrept: { body: "Body11ABT", prop: "tracked01", weap: "LightRepair1" }, // Repair Turret Python Tracks

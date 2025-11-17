@@ -25,15 +25,19 @@ const mis_infestedResearch = [
 const MIS_UPLINK = 1;
 const MIS_TEAM_DELTA = 3;
 
+const MIS_DELTA_COMMANDER_RANK = "Professional";
+const MIS_DELTA_RANK = "Trained";
+
 var luresActive; // Whether the Infested can launch launch large attack waves against the Collective
 var infestedOnslaught; // Whether the Infested are currently attacking the Collective in large numbers
 var onslaughtIdx;
 var numUplinkStructs; // The number of non-wall structures in the final Collective base
+var deltaEntranceSide;
 
 var colSensorGroup;
 var colCommanderGroup;
-var deltaGroup1;
-var deltaGroup2;
+var deltaCommander;
+var deltaCommandGroup;
 
 var beacon1Placed;
 var beacon2Placed;
@@ -162,9 +166,13 @@ function eventDestroyed(obj)
 		{
 			// Disable the Infested lures, preventing any further large Infested waves
 			// If any Collective trucks are trying to rebuild destroyed outposts, order them to give up
-			// NOTE: There aren't any actual lure structures on the map... 
+			// NOTE: There aren't any actual lure structures on the map, it's all just pretend
 
-			// TODO: Dialogue here...
+			camQueueDialogue([
+				{text: "CLAYDE: Attention Commanders, I'm deactivating the nearby Lures.", delay: 0, sound: CAM_RCLICK},
+				{text: "CLAYDE: We can't risk letting the Infested damage the uplink itself.", delay: 3, sound: CAM_RCLICK},
+				{text: "CLAYDE: You'll both need to finish this on your own.", delay: 3, sound: CAM_RCLICK},
+			]);
 
 			luresActive = false;
 			removeTimer("startInfestedOnslaught");
@@ -223,6 +231,7 @@ function startInfestedOnslaught()
 	infestedOnslaught = true;
 	onslaughtIdx++;
 	setTimer("spawnOnslaughtWaves", camSecondsToMilliseconds(15));
+	onslaughtDialogue();
 
 	// Hunker down Collective groups
 	camManageGroup(colCommanderGroup, CAM_ORDER_DEFEND, {
@@ -295,6 +304,7 @@ function endInfestedOnslaught()
 	removeTimer("spawnOnslaughtWaves");
 
 	removeEntryBeacons();
+	onslaughtEndDialogue();
 
 	// Order Collective groups to resume attacking the player
 	if (onslaughtIdx >= 3)
@@ -323,6 +333,71 @@ function endInfestedOnslaught()
 	}
 
 	// TODO: Adjust fog + lighting?
+}
+
+// Play dialogue informing the player of the incoming Infested
+function onslaughtDialogue()
+{
+	switch (onslaughtIdx)
+	{
+	case 1:
+		camQueueDialogue([
+			{text: "--- ANOMALOUS SIGNAL DETECTED ---", delay: 0, sound: cam_sounds.beacon},
+			{text: "CLAYDE: Commander Bravo, I've activated the Lures.", delay: 4, sound: CAM_RCLICK},
+			{text: "CLAYDE: The Infested will begin attacking the Collective soon.", delay: 3, sound: CAM_RCLICK},
+			{text: "CLAYDE: For now, hold your position and let the Infested fight for us...", delay: 4, sound: CAM_RCLICK},
+		]);
+		break;
+	case 2:
+		camQueueDialogue([
+			{text: "CLAYDE: Commander Bravo, the Infested will attack again soon.", delay: 0, sound: CAM_RCLICK},
+			{text: "CLAYDE: You should pull your forces back and be ready to defend.", delay: 3, sound: CAM_RCLICK},
+			{text: "CLAYDE: Let the Infested keep the Collective occupied.", delay: 3, sound: CAM_RCLICK},
+		]);
+		break;
+	case 3:
+		camQueueDialogue([
+			{text: "CLAYDE: The Infested are amassing once again, Commander Bravo.", delay: 0, sound: CAM_RCLICK},
+			{text: "CLAYDE: Pull back and hunker down while they assault the Collective.", delay: 3, sound: CAM_RCLICK},
+		]);
+		break;
+	default: // Repeat after the 3rd onslaught
+		amQueueDialogue([
+			{text: "CLAYDE: Another Infested onslaught is approaching, Commander Bravo.", delay: 0, sound: CAM_RCLICK},
+		]);
+		break;
+	}
+}
+
+// Play dialogue informing the player that the Infested onslaught has ended for now
+function onslaughtEndDialogue()
+{
+	switch (onslaughtIdx)
+	{
+	case 1:
+		camQueueDialogue([
+			{text: "CLAYDE: Commander Bravo, the Infested attacks are subsiding.", delay: 0, sound: CAM_RCLICK},
+			{text: "CLAYDE: If you're ready, consider attacking the Collective's bases soon.", delay: 3, sound: CAM_RCLICK},
+		]);
+		break;
+	case 2:
+		camQueueDialogue([
+			{text: "CLAYDE: Commander Bravo, the Infested onslaught is dissipating.", delay: 0, sound: CAM_RCLICK},
+			{text: "CLAYDE: Now's your chance to attack the Collective, while they're busy dealing with the stragglers.", delay: 3, sound: CAM_RCLICK},
+		]);
+		break;
+	case 3:
+		camQueueDialogue([
+			{text: "CLAYDE: The large attack waves have passed, Commander Bravo.", delay: 0, sound: CAM_RCLICK},
+			{text: "CLAYDE: Move out and assault the Collective before they can repair any damage they've sustained.", delay: 3, sound: CAM_RCLICK},
+		]);
+		break;
+	default: // Repeat after the 3rd onslaught
+		camQueueDialogue([
+			{text: "CLAYDE: The Infested onslaught has passed.", delay: 0, sound: CAM_RCLICK},
+		]);
+		break;
+	}
 }
 
 function removeEntryBeacons()
@@ -482,8 +557,7 @@ function countUplinkStructs()
 	)).length;
 }
 
-// Send in allied forces if the player has cleared enough of the defensive structures
-function sendDeltaReinforcements()
+function checkDeltaEntranceStructs()
 {
 	if (luresActive)
 	{
@@ -499,27 +573,99 @@ function sendDeltaReinforcements()
 
 	if (ENTRANCE1_STRUCTS === 0)
 	{
-		// Send in Delta units from the west entrance
-		const deltaDroids1 = camGetRefillableGroupTemplates(deltaGroup1);
-
-		if (deltaDroids1.length > 0) // Don't send anything if the group is already full
-		{
-			const reinforcements1 = camSendReinforcement(MIS_TEAM_DELTA, getObject("deltaEntry1"), deltaDroids1, CAM_REINFORCE_GROUND);
-			camAssignToRefillableGroups(enumGroup(reinforcements1), deltaGroup1);
-		}
+		deltaEntranceSide = "LEFT";
+	}
+	else if (ENTRANCE2_STRUCTS === 0)
+	{
+		deltaEntranceSide = "RIGHT";
 	}
 
-	if (ENTRANCE2_STRUCTS === 0)
+	if (camDef(deltaEntranceSide))
+	{
+		// If one of the entrances is clear, stop checking and start spawning
+		const entryPos = (deltaEntranceSide === "LEFT") ? camMakePos("deltaEntry1") : camMakePos("deltaEntry2");
+		// Set up Delta's uplink attack groups as well
+		deltaCommander = camMakeRefillableGroup(
+			undefined, {
+				templates: [cTempl.plmcomht]
+			}, CAM_ORDER_COMPROMISE, {
+				pos: camMakePos("colBase5"),
+				radius: 20,
+				repair: 50,
+				repairPos: entryPos,
+				targetPlayer: CAM_THE_COLLECTIVE
+		});
+		deltaCommandGroup = camMakeRefillableGroup(
+			undefined, {
+				templates: [ 
+					cTempl.plmacanht, cTempl.plmacanht, cTempl.plmacanht, cTempl.plmacanht, cTempl.plmacanht, cTempl.plmacanht, // 6 Assault Cannons
+					cTempl.scyac, cTempl.scyac, cTempl.scyac, cTempl.scyac, // 4 Super Auto Cannon Cyborgs
+					cTempl.plmrepht, cTempl.plmrepht, // 2 Repair Turrets
+					cTempl.plmhaaht, cTempl.plmhaaht, // 2 Cyclones
+				],
+			}, CAM_ORDER_FOLLOW, {
+				leader: "deltaCommander",
+				repair: 50,
+				repairPos: entryPos,
+				suborder: CAM_ORDER_DEFEND,
+				data: {
+					pos: entryPos,
+					radius: 20
+				}
+		});
+
+		removeTimer("checkDeltaEntranceStructs");
+		setTimer("sendDeltaReinforcements", camMinutesToMilliseconds(2.5));
+
+		// Tell the player that Delta is approaching
+		camQueueDialogue([
+			{text: "DELTA: Bravo, this is Commander Delta.", delay: 0, sound: CAM_RCLICK},
+			{text: "DELTA: We're approaching the uplink from the northern side.", delay: 3, sound: CAM_RCLICK},
+			{text: "DELTA: We'll be able to reinforce you in a moment...", delay: 3, sound: CAM_RCLICK},
+		]);
+	}
+}
+
+// Send in allied forces if the player has cleared enough of the defensive structures
+function sendDeltaReinforcements()
+{
+	let entryArea;
+
+	if (deltaEntranceSide === "LEFT")
+	{
+		// Send in Delta units from the west entrance
+		entryArea = getObject("deltaEntry1");
+	}
+	else // Assume (deltaEntranceSide === "RIGHT")
 	{
 		// Send in Delta units from the east entrance
-		const deltaDroids2 = camGetRefillableGroupTemplates(deltaGroup2);
+		entryArea = getObject("deltaEntry2");
+	}
 
-		if (deltaDroids2.length > 0) // Don't send anything if the group is already full
+	const deltaDroids = camGetRefillableGroupTemplates([deltaCommander, deltaCommandGroup]);
+
+	if (deltaDroids.length == 0)
+	{
+		return; // Don't send anything if the groups are already full
+	}
+
+	const droids = enumGroup(camSendReinforcement(MIS_TEAM_DELTA, entryArea, deltaDroids, CAM_REINFORCE_GROUND));
+
+	for (const droid of droids)
+	{
+		// Make sure the reinforcements have the appropriate rank
+		if (droid.droidType === DROID_COMMAND)
 		{
-			const reinforcements2 = camSendReinforcement(MIS_TEAM_DELTA, getObject("deltaEntry2"), deltaDroids2, CAM_REINFORCE_GROUND);
-			camAssignToRefillableGroups(enumGroup(reinforcements2), deltaGroup2);
+			camSetDroidRank(droid, MIS_DELTA_COMMANDER_RANK);
+			addLabel(droid, "deltaCommander"); // Also label the command droid
+		}
+		else
+		{
+			camSetDroidRank(droid, MIS_DELTA_RANK);
 		}
 	}
+
+	camAssignToRefillableGroups(droids, [deltaCommander, deltaCommandGroup]);
 }
 
 function sendCollectiveTransporter()
@@ -633,7 +779,7 @@ function eventStartLevel()
 		"colFactory1": { tech: "R-Wpn-Rocket07-Tank-Killer" }, // Tank Killer
 		"colFactory2": { tech: "R-Wpn-Flamer-Damage05" }, // Superhot Flamer Gel Mk2
 		"colAAEmp": { tech: "R-Wpn-AAGun-ROF02" }, // AA Ammunition Hopper Mk2
-		"colPower": { tech: "R-Struc-Power-Upgrade02" }, // Gas Turbine Generator Mk2
+		// "colPower": { tech: "R-Struc-Power-Upgrade02" }, // Gas Turbine Generator Mk2
 	});
 
 	camSetEnemyBases({
@@ -764,6 +910,7 @@ function eventStartLevel()
 	infestedOnslaught = false;
 	onslaughtIdx = 0;
 	numUplinkStructs = countUplinkStructs();
+	deltaEntranceSide = undefined;
 
 	// Manage Collective VTOL groups...
 	camMakeRefillableGroup(
@@ -904,32 +1051,6 @@ function eventStartLevel()
 			}
 	});
 
-	// Set up Delta's uplink attack groups as well
-	deltaGroup1 = camMakeRefillableGroup(
-		undefined, {
-			templates: [
-				cTempl.plmacant, cTempl.plmacant, cTempl.plmacant, cTempl.plmacant, // 4 Assault Cannons
-				cTempl.scygr, cTempl.scygr, cTempl.scygr, cTempl.scygr, // 4 Super Grenadiers
-				cTempl.plmhrept, cTempl.plmhrept, // 2 Repair Turrets
-			]
-		}, CAM_ORDER_COMPROMISE, {
-			pos: camMakePos("colBase5"),
-			radius: 20,
-			targetPlayer: CAM_THE_COLLECTIVE
-	});
-	deltaGroup2 = camMakeRefillableGroup(
-		undefined, {
-			templates: [
-				cTempl.plmacant, cTempl.plmacant, cTempl.plmacant, cTempl.plmacant, // 4 Assault Cannons
-				cTempl.scygr, cTempl.scygr, cTempl.scygr, cTempl.scygr, // 4 Super Grenadiers
-				cTempl.plmhrept, cTempl.plmhrept, // 2 Repair Turrets
-			]
-		}, CAM_ORDER_COMPROMISE, {
-			pos: camMakePos("colBase5"),
-			radius: 20,
-			targetPlayer: CAM_THE_COLLECTIVE
-	});
-
 	// Manage trucks...
 	const TRUCK_TIME = camChangeOnDiff(camSecondsToMilliseconds((tweakOptions.rec_timerlessMode) ? 45 : 90));
 	camManageTrucks(
@@ -1012,6 +1133,22 @@ function eventStartLevel()
 		}
 	}
 
+	// Upgrade Collective structures on higher difficulties
+	if (difficulty == HARD)
+	{
+		// Only replace these when destroyed
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "WallTower03", "Wall-VulcanCan", true); // Cannon Hardpoints
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "AASite-QuadMg1", "AASite-QuadBof", true); // AA Sites
+	}
+	else if (difficulty == INSANE)
+	{
+		// Proactively demolish/replace these
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "AASite-QuadMg1", "AASite-QuadBof"); // AA Sites
+
+		// Only replace these when destroyed
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "WallTower03", "Wall-VulcanCan", true); // Cannon Hardpoints
+	}
+
 	// Most Infested units start out pre-damaged
 	camSetPreDamageModifier(CAM_INFESTED, [50, 80], [60, 90], CAM_INFESTED_PREDAMAGE_EXCLUSIONS);
 
@@ -1025,7 +1162,7 @@ function eventStartLevel()
 	setTimer("sendInfestedReinforcements", camChangeOnDiff(camSecondsToMilliseconds(75)));
 	setTimer("startInfestedOnslaught", camMinutesToMilliseconds(6));
 	setTimer("sendCollectiveTransporter", camChangeOnDiff(camMinutesToMilliseconds(8)));
-	setTimer("sendDeltaReinforcements", camMinutesToMilliseconds(2.5));
+	setTimer("checkDeltaEntranceStructs", camSecondsToMilliseconds(30));
 
 	camSetSkyType(CAM_SKY_NIGHT);
 	// Give the fog a dark purple hue

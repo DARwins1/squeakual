@@ -28,6 +28,7 @@ var colCommanderGroup;
 var group1Attacking;
 var group2Attacking;
 var commanderAttacking;
+var infFactoryOnlyWave; // If true, ONLY spawn Infested units from entrances "bound" to a factory
 
 camAreaEvent("vtolRemoveZone", function(droid)
 {
@@ -47,7 +48,10 @@ function heliAttack()
 
 function vtolAttack()
 {
-	playSound(cam_sounds.enemyVtolsDetected);
+	if (getObject("colCC") !== null)
+	{
+		playSound(cam_sounds.enemyVtolsDetected);
+	}
 	
 	// Phosphor Bombs, Assault Guns, HEAP Bombs, and Lancers
 	const templates = [cTempl.colphosv, cTempl.colagv, cTempl.comhbombv, cTempl.colatv];
@@ -55,7 +59,8 @@ function vtolAttack()
 		limit: [3, 4, 2, 3],
 		alternate: true,
 		targetPlayer: CAM_HUMAN_PLAYER,
-		dynamic: true
+		dynamic: true,
+		pos: getObject("landingZone")
 	};
 	camSetVtolData(CAM_THE_COLLECTIVE, "vtolAttackPos", "vtolRemoveZone", templates, camChangeOnDiff(camMinutesToMilliseconds(2)), "colCC", ext);
 }
@@ -206,17 +211,20 @@ function sendInfestedReinforcements()
 	if (difficulty >= HARD) bChance += 5;
 	if (difficulty === INSANE) bChance += 5;
 
-	const entrances = [
-		"infEntry1", "infEntry2", "infEntry4",
-		"infEntry5", "infEntry6", "infEntry7",
-		"infEntry9",
-	];
+	const entrances = [];
+	if (!infFactoryOnlyWave)
+	{
+		entrances.push(
+			"infEntry1", "infEntry2", "infEntry4",
+			"infEntry5", "infEntry6", "infEntry7",
+			"infEntry9", "infEntry12");
+		// South west trench entrances
+		// (Only if the main depot base is eradicated)
+		if (camBaseIsEliminated("colDepotBase")) entrances.push("infEntry10", "infEntry11");
+	}
 	// South canal high ground entrance
 	// (Stops when factory is destroyed)
 	if (getObject("infFactory2") !== null) entrances.push("infEntry8");
-	// South west trench entrances
-	// (Only if the main depot base is eradicated)
-	if (camBaseIsEliminated("colDepotBase")) entrances.push("infEntry10", "infEntry11");
 
 	const NUM_GROUPS = difficulty + 2;
 	const NUM_ENTRANCES = entrances.length;
@@ -238,6 +246,8 @@ function sendInfestedReinforcements()
 
 		entrances.splice(INDEX, 1);
 	}
+
+	infFactoryOnlyWave = !infFactoryOnlyWave;
 }
 
 function eventStartLevel()
@@ -472,6 +482,31 @@ function eventStartLevel()
 		setMissionTime(camChangeOnDiff(camMinutesToSeconds(105)));
 	}
 
+	// Upgrade Collective structures on higher difficulties
+	if (difficulty == HARD)
+	{
+		// Only replace these when destroyed
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "GuardTower1", "GuardTower3", true); // HMG Towers
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "Sys-SensoTower01", "Sys-SensoTower02", true); // Sensor Towers
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "WallTower03", "Wall-VulcanCan", true); // Cannon Hardpoints
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "Emplacement-MRL-pit", "Emplacement-MRLHvy-pit", true); // MRA Emplacements
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "AASite-QuadMg1", "AASite-QuadBof", true); // AA Sites
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "Emplacement-MortarPit01", "Emplacement-MortarPit02", true); // Mortar Pits
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "PillBox5", "Tower-Projector", true); // Flamer Bunkers
+	}
+	else if (difficulty == INSANE)
+	{
+		// Proactively demolish/replace these
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "Emplacement-MRL-pit", "Emplacement-MRLHvy-pit"); // MRA Emplacements
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "AASite-QuadMg1", "AASite-QuadBof"); // AA Sites
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "Emplacement-MortarPit01", "Emplacement-MortarPit02"); // Mortar Pits
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "PillBox5", "Tower-Projector"); // Flamer Bunkers
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "Sys-SensoTower01", "Sys-SensoTower02"); // Sensor Towers
+
+		// Only replace these when destroyed
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "WallTower03", "Wall-VulcanCan", true); // Cannon Hardpoints
+	}
+
 	colTankGroup1 = camMakeGroup("tankGroup1");
 	camManageGroup(colTankGroup1, CAM_ORDER_PATROL, {
 		pos: [
@@ -490,6 +525,8 @@ function eventStartLevel()
 		interval: camSecondsToMilliseconds(36),
 		repair: 35
 	});
+
+	infFactoryOnlyWave = true;
 
 	// Rank and assign the Collective commander
 	// Set the commander's rank (ranges from Professional to Elite)

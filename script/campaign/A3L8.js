@@ -28,6 +28,9 @@ var colCommanderGroup2;
 var colCommanderGroup3;
 var colHoverGroup;
 
+var numBasesElim;
+var infFactoryOnlyWave; // If true, ONLY spawn Infested units from entrances "bound" to a factory
+
 camAreaEvent("heliRemoveZone", function(droid)
 {
 	camSafeRemoveObject(droid, false);
@@ -121,18 +124,25 @@ function sendInfestedReinforcements()
 	if (difficulty >= HARD) bChance += 5;
 	if (difficulty === INSANE) bChance += 5;
 
-	const entrances = [
+	const entrances = [];
+	if (!infFactoryOnlyWave)
+	{
+		entrances.push(
 		"infEntry1", "infEntry2", "infEntry3",
 		"infEntry4", "infEntry5", "infEntry6",
 		"infEntry7", "infEntry8", "infEntry9",
-		"infEntry15", "infEntry17",
-	];
-	// Southwest corner entrances
-	// Only if southwest base is destroyed
-	if (camBaseIsEliminated("colMainBase")) entrances.push("infEntry11", "infEntry12", "infEntry13");
-	// West small trench entrance
-	// Only if the VTOL base is destroyed
-	if (camBaseIsEliminated("colVtolBase")) entrances.push("infEntry14");
+		"infEntry15", "infEntry17");
+
+		// Southwest corner entrances
+		// Only if southwest base is destroyed
+		if (camBaseIsEliminated("colMainBase")) entrances.push("infEntry11", "infEntry12", "infEntry13");
+		// West small trench entrance
+		// Only if the VTOL base is destroyed
+		if (camBaseIsEliminated("colVtolBase")) entrances.push("infEntry14");
+	}
+	// South trench entrance
+	// Only if the south Infested factory is alive
+	if (getObject("infFactory") !== null) entrances.push("infEntry10");
 	// Northwest small trench entrance
 	// Only if the northwest Infested heavy factory is alive
 	if (getObject("infHvyFactory2") !== null) entrances.push("infEntry16");
@@ -160,6 +170,8 @@ function sendInfestedReinforcements()
 
 		entrances.splice(INDEX, 1);
 	}
+
+	infFactoryOnlyWave = !infFactoryOnlyWave;
 }
 
 // Activate more factories...
@@ -196,6 +208,25 @@ function activateFinalFactories()
 		targetPlayer: CAM_HUMAN_PLAYER,
 		repair: 75
 	})
+}
+
+function camEnemyBaseEliminated()
+{
+	numBasesElim++;
+
+	if (numBasesElim == 5)
+	{
+		// Ominous request from Commander Charlie
+		camQueueDialogue([
+			{text: "<CHARLIE>: Commander Bravo?", delay: 6, sound: CAM_RCLICK},
+			{text: "<CHARLIE>: Hey, Bravo, are you reading this?", delay: 3, sound: CAM_RCLICK},
+			{text: "<CHARLIE>: Listen, I'm not sure what Clayde's got you doing out there...", delay: 5, sound: CAM_RCLICK},
+			{text: "<CHARLIE>: But whenever you're done, there's something we need to show you.", delay: 3, sound: CAM_RCLICK},
+			{text: "<CHARLIE>: It's...", delay: 4, sound: CAM_RCLICK},
+			{text: "<CHARLIE>: It's important.", delay: 2, sound: CAM_RCLICK},
+			{text: "<CHARLIE>: ...And you're only going believe it when you see it.", delay: 4, sound: CAM_RCLICK},
+		]);
+	}
 }
 
 function camEnemyBaseEliminated_colVtolBase()
@@ -520,6 +551,24 @@ function eventStartLevel()
 		setMissionTime(camChangeOnDiff(camHoursToSeconds(2)));
 	}
 
+	// Upgrade Collective structures on higher difficulties
+	if (difficulty == HARD)
+	{
+		// Only replace these when destroyed
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "WallTower03", "Wall-VulcanCan", true); // Cannon Hardpoints
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "Emplacement-MRL-pit", "Emplacement-MRLHvy-pit", true); // MRA Emplacements
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "AASite-QuadMg1", "AASite-QuadBof", true); // AA Sites
+	}
+	else if (difficulty == INSANE)
+	{
+		// Proactively demolish/replace these
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "Emplacement-MRL-pit", "Emplacement-MRLHvy-pit"); // MRA Emplacements
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "AASite-QuadMg1", "AASite-QuadBof"); // AA Sites
+
+		// Only replace these when destroyed
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "WallTower03", "Wall-VulcanCan", true); // Cannon Hardpoints
+	}
+
 	// Rank and assign the Collective commanders
 	// Set the commanders' rank 
 	// Ranges from Trained to Professional:
@@ -531,6 +580,9 @@ function eventStartLevel()
 	// Ranges from Elite to Hero:
 	camSetDroidRank(getObject("colCommander3"), (difficulty <= EASY) ? 6 : (difficulty + 4));
 	colCommanderGroup3 = camMakeGroup("colCommander3");
+
+	numBasesElim = 0;
+	infFactoryOnlyWave = true;
 
 	// Give the commanders orders and assign their subordinates
 	// East base commander:

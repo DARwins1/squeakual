@@ -87,7 +87,7 @@ function sendInfestedReinforcements()
 
 function eventStartLevel()
 {
-	camSetupTransporter(193, 73, 196, 60);
+	camSetupTransporter(193, 73, 198, 78);
 	centreView(193, 73);
 	setNoGoArea(192, 72, 194, 74, CAM_HUMAN_PLAYER);
 	if (!tweakOptions.rec_timerlessMode)
@@ -105,7 +105,7 @@ function eventStartLevel()
 	camPlayVideos({video: "A3L3_BRIEF", type: MISS_MSG});
 
 	camCompleteRequiredResearch(mis_infestedResearch, CAM_INFESTED);
-	setTimer("sendInfestedReinforcements", camChangeOnDiff(camSecondsToMilliseconds(105)));
+	setTimer("sendInfestedReinforcements", camChangeOnDiff(camSecondsToMilliseconds(120)));
 
 	// Most Infested units start out pre-damaged
 	camSetPreDamageModifier(CAM_INFESTED, [50, 80], [60, 90], CAM_INFESTED_PREDAMAGE_EXCLUSIONS);

@@ -19,6 +19,7 @@ const infEntry7 = {x: 157, y: 133, x2: 160, y2: 134};
 const infEntry8 = {x: 134, y: 133, x2: 137, y2: 134};
 const infEntry9 = {x: 108, y: 133, x2: 116, y2: 134};
 const infEntry10 = {x: 83, y: 133, x2: 87, y2: 134};
+const infEntry11 = {x: 81, y: 7, x2: 82, y2: 10};
 
 function heliAttack()
 {
@@ -95,6 +96,7 @@ function sendInfestedReinforcements()
 		infEntry1, infEntry2, infEntry4,
 		infEntry5, infEntry6, infEntry7,
 		infEntry8, infEntry9, infEntry10,
+		infEntry11,
 	];
 
 	const NUM_GROUPS = difficulty + 2;

@@ -69,7 +69,12 @@ function heliAttack()
 // Starts the Collective wave loops
 function startCollectiveAttacks()
 {
-	// TODO: Dialogue here...
+	// Dialogue about incoming Collective attacks
+	camQueueDialogue([
+		{text: "CHARLIE: Bravo, we're picking large groups of enemy tanks.", delay: 4, sound: CAM_RCLICK},
+		{text: "CHARLIE: I've marked the directions that the biggest groups will arrive from.", delay: 3, sound: CAM_RCLICK},
+		{text: "CHARLIE: Try to focus your defenses there, if you can.", delay: 3, sound: CAM_RCLICK},
+	]);
 
 	queueCollectiveHeavyWave();
 	// Send a heavy wave every 4 minutes...
@@ -473,7 +478,11 @@ function sendInfestedReinforcements()
 // Start spawning Charlie reinforcements to help clear the map
 function eventMissionTimeout()
 {
-	// TODO: Dialogue here...
+	// Dialogue about incoming Charlie reinforcements
+	camQueueDialogue([
+		{text: "CHARLIE: Bravo, we're here!", delay: 4, sound: CAM_RCLICK},
+		{text: "CHARLIE: We'll help you clean push the Collective back!", delay: 3, sound: CAM_RCLICK},
+	]);
 
 	sendCharlieReinforcements();
 	setTimer("sendCharlieReinforcements", camSecondsToMilliseconds(30));
@@ -623,7 +632,7 @@ function eventStartLevel()
 	queue("startCollectiveAttacks", camChangeOnDiff(camSecondsToMilliseconds(20)));
 	queue("vtolAttack", camChangeOnDiff(camMinutesToMilliseconds(6)));
 	heliAttack();
-	setTimer("sendInfestedReinforcements", camChangeOnDiff(camSecondsToMilliseconds(60)));
+	setTimer("sendInfestedReinforcements", camChangeOnDiff(camSecondsToMilliseconds(120)));
 	setTimer("sendCollectiveTransporter", camChangeOnDiff(camMinutesToMilliseconds(3)));
 
 	// Give player briefing.

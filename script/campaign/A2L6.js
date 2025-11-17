@@ -1096,7 +1096,7 @@ function eventStartLevel()
 		"colResearch": { tech: "R-Wpn-Rocket-Accuracy03" }, // Rocket Laser Designator
 		"colFactory3": { tech: "R-Wpn-Cannon4AMk1" }, // Hyper Velocity Cannon
 		"colCC2": { tech: "R-Sys-Engineering02" }, // Improved Engineering
-		"colPower": { tech: "R-Struc-Power-Upgrade01" }, // Gas Turbine Generator
+		// "colPower": { tech: "R-Struc-Power-Upgrade01" }, // Gas Turbine Generator
 	});
 
 	camSetEnemyBases({

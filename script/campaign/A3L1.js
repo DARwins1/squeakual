@@ -10,6 +10,7 @@ var firstTransport; // Whether the player's first transport has landed
 var startedFromMenu;
 var playerColour;
 var allowExtraWaves; // Increases the amount of Infested reinforcements as the level progresses
+var infFactoryOnlyWave; // If true, ONLY spawn Infested units from entrances "bound" to a factory
 
 const mis_collectiveResearch = [
 	"R-Wpn-MG-Damage04", "R-Wpn-Rocket-Damage05", "R-Wpn-Mortar-Damage04", 
@@ -47,7 +48,10 @@ function heliAttack()
 
 function vtolAttack()
 {
-	playSound(cam_sounds.enemyVtolsDetected);
+	if (getObject("colCC") !== null)
+	{
+		playSound(cam_sounds.enemyVtolsDetected);
+	}
 
 	// MGs and Phosphor Bombs
 	const templates = [cTempl.colphosv];
@@ -205,7 +209,7 @@ function sendCollectiveTransporter()
 
 function sendInfestedReinforcements()
 {	
-	const coreDroids = [ // Just scavs and crawlers
+	const coreDroids = [ // Just basic scavs and crawlers
 		cTempl.stinger, cTempl.stinger, cTempl.stinger, // Stingers
 		cTempl.basher, cTempl.basher, // Bashers
 		cTempl.boomtick, // Boom Ticks
@@ -234,13 +238,17 @@ function sendInfestedReinforcements()
 	// South road entrance
 	// (Stops entirely when factory is destroyed)
 	if (getObject("infFactory1") !== null) entrances.push("infEntry1");
-	// South canal & east trench entrances
-	// (Does NOT stop for the entire mission!)
-	if (allowExtraWaves) entrances.push("infEntry2", "infEntry4");
 	// East base entrance
 	if (getObject("infFactory2") !== null && allowExtraWaves) entrances.push("infEntry3");
 	// East road entrance
 	if (getObject("infFactory3") !== null && allowExtraWaves) entrances.push("infEntry5");
+
+	if (!infFactoryOnlyWave && allowExtraWaves)
+	{
+		// South canal & east trench entrances
+		// (Does NOT stop for the entire mission!)
+		entrances.push("infEntry2", "infEntry4");
+	}
 
 	const NUM_GROUPS = difficulty + 2;
 	const NUM_ENTRANCES = entrances.length;
@@ -263,6 +271,9 @@ function sendInfestedReinforcements()
 
 		entrances.splice(INDEX, 1);
 	}
+
+	// Flip this between each wave
+	infFactoryOnlyWave = !infFactoryOnlyWave;
 }
 
 // Spawns a player unit at the LZ, and then removes it.
@@ -565,6 +576,24 @@ function eventStartLevel()
 	{
 		setMissionTime(camChangeOnDiff(camMinutesToSeconds(70)));
 	}
+
+	// Upgrade Collective structures on higher difficulties
+	if (difficulty == HARD)
+	{
+		// Only replace these when destroyed
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "AASite-QuadMg1", "AASite-QuadBof", true); // AA Sites
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "Emplacement-MortarPit01", "Emplacement-MortarPit02", true); // Mortar Pits
+	}
+	else if (difficulty == INSANE)
+	{
+		// Proactively demolish/replace these
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "AASite-QuadMg1", "AASite-QuadBof"); // AA Sites
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "Emplacement-MortarPit01", "Emplacement-MortarPit02"); // Mortar Pits
+
+		// Only replace these when destroyed
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "PillBox4", "PillBoxHPC", true); // Cannon Bunkers
+	}
+
 	// 3 Transports on INSANE
 	// 4 Transports on HARD
 	// 5 Transports on all other difficulties
@@ -655,6 +684,7 @@ function eventStartLevel()
 
 	firstTransport = true;
 	allowExtraWaves = false;
+	infFactoryOnlyWave = true;
 
 	camAutoReplaceObjectLabel(["colCC", "heliTower"]);
 	camEnableFactory("cScavFactory1");

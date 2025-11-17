@@ -33,6 +33,7 @@ const mis_infestedResearch = [
 	"R-Wpn-AAGun-Damage01", "R-Vehicle-Engine03",
 ];
 const MIS_GROUND_WAVE_DELAY = camChangeOnDiff(camSecondsToMilliseconds(60));
+const MIS_MAX_COLLECTIVE_UNITS = 250;
 const mis_vtolRemovePos = {x: 16, y: 2};
 
 //Remove enemy vtols when in the remove zone area.
@@ -101,7 +102,7 @@ function collectiveAttackWaves()
 	waveIndex++;
 
 	// Don't spawn another wave if there's already too many units on the map
-	if (countCollectiveAttackDroids() < 250)
+	if (countCollectiveAttackDroids() < MIS_MAX_COLLECTIVE_UNITS)
 	{
 		let colDroidPool = [
 			cTempl.colpodt, // MRP
@@ -519,33 +520,49 @@ function checkIfLaunched()
 	}
 }
 
-function dumpStructSets()
+// End the "warm-up" phase
+function eventMissionTimeout()
 {
-	camDumpStructSet("colLZBaseArea1", "camA2L7ColLZ1Structs");
-	camDumpStructSet("colLZBaseArea2", "camA2L7ColLZ2Structs");
-	camDumpStructSet("colLZBaseArea3", "camA2L7ColLZ3Structs");
-	camDumpStructSet("colLZBaseArea4", "camA2L7ColLZ4Structs");
+	// Grant infinite time for the rest of the mission
+	setMissionTime(-1);
+
+	camSetStandardWinLossConditions(CAM_VICTORY_EVACUATION, "A3L1", {
+		reinforcements: camMinutesToSeconds(3.5), // Duration the transport "leaves" map.
+		gameOverOnDeath: false, // Don't fail when the player runs out of stuff
+		callback: "checkIfLaunched"
+	});
+
+	const startPos = camMakePos("landingZone");
+	const entryPos = camMakePos("transportEntryPos");
+
+	// Place the transporter
+	camSetupTransporter(startPos.x, startPos.y, entryPos.x, entryPos.y);
+	playSound(cam_sounds.lz.returnToLZ);
+
+	// Queue enemy attacks
+	queue("vtolAttack", camChangeOnDiff(camMinutesToMilliseconds(2)));
+	queue("startInfestedAttacks", camChangeOnDiff(camMinutesToMilliseconds(12)));
+	setTimer("collectiveAttackWaves", MIS_GROUND_WAVE_DELAY);
+	setTimer("collectiveHoverReinforcements", MIS_GROUND_WAVE_DELAY * 1.5);
+	setTimer("checkEnemyVtolArea", camSecondsToMilliseconds(1));
+	setTimer("sendCollectiveTransporter", camChangeOnDiff(camMinutesToMilliseconds(2)));
 }
 
 // This entire mission is basically just sending attack waves over and over until the player loses/evacuates all of their stuff.
 // It's basically impossible for the player to truly "lose" this level. Instead, the player has to focus on saving as many of their units as possible
 function eventStartLevel()
 {
-	camSetStandardWinLossConditions(CAM_VICTORY_EVACUATION, "A3L1", {
-		reinforcements: camMinutesToSeconds(3.5), // Duration the transport "leaves" map.
-		gameOverOnDeath: false, // Don't fail when the player runs out of stuff
-		callback: "checkIfLaunched"
-	});
+	camSetStandardWinLossConditions(CAM_VICTORY_SCRIPTED, "A3L1"); // Temporary until the warm-up phase is over
 	camSetExtraObjectiveMessage(_("Evacuate as many units as possible"));
-	setMissionTime(-1); // Infinite time
+
+	// 1 minute "warm up" phase where nothing happens
+	setMissionTime(camMinutesToSeconds(1));
 
 	const startPos = camMakePos("landingZone");
 	const lz = getObject("landingZone");
-	const entryPos = camMakePos("transportEntryPos")
 
 	centreView(startPos.x, startPos.y);
 	setNoGoArea(lz.x, lz.y, lz.x2, lz.y2, CAM_HUMAN_PLAYER);
-	camSetupTransporter(startPos.x, startPos.y, entryPos.x, entryPos.y);
 
 	camCompleteRequiredResearch(mis_collectiveResearch, CAM_THE_COLLECTIVE);
 
@@ -636,13 +653,6 @@ function eventStartLevel()
 	hoverIndex = 0;
 	vtolsDetected = false;
 	lastTransportAlert = 0;
-
-	queue("vtolAttack", camChangeOnDiff(camMinutesToMilliseconds(2)));
-	queue("startInfestedAttacks", camChangeOnDiff(camMinutesToMilliseconds(12)));
-	setTimer("collectiveAttackWaves", MIS_GROUND_WAVE_DELAY);
-	setTimer("collectiveHoverReinforcements", MIS_GROUND_WAVE_DELAY * 1.5);
-	setTimer("checkEnemyVtolArea", camSecondsToMilliseconds(1));
-	setTimer("sendCollectiveTransporter", camChangeOnDiff(camMinutesToMilliseconds(2)));
 
 	// Give player briefing.
 	camPlayVideos({video: "A2L7_BRIEF", type: MISS_MSG});
