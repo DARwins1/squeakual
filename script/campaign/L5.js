@@ -631,7 +631,15 @@ function eventStartLevel()
 	const busPos = camMakePos("boomShowcaseGroup");
 	const showBusDroid = camAddDroid(MIS_CYAN_SCAVS, busPos, cTempl.moncan, "Battle Bus 4");
 	showBusId = showBusDroid.id;
-	setHealth(showBusDroid, 30); // Starts very damaged
+	// Configure the bus' HP depending on difficulty so that the Boom Tick always one-shots it
+	const showBusHP = [
+		32, // SUPER_EASY 
+		27, // EASY
+		21, // MEDIUM
+		19, // HARD
+		17, // INSANE
+	];
+	setHealth(showBusDroid, showBusHP[difficulty]);
 
 	showBusST = camMakeGroup(showBusDroid);
 	addLabel({type: GROUP, id: showBusST}, "showBusST", false);

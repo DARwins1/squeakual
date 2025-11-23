@@ -609,6 +609,10 @@ function __camSetupConsoleForVictoryConditions()
 
 function __camShowVictoryConditions()
 {
+	if (camDef(tweakOptions.victoryHints) && !tweakOptions.victoryHints)
+	{
+		return; // Disabled.
+	}
 	if (!camDef(__camNextLevel))
 	{
 		return; // fastplay / tutorial. Should be a better identifier for this.

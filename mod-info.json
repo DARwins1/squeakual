@@ -22,23 +22,13 @@
   "difficultyLevels": "default",
   "camTweakOptions": [
     {
-      "id": "timerPowerBonus",
-      "default": true,
-      "userEditable": false
-    },
-    {
-      "id": "classicTimers",
-      "default": false,
-      "userEditable": false
-    },
-    {
-      "id": "playerUnitCap40",
-      "default": false,
-      "userEditable": false
-    },
-    {
       "id": "autosavesOnly",
       "default": false,
+      "userEditable": true
+    },
+    {
+      "id": "victoryHints",
+      "default": true,
       "userEditable": true
     }
   ],
