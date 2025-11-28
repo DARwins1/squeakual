@@ -528,6 +528,13 @@ function __camBuildDroid(template, structure)
 	makeComponentAvailable(template.body, structure.player);
 	makeComponentAvailable(__PROP, structure.player);
 	const __NAME = camNameTemplate(template.weap, template.body, __PROP);
+
+	if (template.weap === "CommandBrain01")
+	{
+		// If we have a commander template, make sure the turret is available
+		makeComponentAvailable("CommandTurret1", structure.player);
+	}
+
 	// multi-turret templates are NOW supported :)
 	if (typeof template.weap === "object" && camDef(template.weap[2]))
 	{

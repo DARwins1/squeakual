@@ -88,7 +88,7 @@ function checkCivsDone()
 	// The player has loaded all civilians into Transport Trucks
 	// The player does not currently have any Transport Trucks
 	if (trucksLost < truckLostThreshold 
-		&& civLoaded[1] && civLoaded[2] && civLoaded[3] && civLoaded[4] && civLoaded[5]
+		&& civsLoaded[1] && civsLoaded[2] && civsLoaded[3] && civsLoaded[4] && civsLoaded[5]
 		&& !transportTrucksActive())
 	{
 		setStageTwo();

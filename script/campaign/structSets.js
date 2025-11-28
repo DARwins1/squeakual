@@ -428,7 +428,7 @@ const camA4L4CharlieLZStructs = [
 	{stat: "A0VtolPad", x: 4, y: 110}, {stat: "A0VtolPad", x: 4, y: 111}, {stat: "A0VtolPad", x: 6, y: 108},
 	{stat: "A0VtolPad", x: 6, y: 109}, {stat: "A0VtolPad", x: 6, y: 110}, {stat: "AASite-QuadRotMg", x: 6, y: 111, rot: 1},
 	{stat: "WallTower-HvATrocket", x: 15, y: 103}, {stat: "PillBoxHPC", x: 9, y: 105}, {stat: "GuardTower-TK", x: 11, y: 106},
-	{stat: "Tower-Projector", x: 8, y: 108}, {stat: "GuardTower-RotMg", x: 13, y: 104}, {stat: "AASite-QuadRotMg", x: 13, y: 107},
+	{stat: "GuardTower-RotMg", x: 13, y: 104}, {stat: "AASite-QuadRotMg", x: 13, y: 107},
 	{stat: "AASite-QuadRotMg", x: 4, y: 112, rot: 1}, {stat: "A0VtolPad", x: 4, y: 113}, {stat: "A0VtolPad", x: 4, y: 114},
 	{stat: "A0VtolPad", x: 4, y: 115}, {stat: "A0VtolPad", x: 6, y: 112}, {stat: "A0VtolPad", x: 6, y: 113},
 	{stat: "A0VtolPad", x: 6, y: 114}, {stat: "Pillbox-RotMG", x: 4, y: 117}, {stat: "Tower-Projector", x: 8, y: 114},

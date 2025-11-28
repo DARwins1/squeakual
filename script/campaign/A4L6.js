@@ -14,7 +14,7 @@ const MIS_CIVS = 6; // Civilians waiting to be rescued
 const MIS_CIV_ESCORTS = 7; // Civilians after being collected
 
 const MIS_TRANSPORT_MAX_TIME = camMinutesToSeconds(5); // 5 minutes max
-const MIS_TRANSPORT_START_TIME = camMinutesToSeconds(2); // 2 minutes for the first transport
+const MIS_TRANSPORT_START_TIME = camMinutesToSeconds(1.5); // 1.5 minutes for the first transport
 const MIS_TRANSPORT_TIME_INCREMENT = 15; // Increase transport time by 15 seconds per transport
 const DORDER_GUARD = 25; // Order number for guarding an droid/structure
 const MIS_ALLY_COMMANDER_RANK = "Hero";
@@ -271,9 +271,9 @@ function eventTransporterLanded(transport)
 		{
 			camQueueDialogue([
 				{text: "LIEUTENANT: Commander Bravo, Collective activity in the city is increasing.", delay: 4, sound: CAM_RCLICK},
-				{text: "LIEUTENANT: It'll be increasingly difficult to get transports here from your old base.", delay: 3, sound: CAM_RCLICK},
-				{text: "LIEUTENANT: Try to bring your most important units first.", delay: 3, sound: CAM_RCLICK},
-				{text: "LIEUTENANT: Since it'll take longer for transports to arrive later on.", delay: 3, sound: CAM_RCLICK},
+				{text: "LIEUTENANT: It'll be increasingly difficult to get here from your old base.", delay: 3, sound: CAM_RCLICK},
+				{text: "LIEUTENANT: Which means it'll take longer for transports to arrive later on.", delay: 3, sound: CAM_RCLICK},
+				{text: "LIEUTENANT: So keep that in mind when loading your forces.", delay: 3, sound: CAM_RCLICK},
 			]);
 		}
 		transportIndex++;
@@ -501,7 +501,7 @@ function sendCollectiveReinforcements()
 	{
 		for (const entrance of groundEntrances)
 		{
-			sendCollectiveGroundReinforcements(camRandFrom(groundCompositions), enntrance);
+			sendCollectiveGroundReinforcements(camRandFrom(groundCompositions), entrance);
 		}
 	}
 
@@ -636,7 +636,7 @@ function sendCollectiveTrucks()
 		}
 	}
 	// West LZ
-	if (civLoaded[5] && camBaseIsEliminated("deltaNorthBase") && camAreaSecure("colLZ6", CAM_THE_COLLECTIVE))
+	if (civsLoaded[5] && camBaseIsEliminated("deltaNorthBase") && camAreaSecure("colLZ6", CAM_THE_COLLECTIVE))
 	{
 		if (!camDef(camGetTruck(colLZTruckJob9)))
 		{
@@ -772,7 +772,7 @@ function charlieGroupUpdate()
 		// DEFEND the central base position
 		order = CAM_ORDER_DEFEND;
 		data = {
-			pos: camMakePos("southPatrolPos1"),
+			pos: camMakePos("southPatrolPos4"),
 			radius: 32,
 			repair: 75,
 			removable: false
@@ -816,6 +816,7 @@ function deltaGroupUpdate()
 {
 	// At the start (!allowAllyExpansion), defend nw bridges
 	// If expansion is allowed, move up and PATROL the north area of the map
+	// If the north base is built, PATROL the north area of the map further east
 	// If the north base is built AND the map has expanded (stage > 1), move up and PATROL the east base area
 	// If the east base is built, ATTACK towards the Collective's factory base
 	// If in the final defense stage (stage == 3), ATTACK
@@ -863,7 +864,7 @@ function deltaGroupUpdate()
 			removable: false
 		};
 	}
-	else // (allowAllyExpansion == true)
+	else if (!camBaseIsEliminated("deltaNorthBase"))
 	{
 		// PATROL the north area of the map
 		order = CAM_ORDER_PATROL;
@@ -872,6 +873,21 @@ function deltaGroupUpdate()
 				camMakePos("northPatrolPos2"),
 				camMakePos("northPatrolPos3"),
 				camMakePos("northPatrolPos4"),
+			],
+			interval: camSecondsToMilliseconds(75),
+			radius: 20,
+			repair: 50,
+			removable: false
+		};
+	}
+	else // (allowAllyExpansion == true)
+	{
+		// PATROL the north area of the map
+		order = CAM_ORDER_PATROL;
+		data = {
+			pos: [
+				camMakePos("northPatrolPos2"),
+				camMakePos("northPatrolPos3"),
 			],
 			interval: camSecondsToMilliseconds(75),
 			radius: 20,
@@ -910,6 +926,15 @@ function eventAttacked(victim, attacker)
 	if (victim.player == CAM_THE_COLLECTIVE && attacker.player == CAM_HUMAN_PLAYER)
 	{
 		camCallOnce("collectiveDialogue");
+	}
+}
+
+function eventTransporterExit(transport)
+{
+	if (transport.player === CAM_HUMAN_PLAYER)
+	{
+		// libcampaign won't automatically play this on this mission
+		playSound(cam_sounds.reinforcementsAreAvailable);
 	}
 }
 
@@ -1933,6 +1958,7 @@ function eventStartLevel()
 
 	// Populate the civilian holdouts
 	const templateLists = [
+		null, // index 0
 		[ // Northeast group
 			cTempl.civ, cTempl.civ, cTempl.civ, cTempl.civ, cTempl.civ, cTempl.civ, cTempl.civ, cTempl.civ, cTempl.civ,
 			cTempl.buggy, cTempl.rbuggy, cTempl.bjeep, cTempl.bjeep, cTempl.bjeep, cTempl.gbjeep,

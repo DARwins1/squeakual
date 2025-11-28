@@ -320,7 +320,7 @@ const __camRec2BlackBoxes = [
 	{ scripts: ["A2L6"], x: 3, y: 27 }, // #12
 	// Act 3
 	{ scripts: ["A3L1", "A3L2", "A3L3s", "A3L4", "A3L5s", "A3L6", "A3L7s", "A3L8", "A3L9"], x: 141, y: 3 }, // #13
-	{ scripts: ["A3L1", "A3L2", "A3L3s", "A3L4", "A3L5s", "A3L6", "A3L7s", "A3L8", "A3L9"], x: 86, y: 75 }, // #14
+	{ scripts: ["A3L2", "A3L3s", "A3L4", "A3L5s", "A3L6", "A3L7s", "A3L8", "A3L9"], x: 86, y: 75 }, // #14
 	{ scripts: ["A3L3"], x: 50, y: 12 }, // #15
 	{ scripts: ["A3L5"], x: 23, y: 12 }, // #16
 	{ scripts: ["A3L6", "A3L7s", "A3L8", "A3L9"], x: 195, y: 85 }, // #17
@@ -330,7 +330,7 @@ const __camRec2BlackBoxes = [
 	{ scripts: ["A3L8", "A3L9"], x: 30, y: 4 }, // #21
 	{ scripts: ["A3L8", "A3L9"], x: 45, y: 132 }, // #22
 	// Act 4
-	{ scripts: ["A4L1", "A4L2s", "A4L3", "A4L4s", "A4L5"], x: 141, y: 2 }, // #23
+	{ scripts: ["A4L1", "A4L2s", "A4L3", "A4L4s", "A4L5"], x: 49, y: 3 }, // #23
 	{ scripts: ["A4L2"], x: 3, y: 11 }, // #24
 	{ scripts: ["A4L3", "A4L4s", "A4L5"], x: 128, y: 164 }, // #25
 	{ scripts: ["A4L3", "A4L4s", "A4L5"], x: 172, y: 29 }, // #26

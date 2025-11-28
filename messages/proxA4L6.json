@@ -39,6 +39,7 @@
         "CIVS4": { "message": "RUINS_MSG", "x": 12864, "y": 4160, "z": 0, "audio": "pcv448.ogg", "type": 2 },
         "CIVS5": { "message": "RUINS_MSG", "x": 9664, "y": 5184, "z": 0, "audio": "pcv448.ogg", "type": 2 },
         "CIV_DEPOSIT": { "message": "RUINS_MSG", "x": 1856, "y": 11456, "z": 0, "audio": "pcv448.ogg", "type": 2 },
-        "DELTA_HOLDOUT": { "message": "RUINS_MSG", "x": 25280, "y": 1344, "z": 0, "audio": "pcv448.ogg", "type": 2 }
+        "DELTA_HOLDOUT": { "message": "RUINS_MSG", "x": 25280, "y": 1344, "z": 0, "audio": "pcv448.ogg", "type": 2 },
+        "DELTA_DEPOSIT": { "message": "RUINS_MSG", "x": 2240, "y": 3520, "z": 0, "audio": "pcv448.ogg", "type": 2 }
     }
 }

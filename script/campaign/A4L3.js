@@ -70,8 +70,8 @@ function activateInfested()
 	camEnableFactory("infCybFactory1");
 	camEnableFactory("infCybFactory2");
 
-	// Reduce the Infested presence on SUPER_EASY
-	if (difficulty > SUPER_EASY)
+	// Reduce the Infested presence on SUPEREASY
+	if (difficulty > SUPEREASY)
 	{
 		camQueueDialogue({text: "--- ANOMALOUS SIGNAL DETECTED ---", delay: 0, sound: cam_sounds.beacon});
 
@@ -148,7 +148,7 @@ function teamBanter()
 				{text: "GOLF: You don't have to be.", delay: 4, sound: CAM_RCLICK},
 				{text: "GOLF: Everyone here knows that Commander Bravo is the only competent one among you.", delay: 2, sound: CAM_RCLICK},
 				{text: "FOXTROT: That's why we're here.", delay: 4, sound: CAM_RCLICK},
-				{text: "FOXTROT: Once Team Bravo is defeated, it's over for you.", delay: 2, sound: CAM_RCLICK},
+				{text: "FOXTROT: Once Team Bravo is gone, it's over for you.", delay: 2, sound: CAM_RCLICK},
 			]);
 			break;
 		case 3:
@@ -160,7 +160,10 @@ function teamBanter()
 				{text: "FOXTROT: Lieutenant, you're wasting your effort.", delay: 4, sound: CAM_RCLICK},
 				{text: "FOXTROT: Even if any of your words held value, my loyalty is to the Supreme General.", delay: 3, sound: CAM_RCLICK},
 				{text: "FOXTROT: He SAVED me from the Collective's prison, Lieutenant.", delay: 3, sound: CAM_RCLICK},
-				{text: "FOXTROT: I owe him everything.", delay: 3, sound: CAM_RCLICK},
+				{text: "LIEUTENANT: WE saved you, Foxtrot!", delay: 4, sound: CAM_RCLICK},
+				{text: "LIEUTENANT: All of us joined in the assault.", delay: 3, sound: CAM_RCLICK},
+				{text: "FOXTROT: But that wouldn't have worked without Clayde's planning, would it?", delay: 4, sound: CAM_RCLICK},
+				{text: "FOXTROT: I owe the Supreme General everything.", delay: 3, sound: CAM_RCLICK},
 				{text: "FOXTROT: And I'd go to hell and back for him.", delay: 2, sound: CAM_RCLICK},
 				{text: "FOXTROT: But right now, it looks like I just have to go through one Commander...", delay: 3, sound: CAM_RCLICK},
 			]);
@@ -272,15 +275,15 @@ function teamBanter()
 					{text: "GOLF: Sir, Team Foxtrot is GONE!", delay: 2, sound: CAM_RCLICK},
 					{text: "GOLF: We need reinforcements, ASAP.", delay: 3, sound: CAM_RCLICK},
 					{text: "GOLF: ...", delay: 2},
-					{text: "GOLF: What?!", delay: 4},
-					{text: "GOLF: Sir, we're not gonna last much longer out here!", delay: 4},
-					{text: "GOLF: Team Bravo, they're-", delay: 4},
+					{text: "GOLF: What?!", delay: 4, sound: CAM_RCLICK},
+					{text: "GOLF: Sir, we're not gonna last much longer out here!", delay: 4, sound: CAM_RCLICK},
+					{text: "GOLF: Team Bravo, they're-", delay: 4, sound: CAM_RCLICK},
 					{text: "GOLF: ...", delay: 2},
-					{text: "GOLF: But sir, that isn't fair!", delay: 4},
-					{text: "GOLF: How are we supposed to-", delay: 3},
+					{text: "GOLF: But sir, that isn't fair!", delay: 4, sound: CAM_RCLICK},
+					{text: "GOLF: How are we supposed to-", delay: 3, sound: CAM_RCLICK},
 					{text: "GOLF: ...", delay: 2},
-					{text: "GOLF: No sir, I've always been loyal, sir.", delay: 3},
-					{text: "GOLF: But-", delay: 3},
+					{text: "GOLF: No sir, I've always been loyal, sir.", delay: 3, sound: CAM_RCLICK},
+					{text: "GOLF: But-", delay: 3, sound: CAM_RCLICK},
 					{text: "GOLF: ...", delay: 2},
 					{text: "GOLF: ...Yes, sir.", delay: 4, sound: CAM_RCLICK},
 					{text: "GOLF: I'll finish the job, sir.", delay: 2, sound: CAM_RCLICK},
@@ -593,10 +596,9 @@ function donateFoxtrot()
 			{text: "GOLF: Foxtrot!?", delay: 8, sound: CAM_RCLICK},
 			{text: "GOLF: No...", delay: 2, sound: CAM_RCLICK},
 			{text: "GOLF: How could they-", delay: 2, sound: CAM_RCLICK},
-			{text: "GOLF: YOU.", delay: 4, sound: CAM_RCLICK},
+			{text: "GOLF: YOU.", delay: 6, sound: CAM_RCLICK},
 			{text: "GOLF: You're going to PAY for that, Bravo!", delay: 2, sound: CAM_RCLICK},
 		]);
-
 		camSetExtraObjectiveMessage(_("Defeat Team Golf"));
 	}
 
@@ -642,6 +644,10 @@ function donateGolf()
 
 	if (foxtrotDefeated)
 	{
+		camSetExtraObjectiveMessage();
+	}
+	else
+	{
 		// Live Foxtrot Reaction:
 		camQueueDialogue([
 			{text: "FOXTROT: Commander Golf?", delay: 8, sound: CAM_RCLICK},
@@ -650,11 +656,6 @@ function donateGolf()
 			{text: "FOXTROT: Bravo, did you...", delay: 3, sound: CAM_RCLICK},
 			{text: "FOXTROT: Oh... You're going to regret this, Commander Bravo.", delay: 4, sound: CAM_RCLICK},
 		]);
-
-		camSetExtraObjectiveMessage();
-	}
-	else
-	{
 		camSetExtraObjectiveMessage(_("Defeat Team Foxtrot"));
 	}
 	
@@ -764,7 +765,8 @@ function sendInfestedReinforcements()
 	}
 
 	const NUM_GROUPS = difficulty + 2;
-	for (let i = 0; i < NUM_GROUPS; i++)
+	const NUM_ENTRANCES = entrances.length;
+	for (let i = 0; i < (Math.min(NUM_ENTRANCES, NUM_GROUPS)); i++)
 	{
 		// Spawn units at a random entrance
 		const INDEX = camRand(entrances.length);
@@ -772,9 +774,9 @@ function sendInfestedReinforcements()
 		entrances.splice(INDEX, 1);
 	}
 
-	if (difficulty > SUPER_EASY)
+	if (difficulty > SUPEREASY)
 	{
-		// Always stay in factory-only mode on SUPER_EASY
+		// Always stay in factory-only mode on SUPEREASY
 		infFactoryOnlyWave = !infFactoryOnlyWave;
 	}
 }
@@ -831,7 +833,7 @@ function eventStartLevel()
 	setNoGoArea(lz.x, lz.y, lz.x2, lz.y2, CAM_HUMAN_PLAYER);
 	
 	camSetStandardWinLossConditions(CAM_VICTORY_STANDARD, "A4L4S", {
-		ignoreInfestedUnits: true
+		ignoreInfestedUnits: true,
 		callback: "teamsDefeated"
 	});
 	camSetExtraObjectiveMessage([_("Defeat Team Foxtrot"), _("Defeat Team Golf")]);
@@ -1612,8 +1614,7 @@ function eventStartLevel()
 		{text: "FOXTROT: Give it up, Bravo.", delay: 4, sound: CAM_RCLICK},
 		{text: "FOXTROT: We've got you cornered; there's nowhere for you to go.", delay: 2, sound: CAM_RCLICK},
 		{text: "GOLF: That's right!", delay: 4, sound: CAM_RCLICK},
-		{text: "GOLF: No more running away.", delay: 2, sound: CAM_RCLICK},
-		{text: "GOLF: It's over for you!", delay: 2, sound: CAM_RCLICK},
+		{text: "GOLF: No more running away!", delay: 2, sound: CAM_RCLICK},
 	]);
 
 	// Most Infested units start out pre-damaged

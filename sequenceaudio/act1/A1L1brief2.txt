@@ -8,3 +8,5 @@
 -120 50		14.0	18.0	_("<CLAYDE>: Commanders Delta and Echo will be paired together,")
 -120 60		14.0	18.0	_("as well as Foxtrot and Golf.")
 -120 50		18.0	22.0	_("<CLAYDE>: Keep an eye on each other, have each other's backs,")
+-120 60		18.0	22.0	_("and this should be a walk in the park.")
+-120 50		22.0	25.0	_("<CLAYDE>: Prepare to move out, we're leaving within the hour.")

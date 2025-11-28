@@ -249,7 +249,7 @@ function collectiveAttackWaves()
 
 				// Spawn the commander's squad
 				// Choose from of these lists...
-				let commanderDroids = camRandFrom([
+				let commanderDroids = [
 					[
 						cTempl.commrat, cTempl.commrat, // 2 MRAs
 						cTempl.comhmgt, cTempl.comhmgt, // 2 HMGs
@@ -269,7 +269,7 @@ function collectiveAttackWaves()
 						cTempl.comhaat, // 1 Cyclone
 						cTempl.comrept, // 1 Repair Turret
 					],
-				]);
+				];
 
 				// Add more units to the commander's squad on higher difficulties
 				if (difficulty >= HARD)
@@ -284,6 +284,9 @@ function collectiveAttackWaves()
 					commanderDroids[1].push(cTempl.comatt, cTempl.comatt); // 2 Lancers
 					commanderDroids[2].push(cTempl.cohbbt, cTempl.cohbbt); // 2 Bunker Busters
 				}
+
+				// Choose one of the above droid lists
+				commanderDroids = camRandFrom(commanderDroids);
 
 				// Improve the commander's templates over time...
 				if (difficulty >= HARD || waveIndex >= 10)

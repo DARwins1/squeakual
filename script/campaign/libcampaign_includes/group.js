@@ -132,10 +132,10 @@ function camNeverGroupDroid(what, playerFilter)
 //;;	Useful in missions where multiple different AI players have factories and/or refillable groups.
 //;;	* `templates` The templates of units that this group is composed of. If units are missing from the 
 //;;	  group, the list missing units can be found with the `camGetRefillableGroupTemplates()` function.
+//;;		* If the group is ordered to follow a command droid, the group will automatically stop 
+//;;		refilling once it reaches the maximum group size of the command droid, even if there are more templates in the list.
 //;;	* `obj` An object, that when destroyed, disables this group from pulling from factories. If an object with this label 
 //;;		is later found, resume automatic refilling. Useful for commander squads that should stop refilling when the commander is dead.
-//;;		* If `obj` is a commander, the group will automatically stop refilling once the commander reaches its unit capacity. Useful if
-//;;			a commander's rank is unknown or might change.
 //;;	* `callback` A script-defined function that dictates whether this group may refill. If this function returns `True`, then
 //;;		allow this group to refill, otherwise disallow. If both `obj` and `callback` are defined, then `obj` must exist and
 //;;		`callback` must return `True` to allow this group to refill automatically.
@@ -334,16 +334,16 @@ function __camGetMissingGroupTemplates(group, returnFirst, factory)
 	const missingList = [];
 
 	let maxMissing = templateList.length;
-	if (camDef(__camRefillableGroupInfo[group].obj))
+
+	// Check if we have a command droid as a leader
+	const __GROUP_ORDER = __camGroupInfo[group].order;
+	const groupLeader = __camGroupInfo[group].data.leader;
+	if (camDef(__GROUP_ORDER) && __GROUP_ORDER === CAM_ORDER_FOLLOW // Has the follow order...
+		&& camDef(groupLeader) && groupLeader !== null && groupLeader.type === DROID && groupLeader.droidType === DROID_COMMAND) // Has a live commander leader...
 	{
-		// Object defined...
-		const obj = getObject(__camRefillableGroupInfo[group].obj);
-		if (camDef(obj) && obj !== null && obj.type === DROID && obj.droidType === DROID_COMMAND)
-		{
-			// Object is a live command droid
-			// Limit the maximum amount of missing droids to the commander's capacity minus the droids already in the group
-			maxMissing = (6 + camGetDroidRank(obj) * 2) - droidList.length;
-		}
+		// Object is a live command droid
+		// Limit the maximum amount of missing droids to the commander's capacity minus the droids already in the group
+		maxMissing = (6 + camGetDroidRank(groupLeader) * 2) - droidList.length;
 	}
 
 	if (maxMissing <= 0)
@@ -384,31 +384,25 @@ function __camGetMissingGroupTemplates(group, returnFirst, factory)
 		// Make sure the missing template can be refilled by the given factory
 		if (camDef(factory) && !camFactoryCanProduceTemplate(templateList[templIdx], factory))
 		{
+			templIdx++;
 			continue; // The given factory can't produce this template type; skip it.
 		}
 		
-		let foundMatch = false;
-		for (let j = 0; j < droidList.length; j++)
-		{
-			const droid = droidList[j];
-
-			if (!camDef(droid))
-			{
-				// This droid has already been matched to different template
-				continue;
-			}
-			
+		let templateMatched = false;
+		let droidIdx = 0;
+		while (!templateMatched && droidIdx < droidList.length)
+		{			
 			// NOTE: Comparison only works for single-turret templates!
-			if (camDroidMatchesTemplate(droid, templ))
+			if (camDef(droidList[droidIdx]) && camDroidMatchesTemplate(droidList[droidIdx], templ))
 			{
 				// Remove this droid from the droids list; we don't want multiple templates matching to the same droid!
-				delete droidList[j]; // Set this element as undefined
-				foundMatch = true;
-				break;
+				delete droidList[droidIdx]; // Set this element as undefined
+				templateMatched = true;
 			}
+			droidIdx++;
 		}
 
-		if (!foundMatch) // Template is missing from the group
+		if (!templateMatched) // Template is missing from the group
 		{
 			if (numProduced > 0)
 			{

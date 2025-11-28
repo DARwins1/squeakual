@@ -932,7 +932,7 @@ function eventStartLevel()
 		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "PillBox1", "Cannon-Emplacement"); // HMG Bunkers
 		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "PillBox5", "Flamer-Emplacement"); // Flamer Bunkers
 	}
-	if (difficulty == SUPER_EASY)
+	if (difficulty == SUPEREASY)
 	{
 		// Un-hardened towers
 		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "GuardTower3", "GuardTower1"); // HMG Towers

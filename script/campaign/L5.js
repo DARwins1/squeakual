@@ -633,7 +633,7 @@ function eventStartLevel()
 	showBusId = showBusDroid.id;
 	// Configure the bus' HP depending on difficulty so that the Boom Tick always one-shots it
 	const showBusHP = [
-		32, // SUPER_EASY 
+		32, // SUPEREASY 
 		27, // EASY
 		21, // MEDIUM
 		19, // HARD

@@ -216,17 +216,22 @@ function camEnemyBaseEliminated()
 
 	if (numBasesElim == 5)
 	{
-		// Ominous request from Commander Charlie
-		camQueueDialogue([
-			{text: "<CHARLIE>: Commander Bravo?", delay: 6, sound: CAM_RCLICK},
-			{text: "<CHARLIE>: Hey, Bravo, are you reading this?", delay: 3, sound: CAM_RCLICK},
-			{text: "<CHARLIE>: Listen, I'm not sure what Clayde's got you doing out there...", delay: 5, sound: CAM_RCLICK},
-			{text: "<CHARLIE>: But whenever you're done, there's something we need to show you.", delay: 3, sound: CAM_RCLICK},
-			{text: "<CHARLIE>: It's...", delay: 4, sound: CAM_RCLICK},
-			{text: "<CHARLIE>: It's important.", delay: 2, sound: CAM_RCLICK},
-			{text: "<CHARLIE>: ...And you're only going believe it when you see it.", delay: 4, sound: CAM_RCLICK},
-		]);
+		camCallOnce("charlieDialogue");
 	}
+}
+
+// Ominous request from Commander Charlie
+function charlieDialogue()
+{
+	camQueueDialogue([
+		{text: "<CHARLIE>: Commander Bravo?", delay: 6, sound: CAM_RCLICK},
+		{text: "<CHARLIE>: Hey, Bravo, are you reading this?", delay: 3, sound: CAM_RCLICK},
+		{text: "<CHARLIE>: Listen, I'm not sure what Clayde's got you doing out there...", delay: 5, sound: CAM_RCLICK},
+		{text: "<CHARLIE>: But whenever you're done, there's something we need to show you.", delay: 3, sound: CAM_RCLICK},
+		{text: "<CHARLIE>: It's...", delay: 4, sound: CAM_RCLICK},
+		{text: "<CHARLIE>: It's important.", delay: 2, sound: CAM_RCLICK},
+		{text: "<CHARLIE>: ...And you're only going believe it when you see it.", delay: 4, sound: CAM_RCLICK},
+	]);
 }
 
 function camEnemyBaseEliminated_colVtolBase()

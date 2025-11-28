@@ -293,8 +293,17 @@ function cam_eventDestroyed(obj)
 			__camRemoveIncomingTransporter(obj.player);
 			if (obj.player === CAM_HUMAN_PLAYER)
 			{
-				// Player will lose if their transporter gets destroyed
-				__camGameLost();
+				// Player will lose if their transporter gets destroyed outside of evacuation missions
+				// If we're in an evacuation mission, end the mission in victory or failure now
+				if (__camWinLossCallback === CAM_VICTORY_EVACUATION && camCheckExtraObjective())
+				{
+					// Player can progress anyway
+					camEndMission();
+					return;
+				}
+
+				// Otherwise, game over
+				camEndMission(false);
 				return;
 			}
 			if (camDef(__camPlayerTransports[obj.player]))
@@ -416,10 +425,10 @@ function cam_eventMissionTimeout()
 		const __WON = camCheckExtraObjective();
 		if (!__WON)
 		{
-			__camGameLost();
+			camEndMission(false);
 			return;
 		}
-		__camGameWon();
+		camEndMission();
 	}
 }
 

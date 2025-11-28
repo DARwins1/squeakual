@@ -4,7 +4,8 @@
         "P2_BRIEF": {
             "sequences": [
                 { "loop": 0, "subtitles": "BLANK", "video": "prologue/P2intro.ogv" },
-                { "loop": 0, "subtitles": "BLANK", "video": "prologue/P2brief.ogv" },
+                { "loop": 0, "subtitles": "BLANK", "video": "prologue/P2brief1.ogv" },
+                { "loop": 0, "subtitles": "BLANK", "video": "prologue/P2brief2.ogv" },
                 { "loop": 0, "subtitles": [
                     "MISBRI",
                     "P2_BMSG1",

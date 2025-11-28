@@ -143,6 +143,15 @@ function eventStartLevel()
 	setTimer("sendInfestedReinforcements", camChangeOnDiff(camSecondsToMilliseconds(160)));
 	heliAttack();
 
+	// Hint that the player should build defenses
+	camQueueDialogue([
+		{text: "LIEUTENANT: Commander Bravo, before you move out...", delay: 6, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: The Collective are becoming more active all over the sector.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: They're fighting against the Infested almost everywhere.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: But that fighting could easily find it's way towards your location.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: So make sure you have plenty of defenses before you launch your transport.", delay: 3, sound: CAM_RCLICK},
+	]);
+
 	// Most Infested units start out pre-damaged
 	camSetPreDamageModifier(CAM_INFESTED, [50, 80], [60, 90], CAM_INFESTED_PREDAMAGE_EXCLUSIONS);
 

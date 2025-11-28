@@ -653,7 +653,7 @@ function __camShowVictoryConditions()
 				{
 					++unitsOnMap;
 				}
-				else if (obj.type === STRUCTURE)
+				else if (obj.type === STRUCTURE && obj.status === BUILT && obj.stattype !== WALL) // Only count BUILT, non-wall structures
 				{
 					++structuresOnMap;
 				}

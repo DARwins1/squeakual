@@ -32,6 +32,8 @@ var trucksLost;
 var infestedThreatFactor;
 var infestedThreatFactorMin;
 var truckLostThreshold;
+var scavWestStructSet;
+var scavOilStructSet;
 
 // Civilian holdout groups
 var civGroups;
@@ -214,24 +216,10 @@ function expandMap()
 				template: cTempl.crane,
 				structset: camAreaToStructSet("scavBase1")
 		});
-		camManageTrucks(
-			MIS_CYAN_SCAVS, {
-				label: "westScavBase",
-				respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(100)),
-				template: cTempl.crane,
-				structset: camAreaToStructSet("scavBase3")
-		});
-		if (difficulty >= HARD)
-		{
-			camManageTrucks(
-				MIS_CYAN_SCAVS, {
-					label: "oilOutpost",
-					rebuildBase: true,
-					respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(100)),
-					template: cTempl.crane,
-					structset: camAreaToStructSet("scavBase2")
-			});
-		}
+
+		// Store these structure sets for later
+		scavWestStructSet = camAreaToStructSet("scavBase3")
+		scavOilStructSet = camAreaToStructSet("scavBase2")
 	}
 }
 
@@ -587,6 +575,28 @@ function camEnemyBaseDetected_westScavBase()
 {
 	camEnableFactory("scavFactory2");
 	queue("heliAttack", camChangeOnDiff(camSecondsToMilliseconds(70)));
+
+	// Set these up now so that they don't drive across the map when the first factory activates
+	if (tweakOptions.rec_timerlessMode)
+	{
+		camManageTrucks(
+			MIS_CYAN_SCAVS, {
+				label: "westScavBase",
+				respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(100)),
+				template: cTempl.crane,
+				structset: scavWestStructSet
+		});
+		if (difficulty >= HARD)
+		{
+			camManageTrucks(
+				MIS_CYAN_SCAVS, {
+					label: "oilOutpost",
+					respawnDelay: camChangeOnDiff(camSecondsToMilliseconds(100)),
+					template: cTempl.crane,
+					structset: scavOilStructSet
+			});
+		}
+	}
 }
 
 // Off-map infested reinforcements from the north, bearing south.

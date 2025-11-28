@@ -338,6 +338,11 @@ function endInfestedOnslaught()
 // Play dialogue informing the player of the incoming Infested
 function onslaughtDialogue()
 {
+	if (!luresActive)
+	{
+		return;
+	}
+
 	switch (onslaughtIdx)
 	{
 	case 1:
@@ -362,7 +367,7 @@ function onslaughtDialogue()
 		]);
 		break;
 	default: // Repeat after the 3rd onslaught
-		amQueueDialogue([
+		camQueueDialogue([
 			{text: "CLAYDE: Another Infested onslaught is approaching, Commander Bravo.", delay: 0, sound: CAM_RCLICK},
 		]);
 		break;
@@ -372,6 +377,11 @@ function onslaughtDialogue()
 // Play dialogue informing the player that the Infested onslaught has ended for now
 function onslaughtEndDialogue()
 {
+	if (!luresActive)
+	{
+		return;
+	}
+
 	switch (onslaughtIdx)
 	{
 	case 1:
@@ -388,13 +398,13 @@ function onslaughtEndDialogue()
 		break;
 	case 3:
 		camQueueDialogue([
-			{text: "CLAYDE: The large attack waves have passed, Commander Bravo.", delay: 0, sound: CAM_RCLICK},
+			{text: "CLAYDE: The large attack waves are passing, Commander Bravo.", delay: 0, sound: CAM_RCLICK},
 			{text: "CLAYDE: Move out and assault the Collective before they can repair any damage they've sustained.", delay: 3, sound: CAM_RCLICK},
 		]);
 		break;
 	default: // Repeat after the 3rd onslaught
 		camQueueDialogue([
-			{text: "CLAYDE: The Infested onslaught has passed.", delay: 0, sound: CAM_RCLICK},
+			{text: "CLAYDE: The Infested onslaught is passing.", delay: 0, sound: CAM_RCLICK},
 		]);
 		break;
 	}

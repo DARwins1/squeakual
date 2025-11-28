@@ -341,6 +341,11 @@ function donateHoldout()
 
 	// Start checking for the group's return
 	setTimer("camCheckDeltaReturnArea", camSecondsToMilliseconds(2));
+
+	camQueueDialogue([
+		{text: "DELTA: Alright, you've got them!", delay: 3, sound: CAM_RCLICK},
+		{text: "DELTA: Now bring them back to our base, Bravo.", delay: 3, sound: CAM_RCLICK},
+	]);
 }
 
 // Scan the area near Delta's LZ
@@ -382,9 +387,12 @@ function eventObjectRecycled(obj)
 {
 	if (stage === 2 && obj.type === DROID && obj.player === CAM_HUMAN_PLAYER)
 	{
-		deltaGroupAlive();
+		if (deltaUnitIDs.includes(obj.id))
+		{
+			deltaGroupAlive();
 
-		camCallOnce("deltaRecycleDialogue");
+			camCallOnce("deltaRecycleDialogue");
+		}
 	}
 }
 
@@ -449,7 +457,7 @@ function deltaGroupAlive()
 		if (!unitFound)
 		{
 			// No units found
-			if (numDeltaRescued == 0)
+			if (numDeltaRescued > 0)
 			{
 				// At least one unit made it back alive; move on to the final stage
 				setStageThree();

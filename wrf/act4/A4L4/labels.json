@@ -139,7 +139,7 @@
 
 	"position_23": {
 		"label": "vtolAttackPos",
-		"pos": [7358, 16097]
+		"pos": [5696, 16097]
 	},
 
 
@@ -530,7 +530,7 @@
 
 	"radius_0": {
 		"label": "vtolRemoveZone",
-		"pos": [3846, 14965],
+		"pos": [4864, 14965],
 		"subscriber": 1,
 		"radius": 255
 	}

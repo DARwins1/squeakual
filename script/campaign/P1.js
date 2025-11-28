@@ -419,7 +419,7 @@ function sendTransport2()
 		{text: "CHARLIE: Reinforcements on the way, Bravo.", delay: 2, sound: CAM_RCLICK},
 		{text: "CHARLIE: These flamers should help with any bunkers you run into.", delay: 3, sound: CAM_RCLICK},
 		{text: "CHARLIE: They're great against groups of enemies, too.", delay: 3, sound: CAM_RCLICK},
-		{text: "CHARLIE: But, keep in mind that their range is quite short.", delay: 4, sound: CAM_RCLICK},
+		{text: "CHARLIE: Just remember that their range is very short.", delay: 4, sound: CAM_RCLICK},
 	]);
 
 	if (lz2BeaconPlaced)
@@ -452,7 +452,7 @@ function sendTransport3()
 		{text: "CHARLIE: Transport on the way.", delay: 2, sound: CAM_RCLICK},
 		{text: "CHARLIE: These mortars should be able to take down those uglies from a safe distance.", delay: 3, sound: CAM_RCLICK},
 		{text: "CHARLIE: But make sure you keep them protected.", delay: 4, sound: CAM_RCLICK},
-		{text: "CHARLIE: They're not very effective on their own.", delay: 3, sound: CAM_RCLICK},
+		{text: "CHARLIE: They're pretty squishy on their own.", delay: 3, sound: CAM_RCLICK},
 	]);
 
 	if (lz3BeaconPlaced)

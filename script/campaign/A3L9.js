@@ -35,8 +35,8 @@ var golfPatrolGroup;
 const MIS_TEAM_FOXTROT = 5;
 const MIS_TEAM_GOLF = 6;
 const MIS_FOXTROT_COMMANDER_DELAY = camChangeOnDiff(camMinutesToMilliseconds(2));
-const MIS_MAX_FOXTROT_UNITS = 125;
-const MIS_MAX_GOLF_UNITS = 125;
+const MIS_MAX_FOXTROT_UNITS = 100;
+const MIS_MAX_GOLF_UNITS = 100;
 
 //Remove enemy vtols when in the remove zone area.
 camAreaEvent("vtolRemoveZone", function(droid)
@@ -331,9 +331,8 @@ function foxtrotAttackDialogue()
 {
 	camQueueDialogue([
 		{text: "FOXTROT: You would attack your own allies, Bravo!?", delay: 2, sound: CAM_RCLICK},
-		{text: "FOXTROT: As a fellow Commander, I still held some hope for you.", delay: 3, sound: CAM_RCLICK},
-		{text: "FOXTROT: But it looks like the Supreme General was right.", delay: 3, sound: CAM_RCLICK},
-		{text: "FOXTROT: We'll have to do this the hard way, after all.", delay: 4, sound: CAM_RCLICK},
+		{text: "FOXTROT: ...It looks like the Supreme General was right.", delay: 4, sound: CAM_RCLICK},
+		{text: "FOXTROT: We'll have to do this the hard way, after all.", delay: 3, sound: CAM_RCLICK},
 	]);
 }
 
@@ -382,7 +381,7 @@ function transportDialogue(index)
 	case 4:
 		camQueueDialogue([
 			{text: "GOLF: Oh for the love of-", delay: 4, sound: CAM_RCLICK},
-			{text: "GOLF: Commander Foxtrot, STOP those transports!", delay: 2, sound: CAM_RCLICK},
+			{text: "GOLF: Foxtrot, STOP those transports!", delay: 2, sound: CAM_RCLICK},
 			{text: "FOXTROT: We're working on it, Golf!", delay: 4, sound: CAM_RCLICK},
 		]);
 		break;
@@ -410,7 +409,7 @@ function sendFoxtrotGroundReinforcements()
 	];
 
 	// First, spawn any necessary trucks...
-	const jobList = foxtrotLzTruckJobs.concat(getMissingTrucks(foxtrotDefenseTruckJobs));
+	const jobList = getMissingTrucks(foxtrotLzTruckJobs).concat(getMissingTrucks(foxtrotDefenseTruckJobs));
 
 	for (const job of jobList)
 	{
@@ -435,13 +434,14 @@ function sendFoxtrotGroundReinforcements()
 	const NUM_SPAWNS = (allowFlanking) ? 4 : 2;
 	for (let i = 0; i < NUM_SPAWNS; i++)
 	{
-		entrance = getObject(camRandFrom(entrances));
-		const reinforcements = camSendReinforcement(MIS_TEAM_FOXTROT, entrance, templates, CAM_REINFORCE_GROUND, {
+		const entrance = camRandFrom(entrances);
+		const reinforcements = camSendReinforcement(MIS_TEAM_FOXTROT, getObject(entrance), templates, CAM_REINFORCE_GROUND, {
 			order: CAM_ORDER_ATTACK,
 			data: {
 				targetPlayer: CAM_HUMAN_PLAYER,
 				regroup: true,
-				repair: (flankEntrances.include(entrance)) ? 0 : 50 // Don't repair if flanking
+				count: -1,
+				repair: (flankEntrances.includes(entrance)) ? 0 : 50 // Don't repair if flanking
 			}
 		});
 
@@ -454,7 +454,7 @@ function sendFoxtrotGroundReinforcements()
 function sendFoxtrotTransporter()
 {
 	// First, check if the LZ exists
-	if (!camBaseIsEliminated("foxtrotLz"))
+	if (camBaseIsEliminated("foxtrotLz"))
 	{
 		return; // No LZ :(
 	}
@@ -541,17 +541,17 @@ function sendGolfGroundReinforcements()
 	const NUM_SPAWNS = (allowFlanking) ? 4 : 2;
 	for (let i = 0; i < NUM_SPAWNS; i++)
 	{
-		entrance = getObject(camRandFrom(entrances));
-		const reinforcements = camSendReinforcement(MIS_TEAM_GOLF, entrance, templates, CAM_REINFORCE_GROUND, {
+		const entrance = camRandFrom(entrances);
+		const reinforcements = camSendReinforcement(MIS_TEAM_GOLF, getObject(entrance), templates, CAM_REINFORCE_GROUND, {
 			order: CAM_ORDER_ATTACK,
 			data: {
 				targetPlayer: CAM_HUMAN_PLAYER,
-				repair: (flankEntrances.include(entrance)) ? 0 : 50 // Don't repair if flanking
+				repair: (flankEntrances.includes(entrance)) ? 0 : 50 // Don't repair if flanking
 			}
 		});
 
 		const droids = enumGroup(reinforcements);
-		for (const droid of transDroids)
+		for (const droid of droids)
 		{
 			// Assign the standard rank
 			camSetDroidRank(droid, teamUnitRank);
@@ -563,7 +563,7 @@ function sendGolfGroundReinforcements()
 function sendGolfTransporter()
 {
 	// First, check if the LZ exists
-	if (!camBaseIsEliminated("golfLz"))
+	if (camBaseIsEliminated("golfLz"))
 	{
 		return; // No LZ present
 	}
@@ -596,7 +596,7 @@ function sendGolfTransporter()
 	// Don't send an empty transport!
 	if (droids.length > 0)
 	{
-		camSendReinforcement(MIS_TEAM_GOLF, camMakePos("landingZoneGolf1"), droids,
+		camSendReinforcement(MIS_TEAM_GOLF, camMakePos("landingZoneGolf"), droids,
 			CAM_REINFORCE_TRANSPORT, {
 				entry: camMakePos("transportEntryPosGolf"),
 				exit: camMakePos("transportEntryPosGolf")
@@ -739,8 +739,8 @@ function eventMissionTimeout()
 	// Queue enemy attacks
 	queue("activateFoxtrot", camMinutesToMilliseconds(1)); // Foxtrot units start arriving
 	queue("activateGolf", camMinutesToMilliseconds(4)); // Golf units start arriving
-	queue("vtolAttack2", camMinutesToMilliseconds(4)); // Golf strike VTOLs
-	queue("enableFlanking", camMinutesToMilliseconds(10)); // Foxtrot/Golf begin flanking the player
+	queue("vtolAttack2", camMinutesToMilliseconds(8)); // Golf strike VTOLs
+	queue("enableFlanking", camMinutesToMilliseconds(12)); // Foxtrot/Golf begin flanking the player
 }
 
 // This mission is mostly sending Infested attack waves that eventually shift over to Foxtrot/Golf attack waves

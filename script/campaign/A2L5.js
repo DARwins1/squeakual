@@ -263,7 +263,7 @@ function eventStartLevel()
 				repair: 60,
 				regroup: true
 			},
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(50)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(60)),
 			templates: [ cTempl.comath, cTempl.commrah, cTempl.comhpvh ]
 		},
 		"colFactory2": {
@@ -273,7 +273,7 @@ function eventStartLevel()
 				repair: 40
 			},
 			groupSize: 5,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(60)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(70)),
 			templates: [ cTempl.colpodt, cTempl.colflamt, cTempl.colmrat, cTempl.colaaht ]
 		},
 		"colFactory3": {
@@ -283,7 +283,7 @@ function eventStartLevel()
 				repair: 40
 			},
 			groupSize: 3,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(70)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(80)),
 			templates: [ cTempl.commcant, cTempl.comhmgt, cTempl.comatt, cTempl.commcant ]
 		},
 		"colCybFactory1": {
@@ -293,7 +293,7 @@ function eventStartLevel()
 				repair: 30
 			},
 			groupSize: 4,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(45)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(55)),
 			templates: [ cTempl.cybca, cTempl.cybhg, cTempl.cybgr ]
 		},
 		"colCybFactory2": {
@@ -303,7 +303,7 @@ function eventStartLevel()
 				repair: 30
 			},
 			groupSize: 3,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(70)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(80)),
 			templates: [ cTempl.scygr, cTempl.scymc ]
 		},
 		"colCybFactory3": {
@@ -313,14 +313,14 @@ function eventStartLevel()
 				repair: 30
 			},
 			groupSize: 6,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(50)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(60)),
 			templates: [ cTempl.cybla, cTempl.cybfl ]
 		},
 		"colVtolFactory": {
 			assembly: "colVtolAssembly",
 			order: CAM_ORDER_ATTACK,
 			groupSize: 2,
-			throttle: camChangeOnDiff(camSecondsToMilliseconds(55)),
+			throttle: camChangeOnDiff(camSecondsToMilliseconds(75)),
 			templates: [ cTempl.colatv, cTempl.colatv, cTempl.colbombv, cTempl.colbombv ]
 		},
 	});

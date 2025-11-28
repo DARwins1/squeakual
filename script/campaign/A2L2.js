@@ -20,6 +20,7 @@ var echoStrikeGroup;
 var echoDiscovered;
 var spySensorST;
 
+var echoCommander;
 var echoCommanderDeathTime;
 var echoRank;
 var echoCommanderDelay;
@@ -107,7 +108,7 @@ function echoDialogue()
 	if (echoDiscovered) return; // Don't speculate when we already know :)
 	camQueueDialogue([
 		{text: "LIEUTENANT: General, do you think that Echo's been captured by the Collective?", delay: 0, sound: CAM_RCLICK},
-		{text: "CLAYDE: Maybe...", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Maybe...", delay: 4, sound: CAM_RCLICK},
 		{text: "CLAYDE: But the only way to find out now is to investigate their base.", delay: 2, sound: CAM_RCLICK},
 		{text: "CLAYDE: If they have been captured, we may find some intel on where they're being held.", delay: 3, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: Do you think the Collective...", delay: 12, sound: CAM_RCLICK},
@@ -168,6 +169,8 @@ function expandMap()
 		reinforcements: camMinutesToSeconds(1.75), // Reinforcements enabled
 		callback: "echoEradicated"
 	});
+
+	setReinforcementTime(camMinutesToSeconds(1)); // The first transport is a bit faster
 	camSetExtraObjectiveMessage("Investigate team Echo's base");
 	playSound(cam_sounds.reinforcementsAreAvailable);
 	if (!tweakOptions.rec_timerlessMode)
@@ -213,7 +216,7 @@ function expandMap()
 			repair: 75
 	});
 	// Echo commander group (escorts)
-	camMakeRefillableGroup(
+	echoCommander = camMakeRefillableGroup(
 		camMakeGroup("echoCommander"), {
 			templates: [cTempl.pllcomht],
 			factories: ["colFactory2"],
@@ -403,6 +406,9 @@ function expandMap()
 	queue("enableFinalFactories", camChangeOnDiff(camMinutesToMilliseconds(12)));
 	queue("startCollectiveTransports", camChangeOnDiff(camMinutesToMilliseconds(16)));
 
+	// If the spy sensor is still on the map, remove it now
+	camSafeRemoveObject("echoSpySensor");
+
 	// Hack to prevent the south half of the map from being dark after the expansion
 	setSunPosition(225.0, -601.0, 450.0); // Move the sun just a wee bit (default is 225.0, -600.0, 450.0)
 }
@@ -422,13 +428,14 @@ function advanceTeamEcho()
 	// Make Echo's VTOL Strike sensor and commander more aggressive
 	if (getObject("echoCommander") !== null)
 	{
-		camManageGroup(camMakeGroup("echoCommander"), CAM_ORDER_PATROL, {
+		camManageGroup(echoCommander, CAM_ORDER_PATROL, {
 			pos: [
 				camMakePos("patrolPos4"),
 				camMakePos("patrolPos5"), camMakePos("patrolPos6"), camMakePos("deltaDefensePos")
 			],
 			interval: camSecondsToMilliseconds(24),
-			repair: 75
+			repair: 75,
+			removable: false
 		});
 	}
 	camManageGroup(echoStrikeGroup, CAM_ORDER_ATTACK, {repair: 40, removable: false});
@@ -635,7 +642,7 @@ function eventTransporterLanded(transport)
 			camSafeRemoveObject(droid); // "Evacuate" this droid
 		}
 
-		queue("expandMap", camSecondsToMilliseconds(8));
+		queue("expandMap", camSecondsToMilliseconds(1));
 	}
 	else if (transport.player === CAM_HUMAN_PLAYER)
 	{
@@ -664,7 +671,7 @@ function echoEradicated()
 function allowEchoCommanderRebuild()
 {	
 	// Allow Echo to rebuild their commander if we're on Hard+ (and enough time has passed)
-	return (gameTime >= echoCommanderDeathTime + echoCommanderDelay) && (enumStruct(CAM_THE_COLLECTIVE, COMMAND_CONTROL).length > 0);
+	return (difficulty >= HARD) && (gameTime >= echoCommanderDeathTime + echoCommanderDelay) && (enumStruct(CAM_THE_COLLECTIVE, COMMAND_CONTROL).length > 0);
 }
 
 function eventStartLevel()
@@ -849,5 +856,6 @@ function eventStartLevel()
 	camSetFog(8, 8, 32);
 	// Darken the lighting and add a blue hue
 	camSetSunIntensity(.35, .35, .45);
+	setSunPosition(225.0, -600.0, 450.0);
 	camSetSkyType(CAM_SKY_NIGHT);
 }

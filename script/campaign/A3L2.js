@@ -70,7 +70,12 @@ function eventPickup(feature, droid)
 
 function camEnemyBaseEliminated()
 {
-	// Commander Charlie questions Clayde about using the Infested
+	camCallOnce("charlieDialogue");
+}
+
+// Commander Charlie questions Clayde about using the Infested
+function charlieDialogue()
+{
 	camQueueDialogue([
 		{text: "<CHARLIE>: General Clayde, if I can ask?", delay: 6, sound: CAM_RCLICK},
 		{text: "<CHARLIE>: How long are we going to keep using the Infested for?", delay: 2, sound: CAM_RCLICK},

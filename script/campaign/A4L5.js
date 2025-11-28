@@ -377,7 +377,7 @@ function groundAssault1()
 	camQueueDialogue([
 		{text: "LIEUTENANT: Bravo, a large group of Collective vehicles is approaching from the north.", delay: 4, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: Hold the line!", delay: 3, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: I'll see if there's any way I can speed up the evacuation.", delay: 4, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: I'll see if there's any way we can speed up the evacuation.", delay: 4, sound: CAM_RCLICK},
 	]);
 }
 
@@ -603,9 +603,6 @@ function groundAssaultWave(index)
 					cTempl.comacant, cTempl.comacant, cTempl.comacant, cTempl.comacant, // 4 Assault Cannons
 					cTempl.comrept, cTempl.comrept, cTempl.comrept, cTempl.comrept, // 4 Repair Turrets
 					cTempl.cominft, cTempl.cominft, // 2 Infernos
-					cTempl.comacant, cTempl.comacant, // 2 Assault Cannons (Medium+)
-					cTempl.cominft, cTempl.cominft, // 2 Infernos (Hard+)
-					cTempl.cohhcant, cTempl.cohhcant, // 2 Heavy Cannons (Insane)
 				],
 				[ // Northeast entry
 					cTempl.comsensht, // 1 Sensor
@@ -1178,7 +1175,7 @@ function deltaArrival()
 		{text: "LIEUTENANT: Commander Delta?!", delay: 4, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: What are you doing-", delay: 3, sound: CAM_RCLICK},
 		{text: "DELTA: We heard your speech, Lieutenant.", delay: 1, sound: CAM_RCLICK},
-		{text: "DELTA: Let's put the past behind us, and escape this city together.", delay: 3, sound: CAM_RCLICK},
+		{text: "DELTA: Let's put the past behind us, and get the hell out of here!", delay: 3, sound: CAM_RCLICK},
 		{text: "DELTA: ...Commander Bravo, hang on!", delay: 4, sound: CAM_RCLICK},
 		{text: "DELTA: We'll help you fight off the Collective!", delay: 4, sound: CAM_RCLICK},
 		// Delay

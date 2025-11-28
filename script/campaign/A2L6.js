@@ -304,7 +304,7 @@ function activateCollective()
 	// Collective refillable groups
 	camMakeRefillableGroup(
 		camMakeGroup("colCommandGroup1"), {
-			templates:  // 4 Grenadiers, 2 Lancers, 2 Medium Cannons, 2 Hurricanes
+			templates: [ // 4 Grenadiers, 2 Lancers, 2 Medium Cannons, 2 Hurricanes
 				cTempl.cybgr, cTempl.cybgr, cTempl.cybgr, cTempl.cybgr,
 				cTempl.comatt, cTempl.comatt,
 				cTempl.commcant, cTempl.commcant,
@@ -559,7 +559,7 @@ function activateCollective()
 			rebuildBase: true,
 			structset: camA2L6CharlieForwardStructs1
 	});
-	charlieTruckJob2 = camManageTrucks(
+	charlieTruckJob3 = camManageTrucks(
 		MIS_TEAM_CHARLIE, {
 			label: "charliePrison",
 			rebuildBase: true,
@@ -581,13 +581,13 @@ function activateCollective()
 	});
 	golfTruckJob3 = camManageTrucks(
 		MIS_TEAM_GOLF, {
-			label: "golfLZ",
+			label: "golfForward",
 			rebuildBase: true,
 			structset: camA2L6GolfForwardStructs
 	});
 	golfTruckJob4 = camManageTrucks(
 		MIS_TEAM_GOLF, {
-			label: "golfLZ",
+			label: "golfForward",
 			rebuildBase: true,
 			structset: camA2L6GolfForwardStructs
 	});
@@ -670,8 +670,8 @@ function sendGolfTransporter()
 
 	if (!camDef(camGetTruck(golfTruckJob1))) droidQueue.push(cTempl.plmtruckt);
 	if (!camDef(camGetTruck(golfTruckJob2))) droidQueue.push(cTempl.plmtruckt);
-	if (camBaseIsEliminated("colNorthCanalBase") && !camDef(camGetTruck(golfTruckJob2))) droidQueue.push(cTempl.plmtruckt);
 	if (camBaseIsEliminated("colNorthCanalBase") && !camDef(camGetTruck(golfTruckJob3))) droidQueue.push(cTempl.plmtruckt);
+	if (camBaseIsEliminated("colNorthCanalBase") && !camDef(camGetTruck(golfTruckJob4))) droidQueue.push(cTempl.plmtruckt);
 
 
 	droidQueue = droidQueue.concat(camGetRefillableGroupTemplates([golfSensor, golfSensorGroup, golfAttackGroup, golfVtolGroup]));
@@ -908,7 +908,7 @@ function diversionDialogue()
 		{text: "LIEUTENANT: ...Excuse me, Commanders.", delay: 3, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: I need to go check on something...", delay: 3, sound: CAM_RCLICK},
 		// Delay...
-		{text: "GOLF: Wasn't he supposed to be leading us?", delay: 10, sound: CAM_RCLICK},
+		{text: "GOLF: Hey, wasn't he supposed to be leading us?", delay: 10, sound: CAM_RCLICK},
 		{text: "CHARLIE: Beats me.", delay: 3, sound: CAM_RCLICK},
 		{text: "CHARLIE: Whatever it is, it must be important.", delay: 2, sound: CAM_RCLICK},
 		{text: "GOLF: More important than this?!", delay: 3, sound: CAM_RCLICK},
@@ -936,10 +936,11 @@ function campCleared()
 		{text: "CHARLIE: Hey Lieutenant, the camp is clear!", delay: 2, sound: CAM_RCLICK},
 		{text: "CHARLIE: Lieutenant?", delay: 5, sound: CAM_RCLICK},
 		{text: "CHARLIE: Are you there?", delay: 2, sound: CAM_RCLICK},
-		{text: "GOLF: Hey Charlie, I'm picking up a lot of movement.", delay: 4, sound: CAM_RCLICK},
-		{text: "GOLF: Multiple directions.", delay: 3, sound: CAM_RCLICK},
+		{text: "GOLF: Charlie, I'm picking up a lot of movement.", delay: 4, sound: CAM_RCLICK},
+		{text: "GOLF: ...Multiple directions.", delay: 3, sound: CAM_RCLICK},
 		{text: "CHARLIE: Huh? Is the Collective counter-attacking?", delay: 3, sound: CAM_RCLICK, callback: "startInfestedAttacks"},
-		{text: "GOLF: I don't know, but they're almost on top of us!", delay: 3, sound: CAM_RCLICK},
+		{text: "GOLF: I don't know...", delay: 3, sound: CAM_RCLICK},
+		{text: "GOLF: But they're almost on top of us!", delay: 2, sound: CAM_RCLICK},
 		{text: "GOLF: Charlie, Bravo, look alive!", delay: 3, sound: CAM_RCLICK},
 	]);
 }
@@ -975,7 +976,7 @@ function allowLeave()
 		{text: "CHARLIE: These things look like...", delay: 3, sound: CAM_RCLICK},
 		{text: "CHARLIE: ...Listen, Bravo.", delay: 5, sound: CAM_RCLICK},
 		{text: "CHARLIE: You've gotta get back to base!", delay: 2, sound: CAM_RCLICK},
-		{text: "CHARLIE: Golf and I will keep hold here and keep the prisoners safe.", delay: 2, sound: CAM_RCLICK},
+		{text: "CHARLIE: Golf and I will stay here and keep the prisoners safe.", delay: 2, sound: CAM_RCLICK},
 		{text: "CHARLIE: Get going!", delay: 3, sound: CAM_RCLICK},
 		// Long delay...
 		{text: "CHARLIE: Oh man, Clayde...", delay: 18, sound: CAM_RCLICK},
@@ -1111,6 +1112,7 @@ function eventStartLevel()
 			detectMsg: "COL_BASE3",
 			detectSnd: cam_sounds.baseDetection.enemyBaseDetected,
 			eliminateSnd: cam_sounds.baseElimination.enemyBaseEradicated,
+			player: CAM_THE_COLLECTIVE
 		},
 		"colSouthCanalBase": {
 			cleanup: "colBase4",

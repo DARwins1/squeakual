@@ -334,7 +334,7 @@ function eventTransporterLanded(transport)
 // Move the intro groups to compromise the player's LZ after landing
 function lzAmbush()
 {
-	zuluCommander2 = camManageGroup(camMakeGroup("zuluCommander2"), CAM_ORDER_STRIKE, {
+	camManageGroup(zuluCommander2, CAM_ORDER_STRIKE, {
 		callback: "zuluIntroTargets",
 		altOrder: CAM_ORDER_DEFEND,
 		pos: camMakePos("introCommanderPos"),
@@ -375,22 +375,20 @@ function trapPlayer()
 	camQueueDialogue([
 		{text: "CLAYDE: Halt!", delay: 1, sound: CAM_RCLICK},
 		{text: "CLAYDE: Well... look at that.", delay: 4, sound: CAM_RCLICK},
+		{text: "CLAYDE: Commander Bravo, here at last.", delay: 3, sound: CAM_RCLICK},
 		{text: "CLAYDE: You've been busy, haven't you?", delay: 3, sound: CAM_RCLICK},
 		{text: "CLAYDE: Delta. Foxtrot. Golf.", delay: 3, sound: CAM_RCLICK},
 		{text: "CLAYDE: Quite the stunt you pulled off back there.", delay: 2, sound: CAM_RCLICK},
 		{text: "CLAYDE: Credit where credit's due, Commander.", delay: 3, sound: CAM_RCLICK},
 		{text: "CLAYDE: I've learned quite a lot from watching you.", delay: 3, sound: CAM_RCLICK},
 		{text: "CLAYDE: But now, you stand in the way of NARS' future.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: So if it falls upon me to pave the way towards victory...", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: I'll do it on my own.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: And I'll do it GLADLY.", delay: 2, sound: CAM_RCLICK},
+		{text: "CLAYDE: And if it falls upon me to pave the way towards victory...", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: I'll do it GLADLY.", delay: 2, sound: CAM_RCLICK},
 		{text: "CLAYDE: No matter how many of our enemies need to die to get there.", delay: 2, sound: CAM_RCLICK},
-		{text: "CLAYDE: Both within and without.", delay: 3, sound: CAM_RCLICK},
 		// Slight delay
-		{text: "CLAYDE: Now, Commander Bravo.", delay: 6, sound: CAM_RCLICK},
-		{text: "CLAYDE: You've served me well.", delay: 2, sound: CAM_RCLICK},
-		{text: "CLAYDE: And now, your death will serve NARS one last time.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: Goodbye, Commander-", delay: 3, sound: CAM_RCLICK, callback: "charlieRescue"},
+		{text: "CLAYDE: Commander Bravo, you've served me well.", delay: 6, sound: CAM_RCLICK},
+		{text: "CLAYDE: But now, your death will serve NARS one last time.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: Goodbye, Commander-", delay: 4, sound: CAM_RCLICK, callback: "charlieRescue"},
 	]);
 }
 
@@ -413,10 +411,12 @@ function charlieRescue()
 function zuluRetreat()
 {
 	camManageGroup(zuluCommander2, CAM_ORDER_DEFEND, {
-		pos: camMakePos("introCommanderFallbackPos")
+		pos: camMakePos("introCommanderFallbackPos"),
+		removable: false
 	});
 	camManageGroup(zuluIntroHoverGroup, CAM_ORDER_DEFEND, {
-		pos: camMakePos("introHoverFallbackPos")
+		pos: camMakePos("introHoverFallbackPos"),
+		removable: false
 	});
 
 	setAlliance(MIS_TEAM_ZULU, CAM_HUMAN_PLAYER, false);
@@ -447,29 +447,19 @@ function expandMap()
 		setMissionTime(remainingMissionTime);
 	}
 
+	// Queitly remove Charlie's VTOLs if they're still around
+	enumDroid(MIS_TEAM_CHARLIE).filter((droid) => (isVTOL(droid))).forEach((dr) => {
+		if (!camIsTransporter(dr))
+		{
+			camSafeRemoveObject(dr);
+		}
+	});
+
 	// Expand the map boundaries
 	setScrollLimits(0, 0, 88, 128);
 
 	// HACK: Move the sun position slightly to avoid weird shadows when expanding the map
 	camSetSunPos(225.0, -601.0, 450.0);
-
-	// Assign any remaining intro units to their permanent roles 
-	// Tell the commander to start patrolling
-	camManageGroup(zuluCommander2, CAM_ORDER_PATROL, { // Commander orders are updated later
-			pos: [
-				camMakePos("patrolPos4"),
-				camMakePos("patrolPos5"),
-				camMakePos("patrolPos6"),
-				camMakePos("patrolPos7"),
-			],
-			interval: camSecondsToMilliseconds(36),
-			radius: 20,
-			repair: 75,
-			removable: false
-	});
-
-	// Assign the intro hovers to the hover commander
-	camAssignToRefillableGroups(enumGroup(zuluIntroHoverGroup), zuluCommandGroup3);
 
 	// Manage refillable groups
 	// Zulu groups...
@@ -523,59 +513,22 @@ function expandMap()
 				repair: 50
 			}
 	});
-	// Halftrack/Cyborg command group
-	zuluCommander2 = camMakeRefillableGroup(
-		camMakeGroup("zuluCommander2"), {
-			templates: [mis_zuluComHTTempl],
-			factories: ["zuluFactory4"],
-			callback: "allowCommander2Rebuild"
-		}, CAM_ORDER_PATROL, { // Commander orders are updated later
-			pos: [
-				camMakePos("patrolPos4"),
-				camMakePos("patrolPos5"),
-				camMakePos("patrolPos6"),
-				camMakePos("patrolPos7"),
-			],
-			interval: camSecondsToMilliseconds(36),
-			radius: 20,
-			repair: 75
-	});
-	camMakeRefillableGroup(
-		camMakeGroup("introCommandGroup"), {
-			templates: [ // 4 Assault Guns, 4 Tank Killers, 2 Whirlwinds, 4 Assault Gunners, and 4 Super HVC Cyborgs
-				mis_zuluAGTempl, mis_zuluAGTempl,
-				mis_zuluTKTempl, mis_zuluTKTempl,
-				cTempl.plhraaht,
-				mis_zuluAGTempl, mis_zuluAGTempl,
-				mis_zuluTKTempl, mis_zuluTKTempl,
-				cTempl.plhraaht,
-				cTempl.cybag, cTempl.cybag,
-				cTempl.scyhc, cTempl.scyhc,
-				cTempl.cybag, cTempl.cybag,
-				cTempl.scyhc, cTempl.scyhc,
-				cTempl.scyhc, cTempl.scyhc, // 2 Super HVC Cyborgs (Hard+)
-				mis_zuluTKTempl, mis_zuluTKTempl, // 2 Tank Killers (Insane)
-			],
-			factories: ["zuluFactory1", "zuluFactory2", "zuluCybFactory1", "zuluCybFactory2", "zuluCybFactory3", "zuluCybFactory4"],
-		}, CAM_ORDER_FOLLOW, {
-			leader: "zuluCommander2",
-			repair: 75,
-			suborder: CAM_ORDER_PATROL,
-			data: {
-				pos: [
-					camMakePos("patrolPos4"),
-					camMakePos("patrolPos5"),
-					camMakePos("patrolPos6"),
-					camMakePos("patrolPos7"),
-				],
-				interval: camSecondsToMilliseconds(36),
-				radius: 20,
-				repair: 75
-			}
+	// Tell the commander to start patrolling
+	camManageGroup(zuluCommander2, CAM_ORDER_PATROL, { // Commander orders are updated later
+		pos: [
+			camMakePos("patrolPos4"),
+			camMakePos("patrolPos5"),
+			camMakePos("patrolPos6"),
+			camMakePos("patrolPos7"),
+		],
+		interval: camSecondsToMilliseconds(36),
+		radius: 20,
+		repair: 75,
+		removable: false
 	});
 	// Hover command group
 	zuluCommander3 = camMakeRefillableGroup(
-		undefined, {
+		camMakeGroup("zuluCommander3"), {
 			templates: [mis_zuluComHovTempl],
 			factories: ["zuluFactory5"],
 			callback: "allowCommander3Rebuild"
@@ -587,7 +540,7 @@ function expandMap()
 				camMakePos("hoverPatrolPos4"),
 				camMakePos("hoverPatrolPos5"),
 			],
-			interval: camSecondsToMilliseconds(24),
+			interval: camSecondsToMilliseconds(36),
 			radius: 20,
 			repair: 75
 	});
@@ -854,6 +807,9 @@ function expandMap()
 			repair: 75
 	});
 
+	// Assign the intro hovers to the hover commander
+	camAssignToRefillableGroups(enumGroup(zuluIntroHoverGroup), zuluCommandGroup3);
+
 	// Manage trucks...
 	const TRUCK_TIME = camChangeOnDiff(camSecondsToMilliseconds((tweakOptions.rec_timerlessMode) ? 60 : 150));
 	const ENGINEER_TIME = camChangeOnDiff(camSecondsToMilliseconds((tweakOptions.rec_timerlessMode) ? 30 : 60));
@@ -1034,7 +990,7 @@ function expandMap()
 		structset: camA4L4CharlieForwardStructs,
 		template: cTempl.plhtruckht
 	});
-	charlieTruckJob4 = camManageTrucks(MIS_TEAM_CHARLIE, {
+	charlieTruckJob6 = camManageTrucks(MIS_TEAM_CHARLIE, {
 		label: "charlieForwardBase",
 		rebuildBase: true,
 		structset: camA4L4CharlieForwardStructs,
@@ -1090,13 +1046,13 @@ function claydeBanter()
 				{text: "CLAYDE: I have to hand it to you, Lieutenant.", delay: 4, sound: CAM_RCLICK},
 				{text: "CLAYDE: Coming straight for me was quite the bold move.", delay: 3, sound: CAM_RCLICK},
 				{text: "CLAYDE: But if you were expecting to catch me unprepared...", delay: 3, sound: CAM_RCLICK},
-				{text: "CLAYDE: Then you were sorely mistaken!", delay: 3, sound: CAM_RCLICK},
+				{text: "CLAYDE: Then you were sorely mistaken.", delay: 3, sound: CAM_RCLICK},
 				{text: "LIEUTENANT: Give it up, Clayde.", delay: 4, sound: CAM_RCLICK},
 				{text: "LIEUTENANT: This time, we've got YOU outnumbered.", delay: 2, sound: CAM_RCLICK},
 				{text: "CLAYDE: Not in this lifetime, Lieutenant.", delay: 4, sound: CAM_RCLICK},
 				{text: "CLAYDE: Not while NARS still needs me.", delay: 3, sound: CAM_RCLICK},
 				{text: "CLAYDE: There's still so much to be done here.", delay: 3, sound: CAM_RCLICK},
-				{text: "CLAYDE: And that begins by eradicating Teams Bravo and Charlie.", delay: 3, sound: CAM_RCLICK},
+				{text: "CLAYDE: And that begins by wiping out Teams Bravo and Charlie.", delay: 3, sound: CAM_RCLICK},
 			]);
 			break;
 		case 2:
@@ -1189,7 +1145,7 @@ function claydeBanter()
 // Break any player structures during Clayde's spiel
 function zuluIntroTargets()
 {
-	return enumStruct(CAM_HUMAN_PLAYER);
+	return enumStruct(CAM_HUMAN_PLAYER).filter((struct) => (struct.status === BEING_BUILT));
 }
 
 // Try to snipe important player/Charlie units
@@ -1278,7 +1234,7 @@ function aggroCommander3()
 			camMakePos("hoverPatrolPos6"),
 			camMakePos("hoverPatrolPos7"),
 		],
-		interval: camSecondsToMilliseconds(24),
+		interval: camSecondsToMilliseconds(36),
 		radius: 20,
 		repair: 75,
 		removable: false
@@ -1293,7 +1249,7 @@ function enableVtolStrikes()
 
 function allowVtolStrikeGroups()
 {
-	return (difficulty > SUPER_EASY) && allowVtolStrikes;
+	return (difficulty > SUPEREASY) && allowVtolStrikes;
 }
 
 // Allow rebuilding commanders after a sufficient delay, and if Zulu still has a Command Relay Post
@@ -1348,7 +1304,10 @@ function checkEnableLure()
 	if (camBaseIsEliminated("zuluEastOutpost")) basesDestroyed++;
 
 	// Enable the trap if at least 3 of these bases are destroyed
-	lureTrapEnabled = true;
+	if (basesDestroyed >= 3)
+	{
+		lureTrapEnabled = true;
+	}
 }
 
 // Activate the Lure and draw in the Infested
@@ -1416,7 +1375,7 @@ function setWorldAblaze()
 	camSkipDialogue(); // Stop any current dialogue
 	camQueueDialogue([
 		{text: "CHARLIE: What the-?!", delay: 4, sound: CAM_RCLICK},
-		{text: "CHARLIE: Lieutenant, what's going on...?", delay: 2, sound: CAM_RCLICK},
+		{text: "CHARLIE: Lieutenant, what's happening!?", delay: 2, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: It's the Collective...", delay: 3, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: They're bombing out whole areas of the sector!", delay: 3, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: Entire city blocks are going up in flames.", delay: 3, sound: CAM_RCLICK},
@@ -1738,20 +1697,6 @@ function eventStartLevel()
 		},
 	});
 
-	// Swap on-map templates
-	if (difficulty >= HARD)
-	{
-		camUpgradeOnMapTemplates(cTempl.plhasgnht, mis_zuluAGTempl, MIS_TEAM_ZULU);
-		camUpgradeOnMapTemplates(cTempl.plhhatht, mis_zuluTKTempl, MIS_TEAM_ZULU);
-		camUpgradeOnMapTemplates(cTempl.plhbbh, mis_zuluBBTempl, MIS_TEAM_ZULU);
-		if (difficulty === INSANE)
-		{
-			camUpgradeOnMapTemplates(cTempl.plhinfh, mis_zuluInfTempl, MIS_TEAM_ZULU);
-			camUpgradeOnMapTemplates(cTempl.plhcomht, mis_zuluComHTTempl, MIS_TEAM_ZULU);
-			camUpgradeOnMapTemplates(cTempl.plhcomh, mis_zuluComHovTempl, MIS_TEAM_ZULU);
-		}
-	}
-
 	zuluCommander1DeathTime = 0;
 	zuluCommander2DeathTime = 0;
 	zuluCommander3DeathTime = 0;
@@ -1769,10 +1714,76 @@ function eventStartLevel()
 	camSetDroidRank(getObject("zuluCommander2"), zuluRank);
 	camSetDroidRank(getObject("zuluCommander3"), zuluRank);
 
+	// Setup the second command group
+	// NOTE: This is done at the start because this commander takes part in the intro scene
+	zuluCommander2 = camMakeRefillableGroup(
+		camMakeGroup("zuluCommander2"), {
+			templates: [mis_zuluComHTTempl],
+			factories: ["zuluFactory4"],
+			callback: "allowCommander2Rebuild"
+		}, CAM_ORDER_PATROL, { // Commander orders are updated later
+			pos: [
+				camMakePos("patrolPos4"),
+				camMakePos("patrolPos5"),
+				camMakePos("patrolPos6"),
+				camMakePos("patrolPos7"),
+			],
+			interval: camSecondsToMilliseconds(36),
+			radius: 20,
+			repair: 75
+	});
+	camMakeRefillableGroup(
+		camMakeGroup("introCommandGroup"), {
+			templates: [ // 4 Assault Guns, 4 Tank Killers, 2 Whirlwinds, 4 Assault Gunners, and 4 Super HVC Cyborgs
+				mis_zuluAGTempl, mis_zuluAGTempl,
+				mis_zuluTKTempl, mis_zuluTKTempl,
+				cTempl.plhraaht,
+				mis_zuluAGTempl, mis_zuluAGTempl,
+				mis_zuluTKTempl, mis_zuluTKTempl,
+				cTempl.plhraaht,
+				cTempl.cybag, cTempl.cybag,
+				cTempl.scyhc, cTempl.scyhc,
+				cTempl.cybag, cTempl.cybag,
+				cTempl.scyhc, cTempl.scyhc,
+				cTempl.scyhc, cTempl.scyhc, // 2 Super HVC Cyborgs (Hard+)
+				mis_zuluTKTempl, mis_zuluTKTempl, // 2 Tank Killers (Insane)
+			],
+			factories: ["zuluFactory1", "zuluFactory2", "zuluCybFactory1", "zuluCybFactory2", "zuluCybFactory3", "zuluCybFactory4"],
+		}, CAM_ORDER_FOLLOW, {
+			leader: "zuluCommander2",
+			repair: 75,
+			suborder: CAM_ORDER_PATROL,
+			data: {
+				pos: [
+					camMakePos("patrolPos4"),
+					camMakePos("patrolPos5"),
+					camMakePos("patrolPos6"),
+					camMakePos("patrolPos7"),
+				],
+				interval: camSecondsToMilliseconds(36),
+				radius: 20,
+				repair: 75
+			}
+	});
+
 	// Most Infested units start out pre-damaged
 	camSetPreDamageModifier(CAM_INFESTED, [50, 80], [60, 90], CAM_INFESTED_PREDAMAGE_EXCLUSIONS);
 
 	camAutoReplaceObjectLabel(["zuluLure", "zuluVtolTower1", "zuluVtolTower2", "zuluVtolTower3", "zuluVtolCBTower"]);
+
+	// Swap on-map templates
+	if (difficulty >= HARD)
+	{
+		camUpgradeOnMapTemplates(cTempl.plhasgnht, mis_zuluAGTempl, MIS_TEAM_ZULU);
+		camUpgradeOnMapTemplates(cTempl.plhhatht, mis_zuluTKTempl, MIS_TEAM_ZULU);
+		camUpgradeOnMapTemplates(cTempl.plhbbh, mis_zuluBBTempl, MIS_TEAM_ZULU);
+		if (difficulty === INSANE)
+		{
+			camUpgradeOnMapTemplates(cTempl.plhinfh, mis_zuluInfTempl, MIS_TEAM_ZULU);
+			camUpgradeOnMapTemplates(cTempl.plhcomht, mis_zuluComHTTempl, MIS_TEAM_ZULU);
+			camUpgradeOnMapTemplates(cTempl.plhcomh, mis_zuluComHovTempl, MIS_TEAM_ZULU);
+		}
+	}
 
 	camSetWeather(CAM_WEATHER_RAINSTORM);
 	camSetSkyType(CAM_SKY_NIGHT);

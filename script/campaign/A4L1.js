@@ -280,7 +280,6 @@ function sendInfestedReinforcements()
 	{
 		// Behold the ominous if-statement obelisk!
 		if (getObject("infHvyFactory1") !== null) entrances.push("infEntry1");
-		if (getObject("infHvyFactory2") !== null) entrances.push("infEntry25");
 		if (getObject("infFactory1") !== null) entrances.push("infEntry2");
 		if (getObject("infFactory2") !== null) entrances.push("infEntry3");
 		if (getObject("infHvyFactory3") !== null) entrances.push("infEntry4");
@@ -300,12 +299,12 @@ function sendInfestedReinforcements()
 		if (getObject("infFactory18") !== null) entrances.push("infEntry18");
 		if (getObject("infHvyFactory5") !== null) entrances.push("infEntry19");
 		if (getObject("infCybFactory5") !== null) entrances.push("infEntry20");
-		if (getObject("infCybFactory5") !== null) entrances.push("infEntry20");
 		if (getObject("infFactory19") !== null) entrances.push("infEntry21");
-		if (getObject("infFactory19") !== null) entrances.push("infEntry26");
 		if (getObject("infFactory22") !== null) entrances.push("infEntry22");
 		if (getObject("infFactory23") !== null) entrances.push("infEntry23");
 		if (getObject("infFactory24") !== null) entrances.push("infEntry24");
+		if (getObject("infHvyFactory2") !== null) entrances.push("infEntry25");
+		if (getObject("infFactory19") !== null) entrances.push("infEntry26");
 	}
 	else // Spawn from anywhere
 	{
@@ -314,12 +313,13 @@ function sendInfestedReinforcements()
 			"infEntry5", "infEntry6", "infEntry8",
 			"infEntry10", "infEntry13", "infEntry15",
 			"infEntry17", "infEntry18", "infEntry21",
-			"infEntry26", "infEntry22"
+			"infEntry22", "infEntry26",
 		);
 	}
 
 	const NUM_GROUPS = difficulty + 2;
-	for (let i = 0; i < NUM_GROUPS; i++)
+	const NUM_ENTRANCES = entrances.length;
+	for (let i = 0; i < (Math.min(NUM_ENTRANCES, NUM_GROUPS)); i++)
 	{
 		// Spawn units at a random entrance
 		const INDEX = camRand(entrances.length);

@@ -40,6 +40,7 @@ function camSetVtolData(player, startPos, exitPos, templates, timer, obj, extras
 		templates: templates,
 		spawnStopObject: obj,
 		extras: extras,
+		vtolIds: [], // Store the IDs of the spawned VTOL droids (only used in dynamic mode)
 		timer: timer,
 		nextSpawnTime: timer + gameTime,
 		isFirstSpawn: true,
@@ -268,7 +269,6 @@ function __camSpawnVtols()
 
 			// Store a list of the VTOL droid IDs
 			const groupDroids = enumGroup(group);
-			vds.vtolIds = [];
 			for (const droid of groupDroids)
 			{
 				vds.vtolIds.push(droid.id);

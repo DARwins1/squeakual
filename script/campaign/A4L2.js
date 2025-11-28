@@ -380,9 +380,9 @@ function deltaAttackDialogue()
 		{text: "LIEUTENANT: Clayde is a traitor!", delay: 2, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: We're trying to-", delay: 2, sound: CAM_RCLICK},
 		{text: "DELTA: You expect me to believe you?", delay: 2, sound: CAM_RCLICK},
-		{text: "DELTA: You abandoned NARS.", delay: 2, sound: CAM_RCLICK},
+		{text: "DELTA: YOU abandoned NARS.", delay: 2, sound: CAM_RCLICK},
 		{text: "DELTA: If I were you, I'd have run as far away as I could.", delay: 2, sound: CAM_RCLICK},
-		{text: "DELTA: But instead, you've come here for our uplink.", delay: 3, sound: CAM_RCLICK},
+		{text: "DELTA: But instead, you've come here for our uplinks.", delay: 3, sound: CAM_RCLICK},
 		{text: "DELTA: You know that Clayde wants these, Lieutenant.", delay: 3, sound: CAM_RCLICK},
 		{text: "DELTA: And surely, you know that Clayde wants YOU.", delay: 3, sound: CAM_RCLICK},
 		{text: "DELTA: I don't want to fight you, Bravo.", delay: 4, sound: CAM_RCLICK},
@@ -492,9 +492,13 @@ function activateTeamDelta()
 // Called if the player destroys Delta's LZ
 function deactivateTeamDelta()
 {
+	deltaActive = false;
+
 	// Stop calling transports
 	removeTimer("sendDeltaTransporter");
 
+	// Stop any current dialogue
+	camSkipDialogue();
 	camQueueDialogue([
 		{text: "DELTA: General! Bravo's pushing us back!", delay: 2, sound: CAM_RCLICK},
 		{text: "DELTA: We're trying to hold our ground, but they just-", delay: 3, sound: CAM_RCLICK},
@@ -543,12 +547,13 @@ camAreaEvent("deltaEscape", function(droid)
 // Make Delta's groups more aggressive against the player 
 function aggroTeamDelta()
 {
-	if (deltaAggro)
+	if (deltaAggro || !deltaActive)
 	{
 		return;
 	}
 
 	detectDelta();
+	camCallOnce("deltaAttackDialogue");
 	deltaAggro = true;
 
 	// Dialogue...
@@ -597,10 +602,6 @@ function dataDownloaded()
 		{
 			setMissionTime(missionTimeRemaining); // Resume the mission timer
 		}
-		if (uplinkSecure)
-		{
-			uplinkSecure = false;
-		}
 
 		if (camAllEnemyBasesEliminated())
 		{
@@ -621,7 +622,9 @@ function dataDownloaded()
 
 	// Otherwise, update the time remaining if the uplink is held by the player
 	if (camBaseIsEliminated("colUplinkBase") && camBaseIsEliminated("deltaUplinkBase") 
-		&& camAreaSecure("uplinkStructArea") && enumArea("uplinkStructArea", CAM_HUMAN_PLAYER, false).length > 0)
+		&& camAreaSecure("uplinkStructArea") 
+		// Don't let VTOLs capture the uplink
+		&& enumArea("uplinkStructArea", CAM_HUMAN_PLAYER, false).filter((obj) => (!(obj.type === DROID && isVTOL(obj)))).length > 0)
 	{
 		// If the uplink was secure the last time we checked, update the time remaining
 		if (uplinkSecure)
@@ -670,6 +673,16 @@ function dataDownloaded()
 // Tell the player that they've won
 function clearObjective()
 {
+	if (!uplinkSecure)
+	{
+		// If the uplink wasn't secure and the beacon was placed, remove it
+		hackRemoveMessage("UPLINK_BEACON", PROX_MSG, CAM_HUMAN_PLAYER);
+	}
+	else
+	{
+		uplinkSecure = false;
+	}
+
 	playSound(cam_sounds.objective.primObjectiveCompleted);
 	camSetExtraObjectiveMessage();
 }
@@ -1193,7 +1206,7 @@ function eventStartLevel()
 		CAM_THE_COLLECTIVE, {
 			label: "colOutpost",
 			respawnDelay: TRUCK_TIME,
-			rebuildBase: tweakOptions.rec_timerlessMode,
+			rebuildTruck: tweakOptions.rec_timerlessMode,
 			structset: camAreaToStructSet("outpostStructArea"),
 			truckDroid: getObject("colTruck4")
 	});

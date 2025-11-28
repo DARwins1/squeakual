@@ -102,7 +102,7 @@ function __camGrantBlackBoxResearch()
 	let idxNum = 1;
 	let resIdx = "01";
 	let research = getResearch(partialName + resIdx, CAM_HUMAN_PLAYER);
-	while (research !== null && (camResearchIsAvailable(partialName + resIdx) || research.done))
+	while (research !== null && (camResearchIsAvailable(partialName + resIdx) || research.started || research.done))
 	{
 		// If this schematic has already been granted, check the next one
 		idxNum++;
