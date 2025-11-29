@@ -583,6 +583,7 @@ function eventStartLevel()
 	setNoGoArea(lz.x, lz.y, lz.x2, lz.y2, CAM_HUMAN_PLAYER);
 
 	camCompleteRequiredResearch(mis_collectiveResearch, CAM_THE_COLLECTIVE);
+	camCompleteRequiredResearch(mis_infestedResearch, CAM_INFESTED);
 
 	// Collective LZs
 	camSetEnemyBases({
@@ -650,7 +651,7 @@ function eventStartLevel()
 		cTempl.comath, cTempl.comath, // 2 Lancers
 		cTempl.comhpvh, cTempl.comhpvh, // 2 HVCs
 		cTempl.commrah, cTempl.commrah, // 2 MRAs
-	]
+	];
 	colHoverGroup = camMakeRefillableGroup(
 		undefined, {
 			templates: colHoverTemplates

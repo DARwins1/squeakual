@@ -688,8 +688,8 @@ function sendGolfTransporter()
 	{
 		camSendReinforcement(MIS_TEAM_GOLF, camMakePos("landingZoneGolf"), droids,
 			CAM_REINFORCE_TRANSPORT, {
-				entry: transportEntryPosCharlie,
-				exit: transportEntryPosCharlie
+				entry: transportEntryPosGolf,
+				exit: transportEntryPosGolf
 			}
 		);
 	}
@@ -930,7 +930,7 @@ function campCleared()
 		removable: false,
 		pos: camMakePos("colBase7"),
 		repair: 50
-	})
+	});
 
 	camQueueDialogue([
 		{text: "CHARLIE: We did it!", delay: 4, sound: CAM_RCLICK},
@@ -1290,7 +1290,7 @@ function eventStartLevel()
 		},
 	});
 
-	camAutoReplaceObjectLabel(["heliTower", "colCC1"])
+	camAutoReplaceObjectLabel(["heliTower", "colCC1"]);
 
 	stealthPhase = true;
 	playerHidden = true;

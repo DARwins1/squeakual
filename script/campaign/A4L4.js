@@ -351,7 +351,7 @@ function lzAmbush()
 // Shrink the map, pause the mission timer, prevent reinforcements, and begin Clayde's monologue
 function trapPlayer()
 {
-	playSound(cam_sounds.lz.LZCompromised)
+	playSound(cam_sounds.lz.LZCompromised);
 
 	camSetStandardWinLossConditions(CAM_VICTORY_OFFWORLD, "A4L5", {
 		reinforcements: -1,
@@ -1367,7 +1367,7 @@ function setWorldAblaze()
 	camSetWeather(CAM_WEATHER_SNOW);
 
 	// Stop bantering
-	removeTimer("claydeBanter")
+	removeTimer("claydeBanter");
 
 	// Queue the evac event
 	queue("startZuluEvac", camMinutesToMilliseconds(3));

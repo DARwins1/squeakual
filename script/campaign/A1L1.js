@@ -112,7 +112,6 @@ function grantPlayerTech()
 function setUnitRank(transport)
 {
 	const rank = (firstTransportLanded) ? "Trained" : "Regular";
-	let droids;
 
 	if (transport)
 	{

@@ -366,15 +366,15 @@ function camSetPreDamageModifier(playerId, droidRange, structRange, excludedTemp
 	};
 
 	const droids = enumDroid(playerId);
-	for (droid of droids)
+	for (const droid of droids)
 	{
 		__camPreDamageDroid(droid);
 	}
 
 	const structures = enumStruct(playerId);
-	for (struct of structures)
+	for (const struct of structures)
 	{
-		__camPreDamageStruct(struct)
+		__camPreDamageStruct(struct);
 	}
 }
 
@@ -416,7 +416,7 @@ function camAddDroid(playerId, position, template, droidName)
 		pos = camMakePos(position);
 	}
 
-	name = (camDef(droidName) ? droidName : camNameTemplate(template));
+	const name = (camDef(droidName) ? droidName : camNameTemplate(template));
 	const __PROP = template.prop;
 	let droid;
 	if (typeof template.weap === "object" && camDef(template.weap[2]))
@@ -606,7 +606,7 @@ function __camContinueProduction(structure)
 		// Search sequentially through the queue
 		for (let i = 0; i < __camFactoryQueue[__PLAYER].length; i++)
 		{
-			const template = __camFactoryQueue[__PLAYER][i].template
+			const template = __camFactoryQueue[__PLAYER][i].template;
 			const destPos = __camFactoryQueue[__PLAYER][i].position;
 
 			// Only build if destination is reachable or undefined
@@ -701,7 +701,7 @@ function __camContinueProduction(structure)
 // Returns undefined if no viable factory exists
 function __camClosestViableFactory(template, position, player)
 {
-	let closestLabel = undefined;
+	let closestLabel;
 	let closestDist = -1;
 	// Loop through each factory label
 	for (const compareLabel in __camFactoryInfo)
@@ -746,7 +746,7 @@ function __camPreDamageDroid(droid)
 	{
 		// Check if this droid is excluded
 		let excluded = false;
-		for (template of excludedTemplates)
+		for (const template of excludedTemplates)
 		{
 			if (camDroidMatchesTemplate(droid, template))
 			{

@@ -757,11 +757,11 @@ function camWithinArea(pos, area)
 	}
 	if (!camDef(a))
 	{
-		console("area is undefined!")
+		console("area is undefined!");
 	}
 	if (a === null)
 	{
-		console("area is null!")
+		console("area is null!");
 	}
 	
 	return (p.x >= a.x 
@@ -916,7 +916,7 @@ function camNameTemplate(weapon, body, propulsion)
 					if (!camDef(weapName))
 					{
 						// ?????
-						weapName = "?"
+						weapName = "?";
 					}
 				}
 			}

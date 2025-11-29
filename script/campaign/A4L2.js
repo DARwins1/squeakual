@@ -408,7 +408,7 @@ function camEnemyBaseEliminated_colUplinkBase()
 	camManageGroup(colCommanderGroup, CAM_ORDER_ATTACK, {
 		targetPlayer: CAM_HUMAN_PLAYER,
 		repair: 65
-	})
+	});
 }
 
 // Activate some factories, and move the Collective's kill group against the Infested

@@ -181,7 +181,7 @@ function expandMap()
 	// Queue the start of the infested waves and scavenger bases
 	queue("startInfestedWaves", camSecondsToMilliseconds(60));
 	queue("revealEastBase", camChangeOnDiff(camMinutesToMilliseconds(3)));
-	queue("revealWestBase", camChangeOnDiff(camMinutesToMilliseconds(10)))
+	queue("revealWestBase", camChangeOnDiff(camMinutesToMilliseconds(10)));
 
 	// Start some scavenger patrols
 	camManageGroup(camMakeGroup("eastPatrolGroup"), CAM_ORDER_PATROL, {
@@ -218,8 +218,8 @@ function expandMap()
 		});
 
 		// Store these structure sets for later
-		scavWestStructSet = camAreaToStructSet("scavBase3")
-		scavOilStructSet = camAreaToStructSet("scavBase2")
+		scavWestStructSet = camAreaToStructSet("scavBase3");
+		scavOilStructSet = camAreaToStructSet("scavBase2");
 	}
 }
 
@@ -529,7 +529,7 @@ function convertToTruck(transTruck)
 	{
 		// The player didn't renamed the original truck.
 		// Give it the default template name
-		newName = camNameTemplate("Spade1Mk1", tBody, tProp)
+		newName = camNameTemplate("Spade1Mk1", tBody, tProp);
 	}
 	else
 	{
@@ -540,7 +540,7 @@ function convertToTruck(transTruck)
 	}
 
 	// Create the new truck
-	const newTruck = camAddDroid(CAM_HUMAN_PLAYER, tPos, {body: tBody, prop: tProp, weap: "Spade1Mk1"}, newName);
+	camAddDroid(CAM_HUMAN_PLAYER, tPos, {body: tBody, prop: tProp, weap: "Spade1Mk1"}, newName);
 
 	// Quietly remove the transport truck...
 	camSafeRemoveObject(transTruck);
@@ -733,7 +733,7 @@ function eventTransporterLanded(transport)
 	// Count all Charlie units
 	const units = enumDroid(MIS_TEAM_CHARLIE);
 
-	for (droid of units)
+	for (const droid of units)
 	{
 		if (!camIsTransporter(droid))
 		{
@@ -882,7 +882,6 @@ function nukeMap()
 	camSetEnemyBases({});
 	const nukedObjs = enumArea(0, 0, mapWidth, mapHeight, ALL_PLAYERS, false);
 	const safeObjs = enumArea("safeZone", ALL_PLAYERS, false).filter((obj) => (!(obj.type === DROID && isVTOL(obj))));
-	let foundUnit = false;
 
 	// Blow up everything outside of the safe haven
 	for (let i = 0, len = nukedObjs.length; i < len; ++i)
@@ -1140,7 +1139,7 @@ function eventStartLevel()
 		const templates = templateLists[i];
 		const zone = getObject(civZones[i]);
 
-		for (template of templates)
+		for (const template of templates)
 		{
 			// Make some clean-looking names for the spawned units
 			// ("Weapon Body Propulsion" doesn't look very good for scavenger units)
@@ -1179,7 +1178,7 @@ function eventStartLevel()
 	setScrollLimits(42, 40, 96, 64);
 
 	// HACK: Remove any player structures that are on the map
-	for (struct of enumStruct(CAM_HUMAN_PLAYER))
+	for (const struct of enumStruct(CAM_HUMAN_PLAYER))
 	{
 		camSafeRemoveObject(struct);
 	}

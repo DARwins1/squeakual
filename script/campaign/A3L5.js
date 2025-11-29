@@ -256,11 +256,10 @@ function manageArtifactGroup()
 		const GRAB_RADIUS = 2;
 
 		//Find the one closest to the artifact so that one can "hold" it
-		const artiMembers = enumGroup(colArtiGroup);
-		let closestDroid = undefined;
+		let closestDroid;
 		let closestDist = Infinity;
 
-		for (droid of enumGroup(colArtiGroup))
+		for (const droid of enumGroup(colArtiGroup))
 		{
 			const DR_DIST = camDist(droid, artiLoc);
 			if (DR_DIST < closestDist)

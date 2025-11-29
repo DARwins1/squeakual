@@ -196,8 +196,8 @@ function sendCollectiveHeavyWave()
 			cTempl.comhaat, // 1 Cyclone
 			cTempl.comrept, // 1 Repair Turret
 		];
-		if (difficulty >= HARD) commanderDroids1.push(cTempl.comagt, cTempl.comagt) // 2 Assault Guns (Hard+)
-		if (difficulty == INSANE) commanderDroids1.push(cTempl.cohhrat, cTempl.cohhrat) // 2 HRAs (Insane)
+		if (difficulty >= HARD) commanderDroids1.push(cTempl.comagt, cTempl.comagt); // 2 Assault Guns (Hard+)
+		if (difficulty == INSANE) commanderDroids1.push(cTempl.cohhrat, cTempl.cohhrat); // 2 HRAs (Insane)
 		camSendReinforcement(CAM_THE_COLLECTIVE, getObject("colEntry6"), commanderDroids1, CAM_REINFORCE_GROUND, {
 			order: CAM_ORDER_FOLLOW, data: {leader: "colCommander1", suborder: CAM_ORDER_ATTACK}
 		});
@@ -268,8 +268,8 @@ function sendCollectiveHeavyWave()
 			cTempl.cohraat, // 1 Whirlwind
 			cTempl.comrept, // 1 Repair Turret
 		];
-		if (difficulty >= HARD) commanderDroids2.push(cTempl.cohhcant, cTempl.cohhcant) // 2 Heavy Cannons (Hard+)
-		if (difficulty == INSANE) commanderDroids2.push(cTempl.cohhcant, cTempl.cohhcant) // 2 Heavy Cannons (Insane)
+		if (difficulty >= HARD) commanderDroids2.push(cTempl.cohhcant, cTempl.cohhcant); // 2 Heavy Cannons (Hard+)
+		if (difficulty == INSANE) commanderDroids2.push(cTempl.cohhcant, cTempl.cohhcant); // 2 Heavy Cannons (Insane)
 		camSendReinforcement(CAM_THE_COLLECTIVE, getObject("colEntry6"), commanderDroids2, CAM_REINFORCE_GROUND, {
 			order: CAM_ORDER_FOLLOW, data: {leader: "colCommander2", suborder: CAM_ORDER_ATTACK}
 		});
@@ -292,7 +292,7 @@ function sendCollectiveSupportWave()
 	// Entrances used by non-hover groups
 	const supportEntrances = ["colEntry4", "colEntry7", "colEntry8"];
 	if (supportWaveIdx >= 5) supportEntrances.push("colEntry2");
-	const chosenEntrance = getObject(camRandFrom(supportEntrances))
+	const chosenEntrance = getObject(camRandFrom(supportEntrances));
 
 	const orderData = {order: CAM_ORDER_ATTACK, data: {targetPlayer: CAM_HUMAN_PLAYER}};
 	let spawnTruck = false;

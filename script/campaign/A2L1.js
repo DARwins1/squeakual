@@ -299,7 +299,7 @@ function vtolDialogue2()
 	// Dialogue on shooting down Collective VTOLs...
 	camQueueDialogue([
 		{text: "CLAYDE: Commander, make sure you take down as many of those VTOLs as you can.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: The more of them that you destroy,", delay: 3, sound: CAM_RCLICK}
+		{text: "CLAYDE: The more of them that you destroy,", delay: 3, sound: CAM_RCLICK},
 		{text: "the longer it'll take the Collective to muster more air strikes.", delay: 0}
 	]);
 }
@@ -704,11 +704,11 @@ function eventStartLevel()
 		const attackPool = [ // Misc. cyborgs and tanks
 			cTempl.cybhg, cTempl.cybla, cTempl.cybfl,
 			cTempl.pllcanht, cTempl.pllhmght, cTempl.colatw, cTempl.colpodw,
-		]
+		];
 
 		const artPool = [ // Mortars, MRAs, and Grenadiers
 			cTempl.pllmortw, cTempl.colmraw, cTempl.cybgr,
-		]
+		];
 
 		const vtolPool = [ // Misc. VTOLs
 			cTempl.colcanv, cTempl.colpodv, cTempl.colhmgv, cTempl.colatv,

@@ -358,7 +358,7 @@ function eventStartLevel()
 			repair: 60
 	});
 	// Trucks
-	const TRUCK_TIME = camChangeOnDiff(camSecondsToMilliseconds(70))
+	const TRUCK_TIME = camChangeOnDiff(camSecondsToMilliseconds(70));
 	camManageTrucks(
 		CAM_THE_COLLECTIVE, {
 			label: "colHydroBase",

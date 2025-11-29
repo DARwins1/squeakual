@@ -46,7 +46,7 @@ camAreaEvent("ambushTrigger", function(droid)
 	// Begin the Collective's attacks against team Delta
 	if (droid.player == CAM_HUMAN_PLAYER)
 	{
-		lzAmbushGroup = camMakeGroup("colAmbushGroup")
+		lzAmbushGroup = camMakeGroup("colAmbushGroup");
 		camManageGroup(lzAmbushGroup, CAM_ORDER_ATTACK, {
 			targetPlayer: MIS_TEAM_DELTA,
 			repair: 40,
@@ -851,7 +851,7 @@ function eventStartLevel()
 
 	hackAddMessage("DELTA_LZ", PROX_MSG, CAM_HUMAN_PLAYER);
 
-	spySensorST = camMakeGroup(getObject("echoSpySensor"))
+	spySensorST = camMakeGroup(getObject("echoSpySensor"));
 	addLabel({type: GROUP, id: spySensorST}, "echoSpySensorST", false);
 	resetLabel("echoSpySensorST", CAM_HUMAN_PLAYER); // subscribe for eventGroupSeen
 

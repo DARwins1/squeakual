@@ -194,7 +194,7 @@ function activateAllFactories()
 	camEnableFactory("infHvyFactory1");
 	camEnableFactory("infHvyFactory2");
 	camEnableFactory("infCybFactory1");
-	camEnableFactory("infFactory1")
+	camEnableFactory("infFactory1");
 	camEnableFactory("infFactory8");
 	camEnableFactory("infFactory10");
 	camEnableFactory("infHvyFactory4");
@@ -313,7 +313,7 @@ function sendInfestedReinforcements()
 			"infEntry5", "infEntry6", "infEntry8",
 			"infEntry10", "infEntry13", "infEntry15",
 			"infEntry17", "infEntry18", "infEntry21",
-			"infEntry22", "infEntry26",
+			"infEntry22", "infEntry26"
 		);
 	}
 
@@ -472,7 +472,7 @@ function randInfestedFactoryTemplates()
 		const SWITCH_IDX = camRand(templates.length);
 		const temp = templates[i];
 		templates[i] = templates[SWITCH_IDX];
-		templates[SWITCH_IDX] = templates[i];
+		templates[SWITCH_IDX] = temp;
 	}
 
 	return templates;
@@ -483,7 +483,6 @@ function randInfestedFactoryTemplates()
 // Do this until the spawned unit has no EXP
 function drainPlayerExp()
 {
-	const pos = camMakePos("landingZone");
 	let droidExp = -1;
 	while (droidExp != 0)
 	{
@@ -934,11 +933,11 @@ function eventStartLevel()
 		const attackPool = [ // Misc. cyborgs and tanks
 			cTempl.cybag, cTempl.scytk, cTempl.cybth, cTempl.scyhc,
 			cTempl.plhacanht, cTempl.cohasgnht, cTempl.cohhatht, cTempl.cohbbht, cTempl.plhinfht,
-		]
+		];
 
 		const artPool = [ // Pepperpots, Ballistas, and HRAs
 			cTempl.plhrmortht, cTempl.plhbalht, cTempl.cohhraht,
-		]
+		];
 
 		const vtolPool = [ // Misc. VTOLs
 			cTempl.comhbombv, cTempl.comphosv, cTempl.comhatv, cTempl.comacanv, cTempl.comagv, 

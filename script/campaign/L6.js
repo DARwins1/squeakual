@@ -306,8 +306,8 @@ function infestedEndWaves()
 	/*
 		The waves of infested will start spawning from the various map "entrances" after the player finishes the main mission objectives
 		Waves will spawn from more locations the longer the player spends on the map
-		> Waves 1+ will spawn from the entrances inside the northwest scav base and the northeast scav outpost
-		> Waves 6+ will spawn additional waves from outside the northwest scav base and from the northern road
+		> Waves 1+ will spawn from the entrances inside the north scav base and the northeast infested base
+		> Waves 6+ will spawn additional waves from outside the north scav base
 		> Waves 12+ will spawn additional waves from the west and east highway entrances
 	*/
 
@@ -316,7 +316,6 @@ function infestedEndWaves()
 	const neRoadDroids = [cTempl.stinger, cTempl.stinger, cTempl.infbuggy, cTempl.infbuggy, cTempl.infrbuggy, cTempl.inftrike];
 
 	const nwRoadDroids = [cTempl.inftrike, cTempl.infminitruck, cTempl.infbuggy, cTempl.infrbuggy, cTempl.infbuscan, cTempl.inffiretruck];
-	const nRoadDroids = [cTempl.infmoncan, cTempl.infbuscan, cTempl.inffiretruck, cTempl.boomtick, cTempl.infkevbloke, cTempl.infbloke];
 
 	const wHighwayDroids = [cTempl.stinger, cTempl.infbjeep, cTempl.infrbjeep, cTempl.infminitruck, cTempl.infkevbloke, cTempl.infkevlance];
 	const eHighwayDroids = [cTempl.stinger, cTempl.infbjeep, cTempl.infrbjeep, cTempl.infsartruck, cTempl.infkevbloke, cTempl.infkevlance];

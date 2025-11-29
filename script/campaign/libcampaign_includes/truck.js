@@ -823,5 +823,5 @@ function __toTruckTemplate(droid)
 		body: droid.body,
 		prop: droid.propulsion,
 		weap: (droid.propulsion == "CyborgLegs") ? "CyborgSpade" : "Spade1Mk1"
-	}
+	};
 }

@@ -170,7 +170,7 @@ function __camProcessResearchGatedGuideTopics(research = null)
 			// If this topic is already completed, re-add the log entry
 			if (research.done)
 			{
-				__camAddNewLogTopic(idxNum, true)
+				__camAddNewLogTopic(idxNum, true);
 			}
 			idxNum++;
 			resIdx = ((idxNum < 10) ? ("0" + idxNum) : idxNum);

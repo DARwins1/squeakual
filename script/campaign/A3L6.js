@@ -27,7 +27,6 @@ var colCommanderGroup;
 
 var group1Attacking;
 var group2Attacking;
-var commanderAttacking;
 var infFactoryOnlyWave; // If true, ONLY spawn Infested units from entrances "bound" to a factory
 
 camAreaEvent("vtolRemoveZone", function(droid)
@@ -138,7 +137,7 @@ function commanderAttack()
 			camMakePos("focusPos3"),
 		],
 		repair: 50
-	})
+	});
 }
 
 // Assign a label to the Collective's sensor droid

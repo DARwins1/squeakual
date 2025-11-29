@@ -27,10 +27,6 @@ var nasdaCentralStructSet;
 var waveIndex;
 var powerDestroyed;
 var structsDonated;
-var deltaVtolPos;
-var zuluVtolPos1;
-var zuluVtolPos2;
-var zuluVtolPos3;
 // Refillable Groups...
 var deltaPatrolGroup;
 var deltaMortarGroup;
@@ -104,7 +100,7 @@ function introAttack()
 function weakenZuluDefenses()
 {
 	const structs = enumArea("claydeStructSetArea", MIS_CLAYDE, false).filter((obj) => (obj.type === STRUCTURE));
-	for (structure of structs)
+	for (const structure of structs)
 	{
 		if (structure.name === "Heavy Machinegun Guard Tower" || structure.name === "Tank Traps"
 			|| structure.name === "Sarissa Guard Tower" || structure.name === "Mini-Rocket Battery")
@@ -209,7 +205,7 @@ function eventTransporterLanded(transport)
 	{
 		// Donate some defenses to the player, and also assign some engineers
 		const structs = enumArea("donateArea", MIS_CLAYDE, false).filter((obj) => (obj.type === STRUCTURE));
-		for (structure of structs)
+		for (const structure of structs)
 		{
 			donateObject(structure, CAM_HUMAN_PLAYER);
 		}
@@ -260,7 +256,7 @@ function eventTransporterLanded(transport)
 			// Evacuate Delta units
 			let evacDroids = enumArea("deltaEvacZone", MIS_TEAM_DELTA, false).filter((obj) => (obj.type === DROID && obj.droidType !== DROID_SUPERTRANSPORTER));
 			evacDroids = evacDroids.concat(camGetTransporterDroids(MIS_TEAM_DELTA)); // Include the dummy truck brought by the transporter
-			for (droid of evacDroids)
+			for (const droid of evacDroids)
 			{
 				camSafeRemoveObject(droid);
 			}
@@ -270,7 +266,7 @@ function eventTransporterLanded(transport)
 			// Evacuate Zulu units
 			let evacDroids = enumArea("zuluEvacZone", MIS_CLAYDE, false).filter((obj) => (obj.type === DROID && obj.droidType !== DROID_SUPERTRANSPORTER));
 			evacDroids = evacDroids.concat(camGetTransporterDroids(MIS_CLAYDE));
-			for (droid of evacDroids)
+			for (const droid of evacDroids)
 			{
 				camSafeRemoveObject(droid);
 			}
@@ -513,7 +509,7 @@ function setPhaseTwo()
 
 	// Switch the teams of the NASDA power structures (so the player can destroy them)
 	const structs = enumArea("nasdaPowerArea", MIS_NASDA, false).filter((obj) => (obj.type === STRUCTURE));
-	for (structure of structs)
+	for (const structure of structs)
 	{
 		donateObject(structure, MIS_NASDA_POWER);
 	}
@@ -544,12 +540,12 @@ function evacuateAllies()
 	camMakeGroup(zuluDroids);
 
 	// Move all units towards their respective LZs
-	for (droid of deltaDroids)
+	for (const droid of deltaDroids)
 	{
 		const lz = camMakePos("landingZoneDelta");
 		orderDroidLoc(droid, DORDER_MOVE, lz.x, lz.y);
 	}
-	for (droid of zuluDroids)
+	for (const droid of zuluDroids)
 	{
 		const lz = camMakePos("landingZoneZulu");
 		orderDroidLoc(droid, DORDER_MOVE, lz.x, lz.y);

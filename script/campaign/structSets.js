@@ -298,7 +298,7 @@ const camA3L9GolfDefenseStructs = [
 const camA3L9GolfLZStructs = [
 	{stat: "PillBoxHPC", x: 10, y: 119}, {stat: "Wall-VulcanCan", x: 8, y: 121}, {stat: "Wall-VulcanCan", x: 8, y: 125},
 	{stat: "Wall-VulcanCan", x: 12, y: 121}, {stat: "PillBoxHPC", x: 14, y: 123}, {stat: "Wall-VulcanCan", x: 12, y: 125},
-]
+];
 
 // A4L2
 // Delta forward base structures
@@ -610,7 +610,7 @@ const camA4L6DeltaBase2Structs = [
 	{stat: "A0HardcreteMk1Wall", x: 114, y: 5, rot: 1}, {stat: "A0HardcreteMk1Wall", x: 114, y: 6, rot: 1}, {stat: "WallTower04", x: 114, y: 7},
 	{stat: "A0HardcreteMk1Wall", x: 114, y: 8, rot: 1}, {stat: "A0HardcreteMk1Wall", x: 114, y: 9, rot: 1}, {stat: "WallTower04", x: 114, y: 10},
 	{stat: "A0HardcreteMk1Wall", x: 112, y: 13}, {stat: "WallTower04", x: 113, y: 13},
-]
+];
 const camA4L6DeltaBase3Structs = [
 	{stat: "WallTower04", x: 142, y: 56}, {stat: "GuardTower-RotMg", x: 142, y: 57}, {stat: "A0HardcreteMk1Wall", x: 143, y: 56},
 	{stat: "AASite-QuadRotMg", x: 143, y: 59, rot: 3}, {stat: "Sys-SensoTower02", x: 143, y: 62}, {stat: "GuardTower-HVC", x: 147, y: 43},

@@ -349,7 +349,6 @@ function eventStartLevel()
 			suborder: CAM_ORDER_ATTACK
 	});
 	// Hover patrol group
-	const hoverTemplates = 
 	camMakeRefillableGroup(
 		undefined, {
 			templates: [ // 2 Lancers, 2 MRAs, 2 Bunker Busters

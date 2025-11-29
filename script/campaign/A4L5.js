@@ -1321,7 +1321,6 @@ function eventStartLevel()
 		"colSWLZ": {
 			cleanup: "colLZ3",
 			detectMsg: "COL_LZ3",
-			player: CAM_THE_COLLECTIVE,
 			detectSnd: cam_sounds.baseDetection.enemyLZDetected,
 			eliminateSnd: cam_sounds.baseElimination.enemyLZEradicated,
 			player: CAM_THE_COLLECTIVE
@@ -1329,7 +1328,6 @@ function eventStartLevel()
 		"colEastLZ": {
 			cleanup: "colLZ4",
 			detectMsg: "COL_LZ4",
-			player: CAM_THE_COLLECTIVE,
 			detectSnd: cam_sounds.baseDetection.enemyLZDetected,
 			eliminateSnd: cam_sounds.baseElimination.enemyLZEradicated,
 			player: CAM_THE_COLLECTIVE
@@ -1337,7 +1335,6 @@ function eventStartLevel()
 		"colSELZ": {
 			cleanup: "colLZ5",
 			detectMsg: "COL_LZ5",
-			player: CAM_THE_COLLECTIVE,
 			detectSnd: cam_sounds.baseDetection.enemyLZDetected,
 			eliminateSnd: cam_sounds.baseElimination.enemyLZEradicated,
 			player: CAM_THE_COLLECTIVE

@@ -61,7 +61,6 @@ function __camEnqueueVideos()
 		return; //Nothing to play
 	}
 
-	const __SOUND_IDENTIFER = ".ogg";
 	const what = __camVideoSequences[0];
 
 	// Check if this is a sound to play before some sequence.

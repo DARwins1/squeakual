@@ -27,7 +27,7 @@ function camRandInfTemplates(coreTemplates, coreSize, fodderSize, overrideChance
 	// Add fodder
 	if (!camDef(overrideChance) || camRand(100) > overrideChance)
 	{
-		const infCiv = [cTempl.infciv, cTempl.infciv2] // These templates have slightly different animations
+		const infCiv = [cTempl.infciv, cTempl.infciv2]; // These templates have slightly different animations
 		for (let i = 0; i < fodderSize; ++i)
 		{
 			droids.push(camRandFrom(infCiv));
@@ -146,8 +146,8 @@ function __camInfestObj(obj, fromPlayer)
 				modules: obj.modules
 			};
 
-			let infLabel = undefined;
-			let artTech = undefined;
+			let infLabel;
+			let artTech;
 
 			// Before we remove it, check if this structure has any artifacts inside
 			const objLabel = getLabel(obj);
@@ -235,7 +235,7 @@ function __camInfestObj(obj, fromPlayer)
 						templates = [
 							cTempl.infcybhg, cTempl.infcybca, cTempl.infcybhg,
 							cTempl.infscymc,
-						]
+						];
 					}
 				}
 				else if (fromPlayer === CAM_HUMAN_PLAYER) // Player factory
@@ -260,7 +260,7 @@ function __camInfestObj(obj, fromPlayer)
 							}
 
 							// NOTE: This assumes that the player doesn't have any multi-weapon units!
-							templates.push({body: newBody, prop: droid.propulsion, weap: "Inf" + droid.weapons[0].name})
+							templates.push({body: newBody, prop: droid.propulsion, weap: "Inf" + droid.weapons[0].name});
 						}
 					}
 					// templates = camRemoveDuplicates(templates);

@@ -40,7 +40,7 @@ function setStageTwo()
 	camManageGroup(deltaCrashGroup, CAM_ORDER_DEFEND, {
 		pos: camMakePos("crashDefensePos"),
 		radius: 10
-	})
+	});
 
 	// VTOL attack
 	camSetVtolSpawnStateAll(false); // Disable the stage 1 VTOLs

@@ -314,7 +314,7 @@ function eventStartLevel()
 	});
 
 	// Set up Collective trucks...
-	const TRUCK_TIME = camChangeOnDiff(camSecondsToMilliseconds((tweakOptions.rec_timerlessMode) ? 45 : 90))
+	const TRUCK_TIME = camChangeOnDiff(camSecondsToMilliseconds((tweakOptions.rec_timerlessMode) ? 45 : 90));
 	camManageTrucks(
 		CAM_THE_COLLECTIVE, {
 			label: "colSouthBase",

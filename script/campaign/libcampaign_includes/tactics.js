@@ -206,7 +206,7 @@ function camOrderToString(order)
 //;;
 function camGetGroupOrder(group)
 {
-	let order = undefined;
+	let order;
 	if (camDef(__camGroupInfo[group]))
 	{
 		order = __camGroupInfo[group].order;
@@ -861,7 +861,7 @@ function __camTacticsTickForGroup(group)
 				{
 					// Don't make VTOLs waste ammo on walls/gates
 					closeBy = closeBy.filter(function(obj) {
-						return !(obj.type === STRUCTURE && (obj.stattype === WALL || obj.stattype === GATE))
+						return !(obj.type === STRUCTURE && (obj.stattype === WALL || obj.stattype === GATE));
 					});
 				}
 
@@ -869,7 +869,7 @@ function __camTacticsTickForGroup(group)
 				{
 					// Only target vehicles if there are any in range
 					const tankList = closeBy.filter(function(obj) {
-						return (obj.type === DROID && obj.droidType !== DROID_CYBORG && obj.droidType !== DROID_PERSON)
+						return (obj.type === DROID && obj.droidType !== DROID_CYBORG && obj.droidType !== DROID_PERSON);
 					});
 					if (tankList.length > 0)
 					{
@@ -880,7 +880,7 @@ function __camTacticsTickForGroup(group)
 				{
 					// Only target cyborgs if there are any in range
 					const cybList = closeBy.filter(function(obj) {
-						return (obj.type === DROID && (obj.droidType === DROID_CYBORG || obj.droidType === DROID_PERSON))
+						return (obj.type === DROID && (obj.droidType === DROID_CYBORG || obj.droidType === DROID_PERSON));
 					});
 					if (cybList.length > 0)
 					{
@@ -891,7 +891,7 @@ function __camTacticsTickForGroup(group)
 				{
 					// Only target structures if there are any in range
 					const structList = closeBy.filter(function(obj) {
-						return (obj.type === STRUCTURE)
+						return (obj.type === STRUCTURE);
 					});
 					if (structList.length > 0)
 					{
@@ -902,7 +902,7 @@ function __camTacticsTickForGroup(group)
 				{
 					// If we can only attack VTOLs, then only target VTOLs
 					closeBy = closeBy.filter(function(obj) {
-						return (obj.type === DROID && isVTOL(obj))
+						return (obj.type === DROID && isVTOL(obj));
 					});
 				}
 

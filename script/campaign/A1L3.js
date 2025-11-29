@@ -473,7 +473,7 @@ function spawnBackupTruck()
 	camAssignTruck(newTruck, colLZTruckJob);
 	if (!backupTruckSpawned)
 	{
-		backupTruckSpawned;
+		backupTruckSpawned = true;
 	}
 	else
 	{

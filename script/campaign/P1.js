@@ -518,7 +518,7 @@ function sendTransport5()
 function enableWarehouseDestruction()
 {
 	// Change all warehouses to an enemy team
-	for (struct of enumStruct(MIS_CIVS))
+	for (const struct of enumStruct(MIS_CIVS))
 	{
 		donateObject(struct, MIS_CIVS_DESTRUCTIBLE);
 	}
@@ -527,7 +527,7 @@ function enableWarehouseDestruction()
 function disableWarehouseDestruction()
 {
 	// Change all warehouses back to a friendly team
-	for (struct of enumStruct(MIS_CIVS_DESTRUCTIBLE))
+	for (const struct of enumStruct(MIS_CIVS_DESTRUCTIBLE))
 	{
 		donateObject(struct, MIS_CIVS);
 	}

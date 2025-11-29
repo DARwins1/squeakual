@@ -62,7 +62,7 @@ function vtolAttack()
 	else
 	{
 		// If we're on Insane, replace HMG VTOLs with Assault Guns
-		templates.push(cTempl.colagv)
+		templates.push(cTempl.colagv);
 	}
 	const ext = {
 		limit: [2, 3],
@@ -275,7 +275,6 @@ function sendInfestedReinforcements()
 // Do this until the spawned unit has no EXP
 function drainPlayerExp()
 {
-	const pos = camMakePos("landingZone");
 	let droidExp = -1;
 	while (droidExp != 0)
 	{
@@ -618,11 +617,11 @@ function eventStartLevel()
 		const attackPool = [ // Misc. cyborgs and tanks
 			cTempl.cybfl, cTempl.scyhc,
 			cTempl.plmhpvht, cTempl.plmhmght, cTempl.comatht, cTempl.combbht, cTempl.compodht,
-		]
+		];
 
 		const artPool = [ // Bombards, MRAs and Super Grenadiers
 			cTempl.plmhmortw, cTempl.commraht, cTempl.scygr,
-		]
+		];
 
 		const vtolPool = [ // Misc. VTOLs
 			cTempl.colbombv, cTempl.colhmgv, cTempl.colatv, cTempl.colhpvv,

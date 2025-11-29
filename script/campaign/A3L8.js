@@ -196,7 +196,7 @@ function activateSecondFactories()
 	camManageGroup(colCommanderGroup1, CAM_ORDER_ATTACK, {
 		targetPlayer: CAM_HUMAN_PLAYER,
 		repair: 75
-	})
+	});
 }
 
 function activateFinalFactories()
@@ -207,7 +207,7 @@ function activateFinalFactories()
 	camManageGroup(colCommanderGroup2, CAM_ORDER_ATTACK, {
 		targetPlayer: CAM_HUMAN_PLAYER,
 		repair: 75
-	})
+	});
 }
 
 function camEnemyBaseEliminated()
@@ -250,7 +250,7 @@ function swCommanderAttack()
 	camManageGroup(colCommanderGroup3, CAM_ORDER_ATTACK, {
 		targetPlayer: CAM_HUMAN_PLAYER,
 		repair: 75
-	})
+	});
 }
 
 function eventStartLevel()

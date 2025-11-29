@@ -22,8 +22,6 @@ const MIS_ALLY_UNIT_RANK = "Regular";
 const MIS_ALLY_TRUCK_TIME = camChangeOnDiff(camSecondsToMilliseconds(65), true);
 const MIS_ALLY_ENGINEER_TIME = camChangeOnDiff(camSecondsToMilliseconds(35), true);
 const MIS_ALLY_COMMANDER_DELAY = camChangeOnDiff(camMinutesToMilliseconds(2.5), true);
-const MIS_GROUND_ASSAULT_DELAY = camSecondsToMilliseconds(20);
-const MIS_AIR_ASSAULT_DELAY = camSecondsToMilliseconds(15);
 const MIS_HOVER_THRESHOLD = 16;
 
 const mis_collectiveResearch = [
@@ -43,7 +41,7 @@ const mis_collectiveResearch = [
 const mis_nexusBonusResearch = [
 	"R-Wpn-Missile-Accuracy01", "R-Wpn-Missile-Damage01", "R-Wpn-Missile-ROF01",
 	"R-Wpn-Rail-Damage01", "R-Wpn-Rail-ROF01",
-]
+];
 
 // This mission is divided into 3 "stages"
 // stage 1: escort civilian groups using Transport Trucks back to the safe haven
@@ -550,7 +548,6 @@ function sendCollectiveGroundReinforcements(templates, entrance)
 
 function sendCollectiveGroundReinforcements(templates, entrance)
 {
-	const GROUP_SIZE = difficulty + 4;
 	const droids = [];
 	for (const template of templates)
 	{
@@ -2064,7 +2061,7 @@ function eventStartLevel()
 	camEnableFactory("deltaVtolFactory2");
 
 	// Set up this sight trigger group
-	nxGroupST = camMakeGroup(getObject("nxGroup"))
+	nxGroupST = camMakeGroup(getObject("nxGroup"));
 	addLabel({type: GROUP, id: nxGroupST}, "nxGroupST", false);
 	resetLabel("nxGroupST", CAM_HUMAN_PLAYER); // subscribe for eventGroupSeen
 

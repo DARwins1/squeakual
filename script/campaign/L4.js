@@ -19,7 +19,6 @@ const mis_infestedRes = [
 // Player values
 const MIS_RESEARCH_FACILITY = 1;
 const MIS_CYAN_SCAVS = 2;
-const MIS_AMBIENT = 3;
 const MIS_FAUX_INFESTED = 5;
 
 // Used to determine which entrances can spawn infested waves

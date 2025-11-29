@@ -450,10 +450,10 @@ function eventStartLevel()
 	hackAddMessage("AA_SITE3", PROX_MSG, CAM_HUMAN_PLAYER);
 
 	// Move the Collective Cyborgs away from the player's LZ
-	lzCyborgGroup = camMakeGroup("cyborgLzGroup")
+	lzCyborgGroup = camMakeGroup("cyborgLzGroup");
 	camManageGroup(lzCyborgGroup, CAM_ORDER_DEFEND, {pos: camMakePos("cyborgRallyPos"), radius: 10});
 	// Also rally some C-Scavs
-	lzCScavGroup = camMakeGroup("cScavLzGroup")
+	lzCScavGroup = camMakeGroup("cScavLzGroup");
 	camManageGroup(lzCScavGroup, CAM_ORDER_DEFEND, {pos: camMakePos("cyborgRallyPos"), radius: 10});
 
 	queue("lzAmbush", camMinutesToMilliseconds(2.5));

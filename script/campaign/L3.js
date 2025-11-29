@@ -214,7 +214,7 @@ function sendScavAttackWaves()
 		queue("expandMapCheck", camSecondsToMilliseconds(30));
 	}
 
-	++waveNum
+	++waveNum;
 }
 
 function camEnemyBaseDetected_scavHideout()

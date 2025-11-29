@@ -171,7 +171,7 @@ function cam_eventStartLevel()
 	setTimer("__camShowVictoryConditions", camMinutesToMilliseconds(5));
 	setTimer("__camViewObjects", camSecondsToMilliseconds(1));
 	setTimer("__camTacticsTick", camSecondsToMilliseconds(0.1));
-	setTimer("__camPlayScheduledDialogues", camSecondsToMilliseconds(.1));
+	setTimer("__camPlayScheduledDialogues", camSecondsToMilliseconds(0.1));
 	setTimer("__camGradualEffectsTick", __CAM_GRADUAL_TICK_RATE);
 	queue("__camGrantSpecialResearch", camSecondsToMilliseconds(6));
 	queue("__camEnableGuideTopics", camSecondsToMilliseconds(0.1)); // delayed to handle when mission scripts add research

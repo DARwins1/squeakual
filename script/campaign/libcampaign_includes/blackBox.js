@@ -48,7 +48,7 @@ function camCollectBlackBox(x, y)
 	if (!foundBox)
 	{
 		// This box doesn't match any managed Black Boxes
-		camTrace("No matching Black Box!")
+		camTrace("No matching Black Box!");
 		return;
 	}
 	else

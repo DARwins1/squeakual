@@ -24,7 +24,6 @@ const mis_scavResearch = [
 
 var powerClear;
 var powerCaptured;
-var upinkClear;
 var uplinkCaptured;
 var vtolClear;
 var vtolCaptured;
@@ -203,7 +202,7 @@ function ambushLZ()
 {
 	if (ambushTriggered)
 	{
-		return
+		return;
 	}
 
 	camManageGroup(camMakeGroup("scavAmbushGroup"), CAM_ORDER_ATTACK, {
@@ -340,7 +339,6 @@ function eventTransporterLanded(transport)
 
 	const transDroids = camGetTransporterDroids(transport.player);
 	var truckJobs;
-	var other = [];
 	switch (transport.player)
 	{
 		case MIS_TEAM_CHARLIE:

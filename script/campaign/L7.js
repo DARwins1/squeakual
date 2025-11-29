@@ -542,7 +542,7 @@ function eventStartLevel()
 	queue("startAttackWaves", (camChangeOnDiff(camSecondsToMilliseconds(20))));
 
 	// Start phase two when there's 12 minutes remaining
-	queue("startPhaseTwo", camMinutesToMilliseconds(18))
+	queue("startPhaseTwo", camMinutesToMilliseconds(18));
 
 	camSetPreDamageModifier(CAM_INFESTED, [50, 80], [60, 90], CAM_INFESTED_PREDAMAGE_EXCLUSIONS);
 

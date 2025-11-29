@@ -21,12 +21,7 @@ const mis_infestedResearch = [
 ];
 
 var infGroupIdx;
-var exit1RemoveGroups;
-var exit2RemoveGroups;
-var exit3RemoveGroups;
-var exit4RemoveGroups;
-var exit5RemoveGroups;
-var exit6RemoveGroups;
+var exitRemoveGroups;
 
 // Send a group of Infested from one entrance towards another on the opposite side of the map
 // Groups will not seek out the player unless the player attacks them
@@ -120,8 +115,7 @@ function sendInfestedGroup()
 		}});
 
 	// Let the correct exit trigger know to expect this group's arrival
-	const exitLists = [null, exit1RemoveGroups, exit2RemoveGroups, exit3RemoveGroups, exit4RemoveGroups, exit5RemoveGroups, exit6RemoveGroups];
-	exitLists[exitIdx].push(newGroup);
+	exitRemoveGroups[exitIdx].push(newGroup);
 
 	infGroupIdx++;
 }
@@ -131,24 +125,7 @@ camAreaEvent("infEntry1", function(droid)
 {
 	if (droid.player === CAM_INFESTED)
 	{
-		const groupList = exit1RemoveGroups;
-		const droids = enumArea("infEntry1", CAM_INFESTED, false);
-		for (droid of droids)
-		{
-			for (group of groupList)
-			{
-				// If this droid is from a group we're expecting to use this exit, remove it
-				if (droid.group === group)
-				{
-					camSafeRemoveObject(droid);
-				}
-				if (groupSize(group) == 0)
-				{
-					// If this group is empty, remove it from the list
-					groupList.splice(groupList.indexOf(group), 1);
-				}
-			}
-		}
+		removeInfGroup(1);
 	}
 	resetLabel("infEntry1", CAM_INFESTED);
 });
@@ -157,24 +134,7 @@ camAreaEvent("infEntry2", function(droid)
 {
 	if (droid.player === CAM_INFESTED)
 	{
-		const groupList = exit2RemoveGroups;
-		const droids = enumArea("infEntry2", CAM_INFESTED, false);
-		for (droid of droids)
-		{
-			for (group of groupList)
-			{
-				// If this droid is from a group we're expecting to use this exit, remove it
-				if (droid.group === group)
-				{
-					camSafeRemoveObject(droid);
-				}
-				if (groupSize(group) == 0)
-				{
-					// If this group is empty, remove it from the list
-					groupList.splice(groupList.indexOf(group), 1);
-				}
-			}
-		}
+		removeInfGroup(2);
 	}
 	resetLabel("infEntry2", CAM_INFESTED);
 });
@@ -183,24 +143,7 @@ camAreaEvent("infEntry3", function(droid)
 {
 	if (droid.player === CAM_INFESTED)
 	{
-		const groupList = exit3RemoveGroups;
-		const droids = enumArea("infEntry3", CAM_INFESTED, false);
-		for (droid of droids)
-		{
-			for (group of groupList)
-			{
-				// If this droid is from a group we're expecting to use this exit, remove it
-				if (droid.group === group)
-				{
-					camSafeRemoveObject(droid);
-				}
-				if (groupSize(group) == 0)
-				{
-					// If this group is empty, remove it from the list
-					groupList.splice(groupList.indexOf(group), 1);
-				}
-			}
-		}
+		removeInfGroup(3);
 	}
 	resetLabel("infEntry3", CAM_INFESTED);
 });
@@ -209,24 +152,7 @@ camAreaEvent("infEntry4", function(droid)
 {
 	if (droid.player === CAM_INFESTED)
 	{
-		const groupList = exit4RemoveGroups;
-		const droids = enumArea("infEntry4", CAM_INFESTED, false);
-		for (droid of droids)
-		{
-			for (group of groupList)
-			{
-				// If this droid is from a group we're expecting to use this exit, remove it
-				if (droid.group === group)
-				{
-					camSafeRemoveObject(droid);
-				}
-				if (groupSize(group) == 0)
-				{
-					// If this group is empty, remove it from the list
-					groupList.splice(groupList.indexOf(group), 1);
-				}
-			}
-		}
+		removeInfGroup(4);
 	}
 	resetLabel("infEntry4", CAM_INFESTED);
 });
@@ -235,24 +161,7 @@ camAreaEvent("infEntry5", function(droid)
 {
 	if (droid.player === CAM_INFESTED)
 	{
-		const groupList = exit5RemoveGroups;
-		const droids = enumArea("infEntry5", CAM_INFESTED, false);
-		for (droid of droids)
-		{
-			for (group of groupList)
-			{
-				// If this droid is from a group we're expecting to use this exit, remove it
-				if (droid.group === group)
-				{
-					camSafeRemoveObject(droid);
-				}
-				if (groupSize(group) == 0)
-				{
-					// If this group is empty, remove it from the list
-					groupList.splice(groupList.indexOf(group), 1);
-				}
-			}
-		}
+		removeInfGroup(5);
 	}
 	resetLabel("infEntry5", CAM_INFESTED);
 });
@@ -261,27 +170,32 @@ camAreaEvent("infEntry6", function(droid)
 {
 	if (droid.player === CAM_INFESTED)
 	{
-		const groupList = exit6RemoveGroups;
-		const droids = enumArea("infEntry6", CAM_INFESTED, false);
-		for (droid of droids)
-		{
-			for (group of groupList)
-			{
-				// If this droid is from a group we're expecting to use this exit, remove it
-				if (droid.group === group)
-				{
-					camSafeRemoveObject(droid);
-				}
-				if (groupSize(group) == 0)
-				{
-					// If this group is empty, remove it from the list
-					groupList.splice(groupList.indexOf(group), 1);
-				}
-			}
-		}
+		removeInfGroup(6);
 	}
 	resetLabel("infEntry6", CAM_INFESTED);
 });
+
+function removeInfGroup(index)
+{
+	const groupList = exitRemoveGroups[index];
+	const droids = enumArea("infEntry" + index, CAM_INFESTED, false);
+	for (const droid of droids)
+	{
+		for (const group of groupList)
+		{
+			// If this droid is from a group we're expecting to use this exit, remove it
+			if (droid.group === group)
+			{
+				camSafeRemoveObject(droid);
+			}
+			if (groupSize(group) == 0)
+			{
+				// If this group is empty, remove it from the list
+				groupList.splice(groupList.indexOf(group), 1);
+			}
+		}
+	}
+}
 
 function eventTransporterLanded(transport)
 {
@@ -436,12 +350,15 @@ function eventStartLevel()
 	hackAddMessage("COL_CONVOY", PROX_MSG, CAM_HUMAN_PLAYER);
 
 	infGroupIdx = 0;
-	exit1RemoveGroups = [];
-	exit2RemoveGroups = [];
-	exit3RemoveGroups = [];
-	exit4RemoveGroups = [];
-	exit5RemoveGroups = [];
-	exit6RemoveGroups = [];
+	exitRemoveGroups = [
+		null, // idx 0
+		[],
+		[],
+		[],
+		[],
+		[],
+		[],
+	];
 
 	// Most Infested units start out pre-damaged
 	camSetPreDamageModifier(CAM_INFESTED, [50, 80], [60, 90], CAM_INFESTED_PREDAMAGE_EXCLUSIONS);

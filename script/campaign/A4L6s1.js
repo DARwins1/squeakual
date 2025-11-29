@@ -361,7 +361,7 @@ function convertToTruck(transTruck)
 	{
 		// The player didn't renamed the original truck.
 		// Give it the default template name
-		newName = camNameTemplate("Spade1Mk1", tBody, tProp)
+		newName = camNameTemplate("Spade1Mk1", tBody, tProp);
 	}
 	else
 	{
@@ -372,7 +372,7 @@ function convertToTruck(transTruck)
 	}
 
 	// Create the new truck
-	const newTruck = camAddDroid(CAM_HUMAN_PLAYER, tPos, {body: tBody, prop: tProp, weap: "Spade1Mk1"}, newName);
+	camAddDroid(CAM_HUMAN_PLAYER, tPos, {body: tBody, prop: tProp, weap: "Spade1Mk1"}, newName);
 
 	// Quietly remove the transport truck...
 	camSafeRemoveObject(transTruck);

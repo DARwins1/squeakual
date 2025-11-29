@@ -185,7 +185,7 @@ function camSetRefillableGroupData(group, groupData)
 	// Set default values
 	let factories = []; 
 	let globalFill = false;
-	let player = undefined;
+	let player;
 	let templates = [];
 
 	// Check if we're updating an existing group's data
@@ -240,7 +240,7 @@ function camGetRefillableGroupTemplates(group, allTemplates)
 	{
 		// If we were given an array of groups, return the templates of all of them combined.
 		let templates = [];
-		for (g of group)
+		for (const g of group)
 		{
 			templates = templates.concat(camGetRefillableGroupTemplates(g, allTemplates));
 		}

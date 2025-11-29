@@ -294,12 +294,6 @@ function cScavPlayerDetected()
 			groupSize: 4,
 			maxSize: 8,
 			throttle: camChangeOnDiff(camSecondsToMilliseconds(13)),
-			data: {
-				morale: 50,
-				fallback: camMakePos("cScavAssembly"),
-				regroup: true,
-				count: -1,
-			},
 			templates: templates
 		},
 	});

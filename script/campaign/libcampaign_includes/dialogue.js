@@ -50,7 +50,7 @@ function camQueueDialogue(text, delay, sound, callback)
 	}
 	__camLatestDialogueTime += delay;
 
-	__camQueuedDialogue.push({text: text, time: __camLatestDialogueTime, sound: sound, callback: callback})
+	__camQueuedDialogue.push({text: text, time: __camLatestDialogueTime, sound: sound, callback: callback});
 }
 
 //;; ## camSkipDialogue()
@@ -113,7 +113,7 @@ function __camPlayScheduledDialogues()
 			{
 				if (diaInfo.sound instanceof Array)
 				{
-					for (sound of diaInfo.sound)
+					for (const sound of diaInfo.sound)
 					{
 						__camPlayDialogueSound(sound);
 					}

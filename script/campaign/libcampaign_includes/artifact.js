@@ -342,7 +342,7 @@ function __camCheckArtifactObject(aLabel)
 				// Merge the technologies of these two artifacts into one
 				if (!(__camArtifacts[objLabel].tech instanceof Array))
 				{
-					__camArtifacts[objLabel].tech = [__camArtifacts[objLabel].tech]
+					__camArtifacts[objLabel].tech = [__camArtifacts[objLabel].tech];
 				}
 				if (!(ai.tech instanceof Array))
 				{

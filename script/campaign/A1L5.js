@@ -336,7 +336,7 @@ function eventStartLevel()
 	});
 
 	// Set up Collective trucks
-	const TRUCK_TIME = camChangeOnDiff(camSecondsToMilliseconds(70))
+	const TRUCK_TIME = camChangeOnDiff(camSecondsToMilliseconds(70));
 	const colBaseStructs = camAreaToStructSet("colBase");
 	camManageTrucks(
 		CAM_THE_COLLECTIVE, {
