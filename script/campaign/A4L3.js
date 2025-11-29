@@ -499,20 +499,16 @@ function checkFoxtrotDefeated()
 	{
 		// Check if Foxtrot has any Trucks/Engineers that can rebuild those structures
 		const mainTrucks = camGetTrucksFromLabel("foxtrotMainBase").concat(camGetTrucksFromLabel("foxtrotAltBase"));
-		let foundTruck = false;
 		for (const truck of mainTrucks)
 		{
 			if (camDef(truck) && truck !== null)
 			{
-				foundTruck = true;
+				return; // Truck still alive
 			}
 		}
 
 		// Surrender if no constructors are found
-		if (!foundTruck)
-		{
-			camCallOnce("foxtrotDefeat");
-		}
+		camCallOnce("foxtrotDefeat");
 	}
 }
 
@@ -529,20 +525,16 @@ function checkGolfDefeated()
 	{
 		// Check if Golf has any Trucks that can rebuild those structures
 		const mainTrucks = camGetTrucksFromLabel("golfMainBase").concat(camGetTrucksFromLabel("golfVtolBase"));
-		let foundTruck = false;
 		for (const truck of mainTrucks)
 		{
 			if (camDef(truck) && truck !== null)
 			{
-				foundTruck = true;
+				return; // Truck still alive
 			}
 		}
 
 		// Surrender if no constructors are found
-		if (!foundTruck)
-		{
-			camCallOnce("golfDefeat");
-		}
+		camCallOnce("golfDefeat");
 	}
 }
 
