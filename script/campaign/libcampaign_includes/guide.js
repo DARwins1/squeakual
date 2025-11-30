@@ -158,6 +158,18 @@ function __camProcessResearchGatedGuideTopics(research = null)
 		addGuideTopic("wz2100::units::propulsions::hover", showFlags);
 	}
 
+	// First (explosive) bomb researched
+	if (__camGuideTopicCheckResearchComplete("R-Wpn-Bomb01", research))
+	{
+		addGuideTopic("wz2100::units::weapons::bombs::explosive", showFlags);
+	}
+
+	// First incendiary bomb researched
+	if (__camGuideTopicCheckResearchComplete("R-Wpn-Bomb03", research))
+	{
+		addGuideTopic("wz2100::units::weapons::bombs::incendiary", showFlags);
+	}
+
 	// Also re-add previously collected Logs
 	if (research == null)
 	{

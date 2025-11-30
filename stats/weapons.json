@@ -2491,7 +2491,7 @@
     "Cannon5Vulcan-VTOL": {
         "buildPoints": 700,
         "buildPower": 200,
-        "damage": 80,
+        "damage": 90,
         "designable": 1,
         "effectSize": 45,
         "explosionWav": "smlexpl.ogg",
@@ -2532,7 +2532,7 @@
     "Cannon5VulcanMk1": {
         "buildPoints": 700,
         "buildPower": 200,
-        "damage": 40,
+        "damage": 45,
         "designable": 1,
         "effectSize": 40,
         "explosionWav": "smlexpl.ogg",
@@ -2572,7 +2572,7 @@
     "InfCannon5VulcanMk1": {
         "buildPoints": 700,
         "buildPower": 200,
-        "damage": 40,
+        "damage": 45,
         "designable": 1,
         "effectSize": 40,
         "explosionWav": "smlexpl.ogg",
@@ -2725,7 +2725,7 @@
     "Cyb-Hvywpn-Acannon": {
         "buildPoints": 400,
         "buildPower": 125,
-        "damage": 40,
+        "damage": 45,
         "effectSize": 40,
         "explosionWav": "smlexpl.ogg",
         "facePlayer": 1,
@@ -3458,7 +3458,7 @@
     "InfCyb-Hvywpn-Acannon": {
         "buildPoints": 400,
         "buildPower": 125,
-        "damage": 40,
+        "damage": 45,
         "effectSize": 40,
         "explosionWav": "smlexpl.ogg",
         "facePlayer": 1,
