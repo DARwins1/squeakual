@@ -380,7 +380,6 @@ function collectiveAttackWaves()
 	if (waveIndex >= 6 && waveIndex % 3 == 0)
 	{
 		numColOverrides++;
-		if (difficulty === INSANE) numColOverrides++;
 	}
 	if (waveIndex >= 16 && waveIndex % 2 == 0)
 	{
@@ -483,7 +482,7 @@ function collectiveDialogue()
 		{text: "FOXTROT: We're spotting groups of enemy tanks rolling over the hills.", delay: 2, sound: CAM_RCLICK},
 		{text: "FOXTROT: They look...", delay: 3, sound: CAM_RCLICK},
 		{text: "FOXTROT: ...A lot tougher than scavengers, sir.", delay: 2, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: General!", delay: 6, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: General!", delay: 12, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: Sir, those are Collective vehicles!", delay: 2, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: It looks like they're leading these scavenger attacks!", delay: 3, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: ...But how?", delay: 3, sound: CAM_RCLICK},
@@ -584,8 +583,7 @@ function spawnCollectiveCommander()
 
 function eventDestroyed(obj)
 {
-	if (obj.player === MIS_NASDA_POWER 
-		&& enumArea("nasdaPowerArea", MIS_NASDA_POWER, false).filter((obj) => (obj.type === STRUCTURE && obj.name === "Nuclear Reactor")).length === 0)
+	if (obj.player === MIS_NASDA_POWER && obj.type === STRUCTURE && obj.name === "Nuclear Reactor")
 	{
 		powerDestroyed = true;
 		hackRemoveMessage("NASDA_POWER", PROX_MSG, CAM_HUMAN_PLAYER);
@@ -958,7 +956,7 @@ function eventStartLevel()
 	queue("vtolAttack", camMinutesToMilliseconds(20));
 	queue("setPhaseTwo", camMinutesToMilliseconds(22));
 
-	setTimer("collectiveAttackWaves", camChangeOnDiff(camSecondsToMilliseconds(40)));
+	setTimer("collectiveAttackWaves", camChangeOnDiff(camSecondsToMilliseconds(45)));
 	setTimer("sendDeltaTransporter", camChangeOnDiff(camMinutesToMilliseconds(1.5), true));
 	setTimer("sendCollectiveTransporter", camChangeOnDiff(camMinutesToMilliseconds(2.25)));
 
