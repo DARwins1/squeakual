@@ -177,7 +177,7 @@ function camEnemyBaseEliminated_scavLZBase()
 	// Dialogue about cleared LZs
 	camQueueDialogue([
 		{text: "LIEUTENANT: Good job, Bravo. Your LZ is secure.", delay: 2, sound: CAM_RCLICK},
-		{text: "LIEUTENANT: Call in the reinforcements you need, but do not engage the Collective base.", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Call in the reinforcements you need, but don't attack the Collective yet.", delay: 3, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: We need to wait until the other teams are ready and in place.", delay: 3, sound: CAM_RCLICK},
 		// Long delay...
 		{text: "CHARLIE: Team Charlie here; our LZ is secure.", delay: 16, sound: CAM_RCLICK},
@@ -852,7 +852,7 @@ function golfBodyCheck()
 	}
 
 	// If the player has >= 40% Collective bodies on their vehicles, have Golf comment about it
-	if ((colNum / playerDroids) >= 0.4)
+	if ((colNum / vehicleNum) >= 0.4)
 	{
 		camQueueDialogue([
 			{text: "GOLF: Hey, Bravo!", delay: 0, sound: CAM_RCLICK},
@@ -938,7 +938,8 @@ function campCleared()
 		{text: "CHARLIE: Lieutenant?", delay: 5, sound: CAM_RCLICK},
 		{text: "CHARLIE: Are you there?", delay: 2, sound: CAM_RCLICK},
 		{text: "GOLF: Charlie, I'm picking up a lot of movement.", delay: 4, sound: CAM_RCLICK},
-		{text: "GOLF: ...Multiple directions.", delay: 3, sound: CAM_RCLICK},
+		{text: "GOLF: From...", delay: 3, sound: CAM_RCLICK},
+		{text: "GOLF: ...Every direction!?", delay: 2, sound: CAM_RCLICK},
 		{text: "CHARLIE: Huh? Is the Collective counter-attacking?", delay: 3, sound: CAM_RCLICK, callback: "startInfestedAttacks"},
 		{text: "GOLF: I don't know...", delay: 3, sound: CAM_RCLICK},
 		{text: "GOLF: But they're almost on top of us!", delay: 2, sound: CAM_RCLICK},

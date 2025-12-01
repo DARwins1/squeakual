@@ -606,7 +606,7 @@ A2L7_BSMG23		_("<CLAYDE>: Good luck, Commander Bravo.")
 /* Mission Briefing */
 A3L1_BMSG1		_("<CLAYDE>: Well done, Commander Bravo.")
 A3L1_BMSG2		_("Now that you're out of harm's way, we can get down to business.")
-A3L1_BMSG3		_("<CHARLIE>: Woah, what's with the new emblem, General?")
+A3L1_BMSG3		_("<CHARLIE>: Uhh... what's with the new emblem, General?")
 A3L1_BMSG4		_("<CLAYDE>: After our assault on the Collective's prison camp, the Council reconvened with all of their newly-freed members.")
 A3L1_BMSG5		_("They recognized our efforts, and applauded my leadership and decision-making.")
 A3L1_BMSG6		_("Then, they voted to promote me to the title of 'Supreme General'.")

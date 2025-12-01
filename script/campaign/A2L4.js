@@ -82,9 +82,8 @@ function clearDialogue()
 
 	camQueueDialogue([
 		{text: "CLAYDE: Well done, Commander Bravo.", delay: 4, sound: CAM_RCLICK},
-		{text: "CLAYDE: We're reinforcing Golf's position now.", delay: 2, sound: CAM_RCLICK},
+		{text: "CLAYDE: We'll begin reinforcing Team Golf's position shortly.", delay: 2, sound: CAM_RCLICK},
 		{text: "CLAYDE: Your objective has been accomplished.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: Return to base and await further orders.", delay: 2, sound: CAM_RCLICK},
 	]);
 }
 
@@ -417,16 +416,17 @@ function eventStartLevel()
 		// Only replace these when destroyed
 		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "Sys-SensoTower01", "Sys-SensoTower02", true); // Sensor Towers
 		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "WallTower02", "WallTower03", true); // Cannon Hardpoints
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "AASite-QuadMg1", "AASite-QuadBof", true); // AA Sites
 	}
 	else if (difficulty == INSANE)
 	{
 		// Proactively demolish/replace these
 		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "Sys-SensoTower01", "Sys-SensoTower02"); // Sensor Towers
 		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "WallTower02", "WallTower03"); // Cannon Hardpoints
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "AASite-QuadMg1", "AASite-QuadBof"); // AA Sites
 
 		// Only replace these when destroyed
 		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "Emplacement-MortarPit01", "Emplacement-MortarPit02", true); // Mortar Pits
-		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "AASite-QuadMg1", "AASite-QuadBof", true); // AA Sites
 	}
 
 	camManageGroup(camMakeGroup("cyborgPatrolGroup"), CAM_ORDER_PATROL, {

@@ -441,6 +441,7 @@ function eventStartLevel()
 
 		// Only replace these when destroyed
 		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "Emplacement-MortarPit01", "Emplacement-MortarPit02", true); // Mortar Pits
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "AASite-QuadMg1", "AASite-QuadBof", true); // AA Sites
 	}
 
 	camAutoReplaceObjectLabel(["scavHeliTower", "cScavHeliTower", "colCC"]);

@@ -540,14 +540,13 @@ function eventStartLevel()
 	{
 		// Only replace these when destroyed
 		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "Sys-SensoTower01", "Sys-SensoTower02", true); // Sensor Towers
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "AASite-QuadMg1", "AASite-QuadBof", true); // AA Sites
 	}
 	else if (difficulty == INSANE)
 	{
 		// Proactively demolish/replace these
 		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "Sys-SensoTower01", "Sys-SensoTower02"); // Sensor Towers
-
-		// Only replace these when destroyed
-		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "AASite-QuadMg1", "AASite-QuadBof", true); // AA Sites
+		camTruckObsoleteStructure(CAM_THE_COLLECTIVE, "AASite-QuadMg1", "AASite-QuadBof"); // AA Sites
 	}
 
 	camAutoReplaceObjectLabel(["heliTower1", "heliTower2", "colVtolTower1", "colVtolTower2", "colVtolTower3", "colVtolCBTower"]);

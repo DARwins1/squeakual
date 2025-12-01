@@ -1,6 +1,6 @@
 -120 50		11.0	13.0	_("<CLAYDE>: Well done, Commander Bravo.")
 -120 50		13.0	16.0	_("<CLAYDE>: Now that you're out of harm's way, we can get down to business.")
--120 50		17.0	20.0	_("<CHARLIE>: Woah, what's with the new emblem, General?")
+-120 50		17.0	20.0	_("<CHARLIE>: Uhh... what's with the new emblem, General?")
 -120 50		21.0	26.0	_("<CLAYDE>: After our assault on the Collective's prison camp,")
 -120 60		21.0	26.0	_("the Council reconvened with all of their newly-freed members.")
 -120 50		26.0	30.0	_("<CLAYDE>: They recognized our efforts,")

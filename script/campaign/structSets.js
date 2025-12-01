@@ -98,7 +98,7 @@ const camA1L6ColLZ4Structs = [
 // A2L6
 // Allied forward outposts
 const camA2L6CharlieForwardStructs1 = [
-	{stat: "Walltower06", x: 78, y: 14}, {stat: "A0HardcreteMk1Wall", x: 79, y: 14}, {stat: "Walltower06", x: 80, y: 14},
+	{stat: "WallTower06", x: 78, y: 14}, {stat: "A0HardcreteMk1Wall", x: 79, y: 14}, {stat: "WallTower06", x: 80, y: 14},
 	{stat: "A0RepairCentre3", x: 78, y: 17}, {stat: "Emplacement-MRL-pit", x: 81, y: 18}, {stat: "PillBox1", x: 84, y: 15},
 	{stat: "AASite-QuadBof", x: 80, y: 25}, {stat: "AASite-QuadBof", x: 82, y: 26}, {stat: "GuardTower6H", x: 84, y: 25},
 ];
