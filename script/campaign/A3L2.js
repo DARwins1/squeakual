@@ -77,17 +77,17 @@ function camEnemyBaseEliminated()
 function charlieDialogue()
 {
 	camQueueDialogue([
-		{text: "<CHARLIE>: General Clayde, if I can ask?", delay: 6, sound: CAM_RCLICK},
-		{text: "<CHARLIE>: How long are we going to keep using the Infested for?", delay: 2, sound: CAM_RCLICK},
-		{text: "<CHARLIE>: We've already freed all of our guys from the Collective and...", delay: 3, sound: CAM_RCLICK},
-		{text: "<CHARLIE>: It feels... wrong.", delay: 3, sound: CAM_RCLICK},
-		{text: "<CHARLIE>: To use something like this against other people.", delay: 2, sound: CAM_RCLICK},
-		{text: "<CLAYDE>: First of all, Commander Charlie,", delay: 4, sound: CAM_RCLICK},
+		{text: "CHARLIE: General Clayde, if I can ask?", delay: 6, sound: CAM_RCLICK},
+		{text: "CHARLIE: How long are we going to keep using the Infested for?", delay: 2, sound: CAM_RCLICK},
+		{text: "CHARLIE: We've already freed all of our guys from the Collective and...", delay: 3, sound: CAM_RCLICK},
+		{text: "CHARLIE: It feels... wrong.", delay: 3, sound: CAM_RCLICK},
+		{text: "CHARLIE: To use something like this against other people.", delay: 2, sound: CAM_RCLICK},
+		{text: "CLAYDE: First of all, Commander Charlie,", delay: 4, sound: CAM_RCLICK},
 		{text: "however you may \"feel\" about Project X is irrelevant.", delay: 0},
-		{text: "<CLAYDE>: We can use the Lures to control the Infested;", delay: 4, sound: CAM_RCLICK},
+		{text: "CLAYDE: We can use the Lures to control the Infested;", delay: 4, sound: CAM_RCLICK},
 		{text: "but the Collective is a grave threat to us all.", delay: 0},
-		{text: "<CLAYDE>: So we will use Project X for however long we need it.", delay: 3, sound: CAM_RCLICK},
-		{text: "<CLAYDE>: And second, it's \"Supreme General Clayde\" to you, Commander Charlie.", delay: 4, sound: CAM_RCLICK},
+		{text: "CLAYDE: So we will use Project X for however long we need it.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: And second, it's \"Supreme General Clayde\" to you, Commander Charlie.", delay: 4, sound: CAM_RCLICK},
 	]);
 }
 
