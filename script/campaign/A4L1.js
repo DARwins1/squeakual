@@ -900,7 +900,7 @@ function eventStartLevel()
 	// NOTE: The Infested don't use trucks or cranes
 	if (!tweakOptions.rec_timerlessMode)
 	{
-		setMissionTime(camChangeOnDiff(camHoursToSeconds(1.75)));
+		setMissionTime(camChangeOnDiff(camHoursToSeconds(2)));
 	}
 
 	// 4 Transports on INSANE

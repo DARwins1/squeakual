@@ -71,6 +71,7 @@ var zuluSurrendered;
 var zuluRank;
 var lureTrapEnabled;
 var banterIdx;
+var lureBlipPlaced;
 
 camAreaEvent("vtolRemoveZone", function(droid)
 {
@@ -131,7 +132,12 @@ function eventDestroyed(obj)
 		{
 			// Lure destroyed; Stop spawning Infested
 			lureActive = false;
-			hackRemoveMessage("ZULU_LURE", PROX_MSG, CAM_HUMAN_PLAYER);
+
+			if (lureBlipPlaced)
+			{
+				hackRemoveMessage("ZULU_LURE", PROX_MSG, CAM_HUMAN_PLAYER);
+				lureBlipPlaced = false;
+			}
 		}
 		else if (obj.type === DROID)
 		{
@@ -1331,6 +1337,7 @@ function checkActivateLure()
 		camQueueDialogue({text: "--- ANOMALOUS SIGNAL DETECTED ---", delay: 0, sound: cam_sounds.beacon});
 		camCallOnce("activateInfested");
 		hackAddMessage("ZULU_LURE", PROX_MSG, CAM_HUMAN_PLAYER);
+		lureBlipPlaced = true;
 	}
 }
 
@@ -1419,8 +1426,9 @@ function startZuluEvac()
 		{text: "LIEUTENANT: Commanders Bravo and Charlie, do not let that transport get away!", delay: 4, sound: CAM_RCLICK},
 	]);
 
-	// Resume banter cycle
+	// Restart banter cycle
 	setTimer("claydeBanter", camMinutesToMilliseconds(5));
+	banterIdx = 0;
 
 	// TODO: Decrease the mission timer?
 
@@ -1709,11 +1717,7 @@ function eventStartLevel()
 	heartbeatDarkness = false;
 	banterIdx = 1;
 	zuluRank = (difficulty <= EASY) ? 6 : difficulty + 4; // Elite to Hero
-
-	// Rank commanders...
-	camSetDroidRank(getObject("zuluCommander1"), zuluRank);
-	camSetDroidRank(getObject("zuluCommander2"), zuluRank);
-	camSetDroidRank(getObject("zuluCommander3"), zuluRank);
+	lureBlipPlaced = false;
 
 	// Setup the second command group
 	// NOTE: This is done at the start because this commander takes part in the intro scene
@@ -1785,6 +1789,11 @@ function eventStartLevel()
 			camUpgradeOnMapTemplates(cTempl.plhcomh, mis_zuluComHovTempl, MIS_TEAM_ZULU);
 		}
 	}
+
+	// Rank commanders...
+	camSetDroidRank(getObject("zuluCommander1"), zuluRank);
+	camSetDroidRank(getObject("zuluCommander2"), zuluRank);
+	camSetDroidRank(getObject("zuluCommander3"), zuluRank);
 
 	camSetWeather(CAM_WEATHER_RAINSTORM);
 	camSetSkyType(CAM_SKY_NIGHT);
