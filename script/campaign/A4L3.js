@@ -148,7 +148,7 @@ function teamBanter()
 				{text: "GOLF: You don't have to be.", delay: 4, sound: CAM_RCLICK},
 				{text: "GOLF: Everyone here knows that Commander Bravo is the only competent one among you.", delay: 2, sound: CAM_RCLICK},
 				{text: "FOXTROT: That's why we're here.", delay: 4, sound: CAM_RCLICK},
-				{text: "FOXTROT: Once Team Bravo is gone, it's over for you.", delay: 2, sound: CAM_RCLICK},
+				{text: "FOXTROT: Once Team Bravo is gone, your mutiny is done for.", delay: 2, sound: CAM_RCLICK},
 			]);
 			break;
 		case 3:
@@ -161,11 +161,11 @@ function teamBanter()
 				{text: "FOXTROT: Even if any of your words held value, my loyalty is to the Supreme General.", delay: 3, sound: CAM_RCLICK},
 				{text: "FOXTROT: He SAVED me from the Collective's prison, Lieutenant.", delay: 3, sound: CAM_RCLICK},
 				{text: "LIEUTENANT: WE saved you, Foxtrot!", delay: 4, sound: CAM_RCLICK},
-				{text: "LIEUTENANT: All of us joined in the assault.", delay: 3, sound: CAM_RCLICK},
+				{text: "LIEUTENANT: We all took part in the assault.", delay: 3, sound: CAM_RCLICK},
 				{text: "FOXTROT: But that wouldn't have worked without Clayde's planning, would it?", delay: 4, sound: CAM_RCLICK},
 				{text: "FOXTROT: I owe the Supreme General everything.", delay: 3, sound: CAM_RCLICK},
 				{text: "FOXTROT: And I'd go to hell and back for him.", delay: 2, sound: CAM_RCLICK},
-				{text: "FOXTROT: But right now, it looks like I just have to go through one Commander...", delay: 3, sound: CAM_RCLICK},
+				{text: "FOXTROT: But right now, it looks like I just have to get through one Commander...", delay: 3, sound: CAM_RCLICK},
 			]);
 			break;
 		case 4:

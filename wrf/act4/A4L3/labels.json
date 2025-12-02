@@ -711,14 +711,6 @@
 
 
 	"object_34": {
-		"label": "foxtrotTruck4",
-		"id": 972,
-		"player": 5,
-		"type": 0
-	},
-
-
-	"object_35": {
 		"label": "golfTruck3",
 		"id": 971,
 		"player": 6,
@@ -726,7 +718,7 @@
 	},
 
 
-	"object_36": {
+	"object_35": {
 		"label": "foxtrotFactory1",
 		"id": 916,
 		"player": 5,
@@ -734,7 +726,7 @@
 	},
 
 
-	"object_37": {
+	"object_36": {
 		"label": "golfTruck1",
 		"id": 966,
 		"player": 6,
@@ -742,7 +734,7 @@
 	},
 
 
-	"object_38": {
+	"object_37": {
 		"label": "golfCBTower1",
 		"id": 965,
 		"player": 6,
@@ -750,7 +742,7 @@
 	},
 
 
-	"object_39": {
+	"object_38": {
 		"label": "foxtrotFactory2",
 		"id": 735,
 		"player": 5,
@@ -758,7 +750,7 @@
 	},
 
 
-	"object_40": {
+	"object_39": {
 		"label": "foxtrotCybFactory1",
 		"id": 927,
 		"player": 5,
@@ -766,7 +758,7 @@
 	},
 
 
-	"object_41": {
+	"object_40": {
 		"label": "infFactory5",
 		"id": 851,
 		"player": 4,
@@ -774,7 +766,7 @@
 	},
 
 
-	"object_42": {
+	"object_41": {
 		"label": "golfTruck2",
 		"id": 968,
 		"player": 6,
@@ -782,7 +774,7 @@
 	},
 
 
-	"object_43": {
+	"object_42": {
 		"label": "golfFactory3",
 		"id": 905,
 		"player": 6,

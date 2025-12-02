@@ -603,12 +603,6 @@ function dataDownloaded()
 			setMissionTime(missionTimeRemaining); // Resume the mission timer
 		}
 
-		if (camAllEnemyBasesEliminated())
-		{
-			// Extra dialogue if the player eradicated all bases
-			camCallOnce("eradicateDialogue");
-		}
-
 		// Player can leave
 		camCallOnce("clearObjective");
 		return true;
@@ -651,6 +645,8 @@ function dataDownloaded()
 		{
 			// Make Delta more aggresive if the player is winning
 			aggroTeamDelta();
+
+			camCallOnce("holdDialogue");
 		}
 	}
 	else // Uplink not secure
@@ -675,6 +671,16 @@ function dataDownloaded()
 	}
 }
 
+// Tell the player to keep holding on
+function holdDialogue()
+{
+	camQueueDialogue([
+		{text: "LIEUTENANT: Bravo, we're scanning through the uplink's database.", delay: 4, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: But we still need more time!", delay: 3, sound: CAM_RCLICK},
+		{text: "LIEUTENANT: Just keep holding onto the uplink for a few more minutes!", delay: 3, sound: CAM_RCLICK},
+	]);
+}
+
 // Tell the player that they've won
 function clearObjective()
 {
@@ -688,13 +694,17 @@ function clearObjective()
 		uplinkSecure = false;
 	}
 
-	playSound(cam_sounds.objective.primObjectiveCompleted);
-	camSetExtraObjectiveMessage();
-}
-
-function eradicateDialogue()
-{
-	if (uplinkTimeRemaining > 0)
+	if (uplinkTimeRemaining <= 0)
+	{
+		// The player destroyed all enemy bases instead of holding the uplink
+		// Have the Lieutenant comment about it
+		camQueueDialogue([
+			{text: "LIEUTENANT: Commander Bravo, you've done it!", delay: 4, sound: CAM_RCLICK},
+			{text: "LIEUTENANT: We got the data we needed!", delay: 3, sound: CAM_RCLICK},
+			{text: "LIEUTENANT: Come on back whenever you're done out there.", delay: 3, sound: CAM_RCLICK},
+		]);
+	}
+	else // All bases destroyed
 	{
 		// The player destroyed all enemy bases instead of holding the uplink
 		// Have the Lieutenant comment about it
@@ -704,6 +714,9 @@ function eradicateDialogue()
 			{text: "LIEUTENANT: Come on back whenever you're done out there.", delay: 3, sound: CAM_RCLICK},
 		]);
 	}
+
+	playSound(cam_sounds.objective.primObjectiveCompleted);
+	camSetExtraObjectiveMessage();
 }
 
 // Update the objective message with the accurate time remaining
@@ -994,10 +1007,6 @@ function eventStartLevel()
 		},
 	});
 	
-	// Rank commanders...
-	const COL_RANK = (difficulty <= MEDIUM) ? 4 : difficulty + 2; // Professional to Elite
-	camSetDroidRank(getObject("deltaCommander"), deltaRank);
-	camSetDroidRank(getObject("colCommander"), COL_RANK);
 
 	// Manage refillable groups
 	// Delta groups...
@@ -1329,6 +1338,11 @@ function eventStartLevel()
 	missionTimeRemaining = -1;
 	allowDeltaEscape = false;
 	deltaRank = (difficulty <= EASY) ? 6 : difficulty + 4; // Elite to Hero
+
+	// Rank commanders...
+	const COL_RANK = (difficulty <= MEDIUM) ? 4 : difficulty + 2; // Professional to Elite
+	camSetDroidRank(getObject("deltaCommander"), deltaRank);
+	camSetDroidRank(getObject("colCommander"), COL_RANK);
 
 	hackAddMessage("UPLINK_BEACON", PROX_MSG, CAM_HUMAN_PLAYER);
 
