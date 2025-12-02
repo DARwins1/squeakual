@@ -237,7 +237,8 @@ function startInfestedOnslaught()
 	camManageGroup(colCommanderGroup, CAM_ORDER_DEFEND, {
 		pos: camMakePos("colCommandPos"),
 		radius: 12,
-		repair: 50
+		repair: 50,
+		removable: false
 	});
 	camManageGroup(colSensorGroup, CAM_ORDER_DEFEND, {
 		pos: camMakePos("colArtilleryPos"),
@@ -312,7 +313,8 @@ function endInfestedOnslaught()
 		// Commander only becomes aggressive after the third onslaught
 		camManageGroup(colCommanderGroup, CAM_ORDER_ATTACK, {
 			repair: 50,
-			targetPlayer: CAM_HUMAN_PLAYER
+			targetPlayer: CAM_HUMAN_PLAYER,
+			removable: false
 		});
 	}
 	camManageGroup(colSensorGroup, CAM_ORDER_ATTACK, {
@@ -627,7 +629,8 @@ function checkDeltaEntranceStructs()
 		});
 
 		removeTimer("checkDeltaEntranceStructs");
-		setTimer("sendDeltaReinforcements", camMinutesToMilliseconds(2.5));
+		// NOTE: This gets SLOWER on higher difficulties
+		setTimer("sendDeltaReinforcements", camChangeOnDiff(camMinutesToMilliseconds(2.5), true));
 
 		// Tell the player that Delta is approaching
 		camQueueDialogue([

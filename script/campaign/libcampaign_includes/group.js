@@ -336,26 +336,29 @@ function __camGetMissingGroupTemplates(group, returnFirst, factory)
 	let maxMissing = templateList.length;
 
 	// Check if we have a command droid as a leader
-	const __GROUP_ORDER = __camGroupInfo[group].order;
-	const groupLeader = __camGroupInfo[group].data.leader;
-	if (camDef(__GROUP_ORDER) && __GROUP_ORDER === CAM_ORDER_FOLLOW // Has the follow order...
-		&& camDef(groupLeader) && groupLeader !== null && groupLeader.type === DROID && groupLeader.droidType === DROID_COMMAND) // Has a live commander leader...
+	if (camDef(__camGroupInfo[group]))
 	{
-		// Object is a live command droid
-		// Limit the maximum amount of missing droids to the commander's capacity minus the droids already in the group
-		maxMissing = (6 + camGetDroidRank(groupLeader) * 2) - droidList.length;
-	}
-
-	if (maxMissing <= 0)
-	{
-		// Group is already full
-		if (camDef(returnFirst) && returnFirst)
+		const __GROUP_ORDER = __camGroupInfo[group].order;
+		const groupLeader = __camGroupInfo[group].data.leader;
+		if (camDef(__GROUP_ORDER) && __GROUP_ORDER === CAM_ORDER_FOLLOW // Has the follow order...
+			&& camDef(groupLeader) && groupLeader !== null && groupLeader.type === DROID && groupLeader.droidType === DROID_COMMAND) // Has a live commander leader...
 		{
-			return undefined;
+			// Object is a live command droid
+			// Limit the maximum amount of missing droids to the commander's capacity minus the droids already in the group
+			maxMissing = (6 + camGetDroidRank(groupLeader) * 2) - droidList.length;
 		}
-		else
+
+		if (maxMissing <= 0)
 		{
-			return [];
+			// Group is already full
+			if (camDef(returnFirst) && returnFirst)
+			{
+				return undefined;
+			}
+			else
+			{
+				return [];
+			}
 		}
 	}
 

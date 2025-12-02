@@ -35,8 +35,8 @@ var golfPatrolGroup;
 const MIS_TEAM_FOXTROT = 5;
 const MIS_TEAM_GOLF = 6;
 const MIS_FOXTROT_COMMANDER_DELAY = camChangeOnDiff(camMinutesToMilliseconds(2));
-const MIS_MAX_FOXTROT_UNITS = 100;
-const MIS_MAX_GOLF_UNITS = 100;
+const MIS_MAX_FOXTROT_UNITS = 60;
+const MIS_MAX_GOLF_UNITS = 60;
 
 //Remove enemy vtols when in the remove zone area.
 camAreaEvent("vtolRemoveZone", function(droid)
@@ -87,7 +87,7 @@ function vtolAttack2()
 	// Dialogue about VTOL sniping
 	camQueueDialogue([
 		{text: "FOXTROT: Golf, this is taking too long.", delay: 4, sound: CAM_RCLICK},
-		{text: "FOXTROT: Use your VTOLs and take out Bravo's base structures!", delay: 3, sound: CAM_RCLICK},
+		{text: "FOXTROT: Use your VTOLs and snipe Bravo's base structures!", delay: 3, sound: CAM_RCLICK},
 		{text: "GOLF: On it.", delay: 4, sound: CAM_RCLICK},
 	]);
 
@@ -246,9 +246,9 @@ function foxtrotTransmission()
 		{text: "LIEUTENANT: We have proof! We can-", delay: 2, sound: CAM_RCLICK},
 		{text: "FOXTROT: Can it, Lieutenant.", delay: 2, sound: CAM_RCLICK},
 		{text: "FOXTROT: Clayde told us you'd try something like this.", delay: 3, sound: CAM_RCLICK},
-		{text: "FOXTROT: You're to be put in custody, Lieutenant.", delay: 3, sound: CAM_RCLICK},
+		{text: "FOXTROT: The Supreme General has ordered for you to be put in custody.", delay: 3, sound: CAM_RCLICK},
 		{text: "FOXTROT: ...Effective immediately.", delay: 3, sound: CAM_RCLICK},
-		{text: "FOXTROT: So stand down at once!", delay: 2, sound: CAM_RCLICK},
+		{text: "FOXTROT: So stand down, now!", delay: 2, sound: CAM_RCLICK},
 		// Slight delay...
 		{text: "LIEUTENANT: ...Commander Bravo, your transport is almost ready.", delay: 6, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: But Foxtrot is closing in on you fast.", delay: 3, sound: CAM_RCLICK},
@@ -271,7 +271,7 @@ function activateFoxtrot()
 	]);
 
 	queue("sendFoxtrotGroundReinforcements", camChangeOnDiff(camSecondsToMilliseconds(30)));
-	setTimer("sendFoxtrotGroundReinforcements", camChangeOnDiff(camMinutesToMilliseconds(2)));
+	setTimer("sendFoxtrotGroundReinforcements", camChangeOnDiff(camMinutesToMilliseconds(2.5)));
 	setTimer("sendFoxtrotTransporter", camChangeOnDiff(camMinutesToMilliseconds(1.5)));
 }
 
@@ -288,7 +288,7 @@ function activateGolf()
 		{text: "FOXTROT: Get here ASAP.", delay: 3, sound: CAM_RCLICK},
 	]);
 
-	setTimer("sendGolfGroundReinforcements", camChangeOnDiff(camMinutesToMilliseconds(2.5)));
+	setTimer("sendGolfGroundReinforcements", camChangeOnDiff(camMinutesToMilliseconds(3)));
 	setTimer("sendGolfTransporter", camChangeOnDiff(camMinutesToMilliseconds(1.5)));
 	queue("vtolAttack1", camChangeOnDiff(camMinutesToMilliseconds(1.5))); // Start sending Golf VTOLs as well
 }

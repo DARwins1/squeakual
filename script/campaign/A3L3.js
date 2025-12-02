@@ -258,15 +258,20 @@ function eventPickup(feature, droid)
 {
 	if (feature.stattype === ARTIFACT && droid.player === CAM_HUMAN_PLAYER)
 	{
-		// Rev up any remaining infested factories
-		queue("enableAllFactories", camChangeOnDiff(camSecondsToMilliseconds(12)));
-
-		hackRemoveMessage("COL_CONVOY", PROX_MSG, CAM_HUMAN_PLAYER);
-		camSetExtraObjectiveMessage();
+		camCallOnce("cargoCollected");
 	}
 }
 
-// Enable some factories to chase the player on their way out
+function cargoCollected()
+{
+	// Rev up any remaining infested factories
+	queue("enableAllFactories", camChangeOnDiff(camSecondsToMilliseconds(12)));
+
+	hackRemoveMessage("COL_CONVOY", PROX_MSG, CAM_HUMAN_PLAYER);
+	camSetExtraObjectiveMessage();
+}
+
+// Activate the factories to chase the player on their way out
 function enableAllFactories()
 {
 	camEnableFactory("infFactory");

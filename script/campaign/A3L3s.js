@@ -105,9 +105,9 @@ function eventStartLevel()
 	camQueueDialogue([
 		{text: "CHARLIE: Hey, Bravo.", delay: 12, sound: CAM_RCLICK},
 		{text: "CHARLIE: The section of the city that Clayde's sending you into is a ZOO.", delay: 2, sound: CAM_RCLICK},
-		{text: "CHARLIE: Totally infested.", delay: 3, sound: CAM_RCLICK},
+		{text: "CHARLIE: It's totally infested.", delay: 3, sound: CAM_RCLICK},
 		{text: "CHARLIE: And, you won't be able to call any reinforcements while you're there.", delay: 2, sound: CAM_RCLICK},
-		{text: "CHARLIE: So try to pack your transport wisely, since you're only getting one this time.", delay: 3, sound: CAM_RCLICK},
+		{text: "CHARLIE: So try to pack your transport wisely, since Clayde's only giving you one this time.", delay: 3, sound: CAM_RCLICK},
 	]);
 
 	// Give player briefing.

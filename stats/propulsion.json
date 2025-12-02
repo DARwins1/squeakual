@@ -175,7 +175,7 @@
         "model": "PRLHOV1.PIE",
         "name": "Hover",
         "skidDeceleration": 120,
-        "speed": 225,
+        "speed": 250,
         "type": "Hover",
         "weight": 200
     },
@@ -187,7 +187,7 @@
         "model": "PRLHOV1.PIE",
         "name": "Hover II",
         "skidDeceleration": 120,
-        "speed": 250,
+        "speed": 275,
         "type": "Hover",
         "weight": 150
     },
@@ -199,7 +199,7 @@
         "model": "PRLHOV1.PIE",
         "name": "Hover III",
         "skidDeceleration": 120,
-        "speed": 275,
+        "speed": 300,
         "type": "Hover",
         "weight": 100
     },

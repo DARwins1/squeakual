@@ -117,6 +117,12 @@ function queueCollectiveHeavyWave()
 		// Stop spawning heavy and support waves from this point on
 		removeTimer("queueCollectiveHeavyWave");
 		removeTimer("sendCollectiveSupportWave");
+
+		// Dialogue about incoming Collective attacks
+		camQueueDialogue([
+			{text: "CHARLIE: Hang on, Bravo!", delay: 4, sound: CAM_RCLICK},
+			{text: "CHARLIE: We're almost there!", delay: 3, sound: CAM_RCLICK},
+		]);
 		break;
 	}
 	// Bring in the actual units 20 seconds later
