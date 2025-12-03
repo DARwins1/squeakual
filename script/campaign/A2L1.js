@@ -125,11 +125,8 @@ function eventTransporterLanded(transport)
 			// Transfer all Charlie units/structures to the player
 			// Also give the droids some XP
 			const objs = enumDroid(MIS_TEAM_CHARLIE).concat(enumStruct(MIS_TEAM_CHARLIE));
-			for (const obj of objs)
-			{
-				camSetDroidRank(obj, "Trained");
-				donateObject(obj, CAM_HUMAN_PLAYER);
-			}
+			camSetDroidRank(objs, "Trained");
+			camEnsureDonateObject(objs, CAM_HUMAN_PLAYER);
 
 			queue("setVictory", camSecondsToMilliseconds(1));
 		}

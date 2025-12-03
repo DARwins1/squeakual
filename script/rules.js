@@ -281,34 +281,6 @@ function eventGameInit()
 	setTimer("autoSave", 10*60*1000);
 }
 
-function setLimits()
-{
-	setDroidLimit(selectedPlayer, 101, DROID_ANY); //note: the transporter is a unit you own
-	setDroidLimit(selectedPlayer, 10, DROID_COMMAND);
-	setDroidLimit(selectedPlayer, 15, DROID_CONSTRUCT);
-
-	for (let i = 0; i < maxPlayers; ++i)
-	{
-		setStructureLimits("A0PowerGenerator", 5, i);
-		setStructureLimits("A0ResourceExtractor", 200, i);
-		setStructureLimits("A0ResearchFacility", 5, i);
-		setStructureLimits("A0LightFactory", 5, i);
-		setStructureLimits("A0CyborgFactory", 5, i);
-		setStructureLimits("A0VTolFactory1", 5, i);
-		//non human players get five of these
-		setStructureLimits("A0CommandCentre", i === selectedPlayer ? 1 : 5, i);
-		setStructureLimits("A0ComDroidControl", i === selectedPlayer ? 1 : 5, i);
-		setStructureLimits("A0CommandCentreNP", 5, i);
-		setStructureLimits("A0CommandCentreCO", 5, i);
-		setStructureLimits("A0CommandCentreNE", 5, i);
-	}
-}
-
-function eventStartLevel()
-{
-	setLimits();
-}
-
 function eventDroidBuilt(droid, structure)
 {
 	if (droid.player === selectedPlayer)

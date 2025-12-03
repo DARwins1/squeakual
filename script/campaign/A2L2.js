@@ -157,11 +157,7 @@ function expandMap()
 
 	// Donate Delta objects
 	const deltaObjs = enumDroid(MIS_TEAM_DELTA).filter((droid) => (droid.droidType !== DROID_SUPERTRANSPORTER)).concat(enumStruct(MIS_TEAM_DELTA));
-	for (const obj of deltaObjs)
-	{
-		// Donate team Delta's remaining stuff
-		donateObject(obj, CAM_HUMAN_PLAYER);
-	}
+	camEnsureDonateObject(deltaObjs, CAM_HUMAN_PLAYER);
 
 	// Adjust the victory conditions and enable reinforcements
 	camSetStandardWinLossConditions(CAM_VICTORY_OFFWORLD, "A2L3", {

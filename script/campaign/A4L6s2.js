@@ -332,10 +332,7 @@ function donateHoldout()
 	hackAddMessage("DELTA_DEPOSIT", PROX_MSG, CAM_HUMAN_PLAYER);
 
 	// Donate all units/structures in the holdout to the player
-	for (const obj of enumArea("deltaBase4", MIS_TEAM_DELTA, false))
-	{
-		donateObject(obj, CAM_HUMAN_PLAYER);
-	}
+	camEnsureDonateObject(enumArea("deltaBase4", MIS_TEAM_DELTA, false), CAM_HUMAN_PLAYER);
 
 	playSound(cam_sounds.unitsTransferred);
 

@@ -565,7 +565,6 @@ function donateFoxtrot()
 	// Grab all of Foxtrot's droids and structures
 	const objs = enumDroid(MIS_TEAM_FOXTROT).concat(enumStruct(MIS_TEAM_FOXTROT));
 
-	// Donate them all to the player
 	for (const obj of objs)
 	{
 		// Give the droids some EXP
@@ -573,9 +572,9 @@ function donateFoxtrot()
 		{
 			camSetDroidRank(obj, MIS_DONATED_UNIT_RANK);
 		}
-
-		donateObject(obj, CAM_HUMAN_PLAYER);
 	}
+	// Donate them all to the player
+	camEnsureDonateObject(objs, CAM_HUMAN_PLAYER);
 
 	if (golfDefeated)
 	{
@@ -622,17 +621,9 @@ function donateGolf()
 	// Grab all of Golf's droids and structures
 	const objs = enumDroid(MIS_TEAM_GOLF).concat(enumStruct(MIS_TEAM_GOLF));
 
-	// Donate them all to the player
-	for (const obj of objs)
-	{
-		// Give the droids some EXP
-		if (obj.type === DROID)
-		{
-			camSetDroidRank(obj, MIS_DONATED_UNIT_RANK);
-		}
-
-		donateObject(obj, CAM_HUMAN_PLAYER);
-	}
+	// Donate them all to the player (and grant the droids some EXP)
+	camSetDroidRank(objs, MIS_DONATED_UNIT_RANK);
+	camEnsureDonateObject(objs, CAM_HUMAN_PLAYER);
 
 	if (foxtrotDefeated)
 	{

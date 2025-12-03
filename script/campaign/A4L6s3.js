@@ -3,6 +3,9 @@
 // --- Stage 3 progression functions ---
 // -------------------------------------
 
+const MIS_GROUND_ASSAULT_DELAY = camSecondsToMilliseconds(20);
+const MIS_AIR_ASSAULT_DELAY = camSecondsToMilliseconds(15);
+
 // NOTE: This function is called multiple times to increase the number of VTOL attacks over time
 function stageThreeVtolAttack()
 {
@@ -1126,7 +1129,7 @@ function endSequence()
 
 	// Dialogue...
 	camQueueDialogue([
-		{text: "CHARLIE: Lieutenant!!!", delay: 8, sound: CAM_RCLICK},
+		{text: "CHARLIE: Lieutenant!!!", delay: 24, sound: CAM_RCLICK},
 		{text: "CHARLIE: Lieutenant! They're turning around!", delay: 4, sound: CAM_RCLICK},
 		{text: "CHARLIE: The Collective is falling back!", delay: 3, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: I don't believe it...", delay: 3, sound: CAM_RCLICK},
@@ -1134,7 +1137,7 @@ function endSequence()
 		{text: "LIEUTENANT: We...", delay: 3, sound: CAM_RCLICK},
 		{text: "LIEUTENANT: ...Actually made it!", delay: 2, sound: CAM_RCLICK},
 		{text: "DELTA: The Collective is pulling back to the city!", delay: 3, sound: CAM_RCLICK},
-		{text: "CHARLIE: Hell yeah!", delay: 4, sound: CAM_RCLICK},
+		{text: "DELTA: We're gonna make it out of here!", delay: 4, sound: CAM_RCLICK},
 		{text: "", delay: 25, callback: "endGame"},
 	]);
 
@@ -1144,8 +1147,8 @@ function endSequence()
 	removeTimer("lightningChance");
 
 	// Gradually clear the skies
-	camGradualFog(camSecondsToMilliseconds(30), 198, 219, 225);
-	camGradualSunIntensity(camSecondsToMilliseconds(30), .6,.6,.6);
+	camGradualFog(camSecondsToMilliseconds(60), 198, 219, 225);
+	camGradualSunIntensity(camSecondsToMilliseconds(60), .6,.6,.6);
 	camSetWeather(CAM_WEATHER_CLEAR);
 }
 

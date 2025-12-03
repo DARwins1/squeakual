@@ -437,6 +437,9 @@ const __camUrbanSkyTexture = "texpages/page-25-sky-urban.png";
 const __camNightSkyTexture = "texpages/night-sky.png";
 var __camSkyboxType;
 var __camCapturedFactoryIdx;
+const CAM_MAX_PLAYER_UNITS = 101; //note: the transporter is a unit you own
+const CAM_MAX_PLAYER_COMMANDERS = 10;
+const CAM_MAX_PLAYER_CONSTRUCTORS = 15;
 
 //nexus
 var __camLastNexusAttack;

@@ -161,6 +161,7 @@ function cam_eventStartLevel()
 	camSetSunIntensity(); // Set the sun to it's default position
 	camSetWeather(CAM_WEATHER_DEFAULT);
 	camSetSkyType(CAM_SKY_DAY);
+	__camSetLimits();
 	setTimer("__camSpawnVtols", camSecondsToMilliseconds(0.5));
 	setTimer("__camRetreatVtols", camSecondsToMilliseconds(0.9));
 	// setTimer("__checkVtolSpawnObject", camSecondsToMilliseconds(5));

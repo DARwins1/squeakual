@@ -905,6 +905,22 @@
 	},
 
 
+	"object_31": {
+		"label": "colLZTruck5",
+		"id": 2433,
+		"player": 2,
+		"type": 0
+	},
+
+
+	"object_32": {
+		"label": "colLZTruck6",
+		"id": 2434,
+		"player": 2,
+		"type": 0
+	},
+
+
 	"radius_0": {
 		"label": "vtolRemoveZone2",
 		"pos": [27328, 4532],

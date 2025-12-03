@@ -258,10 +258,7 @@ function eventTransporterLanded(transport)
 		{			
 			// Transfer all Charlie units/structures in the donate area to the player
 			const objs = enumArea("charlieDonateArea", MIS_TEAM_CHARLIE, false);
-			for (const obj of objs)
-			{
-				donateObject(obj, CAM_HUMAN_PLAYER);
-			}
+			camEnsureDonateObject(objs, CAM_HUMAN_PLAYER);
 
 			queue("setVictory", camSecondsToMilliseconds(1));
 		}
@@ -499,7 +496,7 @@ function sendCollectiveReinforcements()
 	{
 		for (const entrance of groundEntrances)
 		{
-			sendCollectiveGroundReinforcements(camRandFrom(groundCompositions), entrance);
+			sendCollectiveGroundReinforcements(camRandFrom(groundCompositions), entrance, aaSupport);
 		}
 	}
 
@@ -512,7 +509,7 @@ function sendCollectiveReinforcements()
 		if (difficulty === INSANE) numHoverGroups++;
 		for (let i = 0; i < numHoverGroups; i++)
 		{
-			sendCollectiveGroundReinforcements(hoverTemplates, camRandFrom(hoverEntrances));
+			sendCollectiveHoverReinforcements(hoverTemplates, camRandFrom(hoverEntrances));
 		}
 	}
 
@@ -525,7 +522,7 @@ function sendCollectiveReinforcements()
 	reinforcementIndex++;
 }
 
-function sendCollectiveGroundReinforcements(templates, entrance)
+function sendCollectiveGroundReinforcements(templates, entrance, aaSupport)
 {
 	// Add AA support
 	if ((difficulty <= EASY && camRand(2) === 0) || difficulty >= MEDIUM)
@@ -546,7 +543,7 @@ function sendCollectiveGroundReinforcements(templates, entrance)
 	});
 }
 
-function sendCollectiveGroundReinforcements(templates, entrance)
+function sendCollectiveHoverReinforcements(templates, entrance)
 {
 	const droids = [];
 	for (const template of templates)
@@ -721,7 +718,7 @@ function sendCollectiveTrucks()
 			}
 			if (!camDef(camGetTruck(colBaseTruckJob16)))
 			{
-				camAssignTruck(camAddDroid(CAM_THE_COLLECTIVE, "groundEntry13", cTempl.comtruckht), colBaseTruckJob63);
+				camAssignTruck(camAddDroid(CAM_THE_COLLECTIVE, "groundEntry13", cTempl.comtruckht), colBaseTruckJob16);
 			}
 		}
 	}
@@ -920,7 +917,7 @@ function eventAttacked(victim, attacker)
 		return;
 	}
 
-	if (victim.player == CAM_THE_COLLECTIVE && attacker.player == CAM_HUMAN_PLAYER)
+	if (victim.player == CAM_THE_COLLECTIVE)
 	{
 		camCallOnce("collectiveDialogue");
 	}
@@ -1507,7 +1504,7 @@ function eventStartLevel()
 	deltaCommanderDeathTime = 0;
 	collectiveRetreat = false;
 	colCommanderIndex = 1;
-	colCommanderRank = Math.min(5, difficulty + 4); // Veteran to Hero
+	colCommanderRank = Math.max(5, difficulty + 4); // Veteran to Hero
 	truckLostThreshold = (difficulty >= MEDIUM) ? 2 : 3;
 	holdoutDonated = false;
 	allowAllyExpansion = false;
@@ -1883,6 +1880,7 @@ function eventStartLevel()
 			label: "colCentralLZ",
 			rebuildBase: true,
 			rebuildTruck: false,
+			truckDroid: getObject("colLZTruck5"), // This truck starts pre-placed on the map
 			structset: camA4L6ColLZ3Structs
 	});
 	colLZTruckJob4 = camManageTrucks(
@@ -1890,6 +1888,7 @@ function eventStartLevel()
 			label: "colCentralLZ",
 			rebuildBase: true,
 			rebuildTruck: false,
+			truckDroid: getObject("colLZTruck6"),
 			structset: camA4L6ColLZ3Structs
 	});
 	colLZTruckJob5 = camManageTrucks(
@@ -1897,7 +1896,7 @@ function eventStartLevel()
 			label: "colNorthLZ",
 			rebuildBase: true,
 			rebuildTruck: false,
-			truckDroid: getObject("colLZTruck1"), // This truck starts pre-placed on the map
+			truckDroid: getObject("colLZTruck1"),
 			structset: camA4L6ColLZ4Structs
 	});
 	colLZTruckJob6 = camManageTrucks(

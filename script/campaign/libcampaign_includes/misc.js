@@ -611,16 +611,17 @@ function camDiscoverCampaign()
 
 //;; ## camSetDroidRank(droid, rank)
 //;; Sets a droid's rank to the given value.
-//;; ```droid``` must be a droid object, while ```rank```
+//;; `droid` must be a droid object, while `rank`
 //;; can be either an integer or name of a rank.
+//;; `droid` may also be an array of droid objects.
 //;;
-//;; @param {Object} droid
+//;; @param {Object|[Object]} droid
 //;; @param {number | String} rank
 //;; @returns {void}
 //;;
 function camSetDroidRank(droid, rank)
 {
-	if (camDef(droid) && camDef(droid.length) && !camIsString(droid))
+	if (droid instanceof Array)
 	{
 		// Array of droids...
 		for (const droidling of droid)
@@ -1149,6 +1150,71 @@ function camSetObjectVision(playerId, state)
 		state = true;
 	}
 	__camPlayerVisibilities[playerId] = state;
+}
+
+// NOTE: This function used to be in rules.js
+function __camSetLimits()
+{
+	setDroidLimit(CAM_HUMAN_PLAYER, CAM_MAX_PLAYER_UNITS, DROID_ANY);
+	setDroidLimit(CAM_HUMAN_PLAYER, CAM_MAX_PLAYER_COMMANDERS, DROID_COMMAND);
+	setDroidLimit(CAM_HUMAN_PLAYER, CAM_MAX_PLAYER_CONSTRUCTORS, DROID_CONSTRUCT);
+
+	for (let i = 0; i < maxPlayers; ++i)
+	{
+		setStructureLimits("A0PowerGenerator", 5, i);
+		setStructureLimits("A0ResourceExtractor", 200, i);
+		setStructureLimits("A0ResearchFacility", 5, i);
+		setStructureLimits("A0LightFactory", 5, i);
+		setStructureLimits("A0CyborgFactory", 5, i);
+		setStructureLimits("A0VTolFactory1", 5, i);
+		//non human players get five of these
+		setStructureLimits("A0CommandCentre", i === CAM_HUMAN_PLAYER ? 1 : 5, i);
+		setStructureLimits("A0ComDroidControl", i === CAM_HUMAN_PLAYER ? 1 : 5, i);
+		setStructureLimits("A0CommandCentreNP", 5, i);
+		setStructureLimits("A0CommandCentreCO", 5, i);
+		setStructureLimits("A0CommandCentreNE", 5, i);
+	}
+}
+
+//;; ## camEnsureDonateObject(obj, player)
+//;; A hacky wrapper for donateObject that ensures that the given objects are donated to the player without conflicting with unit limits.
+//;; `obj` can be a single object or a list of objects.
+//;; NOTE: This function supports donating any object to any player, but should only be necessary for donating DROIDs to CAM_HUMAN_PLAYER.
+//;;
+//;; @param {Object|[Object]} obj
+//;; @param {number} player
+//;; @returns {void}
+//;;
+function camEnsureDonateObject(obj, player)
+{
+	// Raise the player's unit limit(s) 
+	// NOTE: This is unnecessary for non-droid donations, but we don't bother checking the object types here.
+	if (player === CAM_HUMAN_PLAYER) // NOTE: By default, all non-human players are only limited by the 16-bit limit
+	{
+		const __16BIT_LIMIT = 32767; // (2^15 - 1)
+		setDroidLimit(player, __16BIT_LIMIT, DROID_ANY);
+		setDroidLimit(player, __16BIT_LIMIT, DROID_COMMAND);
+		setDroidLimit(player, __16BIT_LIMIT, DROID_CONSTRUCT);
+	}
+
+	// Donate the object(s)
+	if (obj instanceof Array)
+	{
+		for (const ob of obj)
+		{
+			donateObject(ob, player);
+		}
+	}
+	else // Single object
+	{
+		donateObject(obj, player);
+	}
+
+	// Restore the player's unit limit(s) to the default
+	if (player === CAM_HUMAN_PLAYER)
+	{
+		__camSetLimits();
+	}
 }
 
 //////////// privates

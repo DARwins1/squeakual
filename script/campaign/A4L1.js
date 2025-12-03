@@ -63,8 +63,8 @@ function eventTransporterLanded(transport)
 					rank = "Special";
 				}
 				camSetDroidRank(obj, rank);
-				donateObject(obj, CAM_HUMAN_PLAYER);
 			}
+			camEnsureDonateObject(objs, CAM_HUMAN_PLAYER);
 
 			queue("setVictory", camSecondsToMilliseconds(1));
 			camCallOnce("infestedAmbush");

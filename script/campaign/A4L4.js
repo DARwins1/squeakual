@@ -1509,8 +1509,8 @@ function absorbZulu()
 		{
 			// Also give droids some EXP
 			if (droid.droidType !== DROID_COMMAND) camSetDroidRank(droid, "Veteran");
-			donateObject(droid, CAM_HUMAN_PLAYER);
 		}
+		camEnsureDonateObject(donateDroids, CAM_HUMAN_PLAYER);
 	}
 
 	if (!camAllArtifactsPickedUp())

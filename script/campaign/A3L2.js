@@ -58,10 +58,7 @@ function eventPickup(feature, droid)
 	{
 		// Donate Golf's convoy to the player once they collect the artifact
 		const droids = enumDroid(MIS_TEAM_GOLF);
-		for (const droid of droids)
-		{
-			donateObject(droid, CAM_HUMAN_PLAYER);
-		}
+		camEnsureDonateObject(droids, CAM_HUMAN_PLAYER);
 
 		playSound(cam_sounds.rescue.groupRescued);
 		camSetExtraObjectiveMessage();

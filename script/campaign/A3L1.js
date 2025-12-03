@@ -94,10 +94,7 @@ function eventTransporterLanded(transport)
 		{			
 			// Transfer all Zulu units/structures to the player
 			const objs = enumDroid(MIS_TEAM_ZULU).concat(enumStruct(MIS_TEAM_ZULU));
-			for (const obj of objs)
-			{
-				donateObject(obj, CAM_HUMAN_PLAYER);
-			}
+			camEnsureDonateObject(objs, CAM_HUMAN_PLAYER);
 
 			queue("setVictory", camSecondsToMilliseconds(1));
 		}
