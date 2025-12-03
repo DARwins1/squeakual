@@ -44,7 +44,6 @@
     "LureSensor": {
         "buildPoints": 100,
         "buildPower": 20,
-        "designable": 1,
         "hitpoints": 200,
         "id": "LureSensor",
         "location": "TURRET",
