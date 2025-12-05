@@ -282,7 +282,7 @@ function warnPlayer()
 		{text: "CLAYDE: Damnation!", delay: 3, sound: CAM_RCLICK},
 		{text: "CLAYDE: Those scavengers are already here.", delay: 2, sound: CAM_RCLICK},
 		{text: "CLAYDE: Clear them out, and advance towards the research facility.", delay: 2, sound: CAM_RCLICK},
-		{text: "CLAYDE: We may still have enough time to stop before they take what's inside.", delay: 3, sound: CAM_RCLICK},
+		{text: "CLAYDE: We may still have enough time to stop them before they take what's inside.", delay: 3, sound: CAM_RCLICK},
 	]);
 	queue("enableReinforcements", camSecondsToMilliseconds(12));
 }
