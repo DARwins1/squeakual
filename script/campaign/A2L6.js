@@ -780,6 +780,17 @@ function eventTransporterLanded(transport)
 	camAssignToRefillableGroups(transOther, otherGroups);
 }
 
+// Triggers for if the player is very fast
+function camEnemyBaseEliminated_colNorthCanalBase()
+{
+	camCallOnce("enableMoreFactories");
+}
+
+function camEnemyBaseEliminated_colSouthCanalBase()
+{
+	camCallOnce("enableMoreFactories");
+}
+
 // Enable the remaining idle factories
 function enableMoreFactories()
 {
@@ -789,7 +800,12 @@ function enableMoreFactories()
 	camEnableFactory("colCybFactory3");
 	camEnableFactory("colCybFactory4");
 
-	// Dialogue about Clayde's diversion
+	camCallOnce("diversionDialogue1");
+}
+
+// Dialogue about Clayde's diversion
+function diversionDialogue1()
+{
 	camQueueDialogue([
 		{text: "CHARLIE: Lieutenant! The General's plan is working!", delay: 0, sound: CAM_RCLICK},
 		{text: "CHARLIE: The Collective aren't bringing in any reinforcements!", delay: 3, sound: CAM_RCLICK},
@@ -797,6 +813,16 @@ function enableMoreFactories()
 		{text: "LIEUTENANT: But be careful, the Collective are likely to", delay: 3, sound: CAM_RCLICK},
 		{text: "regroup their local forces and counter attack soon.", delay: 0},
 	]);
+}
+
+function camEnemyBaseEliminated_colEastCanalBase()
+{
+	camCallOnce("enableFinalFactories");
+}
+
+function camEnemyBaseEliminated_colCraterBase()
+{
+	camCallOnce("enableFinalFactories");
 }
 
 // Allow the final factories to start making their "own" units
@@ -827,7 +853,7 @@ function enableFinalFactories()
 
 	camEnableFactory("colFactory4");
 	camEnableFactory("colCybFactory5");
-	camCallOnce("diversionDialogue");
+	camCallOnce("diversionDialogue2");
 }
 
 // Check how many "Collective" bodies the player is using
@@ -893,7 +919,7 @@ function stealthBreakDialogue()
 
 // Dialogue on Clayde's mysteriously effective diversion
 // Called when the final factories activate
-function diversionDialogue()
+function diversionDialogue2()
 {
 	camQueueDialogue([
 		{text: "GOLF: The General must be putting on one hell of a diversion.", delay: 0, sound: CAM_RCLICK},

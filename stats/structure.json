@@ -1673,7 +1673,7 @@
         "id": "CivWarehouse1",
         "name": "Safehouse",
         "sensorID": "ZNULLSENSOR",
-        "strength": "MEDIUM",
+        "strength": "HARD",
         "structureModel": [
             "BLWARE1.pie"
         ],

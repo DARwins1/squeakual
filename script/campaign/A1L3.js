@@ -128,16 +128,19 @@ function activateSecondFactories()
 	camEnableFactory("redFactory4");
 	camEnableFactory("orangeFactory1");
 
-	// Dialogue about Collective sightings
-	camQueueDialogue([
-		{text: "GOLF: General, sir!", delay: 0, sound: CAM_RCLICK},
-		{text: "GOLF: We've spotted some strange looking vehicles moving through our AO, sir.", delay: 3, sound: CAM_RCLICK},
-		{text: "GOLF: They, uhh... they don't look like scavengers, sir.", delay: 3, sound: CAM_RCLICK},
-		{text: "CLAYDE: ...And what do you expect me to make of this, Commander Golf?", delay: 5, sound: CAM_RCLICK},
-		{text: "GOLF: I dunno, it's just...", delay: 4, sound: CAM_RCLICK},
-		{text: "GOLF: Their vehicles look a bit more like ours than scavengers.", delay: 2, sound: CAM_RCLICK},
-		{text: "GOLF: ...Maybe there's another force operating in this sector?", delay: 3, sound: CAM_RCLICK},
-	]);
+	if (!collectiveDetected)
+	{
+		// Dialogue about Collective sightings
+		camQueueDialogue([
+			{text: "GOLF: General, sir!", delay: 0, sound: CAM_RCLICK},
+			{text: "GOLF: We've spotted some strange looking vehicles moving through our AO, sir.", delay: 3, sound: CAM_RCLICK},
+			{text: "GOLF: They, uhh... they don't look like scavengers, sir.", delay: 3, sound: CAM_RCLICK},
+			{text: "CLAYDE: ...And what do you expect me to make of this, Commander Golf?", delay: 5, sound: CAM_RCLICK},
+			{text: "GOLF: I dunno, it's just...", delay: 4, sound: CAM_RCLICK},
+			{text: "GOLF: Their vehicles look a bit more like ours than scavengers.", delay: 2, sound: CAM_RCLICK},
+			{text: "GOLF: ...Maybe there's another force operating in this sector?", delay: 3, sound: CAM_RCLICK},
+		]);
+	}
 }
 
 // Activate all remaining factories
