@@ -30,7 +30,6 @@
         ]
     },
     "Stinger": {
-        "available": true,
         "body": "CrawlerBody",
         "id": "Stinger",
         "name": "Stinger Crawler",
@@ -41,7 +40,6 @@
         ]
     },
     "VileStinger": {
-        "available": true,
         "body": "CrawlerBody",
         "id": "VileStinger",
         "name": "Vile Stinger Crawler",
@@ -52,7 +50,6 @@
         ]
     },
     "BoomTick": {
-        "available": true,
         "body": "BoomTickBody",
         "id": "BoomTick",
         "name": "Boom Tick Crawler",
@@ -63,7 +60,6 @@
         ]
     },
     "Basher": {
-        "available": true,
         "body": "BasherBody",
         "id": "Basher",
         "name": "Infested Basher",
@@ -74,7 +70,6 @@
         ]
     },
     "BaBaCivilian": {
-        "available": true,
         "body": "CivilianBody",
         "id": "BaBaCivilian",
         "name": "Civilian",
@@ -82,7 +77,6 @@
         "type": "PERSON"
     },
     "BaBaPeople": {
-        "available": true,
         "body": "B1BaBaPerson01",
         "id": "BaBaPeople",
         "name": "Scavenger",
@@ -93,7 +87,6 @@
         ]
     },
     "BaBaKevPeople": {
-        "available": true,
         "body": "B1BaBaPerson01-Kev",
         "id": "BaBaKevPeople",
         "name": "Armored Scavenger",
@@ -104,7 +97,6 @@
         ]
     },
     "ScavLance": {
-        "available": true,
         "body": "BaBaLanceBody",
         "id": "ScavLance",
         "name": "Scavenger Lance",
@@ -115,7 +107,6 @@
         ]
     },
     "ScavKevLance": {
-        "available": true,
         "body": "BaBaLanceBody-Kev",
         "id": "ScavKevLance",
         "name": "Armored Scavenger Lance",
@@ -126,7 +117,6 @@
         ]
     },
     "InfCivilian": {
-        "available": true,
         "body": "InfestedCivilianBody",
         "id": "InfCivilian",
         "name": "Infested Civilian",
@@ -137,7 +127,6 @@
         ]
     },
     "InfCivilian2": {
-        "available": true,
         "body": "InfestedCivilianBodyAlt",
         "id": "InfCivilian2",
         "name": "Infested Civilian",
@@ -148,7 +137,6 @@
         ]
     },
     "InfScav": {
-        "available": true,
         "body": "InfestedScavBody",
         "id": "InfScav",
         "name": "Infested Scavenger",
@@ -159,7 +147,6 @@
         ]
     },
     "InfKevScav": {
-        "available": true,
         "body": "InfestedScavBody-Kev",
         "id": "InfKevScav",
         "name": "Infested Armored Scavenger",
@@ -170,7 +157,6 @@
         ]
     },
     "InfLance": {
-        "available": true,
         "body": "InfestedLanceBody",
         "id": "InfLance",
         "name": "Infested Scavenger Lance",
@@ -181,7 +167,6 @@
         ]
     },
     "InfKevLance": {
-        "available": true,
         "body": "InfestedLanceBody-Kev",
         "id": "InfKevLance",
         "name": "Infested Armored Scavenger Lance",
@@ -1787,7 +1772,6 @@
         ]
     },
     "InfCyborgHvyChain": {
-        "available": false,
         "body": "CyborgLightBody",
         "id": "InfCyborgHvyChain",
         "name": "Infested Heavy Machinegunner Cyborg",
@@ -1798,7 +1782,6 @@
         ]
     },
     "InfCyborgFlamer01Grd": {
-        "available": false,
         "body": "CyborgLightBody",
         "id": "Cyb-Flamer-GROUND",
         "name": "Infested Flamer Cyborg",
@@ -1809,7 +1792,6 @@
         ]
     },
     "InfCyb-Gren": {
-        "available": false,
         "body": "CyborgLightBody",
         "id": "InfCyb-Gren",
         "name": "Infested Grenadier Cyborg",
@@ -1820,7 +1802,6 @@
         ]
     },
     "InfCyb-Hvy-Acannon": {
-        "available": false,
         "body": "CyborgHeavyBody",
         "id": "InfCyb-Hvy-Acannon",
         "name": "Infested Super Auto-Cannon Cyborg",
@@ -1831,7 +1812,6 @@
         ]
     },
     "InfCyb-Hvy-HPV": {
-        "available": false,
         "body": "CyborgHeavyBody",
         "id": "InfCyb-Hvy-HPV",
         "name": "Infested Super HPC Cyborg",
@@ -1842,7 +1822,6 @@
         ]
     },
     "InfCyb-Hvy-Mcannon": {
-        "available": false,
         "body": "CyborgHeavyBody",
         "id": "InfCyb-Hvy-Mcannon",
         "name": "Infested Super Heavy-Gunner Cyborg",
@@ -1853,7 +1832,6 @@
         ]
     },
     "InfCyb-Hvy-Gren": {
-        "available": false,
         "body": "CyborgHeavyBody",
         "id": "InfCyb-Hvy-Gren",
         "name": "Infested Super Heavy Grenadier Cyborg",
@@ -1864,7 +1842,6 @@
         ]
     },
     "InfCyb-Hvy-TK": {
-        "available": false,
         "body": "CyborgHeavyBody",
         "id": "InfCyb-Hvy-TK",
         "name": "Infested Super Tank-Killer Cyborg",
@@ -1875,7 +1852,6 @@
         ]
     },
     "InfCyb-Rail1-GROUND": {
-        "available": false,
         "body": "CyborgLightBody",
         "id": "InfCyb-Rail1-GROUND",
         "name": "Infested Needle Gunner Cyborg",
@@ -1886,7 +1862,6 @@
         ]
     },
     "InfCyborgRkt01Ground": {
-        "available": false,
         "body": "CyborgLightBody",
         "id": "Cyb-Rocket-GROUND",
         "name": "Infested Lancer Cyborg",
@@ -1897,7 +1872,6 @@
         ]
     },
     "InfCyborgRkt01Mk1": {
-        "available": false,
         "body": "CyborgLightBody",
         "id": "Cyb-Rocket-GROUND",
         "name": "Infested Sarissa Cyborg",
@@ -1908,7 +1882,6 @@
         ]
     },
     "InfCyb-RotMG-GROUND": {
-        "available": false,
         "body": "CyborgLightBody",
         "id": "InfCyb-RotMG-GROUND",
         "name": "Infested Assault Gunner Cyborg",
@@ -1919,7 +1892,6 @@
         ]
     },
     "InfCyb-Thermite": {
-        "available": false,
         "body": "CyborgLightBody",
         "id": "InfCyb-Thermite",
         "name": "Infested Thermite Flamer Cyborg",
