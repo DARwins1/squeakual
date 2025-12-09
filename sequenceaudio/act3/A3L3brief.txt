@@ -24,7 +24,7 @@
 -120 60		67.0	72.0	_("with the convoy shortly after the initial outbreak.")
 -120 50		72.0	76.0	_("<CLAYDE>: The convoy's last known position is here,")
 -120 60		72.0	76.0	_("within a heavily infested section of the city.")
--120 50		76.0	79.0	_("<CLAYDE>: Us a transport to bring a strike team to these coordinates.")
+-120 50		76.0	79.0	_("<CLAYDE>: Use a transport to bring a strike team to these coordinates.")
 -120 50		79.0	82.0	_("<CLAYDE>: Find and recover the Collective's lost cargo, and then return to LZ.")
 -120 50		82.0	85.0	_("<CLAYDE>: The Infested have overrun this area, so be sure to move quickly.")
 -120 50		85.0	87.0	_("<CLAYDE>: Good luck, Commander Bravo.")

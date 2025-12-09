@@ -663,7 +663,7 @@ A3L3_BMSG15		_("<CLAYDE>: In the meantime, Commander Bravo, I have a task for yo
 A3L3_BMSG16		_("The base that you cleared had been expecting an artifact shipment.")
 A3L3_BMSG17		_("However, it appears that the Collective had lost contact with the convoy shortly after the initial outbreak.")
 A3L3_BMSG18		_("The convoy's last known position is here, within a heavily infested section of the city.")
-A3L3_BMSG19		_("Us a transport to bring a strike team to these coordinates.")
+A3L3_BMSG19		_("Use a transport to bring a strike team to these coordinates.")
 A3L3_BMSG20		_("Find and recover the Collective's lost cargo, and then return to LZ.")
 A3L3_BMSG21		_("The Infested have overrun this area, so be sure to move quickly.")
 A3L3_BMSG22		_("Good luck, Commander Bravo.")
