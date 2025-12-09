@@ -491,7 +491,7 @@ function eventMissionTimeout()
 	// Dialogue about incoming Charlie reinforcements
 	camQueueDialogue([
 		{text: "CHARLIE: Bravo, we're here!", delay: 4, sound: CAM_RCLICK},
-		{text: "CHARLIE: We'll help you clean push the Collective back!", delay: 3, sound: CAM_RCLICK},
+		{text: "CHARLIE: We'll help you push the Collective back!", delay: 3, sound: CAM_RCLICK},
 	]);
 
 	sendCharlieReinforcements();
