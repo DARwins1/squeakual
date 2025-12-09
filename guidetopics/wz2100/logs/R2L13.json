@@ -11,7 +11,6 @@
 		"I would like your honest opinion on something.",
 		"<LIEUTENANT>: Of course. What is it?",
 		"<CLAYDE>: This Collective prison camp we're looking for.",
-		"This Collective prison camp we're looking for.",
 		"What do you think we'll find there?",
 		"<LIEUTENANT>: ...You mean, how many of our people?",
 		"<CLAYDE>: No. I mean what sort of defenses will be in place there.",
@@ -63,7 +62,7 @@
 		"Let me know when you have another plan. I'll go check and see if we've made contact with Commander Golf.",
 		"<CLAYDE>: You're dismissed.",
 		"",
-		"[The Lieutenant can be heard exciting the room; an audible sigh can be heard from Clayde]",
+		"[The Lieutenant can be heard exiting the room; an audible sigh can be heard from Clayde]",
 		"",
 		"<CLAYDE>: Eventually, Lieutenant.",
 		"Eventually, you'll understand."
